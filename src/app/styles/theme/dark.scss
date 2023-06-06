@@ -1,0 +1,34 @@
+.app_dark_theme {
+  // redesigned
+  --dark-bg: #090f11;
+  --bg: #0c1214;
+  --light-bg: #151c1f;
+  --text: #dbdbdb;
+  --hint: #555;
+  --cancel: #d95757;
+  --save: #6cd98b;
+  --icon: #74a2b2;
+  --accent: #5ed3f3;
+
+  // border
+  --border-main: 1px solid var(--accent);
+  --border-focus: 1px solid var(--icon);
+  --border-input: 1px solid var(--icon);
+  --border-input-focus: 1px solid var(--accent);
+  --border-success: 1px solid var(--save);
+  --border-cancel: 1px solid var(--cancel);
+
+  // skeleton
+  --skeleton-color: #1515ad;
+  --skeleton-shadow: #2b2be8;
+
+  // code
+  --code-bg: #0e0e37;
+
+  // card-bg
+  --card-bg: #1e1e90;
+
+  // listBox
+  --list-box-bg: #1e1e90;
+  --list-box-option-active: #1b61f8;
+}

@@ -1,0 +1,63 @@
+@import "reset";
+@import "theme/normal";
+@import "theme/dark";
+@import "fonts/fonts";
+@import "variables/global";
+
+body {
+  // overflow: hidden;
+  // height: 100vh;
+}
+
+.app,
+.app_modal,
+.app_drawer {
+  font: var(--font-m);
+  color: var(--text);
+}
+
+.app {
+  background: var(--bg);
+  min-height: 100vh;
+  margin-inline: auto;
+  max-width: 1200px;
+}
+
+.content-page {
+  display: flex;
+}
+
+.bottom_left {
+  top: 100%;
+  right: 0;
+}
+
+.bottom_right {
+  top: 100%;
+  left: 0;
+}
+
+.top_right {
+  bottom: 100%;
+  left: 0;
+}
+
+.top_left {
+  right: 0;
+  bottom: 100%;
+}
+
+// *::-webkit-scrollbar {
+//   width: 12px;               /* ширина scrollbar */
+//   height: 8px;
+// }
+
+// *::-webkit-scrollbar-track {
+//   background: var(--card-bg);        /* цвет дорожки */
+// }
+
+// *::-webkit-scrollbar-thumb {
+//   background-color: var(--inverted-primary-color);    /* цвет плашки */
+//   border-radius: 20px;       /* закругления плашки */
+//   border: 2px solid var(--primary-color);  /* padding вокруг плашки */
+// }

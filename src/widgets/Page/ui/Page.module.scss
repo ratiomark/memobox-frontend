@@ -1,0 +1,26 @@
+.Page {
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 20px;
+  height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.Page_redesigned {
+  // overflow-y: auto;
+  // padding: 32px 0;
+  scrollbar-gutter: stable;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trigger {
+  height: 10px;
+
+  // background-color: red;
+  margin: 10px;
+}

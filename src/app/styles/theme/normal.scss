@@ -1,0 +1,33 @@
+.app_light_theme {
+  // redesigned
+  --dark-bg: #fff;
+  --bg: #eff5f6;
+  --light-bg: #e2eef1;
+  --text: #141c1f;
+  --hint: #adbcc0;
+  --cancel: #f77;
+  --save: #62de85;
+  --icon: #5ed3f3;
+  --accent: #00c8ff;
+
+  // border
+  --border-main: 1px solid var(--accent);
+  --border-input: 1px solid var(--icon);
+  --border-input-focus: 1px solid var(--accent);
+  --border-success: 1px solid var(--save);
+  --border-cancel: 1px solid var(--cancel);
+
+  // skeleton
+  --skeleton-color: #fff;
+  --skeleton-shadow: rgba(0 0 0 / 20%);
+
+  // code
+  --code-bg: #fff;
+
+  // card-bg
+  --card-bg: #e0e0e0;
+
+  // listBox
+  --list-box-bg: #e0e0e0;
+  --list-box-option-active: #04ff04;
+}

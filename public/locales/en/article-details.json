@@ -1,0 +1,9 @@
+{
+  "article not found": "Article was not found",
+  "No comments in article": "No comments",
+  "Comments":"Comments",
+  "error when fetch articles recommendation": "Some error occurred. Please reload page",
+  "recommendations": "Recommendations",
+  "{{count}} views_one": "{{count}} view",
+  "{{count}} views_other": "{{count}} views"
+}

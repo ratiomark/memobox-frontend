@@ -1,0 +1,47 @@
+.primary {
+  color: var(--text);
+}
+
+.error {
+  color: var(--red-light);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.size_s {
+  font: var(--font-m);
+}
+
+.size_m {
+  font: var(--font-l-header);
+}
+
+.size_l {
+  font: var(--font-xl-header);
+}
+
+.size_xl {
+  font: var(--font-xxl-header);
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.saveOriginal {
+  white-space: pre-wrap;
+}

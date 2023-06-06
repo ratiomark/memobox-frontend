@@ -1,0 +1,31 @@
+{
+  "t1": "This is test of i18n",
+  "error happened": "error happened",
+  "update page": "update page",
+  "newke": "new key",
+  "error button": "Error creator",
+  "button lang change": "English",
+  "button lang short": "en",
+  "log in": "Log in",
+  "log out": "Log out",
+  "About us": "About us",
+  "PROFILE PAGE": "Profile",
+  "PROFILE": "Profile",
+  "main page": "Main",
+  "increment": "+",
+  "decrement": "-",
+  "login form in modal": "Login form",
+  "error on login": "Login or password are incorrect",
+  "currency": "Currency",
+  "country": "Country",
+  "ARTICLES": "Articles",
+  "inputs": {
+    "MANDATORY_INPUT": "This field is required",
+    "HAS_TO_BE_MORE_THAN_3": "Minimum 4 symbols",
+    "STOP_LYING_ABOUT_AGE": "Please, write your actual age"
+  },
+  "Close button": "Close",
+  "Send button": "Send",
+  "thanks for evaluation": "Thank You!",
+  "admin panel": "Admin Panel"
+}

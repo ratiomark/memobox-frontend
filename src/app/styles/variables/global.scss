@@ -1,0 +1,74 @@
+:root {
+  --font-family-main: Inter, "Times New Roman", serif;
+  --font-family-text: "Nunito Sans", sans-serif;
+  --font-family-header: "Roboto", sans-serif;
+
+  // s
+  --font-size-s: 12px;
+  --font-line-s: 20px;
+  --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-main);
+  --font-s-text: var(--font-size-s) / var(--font-line-s) var(--font-family-text);
+  --font-s-header: var(--font-size-s) / var(--font-line-s) var(--font-family-header);
+
+  // m
+  --font-size-m: 16px;
+  --font-line-m: 24px;
+  --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+  --font-m-text: var(--font-size-m) / var(--font-line-m) var(--font-family-text);
+  --font-m-header: var(--font-size-m) / var(--font-line-m) var(--font-family-header);
+
+  // l
+  --font-size-l: 24px;
+  --font-line-l: 32px;
+  --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --font-l-text: var(--font-size-l) / var(--font-line-l) var(--font-family-text);
+  --font-l-header: var(--font-size-l) / var(--font-line-l) var(--font-family-header);
+
+  // xl
+  --font-size-xl: 32px;
+  --font-line-xl: 40px;
+  --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+  --font-xl-text: var(--font-size-xl) / var(--font-line-xl) var(--font-family-text);
+  --font-xl-header: var(--font-size-xl) / var(--font-line-xl) var(--font-family-header);
+
+  // xxl header
+  --font-size-xxl: 40px;
+  --font-line-xxl: 52px;
+  --font-xxl-header: var(--font-size-xxl) / var(--font-line-xxl) var(--font-family-header);
+
+  // Sizes
+  --navbar-height: 50px;
+  --sidebar-collapsed: 80px;
+  --sidebar-width: 300px;
+
+  // Buttons sizes
+  // --button-m: 40px;
+
+  // z-index
+  --modal-index: 100000;
+
+  // colors
+  --overlay-background: rgb(0 0 0 / 69%);
+  --red-light: rgb(250 33 33);
+  --red-dark: rgb(209 17 17);
+
+  // opacity
+  --opacity-disabled: 0.7;
+
+  // border
+  --border-radius-8: 8px;
+  --border-radius-16: 16px;
+  --border-radius-34: 34px;
+  --border-radius-48: 48px;
+
+  // padding
+  --padding-main: 8px 16px;
+  --padding-0-top-16-side: 0 16px;
+  --padding-0-top-16-right-8-left-side: 0 16px 0 8px;
+  --padding-0-top-16-right-16-left-side: 0 16px;
+  --padding-2-top-8-left-16-right: 2px 16px 2px 8px;
+  --padding-2-top-16-side: 2px 16px;
+  --padding-3-top-16-side: 3px 16px;
+  --padding-3-top-8-left-16-right: 3px 16px 3px 8px;
+  --padding-5-top-16-side: 5px 16px;
+}

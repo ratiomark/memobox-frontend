@@ -1,0 +1,25 @@
+.navBar {
+  width: 100%;
+  height: var(--navbar-height);
+  background: var(--inverted-bg-color);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+
+  // z-index: 100;
+  // фиксирую
+  // position: fixed;
+}
+
+.navBar_redesigned {
+  width: 100%;
+  padding: 16px;
+}
+
+.links {
+  margin-left: auto;
+}
+
+.mainLink {
+  margin-right: 15px;
+}

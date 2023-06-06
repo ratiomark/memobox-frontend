@@ -1,0 +1,136 @@
+.InputWrapper {
+  // padding: var(--padding-main);
+
+  border: var(--border-input);
+
+  // border: var(--border-input-focus);
+  border-radius: var(--border-radius-48);
+
+  &.paddingWithRightAddon {
+    padding: var(--padding-0-top-16-right-16-left-side);
+  }
+
+  &.paddingWithBothAddon,
+  &.paddingWithLeftAddon {
+    padding: var(--padding-0-top-16-right-8-left-side);
+  }
+
+  &.hasErrors {
+    margin-bottom: 5px;
+    border: 1px solid var(--cancel);
+
+    .addonLeft svg,
+    .addonRight svg {
+      color: var(--cancel);
+    }
+  }
+
+  &.focused:not(.hasErrors) {
+    border: var(--border-input-focus);
+
+    .addonLeft svg,
+    .addonRight svg {
+      color: var(--accent);
+    }
+  }
+}
+
+.inputInWrapper {
+  outline: none;
+  width: 100%;
+  color: var(--text);
+  background: none;
+  border: none;
+
+  &::placeholder {
+    color: var(--hint);
+  }
+
+  // &:focus {
+  // border: var(--border-main);
+  // }
+}
+
+.addonLeft,
+.addonRight {
+  display: flex;
+}
+
+.addonRight {
+  padding-left: 8px;
+}
+
+// .paddingDefault {
+//   padding: var(--padding-main);
+// }
+
+.Input {
+  outline: none;
+  width: 100%;
+  color: var(--text);
+  background: none;
+  padding: var(--padding-main);
+  border: var(--border-input);
+  border-radius: var(--border-radius-48);
+
+  &::placeholder {
+    color: var(--hint);
+  }
+
+  &.focused:not(.hasErrors) {
+    border: var(--border-input-focus);
+  }
+
+  &.hasErrors {
+    margin-bottom: 5px;
+    border: 1px solid var(--cancel);
+  }
+
+  &.readonly {
+    opacity: 0.7;
+    user-select: none;
+  }
+}
+
+// .hasErrors {
+//   margin-bottom: 5px;
+//   border: 1px solid var(--cancel);
+
+//   // margin-top: 10px;
+// }
+
+// .inputError {
+//   max-height: 0;
+//   transition: max-height 0.5s ease-out;
+//   overflow: hidden;
+
+//   // background: #d5d5d5;
+// }
+
+// .inputErrorActive {
+//   max-height: 500px;
+//   transition: max-height 0.75s ease-in;
+// }
+
+// .focused {
+// border: 1px solid var(--accent);
+
+// .addonLeft svg,
+// .addonRight svg {
+// color: var(--accent);
+// }
+// }
+
+// .readonly {
+//   opacity: 0.7;
+//   border: none;
+// }
+
+// .paddingWithBothAddon,
+// .paddingWithRightAddon {
+//   padding: var(--padding-3-top-16-side);
+// }
+
+// .paddingWithLeftAddon {
+//   padding: var(--padding-3-top-8-left-16-right);
+// }

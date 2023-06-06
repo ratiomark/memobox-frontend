@@ -1,0 +1,17 @@
+.Input {
+  // font: var(--font-family-main);
+  outline: none;
+  width: 100%;
+  color: var(--text);
+  background: none;
+  padding: var(--padding-main);
+  border: var(--border-input);
+  border-radius: var(--border-radius);
+  resize: vertical;
+  height: fit-content;
+}
+
+.hasErrors {
+  margin-bottom: 5px;
+  margin-top: 10px;
+}

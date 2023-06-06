@@ -1,0 +1,11 @@
+{
+  "article not found": "Статья не найдена",
+  "No comments in article": "Нет комментариев",
+  "Comments": "Комментарии",
+  "error when fetch articles recommendation": "Ошибка при загрузке рекомендаций",
+  "recommendations": "Рекомендуем",
+  "{{count}} views_zero": "{{count}} просмотров",
+  "{{count}} views_one": "{{count}} просмотр",
+  "{{count}} views_few": "{{count}} просмотрa",
+  "{{count}} views_many": "{{count}} просмотров"
+}
