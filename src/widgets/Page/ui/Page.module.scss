@@ -3,14 +3,11 @@
   flex-shrink: 1;
   padding: 20px;
   height: calc(100vh - var(--navbar-height));
-  overflow-y: auto;
   scrollbar-gutter: stable;
-}
+  width: min(100%, 1200px);
+  margin: 0 auto;
 
-.Page_redesigned {
   // overflow-y: auto;
-  // padding: 32px 0;
-  scrollbar-gutter: stable;
 }
 
 .wrapper {
@@ -20,7 +17,7 @@
 
 .trigger {
   height: 10px;
-
+  // width: 100px;
   // background-color: red;
   margin: 10px;
 }

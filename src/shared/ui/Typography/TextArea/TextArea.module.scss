@@ -7,7 +7,11 @@
   padding: var(--padding-main);
   border: var(--border-input);
   border-radius: var(--border-radius);
-  resize: vertical;
+  resize: none;
+
+  // overflow: hidden;
+  // ;overflow-y:hidden
+  // resize: vertical;
   height: fit-content;
 }
 

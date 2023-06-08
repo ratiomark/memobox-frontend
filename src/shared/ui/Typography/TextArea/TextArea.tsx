@@ -12,7 +12,8 @@ interface InputProps extends HTMLInputProps {
 	className?: string;
 	value?: string;
 	autoFocus?: boolean;
-	readonly?: boolean;
+	readonly?: boolean
+	rows?: number;
 	// inputErrors?: ValidationErrorText[]
 	// onChange?: (value: string | ChangeEvent<HTMLTextAreaElement>) => void;
 	onChangeEvent?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -34,6 +35,7 @@ export const TextArea = memo((props: InputProps) => {
 		onKeyPress,
 		type = 'text',
 		readonly,
+		rows = 1,
 		// inputErrors = [],
 		autoHeight = true,
 		...otherProps
@@ -79,7 +81,7 @@ export const TextArea = memo((props: InputProps) => {
 				// ref={myRef}
 				// autoFocus
 				ref={textAreaRef}
-				rows={1}
+				rows={rows}
 				className={clsx(cls.Input, [className])}
 				onChange={onChangeHandler}
 				value={value}

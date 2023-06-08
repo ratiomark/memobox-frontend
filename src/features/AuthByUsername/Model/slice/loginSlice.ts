@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction, } from '@reduxjs/toolkit';
-import { loginUserByUserName } from '../services/loginByUserName/loginUserByUserName';
+// import { loginUserByUserName } from '../services/loginByUserName/loginUserByUserName';
 import { LoginSchema } from '../types/loginSchema';
 
 const initialState: LoginSchema = {
@@ -20,28 +20,28 @@ export const loginSlice = createSlice({
 			state.password = action.payload
 		}
 	},
-	extraReducers: (builder) => {
-		builder
-			.addCase(
-				loginUserByUserName.pending,
-				(state, action) => {
-					state.error = undefined
-					state.isLoading = true
-				})
-			.addCase(
-				loginUserByUserName.fulfilled,
-				(state, action) => {
-					state.isLoading = false
-					state.username = action.payload.username
-				})
-			.addCase(
-				loginUserByUserName.rejected,
-				(state, action) => {
-					state.isLoading = false;
-					state.error = action.payload;
-				})
+	// extraReducers: (builder) => {
+	// 	builder
+	// 		.addCase(
+	// 			loginUserByUserName.pending,
+	// 			(state, action) => {
+	// 				state.error = undefined
+	// 				state.isLoading = true
+	// 			})
+	// 		.addCase(
+	// 			loginUserByUserName.fulfilled,
+	// 			(state, action) => {
+	// 				state.isLoading = false
+	// 				state.username = action.payload.username
+	// 			})
+	// 		.addCase(
+	// 			loginUserByUserName.rejected,
+	// 			(state, action) => {
+	// 				state.isLoading = false;
+	// 				state.error = action.payload;
+	// 			})
 
-	}
+	// }
 })
 
 export const { reducer: loginReducer } = loginSlice

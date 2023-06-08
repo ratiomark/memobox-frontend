@@ -25,6 +25,7 @@ export type FlexGap =
 	| 'gap_8'
 	| 'gap_10'
 	| 'gap_12'
+	| 'gap_14'
 	| 'gap_16'
 	| 'gap_20'
 	| 'gap_32'

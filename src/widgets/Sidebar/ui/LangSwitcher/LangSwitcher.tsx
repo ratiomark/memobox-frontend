@@ -22,7 +22,7 @@ export const LangSwitcher = (props: LangSwitcherProps) => {
 
 	return (
 		<Button
-			variant='clear'
+			variant='outline'
 			onClick={onToggleLang}
 		>
 			{short ? t('button lang short') : t('button lang change')}

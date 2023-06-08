@@ -3,7 +3,7 @@ import { ValidationErrorText } from '@/shared/lib/helpers/validation/validationE
 import cls from './Input.module.scss'
 import clsx from 'clsx';
 import { HStack } from '../Stack';
-import { Text } from '../Typography/Text/Text';
+import { MyText } from '../Typography/Text/MyText';
 
 
 // Omit позволяет сконструировать тип, который будет включять в себя все пропсы, кроме некоторых указанных отдельно
@@ -78,7 +78,7 @@ export const Input = memo((props: InputProps) => {
 	let inputErrorsRendered;
 	if (hasErrors) {
 		inputErrorsRendered = inputErrors.map(i => (
-			<Text
+			<MyText
 				text={i}
 				align='left'
 				key={i}
@@ -135,7 +135,7 @@ export const Input = memo((props: InputProps) => {
 	// если нет аддонов, то возвращаю просто инпут
 	return (
 		<>
-			{label && <Text text={label} />}
+			{label && <MyText text={label} />}
 			<input
 				// ref={myRef}
 				// autoFocus

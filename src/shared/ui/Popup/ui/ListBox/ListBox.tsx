@@ -6,7 +6,7 @@ import { AbsoluteListDirection } from '@/shared/types/ui';
 import { VStack, HStack } from '../../../Stack';
 import { FlexAlign, FlexGap } from '../../../Stack/Flex/Flex';
 import { Button } from '../../../Button/Button';
-import ArrowBottomIcon from '@/shared/assets/icons_redesigned/arrow-bottom.svg'
+import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Icon } from '../../../Icon/Icon';
 
 export interface ListBoxItems<T extends string> {
@@ -29,6 +29,7 @@ interface ListBoxProps<T extends string> {
 	listBoxPosition?: FlexAlign
 	labelPadding?: FlexGap
 	sameWidth?: boolean
+	max?:boolean
 }
 
 export const ListBox = <T extends string>(props: ListBoxProps<T>) => {
@@ -87,11 +88,12 @@ export const ListBox = <T extends string>(props: ListBoxProps<T>) => {
 						<HListbox.Button as={'div'} aria-disabled={readonly} className={cls.trigger}>
 							<Button
 								ref={listBoxRef}
+								flex
 								className={clsx(cls.ListBoxButton)}
 								disabled={readonly}
-								variant='filled'
+								variant='empty'
 								borderRadius='borderRadius_34'
-								addonRight={<Icon Svg={ArrowBottomIcon} />}
+								addonRight={<Icon color='main' Svg={ArrowBottomIcon} />}
 							>
 								{selectedItemLocalized?.content ?? defaultValue}
 							</Button>

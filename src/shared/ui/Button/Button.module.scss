@@ -1,13 +1,19 @@
 .addonLeft svg,
 .addonRight svg {
-  color: var(--hint);
+  // color: var(--hint);
 }
 
 .Button {
+  text-align: center;
+
+  // font: inherit;
+
+  // padding: var(--button-main-padding);
+  outline: none;
+
+  // font-weight: 400;
+  transition: all 0.4s;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: var(--text);
 
   &:hover {
     color: var(--accent);
@@ -19,6 +25,12 @@
   }
 
   // border: 1px solid red;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .addonLeft,
@@ -56,6 +68,82 @@
   background: none;
 }
 
+.filled {
+  color: var(--button-filled-text-color);
+
+  &.red {
+    background: var(--red-light);
+    border: 1px solid var(--red-dark);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--cancel);
+
+      // 666
+    }
+
+    // border: 1px solid var(--cancel);
+  }
+
+  &.orange {
+    background: var(--wait-color);
+    border: 1px solid var(--wait-color);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--wait-color);
+
+      // 666
+    }
+  }
+
+  &.main {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--accent);
+
+      // 666
+    }
+  }
+}
+
+.empty {
+  background-color: transparent;
+
+  &.red {
+    color: var(--cancel);
+    border: 1px solid var(--cancel);
+
+    &:hover {
+      background-color: var(--cancel);
+      color: var(--button-filled-text-color);
+    }
+  }
+
+  &.orange {
+    color: var(--wait-color);
+    border: 1px solid var(--wait-color);
+
+    &:hover {
+      background-color: var(--wait-color);
+      color: var(--button-filled-text-color);
+    }
+  }
+
+  &.main {
+    color: var(--accent);
+    border: 1px solid var(--accent);
+
+    &:hover {
+      background-color: var(--accent);
+      color: var(--button-filled-text-color);
+    }
+  }
+}
+
 .success {
   border: var(--border-success);
   background: none;
@@ -84,46 +172,58 @@
   }
 }
 
-.filled {
-  background-color: var(--light-bg);
-  border: none;
-  outline: none;
-}
+// .filled {
+//   background-color: var(--light-bg);
+//   border: none;
+//   outline: none;
+// }
 
-.borderRadius_16 {
-  border-radius: var(--border-radius-16);
-}
+.borderRadius {
+  &_4 {
+    border-radius: 4px;
+  }
 
-.borderRadius_34 {
-  border-radius: var(--border-radius-34);
-}
+  &_6 {
+    border-radius: 6px;
+  }
 
-.square {
-  padding: 0;
+  &_8 {
+    border-radius: 8px;
+  }
+
+  &_10 {
+    border-radius: 10px;
+  }
+
+  &_12 {
+    border-radius: 12px;
+  }
+
+  &_16 {
+    border-radius: var(--border-radius-16);
+  }
+
+  &_34 {
+    border-radius: var(--border-radius-34);
+  }
+
+  &_max {
+    border-radius: 999999px;
+  }
 }
 
 .disabled {
   opacity: 0.4;
 }
 
-.square.size_m {
-  width: 200px;
-  width: var(--font-line-m);
-  height: var(--font-line-m);
-}
-
-.square.size_l {
-  width: var(--font-line-l);
-  height: var(--font-line-l);
-}
-
-.square.size_xl {
-  width: var(--font-line-xl);
-  height: var(--font-line-xl);
+.size_s {
+  font: var(--font-s);
 }
 
 .size_m {
   font: var(--font-m);
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .size_l {

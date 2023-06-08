@@ -9,6 +9,19 @@
   --save: #6cd98b;
   --icon: #74a2b2;
   --accent: #5ed3f3;
+  --shelf-bg: #fcfcfc;
+
+  // data-labels
+  --data-label-all: #33d69f;
+  --data-label-train: #eb4b4b;
+  --data-label-wait: #ff8b57;
+  --data-label-text-color: #676872;
+  --small-data-label-background-all: #e6faf3;
+  --small-data-label-background-train: #fce9e9;
+  --small-data-label-background-wait: #fff1ea;
+  --small-data-label-color-all: #33d69f;
+  --small-data-label-color-train: #eb4b4b;
+  --small-data-label-color-wait: #ff8b57;
 
   // border
   --border-main: 1px solid var(--accent);

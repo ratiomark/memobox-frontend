@@ -1,6 +1,25 @@
 .Icon {
-  fill: var(--icon);
-  color: var(--icon);
+  transition: 0.3s;
+}
+
+.main {
+  fill: var(--accent);
+  color: var(--accent);
+}
+
+.hint {
+  fill: var(--hint);
+  color: var(--hint);
+
+  &:hover {
+    fill: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.cancel {
+  fill: var(--cancel);
+  color: var(--cancel);
 }
 
 .button {

@@ -1,3 +1,3 @@
 export { TextArea } from './TextArea/TextArea';
-export { Text } from './Text/Text';
+export { MyText } from './Text/MyText';
 export { Heading } from './Heading/Heading';

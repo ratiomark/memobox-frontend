@@ -1,0 +1,42 @@
+.Transition {
+
+}
+
+.enter {
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+
+  // position: absolute;
+  // z-index: 1000;u
+}
+
+.enterFrom {
+  opacity: 0;
+
+  // transform: translateX(100%);
+
+  // width: 0;
+}
+
+.enterTo {
+  opacity: 1;
+
+  // transform: translateX(0);
+
+  // width: 100%;
+}
+
+.leave {
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.leaveTo {
+  opacity: 0;
+
+  // transform: translateX(80%);
+}
+
+.leaveFrom {
+  opacity: 1;
+
+  // transform: translateX(0);
+}

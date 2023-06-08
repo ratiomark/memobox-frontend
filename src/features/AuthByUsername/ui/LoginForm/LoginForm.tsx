@@ -9,7 +9,7 @@ import { memo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import cls from './LoginForm.module.scss'
-import { loginUserByUserName } from '../../Model/services/loginByUserName/loginUserByUserName'
+// import { loginUserByUserName } from '../../Model/services/loginByUserName/loginUserByUserName'
 import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 
@@ -18,7 +18,7 @@ import {
 	useAsyncReducer,
 } from '@/shared/lib/helpers/hooks/useAsyncReducer'
 import clsx from 'clsx'
-import { Text } from '@/shared/ui/Typography'
+import { MyText } from '@/shared/ui/Typography'
 
 export interface LoginFormProps {
 	className?: string
@@ -56,19 +56,19 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 		[dispatch]
 	)
 
-	const onClickLoginButton = useCallback(async () => {
-		const result = await dispatch(loginUserByUserName({ username, password }))
-		if (result.meta.requestStatus === 'fulfilled') {
-			onSuccess()
-		}
-	}, [onSuccess, dispatch, username, password])
+	// const onClickLoginButton = useCallback(async () => {
+	// 	const result = await dispatch(loginUserByUserName({ username, password }))
+	// 	if (result.meta.requestStatus === 'fulfilled') {
+	// 		onSuccess()
+	// 	}
+	// }, [onSuccess, dispatch, username, password])
 
 	return (
 		<div className={clsx(cls.LoginForm, [className])}>
-			<Text text={t('login form in modal')} />
+			<MyText text={t('login form in modal')} />
 
 			<div className={cls.inputWrapper}>
-				{error && <Text text={error} variant='error'  />}
+				{error && <MyText text={error} variant='error' />}
 
 				<label className={cls.label} htmlFor='userName'>
 					{t('enter userName')}
@@ -93,7 +93,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 					variant='outline'
 					size='size_m'
 					className={cls.loginBtn}
-					onClick={onClickLoginButton}
+					// onClick={onClickLoginButton}
 					disabled={isLoading}
 				>
 					{t('log in')}

@@ -5,6 +5,7 @@ import { userReducer } from '@/entities/User';
 // import { $api } from '@/shared/api/api';
 import { uiReducer } from '@/features/ScrollSave';
 import { rtkApi } from '@/shared/api/rtkApi';
+import { cardModalReducer } from '@/features/CardModal';
 
 export function createReduxStore(
 	initialState?: StateSchema,
@@ -14,6 +15,7 @@ export function createReduxStore(
 		...asyncReducers,
 		user: userReducer,
 		ui: uiReducer,
+		cardModal: cardModalReducer,
 		// а это редьюсер, который создает RTKQuery с помощь createApi, чтобы ТС не ругался, но добавить в схему
 		// [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 		[rtkApi.reducerPath]: rtkApi.reducer

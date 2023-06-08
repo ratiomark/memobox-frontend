@@ -1,31 +1,27 @@
 import { useTranslation } from 'react-i18next'
 import { Page } from '@/widgets/Page'
-import { ListBox } from '@/shared/ui/Popup'
-import { VStack } from '@/shared/ui/Stack'
+import { StatsAndActionsCupboardWidget } from '@/widgets/StatsAndActionsCupboardWidget'
+import { Header } from '@/widgets/Sidebar'
+// eslint-disable-next-line custom-fsd-checker-plugin/public-api-imports
+import { CupboardShelvesWidget } from '@/widgets/CupboardShelvesWidget'
 
 
-
-const items = [
-	{ value: '1', content: '1', disabled: true },
-	{ value: '2', content: '2' },
-	{ value: '3', content: '3' },
-]
-
+// const data = { wait: 40, all: 40, train: 33 }
 const MainPage = () => {
 	const { t } = useTranslation()
+	// const { data, isLoading, error } = useGetShelvesQuery()
+
+
+	// if (isLoading) return <p>Загрузка</p>
+
 	return (
-		<Page data-testid='MainPage'>
-			<VStack>
-				<ListBox
-					items={items}
-					onChange={() => { }}
-					defaultValue='кнопка попка'
-				/>
-			</VStack>
-			<div>
-				{t('main page')}
-			</div>
-		</Page>
+		<>
+			<Header />
+			<Page data-testid='MainPage'>
+				<StatsAndActionsCupboardWidget />
+				<CupboardShelvesWidget />
+			</Page>
+		</>
 	)
 }
 export default MainPage

@@ -1,14 +1,14 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
+import IconEye from '@/shared/assets/icons/eye-20-20.svg'
 import cls from './Icon.module.scss';
-import IconEye from '@/shared/assets/icon/eye-20-20.svg'
 
 type SvgProps = Omit<React.SVGProps<SVGSVGElement>, 'onClick'>
-// базовые пропсы для всех СВГ, неважно кликалбельные или нет
 
+// базовые пропсы для всех СВГ, неважно кликалбельные или нет
 interface IconBaseProps extends SvgProps {
 	className?: string
 	Svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
+	type?: 'main' | 'hint' | 'cancel'
 }
 
 interface UnClickableProps extends IconBaseProps {
@@ -27,9 +27,11 @@ export const Icon = (props: IconProps) => {
 		Svg = IconEye,
 		width = 32,
 		height = 32,
+		type = 'main',
+		clickable = false,
 		...otherProps
 	} = props
-
+	
 	if (props.clickable) {
 		return (
 			<button
@@ -40,7 +42,8 @@ export const Icon = (props: IconProps) => {
 			>
 				<Svg
 					className={clsx(
-						cls.Icon
+						cls.Icon,
+						cls[type]
 					)}
 					width={width}
 					height={height}
@@ -55,6 +58,7 @@ export const Icon = (props: IconProps) => {
 		<Svg
 			className={clsx(
 				cls.Icon,
+				cls[type],
 				className
 			)}
 			width={width}

@@ -8,11 +8,11 @@ export const rtkApi = createApi({
 		baseUrl: __API__,
 		// функция интерцептор, которая ?(будет добавлять соответствующий хедер в наш конфиг)?
 		prepareHeaders: (headers) => {
-			const token = localStorage.getItem(USER_ID_LS_KEY) || ''
-			if (token) {
-				// добавляем поле Authorization в хедеры, потому что наш сервер использует этот заголовок как факт наличия авторизации
-				headers.set('Authorization', token)
-			}
+			// const token = localStorage.getItem(USER_ID_LS_KEY) || ''
+			// if (token) {
+			// добавляем поле Authorization в хедеры, потому что наш сервер использует этот заголовок как факт наличия авторизации
+			headers.set('Authorization', 'token')
+			// }
 			return headers
 		}
 	}),
