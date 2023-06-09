@@ -1,36 +1,10 @@
+import { ShelfSchema } from '@/entities/Shelf';
 import { rtkApi } from '@/shared/api/rtkApi';
-
-interface Card {
-	_id: string,
-	index: number,
-	question: string,
-	answer: string,
-	shelf: number,
-	box: number,
-	state: 'train' | 'wait'
-}
-
-interface Shelf {
-	_id: string,
-	index: number,
-	data: {
-		train: number,
-		wait: number,
-		all: number,
-	},
-	title: string,
-}
-
-interface Cupboard {
-	train: number,
-	wait: number,
-	all: number,
-	shelvesCount: number
-}
+import { CupboardSchema } from '../types/CupboardSchema';
 
 export const cupboardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
-		getCupboardData: build.query<Cupboard, void>({
+		getCupboardData: build.query<CupboardSchema, void>({
 			query: () => ({
 				url: '/cupboard',
 				method: 'GET'
@@ -39,11 +13,11 @@ export const cupboardApi = rtkApi.injectEndpoints({
 			// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
 			// 		acc[current.id.toString()] = current
 			// 		return acc
-			// 	}, {})
+			// 	}, {})s
 			// 	return data
 			// },
 		}),
-		getShelves: build.query<Shelf[], void>({
+		getShelves: build.query<ShelfSchema[], void>({
 			query: () => ({
 				url: '/shelves',
 				method: 'GET'

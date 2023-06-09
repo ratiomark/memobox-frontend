@@ -6,6 +6,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { LoginSchema } from '@/features/AuthByUsername';
 import { UISchema } from '@/features/ScrollSave';
 import { CardModalSchema } from '@/features/CardModal';
+import { ViewPageInitializerSchema } from '@/features/ViewPageInitializer';
 
 // loginForm делаю не обязательным, таким образом я могу подружать его позже с помощью асинхронна и ТС не будет ругаться на то что я не объявил его в rootReducers
 export interface StateSchema {
@@ -16,6 +17,7 @@ export interface StateSchema {
 
 	// async reducers
 	loginForm?: LoginSchema
+	viewPage?: ViewPageInitializerSchema
 }
 
 // достаю ключи редьюсеров, чтобы передать их reducerManager, там где требуются ключи

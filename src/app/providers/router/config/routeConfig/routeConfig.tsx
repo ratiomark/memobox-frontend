@@ -4,6 +4,7 @@ import { Page } from '@/widgets/Page';
 import { AboutPage } from '@/pages/AboutPage';
 import { MainPage } from '@/pages/MainPage';
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
+import { ViewPage } from '@/pages/ViewPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -26,10 +27,14 @@ export const AppRoutes = {
 export type AppRoutes = keyof typeof AppRoutes;
 
 export const obtainRouteMain = () => '/'
-export const obtainRouteView= () => '/view'
+export const obtainRouteView = (shelfId?: string, boxId?: string) => {
+	if (!shelfId) return '/view/1/all'
+	if (boxId) return `/view/${shelfId}/${boxId}`
+	return `/view/${shelfId}/all`
+}
 export const obtainRouteStats = () => '/stats'
 export const obtainRouteSettings = () => '/settings'
-export const obtainRouteTrash= () => '/trash'
+export const obtainRouteTrash = () => '/trash'
 export const obtainRouteAbout = () => '/about'
 export const obtainRouteProfile = (id: string | number) => `/profile/${id}`
 export const obtainRouteArticles = () => '/articles'
@@ -45,8 +50,8 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 		// wrapper: Page
 	},
 	view: {
-		path: obtainRouteView(),
-		element: <MainPage />
+		path: obtainRouteView(':shelfId', ':boxId'),
+		element: <ViewPage />
 	},
 	settings: {
 		path: obtainRouteSettings(),

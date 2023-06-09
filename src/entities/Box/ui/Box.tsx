@@ -26,9 +26,9 @@ export const Box = (props: BoxPropsNewBox | BoxPropsLearntBox | BoxPropsLearning
 	const {
 		className,
 		type,
-		allCards,
-		waitCards,
-		trainCards,
+		// allCards,
+		// waitCards,
+		// trainCards,
 	} = props
 
 	if (type === 'learning') {

@@ -27,7 +27,7 @@ export const ShelvesWrapper = (props: ShelvesWrapperProps) => {
 		dispatch(cardModalActions.setShelf(shelfId))
 		dispatch(cardModalActions.openModalNewCard())
 	}, [dispatch])
-	
+
 	const onCloseNewCardModal = useCallback(() => {
 		dispatch(cardModalActions.closeModalNewCard())
 	}, [dispatch])
@@ -43,8 +43,9 @@ export const ShelvesWrapper = (props: ShelvesWrapperProps) => {
 
 		const shelfButtonsBlock = (
 			<ShelfButtons
-				onAddNewCardClick={onNewCardClickHandle}
 				shelfPosition={shelfItem.index + 1 ?? 11}
+				onAddNewCardClick={onNewCardClickHandle}
+				// onViewShelfClick={ }
 			/>
 		)
 

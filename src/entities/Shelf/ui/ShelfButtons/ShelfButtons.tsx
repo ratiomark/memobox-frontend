@@ -6,11 +6,15 @@ import { useTranslation } from 'react-i18next';
 import cls from './ShelfButtons.module.scss';
 import { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { useNavigate } from 'react-router-dom';
+import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { AppLink } from '@/shared/ui/AppLink/AppLink';
 
 interface ShelfButtonsProps {
 	className?: string
 	shelfPosition: number
 	onAddNewCardClick: () => void
+	onViewShelfClick?: () => void
 }
 
 // function trainHotKey(event: KeyboardEvent) {
@@ -21,9 +25,10 @@ export const ShelfButtons = (props: ShelfButtonsProps) => {
 	const {
 		className,
 		shelfPosition,
-		onAddNewCardClick
+		onAddNewCardClick,
+		onViewShelfClick,
 	} = props
-	
+
 	const [train, setTrain] = useState(0)
 	let positionTextCard = '';
 	let positionTextTrain = '';
@@ -37,6 +42,10 @@ export const ShelfButtons = (props: ShelfButtonsProps) => {
 	useHotkeys(positionTextCard, onAddNewCardClick)
 	useHotkeys(positionTextTrain, () => setTrain(train + 1), [train])
 
+	const navigate = useNavigate()
+	const onViewClick = () => {
+		navigate(obtainRouteView(shelfPosition.toString()))
+	}
 	// useEffect(() => {
 	// 	document.addEventListener('keydown',)
 	// })
@@ -56,9 +65,10 @@ export const ShelfButtons = (props: ShelfButtonsProps) => {
 			<Button className={cls.button}>
 				{t('settings')}
 			</Button>
-			<Button className={cls.button}>
-				{t('view')}
-			</Button>
+			<AppLink to={obtainRouteView(shelfPosition.toString())}>{t('view')}</AppLink>
+			{/* <Button onClick={onViewClick} className={cls.button}> */}
+			{/* {t('view')} */}
+			{/* </Button> */}
 			<Button
 				className={cls.button}
 				variant='filled'

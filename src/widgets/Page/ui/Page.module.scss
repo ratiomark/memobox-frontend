@@ -3,20 +3,24 @@
   flex-shrink: 1;
   padding: 20px;
   height: calc(100vh - var(--navbar-height));
+  overflow: auto;
   scrollbar-gutter: stable;
-  width: min(100%, 1200px);
-  margin: 0 auto;
+
+  // width: min(100%, 1200px);
+  // margin: 0 auto;
 
   // overflow-y: auto;
 }
 
 .wrapper {
-  max-width: 1200px;
+  // max-width: 1200px;
+  width: min(100%, 1200px);
   margin: 0 auto;
 }
 
 .trigger {
   height: 10px;
+
   // width: 100px;
   // background-color: red;
   margin: 10px;

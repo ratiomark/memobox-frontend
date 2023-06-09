@@ -5,9 +5,11 @@
 @import "variables/global";
 
 body {
-  // overflow: hidden;
+  // overflow: auto;
   // height: 100vh;
   background: #f5f6fa;
+
+  // scrollbar-gutter: stable both-edges;
 }
 
 .app,
@@ -21,6 +23,8 @@ body {
   // background: var(--bg);
   min-height: 100vh;
   margin-inline: auto;
+
+  // scrollbar-gutter: stable;
 
   // max-width: 1200px;
 }
