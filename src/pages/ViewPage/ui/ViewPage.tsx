@@ -1,4 +1,5 @@
 import { ViewPageInitializer } from '@/features/ViewPageInitializer';
+import { CardListViewWidget } from '@/widgets/CardListViewWidget';
 import { Page } from '@/widgets/Page';
 import { ShelvesListViewWidget } from '@/widgets/ShelvesListViewWidget';
 import { Header } from '@/widgets/Sidebar';
@@ -10,10 +11,11 @@ const ViewPage = memo(() => {
 
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			<Page data-testid='MainPage'>
 				<ViewPageInitializer
 					shelvesListViewPageBlock={<ShelvesListViewWidget />}
+					cardListViewPageBlock={<CardListViewWidget />}
 				/>
 			</Page>
 		</>

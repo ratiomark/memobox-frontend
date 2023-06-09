@@ -15,6 +15,7 @@ export type AppRouteProps = RouteProps & {
 export const AppRoutes = {
 	main: 'main',
 	view: 'view',
+	viewEmpty: 'viewEmpty',
 	settings: 'settings',
 	stats: 'stats',
 	trash: 'trash',
@@ -28,9 +29,9 @@ export type AppRoutes = keyof typeof AppRoutes;
 
 export const obtainRouteMain = () => '/'
 export const obtainRouteView = (shelfId?: string, boxId?: string) => {
-	if (!shelfId) return '/view/1/all'
-	if (boxId) return `/view/${shelfId}/${boxId}`
-	return `/view/${shelfId}/all`
+	return boxId
+		? `/view/${shelfId}/${boxId}`
+		: `/view/${shelfId}/all`
 }
 export const obtainRouteStats = () => '/stats'
 export const obtainRouteSettings = () => '/settings'
@@ -51,6 +52,10 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	},
 	view: {
 		path: obtainRouteView(':shelfId', ':boxId'),
+		element: <ViewPage />
+	},
+	viewEmpty: {
+		path: '/view',
 		element: <ViewPage />
 	},
 	settings: {

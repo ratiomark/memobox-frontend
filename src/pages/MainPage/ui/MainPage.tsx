@@ -16,7 +16,7 @@ const MainPage = () => {
 
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			<Page data-testid='MainPage'>
 				<StatsAndActionsCupboardWidget />
 				<CupboardShelvesWidget />

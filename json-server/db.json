@@ -913,6 +913,20 @@
       "state": "wait"
     }
   ],
+  "users": [
+    {
+      "id": "1",
+      "username": "mark",
+      "jsonSettings": {
+        "settingsPageHasBeenOpen": false,
+        "isFirstVisit": true
+      },
+      "jsonSavedData": {
+        "viewPageShelfId": "",
+        "viewPageBoxId": ""
+      }
+    }
+  ],
   "cupboard": {
     "all": 100,
     "train": 55,

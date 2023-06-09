@@ -1,4 +1,4 @@
-export { cupboardReducer, cupboardActions } from './model/slice/cupboardSlice';
+// export { cupboardReducer, cupboardActions } from './model/slice/cupboardSlice';
 export type { CupboardSchema } from './model/types/CupboardSchema';
 export { Cupboard } from './ui/Cupboard';
 

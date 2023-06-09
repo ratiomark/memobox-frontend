@@ -27,7 +27,7 @@ export const getHeaderItems = createSelector(
 				Icon: MainIcon,
 			},
 			{
-				path: obtainRouteView(),
+				path: '/view',
 				text: 'view',
 				Icon: AboutIcon,
 			},

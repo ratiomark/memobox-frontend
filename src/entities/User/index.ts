@@ -1,9 +1,11 @@
+export { getJsonSavedData } from './model/selectors/getJsonSavedData';
 export { initAuthData } from './model/services/initAuthData';
+
 
 export { saveJsonSettings } from './model/services/saveJsonSettings';
 export { useJsonSettings } from './model/selectors/getJsonSettings';
-export { getUserMounted } from './model/selectors/getUserMounted/getUserMounted';
-export { getUserAuthData } from './model/selectors/getUserAuthData/getUserAuthData';
+export { getUserMounted } from './model/selectors/getUserMounted';
+export { getUserAuthData } from './model/selectors/getUserAuthData';
 export { userReducer, userActions } from './model/slice/userSlice';
 export {
 	getUserRoles,

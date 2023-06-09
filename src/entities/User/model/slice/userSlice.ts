@@ -29,12 +29,6 @@ const userSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			// .addCase(
-			// 	saveJsonSettings.pending,
-			// 	(state) => {
-			// 		state.error = undefined
-			// 		state.isLoading = true
-			// 	})
 			.addCase(
 				saveJsonSettings.fulfilled,
 				(state, action: PayloadAction<JsonSettings>) => {
@@ -54,12 +48,6 @@ const userSlice = createSlice({
 				(state) => {
 					state._mounted = true
 				})
-		// .addCase(
-		// 	saveJsonSettings.rejected,
-		// 	(state, action) => {
-		// 		state.isLoading = false;
-		// 		state.error = action.payload;
-		// 	})
 	}
 })
 

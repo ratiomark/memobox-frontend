@@ -1,36 +1,37 @@
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { setJsonSettingsMutation } from '../api/userApi'
+import { setJsonSavedDataMutation, setJsonSettingsMutation } from '../api/userApi'
 import { getJsonSettings } from '../selectors/getJsonSettings'
 import { getUserAuthData } from '../selectors/getUserAuthData'
-import { JsonSettings } from '../types/JsonSettings'
+import { JsonSaveData } from '../types/JsonSavedData'
+import { getJsonSavedData } from '../..'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const saveJsonSettings = createAsyncThunk<JsonSettings, JsonSettings, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
-	'user/saveJsonSettings',
-	async (newJsonSettings, thunkAPI) => {
+export const saveUserJsonData = createAsyncThunk<JsonSaveData, JsonSaveData, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+	'user/saveUserJsonData',
+	async (newJsonSavedData, thunkAPI) => {
 
 		const { dispatch, getState, } = thunkAPI
 		const userData = getUserAuthData(getState())
-		const currentUserSettings = getJsonSettings(getState())
+		const userJsonDataFromStore = getJsonSavedData(getState())
 
 		if (!userData) return thunkAPI.rejectWithValue('Нет userData')
 
 		try {
-			const response = await dispatch(setJsonSettingsMutation({
-				jsonSettings: {
-					...currentUserSettings,
-					...newJsonSettings
+			const response = await dispatch(setJsonSavedDataMutation({
+				jsonSavedData: {
+					...userJsonDataFromStore,
+					...newJsonSavedData
 				},
 				userId: userData.id
 			}))
 				.unwrap() //разворачиваю в реальный результат
 
-			const jsonSettingsFromResponse = response.jsonSettings
+			const jsonSavedDataFromResponse = response.jsonSaveData
 
-			if (!jsonSettingsFromResponse) return thunkAPI.rejectWithValue('Нет userData')
+			if (!jsonSavedDataFromResponse) return thunkAPI.rejectWithValue('Нет userData')
 
-			return jsonSettingsFromResponse
+			return jsonSavedDataFromResponse
 
 		} catch (err) {
 			return thunkAPI.rejectWithValue('Some Error in saveJsonSettings')

@@ -23,7 +23,7 @@ interface ShelfProps {
 export const CommonShelf = (props: ShelfProps) => {
 	const {
 		className,
-		data, 
+		data,
 		isLoading
 	} = props
 
@@ -44,7 +44,7 @@ export const CommonShelf = (props: ShelfProps) => {
 					<Heading as='h3' size='s' title={t('common shelf name')} />
 					<CompleteSmallDataLabels data={data} isLoading={isLoading} />
 				</VStack>
-				<ShelfButtons/>
+				<ShelfButtons />
 			</div>
 		</div>
 	)

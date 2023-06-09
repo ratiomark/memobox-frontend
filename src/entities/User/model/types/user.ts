@@ -1,5 +1,6 @@
 import { FeatureFlags } from '@/shared/types/FeatureFlags'
 import { JsonSettings } from './JsonSettings'
+import { JsonSaveData } from './JsonSavedData'
 
 export const UserRole = {
 	ADMIN: 'ADMIN',
@@ -13,16 +14,16 @@ export type UserRole = keyof typeof UserRole
 export interface User {
 	id: string
 	username: string
-	avatar?: string
+	// avatar?: string
 	role?: UserRole[]
 	features?: Partial<FeatureFlags>
 	jsonSettings?: JsonSettings
+	jsonSaveData?: JsonSaveData
 }
 
 // а это интрефейс для стейта, чтобы описать кусок стора?
 // если authData пустая, то юзер не авторизован, а если не пуст, то значит авторизован
 export interface UserSchema {
 	authData?: User
-
 	_mounted: boolean
 }

@@ -1,3 +1,4 @@
+import { ShelfRepresentedByBoxes } from '@/entities/Box'
 import { CardSchema } from '@/entities/Card'
 
 export interface ViewPageInitializerSchema {
@@ -5,6 +6,6 @@ export interface ViewPageInitializerSchema {
 	shelfTitle?: string
 	boxId: string
 	shelvesDataSaved?: {
-		[boxId: string]: CardSchema[]
+		[shelfId: string]: ShelfRepresentedByBoxes
 	}
 }

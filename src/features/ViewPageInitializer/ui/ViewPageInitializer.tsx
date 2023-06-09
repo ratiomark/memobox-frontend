@@ -5,10 +5,14 @@ import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsy
 import { useParams } from 'react-router-dom';
 import { ReactNode, useEffect } from 'react';
 import { viewPageActions, viewPageReducer } from '../model/slice/viewPageSlice';
+import { fetchBoxesDataByShelfId } from '../model/services/fetchBoxesDataByShelfId';
+import { useSelector } from 'react-redux';
+import { getJsonSavedData } from '@/entities/User';
 
 interface ViewPageInitializerProps {
 	className?: string
 	shelvesListViewPageBlock: ReactNode
+	cardListViewPageBlock: ReactNode
 }
 const reducers: ReducersList = {
 	viewPage: viewPageReducer
@@ -16,21 +20,27 @@ const reducers: ReducersList = {
 export const ViewPageInitializer = (props: ViewPageInitializerProps) => {
 	const {
 		className,
-		shelvesListViewPageBlock
+		shelvesListViewPageBlock,
+		cardListViewPageBlock,
 	} = props
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
-
 	const { shelfId, boxId } = useParams<{ shelfId: string, boxId: string }>()
-	
+	const jsonSavedData = useSelector(getJsonSavedData)
+
+	useEffect(() => {
+		console.log('getJsonSavedData  ', jsonSavedData)
+	}, [jsonSavedData])
+
 	useEffect(() => {
 		if (shelfId) {
 			dispatch(viewPageActions.setShelfId(shelfId))
+			dispatch(fetchBoxesDataByShelfId(shelfId))
 		}
 	}, [shelfId, dispatch])
-	
+
 	useEffect(() => {
 		if (boxId) {
-			dispatch(viewPageActions.setShelfId(boxId))
+			dispatch(viewPageActions.setBoxId(boxId))
 		}
 	}, [boxId, dispatch])
 
@@ -44,6 +54,7 @@ export const ViewPageInitializer = (props: ViewPageInitializerProps) => {
 			className)}
 		>
 			{shelvesListViewPageBlock}
+			{cardListViewPageBlock}
 		</div>
 	)
 }
