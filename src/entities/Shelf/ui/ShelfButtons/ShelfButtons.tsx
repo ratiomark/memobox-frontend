@@ -65,10 +65,10 @@ export const ShelfButtons = (props: ShelfButtonsProps) => {
 			<Button className={cls.button}>
 				{t('settings')}
 			</Button>
-			<AppLink to={obtainRouteView(shelfPosition.toString())}>{t('view')}</AppLink>
-			{/* <Button onClick={onViewClick} className={cls.button}> */}
-			{/* {t('view')} */}
-			{/* </Button> */}
+			{/* <AppLink to={obtainRouteView(shelfPosition.toString())}>{t('view')}</AppLink> */}
+			<Button onClick={onViewClick} className={cls.button}>
+				{t('view')}
+			</Button>
 			<Button
 				className={cls.button}
 				variant='filled'

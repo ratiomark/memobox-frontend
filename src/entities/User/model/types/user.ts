@@ -1,6 +1,6 @@
 import { FeatureFlags } from '@/shared/types/FeatureFlags'
 import { JsonSettings } from './JsonSettings'
-import { JsonSaveData } from './JsonSavedData'
+import { JsonSavedData } from './JsonSavedData'
 
 export const UserRole = {
 	ADMIN: 'ADMIN',
@@ -18,7 +18,7 @@ export interface User {
 	role?: UserRole[]
 	features?: Partial<FeatureFlags>
 	jsonSettings?: JsonSettings
-	jsonSaveData?: JsonSaveData
+	jsonSavedData?: JsonSavedData
 }
 
 // а это интрефейс для стейта, чтобы описать кусок стора?

@@ -4,7 +4,7 @@ import { LinkProps, NavLink, } from 'react-router-dom';
 import cls from './AppLink.module.scss'
 
 
-type AppLinkVariant = 'primary' | 'inverted'
+type AppLinkVariant = 'primary' | 'inverted' | 'button'
 
 
 interface AppLinkProps extends LinkProps {

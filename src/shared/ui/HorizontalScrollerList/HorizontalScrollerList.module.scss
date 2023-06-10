@@ -1,0 +1,24 @@
+.HorizontalScrollerList {
+  display: grid;
+
+  // делает флоу грида колонками(по дефолту грид выстраивает детей в ряды)
+  grid-auto-flow: column;
+  overflow-x: auto;
+  gap: 20px;
+  justify-content: start;
+
+  // скроллит список, если курсор в области списка(не вызывает случайного скролла страницы)
+  // overscroll-behavior-inline: contain;
+}
+
+.gridElement {
+  inline-size: 100%;
+  white-space: pre;
+
+  // aspect-ratio: 16 / 9;
+  // object-fit: cover;
+}
+
+.activeShelf {
+  color: red;
+}

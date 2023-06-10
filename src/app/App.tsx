@@ -5,7 +5,7 @@ import { AppRouter } from './providers/router/AppRouter'
 import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { useSelector } from 'react-redux'
-import { getUserMounted, initAuthData } from '@/entities/User'
+import { getUserAuthData, getUserMounted, initAuthData } from '@/entities/User'
 // import { MainLayout } from '@/shared/layouts'
 import { useTheme } from '@/shared/context/useTheme'
 import clsx from 'clsx'
@@ -16,12 +16,13 @@ export const App = () => {
 	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
 	const { theme } = useTheme()
+	
 	useEffect(() => {
 		dispatch(initAuthData())
 	}, [dispatch, userMounted])
 
 	if (!userMounted) return <LoaderWidget />
-
+	
 	return (
 		<div className={clsx('app', theme)}>
 			<Header />

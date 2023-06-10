@@ -21,9 +21,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const {
 		className
 	} = props
-	// const [isOpen, setIsOpen] = useState(false)
-	// const onClose = () => setIsOpen(false)
-	// const onOpen = () => setIsOpen(true)
+
 	const { data, isLoading } = useGetCupboardDataQuery()
 	const { t } = useTranslation()
 

@@ -1,7 +1,7 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { JsonSettings } from '../types/JsonSettings'
 import { User } from '../types/user'
-import { JsonSaveData } from '../types/JsonSavedData'
+import { JsonSavedData } from '../types/JsonSavedData'
 
 interface SetJsonSettings {
 	userId: string
@@ -9,7 +9,7 @@ interface SetJsonSettings {
 }
 interface SetJsonSavedData {
 	userId: string
-	jsonSavedData: JsonSaveData
+	jsonSavedData: JsonSavedData
 }
 
 

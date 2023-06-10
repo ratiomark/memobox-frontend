@@ -922,8 +922,8 @@
         "isFirstVisit": true
       },
       "jsonSavedData": {
-        "viewPageShelfId": "",
-        "viewPageBoxId": ""
+        "viewPageShelfId": "1",
+        "viewPageBoxId": "all"
       }
     }
   ],

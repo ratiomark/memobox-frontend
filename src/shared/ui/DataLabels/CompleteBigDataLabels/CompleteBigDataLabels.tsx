@@ -2,16 +2,12 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { BigDataLabel } from '../BigDataLabels/BigDataLabel';
 import cls from './CompleteBigDataLabels.module.scss';
+import { DataBlock } from '@/shared/types/DataBlock';
 
 
 
-interface CompleteBigDataLabelsProps {
+interface CompleteBigDataLabelsProps extends DataBlock {
 	className?: string
-	data?: {
-		wait: number
-		all: number
-		train: number
-	}
 	isLoading: boolean
 }
 
