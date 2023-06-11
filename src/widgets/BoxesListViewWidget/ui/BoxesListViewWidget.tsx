@@ -28,27 +28,28 @@ export const BoxesListViewWidget = memo((props: BoxesListViewWidgetProps) => {
 	const { t } = useTranslation()
 
 	const tabs = useMemo(() => {
-		// console.log('РЕНДЕР', viewPageIsMounted, shelfDataSaved)
-		if (!viewPageIsMounted || shelfDataSaved?.isLoading) return []
+		const isLoading = shelfDataSaved?.isLoading ?? true
+		if (isLoading) return
+		const data = shelfDataSaved!.data
 		const tabs = [{
 			value: 'all', content: 'all',
 		},
 		{
 			value: 'new', content: 'new',
 		}]
-		Object.keys(shelfDataSaved!.data).forEach(item => {
+		Object.keys(data).forEach(item => {
 			tabs.push({ value: item, content: `коробка ${item}` })
 		})
 		tabs.push({ value: 'learnt', content: 'learnt' })
 		return tabs
-	}, [shelfDataSaved, viewPageIsMounted])
+	}, [shelfDataSaved])
 
 	const onBoxClick = useCallback((tabItem: TabItem) => {
 		dispatch(viewPageActions.setLastBoxId({ boxId: tabItem.value, shelfId }))
 		navigate(obtainRouteView(shelfId, tabItem.value))
 	}, [dispatch, shelfId, navigate])
 
-	if (!viewPageIsMounted || shelfDataSaved?.isLoading) {
+	if (!tabs) {
 		return <Skeleton width={500} height={40} />
 	}
 

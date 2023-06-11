@@ -4,6 +4,7 @@ import { StatsAndActionsCupboardWidget } from '@/widgets/StatsAndActionsCupboard
 import { Header } from '@/widgets/Sidebar'
 // eslint-disable-next-line custom-fsd-checker-plugin/public-api-imports
 import { CupboardShelvesWidget } from '@/widgets/CupboardShelvesWidget'
+import { useEffect } from 'react'
 
 
 // const data = { wait: 40, all: 40, train: 33 }
@@ -11,6 +12,12 @@ const MainPage = () => {
 	const { t } = useTranslation()
 	// const { data, isLoading, error } = useGetShelvesQuery()
 
+	// useEffect(() => {
+	// 	const buttons = document.querySelectorAll('[data-button-type="shelf-train"]')
+	// 	console.log(buttons)
+	// 	// data-button-type='shelf-train'
+
+	// }, [])
 
 	// if (isLoading) return <p>Загрузка</p>
 

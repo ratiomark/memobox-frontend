@@ -1,12 +1,11 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import cls from './CardModalNewCard.module.scss';
 import { Modal } from '@/shared/ui/Modal/Modal';
 import { ListBox } from '@/shared/ui/Popup';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { MyText, TextArea } from '@/shared/ui/Typography';
 import { Button } from '@/shared/ui/Button';
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { ReducersList } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { useSelector } from 'react-redux';
 import { getCardModal } from '../../model/selectors/getCardModal';
@@ -14,6 +13,7 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cardModalActions } from '../../model/slice/cardModalSlice';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { Skeleton } from '@/shared/ui/Skeleton';
+import cls from './CardModalNewCard.module.scss';
 
 interface CardModalNewCardProps {
 	className?: string
@@ -22,7 +22,7 @@ interface CardModalNewCardProps {
 	onClose: () => void
 }
 
-export const CardModalNewCard = (props: CardModalNewCardProps) => {
+export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	const {
 		className,
 		// shelfId,
@@ -39,12 +39,14 @@ export const CardModalNewCard = (props: CardModalNewCardProps) => {
 	const dispatch = useAppDispatch()
 
 	const shelfId = shelfIdFromStore ?? shelvesData?.[0]._id
-	const items = shelvesData?.map(shelfItem => {
-		return {
-			value: shelfItem._id,
-			content: shelfItem.title
-		}
-	})
+	const items = useMemo(() => {
+		return shelvesData?.map(shelfItem => {
+			return {
+				value: shelfItem._id,
+				content: shelfItem.title
+			}
+		})
+	}, [shelvesData])
 
 	const onChangeQuestion = useCallback((text: string) => {
 		dispatch(cardModalActions.setQuestionText(text))
@@ -60,31 +62,32 @@ export const CardModalNewCard = (props: CardModalNewCardProps) => {
 
 	let shelvesAndBoxes;
 	if (isShelvesLoading) {
-		shelvesAndBoxes = (<div className={cls.grid} >
-			<Skeleton width={200} height={67} />
-			<Skeleton width={200} height={67} />
-			{/* <ListBox
-								label='box'
-								value={'1'}
-								items={shelfItems}
-								onChange={() => { null }}
-							/> */}
-		</div>)
+		shelvesAndBoxes = (
+			<div className={cls.grid} >
+				<Skeleton width={200} height={67} />
+				<Skeleton width={200} height={67} />
+			</div>
+		)
 	} else {
-		shelvesAndBoxes = (<div className={cls.grid} >
-			<ListBox
-				label='shelf'
-				value={shelfId}
-				items={items}
-				onChange={onChangeShelf}
-			/>
-			{/* <ListBox
-								label='box'
-								value={'1'}
-								items={shelfItems}
-								onChange={() => { null }}
-							/> */}
-		</div>)
+		shelvesAndBoxes = (
+			<div className={cls.grid} >
+				<ListBox
+					label='shelf'
+					value={shelfId}
+					items={items}
+					onChange={onChangeShelf}
+					max
+					sameWidth
+				/>
+				<ListBox
+					label='shelf'
+					value={shelfId}
+					items={items}
+					onChange={onChangeShelf}
+					max
+					sameWidth
+				/>
+			</div>)
 	}
 
 
@@ -96,9 +99,6 @@ export const CardModalNewCard = (props: CardModalNewCardProps) => {
 		>
 			<div
 				className={cls.cardModal}
-			// max
-			// align='left'
-			// gap='gap_32'
 			>
 				<VStack
 					className={cls.mainContent}
@@ -107,9 +107,8 @@ export const CardModalNewCard = (props: CardModalNewCardProps) => {
 					gap='gap_32'
 				>
 					<HStack
-						className={cls.gap50}
+						className={cls.shelvesAndBoxesWrapper}
 						max
-					// justify='between'
 					>
 						{shelvesAndBoxes}
 					</HStack>
@@ -138,4 +137,5 @@ export const CardModalNewCard = (props: CardModalNewCardProps) => {
 			</div>
 		</Modal>
 	)
-}
+})
+CardModalNewCard.displayName = 'CardModalNewCard'

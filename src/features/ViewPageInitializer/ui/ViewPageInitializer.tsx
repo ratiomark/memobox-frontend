@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import cls from './ViewPageInitializer.module.scss';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, memo, useEffect } from 'react';
 import { viewPageActions, viewPageReducer } from '../model/slice/viewPageSlice';
 import { fetchBoxesDataByShelfId } from '../model/services/fetchBoxesDataByShelfId';
 import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
@@ -21,7 +21,7 @@ interface ViewPageInitializerProps {
 const reducers: ReducersList = {
 	viewPage: viewPageReducer
 }
-export const ViewPageInitializer = (props: ViewPageInitializerProps) => {
+export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	const {
 		className,
 		shelvesListViewPageBlock,
@@ -65,4 +65,5 @@ export const ViewPageInitializer = (props: ViewPageInitializerProps) => {
 			{cardListViewPageBlock}
 		</div>
 	)
-}
+})
+ViewPageInitializer.displayName = 'ViewPageInitializer'

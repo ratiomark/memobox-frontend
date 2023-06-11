@@ -4,7 +4,7 @@ import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { Icon } from '@/shared/ui/Icon';
 import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
 import cls from './ShelvesListViewWidget.module.scss';
-import { useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer';
@@ -224,7 +224,7 @@ const testItems = [
 	}
 ]
 
-export const ShelvesListViewWidget = (props: ShelvesListViewWidgetProps) => {
+export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) => {
 	const {
 		className
 	} = props
@@ -272,4 +272,5 @@ export const ShelvesListViewWidget = (props: ShelvesListViewWidgetProps) => {
 
 		</div>
 	)
-}
+})
+ShelvesListViewWidget.displayName = 'ShelvesListViewWidget'

@@ -5,8 +5,8 @@
   color: var(--text);
   background: none;
   padding: var(--padding-main);
-  border: var(--border-input);
-  border-radius: var(--border-radius);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
   resize: none;
 
   // overflow: hidden;

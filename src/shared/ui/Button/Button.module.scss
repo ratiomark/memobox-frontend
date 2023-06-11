@@ -5,13 +5,7 @@
 
 .Button {
   text-align: center;
-
-  // font: inherit;
-
-  // padding: var(--button-main-padding);
   outline: none;
-
-  // font-weight: 400;
   transition: all 0.4s;
   cursor: pointer;
 
@@ -23,9 +17,15 @@
       color: var(--accent);
     }
   }
-
-  // border: 1px solid red;
 }
+
+// .listBox {
+//   padding: 0;
+//   border: none;
+//   background: none;
+//   outline: none;
+//   width: 70%;
+// }
 
 .flex {
   display: flex;
@@ -171,12 +171,6 @@
     }
   }
 }
-
-// .filled {
-//   background-color: var(--light-bg);
-//   border: none;
-//   outline: none;
-// }
 
 .borderRadius {
   &_4 {

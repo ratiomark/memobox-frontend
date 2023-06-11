@@ -7,6 +7,7 @@ export type ButtonVariant =
 	| 'outline'
 	| 'filled'
 	| 'cancel'
+	// | 'listBox'
 
 type ButtonColor =
 	| 'main'

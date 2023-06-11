@@ -11,4 +11,6 @@ export interface CardSchema {
 	shelf: number,
 	box: number,
 	state: 'train' | 'wait'
+	time: number
+	
 }

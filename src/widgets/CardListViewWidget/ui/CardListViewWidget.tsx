@@ -5,6 +5,8 @@ import { getViewPage, getViewPageIsMounted, getViewPageSavedShelf, getViewPageSh
 import { useSelector } from 'react-redux';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { CardSchema } from '@/entities/Card';
+import { useMemo } from 'react';
+import { CardsListSkeleton } from './CardsListSkeleton';
 
 interface CardListViewWidgetProps {
 	className?: string
@@ -20,20 +22,30 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	const boxId = useSelector(getViewPageSavedShelf(shelfId ?? '1'))?.lastBoxId
 	const { t } = useTranslation()
 
-	if (!viewPageIsMounted || shelfDataSaved?.isLoading) return <Skeleton width={1000} height={100} />
+	const content = useMemo(() => {
+		const isLoading = shelfDataSaved?.isLoading ?? true
+		if (isLoading) return
+		const data = shelfDataSaved!.data
+		if (boxId === 'all') {
+			const allCards: CardSchema[] = []
+			for (const key in data) {
+				allCards.push(...data[key])
+			}
+			return allCards.map(item => <p key={item._id}>{'Полка  ' + item.shelf + '  Коробка   ' + item.box}</p>)
+		} else if (boxId === 'new') {
+			return <p>Нет новых карточек</p>
+		} else if (boxId === 'learnt') {
+			return <p>Нет изученных карточек</p>
+		} else {
+			return data[boxId!].map(item => <p key={item._id}>{'Полка  ' + item.shelf + '  Коробка   ' + item.box}</p>)
+		}
+	}, [boxId, shelfDataSaved])
 
-	let content;
-	// if (boxId === 'all') {
-	// 	const allCards: CardSchema[] = []
-	// 	for (const key in shelfDataSaved) {
-	// 		allCards.push(...shelfDataSaved[key])
-	// 	}
-	// 	// content = <p>заглушка</p>
-	// 	content = allCards.map(item => <p key={item._id}>{item.index}</p>)
-	// } else {
-	// 	// content = <p>заглушка</p>
-	// 	content = shelfDataSaved[boxId ?? '1'].map(item => <p key={item._id}>{item.index}</p>)
-	// }
+
+	if (!viewPageIsMounted || !content) {
+		return <CardsListSkeleton />
+	}
+
 
 	return (
 		<div className={clsx(

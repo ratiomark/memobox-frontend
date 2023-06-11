@@ -6,6 +6,20 @@
   all: unset;
 }
 
+.listBoxItemWrapper {
+  background: white;
+  padding: 4px 4px 4px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+  max-width: 70%;
+  background-color: var(--dark-bg);
+  box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+
+  // box-shadow: 5px 6px 18px -2px rgb(0 0 0 / 81%);
+}
+
 .textDisabled {
   opacity: var(--opacity-disabled);
 }
@@ -21,7 +35,9 @@
   position: absolute;
   z-index: 10001;
   background-color: var(--dark-bg);
-  box-shadow: 5px 6px 18px -2px rgb(0 0 0 / 81%);
+  box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+  max-width: 70%;
+
   // border-radius: var(--border-radius);
   // border: var(--border-main);
   overflow: hidden;
@@ -67,7 +83,7 @@
   align-items: center;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  background: var(--light-bg);
+  background: rgb(128 128 128 / 9.2%);
 }
 
 .iconCheck {

@@ -9,7 +9,7 @@ import { MyTransition } from '@/shared/ui/Transition';
 import { CardModal, cardModalActions } from '@/features/CardModal';
 // import { getCardModal } from '@/features/CardModal/model/selectors/getCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ShelvesWrapper } from './ShelvesWrapper/ShelvesWrapper';
 import { useGetShelvesQuery, useGetCupboardDataQuery } from '@/entities/Cupboard';
@@ -35,6 +35,18 @@ export const CupboardShelvesWidget = (props: CupboardShelvesWidgetProps) => {
 			content: shelfItem.title
 		}
 	})
+
+	// make all train buttons same width
+	useEffect(() => {
+		if (!isShelvesLoading && !isCupboardLoading) {
+			const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
+			const buttonsWidthList: number[] = []
+			trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
+			const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
+			trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
+		}
+	}, [isShelvesLoading, isCupboardLoading])
+
 
 	// const onAddNewCardClick = useCallback((shelfId: string) => {
 	// 	dispatch(cardModalActions.setShelf(shelfId))
@@ -63,21 +75,9 @@ export const CupboardShelvesWidget = (props: CupboardShelvesWidgetProps) => {
 		shelvesRendered = new Array(cupboardData.shelvesCount).fill(0).map((_, index) => <ShelfSkeleton key={index} />)
 	} else if (shelvesData) {
 		shelvesRendered = <ShelvesWrapper isShelvesLoading={false} shelvesData={shelvesData} />
-		// shelvesRendered = shelvesData?.map(dataItem => (
-		// 	<Shelf
-		// 		id={dataItem._id}
-		// 		data={dataItem.data}
-		// 		isLoading={isShelvesLoading}
-		// 		title={dataItem.title}
-		// 		position={dataItem.index + 1}
-		// 		key={dataItem.title}
-		// 		onAddNewCardClick={onAddNewCardClick}
-		// 	/>))
-
 	}
 
 	return (
-		// <MyTransition appear={true} show={!isCupboardLoading}>
 		<div className={clsx(
 			cls.cupboardShelvesWidget,
 			className)}
