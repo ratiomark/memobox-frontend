@@ -1,7 +1,5 @@
 export interface DataBlock {
-	data?: {
-		wait: number
-		all: number
-		train: number
-	}
+	wait: number
+	all: number
+	train: number
 }

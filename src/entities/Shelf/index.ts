@@ -1,6 +1,6 @@
 // export { shelfReducer, shelfActions } from './model/slice/shelfSlice';
 
-export { ShelfButtons } from './ui/ShelfButtons/ShelfButtons';
+export { ShelfButtons } from '../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons';
 
 // export { shelfSchema } from './model/types/shelf';
 export type { ShelfSchema } from './model/types/ShelfSchema'

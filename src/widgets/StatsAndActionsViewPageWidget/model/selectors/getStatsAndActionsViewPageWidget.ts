@@ -1,3 +1,3 @@
-import { StateSchema } from '@/app/providers/StoreProvider';
+// import { StateSchema } from '@/app/providers/StoreProvider';
 
-export const getStatsAndActionsViewPageWidget = (state: StateSchema) => state.statsAndActionsViewPageWidget
+// export const getStatsAndActionsViewPageWidget = (state: StateSchema) => state.statsAndActionsViewPageWidget

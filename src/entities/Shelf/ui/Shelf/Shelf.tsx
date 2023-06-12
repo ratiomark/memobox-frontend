@@ -2,39 +2,28 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './Shelf.module.scss';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
-import { ShelfButtons } from '../ShelfButtons/ShelfButtons';
+import { ShelfButtons } from '../../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { ReactNode, useCallback } from 'react';
 
 
 interface ShelfProps {
-	// data: {
-	// all: number
-	// train: number
-	// wait: number
-	// }
 	id: string
-	title?: string
+	title: string
 	completeSmallDataLabelsBlock: ReactNode
 	shelfButtonsBlock: ReactNode
-	position?: number
+	index: number
 	className?: string
-	// isLoading: boolean
-	// onAddNewCardClick: (shelfId: string) => void
 }
 
 export const Shelf = (props: ShelfProps) => {
 	const {
 		className,
-		// data,
-		// isLoading,
 		completeSmallDataLabelsBlock,
 		shelfButtonsBlock,
 		title,
-		// position,
 		id,
-		// onAddNewCardClick
 	} = props
 
 	// const onAddNewCardClickHandle = useCallback(() => {
@@ -57,7 +46,7 @@ export const Shelf = (props: ShelfProps) => {
 						data={data}
 					/>
 				</VStack>
-				<ShelfButtons onAddNewCardClick={onAddNewCardClickHandle} shelfPosition={position ?? 11} /> */}
+				<ShelfButtons onAddNewCardClick={onAddNewCardClickHandle} shelfPosition={index ?? 11} /> */}
 			</div>
 		</div>
 	)

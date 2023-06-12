@@ -5,6 +5,7 @@ import { Header } from '@/widgets/Sidebar'
 // eslint-disable-next-line custom-fsd-checker-plugin/public-api-imports
 import { CupboardShelvesWidget } from '@/widgets/CupboardShelvesWidget'
 import { useEffect } from 'react'
+import { CupboardShelfList } from '@/features/CupboardShelfList'
 
 
 // const data = { wait: 40, all: 40, train: 33 }
@@ -25,8 +26,9 @@ const MainPage = () => {
 		<>
 			{/* <Header /> */}
 			<Page data-testid='MainPage'>
-				<StatsAndActionsCupboardWidget />
-				<CupboardShelvesWidget />
+				<CupboardShelfList/>
+				{/* <StatsAndActionsCupboardWidget /> */}
+				{/* <CupboardShelvesWidget /> */}
 			</Page>
 		</>
 	)

@@ -1,0 +1,372 @@
+[
+  {
+    "id": "648657d8b7fa5de47f3bde1a",
+    "index": 0,
+    "title": "английский",
+    "boxesData": [
+      {
+        "_id": "648657d85863b1feb3976bae",
+        "index": 0,
+        "specialType": "new",
+        "data": {
+          "all": 7
+        }
+      },
+      {
+        "_id": "648657d8b0a5b2fad06a95bc",
+        "index": 1,
+        "specialType": "none",
+        "data": {
+          "all": 9,
+          "train": 7,
+          "wait": 2
+        }
+      },
+      {
+        "_id": "648657d8ee1e2d1d90cd1e7a",
+        "index": 2,
+        "specialType": "none",
+        "data": {
+          "all": 13,
+          "train": 6,
+          "wait": 7
+        }
+      },
+      {
+        "_id": "648657d802ae948b46b2eec8",
+        "index": 3,
+        "specialType": "none",
+        "data": {
+          "all": 6,
+          "train": 5,
+          "wait": 1
+        }
+      },
+      {
+        "_id": "648657d8852a85c9ea3745f5",
+        "index": 4,
+        "specialType": "none",
+        "data": {
+          "all": 9,
+          "train": 2,
+          "wait": 7
+        }
+      },
+      {
+        "_id": "648657d81223579edfdf124d",
+        "index": 5,
+        "specialType": "learnt",
+        "data": {
+          "all": 8,
+          "train": 3,
+          "wait": 5
+        }
+      }
+    ],
+    "data": {
+      "all": 52,
+      "train": 23,
+      "wait": 22
+    }
+  },
+  {
+    "id": "648657d8a7d724503f7c84a8",
+    "index": 1,
+    "title": "math",
+    "boxesData": [
+      {
+        "_id": "648657d857d72e6f5de4f88d",
+        "index": 0,
+        "specialType": "new",
+        "data": {
+          "all": 5
+        }
+      },
+      {
+        "_id": "648657d8f40126cf1e1339a1",
+        "index": 1,
+        "specialType": "none",
+        "data": {
+          "all": 9,
+          "train": 5,
+          "wait": 4
+        }
+      },
+      {
+        "_id": "648657d84b363b23b576d9d9",
+        "index": 2,
+        "specialType": "none",
+        "data": {
+          "all": 8,
+          "train": 4,
+          "wait": 4
+        }
+      },
+      {
+        "_id": "648657d81e44f854bfd6b8c0",
+        "index": 3,
+        "specialType": "none",
+        "data": {
+          "all": 8,
+          "train": 1,
+          "wait": 7
+        }
+      },
+      {
+        "_id": "648657d876d7e68c44f8dc9c",
+        "index": 4,
+        "specialType": "none",
+        "data": {
+          "all": 4,
+          "train": 1,
+          "wait": 3
+        }
+      },
+      {
+        "_id": "648657d8c5fce13a24c922b2",
+        "index": 5,
+        "specialType": "none",
+        "data": {
+          "all": 10,
+          "train": 5,
+          "wait": 5
+        }
+      },
+      {
+        "_id": "648657d8cfa8c5279695c341",
+        "index": 6,
+        "specialType": "learnt",
+        "data": {
+          "all": 5,
+          "train": 1,
+          "wait": 4
+        }
+      }
+    ],
+    "data": {
+      "all": 49,
+      "train": 17,
+      "wait": 27
+    }
+  },
+  {
+    "id": "648657d82c29f21c1c69ae15",
+    "index": 2,
+    "title": "programming",
+    "boxesData": [
+      {
+        "_id": "648657d8625b00f34abb74c2",
+        "index": 0,
+        "specialType": "new",
+        "data": {
+          "all": 2
+        }
+      },
+      {
+        "_id": "648657d8e5254e7b5bf8384f",
+        "index": 1,
+        "specialType": "none",
+        "data": {
+          "all": 7,
+          "train": 2,
+          "wait": 5
+        }
+      },
+      {
+        "_id": "648657d8bdbe13a90abe591c",
+        "index": 2,
+        "specialType": "none",
+        "data": {
+          "all": 4,
+          "train": 3,
+          "wait": 1
+        }
+      },
+      {
+        "_id": "648657d87c420a2d96f539b1",
+        "index": 3,
+        "specialType": "none",
+        "data": {
+          "all": 6,
+          "train": 5,
+          "wait": 1
+        }
+      },
+      {
+        "_id": "648657d809d7eec0334c8e5a",
+        "index": 4,
+        "specialType": "none",
+        "data": {
+          "all": 10,
+          "train": 7,
+          "wait": 3
+        }
+      },
+      {
+        "_id": "648657d8dc09866444e8a50d",
+        "index": 5,
+        "specialType": "learnt",
+        "data": {
+          "all": 8,
+          "train": 5,
+          "wait": 3
+        }
+      }
+    ],
+    "data": {
+      "all": 37,
+      "train": 22,
+      "wait": 13
+    }
+  },
+  {
+    "id": "648657d842220a53933404cf",
+    "index": 3,
+    "title": "books",
+    "boxesData": [
+      {
+        "_id": "648657d8a0492811f67980a2",
+        "index": 0,
+        "specialType": "new",
+        "data": {
+          "all": 5
+        }
+      },
+      {
+        "_id": "648657d8ae929ccc69ec6171",
+        "index": 1,
+        "specialType": "none",
+        "data": {
+          "all": 11,
+          "train": 5,
+          "wait": 6
+        }
+      },
+      {
+        "_id": "648657d89cf2d515675ad337",
+        "index": 2,
+        "specialType": "none",
+        "data": {
+          "all": 7,
+          "train": 3,
+          "wait": 4
+        }
+      },
+      {
+        "_id": "648657d864c043d4c94c2ea5",
+        "index": 3,
+        "specialType": "none",
+        "data": {
+          "all": 6,
+          "train": 2,
+          "wait": 4
+        }
+      },
+      {
+        "_id": "648657d81d66c0ecfc2f8b65",
+        "index": 4,
+        "specialType": "none",
+        "data": {
+          "all": 3,
+          "train": 1,
+          "wait": 2
+        }
+      },
+      {
+        "_id": "648657d8ad1c5d96678e530d",
+        "index": 5,
+        "specialType": "learnt",
+        "data": {
+          "all": 14,
+          "train": 7,
+          "wait": 7
+        }
+      }
+    ],
+    "data": {
+      "all": 46,
+      "train": 18,
+      "wait": 23
+    }
+  },
+  {
+    "id": "648657d862fd11990ff8f5dc",
+    "index": 4,
+    "title": "facts",
+    "boxesData": [
+      {
+        "_id": "648657d8c4000688b27f1f15",
+        "index": 0,
+        "specialType": "new",
+        "data": {
+          "all": 1
+        }
+      },
+      {
+        "_id": "648657d800b646a9d2653a8a",
+        "index": 1,
+        "specialType": "none",
+        "data": {
+          "all": 7,
+          "train": 3,
+          "wait": 4
+        }
+      },
+      {
+        "_id": "648657d824797d8cacc7088c",
+        "index": 2,
+        "specialType": "none",
+        "data": {
+          "all": 6,
+          "train": 4,
+          "wait": 2
+        }
+      },
+      {
+        "_id": "648657d851e99d6c8608f559",
+        "index": 3,
+        "specialType": "none",
+        "data": {
+          "all": 8,
+          "train": 2,
+          "wait": 6
+        }
+      },
+      {
+        "_id": "648657d8c1a4b9117f265a00",
+        "index": 4,
+        "specialType": "none",
+        "data": {
+          "all": 9,
+          "train": 4,
+          "wait": 5
+        }
+      },
+      {
+        "_id": "648657d822e8099875702714",
+        "index": 5,
+        "specialType": "none",
+        "data": {
+          "all": 5,
+          "train": 2,
+          "wait": 3
+        }
+      },
+      {
+        "_id": "648657d88dec2280c099e0e9",
+        "index": 6,
+        "specialType": "learnt",
+        "data": {
+          "all": 4,
+          "train": 2,
+          "wait": 2
+        }
+      }
+    ],
+    "data": {
+      "all": 40,
+      "train": 17,
+      "wait": 22
+    }
+  }
+]

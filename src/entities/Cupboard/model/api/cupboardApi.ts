@@ -9,13 +9,13 @@ export const cupboardApi = rtkApi.injectEndpoints({
 				url: '/cupboard',
 				method: 'GET'
 			}),
-			// transformResponse: (response: MovieList, meta, arg) => {
-			// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
-			// 		acc[current.id.toString()] = current
-			// 		return acc
-			// 	}, {})s
-			// 	return data
-			// },
+			transformResponse: (response: CupboardSchema, meta, arg) => {
+				const shelves = response.shelves.map(shelf => {
+					return {...shelf, isDeleting: false}
+				})
+				response.shelves = shelves
+				return response
+			},
 		}),
 		getShelves: build.query<ShelfSchema[], void>({
 			query: () => ({
@@ -49,4 +49,3 @@ export const cupboardGetData = cupboardApi.endpoints.getCupboardData.initiate
 export const { useGetCupboardDataQuery } = cupboardApi
 export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 export const { useGetShelvesQuery } = cupboardApi
-// export const { useGetMovieByIdBeatFilmQuery } = beatFilmMoviesApi

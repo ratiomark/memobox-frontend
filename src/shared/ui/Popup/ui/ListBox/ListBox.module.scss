@@ -78,12 +78,13 @@
   opacity: 0.5;
 }
 
+// activeItem
 .ListBoxOption_selected {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  background: rgb(128 128 128 / 9.2%);
+  background-color: var(--active-list-item-popover);
 }
 
 .iconCheck {

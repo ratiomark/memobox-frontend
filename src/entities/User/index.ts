@@ -1,4 +1,7 @@
-export { getJsonSavedData } from './model/selectors/getJsonSavedData';
+export {
+	getJsonSavedData,
+	getUserShelfNamesList
+} from './model/selectors/getJsonSavedData';
 export { initAuthData } from './model/services/initAuthData';
 
 

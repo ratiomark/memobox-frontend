@@ -45,7 +45,8 @@ export const ShelvesWrapper = (props: ShelvesWrapperProps) => {
 			<ShelfButtons
 				shelfPosition={shelfItem.index + 1 ?? 11}
 				onAddNewCardClick={onNewCardClickHandle}
-				// onViewShelfClick={ }
+				shelfId={shelfItem._id}
+			// onViewShelfClick={ }
 			/>
 		)
 

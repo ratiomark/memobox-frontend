@@ -7,12 +7,18 @@ export type ButtonVariant =
 	| 'outline'
 	| 'filled'
 	| 'cancel'
-	// | 'listBox'
+// | 'listBox'
 
 type ButtonColor =
 	| 'main'
 	| 'attention'
 	| 'wait'
+
+type ButtonFontWeight =
+	| '300'
+	| '500'
+	| '600'
+	| '700'
 
 export type ButtonSize =
 	| 'size_s'
@@ -30,6 +36,12 @@ type ButtonBorderRadius =
 	| 'borderRadius_34'
 	| 'borderRadius_max'
 
+const mapFontWeightToClass: Record<ButtonFontWeight, string> = {
+	'300': 'fw_300',
+	'500': 'fw_500',
+	'600': 'fw_600',
+	'700': 'fw_700',
+}
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children?: ReactNode
@@ -41,6 +53,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	disabled?: boolean
 	addonLeft?: ReactNode
 	addonRight?: ReactNode
+	fontWeight?: ButtonFontWeight
 	flex?: boolean
 }
 
@@ -57,9 +70,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, forward
 		disabled,
 		addonLeft,
 		addonRight,
+		fontWeight,
 		...otherProps
 	} = props
-
+	console.log(fontWeight ? mapFontWeightToClass[fontWeight] : 'нема')
 	const mods: Record<string, boolean | undefined> = {
 		[cls.disabled]: disabled,
 		[cls.flex]: flex,
@@ -80,6 +94,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, forward
 				cls[size],
 				cls[borderRadius],
 				cls[color],
+				fontWeight ? mapFontWeightToClass[fontWeight] : '',
 				className
 			)}
 			{...otherProps}

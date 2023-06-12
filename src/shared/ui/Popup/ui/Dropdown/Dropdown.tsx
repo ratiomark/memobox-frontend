@@ -39,7 +39,7 @@ export const Dropdown = (props: DropdownProps) => {
 				cls.Dropdown,
 				[className])}
 		>
-			<Menu.Button className={cls.trigger}>
+			<Menu.Button as={Fragment}>
 				{trigger}
 			</Menu.Button>
 
@@ -60,9 +60,11 @@ export const Dropdown = (props: DropdownProps) => {
 					)
 
 					if (item.href) {
-						return (<Menu.Item as={AppLink} key={index} to={item.href} disabled={item.disabled}>
-							{content}
-						</Menu.Item>)
+						return (
+							<Menu.Item as={AppLink} key={index} to={item.href} disabled={item.disabled}>
+								{content}
+							</Menu.Item>
+						)
 					}
 
 					return (

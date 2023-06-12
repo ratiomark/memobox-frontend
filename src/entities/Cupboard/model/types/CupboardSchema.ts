@@ -1,7 +1,7 @@
+import { ShelfSchema } from '@/entities/Shelf';
+import { DataBlock } from '@/shared/types/DataBlock';
 
 export interface CupboardSchema {
-	train?: number,
-	wait?: number,
-	all?: number,
-	shelvesCount?: number
+	data: DataBlock
+	shelves: ShelfSchema[]
 }

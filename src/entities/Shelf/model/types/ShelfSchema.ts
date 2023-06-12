@@ -1,14 +1,14 @@
+import { BoxSchema, LearntCardBox, NewCardsBox, RegularCardsBox } from '@/entities/Box';
+import { DataBlock } from '@/shared/types/DataBlock';
 
-// export interface ShelfSchema {
+// type OnlyDefaultBoxes = [NewCardsBox, LearntCardBox]
+// type FullRangeOfBoxes = [NewCardsBox, RegularCardsBox, LearntCardBox]
 
-// }
 export interface ShelfSchema {
-	_id: string,
-	index: number,
-	data: {
-		train: number,
-		wait: number,
-		all: number,
-	},
-	title: string,
+	id: string
+	index: number
+	data: DataBlock
+	title: string
+	isDeleting: boolean
+	boxesData: BoxSchema[]
 }

@@ -7,6 +7,7 @@ import { LoginSchema } from '@/features/AuthByUsername';
 import { UISchema } from '@/features/ScrollSave';
 import { CardModalSchema } from '@/features/CardModal';
 import { ViewPageInitializerSchema } from '@/features/ViewPageInitializer';
+import { CupboardPageSchema } from '@/features/CupboardShelfList';
 
 // loginForm делаю не обязательным, таким образом я могу подружать его позже с помощью асинхронна и ТС не будет ругаться на то что я не объявил его в rootReducers
 export interface StateSchema {
@@ -14,7 +15,7 @@ export interface StateSchema {
 	user: UserSchema
 	ui: UISchema
 	cardModal: CardModalSchema
-
+	cupboard: CupboardPageSchema
 	// async reducers
 	loginForm?: LoginSchema
 	viewPage?: ViewPageInitializerSchema

@@ -28,5 +28,14 @@
     "STOP_LYING_ABOUT_AGE": "Please, write your actual age"
   },
   "Close button": "Close",
-  "common shelf name": "Common shelf"
+  "common shelf name": "Common shelf",
+  "settingsItems": {
+    "settings": "Settings",
+    "rename": "Rename shelf",
+    "notifications": "Notifications",
+    "missed training": "Missed training",
+    "box control": "Box management",
+    "remove": "Delete shelf"
+  },
+  "shelf in deletion proccess": "Shelf and card removed to trash"
 }

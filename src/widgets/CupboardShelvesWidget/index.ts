@@ -1,3 +1,3 @@
-// export { cupboardShelvesWidgetReducer, cupboardShelvesWidgetActions } from './model/slice/cupboardShelvesWidgetSlice';
-// export { cupboardShelvesWidgetSchema } from './model/types/cupboardShelvesWidget';
+export { cupboardShelvesWidgetActions, cupboardShelvesWidgetReducer } from './model/slice/cupboardSlice';
+export type { CupboardPageSchema } from './model/types/CupboardPageSchema';
 export { CupboardShelvesWidget } from './ui/CupboardShelvesWidget';

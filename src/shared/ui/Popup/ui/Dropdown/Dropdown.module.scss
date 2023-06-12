@@ -14,8 +14,11 @@
   z-index: 10001;
   min-width: fit-content;
   overflow: hidden;
-  border-radius: var(--border-radius);
-  border: var(--border-main);
+  border-radius: 4px;
+
+  // border-radius: var(--border-radius);
+  // border: var(--border-main);
+  box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
 }
 
 .menuItem {
@@ -30,7 +33,7 @@
 }
 
 .active {
-  background-color: var(--light-bg);
+  background-color: var(--active-list-item-popover);
 }
 
 .disabled {

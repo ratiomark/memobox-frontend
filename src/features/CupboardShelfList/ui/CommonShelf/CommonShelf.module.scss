@@ -1,0 +1,15 @@
+.shelf {
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+  margin-bottom: 30px;
+  background-color: white;
+
+  // background-color: var(--bg);
+  padding: 10px 20px 10px 15px;
+}
+
+.topShelfPart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

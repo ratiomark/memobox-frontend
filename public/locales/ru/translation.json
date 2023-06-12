@@ -16,8 +16,8 @@
   "cupboard": "Шкаф",
   "view": "Обзор",
   "stats": "Статистика",
-  "settings": "Настройки",
   "trash": "Корзина",
+  "settings": "Настройки",
   "Add card with hot key": "Добавить карточку",
   "New shelf": "Новая полка",
   "train": "Тренировать",
@@ -27,5 +27,14 @@
     "STOP_LYING_ABOUT_AGE": "Пожалуйста, укажи настоящий возраст"
   },
   "Close button": "Закрыть",
-  "common shelf name": "Общая полка"
+  "common shelf name": "Общая полка",
+  "settingsItems": {
+    "settings": "Настройки",
+    "rename": "Переименовать полку",
+    "notifications": "Уведомления",
+    "missed training": "Пропущенные тренировки",
+    "box control": "Управление коробками",
+    "remove": "Удалить полку"
+  },
+  "shelf in deletion proccess": "Полка и все карточки удалены в корзину"
 }

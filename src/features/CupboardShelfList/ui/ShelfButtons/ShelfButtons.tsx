@@ -9,17 +9,17 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
+import { Dropdown } from '@/shared/ui/Popup';
+import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
+import { SettingButton } from '../SettingsButton/SettingsButton';
 
 interface ShelfButtonsProps {
 	className?: string
 	shelfPosition: number
+	shelfId: string
 	onAddNewCardClick: () => void
 	onViewShelfClick?: () => void
 }
-
-// function trainHotKey(event: KeyboardEvent) {
-// 	if (event.code === 'Digit1' && event.code === 'KeyN')
-// }
 
 export const ShelfButtons = (props: ShelfButtonsProps) => {
 	const {
@@ -27,6 +27,7 @@ export const ShelfButtons = (props: ShelfButtonsProps) => {
 		shelfPosition,
 		onAddNewCardClick,
 		onViewShelfClick,
+		shelfId,
 	} = props
 
 	const [train, setTrain] = useState(0)
@@ -59,13 +60,18 @@ export const ShelfButtons = (props: ShelfButtonsProps) => {
 		>
 			{/* <p>{click}</p> */}
 			{/* <p>{train}</p> */}
-			<Button onClick={onAddNewCardClick} className={cls.button}>
+			<Button
+				className={cls.button}
+				onClick={onAddNewCardClick}
+				data-button-type="shelf-add-card"
+			>
 				{t('Add card with hot key') + ` (${positionTextCard})`}
 			</Button>
-			<Button className={cls.button}>
+			{/* <Button className={cls.button}>
 				{t('settings')}
-			</Button>
+			</Button> */}
 			{/* <AppLink to={obtainRouteView(shelfPosition.toString())}>{t('view')}</AppLink> */}
+			<SettingButton shelfId={shelfId} />
 			<Button onClick={onViewClick} className={cls.button}>
 				{t('view')}
 			</Button>
