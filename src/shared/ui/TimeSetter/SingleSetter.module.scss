@@ -1,0 +1,40 @@
+.iconRotated {
+  transform: rotate(180deg);
+}
+
+.timeWrapper {
+  // height: 132px;
+  display: flex;
+  flex-direction: column;
+
+  // max-width: 40px;
+
+  // justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
+.iconDisabled {
+  cursor: auto;
+  color: grey;
+  fill: grey;
+}
+
+.hint {
+  color: red;
+  fill: red;
+  stroke: red;
+}
+
+.smallTime {
+  color: #80808096;
+  font-size: 11px;
+}
+
+.empty {
+  height: 24px;
+}

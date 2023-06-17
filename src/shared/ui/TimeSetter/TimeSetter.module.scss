@@ -1,0 +1,22 @@
+.TimeSetter {
+  // display: flex;
+  // gap: 20px;
+  // min-width: 500px;
+  background: white;
+  box-shadow: rgb(0 0 0 / 10%) 0 4px 6px -1px, rgb(0 0 0 / 6%) 0 2px 4px -1px;
+  position: relative;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.setterWrapper {
+  margin-bottom: 20px;
+}
+
+.overlay {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  z-index: 1;
+  background-color: rgb(128 128 128 / 11%);
+}

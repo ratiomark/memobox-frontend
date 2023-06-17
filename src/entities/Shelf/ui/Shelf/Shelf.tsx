@@ -5,30 +5,31 @@ import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDat
 import { ShelfButtons } from '../../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, memo, useCallback, useState } from 'react';
+import { ShelfSchema } from '../../model/types/ShelfSchema';
 
 
-interface ShelfProps {
-	id: string
-	title: string
+export interface ShelfProps {
+	shelf: ShelfSchema
 	completeSmallDataLabelsBlock: ReactNode
 	shelfButtonsBlock: ReactNode
-	index: number
+	boxesBlock?: ReactNode
 	className?: string
 }
 
-export const Shelf = (props: ShelfProps) => {
+export const Shelf = memo((props: ShelfProps) => {
 	const {
 		className,
 		completeSmallDataLabelsBlock,
 		shelfButtonsBlock,
-		title,
-		id,
+		boxesBlock,
+		shelf: {
+			title,
+			// id,
+			collapsed,
+			// index,
+		}
 	} = props
-
-	// const onAddNewCardClickHandle = useCallback(() => {
-	// 	onAddNewCardClick(id)
-	// }, [onAddNewCardClick, id])
 
 	return (
 		<div className={clsx(
@@ -36,6 +37,7 @@ export const Shelf = (props: ShelfProps) => {
 			[className])}
 		>
 			<div className={cls.topShelfPart}>
+
 				<VStack align='start' gap='gap_8'>
 					<Heading as='h3' size='s' title={title} />
 					{completeSmallDataLabelsBlock}
@@ -48,6 +50,12 @@ export const Shelf = (props: ShelfProps) => {
 				</VStack>
 				<ShelfButtons onAddNewCardClick={onAddNewCardClickHandle} shelfPosition={index ?? 11} /> */}
 			</div>
+			<div className={clsx(cls.boxesWrapper, !collapsed ? cls.collapsed : '')}>
+				{!collapsed && boxesBlock}
+				{/* <div className={cls.inner} >
+				</div> */}
+			</div>
 		</div>
 	)
-}
+})
+Shelf.displayName = 'Shelf'

@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import { ComponentProps, ElementType, memo } from 'react';
+import { FontWeight } from '@/shared/types/StyleTypes';
+import { mapFontWeightToClass } from '@/shared/lib/helpers/mappers/mapFontWeightToClass';
 import cls from './Text.module.scss'
 
 
@@ -25,7 +27,7 @@ interface TextOwnProps<E extends ElementType = ElementType> {
 	size?: TextSize;
 	saveOriginal?: boolean;
 	'data-testid'?: string;
-	bold?: boolean;
+	fontWeight?: FontWeight
 	as?: E
 	drop?: boolean
 }
@@ -43,7 +45,7 @@ export const MyText = memo(
 			variant = 'primary',
 			align = 'left',
 			size = 'm',
-			bold = false,
+			fontWeight,
 			saveOriginal,
 			as: TagName = defaultElement,
 			'data-testid': dataTestId = 'Text',
@@ -62,9 +64,10 @@ export const MyText = memo(
 			<TagName
 				className={clsx(
 					additionalClasses ?? '',
+					fontWeight ? mapFontWeightToClass[fontWeight] : '',
 					{
 						[cls.saveOriginal]: saveOriginal,
-						[cls.bold]: bold,
+						// [cls.bold]: bold,
 					},
 				)}
 				data-testid={`${dataTestId}.Paragraph`}

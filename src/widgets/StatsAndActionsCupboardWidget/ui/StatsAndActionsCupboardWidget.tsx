@@ -11,6 +11,9 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useGetCupboardDataQuery } from '@/entities/Cupboard';
 
 import cls from './StatsAndActionsCupboardWidget.module.scss';
+import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions } from '@/features/CupboardShelfList';
+import { getCupboardState } from '@/features/CupboardShelfList';
+import { useSelector } from 'react-redux';
 
 
 interface StatsAndActionsCupboardWidgetProps {
@@ -22,21 +25,17 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 		className
 	} = props
 
-	const { data, isLoading } = useGetCupboardDataQuery()
+	// const { data, isLoading } = useGetCupboardDataQuery()
+	const cupboardIsLoading = useSelector(getCupboardIsLoading)
+	const cupboardError = useSelector(getCupboardError)
+	const cupboardData = useSelector(getCupboardData)
 	const { t } = useTranslation()
-
 	const dispatch = useAppDispatch()
+	
 
 	const onAddNewCardClick = useCallback(() => {
-		dispatch(cardModalActions.openModalNewCard())
+		dispatch(cupboardShelfListActions.setCardModalIsOpen(true))
 	}, [dispatch])
-
-	// const onCloseNewCardModal = useCallback(() => {
-	// 	dispatch(cardModalActions.closeModalNewCard())
-	// }, [dispatch])
-
-	// if (isLoading) return <p>Загрузка</p>
-	// if(!isSuccess) return <p>Неудача</p>
 
 	return (
 		<HStack
@@ -45,7 +44,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 				cls.statsAndActionsCupboardWidget,
 				className)}
 		>
-			<CompleteBigDataLabels data={data} isLoading={isLoading} />
+			<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
 			<HStack gap='gap_14' className={cls.actions} >
 				<Button borderRadius='borderRadius_4'>{t('New shelf')}</Button>
 				<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>

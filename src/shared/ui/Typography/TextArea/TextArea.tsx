@@ -1,14 +1,14 @@
-import { ChangeEvent, FocusEvent, InputHTMLAttributes, KeyboardEvent, memo, MutableRefObject, useEffect, useRef, } from 'react';
+import { ChangeEvent, FocusEvent, forwardRef, InputHTMLAttributes, KeyboardEvent, memo, MutableRefObject, useEffect, useRef, } from 'react';
 import cls from './TextArea.module.scss'
 import clsx from 'clsx';
 
 
 // Omit позволяет сконструировать тип, который будет включять в себя все пропсы, кроме некоторых указанных отдельно
 // Это нужно для того, чтобы в InputProps можно было без проблем определить пропсы которые уже существуют в InputHTMLAttributes<HTMLTextAreaElement>
-type HTMLInputProps = Omit<InputHTMLAttributes<HTMLTextAreaElement>, 'value' | 'onChange' | 'onBlur'>
+type HTMLTextAreaProps = Omit<InputHTMLAttributes<HTMLTextAreaElement>, 'value' | 'onChange' | 'onBlur'>
 
 // Расширяю стандартные пропсы которые принимает инпут, тут использую результат Omit с выпилиенными value, onChange
-interface InputProps extends HTMLInputProps {
+interface TextAreaProps extends HTMLTextAreaProps {
 	className?: string;
 	value?: string;
 	autoFocus?: boolean;
@@ -24,7 +24,8 @@ interface InputProps extends HTMLInputProps {
 	autoHeight?: boolean
 }
 //eslint-disable-next-line
-export const TextArea = memo((props: InputProps) => {
+// forwardRef<HTMLButtonElement, ButtonProps>((props, forwardedRef) => {
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, forwardedRef) => {
 	const {
 		className,
 		value,
@@ -33,7 +34,7 @@ export const TextArea = memo((props: InputProps) => {
 		onBlur,
 		onValidate,
 		onKeyPress,
-		type = 'text',
+		// type = 'text',
 		readonly,
 		rows = 1,
 		// inputErrors = [],
@@ -78,7 +79,6 @@ export const TextArea = memo((props: InputProps) => {
 	return (
 		<>
 			<textarea
-				// ref={myRef}
 				// autoFocus
 				ref={textAreaRef}
 				rows={rows}

@@ -1,4 +1,4 @@
-import { DataBlock } from '@/shared/types/DataBlock'
+import { DataBlock, TimingBlock } from '@/shared/types/DataBlock'
 
 interface BoxBaseSchema {
 	_id: string
@@ -12,17 +12,19 @@ export interface NewCardsBox extends BoxBaseSchema {
 	},
 }
 
-export interface RegularCardsBox extends BoxBaseSchema {
-	specialType: 'none',
+export interface RegularAndLearntCardsBox extends BoxBaseSchema {
+	specialType: 'none' | 'learnt',
 	data: DataBlock
+	timing: TimingBlock
 }
 
-export interface LearntCardBox extends BoxBaseSchema {
-	specialType: 'learnt',
-	data: DataBlock
-}
+// export interface LearntCardBox extends BoxBaseSchema {
+// 	specialType: 'learnt',
+// 	data: DataBlock
+// 	timing: TimingBlock
+// }
 
 export type BoxSchema =
 	| NewCardsBox
-	| RegularCardsBox
-	| LearntCardBox
+	| RegularAndLearntCardsBox
+	// | LearntCardBox

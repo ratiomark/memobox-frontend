@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Listbox as HListbox } from '@headlessui/react'
-import { ElementType, Fragment, MutableRefObject, ReactNode, useEffect, useMemo, useRef, } from 'react';
+import React, { ElementType, Fragment, MutableRefObject, ReactNode, useEffect, useMemo, useRef, } from 'react';
 import { AbsoluteListDirection } from '@/shared/types/ui';
 import { VStack, HStack } from '../../../Stack';
 import { FlexAlign, FlexGap } from '../../../Stack/Flex/Flex';
@@ -9,17 +9,17 @@ import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Icon } from '../../../Icon/Icon';
 import cls from './ListBox.module.scss';
 
-export interface ListBoxItems<T extends string> {
-	value: string | T
+export interface ListBoxItems<T extends number | string> {
+	value: string | T | number
 	content: ReactNode
 	disabled?: boolean
 }
 
-interface ListBoxProps<T extends string> {
+interface ListBoxProps<T extends number | string> {
 	className?: string
 	as?: ElementType<any>
 	items?: ListBoxItems<string | T>[]
-	value?: string | T
+	value?: T
 	defaultValue?: string | T
 	onChange: (value: T) => void
 	readonly?: boolean
@@ -29,10 +29,12 @@ interface ListBoxProps<T extends string> {
 	listBoxPosition?: FlexAlign
 	labelPadding?: FlexGap
 	sameWidth?: boolean
-	max?: boolean
+	max?: boolean,
+	useIndexInsteadId?: boolean
+	// ref?: MutableRefObject<HTMLElement | null>
 }
 
-export const ListBox = <T extends string>(props: ListBoxProps<T>) => {
+export const ListBox = <T extends number | string>(props: ListBoxProps<T>) => {
 	const {
 		items = [],
 		as = 'div',
@@ -48,14 +50,17 @@ export const ListBox = <T extends string>(props: ListBoxProps<T>) => {
 		labelPadding = 'gap_4',
 		sameWidth = false,
 		max = false,
+		useIndexInsteadId
 	} = props
 	const listBoxOptionsRef = useRef() as MutableRefObject<HTMLDivElement>
 	const listBoxRef = useRef() as MutableRefObject<HTMLDivElement>
 	const Stack = labelPosition === 'top' ? VStack : HStack
 
 	const selectedItemLocalized = useMemo(() => {
+		// if (useIndexInsteadId) return items?.find(item => item.value === value)
 		return items?.find(item => item.value === value)
-	}, [items, value])
+	}, [items, value,])
+	// }, [items, value, useIndexInsteadId])
 
 	useEffect(() => {
 		if (sameWidth) {
@@ -87,11 +92,17 @@ export const ListBox = <T extends string>(props: ListBoxProps<T>) => {
 					<>
 						<HListbox.Button as={'div'} aria-disabled={readonly} className={cls.trigger}>
 							<div
+								tabIndex={0}
 								className={cls.listBoxItemWrapper}
 								ref={listBoxRef}
 							>
 								{selectedItemLocalized?.content ?? defaultValue}
-								{<Icon color='main' Svg={ArrowBottomIcon} />}
+								<Icon
+									className={clsx(
+										cls.arrow,
+										open ? cls.rotateArrow : '')}
+									color='main'
+									Svg={ArrowBottomIcon} />
 
 							</div>
 						</HListbox.Button>
@@ -144,3 +155,7 @@ export const ListBox = <T extends string>(props: ListBoxProps<T>) => {
 		</Stack>
 	)
 }
+
+// export const ListBoxRef = React.forwardRef(ListBox) as <T extends number | string>(
+// 	props: ListBoxProps<T> & { ref?: React.ForwardedRef<HTMLElement | null> }
+// ) => ReturnType<typeof ListBox>;

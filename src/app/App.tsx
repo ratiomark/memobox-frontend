@@ -10,19 +10,20 @@ import { getUserAuthData, getUserMounted, initAuthData } from '@/entities/User'
 import { useTheme } from '@/shared/context/useTheme'
 import clsx from 'clsx'
 import { Header } from '@/widgets/Sidebar'
+import './styles/regularStyles.css'
 
 
 export const App = () => {
 	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
 	const { theme } = useTheme()
-	
+
 	useEffect(() => {
 		dispatch(initAuthData())
 	}, [dispatch, userMounted])
 
 	if (!userMounted) return <LoaderWidget />
-	
+
 	return (
 		<div className={clsx('app', theme)}>
 			<Header />

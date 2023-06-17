@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { fetchCupboardData } from '../model/services/fetchCupboardData';
 import { useSelector } from 'react-redux';
 import {
@@ -11,7 +11,7 @@ import {
 	getCupboardError,
 	getCupboardShelves
 } from '../model/selectors/getCupboardShelfList';
-import { getCupboardState } from '../model/slice/cupboardShelfListSlice';
+import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { ShelfItem } from './ShelfItem/ShelfItem';
 import { ShelfButtons } from './ShelfButtons/ShelfButtons';
@@ -21,6 +21,8 @@ import { ShelfSkeleton } from '@/entities/Shelf';
 import { getJsonSavedData } from '@/entities/User';
 import { getUserShelfNamesList } from '@/entities/User';
 import { CommonShelf } from './CommonShelf/CommonShelf';
+import { BoxesBlock } from './BoxesBlock/BoxesBlock';
+import { BoxesSettingsModal } from './BoxesSettingsModal/BoxesSettingsModal/BoxesSettingsModal';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -39,8 +41,6 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 
-	// нужно подтянуть количество полок из профиля юзера, чтобы отрисовать соответствующее количесвто скелетонов.
-	// shelvesCount
 	useEffect(() => {
 		dispatch(fetchCupboardData())
 	}, [dispatch])
@@ -60,6 +60,62 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 		}
 	}, [cupboardIsLoading])
 
+	const onAddNewCardClick = useCallback((shelfId: string) => {
+		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
+		dispatch(cupboardShelfListActions.setCardModalIsOpen(true))
+	}, [dispatch])
+
+	const onCollapseClick = useCallback((shelfId: string, collapsed: boolean) => {
+		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { collapsed } }))
+	}, [dispatch])
+
+	const shelvesList = useMemo(() => {
+		if (cupboardIsLoading) return []
+		return cupboardShelves.map(shelf => {
+			// const onAddNewCard = () => onAddNewCardClick(shelf.id)
+			// не создаю логику для списка коробок, если полка свернута
+			const boxesBlock = <BoxesBlock shelf={shelf} />
+			// const boxesBlock = shelf.collapsed ? null : <BoxesBlock shelf={shelf} />
+			const buttons =
+				<ShelfButtons
+					shelf={shelf}
+					onAddNewCardClick={onAddNewCardClick}
+					onCollapseClick={onCollapseClick}
+				/>
+			// const buttons =
+			// 	<ShelfButtons
+			// 		shelfId={shelf.id}
+			// 		shelfIndex={shelf.index}
+			// 		onAddNewCardClick={onAddNewCard}
+			// 		collapsed={shelf.collapsed}
+			// 		onCollapseClick={onCollapseClick}
+			// 		// onViewShelfClick={() => { }}
+			// 		key={shelf.id}
+			// 	/>
+			const completeSmallDataLabels =
+				<CompleteSmallDataLabels
+					data={shelf.data}
+					isLoading={cupboardIsLoading}
+				/>
+			return (
+				<ShelfItem
+					shelf={shelf}
+					// collapsed={shelf.collapsed}
+					boxesBlock={boxesBlock}
+					// collapsed={shelf.collapsed}
+					key={shelf.id}
+					// id={shelf.id}
+					// title={shelf.title}
+					completeSmallDataLabelsBlock={
+						completeSmallDataLabels
+					}
+					shelfButtonsBlock={buttons}
+				// index={shelf.index}
+				/>
+			)
+		})
+
+	}, [cupboardIsLoading, cupboardShelves, onAddNewCardClick, onCollapseClick])
 
 	if (cupboardIsLoading) {
 		return <>
@@ -74,34 +130,8 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			className)}
 		>
 			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
-			{cupboardShelves.map(shelf => {
-				const buttons =
-					<ShelfButtons
-						shelfId={shelf.id}
-						shelfPosition={shelf.index}
-						onAddNewCardClick={() => { }}
-						onViewShelfClick={() => { }}
-						key={shelf.id}
-					/>
-				const completeSmallDataLabels =
-					<CompleteSmallDataLabels
-						data={shelf.data}
-						isLoading={cupboardIsLoading}
-					/>
-				// ShelfItem должен рабоать даже если isLoading, чтобы можно было анимировать CompleteSmallDataLabels
-				return (
-					<ShelfItem
-						key={shelf.id}
-						id={shelf.id}
-						title={shelf.title}
-						completeSmallDataLabelsBlock={
-							completeSmallDataLabels
-						}
-						shelfButtonsBlock={buttons}
-						index={shelf.index}
-					/>
-				)
-			})}
+			{shelvesList}
+			<BoxesSettingsModal/>
 		</div>
 	)
 }

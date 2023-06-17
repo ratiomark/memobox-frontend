@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { Menu } from '@headlessui/react'
-import cls from './Dropdown.module.scss';
 import { Fragment, ReactNode } from 'react';
 import { AbsoluteListDirection } from '@/shared/types/ui';
 import { AppLink } from '../../../AppLink/AppLink';
 
+import cls from './Dropdown.module.scss';
 
 
 export interface DropdownItem {

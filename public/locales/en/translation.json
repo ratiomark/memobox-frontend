@@ -37,5 +37,16 @@
     "box control": "Box management",
     "remove": "Delete shelf"
   },
-  "shelf in deletion proccess": "Shelf and card removed to trash"
+  "shelf in deletion proccess": "Shelf and card removed to trash",
+  "cancel shelf deletion": "Cancel removing",
+  "box text": "Box",
+  "new cards": "New cards",
+  "learnt cards": "Learnt",
+  "minutes": "Minutes",
+  "hours": "Hours",
+  "days": "Days",
+  "weeks": "Weeks",
+  "months": "Months",
+  "cancel": "Cancel",
+  "save": "Save"
 }

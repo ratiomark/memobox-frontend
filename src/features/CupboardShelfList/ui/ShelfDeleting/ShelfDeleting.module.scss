@@ -14,10 +14,12 @@
 .ShelfDeleting {
   margin-bottom: 30px;
   display: flex;
-  gap: 18.1%;
+  justify-content: space-between;
   align-items: center;
   padding: 10px 20px 10px 15px;
   animation: shrink-height 500ms ease 7400ms normal forwards;
+
+  // animation: shrink-height 500ms ease 7400ms normal forwards;
 }
 
 @keyframes shrink-height {
@@ -26,6 +28,7 @@
     height: 76px;
     padding: 10px 20px 10px 15px;
     margin-bottom: 30px;
+    transform: translateY(0);
   }
 
   1% {
@@ -33,6 +36,7 @@
   }
 
   100% {
+    transform: translateY(-706px);
     height: 0;
     padding: 0;
     margin: 0;
@@ -47,6 +51,8 @@
 .description {
   font-size: 14px;
   color: rgb(128 128 128 / 45.6%);
+
+  // padding-right: 200px;
 }
 
 .button {
@@ -72,7 +78,7 @@
   height: 56px;
   animation: t 7500ms linear;
 
-  // margin-bottom: 30px;
+  // margin-right: 200px;
 }
 
 .countdown::after {

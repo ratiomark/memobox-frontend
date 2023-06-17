@@ -1,6 +1,8 @@
 import { ButtonHTMLAttributes, forwardRef, memo, ReactNode } from 'react'
 import cls from './Button.module.scss'
 import clsx from 'clsx'
+import { FontWeight } from '@/shared/types/StyleTypes'
+import { mapFontWeightToClass } from '@/shared/lib/helpers/mappers/mapFontWeightToClass'
 
 export type ButtonVariant =
 	| 'empty'
@@ -13,12 +15,6 @@ type ButtonColor =
 	| 'main'
 	| 'attention'
 	| 'wait'
-
-type ButtonFontWeight =
-	| '300'
-	| '500'
-	| '600'
-	| '700'
 
 export type ButtonSize =
 	| 'size_s'
@@ -36,13 +32,6 @@ type ButtonBorderRadius =
 	| 'borderRadius_34'
 	| 'borderRadius_max'
 
-const mapFontWeightToClass: Record<ButtonFontWeight, string> = {
-	'300': 'fw_300',
-	'500': 'fw_500',
-	'600': 'fw_600',
-	'700': 'fw_700',
-}
-
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children?: ReactNode
 	className?: string
@@ -53,7 +42,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	disabled?: boolean
 	addonLeft?: ReactNode
 	addonRight?: ReactNode
-	fontWeight?: ButtonFontWeight
+	fontWeight?: FontWeight
 	flex?: boolean
 }
 
@@ -73,7 +62,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, forward
 		fontWeight,
 		...otherProps
 	} = props
-	console.log(fontWeight ? mapFontWeightToClass[fontWeight] : 'нема')
+
 	const mods: Record<string, boolean | undefined> = {
 		[cls.disabled]: disabled,
 		[cls.flex]: flex,

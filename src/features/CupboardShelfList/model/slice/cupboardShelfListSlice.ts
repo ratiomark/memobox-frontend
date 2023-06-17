@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createEntityAdapter, createSelector, createSlice, EntityId, IdSelector, PayloadAction } from '@reduxjs/toolkit'
 import { CupboardPageSchema } from '../types/CupboardPageSchema'
 import { User } from '@/entities/User'
 import { setFeatureFlag } from '@/shared/lib/features'
@@ -10,9 +10,18 @@ import { StateSchema } from '@/app/providers/StoreProvider'
 const initialState: CupboardPageSchema = {
 	isLoading: true,
 	error: '',
-	// shelves: [],
+	newCardModal: {
+		shelfId: '',
+		boxIndex: 0,
+		// boxId:'',
+		questionText: '',
+		answerText: '',
+		isOpen: false,
+	},
 	entities: {},
 	ids: [],
+	boxesSettingsShelfId: '',
+	isBoxesSettingsModalOpen: false,
 	cupboardData: {
 		train: 0,
 		all: 0,
@@ -29,20 +38,44 @@ const shelvesAdapter = createEntityAdapter<ShelfSchema>({
 export const getCupboardState = shelvesAdapter.getSelectors<StateSchema>(
 	(state) => state.cupboard
 )
-export const getShelfIsDeleting = createSelector(
-	[
-		(state: StateSchema, shelfId: string) => getCupboardState.selectById(state, shelfId)
-	],
-	(shelf) => shelf?.isDeleting
-)
 
 const cupboardShelfList = createSlice({
 	name: 'cupboardShelfList',
 	initialState,
 	reducers: {
-		deleteShelf: (state, action: PayloadAction<string>) => {
+		deleteShelf: (state, action: PayloadAction<EntityId>) => {
 			shelvesAdapter.removeOne(state, action.payload)
 		},
+		setCardModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.newCardModal.isOpen = action.payload
+		},
+		setQuestionText: (state, action: PayloadAction<string>) => {
+			state.newCardModal.questionText = action.payload
+		},
+		setAnswerText: (state, action: PayloadAction<string>) => {
+			state.newCardModal.answerText = action.payload
+		},
+		setShelfIdCardModal: (state, action: PayloadAction<string>) => {
+			state.newCardModal.shelfId = action.payload
+			// если индекс прошлой коробки превышает максимальный индекс текущей полки, то ставлю коробку с новыми карточками.
+			const currentShelfBoxes = state.entities[action.payload]?.boxesData
+			if (currentShelfBoxes && currentShelfBoxes.length <= state.newCardModal.boxIndex) {
+				state.newCardModal.boxIndex = 0
+			}
+		},
+		setBoxIndexCardModal: (state, action: PayloadAction<number>) => {
+			state.newCardModal.boxIndex = action.payload
+		},
+		setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
+			state.boxesSettingsShelfId = action.payload
+			state.isBoxesSettingsModalOpen = true
+		},
+		closeBoxesSettingsModal: (state) => {
+			state.isBoxesSettingsModalOpen = false
+		},
+		// setBoxIdCardModal: (state, action: PayloadAction<string>) => {
+		// 	state.newCardModal.shelfId = action.payload
+		// },
 		// setShelfIsDeleting: (state, action: PayloadAction<string>) => {
 		// 	shelvesAdapter.
 		// 	// shelvesAdapter.updateOne({ 'id': action.payload, changes: {isDeleting: true}})
@@ -57,6 +90,7 @@ const cupboardShelfList = createSlice({
 				(state, action: PayloadAction<CupboardSchema>) => {
 					const cupboard = action.payload
 					state.isLoading = false
+					state.newCardModal.shelfId = cupboard.shelves[0].id
 					shelvesAdapter.setAll(state, cupboard.shelves)
 					state.cupboardData = {
 						all: cupboard.data.all,

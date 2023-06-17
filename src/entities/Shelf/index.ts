@@ -4,5 +4,6 @@ export { ShelfButtons } from '../../features/CupboardShelfList/ui/ShelfButtons/S
 
 // export { shelfSchema } from './model/types/shelf';
 export type { ShelfSchema } from './model/types/ShelfSchema'
+export type { ShelfProps } from './ui/Shelf/Shelf';
 export { Shelf } from './ui/Shelf/Shelf';
 export { ShelfSkeleton, } from './ui/Shelf/ShelfSkeleton';

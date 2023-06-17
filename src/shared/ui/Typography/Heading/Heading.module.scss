@@ -27,15 +27,18 @@
 }
 
 .size_m {
-  font: var(--font-l-header);
+  // font: var(--font-l-header);
+  font: var(--font-l);
 }
 
 .size_l {
-  font: var(--font-xl-header);
+  // font: var(--font-xl-header);
+  font: var(--font-xl);
 }
 
 .size_xl {
   font: var(--font-xxl-header);
+  // font: var(--font-xx);
 }
 
 .bold {

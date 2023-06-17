@@ -36,5 +36,16 @@
     "box control": "Управление коробками",
     "remove": "Удалить полку"
   },
-  "shelf in deletion proccess": "Полка и все карточки удалены в корзину"
+  "shelf in deletion proccess": "Полка и все карточки удалены в корзину",
+  "cancel shelf deletion": "Отменить удаление",
+  "box text": "Коробка",
+  "new cards": "Новые карточки",
+  "learnt cards": "Изученные",
+  "minutes": "Минуты",
+  "hours": "Часы",
+  "days": "Дни",
+  "weeks": "Недели",
+  "months": "Месяцы",
+  "cancel": "Отмена",
+  "save": "Сохранить"
 }

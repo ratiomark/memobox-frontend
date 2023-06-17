@@ -5,6 +5,7 @@
   height: calc(100vh - var(--navbar-height));
   overflow: auto;
   scrollbar-gutter: stable;
+  // transition: all 2s;
 
   // width: min(100%, 1200px);
   // margin: 0 auto;
@@ -16,6 +17,7 @@
   // max-width: 1200px;
   width: min(100%, 1200px);
   margin: 0 auto;
+  // transition: all 2s;
 }
 
 .trigger {

@@ -1,9 +1,10 @@
+export { getUserSettings } from './model/selectors/getUserSettings';
+
 export {
 	getJsonSavedData,
 	getUserShelfNamesList
 } from './model/selectors/getJsonSavedData';
 export { initAuthData } from './model/services/initAuthData';
-
 
 export { saveJsonSettings } from './model/services/saveJsonSettings';
 export { useJsonSettings } from './model/selectors/getJsonSettings';

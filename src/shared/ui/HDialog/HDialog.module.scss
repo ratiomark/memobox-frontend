@@ -1,0 +1,52 @@
+.HDialog {
+  position: relative;
+  z-index: 50;
+
+  // position: fixed;
+  // bottom: 0;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // z-index: var(--modal-index);
+  // opacity: 0;
+  // pointer-events: none;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgb(81 81 81 / 50.7%);
+}
+
+.content {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // padding: 20px 4px 20px 20px;
+  // width: min(1200px, 80%);
+
+  // height: 100%;
+
+  // width: 100%;
+  // background-color: var(--bg);
+  // border-radius: 12px;
+  // transform: scale(0.5);
+  // transition: transform 0.3s;
+}
+
+.panel {
+  padding: 20px 4px 20px 20px;
+  width: min(1200px, 80%);
+
+  // height: 100%;
+
+  // width: 100%;
+  background-color: var(--bg);
+  border-radius: 12px;
+}

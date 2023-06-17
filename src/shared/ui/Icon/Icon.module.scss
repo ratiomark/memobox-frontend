@@ -17,6 +17,11 @@
   }
 }
 
+.disabled {
+  fill: var(--hint);
+  color: var(--hint);
+}
+
 .cancel {
   fill: var(--cancel);
   color: var(--cancel);
@@ -33,4 +38,8 @@
 
 .button:hover .Icon {
   color: var(--accent);
+}
+
+.button:hover .disabled {
+  color: var(--hint);
 }

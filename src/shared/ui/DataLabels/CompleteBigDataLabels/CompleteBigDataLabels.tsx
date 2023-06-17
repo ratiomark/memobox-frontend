@@ -6,9 +6,10 @@ import { DataBlock } from '@/shared/types/DataBlock';
 
 
 
-interface CompleteBigDataLabelsProps extends DataBlock {
+interface CompleteBigDataLabelsProps {
 	className?: string
 	isLoading: boolean
+	data: DataBlock
 }
 
 
@@ -24,9 +25,9 @@ export const CompleteBigDataLabels = (props: CompleteBigDataLabelsProps) => {
 			cls.CompleteBigDataLabels,
 			[className])}
 		>
-			<BigDataLabel isLoading={isLoading} cardsCount={data?.all} type='all'/>
-			<BigDataLabel isLoading={isLoading} cardsCount={data?.train} type='train'/>
-			<BigDataLabel isLoading={isLoading} cardsCount={data?.wait} type='wait'/>
+			<BigDataLabel isLoading={isLoading} cardsCount={data?.all} type='all' />
+			<BigDataLabel isLoading={isLoading} cardsCount={data?.train} type='train' />
+			<BigDataLabel isLoading={isLoading} cardsCount={data?.wait} type='wait' />
 		</div>
 	)
 }

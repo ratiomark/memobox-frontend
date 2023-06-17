@@ -2,6 +2,7 @@ import { RouteProps } from 'react-router-dom';
 import { UserRole } from '@/entities/User';
 import { Page } from '@/widgets/Page';
 import { AboutPage } from '@/pages/AboutPage';
+import { SettingsPage } from '@/pages/SettingsPage';
 import { MainPage } from '@/pages/MainPage';
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { ViewPage } from '@/pages/ViewPage';
@@ -60,7 +61,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	},
 	settings: {
 		path: obtainRouteSettings(),
-		element: <MainPage />
+		element: <SettingsPage />
 	},
 	stats: {
 		path: obtainRouteStats(),

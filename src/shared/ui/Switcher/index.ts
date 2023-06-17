@@ -1,1 +1,1 @@
-export { Switcher } from "./Switcher";
+export { Switcher } from './Switcher';

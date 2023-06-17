@@ -18,11 +18,13 @@
 
   // border-radius: var(--border-radius);
   // border: var(--border-main);
-  box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+  // box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  // box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
 }
 
 .menuItem {
-  padding: 8px 16px;
+  padding: 10px 16px;
   border: none;
   background-color: none;
   outline: none;
@@ -30,10 +32,21 @@
   color: var(--text);
   cursor: pointer;
   white-space: nowrap;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.menuItem:first-of-type {
+  padding-top: 20px;
+}
+
+.menuItem:last-of-type {
+  // padding-bottom: 20px;
 }
 
 .active {
-  background-color: var(--active-list-item-popover);
+  // background-color: var(--active-list-item-popover);
+  opacity: 0.6;
 }
 
 .disabled {

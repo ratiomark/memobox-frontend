@@ -5,7 +5,11 @@ import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDat
 import { CommonShelfButtons } from '../CommonShelfButtons/CommonShelfButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
-
+import { UIEvent, UIEventHandler, WheelEvent, memo, useState } from 'react';
+import { Icon } from '@/shared/ui/Icon';
+import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
+import { HDialog } from '@/shared/ui/HDialog';
+import { TimeSetter } from '@/shared/ui/TimeSetter';
 
 interface ShelfProps {
 	data?: {
@@ -20,7 +24,7 @@ interface ShelfProps {
 	className?: string
 }
 
-export const CommonShelf = (props: ShelfProps) => {
+export const CommonShelf = memo((props: ShelfProps) => {
 	const {
 		className,
 		data,
@@ -39,6 +43,7 @@ export const CommonShelf = (props: ShelfProps) => {
 			cls.shelf,
 			[className])}
 		>
+			{/* <TimeSetter/> */}
 			<div className={cls.topShelfPart}>
 				<VStack align='start' gap='gap_8'>
 					<Heading as='h3' size='s' title={t('common shelf name')} />
@@ -46,9 +51,15 @@ export const CommonShelf = (props: ShelfProps) => {
 				</VStack>
 				<CommonShelfButtons />
 			</div>
+			{/* <div className={clsx(cls.boxesWrapper, !collapsed ? cls.collapsed : '')}>
+				<div className={cls.inner} >
+					{boxesBlock}
+				</div>
+			</div> */}
 		</div>
 	)
-}
+})
+CommonShelf.displayName = 'CommonShelf'
 // import clsx from 'clsx';
 // import { useTranslation } from 'react-i18next';
 // import cls from './CommonShelf.module.scss';

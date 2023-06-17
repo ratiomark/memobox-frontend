@@ -206,22 +206,6 @@
   }
 }
 
-.fw_300 {
-  font-weight: 300;
-}
-
-.fw_500 {
-  font-weight: 500;
-}
-
-.fw_600 {
-  font-weight: 600;
-}
-
-.fw_700 {
-  font-weight: 700;
-}
-
 .disabled {
   opacity: 0.4;
 }
@@ -231,15 +215,16 @@
 }
 
 .size_m {
-  font: var(--font-m);
   font-size: 14px;
   line-height: 18px;
 }
 
+// не будет работать fw
 .size_l {
   font: var(--font-l);
 }
 
+// не будет работать fw
 .size_xl {
   font: var(--font-xl);
 }

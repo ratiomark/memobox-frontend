@@ -1,6 +1,7 @@
 import { FeatureFlags } from '@/shared/types/FeatureFlags'
 import { JsonSettings } from './JsonSettings'
 import { JsonSavedData } from './JsonSavedData'
+import { TimingBlock } from '@/shared/types/DataBlock'
 
 export const UserRole = {
 	ADMIN: 'ADMIN',
@@ -15,6 +16,9 @@ export interface User {
 	id: string
 	username: string
 	// avatar?: string
+	userSetting: {
+		shelfTemplate: TimingBlock[]
+	}
 	role?: UserRole[]
 	features?: Partial<FeatureFlags>
 	jsonSettings?: JsonSettings

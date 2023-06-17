@@ -1,4 +1,4 @@
-import { BoxSchema, LearntCardBox, NewCardsBox, RegularCardsBox } from '@/entities/Box';
+import { BoxSchema } from '@/entities/Box';
 import { DataBlock } from '@/shared/types/DataBlock';
 
 // type OnlyDefaultBoxes = [NewCardsBox, LearntCardBox]
@@ -9,6 +9,7 @@ export interface ShelfSchema {
 	index: number
 	data: DataBlock
 	title: string
+	collapsed: boolean
 	isDeleting: boolean
 	boxesData: BoxSchema[]
 }

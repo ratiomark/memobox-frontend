@@ -1,34 +1,50 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './Switcher.module.scss';
+import { Switch } from '@headlessui/react';
 
 interface SwitcherProps {
 	className?: string
+	onClickSwitcher: () => void
+	isChecked: boolean
+	title?: string
 }
 
 export const Switcher = (props: SwitcherProps) => {
 	const {
-		className
+		className,
+		isChecked,
+		onClickSwitcher,
+		title
 	} = props
 
 	const { t } = useTranslation()
-	// const item = [
-	// 	{
-	// 		content: t('Новый'),
-	// 		value: 'new'
-	// 	},
-	// 	{
-	// 		content: t('Старый'),
-	// 		value: 'old'
-	// 	}
-	// ]
-	
-	return (
-		<div className={clsx(
-			cls.Switcher,
-			[className])}
-		>
 
-		</div>
+	return (
+		<Switch.Group>
+			<div className={cls.switcherWrapper} onClick={onClickSwitcher}>
+				{title &&
+					<Switch.Label className={cls.label}>
+						{title}
+					</Switch.Label>
+				}
+				<Switch
+					checked={isChecked}
+					onClick={onClickSwitcher}
+					// onChange={onChangeIsShort}
+					className={clsx(
+						cls.switcher,
+						{ [cls.switcher_active]: isChecked }
+					)}
+				>
+					<div
+						className={clsx(
+							cls.switcherCircle,
+							{ [cls.switcherCircle_active]: isChecked }
+						)}
+					/>
+				</Switch>
+			</div>
+		</Switch.Group>
 	)
 }

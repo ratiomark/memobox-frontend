@@ -1,13 +1,16 @@
 import { Button } from '@/shared/ui/Button';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-// import cls from './ShelfButtons.module.scss';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { t } from 'i18next';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../..';
+import { MyText } from '@/shared/ui/Typography';
+import cls from './SettingsButton.module.scss';
+import { getUserShelfNamesList } from '@/entities/User';
+import { useSelector } from 'react-redux';
 
 interface SettingButtonProps {
 	shelfId: string
@@ -17,7 +20,7 @@ interface SettingButtonProps {
 // 	if (event.code === 'Digit1' && event.code === 'KeyN')
 // }
 
-export const SettingButton = (props: SettingButtonProps) => {
+export const SettingButton = memo((props: SettingButtonProps) => {
 	const {
 		shelfId,
 	} = props
@@ -27,10 +30,18 @@ export const SettingButton = (props: SettingButtonProps) => {
 	// const onViewClick = () => {
 	// 	navigate(obtainRouteView(shelfPosition.toString()))
 	// }
+	const shelfNamesList = useSelector(getUserShelfNamesList)
 	const dispatch = useAppDispatch()
-	const onDeleteClick = useCallback((shelfId: string) => {
+	const onDeleteClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
-	}, [dispatch])
+	}, [dispatch, shelfId])
+
+	const onBoxesSettingsClick = useCallback(() => {
+		dispatch(cupboardShelfListActions.setBoxesSettingsShelfId(shelfId))
+	}, [dispatch, shelfId])
+	// const onRenameShelf = useCallback((shelfId: string) => {
+	// 	dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
+	// }, [dispatch])
 
 
 	const settingItems: DropdownItem[] = useMemo(() => {
@@ -49,14 +60,14 @@ export const SettingButton = (props: SettingButtonProps) => {
 			},
 			{
 				content: t('settingsItems.box control'),
-				onClick: () => alert(`изменение имени ${shelfId}`)
+				onClick: onBoxesSettingsClick,
 			},
 			{
-				content: t('settingsItems.remove'),
-				onClick: () => onDeleteClick(shelfId)
+				content: <MyText fontWeight='300' className={cls.removeShelfButton} text={t('settingsItems.remove')} variant='error' />,
+				onClick: onDeleteClick
 			},
 		]
-	}, [t, shelfId, onDeleteClick])
+	}, [t, shelfId, onDeleteClick, onBoxesSettingsClick])
 
 
 	return (
@@ -72,4 +83,5 @@ export const SettingButton = (props: SettingButtonProps) => {
 			}
 		/>
 	)
-}
+})
+SettingButton.displayName = 'SettingButton'

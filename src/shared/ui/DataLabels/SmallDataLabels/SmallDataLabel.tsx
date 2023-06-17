@@ -5,13 +5,11 @@ import { MyText } from '../../Typography'
 import { Skeleton } from '../../Skeleton'
 import cls from './SmallDataLabel.module.scss'
 import Spinner from '@/shared/assets/icons/spinner.svg'
-export const SmallDataLabelType = {
-	all: 'all',
-	train: 'train',
-	wait: 'wait',
-} as const
 
-export type SmallDataLabelType = keyof typeof SmallDataLabelType
+export type SmallDataLabelType =
+	| 'all'
+	| 'train'
+	| 'wait'
 
 interface SmallDataLabelProps {
 	className?: string;
@@ -34,7 +32,7 @@ export const SmallDataLabel = (props: SmallDataLabelProps) => {
 			<div
 				className={clsx(cls.SmallDataLabel, [className], cls[type])}
 				{...otherProps}
-			> 
+			>
 				<Spinner width={24} height={24} className={cls[type]} />
 			</div>
 		)
