@@ -85,20 +85,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, f
 				className={clsx(cls.Input, [className])}
 				onChange={onChangeHandler}
 				value={value}
-				// onFocus={onFocus}
 				onBlur={onBlurHandler}
 				disabled={readonly}
 				onKeyDown={onKeyPress}
 				{...otherProps}
 			/>
-			{/* {validationErrors} */}
-			{/* {inputErrors.length > 0 && inputErrors.map(i =>
-				<Text
-					text_s={i}
-					align='left'
-					key={i}
-					variant='error'
-				/>)} */}
 		</>
 	)
 })

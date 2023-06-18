@@ -7,16 +7,19 @@
   position: relative;
   padding: 20px;
   border-radius: 4px;
+  z-index: 100;
 }
 
 .setterWrapper {
   margin-bottom: 20px;
+  position: relative;
+  z-index: 100;
 }
 
 .overlay {
   position: absolute;
   cursor: pointer;
   inset: 0;
-  z-index: 1;
+  z-index: 80;
   background-color: rgb(128 128 128 / 11%);
 }

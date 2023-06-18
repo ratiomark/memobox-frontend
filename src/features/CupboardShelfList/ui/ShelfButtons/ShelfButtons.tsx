@@ -45,7 +45,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		onAddNewCardClick(shelfId)
 	}, [onAddNewCardClick, shelfId])
 
-	useHotkeys(positionTextCard, onAddNewCardHandle)
+	useHotkeys(positionTextCard, onAddNewCardHandle, { keyup: true })
 	// useHotkeys(positionTextTrain, () => setTrain(train + 1), [train])
 
 	const navigate = useNavigate()

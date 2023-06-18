@@ -919,10 +919,27 @@
       "username": "mark",
       "jsonSettings": {
         "settingsPageHasBeenOpen": false,
-        "isFirstVisit": true
+        "isFirstVisit": true,
+        "theme": "app_light_theme"
       },
       "userSettings": {
-        "shelfTemplate":[
+        "notifications": {
+          "mobilePushEnabled": true,
+          "emailNotificationsEnabled": true,
+          "minimumCardsForPush": 15,
+          "minimumCardsForEmailNotification": 10,
+          "notificationEmails": [
+            {
+              "email": "someEmail@mail.com",
+              "verified": true
+            },
+            {
+              "email": "someNotVerifiedEmail@mail.com",
+              "verified": false
+            }
+          ]
+        },
+        "shelfTemplate": [
           {
             "minutes": 5,
             "hours": 0,

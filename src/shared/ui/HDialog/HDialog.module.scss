@@ -41,12 +41,27 @@
 }
 
 .panel {
-  padding: 20px 4px 20px 20px;
-  width: min(1200px, 80%);
+  padding: 20px;
 
-  // height: 100%;
-
-  // width: 100%;
+  // width: min(1200px, 80%);
   background-color: var(--bg);
   border-radius: 12px;
 }
+
+.panelMax {
+  padding: 20px 4px 20px 20px;
+  width: min(1200px, 80%);
+  background-color: var(--bg);
+  border-radius: 12px;
+}
+
+// .panel {
+//   padding: 20px 4px 20px 20px;
+//   width: min(1200px, 80%);
+
+//   // height: 100%;
+
+//   // width: 100%;
+//   background-color: var(--bg);
+//   border-radius: 12px;
+// }

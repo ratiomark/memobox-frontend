@@ -23,9 +23,6 @@ import { HDialog } from '@/shared/ui/HDialog';
 
 interface CardModalNewCardProps {
 	className?: string
-	// shelfId?: string
-	// isOpen: boolean
-	// onClose: () => void
 }
 
 export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
@@ -41,7 +38,6 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	const questionTextCardModal = useSelector(getQuestionCardModal)
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
-	// const boxIdCardModal = useSelector(getBoxIdCardModal) ?? cupboardShelves[0].boxesData[0]._id
 	const boxIdCardModal = useSelector(getBoxIndexCardModal)
 
 	const shelfItems = useMemo(() => {
@@ -95,7 +91,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	// const onChangeBox = useCallback((boxId: string) => {
 	// 	dispatch(cupboardShelfListActions.setBoxIdCardModal(boxId))
 	// }, [dispatch])
-	console.log(shelfIdCardModal)
+	// console.log(shelfIdCardModal)
 	let shelvesAndBoxes;
 	if (cupboardIsLoading) {
 		shelvesAndBoxes = (
@@ -131,6 +127,8 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseCardModal}
+			max
+		// lazy
 		>
 			<div
 				className={cls.cardModal}

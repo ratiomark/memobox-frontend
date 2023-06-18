@@ -1,4 +1,10 @@
-export { getUserSettings } from './model/selectors/getUserSettings';
+export {
+	getUserSettings,
+	getUserMissedTrainingSettings,
+	getUserNotificationSettings,
+	getUserShelfTemplateSettings
+} from './model/selectors/getUserSettings';
+
 
 export {
 	getJsonSavedData,

@@ -19,6 +19,7 @@ interface TimeSetterProps {
 	weeks: number
 	months: number
 	onClose: () => void
+	lockSelector?: string
 }
 
 export const TimeSetter = (props: TimeSetterProps) => {
@@ -29,9 +30,10 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		days: daysProps = 0,
 		weeks: weeksProps = 0,
 		months: monthsProps = 0,
-		onClose
+		onClose,
+		lockSelector = '[data-testid="MainPage"]'
 	} = props
-	const [locked, setLocked] = useLockedBody(false, '[data-testid="MainPage"]')
+	const [locked, setLocked] = useLockedBody(false, lockSelector)
 	// console.log('!!!!!!!!!!  ', locked)
 
 	const [minutes, setMinutes] = useState(minutesProps)
@@ -124,8 +126,6 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		if (e.deltaY > 0) onDownClickMonths()
 		else onUpClickMonths()
 	}
-
-
 
 	const { t } = useTranslation()
 

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import IconEye from '@/shared/assets/icons/eye-20-20.svg'
 import cls from './Icon.module.scss';
+import { MouseEvent } from 'react';
 
 type SvgProps = Omit<React.SVGProps<SVGSVGElement>, 'onClick'>
 
@@ -16,7 +17,7 @@ interface UnClickableProps extends IconBaseProps {
 }
 interface ClickableProps extends IconBaseProps {
 	clickable: true
-	onClick: () => void
+	onClick: (() => void) | ((e: MouseEvent<any>) => void)
 }
 
 type IconProps = UnClickableProps | ClickableProps
@@ -31,7 +32,7 @@ export const Icon = (props: IconProps) => {
 		clickable = false,
 		...otherProps
 	} = props
-	
+
 	if (props.clickable) {
 		return (
 			<button

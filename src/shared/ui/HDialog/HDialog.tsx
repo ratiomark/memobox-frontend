@@ -11,18 +11,24 @@ interface HDialogProps {
 	isOpen: boolean
 	onClose: () => void
 	children: ReactNode
-	initialFocus?: MutableRefObject<HTMLElement | null>
+	// initialFocus?: MutableRefObject<HTMLElement | null>
+	max?: boolean
+	lazy?: boolean
 }
 
 export const HDialog = (props: HDialogProps) => {
 	const {
 		className,
 		isOpen,
+		lazy,
 		onClose,
-		initialFocus,
+		// initialFocus,
+		max = false,
 		children,
 	} = props
 	const { theme } = useTheme()
+
+	if (lazy && !isOpen) return null
 
 	return (
 		<Dialog
@@ -32,13 +38,15 @@ export const HDialog = (props: HDialogProps) => {
 				'app_modal',
 				className)
 			}
-			initialFocus={initialFocus}
+			// initialFocus={initialFocus}
 			open={isOpen}
 			onClose={onClose}
 		>
 			<div className={cls.overlay} />
 			<div className={cls.content} >
-				<Dialog.Panel className={cls.panel} >
+				<Dialog.Panel
+					className={max ? cls.panelMax : cls.panel}
+				>
 					{children}
 				</Dialog.Panel>
 			</div>

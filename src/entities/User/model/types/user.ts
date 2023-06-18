@@ -11,12 +11,31 @@ export const UserRole = {
 
 export type UserRole = keyof typeof UserRole
 
+interface NotificationEmails {
+	email: string
+	verified: boolean
+}
+
+interface NotificationSettings {
+	mobilePushEnabled: boolean
+	emailNotificationsEnabled: boolean
+	minimumCardsForPush: number
+	minimumCardsForEmailNotification: number
+	notificationEmails: NotificationEmails[]
+}
+
+interface TimeSleepSettings {
+	timeSleepEnabled: boolean
+}
+
 // то что возвращает бекэнд
 export interface User {
 	id: string
 	username: string
 	// avatar?: string
-	userSetting: {
+	userSettings: {
+		notifications: NotificationSettings
+		missedTrainingAction: 'none' | 'additionalTraining' | 'sendBackwards'
 		shelfTemplate: TimingBlock[]
 	}
 	role?: UserRole[]

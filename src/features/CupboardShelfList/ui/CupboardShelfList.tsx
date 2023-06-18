@@ -82,16 +82,6 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 					onAddNewCardClick={onAddNewCardClick}
 					onCollapseClick={onCollapseClick}
 				/>
-			// const buttons =
-			// 	<ShelfButtons
-			// 		shelfId={shelf.id}
-			// 		shelfIndex={shelf.index}
-			// 		onAddNewCardClick={onAddNewCard}
-			// 		collapsed={shelf.collapsed}
-			// 		onCollapseClick={onCollapseClick}
-			// 		// onViewShelfClick={() => { }}
-			// 		key={shelf.id}
-			// 	/>
 			const completeSmallDataLabels =
 				<CompleteSmallDataLabels
 					data={shelf.data}
@@ -99,18 +89,13 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 				/>
 			return (
 				<ShelfItem
-					shelf={shelf}
-					// collapsed={shelf.collapsed}
-					boxesBlock={boxesBlock}
-					// collapsed={shelf.collapsed}
 					key={shelf.id}
-					// id={shelf.id}
-					// title={shelf.title}
+					shelf={shelf}
+					boxesBlock={boxesBlock}
 					completeSmallDataLabelsBlock={
 						completeSmallDataLabels
 					}
 					shelfButtonsBlock={buttons}
-				// index={shelf.index}
 				/>
 			)
 		})
@@ -131,7 +116,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 		>
 			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
 			{shelvesList}
-			<BoxesSettingsModal/>
+			<BoxesSettingsModal />
 		</div>
 	)
 }

@@ -1,15 +1,12 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import cls from './CommonShelf.module.scss';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
 import { CommonShelfButtons } from '../CommonShelfButtons/CommonShelfButtons';
-import { Heading, MyText } from '@/shared/ui/Typography';
+import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
-import { UIEvent, UIEventHandler, WheelEvent, memo, useState } from 'react';
-import { Icon } from '@/shared/ui/Icon';
-import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
-import { HDialog } from '@/shared/ui/HDialog';
-import { TimeSetter } from '@/shared/ui/TimeSetter';
+import { memo } from 'react';
+
+import cls from './CommonShelf.module.scss';
 
 interface ShelfProps {
 	data?: {

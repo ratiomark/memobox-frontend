@@ -4,6 +4,7 @@
 // @import "https://unpkg.com/open-props/normalize.min.css";
 @import "theme/normal";
 @import "theme/dark";
+@import "theme/orange";
 @import "fonts/fonts";
 @import "variables/global";
 
@@ -36,6 +37,13 @@ body {
 
 .content-page {
   display: flex;
+}
+
+*:focus {
+  // outline: none;
+  // box-shadow: 0 0 5px 3px rgba(#33d69f, 0.2), 0 0 1px 1px rgba(#33d69f, 0.8);
+
+  // border: 1px solid var(--accent);
 }
 
 // .bottom_left {

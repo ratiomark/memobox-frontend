@@ -1,6 +1,5 @@
 import clsx from 'clsx'
-import IconThemeDeprecated from '@/shared/assets/icon/theme-dark-1.svg'
-import IconTheme from '@/shared/assets/icons_redesigned/theme.svg'
+import IconTheme from '@/shared/assets/icons/theme.svg'
 import { useTheme } from '@/shared/context/useTheme'
 import { memo, useCallback } from 'react'
 import { saveJsonSettings } from '@/entities/User'
