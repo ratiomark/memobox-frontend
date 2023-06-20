@@ -5,33 +5,49 @@ import { HDialog } from '@/shared/ui/HDialog';
 import { useSelector } from 'react-redux';
 import { getUserMissedTrainingSettings } from '@/entities/User';
 import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 import { HStack } from '@/shared/ui/Stack';
 
 interface MissedTrainingSettingsProps {
 	className?: string
 	isOpen: boolean
-	onClose: () => void
+	onClose: () => void,
+	missedTrainingSetting: string
+	onSubmit?: () => void
 }
+
+
 
 export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 	const {
 		className,
 		isOpen,
 		onClose,
+		missedTrainingSetting,
 	} = props
-	// const missedTrainingSetting = useSelector(getUserMissedTrainingSettings)
-	const items = ['none', 'additional', 'backwards']
-	const [value, setValue] = useState(items[0])
+
 	const { t } = useTranslation()
 
-	return (
+	const items = useMemo(() => ([
+		{ value: 'none', content: t('missedTrainingSettings.none') },
+		{ value: 'additional', content: t('missedTrainingSettings.additional') },
+		{ value: 'backwards', content: t('missedTrainingSettings.backwards') }
+	]), [t])
 
+	const [value, setValue] = useState(
+		items.find(item => item.value === missedTrainingSetting) ?? items[0]
+	)
+
+	const onCloseHandle = () => {
+		setValue(items.find(item => item.value === missedTrainingSetting) ?? items[0])
+		onClose()
+	}
+
+	return (
 		<HDialog
 			isOpen={isOpen}
-			onClose={onClose}
-			lazy
+			onClose={onCloseHandle}
 		>
 			<div className={clsx(
 				cls.MissedTrainingSettings,
@@ -41,11 +57,10 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 					items={items}
 					onChange={setValue}
 					value={value}
-					className={cls.radioGroup} 
+					className={cls.radioGroup}
 				/>
 				<HStack justify='between' max>
-
-					<Button onClick={onClose}>{t('cancel')}</Button>
+					<Button onClick={onCloseHandle}>{t('cancel')}</Button>
 					<Button variant='filled'>{t('save')}</Button>
 				</HStack>
 			</div>

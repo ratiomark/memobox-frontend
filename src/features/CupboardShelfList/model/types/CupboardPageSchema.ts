@@ -16,6 +16,15 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	}
 	boxesSettingsShelfId: string
 	isBoxesSettingsModalOpen: boolean
+	missedTrainingModal: {
+		shelfId: string
+		boxId: string
+		isOpen: boolean
+	},
+	notificationShelfModal: {
+		shelfId: string
+		isOpen: boolean
+	},
 	// shelvesDeletionIds?: string[]
 	// shelves: ShelfSchema[]
 	cupboardData: DataBlock

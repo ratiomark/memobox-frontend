@@ -14,6 +14,8 @@
 }
 
 .switcher {
+  display: flex;
+  align-items: center;
   outline: none;
   cursor: pointer;
   background-color: rgb(128 128 128 / 45.2%);

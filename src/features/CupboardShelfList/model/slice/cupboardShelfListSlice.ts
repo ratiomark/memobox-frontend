@@ -10,18 +10,26 @@ import { StateSchema } from '@/app/providers/StoreProvider'
 const initialState: CupboardPageSchema = {
 	isLoading: true,
 	error: '',
-	newCardModal: {
-		shelfId: '',
-		boxIndex: 0,
-		// boxId:'',
-		questionText: '',
-		answerText: '',
-		isOpen: false,
-	},
 	entities: {},
 	ids: [],
 	boxesSettingsShelfId: '',
 	isBoxesSettingsModalOpen: false,
+	missedTrainingModal: {
+		shelfId: '',
+		boxId: '',
+		isOpen: false,
+	},
+	notificationShelfModal: {
+		shelfId: '',
+		isOpen: false,
+	},
+	newCardModal: {
+		shelfId: '',
+		boxIndex: 0,
+		questionText: '',
+		answerText: '',
+		isOpen: false,
+	},
 	cupboardData: {
 		train: 0,
 		all: 0,
@@ -43,9 +51,6 @@ const cupboardShelfList = createSlice({
 	name: 'cupboardShelfList',
 	initialState,
 	reducers: {
-		deleteShelf: (state, action: PayloadAction<EntityId>) => {
-			shelvesAdapter.removeOne(state, action.payload)
-		},
 		setCardModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.newCardModal.isOpen = action.payload
 		},
@@ -66,6 +71,7 @@ const cupboardShelfList = createSlice({
 		setBoxIndexCardModal: (state, action: PayloadAction<number>) => {
 			state.newCardModal.boxIndex = action.payload
 		},
+		// boxes settings
 		setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
 			state.boxesSettingsShelfId = action.payload
 			state.isBoxesSettingsModalOpen = true
@@ -73,16 +79,31 @@ const cupboardShelfList = createSlice({
 		closeBoxesSettingsModal: (state) => {
 			state.isBoxesSettingsModalOpen = false
 		},
-		// setBoxIdCardModal: (state, action: PayloadAction<string>) => {
-		// 	state.newCardModal.shelfId = action.payload
-		// },
-		// setShelfIsDeleting: (state, action: PayloadAction<string>) => {
-		// 	shelvesAdapter.
-		// 	// shelvesAdapter.updateOne({ 'id': action.payload, changes: {isDeleting: true}})
-		// },
-		updateShelf: shelvesAdapter.updateOne,
+		// missed training
+		setMissedTrainingShelfId: (state, action: PayloadAction<string>) => {
+			state.missedTrainingModal.shelfId = action.payload
+		},
+		setMissedTrainingBoxId: (state, action: PayloadAction<string>) => {
+			state.missedTrainingModal.boxId = action.payload
+		},
+		setMissedTrainingModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.missedTrainingModal.isOpen = action.payload
+		},
+		// shelf notification
+		setNotificationModalShelfId: (state, action: PayloadAction<string>) => {
+			state.notificationShelfModal.shelfId = action.payload
+		},
+		setNotificationModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.notificationShelfModal.isOpen = action.payload
+		},
 
+		// shelf control
+		deleteShelf: (state, action: PayloadAction<EntityId>) => {
+			shelvesAdapter.removeOne(state, action.payload)
+		},
+		updateShelf: shelvesAdapter.updateOne,
 	},
+
 	extraReducers: (builder) => {
 		builder
 			.addCase(

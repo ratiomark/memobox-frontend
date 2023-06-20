@@ -4,7 +4,7 @@
   border: var(--border-input);
 
   // border: var(--border-input-focus);
-  border-radius: var(--border-radius-48);
+  border-radius: var(--border-radius-main);
 
   &.paddingWithRightAddon {
     padding: var(--padding-0-top-16-right-16-left-side);
@@ -71,7 +71,7 @@
   background: none;
   padding: var(--padding-main);
   border: var(--border-input);
-  border-radius: var(--border-radius-48);
+  border-radius: var(--border-radius-main);
 
   &::placeholder {
     color: var(--hint);

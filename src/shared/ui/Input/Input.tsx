@@ -16,7 +16,7 @@ interface InputProps extends HTMLInputProps {
 	value?: string;
 	autoFocus?: boolean;
 	readonly?: boolean;
-	inputErrors?: ValidationErrorText[]
+	inputErrors?: ValidationErrorText[] | string[]
 	// onChange?: (value: string | ChangeEvent<HTMLInputElement>) => void;
 	onChangeEvent?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onChangeString?: (value: string) => void;

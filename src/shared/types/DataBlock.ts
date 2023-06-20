@@ -4,7 +4,7 @@ export interface DataBlock {
 	train: number
 }
 
-export interface TimingBlock{
+export interface TimingBlock {
 	minutes: number
 	hours: number
 	days: number
@@ -12,3 +12,4 @@ export interface TimingBlock{
 	months: number
 }
 
+export type MissedTrainingValues = 'none' | 'additional' | 'backwards'

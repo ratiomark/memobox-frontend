@@ -1,3 +1,27 @@
 .NotificationSettings {
+  min-width: 700px;
 
+  // width: min(100%, 800px);
+}
+
+.notificationBlock{
+
+}
+
+.detailsBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 20px 0;
+}
+
+.detailsBlock_last {
+  justify-content: start;
+}
+
+.notificationCard {
+  display: flex;
+  min-width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -38,7 +38,7 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 				boxesList={boxesData}
 				setBoxesData={setBoxesData}
 			/>
-			<Button onClick={() => console.log(boxesData)}>Consol</Button>
+			<Button onClick={() => console.log(boxesData)}>{t('consol')}</Button>
 		</VStack>
 	)
 	// const timeSetter = (

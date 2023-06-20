@@ -6,7 +6,7 @@ import { Header } from '@/widgets/Sidebar'
 import { CupboardShelvesWidget } from '@/widgets/CupboardShelvesWidget'
 import { useEffect } from 'react'
 import { CupboardShelfList } from '@/features/CupboardShelfList'
-import { CardModalNewCard } from '@/features/CupboardShelfList/ui/CardModalNewCard/CardModalNewCard'
+import { CardModalNewCard } from '@/features/CupboardShelfList/ui/Modals/CardModalNewCard/CardModalNewCard'
 
 
 // const data = { wait: 40, all: 40, train: 33 }

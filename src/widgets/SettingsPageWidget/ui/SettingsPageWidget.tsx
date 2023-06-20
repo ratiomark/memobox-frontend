@@ -5,12 +5,17 @@ import { VStack } from '@/shared/ui/Stack';
 import { Heading } from '@/shared/ui/Typography';
 import { MouseEvent, useState } from 'react';
 import { Card } from '@/shared/ui/Card';
-import { getUserSettings } from '@/entities/User';
+import {
+	getUserMissedTrainingSettings,
+	getUserSettings,
+	getUserShelfTemplateSettings
+} from '@/entities/User';
 import { useSelector } from 'react-redux';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import cls from './SettingsPageWidget.module.scss';
 import { Icon } from '@/shared/ui/Icon';
 import { MissedTrainingSettings } from '@/features/SettingsFeatures';
+import { NotificationSettings } from '@/features/SettingsFeatures/NotificationSettings/NotificationSettings';
 
 interface SettingsPageWidgetProps {
 	className?: string
@@ -26,6 +31,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 		timeSleepModal: false,
 		missedTrainingModal: false
 	})
+
+	const missedTrainingSetting = useSelector(getUserMissedTrainingSettings)
 
 	const toggleShelfTemplateModal = () => {
 		setSettingModalStates(prev => ({ ...prev, shelfTemplateModal: !prev.shelfTemplateModal }))
@@ -127,14 +134,17 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			<ShelfTemplateSettings
 				isOpen={settingModalStates.shelfTemplateModal}
 				onClose={toggleShelfTemplateModal}
-			// isOpen={isShelfTemplateOpen}
-			// onClose={closeShelfTemplate}
 			/>
+			<NotificationSettings
+				isOpen={settingModalStates.notificationModal}
+				onClose={toggleNotificationModal}
+			/>
+				
 			<MissedTrainingSettings
+				missedTrainingSetting={missedTrainingSetting}
 				isOpen={settingModalStates.missedTrainingModal}
 				onClose={toggleMissedTrainingModal}
-			// isOpen={isMissedTrainingOpen}
-			// onClose={closeMissedTraining}
+				lazy={true}
 			/>
 		</div>
 	)

@@ -16,7 +16,7 @@ interface NotificationEmails {
 	verified: boolean
 }
 
-interface NotificationSettings {
+export interface NotificationSettings {
 	mobilePushEnabled: boolean
 	emailNotificationsEnabled: boolean
 	minimumCardsForPush: number

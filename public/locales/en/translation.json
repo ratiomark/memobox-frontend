@@ -48,5 +48,10 @@
   "weeks": "Weeks",
   "months": "Months",
   "cancel": "Cancel",
-  "save": "Save"
+  "save": "Save",
+  "missedTrainingSettings": {
+    "none": "Do nothing",
+    "additional": "Additional training",
+    "backwards": "Move to previous box"
+  }
 }

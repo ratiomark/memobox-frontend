@@ -45,10 +45,10 @@ export const BoxesSettingsModal = memo((props: BoxesSettingsModalProps) => {
 			<div
 				className={cls.cardModal}
 			>
-				<BoxesSettingsContent shelf={shelf} />
+				<BoxesSettingsContent shelf={shelf!} />
 				<div className={cls.actions} >
-					<Button>{t('Назад')}</Button>
-					<Button>{t('Сохранить')}</Button>
+					<Button>{t('cancel')}</Button>
+					<Button>{t('save')}</Button>
 				</div>
 			</div>
 		</HDialog>

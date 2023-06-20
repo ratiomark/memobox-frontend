@@ -49,7 +49,7 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 						key={boxItem._id}
 					/>)
 			})}
-			<p>Изученные</p>
+			<p>{t('translation.learnt cards')}</p>
 		</div>
 	)
 }

@@ -12,12 +12,12 @@ import {
 	getBoxIndexCardModal,
 	// getBoxIdCardModal,
 	getIsOpenCardModal, getQuestionCardModal, getShelfIdCardModal
-} from '../../model/selectors/getCardModal';
+} from '../../../model/selectors/getCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { cupboardShelfListActions, getCupboardState } from '../../model/slice/cupboardShelfListSlice';
+import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import cls from './CardModalNewCard.module.scss';
-import { getCupboardIsLoading, getCupboardError } from '../../model/selectors/getCupboardShelfList';
+import { getCupboardIsLoading, getCupboardError } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 
 

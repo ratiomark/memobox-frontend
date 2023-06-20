@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import cls from './CommonShelfButtons.module.scss';
 import { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { obtainRouteTraining } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { useNavigate } from 'react-router-dom';
 
 interface ShelfButtonsProps {
 	className?: string
@@ -19,8 +21,11 @@ export const ShelfButtons = (props: ShelfButtonsProps) => {
 	const {
 		className,
 	} = props
-	const [train, setTrain] = useState(0)
-	useHotkeys('t', () => setTrain(train + 1), [train])
+	const navigate = useNavigate()
+	const startTraining = () => {
+		navigate(obtainRouteTraining('all', 'all'))
+	}
+	useHotkeys('t', startTraining)
 
 	const { t } = useTranslation()
 
@@ -38,6 +43,7 @@ export const ShelfButtons = (props: ShelfButtonsProps) => {
 				className={cls.button}
 				variant='filled'
 				data-button-type='shelf-train'
+				onClick={startTraining}
 			>
 				{t('train') + ' (t)'}
 			</Button>

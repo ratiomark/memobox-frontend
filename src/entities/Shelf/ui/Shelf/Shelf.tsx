@@ -31,29 +31,24 @@ export const Shelf = memo((props: ShelfProps) => {
 		}
 	} = props
 
+	// const [shelfCollapsed, setShelfCollapsed] = useState(collapsed)
+
 	return (
 		<div className={clsx(
 			cls.shelf,
 			[className])}
 		>
 			<div className={cls.topShelfPart}>
-
 				<VStack align='start' gap='gap_8'>
 					<Heading as='h3' size='s' title={title} />
 					{completeSmallDataLabelsBlock}
 				</VStack>
 				{shelfButtonsBlock}
-				{/* <CompleteSmallDataLabels
-						isLoading={isLoading}
-						data={data}
-					/>
-				</VStack>
-				<ShelfButtons onAddNewCardClick={onAddNewCardClickHandle} shelfPosition={index ?? 11} /> */}
 			</div>
 			<div className={clsx(cls.boxesWrapper, !collapsed ? cls.collapsed : '')}>
-				{!collapsed && boxesBlock}
-				{/* <div className={cls.inner} >
-				</div> */}
+				<div className={cls.inner} >
+					{boxesBlock}
+				</div>
 			</div>
 		</div>
 	)

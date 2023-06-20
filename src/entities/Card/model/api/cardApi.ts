@@ -8,7 +8,8 @@ export const cardApi = rtkApi.injectEndpoints({
 				url: '/cards',
 				method: 'GET',
 				params: {
-					shelf: Number(id),
+					shelf: id,
+					// box: boxId
 				}
 			}),
 			// transformResponse: (response: MovieList, meta, arg) => {

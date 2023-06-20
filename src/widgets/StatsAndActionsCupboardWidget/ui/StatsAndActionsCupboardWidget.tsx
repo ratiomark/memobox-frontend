@@ -5,13 +5,14 @@ import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLab
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import cls from './StatsAndActionsCupboardWidget.module.scss';
 import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions } from '@/features/CupboardShelfList';
 import { useSelector } from 'react-redux';
 import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { CreateNewShelfModal } from '@/features/CreateNewShelfModal';
 
 
 interface StatsAndActionsCupboardWidgetProps {
@@ -22,7 +23,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const {
 		className
 	} = props
-
+	const [newShelfModalIsOpen, setNewShelfModalIsOpen] = useState(false)
 	// const { data, isLoading } = useGetCupboardDataQuery()
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
@@ -30,11 +31,14 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
+	const onAddNewShelfClick = () => setNewShelfModalIsOpen(true)
+	const onCloseNewShelfModal = () => setNewShelfModalIsOpen(false)
+
 	const onAddNewCardClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.setCardModalIsOpen(true))
 	}, [dispatch])
 
-	useHotkeys('n', onAddNewCardClick, { keyup: true 	})
+	useHotkeys('n', onAddNewCardClick, { keyup: true })
 
 	return (
 		<HStack
@@ -46,7 +50,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 			<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
 			<ThemeSwitcher />
 			<HStack gap='gap_14' className={cls.actions} >
-				<Button borderRadius='borderRadius_4'>{t('New shelf')}</Button>
+				<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
 				<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
 				<Icon
 					Svg={InfoIcon}
@@ -56,6 +60,12 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 				/>
 
 			</HStack>
+			<CreateNewShelfModal
+				isOpen={newShelfModalIsOpen}
+				onClose={onCloseNewShelfModal}
+				onSubmit={() => console.log('Создаю новую полку с названием  ')}
+				shelfNames={['math']}
+			/>
 		</HStack>
 	)
 }

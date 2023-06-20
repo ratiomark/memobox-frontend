@@ -6,6 +6,7 @@ import { SettingsPage } from '@/pages/SettingsPage';
 import { MainPage } from '@/pages/MainPage';
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { ViewPage } from '@/pages/ViewPage';
+import { TrainingPage } from '@/pages/TrainingPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -20,6 +21,7 @@ export const AppRoutes = {
 	settings: 'settings',
 	stats: 'stats',
 	trash: 'trash',
+	training: 'training',
 	ABOUT: 'about',
 	forbidden_page: 'forbidden_page',
 	PAGE_NOT_FOUND: 'PAGE_NOT_FOUND',
@@ -33,6 +35,10 @@ export const obtainRouteView = (shelfId?: string, boxId?: string) => {
 	return boxId
 		? `/view/${shelfId}/${boxId}`
 		: `/view/${shelfId}/all`
+}
+
+export const obtainRouteTraining = (shelfId?: string, boxId?: string) => {
+	return `/training/${shelfId}/${boxId}`
 }
 export const obtainRouteStats = () => '/stats'
 export const obtainRouteSettings = () => '/settings'
@@ -70,6 +76,10 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	trash: {
 		path: obtainRouteTrash(),
 		element: <MainPage />
+	},
+	training: {
+		path: obtainRouteTraining(':shelfId', ':boxId'),
+		element: <TrainingPage/>
 	},
 	ABOUT: {
 		path: obtainRouteAbout(),

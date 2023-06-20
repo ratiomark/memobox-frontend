@@ -18,7 +18,7 @@ export const fetchCupboardData = createAsyncThunk<CupboardSchema, void, { reject
 			return response
 
 		} catch (err) {
-			return thunkAPI.rejectWithValue('Some Error in fetchCupboardData')
+			return thunkAPI.rejectWithValue('some error in fetchCupboardData')
 		}
 	}
 )

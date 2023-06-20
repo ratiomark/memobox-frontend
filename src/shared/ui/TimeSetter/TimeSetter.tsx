@@ -34,7 +34,6 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		lockSelector = '[data-testid="MainPage"]'
 	} = props
 	const [locked, setLocked] = useLockedBody(false, lockSelector)
-	// console.log('!!!!!!!!!!  ', locked)
 
 	const [minutes, setMinutes] = useState(minutesProps)
 	const [hours, setHours] = useState(hoursProps)

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import cls from './BoxesBlock.module.scss';
 import { ShelfSchema } from '@/entities/Shelf';
 import { useCallback, useMemo } from 'react';
 import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice';
@@ -8,6 +7,7 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@/entities/Box';
+import cls from './BoxesBlock.module.scss';
 
 interface BoxesBlockProps {
 	className?: string
@@ -19,9 +19,8 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 		className,
 		shelf,
 	} = props
-	// если идет загрузка, то нужно вернуть скелетон на уровне полки, то есть если полка !collapsed, то отрисовать скелетоны коробок
-	const dispatch = useAppDispatch()
 
+	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
 	const onViewClick = useCallback((shelfId: string, boxIndex: number) => {
@@ -40,19 +39,12 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 	const boxList = useMemo(() => {
 		const boxesData = [...shelf.boxesData].sort((a, b) => a.index - b.index)
 		return boxesData.map(boxItem => {
-			// const onAddNewCard = () => onAddNewCardClick(shelf.id, boxItem.index)
-			// const onBoxViewClick = () => onViewClick(boxItem.index)
 			return (
 				<Box
 					boxItem={boxItem}
-					// timing={boxItem.timing}
 					shelfId={shelf.id}
 					onAddNewCard={onAddNewCardClick}
 					onBoxViewClick={onViewClick}
-					// onTimerClick={() => {}}
-					// data={boxItem.data}
-					// index={boxItem.index}
-					// specialType={boxItem.specialType}
 					key={boxItem._id}
 				/>
 			)
@@ -65,7 +57,6 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 			className)}
 		>
 			{boxList}
-			{/* {boxesData} */}
 		</div>
 	)
 }

@@ -39,6 +39,16 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 	const onBoxesSettingsClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.setBoxesSettingsShelfId(shelfId))
 	}, [dispatch, shelfId])
+
+	const onMissedTrainingClick = useCallback(() => {
+		dispatch(cupboardShelfListActions.setMissedTrainingShelfId(shelfId))
+		dispatch(cupboardShelfListActions.setMissedTrainingModalIsOpen(true))
+	}, [dispatch, shelfId])
+
+	const onNotificationClick = useCallback(() => {
+		dispatch(cupboardShelfListActions.setNotificationModalShelfId(shelfId))
+		dispatch(cupboardShelfListActions.setNotificationModalIsOpen(true))
+	}, [dispatch, shelfId])
 	// const onRenameShelf = useCallback((shelfId: string) => {
 	// 	dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
 	// }, [dispatch])
@@ -52,11 +62,11 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 			},
 			{
 				content: t('settingsItems.notifications'),
-				onClick: () => alert(`изменение имени ${shelfId}`)
+				onClick: onNotificationClick
 			},
 			{
 				content: t('settingsItems.missed training'),
-				onClick: () => alert(`изменение имени ${shelfId}`)
+				onClick: onMissedTrainingClick
 			},
 			{
 				content: t('settingsItems.box control'),
@@ -67,7 +77,7 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 				onClick: onDeleteClick
 			},
 		]
-	}, [t, shelfId, onDeleteClick, onBoxesSettingsClick])
+	}, [t, shelfId, onNotificationClick, onDeleteClick, onMissedTrainingClick, onBoxesSettingsClick])
 
 
 	return (

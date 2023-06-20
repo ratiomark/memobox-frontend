@@ -1,5 +1,5 @@
 import { BoxSchema } from '@/entities/Box';
-import { DataBlock } from '@/shared/types/DataBlock';
+import { DataBlock, MissedTrainingValues } from '@/shared/types/DataBlock';
 
 // type OnlyDefaultBoxes = [NewCardsBox, LearntCardBox]
 // type FullRangeOfBoxes = [NewCardsBox, RegularCardsBox, LearntCardBox]
@@ -11,5 +11,8 @@ export interface ShelfSchema {
 	title: string
 	collapsed: boolean
 	isDeleting: boolean
+	isLoading: boolean
+	missedTrainingAction?: MissedTrainingValues
+	notificationEnabled?: boolean
 	boxesData: BoxSchema[]
 }

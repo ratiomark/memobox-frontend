@@ -8,7 +8,7 @@ export interface CardSchema {
 	index: number,
 	question: string,
 	answer: string,
-	shelf: number,
+	shelf: string,
 	box: number,
 	state: 'train' | 'wait'
 	time: number

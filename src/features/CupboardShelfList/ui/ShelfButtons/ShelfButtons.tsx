@@ -7,7 +7,7 @@ import cls from './ShelfButtons.module.scss';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router-dom';
-import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
@@ -40,15 +40,20 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		positionTextCard = `n + ${shelfIndexEdited}`
 		positionTextTrain = `t + ${shelfIndexEdited}`
 	}
+	const navigate = useNavigate()
+
+	const startTraining = () => {
+		navigate(obtainRouteTraining(shelfId, 'all'))
+	}
 
 	const onAddNewCardHandle = useCallback(() => {
 		onAddNewCardClick(shelfId)
 	}, [onAddNewCardClick, shelfId])
 
-	useHotkeys(positionTextCard, onAddNewCardHandle, { keyup: true })
-	// useHotkeys(positionTextTrain, () => setTrain(train + 1), [train])
+	useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true })
+	useHotkeys(positionTextTrain, startTraining,)
 
-	const navigate = useNavigate()
+
 	const onViewClick = () => {
 		navigate(obtainRouteView(shelfIndexEdited.toString()))
 	}

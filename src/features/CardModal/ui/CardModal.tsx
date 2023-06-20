@@ -75,8 +75,7 @@ export const CardModal = (props: CardModalProps) => {
 					align='left'
 					gap='gap_32'
 				>
-					Что-то работает не так как задумано
-				</VStack>
+					{t('chto-to-rabotaet-ne-tak-kak-zadumano')}	</VStack>
 			</div>
 		</Modal>
 	)

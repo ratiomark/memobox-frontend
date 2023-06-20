@@ -15,14 +15,14 @@ import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupbo
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { ShelfItem } from './ShelfItem/ShelfItem';
 import { ShelfButtons } from './ShelfButtons/ShelfButtons';
-import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLabels/CompleteBigDataLabels';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
 import { ShelfSkeleton } from '@/entities/Shelf';
-import { getJsonSavedData } from '@/entities/User';
 import { getUserShelfNamesList } from '@/entities/User';
 import { CommonShelf } from './CommonShelf/CommonShelf';
-import { BoxesBlock } from './BoxesBlock/BoxesBlock';
 import { BoxesSettingsModal } from './BoxesSettingsModal/BoxesSettingsModal/BoxesSettingsModal';
+import { BoxesBlockWrapper } from './BoxesBlock/BoxesBlockWrapper';
+import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModal/MissedTrainingSettings';
+import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -74,7 +74,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 		return cupboardShelves.map(shelf => {
 			// const onAddNewCard = () => onAddNewCardClick(shelf.id)
 			// не создаю логику для списка коробок, если полка свернута
-			const boxesBlock = <BoxesBlock shelf={shelf} />
+			const boxesBlock = <BoxesBlockWrapper shelf={shelf} />
 			// const boxesBlock = shelf.collapsed ? null : <BoxesBlock shelf={shelf} />
 			const buttons =
 				<ShelfButtons
@@ -117,6 +117,8 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
 			{shelvesList}
 			<BoxesSettingsModal />
+			<MissedTrainingSettingsModal />
+			<NotificationSettingsModal />
 		</div>
 	)
 }

@@ -76,6 +76,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, forward
 	return (
 		<button
 			ref={forwardedRef}
+			// disabled={disabled}
 			className={clsx(
 				cls.Button,
 				mods,
