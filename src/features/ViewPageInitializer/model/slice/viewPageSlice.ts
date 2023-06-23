@@ -1,11 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchBoxesDataByShelfId, FetchBoxesThunkResponse } from '../services/fetchBoxesDataByShelfId'
 import { ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
+import { CardSchema } from '@/entities/Card'
+import { fetchCards } from '../services/fetchCards'
 
 const initialState: ViewPageInitializerSchema = {
 	// boxId: '',
 	_viewPageMounted: false,
-	shelfId: '',
+	isLoading: true,
+	error: '',
+	cards: [],
+	shelfId: 'all',
+	boxId: 'new',
 	shelvesDataSaved: {}
 }
 export interface InitiateShelfPayload {
@@ -18,6 +24,9 @@ const viewPageSlice = createSlice({
 	reducers: {
 		setActiveShelfId: (state, action: PayloadAction<string>) => {
 			state.shelfId = action.payload
+		},
+		setActiveBoxId: (state, action: PayloadAction<string|number>) => {
+			state.boxId = action.payload
 		},
 		setViewPageIsMounted: (state) => {
 			state._viewPageMounted = true
@@ -56,6 +65,27 @@ const viewPageSlice = createSlice({
 						state.shelvesDataSaved[action.payload]['error'] = `some error when fetching cards shelfId = ${action.payload}`
 						state.shelvesDataSaved[action.payload]['isLoading'] = false
 					}
+				})
+			.addCase(
+				fetchCards.fulfilled,
+				(state, action: PayloadAction<CardSchema[]>) => {
+					state.isLoading = false
+					state.cards = action.payload
+					state.error = ''
+				})
+			.addCase(
+				fetchCards.rejected,
+				(state, action) => {
+					if (action.payload) {
+						state.isLoading = false
+						state.error = action.payload
+					}
+				})
+			.addCase(
+				fetchCards.pending,
+				(state) => {
+					state.isLoading = true
+					state.error = ''
 				})
 	}
 })

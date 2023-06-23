@@ -5,7 +5,7 @@ import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLab
 import { useRef, } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { CardSchema } from '@/entities/Card';
-import { getViewPageIsMounted, getViewPageSavedShelf, getViewPageShelfId } from '@/features/ViewPageInitializer';
+import { getViewPageCardsFiltered, getViewPageIsLoading, getViewPageIsMounted, getViewPageSavedShelf, getViewPageShelfId } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { ShelfRepresentedByBoxes } from '@/entities/Box';
 import { useNavigate } from 'react-router-dom';
@@ -61,16 +61,18 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 	// const [data, setData] = useState<any>()
 	// const [isLoading, setIsLoading] = useState(true)
 	// const dispatch = useAppDispatch()
-	const shelfId = useSelector(getViewPageShelfId) ?? '1'
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
-	const shelfDataSaved = useSelector(getViewPageSavedShelf(shelfId ?? '1'))
-	const boxId = useSelector(getViewPageSavedShelf(shelfId ?? '1'))?.lastBoxId
+	const viewPageIsLoading = useSelector(getViewPageIsLoading)
+	const shelfId = useSelector(getViewPageShelfId) ?? '1'
+	const cards = useSelector(getViewPageCardsFiltered)
+	// const shelfDataSaved = useSelector(getViewPageSavedShelf(shelfId ?? '1'))
+	// const boxId = useSelector(getViewPageSavedShelf(shelfId ?? '1'))?.lastBoxId
 	// const navigate = useNavigate()
 
 
 	const { t } = useTranslation()
 
-	if (!viewPageIsMounted || shelfDataSaved?.isLoading) {
+	if (!viewPageIsMounted || viewPageIsLoading) {
 		return (
 			<HStack
 				max
@@ -83,7 +85,8 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 		)
 	}
 
-	const data = getStatsFromBoxIdAndData(boxId, shelfDataSaved?.data)
+	// const data = getStatsFromBoxIdAndData(boxId, shelfDataSaved?.data)
+	const data = replaceCardsWithStatsData(cards)
 
 	return (
 		<HStack

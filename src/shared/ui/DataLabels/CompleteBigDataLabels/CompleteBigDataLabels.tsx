@@ -9,7 +9,7 @@ import { DataBlock } from '@/shared/types/DataBlock';
 interface CompleteBigDataLabelsProps {
 	className?: string
 	isLoading: boolean
-	data: DataBlock
+	data: DataBlock | undefined
 }
 
 

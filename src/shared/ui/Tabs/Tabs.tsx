@@ -5,7 +5,7 @@ import cls from './Tabs.module.scss';
 import { FlexDirection, FlexAlign, Flex } from '../Stack/Flex/Flex';
 
 export interface TabItem {
-	value: string
+	value: string | number
 	content: ReactNode
 }
 
@@ -34,10 +34,10 @@ export const Tabs = memo((props: TabsProps) => {
 	}, [onTabClick])
 
 	return (
-		<Flex
-			align={align}
-			direction={direction}
-			gap='gap_8'
+		<ul
+			// align={align}
+			// direction={direction}
+			// gap='gap_8'
 			className={clsx(
 				cls.Tabs,
 				[className])}
@@ -45,9 +45,9 @@ export const Tabs = memo((props: TabsProps) => {
 			{tabs.map(item => {
 				const isSelected = value === item.value
 				return (
-					<Card
+					<li
 						key={item.value}
-						variant={isSelected ? 'light' : 'normal'}
+						// variant={isSelected ? 'light' : 'normal'}
 						className={clsx(
 							cls.tabItem,
 							{ [cls.selectedItem]: isSelected }
@@ -55,9 +55,9 @@ export const Tabs = memo((props: TabsProps) => {
 						onClick={clickHandle(item)}
 					>
 						{item.content}
-					</Card>
+					</li>
 				)
 			})}
-		</Flex>
+		</ul>
 	)
 })

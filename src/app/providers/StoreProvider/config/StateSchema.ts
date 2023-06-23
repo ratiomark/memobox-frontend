@@ -5,7 +5,7 @@ import { IReducerManager } from './reducerManager';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { LoginSchema } from '@/features/AuthByUsername';
 import { UISchema } from '@/features/ScrollSave';
-import { CardModalSchema } from '@/features/CardModal';
+// import { CardModalSchema } from '@/features/CardModal';
 import { ViewPageInitializerSchema } from '@/features/ViewPageInitializer';
 import { CupboardPageSchema } from '@/features/CupboardShelfList';
 
@@ -14,7 +14,7 @@ export interface StateSchema {
 	[rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 	user: UserSchema
 	ui: UISchema
-	cardModal: CardModalSchema
+	// cardModal: CardModalSchema
 	cupboard: CupboardPageSchema
 	// async reducers
 	loginForm?: LoginSchema

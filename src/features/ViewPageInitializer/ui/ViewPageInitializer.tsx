@@ -1,12 +1,13 @@
-import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
-import cls from './ViewPageInitializer.module.scss';
-import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ReactNode, memo, useEffect } from 'react';
-import { viewPageActions, viewPageReducer } from '../model/slice/viewPageSlice';
-import { fetchBoxesDataByShelfId } from '../model/services/fetchBoxesDataByShelfId';
 import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
+import clsx from 'clsx';
+import { ReactNode, memo, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchBoxesDataByShelfId } from '../model/services/fetchBoxesDataByShelfId';
+import { viewPageActions, viewPageReducer } from '../model/slice/viewPageSlice';
+import cls from './ViewPageInitializer.module.scss';
+import { fetchCards } from '../model/services/fetchCards';
 // import { useSelector } from 'react-redux';
 // import { getJsonSavedData } from '@/entities/User';
 // import { saveUserJsonData } from '@/entities/User/model/services/saveUserJsonData';
@@ -35,11 +36,12 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 
 
 	useEffect(() => {
-		if (!shelfId) navigate(obtainRouteView('1', 'new'))
-		const boxIdChecked = boxId ? boxId : 'new'
-		const shelfIdChecked = shelfId ?? '1'
+		// if (!shelfId) navigate(obtainRouteView('all', 'new'))
+		const boxIdChecked = boxId ?? 'new'
+		const shelfIdChecked = shelfId ?? 'all'
 		dispatch(viewPageActions.setViewPageIsMounted())
-		dispatch(fetchBoxesDataByShelfId({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
+		dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
+		// dispatch(fetchBoxesDataByShelfId({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
 
 	}, [shelfId, navigate, boxId, dispatch])
 

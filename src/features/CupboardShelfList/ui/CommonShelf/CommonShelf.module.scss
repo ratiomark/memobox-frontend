@@ -13,3 +13,21 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.boxesWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.substitute {
+  height: 162px;
+}
+
+.collapsed {
+  grid-template-rows: 1fr;
+}
+
+.inner {
+  overflow: hidden;
+}

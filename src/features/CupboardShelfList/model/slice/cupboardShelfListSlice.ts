@@ -12,6 +12,7 @@ const initialState: CupboardPageSchema = {
 	error: '',
 	entities: {},
 	ids: [],
+	// commonShelfCollapsed: false,
 	boxesSettingsShelfId: '',
 	isBoxesSettingsModalOpen: false,
 	missedTrainingModal: {
@@ -56,6 +57,9 @@ const cupboardShelfList = createSlice({
 		},
 		setQuestionText: (state, action: PayloadAction<string>) => {
 			state.newCardModal.questionText = action.payload
+		},
+		setCommonShelfCollapsed: (state, action: PayloadAction<boolean>) => {
+			state.commonShelfCollapsed = action.payload
 		},
 		setAnswerText: (state, action: PayloadAction<string>) => {
 			state.newCardModal.answerText = action.payload
@@ -111,6 +115,7 @@ const cupboardShelfList = createSlice({
 				(state, action: PayloadAction<CupboardSchema>) => {
 					const cupboard = action.payload
 					state.isLoading = false
+					state.commonShelfCollapsed = action.payload.commonShelfCollapsed
 					state.newCardModal.shelfId = cupboard.shelves[0].id
 					shelvesAdapter.setAll(state, cupboard.shelves)
 					state.cupboardData = {

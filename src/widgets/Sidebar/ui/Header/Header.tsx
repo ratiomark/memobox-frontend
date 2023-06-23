@@ -35,18 +35,19 @@ export const Header = memo(({ className }: SidebarProps) => {
 				// { [cls.collapsed]: collapsed },
 				className)}
 		>
-			<HStack as={'nav'} gap="gap_8" align='start' className={cls.items}>
+			{/* <HStack as={'nav'} gap="gap_8" align='start' max className={cls.items}> */}
+			<nav className={cls.items}>
 				{HeaderItemsListRendered}
-			</HStack>
+			</nav>
 
 		</header>
 	)
 })
 
-	// < div className = { clsx(cls.switchers) } >
-	// 	{/* <ThemeSwitcher /> */ }
-	// 	< LangSwitcher className = { cls.lang } />
-	// 		</ >
+// < div className = { clsx(cls.switchers) } >
+// 	{/* <ThemeSwitcher /> */ }
+// 	< LangSwitcher className = { cls.lang } />
+// 		</ >
 Header.displayName = 'Header'
 // // import { ThemeSwitcher } from '@/features/ThemeSwitcher'
 // import { memo, useMemo, useState } from 'react'

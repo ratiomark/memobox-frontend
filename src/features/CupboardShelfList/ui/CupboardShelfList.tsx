@@ -9,7 +9,8 @@ import {
 	getCupboardData,
 	getCupboardIsLoading,
 	getCupboardError,
-	getCupboardShelves
+	getCupboardShelves,
+	getCupboardCommonShelfCollapsed
 } from '../model/selectors/getCupboardShelfList';
 import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
 import { Skeleton } from '@/shared/ui/Skeleton';
@@ -72,21 +73,18 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const shelvesList = useMemo(() => {
 		if (cupboardIsLoading) return []
 		return cupboardShelves.map(shelf => {
-			// const onAddNewCard = () => onAddNewCardClick(shelf.id)
-			// не создаю логику для списка коробок, если полка свернута
-			const boxesBlock = <BoxesBlockWrapper shelf={shelf} />
-			// const boxesBlock = shelf.collapsed ? null : <BoxesBlock shelf={shelf} />
+			const completeSmallDataLabels =
+				<CompleteSmallDataLabels
+					data={shelf.data}
+					isLoading={cupboardIsLoading}
+				/>
 			const buttons =
 				<ShelfButtons
 					shelf={shelf}
 					onAddNewCardClick={onAddNewCardClick}
 					onCollapseClick={onCollapseClick}
 				/>
-			const completeSmallDataLabels =
-				<CompleteSmallDataLabels
-					data={shelf.data}
-					isLoading={cupboardIsLoading}
-				/>
+			const boxesBlock = <BoxesBlockWrapper shelf={shelf} />
 			return (
 				<ShelfItem
 					key={shelf.id}

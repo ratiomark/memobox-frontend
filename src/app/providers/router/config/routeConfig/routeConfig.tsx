@@ -31,7 +31,7 @@ export const AppRoutes = {
 export type AppRoutes = keyof typeof AppRoutes;
 
 export const obtainRouteMain = () => '/'
-export const obtainRouteView = (shelfId?: string, boxId?: string) => {
+export const obtainRouteView = (shelfId?: string, boxId?: string|number) => {
 	return boxId
 		? `/view/${shelfId}/${boxId}`
 		: `/view/${shelfId}/all`

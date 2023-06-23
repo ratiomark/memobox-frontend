@@ -108,6 +108,35 @@
       // 666
     }
   }
+
+  &.trainingAction {
+    color: rgb(41 26 95 / 87.7%);
+
+    // color: var(--button-color-training-filled);
+    border: 1px solid var(--button-color-training-empty);
+  }
+
+  &.attention {
+    // color: white;
+    background: var(--red-light);
+    border: 1px solid  var(--red-light);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--red-light);
+    }
+  }
+
+  &.wait {
+    // color: white;
+    background: var(--wait-color);
+    border: 1px solid  var(--wait-color);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--wait-color);
+    }
+  }
 }
 
 .empty {
@@ -141,6 +170,11 @@
       background-color: var(--accent);
       color: var(--button-filled-text-color);
     }
+  }
+
+  &.trainingAction {
+    color: var(--button-color-training-empty);
+    border: 1px solid var(--button-color-training-empty);
   }
 }
 

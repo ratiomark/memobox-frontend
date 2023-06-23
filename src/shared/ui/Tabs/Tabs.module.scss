@@ -1,14 +1,35 @@
 .Tabs {
-  // display: flex;
-  // gap: 8px;
-  // align-items: center;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  width: fit-content;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 300;
+  overflow: hidden;
 }
 
 .tabItem {
   cursor: pointer;
+  padding: 6px 16px;
+  border-right: 1px solid var(--accent);
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: var(--accent);
+    color: var(--shelf-bg);
+  }
+}
+
+.tabItem:last-child {
+  border-right: none;
 }
 
 .selectedItem {
+  background-color: var(--accent);
+  color: var(--shelf-bg);
+
   // padding: var(--padding-main);
 }
 

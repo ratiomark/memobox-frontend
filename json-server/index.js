@@ -25,6 +25,25 @@ server.use(jsonServer.bodyParser);
 // 	next();
 // });
 
+// server.get('/cards', async (req, res) => {
+// 	const shelf = req.originalUrl.split('?')[1].split('=')[1]
+// 	try {
+// 		const db = await JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
+// 		const { cards } = db
+// 		if (shelf === 'all') {
+// 			return res.json(cards.slice(0, 40))
+// 		} else {
+// 			// console.log(cards.map(card => (card.shelf, shelf)))
+// 			// console.log(cards.map(card => card.shelf))
+// 			const resCards = cards.filter(item => item.shelf === shelf)
+// 			// console.log(resCards)
+// 			return res.json(resCards)
+// 		}
+// 	} catch (e) {
+// 		console.log(e);
+// 		return res.status(500).json({ message: e.message });
+// 	}
+// })
 // Эндпоинт для логина
 server.post('/login', (req, res) => {
 	try {

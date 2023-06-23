@@ -48,9 +48,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 		})
 	}, [items, value])
 
-	if (!itemsRendered) return <Skeleton width={'100%'} height={24} />
-
-
+	if (!itemsRendered) return (<Skeleton width={'100%'} height={24} />)
 
 	return (
 		<div className={clsx(

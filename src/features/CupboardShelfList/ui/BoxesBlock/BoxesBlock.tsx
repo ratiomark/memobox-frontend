@@ -23,7 +23,7 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
-	const onViewClick = useCallback((shelfId: string, boxIndex: number) => {
+	const onViewClick = useCallback((shelfId: string, boxIndex: number | string) => {
 		navigate(obtainRouteView(shelfId, boxIndex.toString()))
 	}, [navigate])
 

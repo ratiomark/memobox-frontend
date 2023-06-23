@@ -38,7 +38,7 @@ interface BoxPropsBase {
 	// index: number
 	shelfId: string
 	onAddNewCard: (shelfId: string, boxIndex: number) => void
-	onBoxViewClick: (shelfId: string, boxIndex: number) => void
+	onBoxViewClick: (shelfId: string, boxIndex: number | string) => void
 }
 
 
@@ -91,8 +91,16 @@ export const Box = (props: BoxPropsBase) => {
 	const { t } = useTranslation()
 
 	const onBoxViewClickHandle = useCallback(() => {
-		onBoxViewClick(shelfId, boxItem.index)
-	}, [onBoxViewClick, shelfId, boxItem.index])
+		let boxId: string | number;
+		if (boxItem.specialType === 'none') {
+			boxId = boxItem.index
+		} else if (boxItem.specialType === 'learnt') {
+			boxId = 'learnt'
+		} else {
+			boxId = 'new'
+		}
+		onBoxViewClick(shelfId, boxId)
+	}, [onBoxViewClick, shelfId, boxItem.index, boxItem.specialType])
 
 	const onAddNewCardHandle = useCallback(() => {
 		onAddNewCard(shelfId, boxItem.index)

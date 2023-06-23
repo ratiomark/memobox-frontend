@@ -7,9 +7,8 @@
 }
 
 .items {
-  max-width: 1200px;
-
-  // width: min(1200px, 100%);
+  display: flex;
+  width: min(100%, 1200px);
   margin: 0 auto;
 }
 

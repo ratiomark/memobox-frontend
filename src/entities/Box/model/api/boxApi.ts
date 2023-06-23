@@ -12,10 +12,11 @@ export const boxApi = rtkApi.injectEndpoints({
 				url: '/cards',
 				method: 'GET',
 				params: {
-					shelf: Number(id),
+					shelf: id,
 				}
 			}),
 			transformResponse: (response: CardSchema[], meta, arg) => {
+
 				const data: ShelfRepresentedByBoxes = {}
 				response.forEach(card => {
 					const box = card.box.toString()

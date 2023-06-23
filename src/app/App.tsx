@@ -11,13 +11,15 @@ import { useTheme } from '@/shared/context/useTheme'
 import clsx from 'clsx'
 import { Header } from '@/widgets/Sidebar'
 import './styles/regularStyles.css'
+import { useLocation } from 'react-router-dom'
 
 
 export const App = () => {
 	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
 	const { theme } = useTheme()
-
+	const location = useLocation()
+	
 	useEffect(() => {
 		dispatch(initAuthData())
 	}, [dispatch, userMounted])
@@ -26,7 +28,7 @@ export const App = () => {
 
 	return (
 		<div className={clsx('app', theme)}>
-			<Header />
+			{location.pathname.split('/')[1] !== 'training' ? <Header /> : null}
 			<Suspense fallback={<LoaderWidget />}>
 				<AppRouter />
 				{/* <MainLayout

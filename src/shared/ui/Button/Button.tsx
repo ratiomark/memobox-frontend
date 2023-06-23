@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes, forwardRef, memo, ReactNode } from 'react'
-import cls from './Button.module.scss'
 import clsx from 'clsx'
 import { FontWeight } from '@/shared/types/StyleTypes'
 import { mapFontWeightToClass } from '@/shared/lib/helpers/mappers/mapFontWeightToClass'
+import cls from './Button.module.scss'
 
 export type ButtonVariant =
 	| 'empty'
@@ -15,6 +15,7 @@ type ButtonColor =
 	| 'main'
 	| 'attention'
 	| 'wait'
+	| 'trainingAction'
 
 export type ButtonSize =
 	| 'size_s'

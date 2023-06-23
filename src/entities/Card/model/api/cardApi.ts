@@ -12,13 +12,12 @@ export const cardApi = rtkApi.injectEndpoints({
 					// box: boxId
 				}
 			}),
-			// transformResponse: (response: MovieList, meta, arg) => {
-			// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
-			// 		acc[current.id.toString()] = current
-			// 		return acc
-			// 	}, {})s
-			// 	return data
-			// },
+		}),
+		getAllCards: build.query<CardSchema[], void>({
+			query: () => ({
+				url: '/cards',
+				method: 'GET',
+			}),
 		}),
 		getBoxByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
 			query: ({ shelfId, boxId }) => ({
@@ -39,7 +38,9 @@ export const cardApi = rtkApi.injectEndpoints({
 		}),
 	}),
 })
-// export const getBoxesByShelfId = boxApi.endpoints.getBoxesByShelfId.initiate
+
+export const { useGetCardsByShelfIdQuery } = cardApi
+export const getAllCards = cardApi.endpoints.getAllCards.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 // export const { useGetBoxByShelfAndBoxIdQuery } = boxApi

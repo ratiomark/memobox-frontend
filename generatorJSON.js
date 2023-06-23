@@ -237,7 +237,8 @@ JG.repeat(5, {
 		question: '{{lorem(1, "paragraphs")}}',
 		answer: '{{lorem(1, "paragraphs")}}',
 		shelf: function (tags) {
-			return tags.integer(1, 5);
+			var shelves = ['648c920baa3edb04cec38442', '648c920b3e40b5930a6e1603', '648c920b6adf96517748f3c1', '648c920b07d1f8f9ed46604e', '648c920beba56ba6cd7db7bb'];
+			return shelves[tags.integer(0, shelves.length - 1)];
 		},
 		box: function (tags) {
 			return tags.integer(1, 4);

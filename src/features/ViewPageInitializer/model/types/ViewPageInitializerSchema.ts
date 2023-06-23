@@ -11,7 +11,11 @@ import { CardSchema } from '@/entities/Card'
 // }
 export interface ViewPageInitializerSchema {
 	shelfId: string
+	boxId: string | number
 	_viewPageMounted: boolean
+	cards: CardSchema[]
+	isLoading: boolean
+	error: string
 	// shelfTitle?: string
 	// boxId: string
 	shelvesDataSaved: {

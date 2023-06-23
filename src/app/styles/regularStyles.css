@@ -3,6 +3,11 @@
   right: 0;
 }
 
+.container {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+}
+
 .bottom_right {
   top: 100%;
   left: 0;

@@ -6,6 +6,7 @@ import { EntityState } from '@reduxjs/toolkit'
 export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	isLoading: boolean
 	error: string
+	commonShelfCollapsed?: boolean
 	newCardModal: {
 		shelfId: string
 		boxIndex: number
