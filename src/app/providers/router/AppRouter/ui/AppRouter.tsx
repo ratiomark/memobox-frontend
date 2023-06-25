@@ -7,10 +7,11 @@ import { ProtectedRoute } from './ProtectedRoute'
 export const AppRouter = () => {
 
 	const renderWithWrapper = useCallback((route: AppRouteProps) => {
-		const { path, authOnly, element, wrapper: Wrapper, roles } = route
+		const { path, authOnly, element, wrapper: Wrapper, roles, suspense: suspenseSkeleton } = route
 
 		const finalElement = (
-			<Suspense fallback={<LoaderWidget />}>
+			<Suspense fallback={suspenseSkeleton ? suspenseSkeleton : <LoaderWidget />}>
+			{/* <Suspense fallback={<LoaderWidget />}> */}
 				{Wrapper
 					? <Wrapper>{element}</Wrapper>
 					: element
@@ -31,7 +32,8 @@ export const AppRouter = () => {
 	const routes = Object.values(routeConfig).map(renderWithWrapper)
 
 	return (
-		<Suspense fallback={<LoaderWidget />}>
+		<Suspense fallback={<h1>sdiofjweiofjweofi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>}>
+		{/* <Suspense fallback={<LoaderWidget />}> */}
 			<Routes>
 				{routes}
 			</Routes>

@@ -55,5 +55,8 @@
     "none": "Do nothing",
     "additional": "Additional training",
     "backwards": "Move to previous box"
-  }
+  },
+  "shelf": "Shelf",
+  "creation": "Creation",
+  "last training": "Last training"
 }

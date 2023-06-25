@@ -5,6 +5,8 @@ import { CardListViewWidget } from '@/widgets/CardListViewWidget';
 import { Page } from '@/widgets/Page';
 import { ShelvesListViewWidget } from '@/widgets/ShelvesListViewWidget';
 import { Header } from '@/widgets/Sidebar';
+import { SortControllerViewPageWidget } from '@/widgets/SortControllerViewPageWidget';
+import { SortControllerWrapper } from '@/widgets/SortControllerViewPageWidget/ui/SortControllerWrapper/SortControllerWrapper';
 import { StatsAndActionsViewPageWidget } from '@/widgets/StatsAndActionsViewPageWidget';
 import { memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +23,8 @@ const ViewPage = memo(() => {
 					shelvesListViewPageBlock={<ShelvesListViewWidget />}
 					boxListViewPageBlock={<BoxesListViewWidget />}
 					statsAndActionsViewPageBlock={<StatsAndActionsViewPageWidget />}
+					sortControllerViewPageBlock={<SortControllerWrapper />}
+					// sortControllerViewPageBlock={<SortControllerViewPageWidget />}
 					cardListViewPageBlock={<CardListViewWidget />}
 				/>
 			</Page>

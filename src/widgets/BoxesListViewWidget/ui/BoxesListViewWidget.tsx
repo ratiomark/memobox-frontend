@@ -52,8 +52,8 @@ export const BoxesListViewWidget = memo((props: BoxesListViewWidgetProps) => {
 			return tabs
 		} else {
 			const boxesData = shelvesData?.find(shelf => shelf.id === shelfId)?.boxesData
-			boxesData?.slice(1, boxesData?.length - 2).forEach(box => {
-				tabs.push({ value: box.index, content: `${t('box text')} ${box.index}` })
+			boxesData?.slice(1, boxesData?.length - 1).forEach(box => {
+				tabs.push({ value: String(box.index), content: `${t('box text')} ${box.index}` })
 			})
 			tabs.push({ value: 'learnt', content: t('learnt cards') })
 			return tabs

@@ -8,6 +8,7 @@ import { CardSchema } from '@/entities/Card';
 import { useMemo } from 'react';
 import { CardsListSkeleton } from './CardsListSkeleton';
 import { getViewPageCardsFiltered, getViewPageIsLoading } from '@/features/ViewPageInitializer';
+import { CardListItem } from './CardListItem/CardListItem';
 
 interface CardListViewWidgetProps {
 	className?: string
@@ -20,12 +21,16 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	const cards = useSelector(getViewPageCardsFiltered)
+	// const activeSort = 'createdAt'
+	// const sortDirection = 'asc'
+	// console.log(cards?.filter(card => card.specialType === 'learnt'))
 	// const boxId = useSelector(getViewPageSavedShelf(shelfId ?? '1'))?.lastBoxId
 	const { t } = useTranslation()
 
 	const content = useMemo(() => {
 		if (viewPageIsLoading) return []
-		return cards?.map(item => <p key={item._id}>{'Полка  ' + item.shelf + '  Коробка   ' + item.box}</p>)
+		// return cards?.map(item => <p key={item._id}>{'Полка  ' + item.shelf + '  Коробка   ' + item.box}</p>)
+		return cards?.map(item => <CardListItem card={item} key={item._id} />)
 		// const data = shelfDataSaved!.data
 		// if (boxId === 'all') {
 		// 	const allCards: CardSchema[] = []
@@ -49,14 +54,14 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 
 
 	return (
-		<div className={clsx(
+		<ul className={clsx(
 			cls.cardListViewWidget,
 			className)}
 		>
 			{/* <p>Полка {shelfId}</p> */}
 			{/* <p>Коробка {boxId}</p> */}
 			{content}
-		</div>
+		</ul>
 	)
 }
 // import clsx from 'clsx';

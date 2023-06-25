@@ -27,7 +27,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		shelf: {
 			index: shelfIndex,
 			id: shelfId,
-			collapsed
+			isCollapsed
 		},
 		onAddNewCardClick,
 		onCollapseClick,
@@ -50,7 +50,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		onAddNewCardClick(shelfId)
 	}, [onAddNewCardClick, shelfId])
 
-	useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true })
+	useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true, preventDefault: true, })
 	useHotkeys(positionTextTrain, startTraining,)
 
 
@@ -59,8 +59,8 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 	}
 
 	const onCollapseClickHandle = useCallback(() => {
-		onCollapseClick(shelfId, !collapsed)
-	}, [onCollapseClick, shelfId, collapsed])
+		onCollapseClick(shelfId, !isCollapsed)
+	}, [onCollapseClick, shelfId, isCollapsed])
 
 	const { t } = useTranslation()
 
@@ -96,7 +96,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 			</Button>
 			<Icon
 				className={
-					clsx(cls.arrow, !collapsed ? cls.rotateArrow : '')}
+					clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
 				clickable
 				type='hint'
 				Svg={ArrowBottomIcon}

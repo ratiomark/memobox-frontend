@@ -17,6 +17,7 @@ interface ViewPageInitializerProps {
 	shelvesListViewPageBlock: ReactNode
 	boxListViewPageBlock: ReactNode
 	statsAndActionsViewPageBlock: ReactNode
+	sortControllerViewPageBlock: ReactNode
 	cardListViewPageBlock: ReactNode
 }
 const reducers: ReducersList = {
@@ -28,6 +29,7 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 		shelvesListViewPageBlock,
 		statsAndActionsViewPageBlock,
 		cardListViewPageBlock,
+		sortControllerViewPageBlock,
 		boxListViewPageBlock,
 	} = props
 	const navigate = useNavigate()
@@ -64,6 +66,7 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 			{shelvesListViewPageBlock}
 			{boxListViewPageBlock}
 			{statsAndActionsViewPageBlock}
+			{sortControllerViewPageBlock}
 			{cardListViewPageBlock}
 		</div>
 	)

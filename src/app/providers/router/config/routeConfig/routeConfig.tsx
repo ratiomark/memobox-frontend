@@ -7,11 +7,13 @@ import { MainPage } from '@/pages/MainPage';
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { ViewPage } from '@/pages/ViewPage';
 import { TrainingPage } from '@/pages/TrainingPage';
+import { ReactNode } from 'react';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
 	wrapper?: React.ElementType
 	roles?: UserRole[]
+	suspense?: JSX.Element
 }
 
 export const AppRoutes = {
@@ -26,7 +28,13 @@ export const AppRoutes = {
 	forbidden_page: 'forbidden_page',
 	PAGE_NOT_FOUND: 'PAGE_NOT_FOUND',
 } as const;
-
+const Susp = () => {
+	return (<div>
+		<h1>fiojwefiowejf iowejf woeifjweofijweoif wejfiowej weiofj weiof jweiofjw fiowjfiowe fj</h1>
+		<h1>fiojwefiowejf iowejf woeifjweofijweoif wejfiowej weiofj weiof jweiofjw fiowjfiowe fj</h1>
+		<h1>fiojwefiowejf iowejf woeifjweofijweoif wejfiowej weiofj weiof jweiofjw fiowjfiowe fj</h1>
+	</div>)
+}
 
 export type AppRoutes = keyof typeof AppRoutes;
 
@@ -59,11 +67,13 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	},
 	view: {
 		path: obtainRouteView(':shelfId', ':boxId'),
-		element: <ViewPage />
+		element: <ViewPage />,
+		// suspense: <Susp />
 	},
 	viewEmpty: {
 		path: '/view',
-		element: <ViewPage />
+		element: <ViewPage />,
+		// suspense: <Susp />
 	},
 	settings: {
 		path: obtainRouteSettings(),
@@ -79,7 +89,8 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	},
 	training: {
 		path: obtainRouteTraining(':shelfId', ':boxId'),
-		element: <TrainingPage/>
+		element: <TrainingPage />,
+		// suspense: <Susp/>
 	},
 	ABOUT: {
 		path: obtainRouteAbout(),

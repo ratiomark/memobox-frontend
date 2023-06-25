@@ -9,6 +9,7 @@ import { CardSchema } from '@/entities/Card'
 // 		[shelfId: string]: ShelfRepresentedByBoxes
 // 	}
 // }
+// type Sort
 export interface ViewPageInitializerSchema {
 	shelfId: string
 	boxId: string | number
@@ -16,6 +17,7 @@ export interface ViewPageInitializerSchema {
 	cards: CardSchema[]
 	isLoading: boolean
 	error: string
+	// sort: string
 	// shelfTitle?: string
 	// boxId: string
 	shelvesDataSaved: {

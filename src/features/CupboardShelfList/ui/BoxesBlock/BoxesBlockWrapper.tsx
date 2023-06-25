@@ -20,7 +20,7 @@ export const BoxesBlockWrapper = (props: BoxesBlockProps) => {
 		shelf,
 	} = props
 
-	if (shelf.collapsed) return <div className={cls.substitute} />
+	if (shelf.isCollapsed) return <div className={cls.substitute} />
 	else if (shelf.isLoading) return <BoxesBlockSkeleton />
 	else return <BoxesBlock {...props} />
 }

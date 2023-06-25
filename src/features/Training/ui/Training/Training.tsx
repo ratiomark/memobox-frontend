@@ -4,6 +4,7 @@ import cls from './Training.module.scss';
 import { useGetCardsByShelfIdQuery } from '@/entities/Card';
 import { TrainingContentSkeleton } from '../TrainingContent/TrainingContentSkeleton';
 import { TrainingContent } from '../TrainingContent/TrainingContent';
+import { useGetAllCardsQuery } from '@/entities/Card';
 
 interface TrainingProps {
 	className?: string
@@ -17,8 +18,9 @@ export const Training = (props: TrainingProps) => {
 		shelfId,
 		boxId = 'all'
 	} = props
-	const { isLoading, data, isError } = useGetCardsByShelfIdQuery(shelfId)
-
+	// const { isLoading, data, isError } = useGetCardsByShelfIdQuery(shelfId)
+	const { isLoading, data, isError } = useGetAllCardsQuery()
+	// console.log(data)
 	const { t } = useTranslation()
 
 	if (isLoading) return <TrainingContentSkeleton />

@@ -8,9 +8,11 @@ import { memo } from 'react';
 
 import cls from './CommonShelf.module.scss';
 import { useSelector } from 'react-redux';
-import { getCupboardCommonShelfCollapsed } from '../../model/selectors/getCupboardShelfList';
-import { Box } from '@/entities/Box';
+import { getCupboardCommonShelf, getCupboardCommonShelfCollapsed } from '../../model/selectors/getCupboardShelfList';
+import { Box, BoxesBlockSkeleton } from '@/entities/Box';
 import { CommonShelfBoxes } from '../CommonShelfBoxes/CommonShelfBoxes';
+import { Skeleton } from '@/shared/ui/Skeleton';
+import { CommonShelfButtonsSkeleton } from '../CommonShelfButtons/CommonShelfButtonsSkeleton';
 
 interface ShelfProps {
 	data?: {
@@ -34,6 +36,7 @@ export const CommonShelf = memo((props: ShelfProps) => {
 		// collapsed
 	} = props
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
+	// const commonShelf = useSelector(getCupboardCommonShelf)
 	// const { isSuccess, isLoading, data } = useGetCupboardDataQuery()
 	const { t } = useTranslation()
 
@@ -42,7 +45,13 @@ export const CommonShelf = memo((props: ShelfProps) => {
 
 	const boxesBlock = commonShelfCollapsed
 		? <div className={cls.substitute} />
-		: <CommonShelfBoxes />
+		: isLoading
+			? <BoxesBlockSkeleton />
+			: <CommonShelfBoxes />
+
+	const buttons = isLoading
+		? <CommonShelfButtonsSkeleton />
+		: <CommonShelfButtons />
 
 	return (
 		<div className={clsx(
@@ -54,7 +63,7 @@ export const CommonShelf = memo((props: ShelfProps) => {
 					<Heading as='h3' size='s' title={t('common shelf name')} />
 					<CompleteSmallDataLabels data={data} isLoading={isLoading} />
 				</VStack>
-				<CommonShelfButtons />
+				{buttons}
 			</div>
 			<div className={clsx(cls.boxesWrapper, !commonShelfCollapsed ? cls.collapsed : '')}>
 				<div className={cls.inner} >

@@ -5,7 +5,7 @@ import { ListBox } from '@/shared/ui/Popup';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { MyText, TextArea } from '@/shared/ui/Typography';
 import { Button } from '@/shared/ui/Button';
-import { memo, useCallback, useMemo, useRef, useState } from 'react';
+import { MutableRefObject, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
 	getAnswerCardModal,
@@ -39,6 +39,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
 	const boxIdCardModal = useSelector(getBoxIndexCardModal)
+	const refTextArea = useRef() as MutableRefObject<HTMLTextAreaElement>
 
 	const shelfItems = useMemo(() => {
 		if (cupboardIsLoading) return []
@@ -68,10 +69,17 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 		return itemsList
 	}, [cupboardIsLoading, shelfIdCardModal, cupboardShelves])
 
+	// useEffect(() => {
+		// if (isOpen && refTextArea.current) {
+		// refTextArea.current.focus()
+		// }
+
+	// })
 
 	const onChangeQuestion = useCallback((text: string) => {
-		dispatch(cupboardShelfListActions.setQuestionText(text))
-	}, [dispatch])
+
+		isOpen && dispatch(cupboardShelfListActions.setQuestionText(text))
+	}, [dispatch, isOpen])
 
 	const onCloseCardModal = useCallback(() => {
 		dispatch(cupboardShelfListActions.setCardModalIsOpen(false))
@@ -148,10 +156,12 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 					<div>
 						<MyText text={'question'} />
 						<TextArea
+							// ref={refTextArea}
 							rows={5}
 							value={questionTextCardModal}
 							onChangeString={onChangeQuestion}
-							autoFocus
+							focus
+						// autoFocus
 						/>
 					</div>
 					<div>

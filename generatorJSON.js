@@ -1,3 +1,4 @@
+ed5bjttxat9fusj4zipgjjuj9c7nezk9fqxkqfb8
 JG.repeat(1, {
 	shelves: JG.repeat(5, {
 		id: JG.objectId(),
@@ -229,6 +230,43 @@ JG.repeat(5, {
 	}
 ]
 
+
+JG.repeat(100, {
+	_id: JG.objectId(),
+	index: JG.index(),
+	question: JG.loremIpsum({ units: 'sentences', count: 2 }),
+	answer: JG.loremIpsum({ units: 'sentences', count: 2 }),
+	shelf() {
+		var shelves = [
+			'648c920baa3edb04cec38442',
+			'648c920b3e40b5930a6e1603',
+			'648c920b6adf96517748f3c1',
+			'648c920b07d1f8f9ed46604e',
+			'648c920beba56ba6cd7db7bb'
+		];
+		return shelves[JG.integer(0, shelves.length - 1)];
+	},
+	box: JG.integer(0, 5),
+	specialType() {
+		if (this.box === 0) {
+			return 'new';
+		}
+		if (this.box === 5) {
+			return 'learnt';
+		}
+		return 'none';
+	},
+	state() {
+		if (this.specialType === 'new') {
+			return 'train';
+		}
+		return ['wait', 'train'][JG.integer(0, 1)];
+	}
+
+});
+
+
+
 [
 	'{{repeat(100)}}',
 	{
@@ -237,7 +275,13 @@ JG.repeat(5, {
 		question: '{{lorem(1, "paragraphs")}}',
 		answer: '{{lorem(1, "paragraphs")}}',
 		shelf: function (tags) {
-			var shelves = ['648c920baa3edb04cec38442', '648c920b3e40b5930a6e1603', '648c920b6adf96517748f3c1', '648c920b07d1f8f9ed46604e', '648c920beba56ba6cd7db7bb'];
+			var shelves = [
+				'648c920baa3edb04cec38442',
+				'648c920b3e40b5930a6e1603',
+				'648c920b6adf96517748f3c1',
+				'648c920b07d1f8f9ed46604e',
+				'648c920beba56ba6cd7db7bb'
+			];
 			return shelves[tags.integer(0, shelves.length - 1)];
 		},
 		box: function (tags) {

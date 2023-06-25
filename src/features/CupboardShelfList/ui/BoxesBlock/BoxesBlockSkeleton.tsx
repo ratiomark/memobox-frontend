@@ -18,11 +18,11 @@ export const BoxesBlockSkeleton = () => {
 		<div className={cls.BoxesBlock}
 
 		>
-			<Skeleton width={150} height={137}></Skeleton>
-			<Skeleton width={150} height={137}></Skeleton>
-			<Skeleton width={150} height={137}></Skeleton>
-			<Skeleton width={150} height={137}></Skeleton>
-			<Skeleton width={150} height={137}></Skeleton>
+			<Skeleton width={150} height={137}/>
+			<Skeleton width={150} height={137}/>
+			<Skeleton width={150} height={137}/>
+			<Skeleton width={150} height={137}/>
+			<Skeleton width={150} height={137}/>
 		</div>
 	)
 }

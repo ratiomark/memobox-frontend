@@ -6,7 +6,8 @@ import { Header } from '@/widgets/Sidebar'
 import { CupboardShelvesWidget } from '@/widgets/CupboardShelvesWidget'
 import { useEffect } from 'react'
 import { CupboardShelfList } from '@/features/CupboardShelfList'
-import { CardModalNewCard } from '@/features/CupboardShelfList/ui/Modals/CardModalNewCard/CardModalNewCard'
+import { CardModalNewCard } from '@/features/CupboardShelfList'
+import { CupboardShelfListWrapper } from '@/features/CupboardShelfList'
 
 
 // const data = { wait: 40, all: 40, train: 33 }
@@ -28,8 +29,8 @@ const MainPage = () => {
 			{/* <Header /> */}
 			<Page data-testid='MainPage'>
 				<StatsAndActionsCupboardWidget />
-				<CupboardShelfList />
-				<CardModalNewCard />
+				<CupboardShelfListWrapper />
+				{/* <CardModalNewCard /> */}
 				{/* <CupboardShelvesWidget /> */}
 			</Page>
 		</>

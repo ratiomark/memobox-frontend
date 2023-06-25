@@ -1,4 +1,5 @@
 import { CupboardSchema } from '@/entities/Cupboard'
+import { CommonShelfBackendResponse } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
 import { DataBlock } from '@/shared/types/DataBlock'
 import { EntityState } from '@reduxjs/toolkit'
@@ -6,7 +7,8 @@ import { EntityState } from '@reduxjs/toolkit'
 export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	isLoading: boolean
 	error: string
-	commonShelfCollapsed?: boolean
+	commonShelf?: CommonShelfBackendResponse
+	// commonShelfCollapsed?: boolean
 	newCardModal: {
 		shelfId: string
 		boxIndex: number

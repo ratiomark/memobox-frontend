@@ -9,6 +9,9 @@ import EyeIcon from '@/shared/assets/icons/eye2.svg'
 import cls from './CommonShelfBoxes.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { useSelector } from 'react-redux';
+import { getCupboardCommonShelf } from '../../model/selectors/getCupboardShelfList';
+import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
 
 interface CommonShelfBoxesProps {
 	className?: string
@@ -19,6 +22,8 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 		className
 	} = props
 	const navigate = useNavigate()
+	const commonShelf = useSelector(getCupboardCommonShelf)
+
 	const onNewCardsClick = () => {
 		navigate(obtainRouteView('all', 'new'))
 	}
@@ -37,7 +42,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 					className={cls.dataLabels}
 					type='all'
 					isLoading={false}
-					cardsCount={5}
+					cardsCount={commonShelf?.new.all}
 				/>
 				<HStack
 					className={cls.buttonsBlock}
@@ -55,11 +60,10 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 			</div>
 			<div className={clsx(cls.Box, [className])} >
 				<Heading as='h5' className={cls.title} title={t('learning cards')} />
-				<SmallDataLabel
+				<CompleteSmallDataLabels
 					className={cls.dataLabels}
-					type='all'
 					isLoading={false}
-					cardsCount={5}
+					data={commonShelf?.learning}
 				/>
 				<HStack
 					className={cls.buttonsBlock}
@@ -77,11 +81,10 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 			</div>
 			<div className={clsx(cls.Box, [className])} >
 				<Heading as='h5' className={cls.title} title={t('learnt cards')} />
-				<SmallDataLabel
+				<CompleteSmallDataLabels
 					className={cls.dataLabels}
-					type='all'
 					isLoading={false}
-					cardsCount={5}
+					data={commonShelf?.learnt}
 				/>
 				<HStack
 					className={cls.buttonsBlock}

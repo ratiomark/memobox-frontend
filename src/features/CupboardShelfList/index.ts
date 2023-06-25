@@ -1,3 +1,6 @@
+export { CupboardShelfListWrapper } from './ui/CupboardShelfListWrapper/CupboardShelfListWrapper';
+export { CardModalNewCard } from './ui/Modals/CardModalNewCard/CardModalNewCard';
+
 export { getCupboardState } from './model/slice/cupboardShelfListSlice';
 
 export {

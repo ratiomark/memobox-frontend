@@ -1,0 +1,65 @@
+.CardListItem {
+  border-radius: 4px;
+  background-color: var(--bg);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+  padding: 8px 14px;
+  align-items: center;
+  display: flex;
+  gap: 40px;
+
+}
+
+.icons {
+  // justify-self: end;
+  margin: 0 0 0 auto;
+}
+
+.trashIcon {
+  // background-color: pink;
+  fill: none;
+
+  // padding: 20px;
+  color: rgb(255 0 0 / 75.5%);
+}
+
+.mainContent {
+  width: 20%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.createdAt {
+  
+  color: red;
+  width: 80px;
+  border: 1px solid red;
+}
+
+.shelf {
+  
+  color: blue;
+  width: 120px;
+   display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  border: 1px solid blue;
+}
+
+.lastTraining {
+  
+    color: orange;
+  width: 80px;
+  border: 1px solid orange;
+}
+
+
+// .mainContent {
+//   width: 20%;
+//   display: -webkit-box;
+//   -webkit-line-clamp: 2;
+//   -webkit-box-orient: vertical;
+//   overflow: hidden;
+// }

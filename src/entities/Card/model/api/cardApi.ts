@@ -40,6 +40,7 @@ export const cardApi = rtkApi.injectEndpoints({
 })
 
 export const { useGetCardsByShelfIdQuery } = cardApi
+export const { useGetAllCardsQuery } = cardApi
 export const getAllCards = cardApi.endpoints.getAllCards.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate

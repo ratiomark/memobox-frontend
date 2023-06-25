@@ -24,6 +24,7 @@ import { BoxesSettingsModal } from './BoxesSettingsModal/BoxesSettingsModal/Boxe
 import { BoxesBlockWrapper } from './BoxesBlock/BoxesBlockWrapper';
 import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModal/MissedTrainingSettings';
 import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
+import { CardModalNewCard } from '..';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -36,15 +37,15 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	} = props
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
-	const shelfNamesList = useSelector(getUserShelfNamesList)
+	// const shelfNamesList = useSelector(getUserShelfNamesList)
 	const cupboardData = useSelector(getCupboardData)
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 
-	useEffect(() => {
-		dispatch(fetchCupboardData())
-	}, [dispatch])
+	// useEffect(() => {
+	// 	dispatch(fetchCupboardData())
+	// }, [dispatch])
 
 	useEffect(() => {
 		if (!cupboardIsLoading) {
@@ -66,8 +67,8 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 		dispatch(cupboardShelfListActions.setCardModalIsOpen(true))
 	}, [dispatch])
 
-	const onCollapseClick = useCallback((shelfId: string, collapsed: boolean) => {
-		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { collapsed } }))
+	const onCollapseClick = useCallback((shelfId: string, isCollapsed: boolean) => {
+		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isCollapsed } }))
 	}, [dispatch])
 
 	const shelvesList = useMemo(() => {
@@ -100,12 +101,12 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 
 	}, [cupboardIsLoading, cupboardShelves, onAddNewCardClick, onCollapseClick])
 
-	if (cupboardIsLoading) {
-		return <>
-			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
-			{shelfNamesList!.map(title => <ShelfSkeleton key={title} title={title} />)}
-		</>
-	}
+	// if (cupboardIsLoading) {
+	// 	return <>
+	// 		<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
+	// 		{shelfNamesList!.map(title => <ShelfSkeleton key={title} title={title} />)}
+	// 	</>
+	// }
 
 	return (
 		<div className={clsx(
@@ -117,6 +118,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			<BoxesSettingsModal />
 			<MissedTrainingSettingsModal />
 			<NotificationSettingsModal />
+			<CardModalNewCard />
 		</div>
 	)
 }

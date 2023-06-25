@@ -29,7 +29,7 @@ export const fetchCards = createAsyncThunk<CardSchema[], FetchBoxesThunkArg, { s
 
 		try {
 			const cards = await dispatch(getAllCards()).unwrap()
-			console.log(cards)
+			// console.log(cards)
 			if (!cards) throw new Error()
 			return cards
 

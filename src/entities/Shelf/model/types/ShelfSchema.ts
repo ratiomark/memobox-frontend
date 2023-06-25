@@ -9,7 +9,7 @@ export interface ShelfSchema {
 	index: number
 	data: DataBlock
 	title: string
-	collapsed: boolean
+	isCollapsed: boolean
 	isDeleting: boolean
 	isLoading: boolean
 	missedTrainingAction?: MissedTrainingValues

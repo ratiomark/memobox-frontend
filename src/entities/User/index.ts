@@ -2,13 +2,15 @@ export {
 	getUserSettings,
 	getUserMissedTrainingSettings,
 	getUserNotificationSettings,
-	getUserShelfTemplateSettings
+	getUserShelfTemplateSettings,
 } from './model/selectors/getUserSettings';
 
 
 export {
 	getJsonSavedData,
-	getUserShelfNamesList
+	getUserShelfNamesList,
+	getUserSavedDataCommonShelfCollapsed,
+	getUserSavedDataViewPageColumns,
 } from './model/selectors/getJsonSavedData';
 export { initAuthData } from './model/services/initAuthData';
 
@@ -22,4 +24,4 @@ export {
 	isUserAdmin,
 	isUserManager,
 } from './model/selectors/rolesSelector'
-export type { UserSchema, User, UserRole } from './model/types/user';
+export type { UserSchema, User, UserRole } from './model/types/user'; 

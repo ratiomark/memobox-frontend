@@ -7,17 +7,20 @@ import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { ShelfButtonsSkeleton } from '../../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtonsSkeleton';
+import { BoxesBlockSkeleton } from '@/entities/Box';
 
 
 interface ShelfProps {
 	className?: string
 	title?: string
+	isCollapsed?: boolean
 }
 
 export const ShelfSkeleton = (props: ShelfProps) => {
 	const {
 		className,
-		title
+		title,
+		isCollapsed
 	} = props
 
 	return (
@@ -36,6 +39,11 @@ export const ShelfSkeleton = (props: ShelfProps) => {
 					/>
 				</VStack>
 				<ShelfButtonsSkeleton />
+			</div>
+			<div className={clsx(cls.boxesWrapper, !isCollapsed ? cls.collapsed : '')}>
+				<div className={cls.inner} >
+					<BoxesBlockSkeleton/>
+				</div>
 			</div>
 		</div>
 	)

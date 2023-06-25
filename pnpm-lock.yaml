@@ -87,6 +87,9 @@ devDependencies:
   json-server:
     specifier: ^0.17.0
     version: 0.17.0
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   sass:
     specifier: ^1.49.9
     version: 1.49.9

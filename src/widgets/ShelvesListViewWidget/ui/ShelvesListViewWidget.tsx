@@ -14,6 +14,7 @@ import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { HorizontalScrollerList } from '@/shared/ui/HorizontalScrollerList';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { Skeleton } from '@/shared/ui/Skeleton';
 // import { getLastBoxIdByShelfId } from '@/features/ViewPageInitializer/model/selectors/getViewPageInitializer';
 
 
@@ -232,7 +233,7 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 	const items = useMemo(() => {
-		// if (isShelvesLoading) return []
+		if (isShelvesLoading) return []
 		const items = [{ value: 'all', content: 'Common shelf' }]
 		shelvesData?.forEach(shelfItem => {
 			items.push({
@@ -241,7 +242,7 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 			})
 		})
 		return items
-	}, [shelvesData])
+	}, [shelvesData, isShelvesLoading])
 	// }, [shelvesData, isShelvesLoading])
 	// // нужно подтягивать полку + коробку которую последний раз смотрел пользвоатель, то есть юзать jsonSettings юзера. Если там будет пусто, то юзать первую полку с отображением "все".
 	const dispatch = useAppDispatch()
@@ -263,6 +264,7 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 			<Icon
 				Svg={MultiSelectIcon}
 			/>
+			{/* {isShelvesLoading ? <Skeleton width={400} height={18} /> : null} */}
 			{/* Общая полка */}
 			{/* горизонтальный скролл списка с полками */}
 			{/* <AppLink text={} */}

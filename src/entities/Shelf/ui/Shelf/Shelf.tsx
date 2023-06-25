@@ -26,7 +26,7 @@ export const Shelf = memo((props: ShelfProps) => {
 		shelf: {
 			title,
 			// id,
-			collapsed,
+			isCollapsed,
 			// index,
 		}
 	} = props
@@ -45,7 +45,7 @@ export const Shelf = memo((props: ShelfProps) => {
 				</VStack>
 				{shelfButtonsBlock}
 			</div>
-			<div className={clsx(cls.boxesWrapper, !collapsed ? cls.collapsed : '')}>
+			<div className={clsx(cls.boxesWrapper, !isCollapsed ? cls.collapsed : '')}>
 				<div className={cls.inner} >
 					{boxesBlock}
 				</div>

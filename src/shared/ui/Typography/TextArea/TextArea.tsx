@@ -22,6 +22,7 @@ interface TextAreaProps extends HTMLTextAreaProps {
 	onValidate?: (value: any) => void
 	onKeyPress?: (event: KeyboardEvent<HTMLTextAreaElement>) => void;
 	autoHeight?: boolean
+	focus?: boolean
 }
 //eslint-disable-next-line
 // forwardRef<HTMLButtonElement, ButtonProps>((props, forwardedRef) => {
@@ -39,6 +40,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, f
 		rows = 1,
 		// inputErrors = [],
 		autoHeight = true,
+		focus,
 		...otherProps
 		// autoFocus,
 	} = props
@@ -49,10 +51,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, f
 		if (textAreaRef.current && autoHeight) {
 			textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight + 2}px`
 		}
+		if (focus) area.focus()
 		return (() => {
 			area.style.height = 'auto'
 		})
-	}, [value, autoHeight])
+	}, [value, autoHeight, focus])
 
 	const isBlurHappened = useRef<boolean>(false)
 	const textAreaRef = useRef() as MutableRefObject<HTMLTextAreaElement>

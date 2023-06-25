@@ -13,904 +13,1204 @@
   ],
   "cards": [
     {
-      "_id": "6480f926a144a50210587a0c",
+      "_id": "6495b7a7f020e4bd7077882a",
+      "box": 3,
       "index": 0,
-      "question": "Pariatur ipsum fugiat ad ad. Enim esse irure adipisicing esse eu Lorem excepteur et cillum consequat consectetur. Reprehenderit esse cillum enim do id dolor. Dolor duis et veniam amet dolore cillum cupidatat consectetur anim sunt ad sint pariatur. Commodo est nisi ea quis. Aute sunt culpa mollit sint do nulla velit dolore esse officia eu.\r\n",
-      "answer": "Excepteur excepteur reprehenderit laborum est aliqua consectetur consequat minim do aute enim minim cillum non. Proident sint fugiat proident reprehenderit labore do ex esse id veniam. Nulla consequat irure eiusmod labore velit. Cupidatat id minim aute minim dolore labore proident do non ex culpa. Culpa ipsum duis do ad. Sint cupidatat ad consequat in ad reprehenderit nostrud ex occaecat laboris.\r\n",
       "shelf": "648c920baa3edb04cec38442",
-      "box": 1,
-      "state": "train"
+      "state": "wait",
+      "answer": "Irure qui quis ut laborum enim consequat esse. Labore ad sint consequat pariatur ullamco aute exercitation aliqua ex non ipsum do eu.",
+      "question": "Veniam occaecat irure sit veniam ex et dolore sint sint duis cillum consectetur. Dolor excepteur aliqua ex et in excepteur enim.",
+      "createdAt": "2022-04-18T20:09:49.091Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-14T20:09:49.091Z"
     },
     {
-      "_id": "6480f9261087a36774e847fb",
+      "_id": "6495b7a747f3edcc8d6abebf",
+      "box": 4,
       "index": 1,
-      "question": "Reprehenderit irure eiusmod labore ex duis labore reprehenderit tempor anim enim adipisicing incididunt duis. Culpa sunt ullamco non consectetur eu tempor sit consectetur id. Aliqua nisi sit do esse irure labore consectetur aliqua aute fugiat. Aute ut cupidatat incididunt laboris proident pariatur sint Lorem. Commodo reprehenderit ut aliqua occaecat in. Dolore laborum culpa ullamco do est id velit occaecat duis enim enim in cillum. Id aliquip sit officia aliquip excepteur voluptate fugiat deserunt sunt.\r\n",
-      "answer": "Minim reprehenderit dolore amet laborum. Veniam occaecat reprehenderit esse labore sint Lorem cupidatat tempor excepteur do elit est ut. Sunt pariatur fugiat nisi sit deserunt sunt amet amet occaecat qui do ipsum dolor et. Nostrud cupidatat ad est commodo sunt nostrud ut. Cillum reprehenderit pariatur mollit sunt. Commodo cillum Lorem anim ut minim dolor Lorem.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Mollit non nisi minim mollit. Qui fugiat eiusmod irure laboris amet minim non magna.",
+      "question": "Cupidatat pariatur voluptate enim amet in cillum excepteur nisi officia aliqua culpa et fugiat nostrud. Lorem officia ipsum enim ea sunt ea veniam consectetur ad minim excepteur sint amet.",
+      "createdAt": "2022-03-24T03:49:00.458Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-30T03:49:00.458Z"
     },
     {
-      "_id": "6480f926de6f69a71f6d7038",
+      "_id": "6495b7a798c781483f98ceee",
+      "box": 1,
       "index": 2,
-      "question": "Aliquip deserunt Lorem esse veniam ea do consequat cillum. Laborum sit aute officia magna commodo aliqua. Sunt veniam ea in cupidatat aliqua proident Lorem Lorem elit deserunt ad ullamco incididunt elit. Nisi magna minim ipsum pariatur reprehenderit deserunt magna sint nostrud minim duis excepteur. Consequat minim enim incididunt mollit sunt in reprehenderit et reprehenderit consequat pariatur voluptate consequat eiusmod. Lorem enim velit labore deserunt consequat. Nisi enim et incididunt exercitation do aliquip veniam eiusmod nisi amet dolor deserunt tempor.\r\n",
-      "answer": "Do nostrud cillum nulla ut aliquip fugiat et ea. Nostrud exercitation voluptate exercitation incididunt eu qui nulla consequat id aute. Eiusmod cillum est consectetur laboris consequat mollit sint eiusmod. Id sunt ex sit mollit magna id labore anim tempor anim sit.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Ea nisi do magna consectetur do. Enim eiusmod duis sit dolor mollit amet ullamco reprehenderit culpa fugiat pariatur officia.",
+      "question": "Id amet cillum enim et et esse ullamco commodo. Velit enim mollit minim ullamco eiusmod fugiat in ullamco esse excepteur.",
+      "createdAt": "2022-09-25T03:37:59.319Z",
+      "specialType": "none",
+      "lastTraining": "2022-11-15T03:37:59.319Z"
     },
     {
-      "_id": "6480f926c7c1f40052086a3b",
+      "_id": "6495b7a75a3b171928b6aaa8",
+      "box": 0,
       "index": 3,
-      "question": "Consequat labore anim id eu eiusmod amet commodo dolore tempor minim ad deserunt. Incididunt enim duis eiusmod magna Lorem culpa dolore mollit cupidatat magna laborum in in. Duis irure ad do Lorem nisi magna velit. In minim elit ad quis laboris eiusmod sit velit mollit irure. Aliqua sunt enim laboris elit aliqua sit reprehenderit in quis culpa. Ut duis incididunt labore Lorem pariatur. Elit occaecat ipsum eiusmod qui ullamco voluptate nostrud tempor nulla quis adipisicing excepteur.\r\n",
-      "answer": "Ipsum tempor consectetur eiusmod deserunt ad dolore laboris. Cupidatat aute ex ad anim sit duis irure tempor ullamco ut deserunt ullamco consectetur qui. Do voluptate non laborum elit nisi eu excepteur sit Lorem aliquip irure.\r\n",
       "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 2,
-      "state": "train"
+      "state": "train",
+      "answer": "Dolore anim Lorem cupidatat consequat. Aliqua tempor mollit ad amet deserunt laborum.",
+      "question": "Laborum ad reprehenderit sunt aute labore aliqua ad nulla quis nisi. Laborum incididunt duis velit ullamco eu aliqua amet amet incididunt ex nulla.",
+      "createdAt": "2022-05-24T21:03:22.848Z",
+      "specialType": "new",
+      "lastTraining": "2022-06-26T21:03:22.848Z"
     },
     {
-      "_id": "6480f92652cecefbd70bf02b",
+      "_id": "6495b7a72d799f4379131df3",
+      "box": 1,
       "index": 4,
-      "question": "Aliquip veniam nostrud ad nostrud qui excepteur ad culpa veniam incididunt. Fugiat eiusmod nulla esse ad reprehenderit amet laboris reprehenderit ex. Non ipsum laborum pariatur enim consequat anim dolor. Sint eu eu labore sint cillum dolor in commodo qui minim.\r\n",
-      "answer": "Nostrud sunt exercitation aute eiusmod exercitation. Minim ut cillum fugiat et dolore excepteur et minim adipisicing reprehenderit eiusmod elit sunt ea. Sunt nisi eiusmod labore eiusmod quis enim exercitation magna reprehenderit aliqua adipisicing cillum. Ullamco aliqua non consequat duis. Minim adipisicing est ex laborum cupidatat exercitation ea duis esse quis velit nisi in. Laborum sunt commodo ipsum dolor nostrud est non id. Tempor Lorem consequat id aute dolore deserunt nostrud deserunt eiusmod magna occaecat.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "wait",
+      "answer": "Aute qui et labore occaecat culpa et aute ullamco consectetur eu consectetur. Nostrud aliquip ipsum elit dolor aute aute exercitation voluptate reprehenderit cupidatat consectetur adipisicing qui.",
+      "question": "Minim irure magna proident consequat non consectetur esse Lorem ea laboris proident fugiat. In nostrud pariatur cupidatat commodo anim labore irure reprehenderit enim.",
+      "createdAt": "2022-01-29T08:34:32.106Z",
+      "specialType": "none",
+      "lastTraining": "2022-03-31T08:34:32.106Z"
     },
     {
-      "_id": "6480f9260a43713daf8525c8",
+      "_id": "6495b7a7750b26a2cf46b683",
+      "box": 3,
       "index": 5,
-      "question": "Nulla officia officia cillum officia dolor consequat ad eiusmod sint adipisicing ad dolor. Incididunt exercitation nostrud quis duis qui proident commodo nostrud culpa in reprehenderit eiusmod do et. Amet id incididunt ea excepteur enim laborum sint nulla id esse sit qui reprehenderit commodo. Mollit commodo culpa voluptate labore minim sunt. Cupidatat veniam magna qui consectetur aliquip dolore aliquip irure eiusmod elit reprehenderit sunt excepteur.\r\n",
-      "answer": "Excepteur cillum irure reprehenderit sit dolore cillum eu aliqua. Magna ipsum aute ipsum nostrud duis veniam enim adipisicing mollit exercitation non consequat anim minim. Amet aliquip elit ut nulla. Occaecat culpa pariatur ipsum dolore deserunt anim aliqua excepteur ex non dolor.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "wait",
+      "answer": "Tempor eu veniam nulla eiusmod tempor sunt voluptate cillum sint consequat sit eu velit. Irure in ullamco labore quis nulla.",
+      "question": "Est ex voluptate reprehenderit mollit ea tempor labore occaecat amet dolore in reprehenderit amet. Cillum esse eu reprehenderit incididunt id Lorem esse elit irure.",
+      "createdAt": "2022-02-05T08:07:34.065Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-05T08:07:34.065Z"
     },
     {
-      "_id": "6480f9268cff7140dabbcb39",
+      "_id": "6495b7a79f07c371e01a1034",
+      "box": 2,
       "index": 6,
-      "question": "Enim velit magna irure ut. Aute eu minim ipsum in. Commodo Lorem duis nulla fugiat voluptate id. Occaecat quis eu elit ea duis consequat nostrud mollit aliqua quis.\r\n",
-      "answer": "Duis quis velit nostrud aute reprehenderit irure aliquip. Culpa anim nostrud sunt non. Ipsum pariatur ullamco pariatur proident adipisicing aute. Et ipsum ullamco exercitation consectetur in dolor pariatur minim consequat excepteur. Qui sint ut adipisicing duis fugiat aute ea exercitation amet nisi labore excepteur exercitation. Quis sint non quis anim ut officia.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "wait",
+      "answer": "Velit tempor adipisicing anim tempor ullamco fugiat voluptate consequat deserunt veniam voluptate sunt nulla. Proident culpa nulla nulla adipisicing.",
+      "question": "Irure occaecat ullamco magna ad minim fugiat incididunt ut consectetur mollit sunt. Aute nisi pariatur est labore voluptate do excepteur laboris.",
+      "createdAt": "2022-06-18T07:54:30.147Z",
+      "specialType": "none",
+      "lastTraining": "2022-08-03T07:54:30.147Z"
     },
     {
-      "_id": "6480f926e291943e3d8428a3",
+      "_id": "6495b7a72bf30fc72c727f2c",
+      "box": 3,
       "index": 7,
-      "question": "Laborum ea dolore culpa minim incididunt. Laboris reprehenderit enim adipisicing enim qui magna incididunt sit eu consectetur. Consectetur dolor laboris amet nulla ipsum nostrud culpa. Exercitation incididunt cillum aliquip pariatur occaecat pariatur ea deserunt labore duis exercitation aute elit. Ex in pariatur pariatur voluptate amet culpa eu duis non proident et ea. Voluptate velit sunt qui excepteur laborum nostrud id. Eu laborum aliquip reprehenderit consectetur dolor enim exercitation magna nisi.\r\n",
-      "answer": "Aliqua proident consectetur non incididunt laboris. Tempor pariatur officia dolore qui elit laboris cupidatat deserunt cillum elit tempor eiusmod Lorem. Amet consectetur minim commodo adipisicing ex consequat non.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "train",
+      "answer": "Consequat cupidatat fugiat laborum consequat ex irure aliquip Lorem in. Sint sit laborum laboris veniam consequat et officia.",
+      "question": "Veniam anim magna Lorem ut eu et tempor adipisicing mollit eiusmod. Occaecat magna fugiat voluptate consequat irure labore duis ad ipsum et ipsum proident.",
+      "createdAt": "2022-09-06T10:03:07.764Z",
+      "specialType": "none",
+      "lastTraining": "2022-10-18T10:03:07.764Z"
     },
     {
-      "_id": "6480f9266caa5bbed0acddf7",
+      "_id": "6495b7a7d6895feb7acab47d",
+      "box": 1,
       "index": 8,
-      "question": "Sint et est Lorem laborum sit esse sint adipisicing nostrud pariatur labore quis duis quis. Ex incididunt deserunt excepteur laborum incididunt. Excepteur ut ex sunt ut veniam esse labore irure enim. Est reprehenderit cillum culpa ea ullamco dolor. Cillum laboris consectetur nostrud sint est velit quis et. Aliqua anim magna officia aliquip anim dolor Lorem nostrud nostrud consectetur enim proident occaecat laborum. Reprehenderit non reprehenderit est elit.\r\n",
-      "answer": "Veniam exercitation nisi duis duis reprehenderit sint mollit ex veniam consectetur voluptate. Duis ipsum aliqua velit pariatur consequat. Officia nostrud eu aliqua mollit commodo nulla deserunt ut nostrud commodo tempor sit et ad. Officia aliqua fugiat duis veniam ea ea id.\r\n",
       "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 3,
-      "state": "train"
+      "state": "wait",
+      "answer": "Sit laboris quis nisi elit nulla aliqua magna commodo nulla consectetur laborum pariatur non. Incididunt adipisicing irure consequat minim ut.",
+      "question": "Exercitation dolor minim amet veniam quis aliqua. Esse elit amet ex esse minim ad consequat deserunt amet et quis fugiat qui.",
+      "createdAt": "2022-06-23T20:45:39.072Z",
+      "specialType": "none",
+      "lastTraining": "2022-07-24T20:45:39.072Z"
     },
     {
-      "_id": "6480f926bbc035583e466b84",
+      "_id": "6495b7a71ba48dc5128d85c3",
+      "box": 5,
       "index": 9,
-      "question": "Eu reprehenderit velit commodo sint occaecat exercitation duis reprehenderit elit culpa officia quis. Dolor esse consequat aute officia aute consectetur. Nostrud proident minim quis incididunt id sit irure mollit sit quis officia eiusmod laboris. Consequat quis laborum duis consequat minim. In tempor cillum duis qui sit ea excepteur nostrud et in commodo qui aliquip. Fugiat veniam labore deserunt sit labore aliquip officia irure anim culpa tempor occaecat deserunt.\r\n",
-      "answer": "Consequat reprehenderit voluptate in laborum dolore voluptate cillum magna reprehenderit voluptate culpa non officia. Mollit cillum duis anim dolore officia occaecat ullamco eu. Do culpa ipsum id excepteur sit. Nisi commodo dolor sit proident nisi duis irure reprehenderit cupidatat veniam do laborum duis.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "train",
+      "answer": "Lorem et magna ex eu ad labore anim do minim tempor qui et. Laboris pariatur nisi proident enim cupidatat sint est non.",
+      "question": "Ex veniam ipsum voluptate incididunt officia laboris. Lorem deserunt duis velit est dolor laboris est eiusmod exercitation aute id occaecat sit ullamco.",
+      "createdAt": "2022-10-31T18:15:25.499Z",
+      "specialType": "learnt",
+      "lastTraining": "2023-01-21T18:15:25.499Z"
     },
     {
-      "_id": "6480f92673ac5c5999d433aa",
+      "_id": "6495b7a7ba5ce635a644f36e",
+      "box": 2,
       "index": 10,
-      "question": "Cupidatat cillum minim voluptate duis laboris esse dolore ad officia aliqua. Do amet eu duis aliqua id elit nostrud labore eu. Cillum deserunt proident labore fugiat amet aute cupidatat nulla.\r\n",
-      "answer": "Elit pariatur incididunt qui amet. Ut nostrud laboris aliqua est eu amet reprehenderit eiusmod aliquip commodo voluptate elit consectetur. Eiusmod irure tempor amet est consectetur ea ea cupidatat consequat.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 3,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Labore tempor Lorem proident enim. Quis elit laborum est consectetur irure non cupidatat cillum commodo do.",
+      "question": "Deserunt irure tempor deserunt sit qui tempor do dolore eu laboris reprehenderit fugiat voluptate magna. Amet ut enim consectetur do sit excepteur fugiat amet fugiat officia id velit eiusmod eiusmod.",
+      "createdAt": "2022-10-21T19:21:44.223Z",
+      "specialType": "none",
+      "lastTraining": "2022-12-27T19:21:44.223Z"
     },
     {
-      "_id": "6480f926b78c0fd4110a11aa",
+      "_id": "6495b7a76a66ed6390ef518c",
+      "box": 3,
       "index": 11,
-      "question": "Duis culpa aliquip do dolore occaecat ea et tempor adipisicing laboris consectetur velit nisi. Occaecat ea ut velit culpa proident sint ex nostrud. Nisi fugiat eiusmod ullamco amet tempor nostrud est consectetur consequat. Non eu qui quis proident proident dolor. Eu ut occaecat pariatur nisi adipisicing elit occaecat nulla ex sunt minim. Laborum eu fugiat eu adipisicing dolor.\r\n",
-      "answer": "Duis irure esse tempor consectetur. Sint exercitation dolor do voluptate duis irure officia incididunt voluptate laborum ipsum elit duis deserunt. Eiusmod ut et dolor est aliquip deserunt adipisicing sint adipisicing qui commodo. Fugiat laboris fugiat enim esse nisi reprehenderit. Fugiat irure enim incididunt dolore adipisicing culpa esse. In commodo esse sit aliquip nostrud elit cupidatat.\r\n",
       "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 1,
-      "state": "train"
+      "state": "wait",
+      "answer": "Qui amet eu ex elit tempor sunt deserunt est pariatur proident anim nulla aute anim. Enim est adipisicing consectetur ad aliqua exercitation occaecat culpa proident.",
+      "question": "Ullamco sunt labore laborum cillum adipisicing excepteur nulla esse sunt mollit et officia cillum. Ex culpa elit ullamco pariatur veniam irure cillum occaecat aute commodo minim id commodo duis.",
+      "createdAt": "2022-02-22T17:28:30.251Z",
+      "specialType": "none",
+      "lastTraining": "2022-03-24T17:28:30.251Z"
     },
     {
-      "_id": "6480f9269c97ee2cf4c1573d",
+      "_id": "6495b7a76dc73aad1d0aa1d3",
+      "box": 4,
       "index": 12,
-      "question": "In irure veniam laboris laborum consectetur pariatur ullamco ex et aliqua consequat. Nostrud irure dolore nostrud reprehenderit aliqua reprehenderit duis dolor exercitation. Commodo Lorem veniam dolor officia eu Lorem pariatur anim. Reprehenderit sit anim id Lorem non aute incididunt consectetur aliqua.\r\n",
-      "answer": "Sit ullamco consequat esse consectetur sit anim sint. Occaecat et sit sit commodo esse exercitation consequat anim consectetur proident. Dolor in labore velit laboris Lorem non laboris reprehenderit reprehenderit in dolor laboris pariatur.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 2,
-      "state": "wait"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Magna voluptate Lorem deserunt do minim aute ullamco ex culpa labore. Sint proident est velit anim esse ad ea aliquip labore sint ea aute in deserunt.",
+      "question": "Aute elit ut incididunt ad magna eiusmod aute enim esse. Id magna incididunt est amet anim et do fugiat est ex do occaecat in enim.",
+      "createdAt": "2022-05-13T02:58:44.624Z",
+      "specialType": "none",
+      "lastTraining": "2022-07-17T02:58:44.624Z"
     },
     {
-      "_id": "6480f9261ac06acd70d43a87",
+      "_id": "6495b7a724557c692a89b558",
+      "box": 4,
       "index": 13,
-      "question": "Ut amet eu commodo eu proident irure aute nisi. Sint qui veniam proident dolore ad dolore tempor qui ut exercitation quis enim aute officia. Consectetur dolore tempor adipisicing labore esse do dolor ex fugiat. Esse aliquip incididunt cupidatat aliqua.\r\n",
-      "answer": "Adipisicing qui irure deserunt dolore consectetur dolor in dolore sunt. Duis proident commodo ex enim ex aute. Ex consequat ex nisi sint est deserunt sint et Lorem dolor exercitation amet. Ea adipisicing adipisicing nostrud tempor esse sint nulla id.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "wait",
+      "answer": "Eu exercitation sunt mollit labore occaecat cillum minim exercitation commodo ut officia ex. Minim in fugiat sunt non dolor elit ex enim aliquip adipisicing sint.",
+      "question": "Sint commodo nostrud qui non consectetur enim amet amet. Ea quis est aute id excepteur velit esse aliqua.",
+      "createdAt": "2022-05-03T17:47:37.285Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-07-19T17:47:37.285Z"
     },
     {
-      "_id": "6480f9262a563dfa1cc60849",
+      "_id": "6495b7a76bd2876b489335f3",
+      "box": 4,
       "index": 14,
-      "question": "Nostrud officia eiusmod est non amet. In mollit labore nostrud incididunt quis. Et amet cillum ipsum ex nulla. Ad deserunt in adipisicing deserunt sit velit eiusmod veniam duis consectetur Lorem. Nisi aliqua enim laborum laborum tempor mollit officia culpa in quis nulla proident ad consequat. Officia do dolor ut ea deserunt qui id sunt ad labore.\r\n",
-      "answer": "Ut tempor tempor exercitation id. Duis mollit anim adipisicing commodo laborum. Ex non Lorem enim adipisicing aliqua duis amet do nulla minim ad. Consequat reprehenderit incididunt reprehenderit eu ipsum exercitation enim mollit deserunt eiusmod quis.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "wait",
+      "answer": "Aute labore labore Lorem tempor consequat qui ex est pariatur pariatur et ut. Culpa dolor laboris consequat qui tempor quis dolore et aliquip ullamco dolor incididunt.",
+      "question": "Labore culpa ut mollit adipisicing adipisicing duis eiusmod. Eiusmod ea sunt sunt aliqua labore mollit dolore dolore aliqua.",
+      "createdAt": "2022-07-31T11:00:03.210Z",
+      "specialType": "none",
+      "lastTraining": "2022-10-02T11:00:03.210Z"
     },
     {
-      "_id": "6480f926a3fefe2a0039ce4d",
+      "_id": "6495b7a727d107ebd1859e4b",
+      "box": 0,
       "index": 15,
-      "question": "Ea irure exercitation ea do Lorem. Velit Lorem aute elit in enim culpa incididunt. Anim tempor sint ipsum exercitation irure aute nostrud enim culpa minim. Pariatur cillum voluptate commodo excepteur elit non voluptate tempor.\r\n",
-      "answer": "Reprehenderit ad adipisicing ut cillum nisi eiusmod id. Pariatur nostrud aute cupidatat magna eiusmod magna eiusmod non quis veniam ipsum fugiat est. Ea dolore ipsum veniam ut ut sit sit laboris irure cupidatat sunt. Consectetur aliquip quis id voluptate do sint reprehenderit duis. Dolore consequat cupidatat id consequat Lorem ut nostrud nisi enim dolor fugiat. Fugiat excepteur sunt do qui incididunt.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 3,
-      "state": "wait"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "train",
+      "answer": "Esse quis culpa do cillum culpa cillum voluptate commodo nostrud mollit reprehenderit enim occaecat consectetur. Aliqua incididunt ea quis anim eu laboris officia.",
+      "question": "Ea excepteur anim qui Lorem officia irure consequat deserunt cillum culpa eiusmod anim. Cillum consequat minim mollit voluptate enim nostrud incididunt non minim mollit.",
+      "createdAt": "2022-10-06T01:40:22.066Z",
+      "specialType": "new",
+      "lastTraining": "2022-12-12T01:40:22.066Z"
     },
     {
-      "_id": "6480f9264a65d012743aaf4c",
+      "_id": "6495b7a7d12840fb63a6b65c",
+      "box": 0,
       "index": 16,
-      "question": "Incididunt voluptate culpa nostrud irure consectetur. Ipsum et exercitation excepteur sunt aliquip labore commodo ut incididunt qui. Laboris occaecat incididunt consectetur sit et duis eiusmod cillum ullamco ullamco. Aliquip mollit amet laborum cillum voluptate quis tempor magna nostrud duis laborum. Dolor magna nostrud culpa sint duis mollit sunt officia aliquip duis id exercitation velit excepteur. Deserunt quis culpa excepteur anim aliqua enim. Eu Lorem proident ullamco adipisicing.\r\n",
-      "answer": "Magna qui mollit dolore anim esse dolore nisi ad in Lorem eiusmod. Aliqua nostrud aute voluptate occaecat nostrud ad pariatur ad qui. Do labore nulla eiusmod laborum culpa labore elit nisi ad elit. Ullamco laborum non nulla elit non cupidatat aliquip sint. Do fugiat tempor ex Lorem elit sint ut aliquip ipsum. Occaecat quis ea reprehenderit commodo elit.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "train",
+      "answer": "Ut reprehenderit in exercitation officia magna esse aliqua esse sint labore id voluptate. Esse sunt proident ut ut cillum ad quis sunt aute laborum qui quis ex non.",
+      "question": "Incididunt fugiat minim commodo quis do adipisicing voluptate enim aliqua veniam exercitation incididunt voluptate. Irure ea incididunt minim dolor.",
+      "createdAt": "2022-01-31T08:36:08.269Z",
+      "specialType": "new",
+      "lastTraining": "2022-03-27T08:36:08.269Z"
     },
     {
-      "_id": "6480f926e11befc666c05135",
+      "_id": "6495b7a78e1f137c37d9ba6e",
+      "box": 5,
       "index": 17,
-      "question": "Esse qui ipsum incididunt esse sint id et. Cillum ad qui cupidatat id ea in quis ad eiusmod proident Lorem reprehenderit. Consectetur id ut exercitation esse nulla. Fugiat esse minim labore ea nisi ea laboris exercitation ullamco tempor ut. Nulla eu est cupidatat aliqua labore proident velit consequat enim id nulla aute. Ea eiusmod reprehenderit sint mollit exercitation elit.\r\n",
-      "answer": "Proident quis laborum sint dolor. Et dolor adipisicing anim cupidatat in id commodo culpa pariatur nisi enim anim officia. Dolor exercitation id anim sunt officia aliqua tempor. Deserunt non officia dolor proident nostrud id proident dolor voluptate ex ex adipisicing dolor. Irure consectetur dolor voluptate commodo ea.\r\n",
       "shelf": "648c920baa3edb04cec38442",
-      "box": 3,
-      "state": "wait"
+      "state": "wait",
+      "answer": "Ullamco sit consequat aliqua esse aute. In veniam irure dolore amet proident proident et et est eu reprehenderit excepteur Lorem anim.",
+      "question": "Voluptate minim duis adipisicing quis dolore fugiat. Nisi dolore voluptate ex ea nisi id est.",
+      "createdAt": "2022-02-14T06:28:37.209Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-04-07T06:28:37.209Z"
     },
     {
-      "_id": "6480f9268e5c36fca138cd64",
+      "_id": "6495b7a7020702a3718f8a93",
+      "box": 5,
       "index": 18,
-      "question": "Commodo culpa incididunt fugiat ullamco incididunt do eu consequat reprehenderit dolore exercitation. Voluptate deserunt cupidatat do ea. Consequat irure ad adipisicing aliqua pariatur qui dolore tempor nulla dolor consequat. Eu cillum aute labore anim mollit ipsum cillum minim anim ad id in aliquip. Mollit amet elit occaecat consequat aute ut aliqua quis laborum officia. Eiusmod anim qui sunt non anim ea eu adipisicing et dolore ea nostrud anim. Aliquip reprehenderit ullamco pariatur elit non consequat sit et deserunt amet reprehenderit exercitation mollit.\r\n",
-      "answer": "Laboris ex irure ut duis labore veniam nulla quis nulla ea ad. Duis deserunt consectetur ipsum aliqua ad nostrud pariatur incididunt elit. Magna elit ex ut proident consectetur mollit laboris adipisicing id labore.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "wait"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "train",
+      "answer": "Ex consectetur nisi sint consequat laborum. Aliquip elit veniam amet nisi.",
+      "question": "Commodo fugiat officia qui laboris minim nulla tempor nulla amet nostrud laboris Lorem. Incididunt irure amet et commodo veniam incididunt pariatur.",
+      "createdAt": "2022-06-12T17:33:10.526Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-08-26T17:33:10.526Z"
     },
     {
-      "_id": "6480f926245a3ad7ab88df53",
+      "_id": "6495b7a7ae0d4e9cb055ba42",
+      "box": 0,
       "index": 19,
-      "question": "Do sunt veniam enim exercitation nulla sunt. Aute ad duis aliqua tempor aute sit et deserunt aliqua exercitation pariatur esse irure. Ad non cillum fugiat consequat dolore exercitation culpa ipsum qui incididunt. Consectetur eiusmod duis voluptate dolor magna et elit culpa aliquip fugiat tempor. Tempor sint nostrud et ipsum laborum officia occaecat sit deserunt consectetur nisi sunt irure sit. Aliqua magna exercitation pariatur laboris Lorem ut Lorem eu quis occaecat amet aliquip quis ut. Id commodo ex adipisicing in mollit officia eiusmod.\r\n",
-      "answer": "Nostrud deserunt nisi occaecat aliqua eiusmod elit occaecat. Sit esse excepteur ipsum quis dolor exercitation elit sunt enim quis commodo veniam excepteur. Enim dolore eu ea Lorem non eu ut cillum aute. Non magna laboris anim duis tempor duis mollit. Est enim voluptate eu ipsum et tempor elit aliqua elit laboris consectetur nisi. Fugiat est qui quis excepteur velit est labore.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 2,
-      "state": "wait"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "train",
+      "answer": "Mollit amet est magna laboris non occaecat eu ipsum. Occaecat duis duis consequat nulla tempor.",
+      "question": "Id quis anim esse laborum sit consequat nostrud eu. Proident magna ullamco consequat eu.",
+      "createdAt": "2022-06-14T02:15:07.468Z",
+      "specialType": "new",
+      "lastTraining": "2022-07-22T02:15:07.468Z"
     },
     {
-      "_id": "6480f9260e3326cb2a4a0a87",
+      "_id": "6495b7a7df1ecc84c333fd5a",
+      "box": 1,
       "index": 20,
-      "question": "Elit voluptate mollit dolore incididunt consectetur sint Lorem enim est laboris ullamco deserunt ipsum pariatur. Aute et sint cupidatat non sunt ad cupidatat eiusmod ea cillum. Eiusmod nulla duis veniam sint proident nostrud tempor. Adipisicing mollit aute in occaecat nulla aliquip consequat ad cillum.\r\n",
-      "answer": "Incididunt laborum consequat voluptate esse commodo in esse adipisicing do eiusmod qui nulla eiusmod. Sit dolore culpa reprehenderit voluptate adipisicing do occaecat deserunt in aliquip. Laborum officia do ex in dolore eu elit ullamco ut veniam ipsum commodo et velit. Lorem ad ad qui cillum officia in laborum duis adipisicing non cupidatat non id. Et ipsum adipisicing est ad magna dolor irure reprehenderit commodo esse aliquip pariatur incididunt exercitation. Lorem Lorem ullamco ea cillum ullamco ut duis labore deserunt laborum ex consectetur. Voluptate dolore officia non proident quis laborum consequat Lorem laboris magna.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "train",
+      "answer": "Quis irure minim deserunt occaecat Lorem Lorem et excepteur. Duis irure aute irure mollit minim labore magna.",
+      "question": "Laboris nulla tempor consequat officia velit in fugiat ad exercitation aliquip magna ea. Duis consectetur culpa deserunt exercitation cupidatat aliqua anim occaecat ut.",
+      "createdAt": "2022-03-11T00:44:55.479Z",
+      "specialType": "none",
+      "lastTraining": "2022-06-09T00:44:55.479Z"
     },
     {
-      "_id": "6480f926c497106f70d89795",
+      "_id": "6495b7a7e1278b04749ffdc9",
+      "box": 0,
       "index": 21,
-      "question": "Mollit officia amet adipisicing ea reprehenderit in. Laborum deserunt eiusmod exercitation qui consectetur magna. Veniam do fugiat duis ex cillum consequat nostrud ut incididunt anim dolore magna. Est labore reprehenderit qui do aute commodo magna tempor. Et officia proident exercitation non in non do consequat exercitation.\r\n",
-      "answer": "Magna ipsum ea tempor aute nisi irure quis ad labore fugiat elit quis elit. Aute dolor ullamco exercitation dolore ad culpa nulla nisi anim minim nulla ad esse in. Pariatur elit elit aliqua velit laboris laborum laboris cillum.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "train",
+      "answer": "Ullamco laboris dolor id ad aliqua in occaecat incididunt est elit ex. Est laborum adipisicing aute et duis sint do commodo nulla dolor proident.",
+      "question": "Voluptate culpa exercitation id occaecat culpa exercitation quis excepteur cillum quis culpa laborum nulla amet. Officia aliquip in ea velit ex ut reprehenderit tempor aute quis.",
+      "createdAt": "2022-09-26T07:45:53.868Z",
+      "specialType": "new",
+      "lastTraining": "2022-11-09T07:45:53.868Z"
     },
     {
-      "_id": "6480f926026921ce8be4c783",
+      "_id": "6495b7a7e6298a5dc8e459ae",
+      "box": 4,
       "index": 22,
-      "question": "Esse anim veniam adipisicing mollit dolore amet ipsum duis. Adipisicing cillum culpa commodo dolore minim officia velit reprehenderit quis dolor excepteur eu. Qui veniam non pariatur pariatur. Enim aliquip cupidatat ea velit deserunt enim culpa nulla. Minim sunt ullamco ad exercitation sunt do minim velit Lorem velit commodo sit velit. Voluptate sit elit voluptate sit pariatur ullamco.\r\n",
-      "answer": "Irure non magna tempor fugiat. Tempor occaecat laborum deserunt dolor laborum ea consequat tempor adipisicing laborum. Consequat eiusmod minim mollit fugiat id. Ex commodo qui fugiat commodo. Id amet sit ipsum exercitation tempor amet nostrud. Dolor ut commodo ea laborum qui ullamco.\r\n",
       "shelf": "648c920b6adf96517748f3c1",
-      "box": 4,
-      "state": "train"
+      "state": "train",
+      "answer": "Amet et mollit aliquip quis proident esse velit dolor. Dolor exercitation sit ut ex laboris dolor eu consectetur irure dolore consectetur cupidatat.",
+      "question": "Magna nostrud minim est dolore fugiat. In laborum nisi sit dolore voluptate non culpa cillum proident dolor sunt id.",
+      "createdAt": "2022-03-18T07:29:39.487Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-13T07:29:39.487Z"
     },
     {
-      "_id": "6480f926d91f58aab2ef23ea",
+      "_id": "6495b7a7e13a2bc496206d4d",
+      "box": 3,
       "index": 23,
-      "question": "Ullamco exercitation quis occaecat voluptate qui est. Id labore nostrud cupidatat commodo laborum. Dolore occaecat dolor exercitation cupidatat veniam Lorem incididunt. Labore anim minim sunt deserunt velit commodo exercitation laboris fugiat officia. Ea sit culpa nisi voluptate deserunt nisi enim duis ullamco in pariatur voluptate officia.\r\n",
-      "answer": "Reprehenderit officia exercitation sit nulla nostrud magna. Dolor ut anim dolore elit duis magna officia est. Ipsum culpa ex est id nisi. Nisi reprehenderit sint exercitation proident occaecat dolore fugiat deserunt elit eu velit Lorem consequat sit. Cupidatat aliqua proident magna pariatur ad dolore ea.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "train",
+      "answer": "Aliqua esse commodo fugiat proident labore reprehenderit ullamco et. Ex esse commodo amet sint fugiat deserunt dolore enim quis tempor ad fugiat ad est.",
+      "question": "Veniam incididunt ullamco ut quis dolor dolor eiusmod velit esse nostrud. Id nostrud est esse tempor proident.",
+      "createdAt": "2022-01-07T06:24:28.361Z",
+      "specialType": "none",
+      "lastTraining": "2022-04-06T06:24:28.361Z"
     },
     {
-      "_id": "6480f926ce1a9d0eae43e0e9",
+      "_id": "6495b7a7803e985f8a8f4821",
+      "box": 4,
       "index": 24,
-      "question": "Velit cillum commodo voluptate commodo. Occaecat consectetur dolore pariatur fugiat sint tempor exercitation ipsum cillum sit duis aliquip veniam ipsum. Culpa sunt pariatur aliquip ea nisi amet excepteur Lorem nostrud reprehenderit aliqua. Tempor amet eu proident proident ea sit. Amet incididunt eu esse dolore commodo velit Lorem. Esse irure anim ullamco magna aliquip irure veniam.\r\n",
-      "answer": "Fugiat occaecat est enim consequat elit deserunt nisi eu aute. Minim irure pariatur pariatur ut eiusmod duis in in nostrud amet sint excepteur. Sit Lorem aute qui velit cupidatat minim qui ex nisi qui tempor enim.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Fugiat tempor in non in labore cupidatat amet eiusmod mollit eu. Ullamco aliquip sit aliqua do reprehenderit proident sunt labore.",
+      "question": "Laboris cupidatat ad in voluptate eiusmod cupidatat eiusmod labore ad in ipsum ea incididunt. Qui veniam dolor qui veniam aliqua cupidatat voluptate in exercitation reprehenderit in.",
+      "createdAt": "2022-08-24T01:46:56.695Z",
+      "specialType": "none",
+      "lastTraining": "2022-08-31T01:46:56.695Z"
     },
     {
-      "_id": "6480f926411bc22e65e67215",
+      "_id": "6495b7a79271d03672f1d1ea",
+      "box": 4,
       "index": 25,
-      "question": "Cillum laborum reprehenderit eiusmod aliquip do laborum est veniam minim qui do in consectetur culpa. Tempor consectetur laborum ea tempor anim. Lorem sint ad aliquip dolore aute ea. Nostrud elit labore ullamco eiusmod. Ea officia consequat nulla dolore velit excepteur.\r\n",
-      "answer": "Et fugiat sint cillum commodo dolore sint nisi do velit consequat ut ex excepteur. Mollit sit id dolor do Lorem amet et elit. Velit reprehenderit aute dolore ex ullamco cillum elit cupidatat et aliqua consectetur consequat in dolore. Velit tempor reprehenderit et non occaecat quis Lorem eiusmod magna commodo esse reprehenderit proident. Veniam excepteur consequat mollit anim cupidatat ipsum. Ad deserunt esse velit in.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "train",
+      "answer": "Quis voluptate Lorem mollit eiusmod nulla minim ipsum irure do. Eiusmod consectetur velit aliquip in irure excepteur.",
+      "question": "Esse sit occaecat eu nulla culpa eu do minim. Velit voluptate dolore excepteur nulla sunt ea labore nisi aute occaecat magna.",
+      "createdAt": "2022-07-14T05:19:56.279Z",
+      "specialType": "none",
+      "lastTraining": "2022-08-19T05:19:56.279Z"
     },
     {
-      "_id": "6480f9264796f54f337d3545",
+      "_id": "6495b7a7cc14b6f2accf408d",
+      "box": 3,
       "index": 26,
-      "question": "Cupidatat nostrud ad nisi incididunt commodo proident ipsum est officia. Sunt esse esse sit dolore magna cillum. Laboris dolore enim ullamco commodo voluptate.\r\n",
-      "answer": "Do eu enim cupidatat minim aliquip ullamco. Ad consequat minim fugiat laboris magna proident magna nisi incididunt irure. Esse magna occaecat ullamco ad aliqua sint ea excepteur. Enim elit in ullamco eiusmod et duis. Deserunt elit laboris laboris veniam do deserunt incididunt.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Deserunt dolore voluptate incididunt voluptate ex in officia. Labore officia amet culpa ullamco nostrud.",
+      "question": "Ut id est ullamco irure deserunt deserunt aute non. Sint reprehenderit mollit exercitation fugiat exercitation nulla do ad sunt.",
+      "createdAt": "2022-01-05T19:03:23.514Z",
+      "specialType": "none",
+      "lastTraining": "2022-02-13T19:03:23.514Z"
     },
     {
-      "_id": "6480f9262cd7a2a82a3aa0b2",
+      "_id": "6495b7a7d7e317e8305b0822",
+      "box": 0,
       "index": 27,
-      "question": "Est exercitation sit qui veniam ea mollit eiusmod esse Lorem mollit irure ea. Culpa laborum id ipsum ipsum laboris voluptate. Nostrud ut sint deserunt magna irure id duis esse. Magna sint do duis ut non occaecat occaecat occaecat sint pariatur do exercitation.\r\n",
-      "answer": "Enim nostrud Lorem laborum Lorem pariatur pariatur dolor. Adipisicing excepteur duis cillum aute laborum exercitation consectetur magna aliquip culpa sint nostrud nulla. Tempor anim dolor ad irure mollit reprehenderit et eu culpa adipisicing sit. Nulla commodo nisi et consequat do officia ut eiusmod culpa pariatur. Magna consequat occaecat in labore cupidatat consequat tempor. Eu nostrud irure ex aliqua voluptate occaecat. Non est id et dolore quis anim commodo in.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 3,
-      "state": "wait"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Sit ut qui commodo minim veniam dolore adipisicing culpa ut in exercitation amet. Velit incididunt Lorem ipsum velit non.",
+      "question": "Ullamco laborum magna consequat anim nostrud officia pariatur amet dolor aute irure nulla do. Sint est Lorem do dolor enim reprehenderit nulla occaecat ut ex consequat id.",
+      "createdAt": "2022-06-07T09:48:07.359Z",
+      "specialType": "new",
+      "lastTraining": "2022-06-16T09:48:07.359Z"
     },
     {
-      "_id": "6480f926528028f638076d51",
+      "_id": "6495b7a76b0eba4bb63a2507",
+      "box": 2,
       "index": 28,
-      "question": "Consequat culpa ullamco nostrud eiusmod duis adipisicing magna tempor incididunt laboris ex ad cupidatat. Aliquip eu cillum enim culpa id eu adipisicing exercitation exercitation qui. Do velit commodo tempor do id aute excepteur culpa ea minim tempor do.\r\n",
-      "answer": "Aute culpa dolor magna occaecat. Irure nulla esse commodo proident duis ea proident eu est ex. Quis qui adipisicing est nisi in ex minim dolor consectetur.\r\n",
       "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 1,
-      "state": "wait"
+      "state": "train",
+      "answer": "Labore excepteur duis aliquip voluptate reprehenderit elit voluptate. Qui minim amet eu tempor adipisicing excepteur amet.",
+      "question": "Sint esse qui veniam laborum aliquip consectetur ea officia id esse fugiat deserunt. Consectetur esse laborum culpa consectetur non.",
+      "createdAt": "2022-08-21T02:44:26.837Z",
+      "specialType": "none",
+      "lastTraining": "2022-09-15T02:44:26.837Z"
     },
     {
-      "_id": "6480f926296078966c89f06a",
+      "_id": "6495b7a7780de7cf531248b4",
+      "box": 5,
       "index": 29,
-      "question": "Nulla voluptate consectetur magna ea sunt qui Lorem proident culpa nulla eu. Ex officia ea id excepteur enim voluptate. Laborum ea dolor incididunt nostrud est cupidatat ex nulla sunt commodo eiusmod ex.\r\n",
-      "answer": "Consectetur aute anim voluptate ut fugiat veniam et ea duis quis elit fugiat aliqua. In dolor id magna magna occaecat. Sit duis irure aliquip nulla anim aliquip officia culpa. Sunt voluptate labore sunt qui incididunt duis. Dolor commodo consectetur proident eiusmod voluptate quis velit irure fugiat est ullamco ea nisi in. Do cillum quis aute qui ipsum. Irure do nulla mollit minim nulla reprehenderit nostrud occaecat eu ipsum ullamco sint.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Ad consequat irure consectetur do anim Lorem Lorem excepteur mollit sint culpa. Excepteur pariatur officia ipsum incididunt nisi nostrud irure deserunt.",
+      "question": "Laboris reprehenderit pariatur velit ea commodo culpa labore. Velit exercitation amet pariatur non aliquip elit reprehenderit laborum nostrud culpa elit minim eiusmod.",
+      "createdAt": "2022-08-06T19:43:04.909Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-09-21T19:43:04.909Z"
     },
     {
-      "_id": "6480f926cb4cccfda6472042",
+      "_id": "6495b7a7aecc226a88ec760d",
+      "box": 4,
       "index": 30,
-      "question": "Dolor cillum tempor exercitation est tempor aliquip cupidatat nostrud dolor ut irure. Ullamco eu nisi labore id excepteur incididunt voluptate sit tempor ullamco. Adipisicing fugiat elit labore nisi sit dolor incididunt ipsum minim.\r\n",
-      "answer": "Fugiat consectetur eiusmod ut incididunt enim ad ex duis et consequat est quis. Consequat ad cillum dolor qui aliqua id irure exercitation aliqua labore ut cupidatat ut. Do Lorem nulla proident sit minim eiusmod eiusmod magna deserunt ipsum laboris nostrud.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 3,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Reprehenderit ut pariatur exercitation duis tempor duis veniam occaecat sint duis duis. Voluptate commodo aliqua consequat consectetur commodo proident sint sunt.",
+      "question": "Et sunt laborum in labore nisi amet mollit culpa ullamco. Lorem labore ad laboris in quis enim labore velit excepteur.",
+      "createdAt": "2022-03-23T15:37:10.551Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-03-28T15:37:10.551Z"
     },
     {
-      "_id": "6480f9265b9eedcb137b2148",
+      "_id": "6495b7a7fb0091bca4d9424c",
+      "box": 3,
       "index": 31,
-      "question": "Deserunt voluptate adipisicing minim proident ipsum duis irure Lorem. Aliquip laboris officia incididunt irure nostrud incididunt sunt nostrud. Eiusmod culpa qui laborum sint proident commodo Lorem veniam esse do reprehenderit anim aliquip. Voluptate duis pariatur magna laboris proident excepteur sunt labore officia ad cillum. Lorem dolore eu pariatur excepteur cillum. Officia ex nisi officia laboris. Culpa laborum tempor nisi sint ad.\r\n",
-      "answer": "Aliqua esse nostrud deserunt nisi. Deserunt proident tempor consequat officia adipisicing. Nisi sunt laborum adipisicing nostrud id excepteur ut do in mollit non. Magna quis veniam nisi excepteur excepteur ullamco mollit minim ipsum cupidatat magna pariatur. Nostrud proident pariatur velit incididunt dolore laborum. Dolor pariatur quis sint tempor nulla sit est officia ea ut. Labore ipsum dolor laborum labore ad ad laboris eiusmod.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Ad sunt qui esse ullamco sunt nostrud aliqua fugiat. Cupidatat nulla dolor id duis cupidatat cupidatat amet officia voluptate duis.",
+      "question": "Laborum Lorem quis aliqua excepteur voluptate non nostrud ea enim dolore tempor. Pariatur reprehenderit officia consectetur commodo consectetur mollit proident cillum quis.",
+      "createdAt": "2022-02-04T06:57:25.894Z",
+      "specialType": "none",
+      "lastTraining": "2022-03-01T06:57:25.894Z"
     },
     {
-      "_id": "6480f926f0b2de7fdb592369",
+      "_id": "6495b7a7197b1d343f207fcd",
+      "box": 2,
       "index": 32,
-      "question": "Cillum non ut officia adipisicing quis enim Lorem ad dolor commodo adipisicing. In sint aliquip laboris dolore irure eu labore amet Lorem velit laboris mollit. Qui excepteur tempor qui fugiat amet adipisicing dolore voluptate. Nisi velit veniam consequat eiusmod non pariatur do nisi aliquip reprehenderit deserunt enim. Veniam anim velit id fugiat laborum labore culpa velit dolor sint Lorem.\r\n",
-      "answer": "Consectetur aliquip dolor adipisicing adipisicing reprehenderit. Laborum tempor irure sint sint proident nisi labore aliqua sint cupidatat ut. Minim sunt qui quis excepteur reprehenderit anim ut culpa ex fugiat nostrud duis tempor commodo.\r\n",
       "shelf": "648c920baa3edb04cec38442",
-      "box": 1,
-      "state": "wait"
+      "state": "train",
+      "answer": "Officia cillum elit mollit eu ipsum fugiat tempor minim velit quis dolor. Non duis aliqua eiusmod id et reprehenderit sit amet esse anim dolor velit adipisicing culpa.",
+      "question": "Est nostrud adipisicing adipisicing ex cupidatat reprehenderit ullamco ad labore ex dolore laborum quis. Velit ex enim deserunt consectetur anim eu incididunt labore cupidatat eiusmod aute.",
+      "createdAt": "2022-08-14T11:05:24.195Z",
+      "specialType": "none",
+      "lastTraining": "2022-09-16T11:05:24.195Z"
     },
     {
-      "_id": "6480f926d6b6d207e384fc7e",
+      "_id": "6495b7a76d6f8f6dc6e9fcca",
+      "box": 4,
       "index": 33,
-      "question": "Dolore veniam esse enim laborum elit esse do. Nisi culpa aliqua et ullamco aute cupidatat ex irure et. Amet laborum labore do ut occaecat commodo anim sit. Voluptate incididunt enim sunt quis pariatur non quis ex dolore sint enim. Et nisi mollit laboris officia pariatur magna. Nostrud ea anim sint in irure non sunt excepteur veniam ex elit consectetur irure aute.\r\n",
-      "answer": "Eiusmod pariatur occaecat adipisicing deserunt do veniam deserunt dolor sunt. Elit deserunt nostrud mollit tempor laborum tempor anim. Ipsum proident dolor elit ipsum occaecat tempor cupidatat enim tempor consectetur. Deserunt fugiat amet voluptate culpa.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Pariatur est ipsum quis deserunt ex enim culpa sit proident non culpa. Eu aute in non ea ad magna cupidatat minim.",
+      "question": "Ut dolore adipisicing consequat cillum velit esse Lorem incididunt. Laborum quis ea occaecat est.",
+      "createdAt": "2022-10-21T09:26:50.722Z",
+      "specialType": "none",
+      "lastTraining": "2022-11-24T09:26:50.722Z"
     },
     {
-      "_id": "6480f926ba4d9576541f5128",
+      "_id": "6495b7a74bae498e74254e59",
+      "box": 2,
       "index": 34,
-      "question": "Duis eu culpa nisi labore incididunt aliqua elit aliquip id anim. Sit in ea ad commodo esse ea dolore proident reprehenderit non cupidatat do. Sint dolor in velit qui nisi ipsum amet irure enim ea ad.\r\n",
-      "answer": "Aute laborum incididunt occaecat ut nisi. Anim enim proident consectetur nulla id. Dolor officia consequat culpa commodo sit veniam reprehenderit officia. Officia minim dolor nostrud ea est duis id voluptate qui eu. Consequat consequat nulla magna est pariatur consequat cillum eiusmod proident irure cupidatat ad labore consequat.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "wait",
+      "answer": "Ullamco incididunt proident exercitation deserunt ipsum. Veniam aute dolore laborum laborum labore.",
+      "question": "Consectetur reprehenderit nisi laboris occaecat ad aute excepteur ea in nisi. Sint sint reprehenderit cupidatat do qui occaecat proident exercitation exercitation amet proident do consectetur commodo.",
+      "createdAt": "2022-06-28T20:38:52.944Z",
+      "specialType": "none",
+      "lastTraining": "2022-07-25T20:38:52.944Z"
     },
     {
-      "_id": "6480f92678604c972c4285a6",
+      "_id": "6495b7a753937aa5bf97b85e",
+      "box": 4,
       "index": 35,
-      "question": "Officia nisi sint magna nostrud laboris aute pariatur magna eiusmod. Consectetur consequat est mollit culpa nulla dolore eiusmod tempor. Enim non commodo sunt magna aliquip. Enim occaecat irure sint adipisicing. Irure fugiat deserunt Lorem ipsum ea dolor eiusmod irure ad consectetur enim amet Lorem.\r\n",
-      "answer": "Lorem Lorem ex occaecat fugiat ut ad culpa. Cupidatat sunt mollit esse eiusmod. Quis incididunt mollit anim ea veniam sint.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 3,
-      "state": "train"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "wait",
+      "answer": "Et ullamco quis ea deserunt ex nostrud non. Dolor culpa aute excepteur sunt minim non quis laborum nulla aute Lorem esse.",
+      "question": "Duis excepteur magna quis officia dolore tempor. Sint Lorem labore incididunt in pariatur cupidatat aliquip sint.",
+      "createdAt": "2022-03-25T17:58:27.088Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-09T17:58:27.088Z"
     },
     {
-      "_id": "6480f926fe6fc50bd33930da",
+      "_id": "6495b7a72473595ebe3e0a05",
+      "box": 4,
       "index": 36,
-      "question": "Sunt elit eiusmod qui velit nisi dolor. Ullamco cillum do nisi do mollit exercitation commodo eiusmod enim do dolore excepteur amet est. Labore Lorem irure ea dolore commodo voluptate deserunt culpa ut nostrud labore dolor eu culpa. Ex duis laboris officia occaecat eu ea consequat nisi est nisi ipsum incididunt.\r\n",
-      "answer": "Ut ut aute culpa qui occaecat in magna quis labore nulla et cupidatat dolore. Esse excepteur id minim consectetur veniam. Nisi culpa et ut sunt amet laborum adipisicing ad incididunt minim do anim amet quis. Pariatur sint commodo ut mollit in commodo esse eu id in velit occaecat velit do. Amet anim irure nulla sit aliquip Lorem nostrud. Ea mollit et tempor proident cillum laborum do commodo exercitation proident nulla. Pariatur laboris adipisicing magna qui aliqua sint in consectetur pariatur officia nulla.\r\n",
       "shelf": "648c920b6adf96517748f3c1",
-      "box": 1,
-      "state": "train"
+      "state": "train",
+      "answer": "Cillum nisi ipsum nisi qui non qui pariatur ea cupidatat deserunt ea dolore incididunt et. Elit quis labore sint in culpa.",
+      "question": "Eiusmod ea sit nulla reprehenderit minim et eiusmod aliqua sit culpa proident. Ut veniam qui minim quis laboris.",
+      "createdAt": "2022-11-12T05:54:58.835Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-11-21T05:54:58.835Z"
     },
     {
-      "_id": "6480f9262492b14bb76a442b",
+      "_id": "6495b7a79967b92fed7905d2",
+      "box": 2,
       "index": 37,
-      "question": "Ex duis eiusmod aliquip consectetur. Esse aliquip velit fugiat id anim ad magna. Reprehenderit non sit cupidatat tempor id aliqua cupidatat. Sunt magna commodo velit ullamco dolor duis enim. Tempor aliqua est occaecat consectetur incididunt dolore mollit.\r\n",
-      "answer": "Exercitation officia Lorem fugiat cupidatat sint elit ad occaecat ex duis. Sint qui laborum amet quis qui incididunt enim Lorem cillum ea commodo anim id. Est excepteur deserunt in cupidatat esse labore adipisicing cupidatat officia. Ad qui ea enim amet laborum ut occaecat enim amet nisi esse veniam excepteur. Fugiat labore anim labore ad. Non aute veniam et et elit adipisicing officia dolore.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Adipisicing non ullamco officia aute minim culpa pariatur laborum Lorem non fugiat excepteur ut. Officia enim Lorem anim anim et cupidatat ipsum et aute labore consequat labore est anim.",
+      "question": "Sunt do duis aliqua consequat nisi qui sint sint est. Sit esse tempor duis sit velit incididunt laboris sunt est labore esse.",
+      "createdAt": "2022-06-06T03:49:00.629Z",
+      "specialType": "none",
+      "lastTraining": "2022-06-27T03:49:00.629Z"
     },
     {
-      "_id": "6480f9269283c4c04a52fb81",
+      "_id": "6495b7a7f26a45f35778fd20",
+      "box": 4,
       "index": 38,
-      "question": "Ut laboris duis eu tempor ullamco. Excepteur proident ad laborum cillum id ullamco minim laboris sint sit aliquip dolore nulla. Nisi enim Lorem dolor eiusmod elit sint eiusmod ut ullamco ut nulla irure magna. Dolore tempor dolor duis non commodo mollit nulla do sunt nisi do mollit. Labore in occaecat esse laborum elit ex ad in incididunt veniam aliqua adipisicing non exercitation. Commodo duis ea sint enim eiusmod velit.\r\n",
-      "answer": "Nulla proident dolor aliqua do dolor irure. Occaecat et ipsum labore sit id qui commodo non sunt est. Laborum voluptate minim non enim consequat in labore nisi in mollit. Veniam dolor occaecat proident est quis. Ad magna ut cillum exercitation in eiusmod. Aliquip sit reprehenderit non sint ipsum minim. Irure cupidatat ullamco commodo id et excepteur non.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "train",
+      "answer": "Laborum sunt esse Lorem est. Id esse non sunt cillum ea ad.",
+      "question": "Duis magna ex nulla quis qui minim eu labore cillum enim voluptate anim. Labore irure tempor cillum Lorem consectetur duis tempor labore nisi.",
+      "createdAt": "2022-06-26T22:33:03.191Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-08-25T22:33:03.191Z"
     },
     {
-      "_id": "6480f926b88e7c4fdfc2d4b7",
+      "_id": "6495b7a7c7f90d4ec334a52a",
+      "box": 4,
       "index": 39,
-      "question": "Lorem cupidatat excepteur do Lorem eiusmod dolore. Velit irure eu cillum consequat sunt ea amet eu sunt sunt. Nostrud incididunt labore tempor labore mollit exercitation enim deserunt fugiat. Do nisi duis ipsum nulla excepteur.\r\n",
-      "answer": "Deserunt aliqua veniam fugiat nulla pariatur ad minim non eiusmod tempor sunt velit culpa velit. Reprehenderit ullamco sint pariatur excepteur laboris commodo et ullamco enim anim excepteur deserunt. Sint non commodo enim laborum nulla id nulla cupidatat sit sint et ut cillum qui. Cillum qui sunt qui est sunt ad ex exercitation ea culpa. Officia sint ad anim reprehenderit aliqua anim in. Ea magna sint deserunt Lorem sit culpa est laboris sit minim Lorem reprehenderit.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 3,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Cupidatat eiusmod veniam ullamco deserunt do sunt nulla culpa dolore id excepteur velit deserunt. Sint Lorem commodo sunt amet non id eiusmod culpa aliquip.",
+      "question": "Reprehenderit velit aute cillum sit pariatur commodo nisi incididunt aute. Tempor magna aliquip laborum Lorem incididunt aliqua magna nulla.",
+      "createdAt": "2022-10-29T20:28:02.407Z",
+      "specialType": "none",
+      "lastTraining": "2022-12-28T20:28:02.407Z"
     },
     {
-      "_id": "6480f92612478d9b1129272d",
+      "_id": "6495b7a77f74f6d1ed0bfb63",
+      "box": 1,
       "index": 40,
-      "question": "Veniam duis amet excepteur do commodo. Qui voluptate aliqua do incididunt ut ad in sint. Aliqua commodo non pariatur id aliquip exercitation aute aliqua. Dolore esse reprehenderit aliqua id fugiat. Ex quis voluptate enim est duis duis irure excepteur. Dolore aliqua et tempor et veniam culpa nulla id deserunt quis.\r\n",
-      "answer": "Dolore irure ipsum eiusmod elit nisi cillum. Aliquip eu id quis aliqua esse velit ea in nulla irure. Dolor reprehenderit magna dolor culpa.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Dolore elit ut cupidatat dolore. Qui labore aute non elit qui laborum duis quis elit ea.",
+      "question": "Est non tempor sit duis. Velit Lorem duis elit ipsum irure aute reprehenderit aliquip.",
+      "createdAt": "2022-08-21T02:34:16.558Z",
+      "specialType": "none",
+      "lastTraining": "2022-10-23T02:34:16.558Z"
     },
     {
-      "_id": "6480f926a4ed1268b6700483",
+      "_id": "6495b7a7886901f80ac46c46",
+      "box": 3,
       "index": 41,
-      "question": "Commodo laboris esse dolor esse aliquip aliqua quis dolor. Ullamco proident reprehenderit id fugiat enim esse fugiat. Officia laborum proident quis aliqua reprehenderit elit non ipsum. Laboris aliqua eu laboris officia ipsum voluptate eu laborum mollit cupidatat do dolore exercitation. Enim Lorem do nisi ipsum officia mollit esse voluptate incididunt mollit proident Lorem duis adipisicing.\r\n",
-      "answer": "Id commodo cupidatat eiusmod sit officia duis elit dolor occaecat. Eu adipisicing reprehenderit aliqua fugiat aliquip deserunt ad mollit cupidatat do nisi veniam voluptate. Dolore fugiat magna voluptate laboris incididunt consectetur mollit cillum qui aliquip. Ad nisi esse culpa Lorem et. Sint dolore et culpa consectetur sint deserunt.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Amet do ipsum velit id eiusmod non Lorem dolore esse nulla. Ut ad culpa aute est ipsum esse velit quis eu excepteur adipisicing adipisicing proident laboris.",
+      "question": "Aute veniam sit occaecat sint magna ipsum mollit in eu voluptate cillum voluptate occaecat. Do officia sit aliquip reprehenderit aliquip magna laboris non labore culpa minim eiusmod.",
+      "createdAt": "2022-10-18T23:25:44.852Z",
+      "specialType": "none",
+      "lastTraining": "2023-01-04T23:25:44.852Z"
     },
     {
-      "_id": "6480f926b8afd945988519b6",
+      "_id": "6495b7a7c86bf13ec29670fa",
+      "box": 1,
       "index": 42,
-      "question": "Sint nulla duis id laborum amet est adipisicing occaecat tempor. Amet Lorem velit dolore ullamco eu reprehenderit. Sit occaecat ut esse officia occaecat nulla qui adipisicing sint magna tempor ex. Eu irure in velit laboris magna ad id sit. Veniam consectetur Lorem reprehenderit cillum aliquip nulla nostrud esse. Deserunt aliquip nostrud eiusmod nisi.\r\n",
-      "answer": "Consequat et aute minim consectetur exercitation cillum non sit. Labore pariatur eiusmod anim nisi aliquip. Non qui et Lorem dolore. Ea sunt adipisicing ullamco sint est qui culpa ex ullamco tempor ullamco duis velit mollit. Aliqua duis ipsum ea eu magna Lorem.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Labore qui elit nulla laborum dolore quis. Sit amet consectetur cillum sint dolor duis reprehenderit sit elit enim commodo.",
+      "question": "Deserunt enim ullamco occaecat ut culpa reprehenderit quis officia irure tempor Lorem ad. Quis mollit officia fugiat esse.",
+      "createdAt": "2022-12-30T18:02:09.479Z",
+      "specialType": "none",
+      "lastTraining": "2023-03-18T18:02:09.479Z"
     },
     {
-      "_id": "6480f9266e7a1c9b879b48f8",
+      "_id": "6495b7a7de2bf663d0044235",
+      "box": 4,
       "index": 43,
-      "question": "Deserunt magna ullamco pariatur est mollit dolore. Fugiat duis ex duis sunt ut id Lorem nulla ad. Sit mollit irure excepteur est. Non nisi voluptate labore esse ad velit magna occaecat nulla aliquip nisi nostrud reprehenderit veniam. Aliqua proident tempor tempor officia labore commodo do. Ullamco minim dolore mollit amet dolor aliqua anim et sint minim nulla deserunt officia. Reprehenderit excepteur ex do officia enim.\r\n",
-      "answer": "In excepteur non Lorem magna consequat eu eiusmod enim reprehenderit sit ullamco id. Fugiat laboris aliquip aute Lorem labore veniam irure deserunt eiusmod. Incididunt cupidatat non esse deserunt consequat magna ea.\r\n",
       "shelf": "648c920baa3edb04cec38442",
-      "box": 3,
-      "state": "wait"
+      "state": "train",
+      "answer": "Et cupidatat consequat anim minim nisi ut non consequat labore. Aliquip pariatur anim cillum eiusmod Lorem ullamco non.",
+      "question": "Deserunt cupidatat reprehenderit enim pariatur. Non nisi magna excepteur ullamco cillum sint anim minim.",
+      "createdAt": "2022-12-28T02:09:07.559Z",
+      "specialType": "none",
+      "lastTraining": "2023-02-12T02:09:07.559Z"
     },
     {
-      "_id": "6480f9266a32f7f942e00a22",
+      "_id": "6495b7a75c309523bd984d53",
+      "box": 0,
       "index": 44,
-      "question": "Cillum consequat est excepteur quis elit aute consequat. Velit consectetur esse in sint officia aute tempor. Aliqua duis fugiat excepteur nisi. Sunt non in laborum sit consectetur sint. Eiusmod commodo labore reprehenderit elit veniam elit.\r\n",
-      "answer": "Laboris voluptate excepteur nostrud ex dolor duis est eiusmod laboris dolor. Deserunt laborum eiusmod reprehenderit veniam incididunt voluptate in laborum dolor aliqua excepteur excepteur qui amet. Ea et enim eu tempor consequat enim sint ut adipisicing adipisicing in ut. Incididunt fugiat do cupidatat proident ut incididunt esse enim aute excepteur. Aute sint Lorem cupidatat labore aliquip irure ipsum mollit mollit labore aute cillum. Do ipsum exercitation cupidatat aliqua eiusmod labore Lorem deserunt commodo cillum elit sint amet ea. Mollit ex pariatur ex ex ex irure labore.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Pariatur veniam magna nostrud mollit. Cupidatat deserunt anim ullamco aliquip enim.",
+      "question": "Anim duis proident elit exercitation est veniam non officia excepteur duis laborum quis voluptate. Amet nostrud Lorem voluptate incididunt amet tempor deserunt in ipsum pariatur.",
+      "createdAt": "2022-08-30T09:38:47.352Z",
+      "specialType": "new",
+      "lastTraining": "2022-10-06T09:38:47.352Z"
     },
     {
-      "_id": "6480f926c7d4434bb99af681",
+      "_id": "6495b7a75ab78c2c4166dd4e",
+      "box": 4,
       "index": 45,
-      "question": "Voluptate culpa laboris occaecat do voluptate amet id nulla pariatur. Sit mollit quis nisi cupidatat amet tempor adipisicing sint mollit incididunt sint dolor labore. Cupidatat tempor occaecat proident nostrud anim aliquip excepteur ea. Laborum laboris tempor quis consectetur enim dolor adipisicing dolore veniam id amet ex ex. Nulla incididunt tempor consequat eu do et exercitation Lorem dolor enim cillum. Dolor officia sunt nostrud pariatur culpa aliqua sint quis qui veniam ipsum eiusmod aliquip. Laborum exercitation id et aliquip ullamco ad esse nisi aliquip reprehenderit fugiat.\r\n",
-      "answer": "Non amet irure ea laboris ullamco elit esse Lorem. Pariatur ad nisi id eu tempor magna ipsum incididunt. Anim cillum consequat velit eiusmod deserunt do quis. Incididunt esse laboris velit voluptate reprehenderit esse officia amet dolore enim culpa elit. Exercitation sunt cillum culpa laborum exercitation anim excepteur proident Lorem id elit consectetur. Anim aliquip est id sit officia incididunt pariatur. Duis voluptate excepteur enim irure consequat officia laborum.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Sunt nostrud esse eu ut cillum minim ad eiusmod reprehenderit. Incididunt reprehenderit labore excepteur laborum mollit aliquip anim do dolore.",
+      "question": "Dolor dolore quis ullamco ut ullamco culpa est labore magna magna nisi labore nisi consequat. Id cupidatat cillum deserunt adipisicing cillum ad et commodo laboris velit sunt aute eu nulla.",
+      "createdAt": "2022-01-11T05:58:41.779Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-03-16T05:58:41.779Z"
     },
     {
-      "_id": "6480f926257c8e75c8335f75",
+      "_id": "6495b7a7d75577964aac37b1",
+      "box": 5,
       "index": 46,
-      "question": "Aliqua adipisicing ex voluptate duis sit eu proident ex esse tempor. Quis tempor sunt enim ex aliqua do sint id dolor consectetur voluptate sunt minim. Magna mollit id pariatur esse in commodo qui est duis proident labore duis. Cupidatat amet pariatur exercitation irure laborum non eu elit ut veniam aute sunt esse ipsum. Magna est do proident magna pariatur ad commodo laborum.\r\n",
-      "answer": "Labore esse Lorem nisi proident pariatur magna ad tempor aliquip. Incididunt pariatur nisi duis proident excepteur Lorem veniam sit sunt irure aliqua. Velit consectetur enim enim excepteur sunt. Magna consequat ex aliquip sint ea. Aute duis minim amet labore cillum.\r\n",
       "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 1,
-      "state": "wait"
+      "state": "wait",
+      "answer": "Ipsum consequat sunt in incididunt enim velit. Eu proident adipisicing laboris eu laboris consectetur commodo.",
+      "question": "Deserunt Lorem minim ullamco incididunt labore nisi adipisicing. Magna excepteur velit ut ullamco quis magna pariatur do magna ut qui consequat.",
+      "createdAt": "2022-03-31T00:11:28.272Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-04-14T00:11:28.272Z"
     },
     {
-      "_id": "6480f9265d53728fc729f4b6",
+      "_id": "6495b7a7fd36fe7d31666161",
+      "box": 1,
       "index": 47,
-      "question": "Amet culpa laboris dolore ea fugiat anim nulla occaecat. Reprehenderit laborum dolor aliquip minim. Occaecat ex reprehenderit eiusmod ea enim do eu. Labore quis adipisicing commodo eiusmod et ut culpa ut officia. Qui voluptate culpa nisi irure duis minim minim irure aliquip pariatur amet ut incididunt. Velit ex nostrud consequat id in dolor sunt ut incididunt.\r\n",
-      "answer": "Minim aliqua consequat ad qui enim pariatur ea nisi et id Lorem sint velit adipisicing. Aliqua nisi elit ut consectetur deserunt mollit exercitation sunt aliqua est deserunt exercitation dolor do. Lorem consectetur sunt aute proident voluptate est ipsum ullamco reprehenderit duis eu. Excepteur ipsum sint ad eiusmod aute qui non qui officia ipsum amet aliqua. Ullamco aliqua magna duis velit nostrud ullamco esse.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Quis pariatur Lorem ut Lorem commodo voluptate labore proident non. Voluptate sunt fugiat et ut dolore ipsum occaecat ex dolor nisi sit.",
+      "question": "Commodo magna do occaecat duis. Dolore elit ex irure aliqua aliqua.",
+      "createdAt": "2022-09-01T04:15:59.396Z",
+      "specialType": "none",
+      "lastTraining": "2022-09-13T04:15:59.396Z"
     },
     {
-      "_id": "6480f9260e3e1548c2f77d65",
+      "_id": "6495b7a720bc95f0005c94e5",
+      "box": 3,
       "index": 48,
-      "question": "Pariatur velit aliquip labore est qui sint elit sunt nostrud sint. Minim aute eu cupidatat duis aute elit proident est veniam sunt. Sunt aute enim nostrud sunt duis. Reprehenderit qui et ea velit do laboris proident cillum ullamco consequat deserunt. Occaecat laborum laborum in exercitation dolor aute adipisicing officia aliquip.\r\n",
-      "answer": "Non cupidatat nisi id aliqua quis ullamco exercitation. Cillum occaecat sint nulla mollit qui dolore ad. Ullamco occaecat culpa sit sunt commodo cupidatat deserunt eu dolore officia sunt. Nostrud dolor laboris nisi aliquip veniam do officia dolore nostrud sunt aliquip ex anim et. Ut et minim culpa sunt labore sit fugiat dolore aliquip duis labore est ex.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Velit voluptate amet elit nostrud do id occaecat dolore consequat. Ullamco velit sit aute deserunt deserunt laborum aliquip tempor.",
+      "question": "Commodo duis cupidatat magna sint sit. Et fugiat exercitation qui quis excepteur.",
+      "createdAt": "2022-12-04T15:12:59.491Z",
+      "specialType": "none",
+      "lastTraining": "2022-12-27T15:12:59.491Z"
     },
     {
-      "_id": "6480f92697af5c5b5cc6d27d",
+      "_id": "6495b7a75e092bd83046c573",
+      "box": 2,
       "index": 49,
-      "question": "Est qui aliqua amet incididunt labore incididunt incididunt quis consequat pariatur. Qui ea deserunt aliqua nulla laborum magna sint amet tempor eu et. Laborum eiusmod reprehenderit do labore aute et quis nulla enim aute. Elit sint proident excepteur consequat nisi sunt in id. Veniam proident ea dolor nulla velit amet dolore aliqua Lorem culpa ea velit tempor.\r\n",
-      "answer": "Veniam officia amet Lorem occaecat laborum reprehenderit velit consectetur eu. Cupidatat ex non non nostrud. Amet sit incididunt tempor fugiat sunt elit exercitation do proident. Anim voluptate aliqua mollit elit exercitation nisi cillum in occaecat labore amet sunt. Ea exercitation minim eu ea aliqua et enim excepteur. Est sint irure ipsum ea irure laboris in duis duis fugiat ex deserunt laboris. Magna cupidatat sunt irure cupidatat cupidatat duis et non.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "wait",
+      "answer": "Sint enim aliqua consectetur est in aute deserunt reprehenderit minim. Consequat nostrud nisi excepteur nulla anim.",
+      "question": "Mollit Lorem ex esse aliquip veniam cillum. Nisi proident culpa do sit minim tempor mollit est laborum tempor do proident laborum.",
+      "createdAt": "2022-03-22T06:10:03.536Z",
+      "specialType": "none",
+      "lastTraining": "2022-06-09T06:10:03.536Z"
     },
     {
-      "_id": "6480f9269c06737f3d7068f8",
+      "_id": "6495b7a7678c0ac114a28bd3",
+      "box": 1,
       "index": 50,
-      "question": "Veniam culpa ea aliquip sint eiusmod dolor laborum reprehenderit esse elit dolore et. Magna voluptate aute dolore mollit duis commodo ipsum et laborum sunt ad enim. Duis laborum laborum ad labore eu tempor minim fugiat do amet nisi excepteur.\r\n",
-      "answer": "Qui est eu Lorem ex minim ad voluptate ullamco velit esse ea nulla sint fugiat. Sit et adipisicing elit enim cillum dolor aliquip pariatur duis pariatur mollit deserunt pariatur Lorem. Eu Lorem aliquip nisi in proident cillum deserunt sunt laborum. Commodo occaecat sint do incididunt velit consequat.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "train",
+      "answer": "Id sit ullamco laborum cupidatat dolore eiusmod elit. Velit veniam officia enim dolore commodo Lorem.",
+      "question": "Excepteur fugiat id nulla culpa eiusmod. Eiusmod incididunt qui do officia adipisicing voluptate incididunt.",
+      "createdAt": "2022-03-09T03:30:41.857Z",
+      "specialType": "none",
+      "lastTraining": "2022-04-12T03:30:41.857Z"
     },
     {
-      "_id": "6480f92625c884e22a771f28",
+      "_id": "6495b7a7014e08d05cd63100",
+      "box": 3,
       "index": 51,
-      "question": "Laboris reprehenderit et ad labore ipsum incididunt in ipsum anim magna. Cupidatat nostrud Lorem velit proident exercitation Lorem. Sint duis est cillum aliquip anim occaecat labore sint sit exercitation laborum est consectetur ut. In veniam nulla esse reprehenderit dolor. Aliqua duis enim sint proident nulla magna ut velit veniam ipsum.\r\n",
-      "answer": "Culpa nisi irure excepteur nostrud esse esse cupidatat fugiat nisi elit velit id eiusmod labore. Occaecat aliquip dolore nostrud culpa in. Occaecat veniam in eu eiusmod id nulla anim adipisicing et.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Sunt laborum voluptate nisi nisi sunt eiusmod laborum nisi aliqua dolor dolor est. Ut laborum ipsum consectetur Lorem esse enim reprehenderit ullamco adipisicing ut.",
+      "question": "Dolore elit ipsum fugiat veniam sit aliqua sint eiusmod occaecat labore sint qui labore in. Incididunt minim magna occaecat officia officia ullamco ad consectetur duis esse.",
+      "createdAt": "2022-06-14T13:20:33.060Z",
+      "specialType": "none",
+      "lastTraining": "2022-07-25T13:20:33.060Z"
     },
     {
-      "_id": "6480f926da6cc67c78352d28",
+      "_id": "6495b7a755af9a92e3b4d428",
+      "box": 2,
       "index": 52,
-      "question": "Ipsum consectetur officia laborum cillum esse sit et proident mollit non do. Ut ad fugiat non qui eu mollit reprehenderit. Consequat Lorem ullamco deserunt non nostrud aliquip qui incididunt consectetur. Consequat quis id ut fugiat id aute sunt cillum ullamco esse enim non in non.\r\n",
-      "answer": "Sint sunt reprehenderit non excepteur adipisicing ullamco veniam id. Amet laborum velit reprehenderit id magna exercitation qui aliqua non laborum. Pariatur voluptate officia exercitation officia id voluptate commodo culpa nulla incididunt ea adipisicing. Do dolor ut magna velit in sit dolore sit elit nostrud.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 3,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Cillum incididunt est est eu culpa qui occaecat eiusmod officia proident. Qui labore elit in reprehenderit proident do fugiat et in aliquip consequat mollit nostrud.",
+      "question": "Dolor irure pariatur veniam irure commodo aute voluptate reprehenderit labore aliqua. Non nisi voluptate ut non laboris nostrud esse est ea.",
+      "createdAt": "2022-11-19T15:56:21.629Z",
+      "specialType": "none",
+      "lastTraining": "2023-01-02T15:56:21.629Z"
     },
     {
-      "_id": "6480f9267cffa62daf09f7d9",
+      "_id": "6495b7a723fda5d762f6cea1",
+      "box": 1,
       "index": 53,
-      "question": "Ad exercitation cillum officia fugiat cupidatat cupidatat. Dolore consectetur enim aliquip culpa laborum id incididunt. Nisi sit cupidatat ullamco elit proident consequat fugiat aliqua enim id eu tempor occaecat. Commodo ipsum dolore qui enim cillum culpa incididunt proident voluptate ex. Nulla excepteur consequat ad adipisicing. Enim voluptate ut Lorem ea culpa nisi adipisicing ea in cupidatat officia.\r\n",
-      "answer": "Id ad dolore aliquip commodo duis laborum aute occaecat nulla aliqua labore nulla excepteur aliqua. Magna Lorem reprehenderit veniam tempor proident amet voluptate ex incididunt est ipsum sint velit mollit. Pariatur cupidatat do ea amet aute non ut nostrud proident est ad sint amet irure. Officia culpa reprehenderit enim velit labore magna eu eiusmod nulla dolore exercitation. Laborum cillum cillum consequat fugiat magna ut non laborum. Duis aute mollit velit dolor eiusmod laboris.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "wait"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "wait",
+      "answer": "Ad adipisicing excepteur proident incididunt. Occaecat ad proident anim eu sit velit nostrud dolore commodo minim.",
+      "question": "Aliquip consequat aliquip est voluptate do deserunt tempor occaecat sunt exercitation. Aliqua ea eiusmod irure aute laborum eiusmod non.",
+      "createdAt": "2022-07-05T20:04:50.949Z",
+      "specialType": "none",
+      "lastTraining": "2022-07-22T20:04:50.949Z"
     },
     {
-      "_id": "6480f92629092f702ad9563b",
+      "_id": "6495b7a76db1e6b774e01120",
+      "box": 3,
       "index": 54,
-      "question": "Aute ea ex Lorem ut. Occaecat occaecat aute id sint consequat nostrud veniam qui sint quis duis proident do culpa. Enim adipisicing elit nostrud excepteur tempor veniam est in. Est minim sint ut Lorem cillum minim cillum incididunt amet reprehenderit. Sit magna est id consequat ut ipsum laborum minim adipisicing labore anim laborum qui ut. Elit commodo in duis eu incididunt non et veniam deserunt eu duis quis ad. Anim commodo eiusmod non incididunt.\r\n",
-      "answer": "Id duis voluptate ea tempor consequat aliquip consectetur minim reprehenderit sint. Proident ex officia dolore Lorem. Ex ea incididunt aliquip mollit. Sit deserunt duis cupidatat non. Irure aute dolore consectetur minim et laboris sit anim Lorem cupidatat esse. Ad reprehenderit dolor officia non ex tempor laboris. Sit minim nostrud mollit deserunt eiusmod tempor.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "train",
+      "answer": "Nulla et aliquip culpa exercitation cupidatat proident dolore est nulla fugiat sint amet fugiat. Ullamco amet amet anim magna ut.",
+      "question": "Reprehenderit cillum excepteur veniam tempor enim officia occaecat culpa. Exercitation enim est exercitation elit.",
+      "createdAt": "2022-08-28T17:49:07.926Z",
+      "specialType": "none",
+      "lastTraining": "2022-09-14T17:49:07.926Z"
     },
     {
-      "_id": "6480f926f8b61015fdbf9634",
+      "_id": "6495b7a722d8c2f22d279c57",
+      "box": 0,
       "index": 55,
-      "question": "Exercitation qui officia et fugiat tempor sit. In nostrud anim sit dolor Lorem ipsum. Eiusmod magna sunt id veniam magna aliquip nulla culpa quis tempor pariatur nisi ea.\r\n",
-      "answer": "Sunt culpa consectetur excepteur nostrud consectetur veniam. Elit anim magna sint magna proident aliqua cillum fugiat quis sint occaecat ut exercitation. Non ad commodo pariatur incididunt do proident laborum nulla laborum velit sint non aute proident.\r\n",
       "shelf": "648c920b3e40b5930a6e1603",
-      "box": 2,
-      "state": "train"
+      "state": "train",
+      "answer": "Occaecat pariatur sit voluptate consequat non reprehenderit proident. Laboris minim mollit laboris anim officia ad commodo do.",
+      "question": "Reprehenderit Lorem do minim commodo incididunt excepteur consectetur dolore veniam quis culpa et. Nulla quis reprehenderit enim pariatur labore culpa.",
+      "createdAt": "2022-10-06T15:16:14.942Z",
+      "specialType": "new",
+      "lastTraining": "2022-10-22T15:16:14.942Z"
     },
     {
-      "_id": "6480f9261fa08492291f59ed",
+      "_id": "6495b7a753a16d43725ea21c",
+      "box": 5,
       "index": 56,
-      "question": "Enim sunt elit et pariatur deserunt duis quis. Excepteur consectetur est ea irure laboris non. Dolor sunt aliqua et deserunt velit nisi laboris ex elit.\r\n",
-      "answer": "Commodo elit qui adipisicing officia ea cillum voluptate duis labore sint magna. Non duis nisi aute voluptate laboris cupidatat dolor est velit voluptate do cupidatat veniam. Veniam ea excepteur fugiat consequat culpa aliquip laboris do sit minim qui sint ut. Reprehenderit consectetur laboris minim id minim amet qui. Id consectetur fugiat est anim excepteur et eu nisi. Laboris elit do ex quis magna ex elit ut sint velit esse. Ex dolore fugiat eu laborum anim sint ipsum.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Adipisicing et dolor sint exercitation cupidatat dolor sit labore do nisi commodo adipisicing. Dolor ad aliquip et cupidatat cillum commodo commodo.",
+      "question": "Velit nostrud in in ullamco non velit duis do do culpa velit sit incididunt elit. Excepteur ea pariatur laborum tempor sit fugiat sunt et culpa ipsum consectetur.",
+      "createdAt": "2022-01-06T04:21:51.929Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-03-27T04:21:51.929Z"
     },
     {
-      "_id": "6480f926024b1d12a472cb95",
+      "_id": "6495b7a7731b432d4748427c",
+      "box": 1,
       "index": 57,
-      "question": "Est incididunt ea commodo quis dolore tempor nisi proident nostrud cillum amet ea. Tempor incididunt dolor eu minim minim deserunt ad do nisi irure sunt cupidatat. Irure aliqua culpa aute consectetur magna amet in ipsum quis magna ad ipsum aliqua consequat.\r\n",
-      "answer": "Irure quis reprehenderit magna reprehenderit proident Lorem cillum nisi do excepteur consequat voluptate. Eiusmod aute ut do labore minim. Esse ex consectetur laborum Lorem sunt tempor et. Est ipsum commodo do est commodo tempor laborum duis officia.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Nostrud in tempor in aliquip deserunt culpa et dolor incididunt officia labore proident ullamco velit. Amet culpa cillum incididunt nisi proident proident officia sunt velit exercitation culpa dolore.",
+      "question": "Aliqua et elit id dolor labore non ullamco et elit sint tempor qui tempor amet. Et ut aliquip incididunt eu enim dolore elit deserunt sunt duis Lorem.",
+      "createdAt": "2022-11-23T18:57:32.280Z",
+      "specialType": "none",
+      "lastTraining": "2023-01-29T18:57:32.280Z"
     },
     {
-      "_id": "6480f92695b704a1a800037c",
+      "_id": "6495b7a75ef3d40fd52ee527",
+      "box": 4,
       "index": 58,
-      "question": "Qui pariatur eiusmod esse aliqua ipsum. Labore aliquip eiusmod et adipisicing excepteur minim commodo est fugiat ea labore. Minim aliquip incididunt irure laborum.\r\n",
-      "answer": "Amet laboris reprehenderit incididunt aute nostrud non dolore dolor Lorem qui. Consequat qui eu proident consectetur do ut adipisicing et aliqua. Ut nostrud reprehenderit sint commodo. Non incididunt sint est nulla consectetur aliquip. Cillum dolore veniam reprehenderit irure veniam culpa fugiat fugiat tempor ut elit minim amet veniam.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Eu culpa esse do exercitation officia deserunt Lorem ipsum ea id voluptate nulla. Velit elit nisi irure cupidatat.",
+      "question": "Eiusmod incididunt consequat non irure magna in ipsum incididunt exercitation. Anim est duis aliqua amet aliqua amet sint incididunt et exercitation adipisicing culpa ullamco exercitation.",
+      "createdAt": "2022-10-25T22:48:33.745Z",
+      "specialType": "none",
+      "lastTraining": "2022-11-07T22:48:33.745Z"
     },
     {
-      "_id": "6480f926257db463c2ec8f4e",
+      "_id": "6495b7a72848e2a5285b2b88",
+      "box": 3,
       "index": 59,
-      "question": "Eiusmod consequat esse nisi ea pariatur labore Lorem. Labore elit eiusmod amet duis minim cupidatat culpa commodo enim cillum. Amet aliquip aute ut laborum. Cillum do tempor officia occaecat eu dolore voluptate Lorem nulla sunt.\r\n",
-      "answer": "Labore elit consectetur pariatur tempor duis minim eu aliquip. Velit amet sit et Lorem excepteur ullamco magna magna laborum. Ullamco fugiat irure duis consectetur elit quis deserunt laborum. Elit nulla velit labore cillum fugiat ex deserunt irure nulla laboris qui est. Duis esse consectetur aliqua ad labore enim ad culpa excepteur ea laborum excepteur.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "wait",
+      "answer": "Est deserunt nostrud tempor duis ipsum nisi. Aliqua laborum nisi officia ad ex esse excepteur duis ipsum deserunt commodo pariatur quis cupidatat.",
+      "question": "Do aliquip dolor dolore sunt voluptate id occaecat. Sit minim qui sit eu.",
+      "createdAt": "2022-09-29T19:18:55.152Z",
+      "specialType": "none",
+      "lastTraining": "2022-10-07T19:18:55.152Z"
     },
     {
-      "_id": "6480f9264f37835d3e0d958a",
+      "_id": "6495b7a72cbc9e5df4a5ed25",
+      "box": 3,
       "index": 60,
-      "question": "Aliquip quis incididunt amet sint irure pariatur ea officia. Sunt culpa proident amet ut Lorem incididunt ad. Id proident aliquip velit elit do eiusmod occaecat. Ea amet culpa labore incididunt pariatur.\r\n",
-      "answer": "Aute et amet veniam eu elit voluptate eu proident. Nisi ex eiusmod et eiusmod voluptate proident elit incididunt adipisicing ea est. In dolor nisi cupidatat minim nostrud in.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 3,
-      "state": "wait"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "train",
+      "answer": "Do id ex dolor ea deserunt excepteur exercitation in eiusmod officia. Lorem fugiat ut ipsum aliquip.",
+      "question": "Sunt nisi elit deserunt ipsum laborum do officia sint commodo. Adipisicing consectetur in minim mollit deserunt commodo ut consequat.",
+      "createdAt": "2022-01-27T23:15:20.651Z",
+      "specialType": "none",
+      "lastTraining": "2022-03-20T23:15:20.651Z"
     },
     {
-      "_id": "6480f9265e4d37d46f5413cf",
+      "_id": "6495b7a7fe778f65088a726f",
+      "box": 5,
       "index": 61,
-      "question": "Sint eiusmod cillum pariatur duis nulla voluptate velit officia sunt mollit occaecat nisi excepteur. Tempor nisi do elit ipsum tempor duis anim non culpa sit dolore officia in. Cillum esse laboris aute est ipsum cupidatat fugiat. Exercitation elit occaecat reprehenderit magna magna tempor velit nulla minim deserunt.\r\n",
-      "answer": "Enim aliqua et minim ex voluptate veniam incididunt eiusmod. Qui laboris exercitation quis cupidatat nostrud incididunt in commodo exercitation nostrud velit sunt. Aute voluptate cupidatat Lorem ad ullamco officia labore nulla voluptate fugiat. Mollit magna proident eu anim amet ullamco eiusmod aliqua cupidatat ex ipsum in magna minim.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "wait",
+      "answer": "Veniam et eu consectetur enim reprehenderit esse. Ad voluptate consequat voluptate Lorem reprehenderit aliqua veniam.",
+      "question": "Pariatur voluptate nulla duis amet anim elit sunt excepteur. Ad elit labore fugiat anim proident pariatur in exercitation pariatur labore culpa cupidatat proident.",
+      "createdAt": "2022-01-17T17:20:47.746Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-03-18T17:20:47.746Z"
     },
     {
-      "_id": "6480f926c0b93f6f933ab30e",
+      "_id": "6495b7a703817fa17f8b02aa",
+      "box": 3,
       "index": 62,
-      "question": "Laboris Lorem eu officia irure anim elit aliqua officia commodo fugiat eu eiusmod. Qui qui consectetur consectetur consectetur non excepteur non velit. Esse culpa quis occaecat ut tempor veniam laborum proident. Cillum eiusmod sint voluptate id culpa do. Aliquip culpa elit ullamco ipsum et commodo aliquip qui. Mollit elit labore incididunt reprehenderit eiusmod est ad nulla sit proident enim.\r\n",
-      "answer": "Fugiat labore cillum aliqua laboris sint magna. Mollit nulla nulla voluptate enim id. Ad ullamco reprehenderit amet proident nulla irure duis consectetur. Sint aliquip Lorem consectetur id ut sint nisi sunt irure duis laborum minim quis duis. Eiusmod ex consequat dolor commodo ipsum dolor deserunt do ea deserunt occaecat. Minim qui qui tempor commodo reprehenderit deserunt laborum duis id dolor veniam excepteur. Occaecat incididunt non laboris do laborum velit.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Dolore ut magna ea eiusmod. Consequat consectetur officia fugiat elit consectetur pariatur tempor tempor.",
+      "question": "Aliquip pariatur ex adipisicing nostrud tempor magna irure. Excepteur amet anim fugiat officia in consequat ad dolore ad.",
+      "createdAt": "2022-09-16T06:55:32.932Z",
+      "specialType": "none",
+      "lastTraining": "2022-10-21T06:55:32.932Z"
     },
     {
-      "_id": "6480f92699c8f9d9a579d659",
+      "_id": "6495b7a734db2e3460ddfd5c",
+      "box": 1,
       "index": 63,
-      "question": "Veniam magna culpa eiusmod id adipisicing mollit occaecat culpa id. Nulla aliquip voluptate minim tempor irure mollit ea cillum do fugiat. Quis laborum Lorem labore ut duis tempor consequat. Nostrud velit cupidatat fugiat aute velit tempor. Ex excepteur aute eiusmod ad.\r\n",
-      "answer": "Sint sit tempor sit duis sunt fugiat ex veniam sunt minim. Ullamco enim ut nostrud consectetur. Labore cupidatat quis sunt voluptate incididunt ex culpa sunt cupidatat minim esse laboris eiusmod. Est exercitation veniam est anim ad et aliqua adipisicing ipsum in cillum sint. Mollit laboris tempor eu reprehenderit ad occaecat eiusmod aute.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "wait",
+      "answer": "Aliqua exercitation mollit pariatur minim. Nostrud irure fugiat incididunt ad aliquip occaecat nisi nulla aute laboris fugiat.",
+      "question": "Ad exercitation reprehenderit mollit deserunt veniam Lorem ea quis irure ea. Commodo elit est tempor qui reprehenderit tempor elit deserunt elit magna occaecat dolore adipisicing reprehenderit.",
+      "createdAt": "2022-03-06T21:56:01.564Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-19T21:56:01.564Z"
     },
     {
-      "_id": "6480f9265bd62cf5b055594c",
+      "_id": "6495b7a7daba666cc9776e62",
+      "box": 2,
       "index": 64,
-      "question": "Enim dolore adipisicing tempor fugiat id cillum ea elit id non excepteur incididunt. Exercitation excepteur ut ullamco ullamco ad nisi quis eu consequat. Sit consequat est qui consequat minim excepteur est ea amet in elit. Elit occaecat veniam anim non elit cupidatat qui esse sunt deserunt dolore ullamco dolore aliquip. Mollit id cupidatat quis aute consequat laborum sint irure esse. Est veniam enim et fugiat. Laboris ex anim ad deserunt excepteur dolore nulla veniam culpa laboris.\r\n",
-      "answer": "Sit eiusmod cillum nisi exercitation enim et in. Adipisicing pariatur nostrud do ipsum id sunt sunt irure veniam. Lorem mollit pariatur duis amet non dolor ea et magna ad.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Incididunt voluptate Lorem eiusmod consequat elit officia exercitation nostrud. In elit aliquip veniam Lorem eiusmod nostrud.",
+      "question": "Officia sint in consectetur incididunt reprehenderit ad culpa aute nostrud esse. Laborum pariatur Lorem eu laborum.",
+      "createdAt": "2022-07-25T05:38:44.034Z",
+      "specialType": "none",
+      "lastTraining": "2022-10-11T05:38:44.034Z"
     },
     {
-      "_id": "6480f9262f199f624447c961",
+      "_id": "6495b7a72353f4c288f50c5f",
+      "box": 2,
       "index": 65,
-      "question": "Commodo fugiat incididunt cupidatat nulla excepteur consequat ullamco consectetur fugiat cillum voluptate. Qui aute amet aliqua proident nisi aliquip ut. Occaecat ea aute duis anim ut et sit Lorem. Consequat culpa aute fugiat ullamco est. Eiusmod sint excepteur cupidatat amet fugiat sit non sunt veniam.\r\n",
-      "answer": "Incididunt Lorem sunt proident sit nisi. Tempor ex aliquip quis nulla sint minim excepteur adipisicing commodo. Anim aliquip amet sint commodo consectetur officia officia anim enim veniam. Amet laboris id incididunt ad eu voluptate eiusmod.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "wait",
+      "answer": "In voluptate nisi ullamco ad quis duis est cillum eu sunt labore. Esse reprehenderit irure esse fugiat et.",
+      "question": "Qui occaecat quis qui velit laborum labore ex adipisicing proident sit. Culpa aliquip voluptate anim pariatur ex veniam mollit ut dolor aute in veniam nisi mollit.",
+      "createdAt": "2022-12-20T21:07:19.878Z",
+      "specialType": "none",
+      "lastTraining": "2023-01-08T21:07:19.878Z"
     },
     {
-      "_id": "6480f926b193cd62f6b743cf",
+      "_id": "6495b7a78e3679ac23ff792f",
+      "box": 2,
       "index": 66,
-      "question": "Cillum ex quis Lorem ipsum Lorem duis excepteur. Officia cupidatat ullamco anim do sit Lorem sint. Officia nisi eiusmod excepteur nulla ut dolore proident eu tempor sunt mollit.\r\n",
-      "answer": "Eiusmod culpa pariatur qui quis in laborum fugiat ex aliquip aliqua. Proident reprehenderit Lorem deserunt pariatur consectetur esse dolor. Deserunt ex nulla eiusmod ex sunt adipisicing Lorem occaecat deserunt consectetur dolor veniam dolore. Nostrud reprehenderit id minim culpa tempor culpa irure exercitation incididunt eiusmod eu pariatur dolore. Dolore culpa commodo sint ea mollit esse tempor. Aliqua quis exercitation sit in aute ea. Deserunt ut mollit adipisicing enim ad Lorem anim anim excepteur.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "train",
+      "answer": "Nulla ad commodo dolor laboris sunt officia esse officia reprehenderit laboris. Nostrud sint anim tempor ex veniam quis ex ea sunt aute qui sit.",
+      "question": "Elit occaecat sit veniam tempor incididunt tempor sit ut aute consequat consectetur mollit aute sint. Enim duis minim et eiusmod adipisicing sit ad nulla adipisicing voluptate quis consectetur tempor.",
+      "createdAt": "2022-03-09T02:36:38.230Z",
+      "specialType": "none",
+      "lastTraining": "2022-03-23T02:36:38.230Z"
     },
     {
-      "_id": "6480f9262cca3383dc528d18",
+      "_id": "6495b7a73ddd51e08534106d",
+      "box": 2,
       "index": 67,
-      "question": "Exercitation reprehenderit duis voluptate anim incididunt in aute occaecat mollit sunt dolor adipisicing exercitation et. Sunt quis ut ipsum excepteur sit consequat minim ad nostrud. Consequat nisi ipsum cupidatat exercitation ipsum pariatur non proident exercitation cillum nisi fugiat. Aliqua aliqua id ea laborum anim sint laborum sunt culpa fugiat elit. Eiusmod ipsum elit fugiat anim non est qui enim quis fugiat labore sunt pariatur labore. Voluptate incididunt id pariatur ullamco mollit magna velit elit fugiat exercitation ut. Dolore aute labore ea ad adipisicing quis velit deserunt consectetur.\r\n",
-      "answer": "Esse enim pariatur incididunt incididunt veniam mollit ullamco eiusmod tempor sit. Magna eiusmod id duis esse mollit nisi nostrud reprehenderit anim do non. Magna consequat tempor dolor commodo proident. Ea veniam aliqua tempor excepteur ex et excepteur est occaecat et consequat esse. Elit voluptate enim non adipisicing.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "train",
+      "answer": "Ea proident ullamco ipsum Lorem magna qui commodo magna. Dolore sit reprehenderit ea ad labore proident occaecat.",
+      "question": "Do ad labore nostrud ipsum ullamco fugiat nostrud qui. Occaecat aliqua voluptate non ad ut deserunt laborum est id pariatur ex.",
+      "createdAt": "2022-12-21T16:24:37.953Z",
+      "specialType": "none",
+      "lastTraining": "2023-02-17T16:24:37.953Z"
     },
     {
-      "_id": "6480f926fcb47ffece53d925",
+      "_id": "6495b7a705b734bcfab5ac9c",
+      "box": 4,
       "index": 68,
-      "question": "Cillum laborum sunt do et amet quis incididunt velit Lorem nisi. Dolore cillum nulla id est. Dolore eiusmod velit incididunt aute eiusmod mollit dolore qui velit eiusmod commodo culpa ipsum non.\r\n",
-      "answer": "Ullamco non sit aute aute sit dolore excepteur labore commodo exercitation. Officia ut sint anim excepteur consectetur veniam. Velit ullamco minim magna ex esse commodo ad cillum.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 3,
-      "state": "train"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Lorem cillum labore sunt veniam voluptate laborum minim enim dolor. Sint aute nulla esse et quis.",
+      "question": "Elit proident est non nostrud quis ea culpa incididunt consequat aute. Minim in veniam fugiat esse eiusmod ex irure.",
+      "createdAt": "2022-10-23T13:04:30.139Z",
+      "specialType": "none",
+      "lastTraining": "2022-11-21T13:04:30.139Z"
     },
     {
-      "_id": "6480f92604507ef4809e112b",
+      "_id": "6495b7a724439d2078fa10b6",
+      "box": 2,
       "index": 69,
-      "question": "Laborum occaecat commodo occaecat commodo nulla enim consequat incididunt aute culpa proident ullamco. Deserunt veniam ad id labore. Commodo quis occaecat proident amet exercitation nulla et quis do.\r\n",
-      "answer": "Amet amet consequat esse anim et. Cupidatat fugiat sit aliquip officia. Aute ut et exercitation culpa do commodo tempor consectetur nostrud minim. Veniam cupidatat ea incididunt consequat cillum dolore do tempor eiusmod enim mollit.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "wait",
+      "answer": "Ea Lorem aliquip sunt enim aliquip ipsum magna ad. Lorem ex sunt minim fugiat minim magna quis enim non incididunt.",
+      "question": "Ex sit qui veniam commodo nostrud incididunt enim eu velit. Deserunt sunt laborum irure sunt est reprehenderit pariatur nulla id consectetur minim reprehenderit.",
+      "createdAt": "2022-09-07T16:27:59.924Z",
+      "specialType": "none",
+      "lastTraining": "2022-11-10T16:27:59.924Z"
     },
     {
-      "_id": "6480f9267f0d1e0cb5598ad1",
+      "_id": "6495b7a70b3e1dd3d476d993",
+      "box": 2,
       "index": 70,
-      "question": "Ipsum mollit eu ut minim tempor cupidatat do do adipisicing ipsum tempor nisi ea. Sint duis aliqua commodo nostrud laborum occaecat magna nisi mollit elit. Sint incididunt pariatur velit nostrud qui laborum mollit culpa adipisicing proident laborum deserunt anim. Eu esse veniam pariatur aliqua proident dolor magna tempor dolor exercitation tempor sit. Culpa mollit veniam voluptate aliquip ex consectetur aute ex consectetur id fugiat cupidatat.\r\n",
-      "answer": "Excepteur ea velit aliquip esse ipsum eu id. Ex commodo cupidatat ea reprehenderit deserunt quis consequat ipsum duis tempor velit sit ipsum. Irure Lorem Lorem eiusmod veniam et velit pariatur elit consequat commodo ex incididunt sunt.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Commodo cillum culpa veniam ullamco eiusmod cupidatat nulla est Lorem voluptate consectetur. Est enim velit aliquip mollit ad sint fugiat esse exercitation quis deserunt mollit reprehenderit tempor.",
+      "question": "Qui adipisicing sit est irure quis commodo adipisicing eu exercitation exercitation tempor ullamco laborum. Veniam id consectetur amet cillum ut tempor proident amet do.",
+      "createdAt": "2022-05-04T06:23:06.017Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-10T06:23:06.017Z"
     },
     {
-      "_id": "6480f9263e49290888a5ebd6",
+      "_id": "6495b7a7a87da77d933f949f",
+      "box": 3,
       "index": 71,
-      "question": "Qui enim officia elit do laborum elit labore est mollit. Laborum officia labore deserunt excepteur magna in ad duis tempor ad amet adipisicing aliquip ad. Esse ea in labore cupidatat dolore tempor qui mollit.\r\n",
-      "answer": "Elit consectetur laborum aliquip magna nulla do cupidatat tempor ad tempor cillum nisi. Sint officia ipsum incididunt nisi commodo sunt minim reprehenderit amet reprehenderit veniam aliqua do incididunt. Cupidatat tempor anim consectetur quis excepteur mollit nisi amet id ea est non reprehenderit. Esse incididunt dolore quis voluptate cillum anim. Incididunt nostrud enim in ea laborum nostrud eiusmod excepteur fugiat labore ea excepteur aliqua occaecat. Reprehenderit culpa in reprehenderit dolore esse deserunt. Ex et exercitation mollit magna eu est dolore.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "wait",
+      "answer": "Culpa eiusmod ipsum culpa Lorem culpa ut. Et mollit consectetur commodo elit aliqua tempor consequat do esse do esse officia id incididunt.",
+      "question": "Amet irure deserunt nostrud occaecat. Velit magna nulla occaecat in sunt culpa sunt cupidatat nostrud.",
+      "createdAt": "2022-04-20T17:36:40.551Z",
+      "specialType": "none",
+      "lastTraining": "2022-06-07T17:36:40.551Z"
     },
     {
-      "_id": "6480f9266a5c9b913b4f8710",
+      "_id": "6495b7a7d7d1b4936346e81a",
+      "box": 4,
       "index": 72,
-      "question": "Laborum Lorem veniam consectetur consequat irure mollit. Eiusmod exercitation nisi ea sit quis reprehenderit dolore enim. Amet fugiat ut qui excepteur quis eu. Culpa laborum non velit aliqua minim velit eiusmod eu. Anim laboris cupidatat labore proident excepteur minim mollit quis aliquip enim ea nostrud. Id anim quis cillum voluptate proident labore aute ullamco aliqua consequat veniam. Velit amet mollit adipisicing veniam do sint ullamco pariatur enim aliquip consectetur voluptate consequat.\r\n",
-      "answer": "Magna mollit culpa ut dolor exercitation. Excepteur dolor irure ea ea sit. Incididunt mollit laborum consequat Lorem id amet duis sint. Ex deserunt ad sit consequat velit minim qui eiusmod quis ullamco. Qui minim commodo mollit tempor sunt qui incididunt anim tempor. Adipisicing nostrud tempor aliquip anim irure consequat.\r\n",
       "shelf": "648c920b6adf96517748f3c1",
-      "box": 1,
-      "state": "wait"
+      "state": "wait",
+      "answer": "Officia qui culpa eu anim cillum non do. Minim eiusmod aliquip in anim do adipisicing excepteur consequat ex.",
+      "question": "Culpa deserunt quis ipsum aute consequat laborum elit elit sint dolore laborum. Dolor qui cillum aute esse quis anim eu mollit dolore minim in consectetur.",
+      "createdAt": "2022-12-26T22:25:57.054Z",
+      "specialType": "learnt",
+      "lastTraining": "2023-01-21T22:25:57.054Z"
     },
     {
-      "_id": "6480f9262f8e297d6df1d1f9",
+      "_id": "6495b7a7950386bf5be4640e",
+      "box": 0,
       "index": 73,
-      "question": "Tempor mollit ut dolor non amet ex ut mollit. Dolor amet ullamco deserunt amet dolor. In qui ut adipisicing cillum magna nisi reprehenderit nisi enim. Nostrud exercitation est eiusmod sit velit magna mollit esse anim nostrud irure. Consequat pariatur ullamco ad ea. Commodo dolor sint est et enim elit veniam et mollit mollit officia culpa ad officia.\r\n",
-      "answer": "Excepteur cupidatat pariatur sunt irure exercitation dolor dolor nostrud. Magna fugiat sit aliquip ullamco. Culpa ut culpa consectetur quis occaecat reprehenderit ea mollit nostrud eiusmod velit reprehenderit. Reprehenderit enim ut sint cillum sint exercitation fugiat et velit quis adipisicing pariatur voluptate. Dolore velit tempor occaecat tempor duis dolor ad cillum mollit.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "train",
+      "answer": "Mollit fugiat aute est duis cillum exercitation elit incididunt. Occaecat est dolor proident incididunt adipisicing proident voluptate dolor.",
+      "question": "Nisi nulla tempor dolor quis magna velit ipsum adipisicing fugiat. Labore ut id id deserunt commodo qui minim mollit aliqua minim elit proident aliqua.",
+      "createdAt": "2022-08-13T16:57:30.762Z",
+      "specialType": "new",
+      "lastTraining": "2022-11-07T16:57:30.762Z"
     },
     {
-      "_id": "6480f926f2a1dbb075314198",
+      "_id": "6495b7a73828568f7ee86a5e",
+      "box": 4,
       "index": 74,
-      "question": "Est ut sunt mollit aliquip cillum officia elit ex ad mollit exercitation minim excepteur sunt. Consequat occaecat enim ipsum reprehenderit laborum amet occaecat excepteur. Elit qui esse in commodo qui excepteur. Ad dolore fugiat cupidatat labore cillum minim esse dolor irure tempor.\r\n",
-      "answer": "Occaecat irure culpa aliquip Lorem qui minim adipisicing ex Lorem sunt do consectetur nisi incididunt. Consequat pariatur aliquip quis cupidatat id sit ullamco. Aliqua dolor in sit duis ad velit nisi. Veniam eiusmod sit Lorem ea fugiat enim consectetur nostrud laborum id mollit elit exercitation. Ad irure nostrud Lorem id.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "wait",
+      "answer": "Ea fugiat Lorem sit eiusmod duis occaecat tempor pariatur anim fugiat et. Proident exercitation enim dolor officia ullamco incididunt.",
+      "question": "Officia et aute officia do eu in ipsum dolore nulla tempor. Id voluptate consequat esse deserunt anim ea consequat ea aliqua occaecat velit.",
+      "createdAt": "2022-04-12T14:14:16.724Z",
+      "specialType": "none",
+      "lastTraining": "2022-07-04T14:14:16.724Z"
     },
     {
-      "_id": "6480f9266b74f23dd6fa6820",
+      "_id": "6495b7a76afa3ccfe4255c0b",
+      "box": 5,
       "index": 75,
-      "question": "Sint amet ex consectetur eu commodo. Fugiat ipsum anim ad ut incididunt incididunt in. Mollit exercitation veniam proident tempor exercitation et aute amet reprehenderit aute.\r\n",
-      "answer": "Exercitation laborum excepteur nulla non laboris eiusmod deserunt esse dolor ea. Occaecat ipsum culpa ipsum consequat nulla ad dolore dolor fugiat consectetur. Quis proident proident proident consectetur sint commodo id esse.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "train",
+      "answer": "Sit adipisicing do commodo eiusmod dolor voluptate cillum proident eiusmod laborum minim ipsum sunt. Consectetur adipisicing ex deserunt aliquip adipisicing nostrud nulla cupidatat qui duis quis sint sint nostrud.",
+      "question": "Nostrud et sunt dolor aute adipisicing est velit qui consequat enim Lorem ipsum esse consectetur. Cillum proident cillum laboris culpa sit.",
+      "createdAt": "2022-10-25T22:42:49.385Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-11-18T22:42:49.385Z"
     },
     {
-      "_id": "6480f9262a279cb55a5e38e3",
+      "_id": "6495b7a7d9dc1488ad968a73",
+      "box": 5,
       "index": 76,
-      "question": "Ullamco dolor ullamco fugiat anim culpa. Amet aliqua sunt quis ipsum. Amet incididunt aliquip commodo duis in ad esse voluptate. Dolore consectetur elit veniam excepteur ut reprehenderit. Aute cillum commodo nisi non aute adipisicing proident nisi qui laborum sit. Do cillum tempor nulla amet reprehenderit dolore culpa ullamco sit consectetur in.\r\n",
-      "answer": "Non occaecat exercitation irure nisi consectetur ex anim. In excepteur in anim non veniam aliqua deserunt esse exercitation id magna aliquip consequat duis. Officia ipsum adipisicing ex aute ea labore.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Aliqua quis nisi nisi eiusmod aute eiusmod aliquip. Quis et cupidatat nostrud amet officia duis esse consectetur eu proident enim.",
+      "question": "Nisi culpa cillum sunt qui fugiat laboris nulla fugiat eu ex ea et minim duis. Irure velit aliqua ut aliquip id.",
+      "createdAt": "2022-01-09T01:56:12.688Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-01-21T01:56:12.688Z"
     },
     {
-      "_id": "6480f926ac7de9f1f22243ef",
+      "_id": "6495b7a708e9f19c7fd51c9f",
+      "box": 4,
       "index": 77,
-      "question": "Sunt consequat adipisicing ullamco irure veniam id non fugiat est anim pariatur esse aliqua. Id laboris ut quis do cillum voluptate laborum tempor ea ex ullamco irure et. Consequat irure aliquip laborum irure velit ipsum exercitation aliqua culpa reprehenderit magna consequat. Nulla reprehenderit qui amet dolore aliquip esse consectetur sunt ad in nulla fugiat non est.\r\n",
-      "answer": "Qui occaecat ipsum pariatur nostrud culpa et ea sit tempor laboris reprehenderit dolore. Veniam laborum qui sint dolor cillum eiusmod ullamco dolore et qui proident. Irure sit enim sint ullamco id commodo commodo in adipisicing quis eu. Exercitation irure laborum exercitation laborum elit nostrud qui voluptate non dolore enim consequat pariatur laboris. Id amet laboris do proident eu ea est aliquip commodo exercitation ea tempor est in. Labore commodo eu consectetur aliqua eu adipisicing et aute quis.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "wait",
+      "answer": "Fugiat aute cillum non dolor quis elit excepteur exercitation fugiat aliquip aliqua ipsum velit. Consequat elit magna eiusmod enim proident ex culpa dolor fugiat cillum reprehenderit sint id nostrud.",
+      "question": "Ex ad dolore consequat esse nostrud qui minim culpa et. Veniam deserunt cupidatat magna proident culpa cillum laborum in.",
+      "createdAt": "2022-07-12T22:58:05.732Z",
+      "specialType": "none",
+      "lastTraining": "2022-09-29T22:58:05.732Z"
     },
     {
-      "_id": "6480f9264ecef115cee38445",
+      "_id": "6495b7a72b6a1d9476f5ada1",
+      "box": 0,
       "index": 78,
-      "question": "Velit dolor officia deserunt fugiat. Dolore veniam labore nostrud exercitation nostrud. Culpa incididunt Lorem culpa occaecat aute anim ex cupidatat fugiat amet irure consectetur. Ipsum voluptate commodo amet do.\r\n",
-      "answer": "Ullamco velit nulla et laborum quis ut proident elit ex qui officia mollit. Quis mollit fugiat eu magna ex reprehenderit elit culpa sit amet deserunt. Fugiat Lorem ipsum ullamco culpa aliquip irure velit culpa. Ea et nostrud nostrud duis eu in esse consequat anim duis adipisicing aliquip culpa deserunt. Id incididunt velit est labore minim consequat incididunt cupidatat.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Elit voluptate veniam laboris et ex quis sunt. Minim velit sit esse fugiat exercitation quis aliqua sit velit veniam voluptate esse ad ipsum.",
+      "question": "Reprehenderit id ad veniam sint id excepteur duis irure. Esse dolor minim amet commodo exercitation eu.",
+      "createdAt": "2022-07-27T10:25:11.307Z",
+      "specialType": "new",
+      "lastTraining": "2022-08-05T10:25:11.307Z"
     },
     {
-      "_id": "6480f9265a77f81161fd4c14",
+      "_id": "6495b7a7a45f70341223d0ac",
+      "box": 2,
       "index": 79,
-      "question": "Excepteur incididunt adipisicing labore qui adipisicing ex sit enim enim tempor est aliquip. Anim esse ipsum excepteur elit enim culpa aute adipisicing ad incididunt irure. In voluptate ea minim sint do cillum. In sit exercitation est cillum et labore quis minim irure duis dolore exercitation. Ut nulla sit enim irure tempor.\r\n",
-      "answer": "Id sint irure excepteur sit exercitation culpa dolore. Voluptate voluptate id qui magna labore ullamco cillum exercitation ipsum consectetur. Ut consequat nisi minim laboris culpa eu.\r\n",
       "shelf": "648c920b3e40b5930a6e1603",
-      "box": 1,
-      "state": "train"
+      "state": "train",
+      "answer": "Nisi nostrud aute consequat nulla nostrud minim et ipsum sit id. Commodo commodo exercitation commodo mollit.",
+      "question": "Officia deserunt dolore eu veniam nisi laboris consectetur amet eu aliqua ex sit veniam. Dolore ut reprehenderit pariatur ex qui nulla aliqua cupidatat cillum.",
+      "createdAt": "2022-06-26T16:56:44.811Z",
+      "specialType": "none",
+      "lastTraining": "2022-08-10T16:56:44.811Z"
     },
     {
-      "_id": "6480f9263a1bac81874769a0",
+      "_id": "6495b7a74d9ce36de558834f",
+      "box": 4,
       "index": 80,
-      "question": "Veniam mollit proident aliqua veniam esse cupidatat. Ullamco velit eiusmod Lorem exercitation aliquip elit fugiat. Pariatur duis ad qui laboris magna nisi. Aliqua voluptate ut laboris exercitation eu elit elit irure nostrud exercitation fugiat velit. Ea duis do tempor velit nulla cillum commodo do cillum deserunt.\r\n",
-      "answer": "Lorem excepteur consequat aute aute culpa incididunt ea eiusmod cillum exercitation do magna laborum. Qui laboris sint voluptate eiusmod do dolor duis amet exercitation elit Lorem duis commodo nostrud. In nostrud qui cillum ullamco magna magna ex aliqua ipsum do laboris incididunt. Quis ex esse eu dolor ad qui tempor laboris. Occaecat irure est ullamco velit eu eu ullamco velit adipisicing anim.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 4,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Pariatur exercitation qui dolor in officia nostrud culpa adipisicing qui culpa. Eiusmod reprehenderit quis aliqua laborum.",
+      "question": "Duis non sit laborum cupidatat culpa excepteur. Nulla duis sint proident duis eiusmod consequat anim duis nisi.",
+      "createdAt": "2022-04-03T09:40:08.455Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-14T09:40:08.455Z"
     },
     {
-      "_id": "6480f926b3fd7c565627031d",
+      "_id": "6495b7a71c49eff2f92ca9d3",
+      "box": 4,
       "index": 81,
-      "question": "Quis ullamco eiusmod adipisicing consequat. Non cupidatat eiusmod tempor consectetur quis consequat cupidatat cupidatat nulla occaecat officia veniam id. Qui eu sint in aliqua voluptate. Consequat consequat commodo dolore aliqua ad. Eiusmod dolore id excepteur exercitation quis reprehenderit ipsum elit cillum ea incididunt nostrud elit. Nostrud Lorem duis cillum velit sint ut ex nostrud pariatur minim veniam. Sint ullamco nisi sit proident et.\r\n",
-      "answer": "Lorem fugiat sit sunt nostrud velit reprehenderit duis Lorem irure nisi pariatur magna id sunt. Irure eu consectetur deserunt proident nisi aliquip in incididunt excepteur enim ad ipsum mollit. Lorem officia consectetur ex velit ex cupidatat aute. Voluptate dolore incididunt Lorem officia ad Lorem aliqua dolor consectetur dolor. Qui incididunt mollit velit duis in dolore duis aute exercitation. Labore irure exercitation aute irure voluptate deserunt.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Dolore laborum duis esse dolor laboris. Duis occaecat eu id commodo non eu.",
+      "question": "Non adipisicing veniam proident cupidatat. Nulla in exercitation deserunt eiusmod in ut ea voluptate ea magna velit duis reprehenderit amet.",
+      "createdAt": "2022-02-24T14:42:03.949Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-03-29T14:42:03.949Z"
     },
     {
-      "_id": "6480f9267cae8695b948686d",
+      "_id": "6495b7a79c00e67b4919c4d6",
+      "box": 1,
       "index": 82,
-      "question": "Ipsum esse est quis sit ut ut consectetur. Nulla voluptate sunt et est officia labore nostrud nisi dolor. Incididunt quis dolor dolor nulla dolore. Sunt occaecat occaecat incididunt incididunt ut nulla deserunt. Exercitation est enim voluptate aliqua sit culpa. Sint incididunt cillum fugiat nisi consectetur Lorem culpa nisi duis ullamco ea dolor. Eu magna et proident amet magna consectetur esse sit sint reprehenderit ullamco.\r\n",
-      "answer": "Deserunt consectetur eiusmod nulla ullamco occaecat aliqua. Nulla est in dolor consectetur proident aliquip officia. Exercitation ullamco commodo ullamco quis. Tempor eiusmod Lorem cupidatat sit nulla est sint qui mollit enim ex id consectetur enim. Ipsum amet aliquip sunt eu consectetur.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "wait"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Esse ea magna aute commodo. Irure ea exercitation incididunt enim mollit eu labore laborum culpa commodo sit ea.",
+      "question": "Do dolor minim tempor amet irure. Excepteur cillum ad minim sint est.",
+      "createdAt": "2022-01-21T01:16:58.003Z",
+      "specialType": "none",
+      "lastTraining": "2022-03-28T01:16:58.003Z"
     },
     {
-      "_id": "6480f926cee2866b438d5f43",
+      "_id": "6495b7a7ae163c602bd6190e",
+      "box": 4,
       "index": 83,
-      "question": "Eu aliquip eiusmod magna sit sunt occaecat nostrud. Officia labore cupidatat ipsum est do proident incididunt do id eu aliqua tempor magna ut. Pariatur enim esse consequat commodo. Ex reprehenderit culpa officia consequat aute sit minim fugiat labore proident consectetur occaecat nostrud dolor. Minim commodo tempor veniam culpa magna ullamco sit sint officia adipisicing anim commodo. Dolore reprehenderit minim officia ullamco Lorem eu cillum.\r\n",
-      "answer": "Consequat deserunt Lorem exercitation adipisicing nisi qui qui ipsum dolore. Commodo mollit ipsum velit dolore consequat eiusmod labore. Quis velit ullamco laboris Lorem enim ipsum ipsum consequat consequat cupidatat eu cillum. Sunt cillum deserunt ipsum commodo tempor ipsum sunt aute. Officia laboris irure nostrud proident non dolor et deserunt adipisicing. Est mollit id elit adipisicing qui.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 2,
-      "state": "train"
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Voluptate excepteur ex ullamco laboris in exercitation aute commodo commodo esse ea mollit consequat. Ea sint est deserunt ipsum esse proident amet quis exercitation.",
+      "question": "Esse id enim veniam dolor exercitation non quis adipisicing irure veniam cupidatat fugiat pariatur adipisicing. Laboris magna dolor incididunt duis qui excepteur amet sint eiusmod nostrud pariatur pariatur.",
+      "createdAt": "2022-03-07T07:47:26.280Z",
+      "specialType": "none",
+      "lastTraining": "2022-04-12T07:47:26.280Z"
     },
     {
-      "_id": "6480f926ce827526a630e8dc",
+      "_id": "6495b7a7de0d396abf9812fd",
+      "box": 5,
       "index": 84,
-      "question": "Ipsum officia labore non Lorem ex officia excepteur eu nisi officia aute magna ut. Tempor elit ex sit labore adipisicing excepteur eu. Commodo dolore non proident ea veniam sit sit exercitation. Magna velit in ipsum do excepteur dolore aute ipsum minim aute qui nisi officia qui. Proident commodo velit laborum eiusmod dolor dolore ut eu irure adipisicing labore aute. Adipisicing anim non nisi exercitation aute irure eu.\r\n",
-      "answer": "Culpa enim nulla labore labore velit. Nisi occaecat Lorem sit nostrud aliquip labore reprehenderit. Pariatur consectetur fugiat irure voluptate ut tempor ipsum incididunt in laborum proident enim. Aute et velit excepteur fugiat consequat velit incididunt officia et proident id cillum proident. Fugiat fugiat ea commodo cillum occaecat. Dolore nostrud nisi reprehenderit cupidatat excepteur eu ea duis ut qui.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "wait",
+      "answer": "Et quis pariatur non consectetur eu adipisicing ut fugiat esse. Quis adipisicing magna minim laborum incididunt consectetur.",
+      "question": "Nulla nulla exercitation elit id irure laboris. Velit dolore duis aliqua laborum dolore eiusmod nostrud nisi irure ullamco.",
+      "createdAt": "2022-09-11T17:10:40.585Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-09-16T17:10:40.585Z"
     },
     {
-      "_id": "6480f926d3789db5be71f6de",
+      "_id": "6495b7a73aaa0aeb05bb16d3",
+      "box": 2,
       "index": 85,
-      "question": "Exercitation eu minim do aute laborum veniam nulla tempor officia ullamco irure minim incididunt. Non incididunt quis fugiat laborum occaecat voluptate ex consectetur ullamco ad. Culpa minim nisi culpa veniam fugiat labore irure cillum officia excepteur voluptate. Ut ut et esse do labore consequat nulla ipsum velit veniam excepteur. Ea non nostrud sunt aute ea consequat enim irure sint adipisicing.\r\n",
-      "answer": "Nulla consequat incididunt fugiat enim dolore reprehenderit occaecat dolore anim non Lorem sint sunt. Minim ex aute laboris dolor sunt ullamco voluptate pariatur velit ipsum proident. Qui duis sit nisi sint incididunt dolore sint voluptate aute Lorem magna. Consectetur ea labore est minim officia dolore minim ex deserunt cillum.\r\n",
-      "shelf": "648c920baa3edb04cec38442",
-      "box": 1,
-      "state": "train"
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Consectetur officia in incididunt Lorem esse et voluptate et. Ea eiusmod laborum ad cillum proident velit minim minim.",
+      "question": "Ipsum qui in pariatur minim et in tempor ad. Pariatur aliqua tempor aliqua minim incididunt officia quis culpa.",
+      "createdAt": "2022-07-28T07:27:59.228Z",
+      "specialType": "none",
+      "lastTraining": "2022-09-05T07:27:59.228Z"
     },
     {
-      "_id": "6480f92699adff2911846325",
+      "_id": "6495b7a7453c3d5f1f98d58f",
+      "box": 1,
       "index": 86,
-      "question": "Commodo aliqua velit ipsum reprehenderit laboris exercitation elit id excepteur irure sunt. Officia sit sit magna labore anim. Eu eiusmod enim nostrud adipisicing ipsum proident qui id irure pariatur.\r\n",
-      "answer": "Enim ex fugiat excepteur Lorem esse occaecat cillum incididunt ut esse enim ex dolor. Eiusmod commodo ullamco commodo duis sint ut. Do voluptate veniam Lorem adipisicing elit ea consequat adipisicing reprehenderit laborum minim irure magna labore. Non sit labore ea labore sunt eu anim elit sint enim. Amet fugiat occaecat est eiusmod magna exercitation dolor.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Ullamco commodo enim excepteur sunt consectetur. Pariatur est ad tempor deserunt elit quis.",
+      "question": "Consectetur esse culpa commodo id excepteur aliquip exercitation sunt ut magna ipsum nulla ad in. Ullamco nisi occaecat ullamco laborum deserunt consectetur incididunt veniam est.",
+      "createdAt": "2022-08-13T04:36:36.289Z",
+      "specialType": "none",
+      "lastTraining": "2022-09-10T04:36:36.289Z"
     },
     {
-      "_id": "6480f926509735d456237eb7",
+      "_id": "6495b7a788f5b8f8a5629a4c",
+      "box": 4,
       "index": 87,
-      "question": "Lorem pariatur eu culpa non. Aute non exercitation magna ullamco laboris excepteur deserunt laboris. Exercitation labore officia anim ex non aliquip dolor consectetur labore commodo exercitation eiusmod fugiat. Qui incididunt sint aliquip Lorem. Excepteur id enim laborum culpa est mollit aliqua magna non commodo eiusmod occaecat consequat.\r\n",
-      "answer": "Eu quis amet qui eu voluptate in enim minim labore nostrud est sunt mollit. Qui amet do anim Lorem nostrud. In ea et enim laborum Lorem et non aliquip voluptate ipsum Lorem. Velit qui adipisicing adipisicing nulla sit ad sit laborum incididunt eiusmod in deserunt esse anim. Culpa voluptate irure est magna culpa amet irure sit cillum esse. Mollit irure occaecat id officia irure duis velit eiusmod sit irure cupidatat id do.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 3,
-      "state": "wait"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "wait",
+      "answer": "Consectetur reprehenderit aliquip Lorem sint id ex enim laborum laboris voluptate. Labore ut ad mollit magna sit velit.",
+      "question": "Et ullamco est velit excepteur dolore cupidatat. Ex sunt velit voluptate velit enim eu.",
+      "createdAt": "2022-05-05T05:58:09.177Z",
+      "specialType": "none",
+      "lastTraining": "2022-07-08T05:58:09.177Z"
     },
     {
-      "_id": "6480f926ebea2698f80ff818",
+      "_id": "6495b7a70833af0be1ccc19b",
+      "box": 0,
       "index": 88,
-      "question": "Laboris aute duis eiusmod eiusmod sint id dolore quis nostrud consectetur et sit ut. Labore ullamco enim mollit ullamco minim deserunt tempor nisi consequat quis minim nulla. Consequat occaecat ut officia ea quis dolore. Nostrud Lorem anim tempor quis tempor aute aute sunt velit ad exercitation ipsum. Qui voluptate ipsum non qui sint est. Irure Lorem mollit eu Lorem aliquip culpa proident deserunt laboris labore ex cillum. Nulla ea qui ad deserunt sunt ea.\r\n",
-      "answer": "Ullamco ex ut in elit dolore nulla ullamco dolor est id veniam cillum. Occaecat magna ad eu sint aliquip Lorem sunt adipisicing exercitation officia eiusmod voluptate. Esse duis nisi sint voluptate adipisicing cillum eiusmod. Consequat ipsum deserunt qui commodo voluptate. Sit et est consequat ea adipisicing Lorem anim est ad amet aliquip.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 1,
-      "state": "wait"
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Minim aliqua voluptate Lorem deserunt aute non labore anim in in consequat. Aliqua voluptate nulla eu in.",
+      "question": "Aute aute ex esse laboris magna ut voluptate duis tempor reprehenderit. Irure veniam quis ea pariatur reprehenderit tempor non ullamco.",
+      "createdAt": "2022-12-27T17:58:59.569Z",
+      "specialType": "new",
+      "lastTraining": "2023-03-05T17:58:59.569Z"
     },
     {
-      "_id": "6480f926a979c38d55a35177",
+      "_id": "6495b7a7f864a05c893e1fd1",
+      "box": 2,
       "index": 89,
-      "question": "Anim voluptate velit commodo proident duis id ad aute ea elit consequat. Reprehenderit nostrud dolor minim adipisicing anim eiusmod culpa deserunt duis mollit cupidatat qui labore anim. Aute aliquip cupidatat et ex velit consequat ad in. Culpa Lorem eu anim non ea adipisicing consequat amet dolore reprehenderit nostrud nulla dolor eu. Quis sint minim commodo velit mollit ullamco non laboris officia aliquip commodo nisi anim fugiat.\r\n",
-      "answer": "Esse quis ipsum in voluptate ex irure ut ex quis. Quis anim dolore velit cillum ex voluptate eu reprehenderit occaecat anim laboris eu ipsum ex. Exercitation ullamco ut velit incididunt magna ut esse.\r\n",
-      "shelf": "648c920b3e40b5930a6e1603",
-      "box": 4,
-      "state": "wait"
+      "shelf": "648c920b07d1f8f9ed46604e",
+      "state": "train",
+      "answer": "Ea esse officia elit tempor nisi consectetur commodo eiusmod est esse culpa Lorem. Est aliqua officia officia cillum Lorem aute nisi fugiat labore.",
+      "question": "Adipisicing qui consectetur proident eiusmod non tempor eiusmod sit qui excepteur. Culpa aute dolor cillum ad anim non consectetur esse anim ipsum non nisi velit magna.",
+      "createdAt": "2022-08-05T01:51:42.483Z",
+      "specialType": "none",
+      "lastTraining": "2022-10-29T01:51:42.483Z"
     },
     {
-      "_id": "6480f926abf9d75c3bda8959",
+      "_id": "6495b7a7f800c67e6eccc1f1",
+      "box": 5,
       "index": 90,
-      "question": "Fugiat do laboris magna pariatur culpa eu est officia ipsum non consectetur. Ut elit adipisicing exercitation reprehenderit anim exercitation aliquip eiusmod consequat eiusmod do. Labore quis aliquip id minim eiusmod est labore laboris voluptate. Ex culpa nostrud in cupidatat. Excepteur ea dolore voluptate aute velit ut labore nisi ipsum consequat in voluptate. Culpa incididunt id proident et aliquip Lorem ut exercitation deserunt dolor nisi. Adipisicing sit enim do nulla cillum amet aute laborum esse.\r\n",
-      "answer": "Quis consequat Lorem irure dolore anim. Ea mollit officia incididunt nostrud sunt veniam id ullamco laborum. Tempor cupidatat magna culpa sunt sint aute mollit excepteur cupidatat eu nulla ad do aute. Sunt do ullamco officia eu. Nulla velit officia non reprehenderit nostrud.\r\n",
-      "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 2,
-      "state": "train"
-    },
-    {
-      "_id": "6480f92677319c1878dc84fa",
-      "index": 91,
-      "question": "Ipsum et Lorem reprehenderit adipisicing ullamco et dolore excepteur irure. Pariatur ex sint eiusmod in laboris cupidatat magna enim aute ad consequat. Culpa laborum id eiusmod ipsum sint officia ipsum. Aute dolore ullamco in non cupidatat.\r\n",
-      "answer": "Mollit cillum adipisicing nisi non et aliquip. Dolore magna nisi do cillum labore et ad. Consequat eu consequat consequat commodo culpa do cillum magna esse voluptate.\r\n",
       "shelf": "648c920b3e40b5930a6e1603",
-      "box": 1,
-      "state": "train"
+      "state": "wait",
+      "answer": "Adipisicing fugiat labore amet ad aute mollit eu mollit. Nisi incididunt commodo deserunt tempor aliquip sit qui eiusmod sint.",
+      "question": "Ea pariatur proident est anim incididunt veniam excepteur. Proident ullamco pariatur ea enim non commodo nisi incididunt.",
+      "createdAt": "2022-01-29T06:26:31.729Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-03-26T06:26:31.729Z"
     },
     {
-      "_id": "6480f926547e95e158efb113",
-      "index": 92,
-      "question": "Est tempor occaecat labore cillum ex labore incididunt consequat. Quis consectetur ipsum ad veniam exercitation nisi fugiat occaecat. Reprehenderit non duis enim excepteur id Lorem id sint. Mollit elit deserunt consequat non cillum.\r\n",
-      "answer": "Laboris ex ad deserunt magna tempor ea minim. Velit dolor et eu et excepteur qui voluptate commodo quis consectetur non incididunt fugiat eiusmod. Cupidatat incididunt incididunt deserunt mollit culpa amet ipsum eu consequat ex. Voluptate sint velit consectetur est cillum enim in ad veniam. Mollit enim voluptate id eu esse sunt. Nisi cupidatat veniam ullamco aute. Sint labore laborum labore Lorem labore laborum ut non incididunt est qui enim ad elit.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 3,
-      "state": "train"
-    },
-    {
-      "_id": "6480f926cde5ce4acd348f07",
-      "index": 93,
-      "question": "Elit consectetur Lorem veniam nostrud elit ipsum qui cupidatat occaecat officia pariatur amet incididunt amet. Cillum laborum dolore do consectetur commodo irure velit fugiat voluptate tempor in adipisicing laboris. Sit duis labore aute nostrud eu ea ut non tempor ex. Non in id culpa ullamco magna.\r\n",
-      "answer": "Eiusmod dolore veniam occaecat laboris est duis ad in ad. Excepteur id eiusmod adipisicing laboris. Magna qui dolore occaecat id nostrud mollit amet pariatur tempor laborum consectetur qui dolor. Esse do duis sunt dolor ea ex ut mollit duis enim qui esse aliquip nostrud. Consectetur non id aliquip exercitation laboris enim tempor et laborum cupidatat Lorem duis.\r\n",
+      "_id": "6495b7a755245988df578e24",
+      "box": 2,
+      "index": 91,
       "shelf": "648c920b07d1f8f9ed46604e",
-      "box": 4,
-      "state": "train"
+      "state": "wait",
+      "answer": "Consectetur amet et veniam proident pariatur. Culpa nostrud pariatur elit anim labore aute sunt sint ullamco.",
+      "question": "Ex tempor ea cillum labore irure cupidatat ullamco irure mollit excepteur. Amet do ea tempor deserunt labore ex voluptate occaecat eiusmod tempor incididunt aliqua consectetur dolor.",
+      "createdAt": "2022-03-06T08:01:44.143Z",
+      "specialType": "none",
+      "lastTraining": "2022-05-26T08:01:44.143Z"
     },
     {
-      "_id": "6480f9260d1add61c81ec4fd",
+      "_id": "6495b7a7616fdcc0201508c3",
+      "box": 4,
+      "index": 92,
+      "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Dolore eiusmod eu sit qui consectetur sint sunt nulla. Amet duis incididunt consectetur enim et Lorem.",
+      "question": "Consequat aute commodo veniam nisi Lorem mollit. Reprehenderit pariatur fugiat velit fugiat non culpa do.",
+      "createdAt": "2022-10-13T18:43:20.917Z",
+      "specialType": "none",
+      "lastTraining": "2022-11-09T18:43:20.917Z"
+    },
+    {
+      "_id": "6495b7a7208b49449e8bae04",
+      "box": 3,
+      "index": 93,
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Id ex pariatur irure ex laboris fugiat non nostrud id. Occaecat non tempor irure id dolore adipisicing incididunt sint qui qui magna anim.",
+      "question": "Fugiat qui et duis voluptate deserunt aute nostrud qui ea. Aute Lorem occaecat mollit velit amet irure officia est occaecat nulla ullamco velit fugiat aute.",
+      "createdAt": "2022-12-11T21:17:44.329Z",
+      "specialType": "none",
+      "lastTraining": "2023-02-28T21:17:44.329Z"
+    },
+    {
+      "_id": "6495b7a7d4de8d38cf65630e",
+      "box": 3,
       "index": 94,
-      "question": "Reprehenderit fugiat ut in sint tempor minim incididunt excepteur. Culpa ea fugiat laboris reprehenderit dolor minim dolore aliqua ex eu. Nisi veniam consectetur laboris eu occaecat do dolore velit pariatur eiusmod ex ut. Cillum eu officia do dolore anim. Duis officia ipsum ipsum amet fugiat.\r\n",
-      "answer": "Nisi occaecat occaecat aliquip velit ipsum. Anim anim sint reprehenderit cillum magna do incididunt. Laborum commodo veniam nostrud ea consequat nulla adipisicing ad sint cillum adipisicing et. Amet anim consectetur enim cupidatat nisi nisi eu elit. Dolor nostrud deserunt cupidatat aliqua. Cillum nisi dolore pariatur excepteur occaecat ex elit dolor id dolor. Dolore pariatur quis anim nisi laborum eu laborum.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
-      "box": 3,
-      "state": "wait"
-    },
-    {
-      "_id": "6480f926dba5d9080069b430",
-      "index": 95,
-      "question": "Ullamco deserunt sint sunt sunt reprehenderit. Labore consectetur id ullamco nostrud deserunt ipsum aliqua veniam nulla proident esse dolor. Laborum aliquip voluptate proident ipsum veniam ullamco irure cillum elit. Dolor aute qui commodo quis. Aliqua cillum reprehenderit proident occaecat velit ullamco consequat non cillum tempor. Aute do fugiat amet ullamco labore minim nostrud quis. Magna laboris do ea tempor id culpa laboris non ullamco pariatur qui fugiat velit ullamco.\r\n",
-      "answer": "Quis sint Lorem laboris culpa qui. Sunt amet ad ipsum magna voluptate. Labore ullamco incididunt tempor velit laborum sunt cillum dolore eiusmod officia duis. Excepteur id proident dolor occaecat nisi id labore aute excepteur consectetur cillum velit. Veniam fugiat aute est nisi in. Exercitation excepteur esse esse Lorem in id Lorem commodo id nisi commodo cupidatat labore. Fugiat qui ex ad id est.\r\n",
       "shelf": "648c920baa3edb04cec38442",
-      "box": 2,
-      "state": "train"
+      "state": "train",
+      "answer": "Dolore laborum minim amet deserunt minim consectetur officia aute minim veniam id. Occaecat dolor eiusmod culpa et non qui cupidatat excepteur.",
+      "question": "Aliqua culpa amet reprehenderit do ex pariatur. Elit irure laboris non ex ullamco voluptate.",
+      "createdAt": "2022-06-28T16:16:28.600Z",
+      "specialType": "none",
+      "lastTraining": "2022-09-21T16:16:28.600Z"
     },
     {
-      "_id": "6480f92698fd01206209c53d",
-      "index": 96,
-      "question": "Amet in voluptate reprehenderit officia. Enim labore in fugiat irure. Quis aliquip culpa non cupidatat aliqua cillum aute. Adipisicing minim exercitation in dolor. Quis irure reprehenderit non veniam ex.\r\n",
-      "answer": "Ea laborum irure duis nostrud sint eiusmod aliquip sint elit aute eiusmod cillum ea. Ex enim reprehenderit amet laborum ad magna ullamco amet cillum. Ea officia pariatur aute commodo qui quis culpa ipsum labore quis tempor consectetur sunt. Ipsum voluptate ea enim aute excepteur quis. Voluptate proident pariatur ipsum cupidatat do aute ipsum. Sint dolor Lorem excepteur sunt incididunt ad occaecat exercitation. Occaecat ipsum laborum esse velit labore velit sunt labore adipisicing voluptate labore.\r\n",
-      "shelf": "648c920b6adf96517748f3c1",
+      "_id": "6495b7a71f9772622a95cbaf",
       "box": 3,
-      "state": "train"
-    },
-    {
-      "_id": "6480f926a5deb0e96657e6b8",
-      "index": 97,
-      "question": "Ut aute est ex proident esse eiusmod dolor tempor sunt nisi aute dolore excepteur ea. Dolor officia exercitation aliquip ea ipsum commodo ipsum aliquip irure mollit officia commodo adipisicing. Esse officia enim occaecat ad do voluptate commodo fugiat sit tempor. Commodo duis ipsum anim exercitation sunt. Consequat sint deserunt cillum nisi aute cupidatat mollit eiusmod.\r\n",
-      "answer": "Minim aliqua et et exercitation mollit veniam aute et magna ad. Eu enim occaecat commodo elit sint quis. Culpa consectetur do aliqua ipsum laboris sint proident tempor in culpa irure. Adipisicing ullamco pariatur enim consectetur consequat cillum consequat nisi. Excepteur amet ipsum consectetur nostrud sit et excepteur et nostrud pariatur ea adipisicing pariatur amet. Et ullamco proident tempor in eu irure laborum ad enim irure amet. Ex amet aliqua ad deserunt officia irure labore duis nulla.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 4,
-      "state": "wait"
-    },
-    {
-      "_id": "6480f926f00c6d3b53c378c0",
-      "index": 98,
-      "question": "Non mollit aliquip ullamco excepteur deserunt aute reprehenderit minim magna est. Pariatur magna nostrud aliquip aute sunt laboris. Officia magna non fugiat amet consequat Lorem qui Lorem. Amet est sint mollit occaecat aute deserunt ex ad dolore. Dolor non minim veniam veniam qui magna fugiat in.\r\n",
-      "answer": "Aliquip non occaecat mollit culpa aute ad officia mollit. Sunt proident eu elit pariatur veniam reprehenderit laborum mollit ex excepteur laborum eu. Ad sunt dolore sunt nulla esse consectetur nulla nostrud. Nulla commodo officia consequat ut ullamco sunt. Mollit do velit sit ut minim exercitation aute labore elit.\r\n",
-      "shelf": "648c920beba56ba6cd7db7bb",
-      "box": 2,
-      "state": "wait"
-    },
-    {
-      "_id": "6480f92651fb8b3c9252e12f",
-      "index": 99,
-      "question": "Enim non amet ea et non officia culpa. Cillum consectetur consectetur voluptate nulla non est ex ipsum deserunt. Veniam do pariatur minim nostrud eiusmod. Aute enim consectetur nisi excepteur sunt. Officia aute adipisicing esse eu est voluptate pariatur sit sunt ad amet sint.\r\n",
-      "answer": "Veniam et consequat sint ad anim. Officia consectetur sint Lorem nisi est velit. Est excepteur dolore id magna sit amet.\r\n",
+      "index": 95,
       "shelf": "648c920b6adf96517748f3c1",
+      "state": "train",
+      "answer": "Ullamco irure consequat ex id proident aliquip non. Magna reprehenderit anim cillum velit culpa.",
+      "question": "Anim anim deserunt dolore aute velit amet consequat ea enim. Ea laborum est nisi non sunt Lorem cupidatat.",
+      "createdAt": "2022-09-24T20:08:46.055Z",
+      "specialType": "none",
+      "lastTraining": "2022-12-05T20:08:46.055Z"
+    },
+    {
+      "_id": "6495b7a76e7a66ff2e7fb888",
+      "box": 3,
+      "index": 96,
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "train",
+      "answer": "Ullamco amet non deserunt exercitation cillum pariatur velit ad qui deserunt. Enim culpa nostrud ut sint nostrud elit commodo magna veniam anim labore qui adipisicing.",
+      "question": "Sunt Lorem eiusmod irure deserunt voluptate mollit. Officia elit sit nisi deserunt cupidatat fugiat elit.",
+      "createdAt": "2022-05-11T03:04:23.296Z",
+      "specialType": "none",
+      "lastTraining": "2022-06-14T03:04:23.296Z"
+    },
+    {
+      "_id": "6495b7a7061768782ce4c6fd",
+      "box": 5,
+      "index": 97,
+      "shelf": "648c920beba56ba6cd7db7bb",
+      "state": "wait",
+      "answer": "Aute officia nisi quis laboris sunt quis exercitation sint aliqua. Nulla sint voluptate excepteur proident eu dolore do.",
+      "question": "In Lorem proident est exercitation aute sunt ullamco quis qui dolore ea. Id commodo cillum in ipsum.",
+      "createdAt": "2022-11-07T05:23:32.358Z",
+      "specialType": "learnt",
+      "lastTraining": "2022-11-25T05:23:32.358Z"
+    },
+    {
+      "_id": "6495b7a7dc5cbad289abfd76",
       "box": 2,
-      "state": "wait"
+      "index": 98,
+      "shelf": "648c920baa3edb04cec38442",
+      "state": "train",
+      "answer": "Cupidatat ad Lorem quis sint sunt proident deserunt. Eu ad fugiat fugiat ad elit ipsum.",
+      "question": "Officia anim non est do in magna ut in pariatur eiusmod dolore. Do ex cillum est non dolore irure et in deserunt consectetur.",
+      "createdAt": "2022-06-26T08:25:37.555Z",
+      "specialType": "none",
+      "lastTraining": "2022-07-30T08:25:37.555Z"
+    },
+    {
+      "_id": "6495b7a7a22ba1cd15e3a3b8",
+      "box": 3,
+      "index": 99,
+      "shelf": "648c920b3e40b5930a6e1603",
+      "state": "wait",
+      "answer": "Occaecat aliquip do duis exercitation sunt in velit non esse aliqua nostrud minim velit consequat. Adipisicing consequat magna cillum voluptate cillum mollit commodo voluptate commodo magna.",
+      "question": "Aliqua duis quis laborum minim laborum in non dolore sint est incididunt reprehenderit. Cillum velit sunt exercitation eu mollit Lorem.",
+      "createdAt": "2022-04-05T10:03:50.620Z",
+      "specialType": "none",
+      "lastTraining": "2022-06-19T10:03:50.620Z"
     }
   ],
   "users": [
@@ -978,25 +1278,58 @@
         ]
       },
       "jsonSavedData": {
-        "shelfNamesList": [
-          "math",
-          "books",
-          "английский",
-          "facts",
-          "biology"
+        "commonShelfCollapsed": true,
+        "viewPageColumns": [
+          {
+            "value": "shelf",
+            "content": "shelf",
+            "enabled": true,
+            "index": 0
+          },
+          {
+            "value": "createdAt",
+            "content": "creation",
+            "enabled": true,
+            "index": 1
+          },
+          {
+            "value": "lastTraining",
+            "content": "last training",
+            "enabled": true,
+            "index": 2
+          }
         ],
-        "viewPageShelfId": "1",
-        "viewPageBoxId": "all"
+        "shelfNamesList": [
+          {
+            "title": "math",
+            "isCollapsed": false
+          },
+          {
+            "title": "books",
+            "isCollapsed": true
+          },
+          {
+            "title": "английский",
+            "isCollapsed": true
+          },
+          {
+            "title": "facts",
+            "isCollapsed": true
+          },
+          {
+            "title": "biology",
+            "isCollapsed": true
+          }
+        ]
       }
     }
   ],
   "cupboard": {
-    "commonShelfCollapsed": true,
     "shelves": [
       {
         "id": "648c920baa3edb04cec38442",
         "index": 0,
-        "collapsed": true,
+        "isCollapsed": false,
         "title": "math",
         "boxesData": [
           {
@@ -1004,7 +1337,8 @@
             "index": 0,
             "specialType": "new",
             "data": {
-              "all": 6
+              "all": 2,
+              "train": null
             }
           },
           {
@@ -1012,9 +1346,9 @@
             "index": 1,
             "specialType": "none",
             "data": {
-              "all": 11,
-              "train": 5,
-              "wait": 6
+              "all": 1,
+              "train": 0,
+              "wait": 1
             },
             "timing": {
               "minutes": 0,
@@ -1029,9 +1363,9 @@
             "index": 2,
             "specialType": "none",
             "data": {
-              "all": 9,
-              "train": 4,
-              "wait": 5
+              "all": 2,
+              "train": 2,
+              "wait": 0
             },
             "timing": {
               "minutes": 0,
@@ -1046,9 +1380,9 @@
             "index": 3,
             "specialType": "none",
             "data": {
-              "all": 10,
-              "train": 5,
-              "wait": 5
+              "all": 4,
+              "train": 2,
+              "wait": 2
             },
             "timing": {
               "minutes": 0,
@@ -1063,9 +1397,9 @@
             "index": 4,
             "specialType": "none",
             "data": {
-              "all": 12,
-              "train": 7,
-              "wait": 5
+              "all": 2,
+              "train": 1,
+              "wait": 1
             },
             "timing": {
               "minutes": 0,
@@ -1080,9 +1414,9 @@
             "index": 5,
             "specialType": "learnt",
             "data": {
-              "all": 6,
-              "train": 4,
-              "wait": 2
+              "all": 5,
+              "train": 2,
+              "wait": 3
             },
             "timing": {
               "minutes": 0,
@@ -1094,15 +1428,15 @@
           }
         ],
         "data": {
-          "all": 54,
-          "train": 25,
-          "wait": 23
+          "all": 16,
+          "train": 9,
+          "wait": 7
         }
       },
       {
         "id": "648c920b3e40b5930a6e1603",
         "index": 1,
-        "collapsed": true,
+        "isCollapsed": true,
         "title": "books",
         "boxesData": [
           {
@@ -1110,7 +1444,8 @@
             "index": 0,
             "specialType": "new",
             "data": {
-              "all": 4
+              "all": 2,
+              "train": null
             }
           },
           {
@@ -1118,9 +1453,9 @@
             "index": 1,
             "specialType": "none",
             "data": {
-              "all": 11,
-              "train": 5,
-              "wait": 6
+              "all": 2,
+              "train": 1,
+              "wait": 1
             },
             "timing": {
               "minutes": 0,
@@ -1152,9 +1487,9 @@
             "index": 3,
             "specialType": "none",
             "data": {
-              "all": 9,
-              "train": 6,
-              "wait": 3
+              "all": 7,
+              "train": 3,
+              "wait": 4
             },
             "timing": {
               "minutes": 0,
@@ -1169,9 +1504,9 @@
             "index": 4,
             "specialType": "none",
             "data": {
-              "all": 8,
-              "train": 5,
-              "wait": 3
+              "all": 3,
+              "train": 1,
+              "wait": 2
             },
             "timing": {
               "minutes": 0,
@@ -1186,9 +1521,9 @@
             "index": 5,
             "specialType": "learnt",
             "data": {
-              "all": 8,
-              "train": 2,
-              "wait": 6
+              "all": 3,
+              "train": 1,
+              "wait": 2
             },
             "timing": {
               "minutes": 0,
@@ -1200,15 +1535,15 @@
           }
         ],
         "data": {
-          "all": 44,
-          "train": 19,
-          "wait": 21
+          "all": 21,
+          "train": 9,
+          "wait": 12
         }
       },
       {
         "id": "648c920b6adf96517748f3c1",
         "index": 2,
-        "collapsed": true,
+        "isCollapsed": true,
         "title": "английский",
         "boxesData": [
           {
@@ -1216,12 +1551,47 @@
             "index": 0,
             "specialType": "new",
             "data": {
-              "all": 3
+              "all": 2,
+              "train": null
             }
           },
           {
             "_id": "648c920b1ab0db449c60fa6c",
             "index": 1,
+            "specialType": "none",
+            "data": {
+              "all": 5,
+              "train": 4,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bf46cf9b533a32075",
+            "index": 2,
+            "specialType": "none",
+            "data": {
+              "all": 3,
+              "train": 0,
+              "wait": 3
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bf5f065d98a38788b",
+            "index": 3,
             "specialType": "none",
             "data": {
               "all": 5,
@@ -1237,46 +1607,29 @@
             }
           },
           {
-            "_id": "648c920bf46cf9b533a32075",
-            "index": 2,
-            "specialType": "none",
-            "data": {
-              "all": 11,
-              "train": 5,
-              "wait": 6
-            },
-            "timing": {
-              "minutes": 0,
-              "hours": 0,
-              "days": 0,
-              "weeks": 0,
-              "months": 0
-            }
-          },
-          {
-            "_id": "648c920bf5f065d98a38788b",
-            "index": 3,
-            "specialType": "none",
-            "data": {
-              "all": 13,
-              "train": 6,
-              "wait": 7
-            },
-            "timing": {
-              "minutes": 0,
-              "hours": 0,
-              "days": 0,
-              "weeks": 0,
-              "months": 0
-            }
-          },
-          {
             "_id": "648c920baf3426c25284a0a1",
             "index": 4,
+            "specialType": "none",
+            "data": {
+              "all": 7,
+              "train": 5,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920baf3426c2528sdaf0a1",
+            "index": 5,
             "specialType": "learnt",
             "data": {
-              "all": 4,
-              "train": 1,
+              "all": 5,
+              "train": 2,
               "wait": 3
             },
             "timing": {
@@ -1289,15 +1642,15 @@
           }
         ],
         "data": {
-          "all": 36,
-          "train": 15,
-          "wait": 18
+          "all": 27,
+          "train": 16,
+          "wait": 11
         }
       },
       {
         "id": "648c920b07d1f8f9ed46604e",
         "index": 3,
-        "collapsed": true,
+        "isCollapsed": true,
         "title": "facts",
         "boxesData": [
           {
@@ -1305,7 +1658,8 @@
             "index": 0,
             "specialType": "new",
             "data": {
-              "all": 2
+              "all": 3,
+              "train": null
             }
           },
           {
@@ -1313,9 +1667,9 @@
             "index": 1,
             "specialType": "none",
             "data": {
-              "all": 10,
-              "train": 7,
-              "wait": 3
+              "all": 3,
+              "train": 1,
+              "wait": 2
             },
             "timing": {
               "minutes": 0,
@@ -1330,8 +1684,8 @@
             "index": 2,
             "specialType": "none",
             "data": {
-              "all": 11,
-              "train": 7,
+              "all": 8,
+              "train": 4,
               "wait": 4
             },
             "timing": {
@@ -1345,11 +1699,45 @@
           {
             "_id": "648c920b609485fe207e7da6",
             "index": 3,
+            "specialType": "none",
+            "data": {
+              "all": 3,
+              "train": 0,
+              "wait": 3
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b609485fe207easf6",
+            "index": 4,
+            "specialType": "none",
+            "data": {
+              "all": 1,
+              "train": 0,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b609485fe207easfia23f6",
+            "index": 5,
             "specialType": "learnt",
             "data": {
-              "all": 6,
-              "train": 2,
-              "wait": 4
+              "all": 2,
+              "train": 1,
+              "wait": 1
             },
             "timing": {
               "minutes": 0,
@@ -1361,15 +1749,15 @@
           }
         ],
         "data": {
-          "all": 29,
-          "train": 16,
+          "all": 20,
+          "train": 9,
           "wait": 11
         }
       },
       {
         "id": "648c920beba56ba6cd7db7bb",
         "index": 4,
-        "collapsed": true,
+        "isCollapsed": true,
         "title": "biology",
         "boxesData": [
           {
@@ -1377,7 +1765,8 @@
             "index": 0,
             "specialType": "new",
             "data": {
-              "all": 2
+              "all": 2,
+              "train": null
             }
           },
           {
@@ -1385,9 +1774,9 @@
             "index": 1,
             "specialType": "none",
             "data": {
-              "all": 9,
-              "train": 5,
-              "wait": 4
+              "all": 2,
+              "train": 1,
+              "wait": 1
             },
             "timing": {
               "minutes": 0,
@@ -1402,8 +1791,8 @@
             "index": 2,
             "specialType": "none",
             "data": {
-              "all": 6,
-              "train": 4,
+              "all": 2,
+              "train": 0,
               "wait": 2
             },
             "timing": {
@@ -1419,9 +1808,9 @@
             "index": 3,
             "specialType": "none",
             "data": {
-              "all": 9,
-              "train": 7,
-              "wait": 2
+              "all": 1,
+              "train": 1,
+              "wait": 0
             },
             "timing": {
               "minutes": 0,
@@ -1436,9 +1825,9 @@
             "index": 4,
             "specialType": "none",
             "data": {
-              "all": 10,
+              "all": 5,
               "train": 3,
-              "wait": 7
+              "wait": 2
             },
             "timing": {
               "minutes": 0,
@@ -1453,9 +1842,9 @@
             "index": 5,
             "specialType": "learnt",
             "data": {
-              "all": 12,
-              "train": 5,
-              "wait": 7
+              "all": 4,
+              "train": 2,
+              "wait": 2
             },
             "timing": {
               "minutes": 0,
@@ -1467,23 +1856,39 @@
           }
         ],
         "data": {
-          "all": 48,
-          "train": 24,
-          "wait": 22
+          "all": 16,
+          "train": 9,
+          "wait": 7
         }
       }
     ],
-    "data": {
-      "all": 210,
-      "train": 94,
-      "wait": 97
+    "commonShelf": {
+      "new": {
+        "all": 11
+      },
+      "learning": {
+        "all": 70,
+        "train": 33,
+        "wait": 37
+      },
+      "learnt": {
+        "all": 19,
+        "train": 8,
+        "wait": 11
+      },
+      "data": {
+        "all": 100,
+        "train": 52,
+        "wait": 48
+      },
+      "isCollapsed": false
     }
   },
   "shelves": [
     {
       "id": "648c920baa3edb04cec38442",
       "index": 0,
-      "collapsed": true,
+      "isCollapsed": false,
       "title": "math",
       "boxesData": [
         {
@@ -1491,7 +1896,8 @@
           "index": 0,
           "specialType": "new",
           "data": {
-            "all": 6
+            "all": 2,
+            "train": null
           }
         },
         {
@@ -1499,9 +1905,9 @@
           "index": 1,
           "specialType": "none",
           "data": {
-            "all": 11,
-            "train": 5,
-            "wait": 6
+            "all": 1,
+            "train": 0,
+            "wait": 1
           },
           "timing": {
             "minutes": 0,
@@ -1516,9 +1922,9 @@
           "index": 2,
           "specialType": "none",
           "data": {
-            "all": 9,
-            "train": 4,
-            "wait": 5
+            "all": 2,
+            "train": 2,
+            "wait": 0
           },
           "timing": {
             "minutes": 0,
@@ -1533,9 +1939,9 @@
           "index": 3,
           "specialType": "none",
           "data": {
-            "all": 10,
-            "train": 5,
-            "wait": 5
+            "all": 4,
+            "train": 2,
+            "wait": 2
           },
           "timing": {
             "minutes": 0,
@@ -1550,9 +1956,9 @@
           "index": 4,
           "specialType": "none",
           "data": {
-            "all": 12,
-            "train": 7,
-            "wait": 5
+            "all": 2,
+            "train": 1,
+            "wait": 1
           },
           "timing": {
             "minutes": 0,
@@ -1567,9 +1973,9 @@
           "index": 5,
           "specialType": "learnt",
           "data": {
-            "all": 6,
-            "train": 4,
-            "wait": 2
+            "all": 5,
+            "train": 2,
+            "wait": 3
           },
           "timing": {
             "minutes": 0,
@@ -1581,15 +1987,15 @@
         }
       ],
       "data": {
-        "all": 54,
-        "train": 25,
-        "wait": 23
+        "all": 16,
+        "train": 9,
+        "wait": 7
       }
     },
     {
       "id": "648c920b3e40b5930a6e1603",
       "index": 1,
-      "collapsed": true,
+      "isCollapsed": true,
       "title": "books",
       "boxesData": [
         {
@@ -1597,7 +2003,8 @@
           "index": 0,
           "specialType": "new",
           "data": {
-            "all": 4
+            "all": 2,
+            "train": null
           }
         },
         {
@@ -1605,9 +2012,9 @@
           "index": 1,
           "specialType": "none",
           "data": {
-            "all": 11,
-            "train": 5,
-            "wait": 6
+            "all": 2,
+            "train": 1,
+            "wait": 1
           },
           "timing": {
             "minutes": 0,
@@ -1639,9 +2046,9 @@
           "index": 3,
           "specialType": "none",
           "data": {
-            "all": 9,
-            "train": 6,
-            "wait": 3
+            "all": 7,
+            "train": 3,
+            "wait": 4
           },
           "timing": {
             "minutes": 0,
@@ -1656,9 +2063,9 @@
           "index": 4,
           "specialType": "none",
           "data": {
-            "all": 8,
-            "train": 5,
-            "wait": 3
+            "all": 3,
+            "train": 1,
+            "wait": 2
           },
           "timing": {
             "minutes": 0,
@@ -1673,9 +2080,9 @@
           "index": 5,
           "specialType": "learnt",
           "data": {
-            "all": 8,
-            "train": 2,
-            "wait": 6
+            "all": 3,
+            "train": 1,
+            "wait": 2
           },
           "timing": {
             "minutes": 0,
@@ -1687,15 +2094,15 @@
         }
       ],
       "data": {
-        "all": 44,
-        "train": 19,
-        "wait": 21
+        "all": 21,
+        "train": 9,
+        "wait": 12
       }
     },
     {
       "id": "648c920b6adf96517748f3c1",
       "index": 2,
-      "collapsed": true,
+      "isCollapsed": true,
       "title": "английский",
       "boxesData": [
         {
@@ -1703,12 +2110,47 @@
           "index": 0,
           "specialType": "new",
           "data": {
-            "all": 3
+            "all": 2,
+            "train": null
           }
         },
         {
           "_id": "648c920b1ab0db449c60fa6c",
           "index": 1,
+          "specialType": "none",
+          "data": {
+            "all": 5,
+            "train": 4,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920bf46cf9b533a32075",
+          "index": 2,
+          "specialType": "none",
+          "data": {
+            "all": 3,
+            "train": 0,
+            "wait": 3
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920bf5f065d98a38788b",
+          "index": 3,
           "specialType": "none",
           "data": {
             "all": 5,
@@ -1724,47 +2166,13 @@
           }
         },
         {
-          "_id": "648c920bf46cf9b533a32075",
-          "index": 2,
-          "specialType": "none",
-          "data": {
-            "all": 11,
-            "train": 5,
-            "wait": 6
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920bf5f065d98a38788b",
-          "index": 3,
-          "specialType": "none",
-          "data": {
-            "all": 13,
-            "train": 6,
-            "wait": 7
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
           "_id": "648c920baf3426c25284a0a1",
           "index": 4,
           "specialType": "learnt",
           "data": {
-            "all": 4,
-            "train": 1,
-            "wait": 3
+            "all": 12,
+            "train": 7,
+            "wait": 5
           },
           "timing": {
             "minutes": 0,
@@ -1776,15 +2184,15 @@
         }
       ],
       "data": {
-        "all": 36,
-        "train": 15,
-        "wait": 18
+        "all": 27,
+        "train": 16,
+        "wait": 11
       }
     },
     {
       "id": "648c920b07d1f8f9ed46604e",
       "index": 3,
-      "collapsed": true,
+      "isCollapsed": true,
       "title": "facts",
       "boxesData": [
         {
@@ -1792,7 +2200,8 @@
           "index": 0,
           "specialType": "new",
           "data": {
-            "all": 2
+            "all": 3,
+            "train": null
           }
         },
         {
@@ -1800,9 +2209,9 @@
           "index": 1,
           "specialType": "none",
           "data": {
-            "all": 10,
-            "train": 7,
-            "wait": 3
+            "all": 3,
+            "train": 1,
+            "wait": 2
           },
           "timing": {
             "minutes": 0,
@@ -1817,8 +2226,8 @@
           "index": 2,
           "specialType": "none",
           "data": {
-            "all": 11,
-            "train": 7,
+            "all": 8,
+            "train": 4,
             "wait": 4
           },
           "timing": {
@@ -1832,11 +2241,28 @@
         {
           "_id": "648c920b609485fe207e7da6",
           "index": 3,
+          "specialType": "none",
+          "data": {
+            "all": 3,
+            "train": 0,
+            "wait": 3
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920b609485fe207easf6",
+          "index": 4,
           "specialType": "learnt",
           "data": {
-            "all": 6,
-            "train": 2,
-            "wait": 4
+            "all": 3,
+            "train": 1,
+            "wait": 2
           },
           "timing": {
             "minutes": 0,
@@ -1848,15 +2274,15 @@
         }
       ],
       "data": {
-        "all": 29,
-        "train": 16,
+        "all": 20,
+        "train": 9,
         "wait": 11
       }
     },
     {
       "id": "648c920beba56ba6cd7db7bb",
       "index": 4,
-      "collapsed": true,
+      "isCollapsed": true,
       "title": "biology",
       "boxesData": [
         {
@@ -1864,7 +2290,8 @@
           "index": 0,
           "specialType": "new",
           "data": {
-            "all": 2
+            "all": 2,
+            "train": null
           }
         },
         {
@@ -1872,9 +2299,9 @@
           "index": 1,
           "specialType": "none",
           "data": {
-            "all": 9,
-            "train": 5,
-            "wait": 4
+            "all": 2,
+            "train": 1,
+            "wait": 1
           },
           "timing": {
             "minutes": 0,
@@ -1889,8 +2316,8 @@
           "index": 2,
           "specialType": "none",
           "data": {
-            "all": 6,
-            "train": 4,
+            "all": 2,
+            "train": 0,
             "wait": 2
           },
           "timing": {
@@ -1906,9 +2333,9 @@
           "index": 3,
           "specialType": "none",
           "data": {
-            "all": 9,
-            "train": 7,
-            "wait": 2
+            "all": 1,
+            "train": 1,
+            "wait": 0
           },
           "timing": {
             "minutes": 0,
@@ -1923,9 +2350,9 @@
           "index": 4,
           "specialType": "none",
           "data": {
-            "all": 10,
+            "all": 5,
             "train": 3,
-            "wait": 7
+            "wait": 2
           },
           "timing": {
             "minutes": 0,
@@ -1940,9 +2367,9 @@
           "index": 5,
           "specialType": "learnt",
           "data": {
-            "all": 12,
-            "train": 5,
-            "wait": 7
+            "all": 4,
+            "train": 2,
+            "wait": 2
           },
           "timing": {
             "minutes": 0,
@@ -1954,9 +2381,9 @@
         }
       ],
       "data": {
-        "all": 48,
-        "train": 24,
-        "wait": 22
+        "all": 16,
+        "train": 9,
+        "wait": 7
       }
     }
   ]

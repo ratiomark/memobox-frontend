@@ -5,7 +5,9 @@ export {
 	getViewPageCardsFiltered,
 	getViewPageIsMounted,
 	getViewPage,
-	getViewPageSavedShelf
+	// getViewPageSortItemsList,
+	getViewPageColumns,
+	getViewPageSavedShelf,
 } from './model/selectors/getViewPageInitializer';
 
 export { viewPageReducer, viewPageActions } from './model/slice/viewPageSlice';

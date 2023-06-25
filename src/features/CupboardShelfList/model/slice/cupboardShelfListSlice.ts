@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSelector, createSlice, EntityId, IdSelector, PayloadAction } from '@reduxjs/toolkit'
+import { createEntityAdapter, createSelector, createSlice, EntityId, IdSelector, PayloadAction, SerializedError } from '@reduxjs/toolkit'
 import { CupboardPageSchema } from '../types/CupboardPageSchema'
 import { User } from '@/entities/User'
 import { setFeatureFlag } from '@/shared/lib/features'
@@ -6,6 +6,7 @@ import { fetchCupboardData } from '../services/fetchCupboardData'
 import { CupboardSchema } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
 import { StateSchema } from '@/app/providers/StoreProvider'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 
 const initialState: CupboardPageSchema = {
 	isLoading: true,
@@ -59,7 +60,7 @@ const cupboardShelfList = createSlice({
 			state.newCardModal.questionText = action.payload
 		},
 		setCommonShelfCollapsed: (state, action: PayloadAction<boolean>) => {
-			state.commonShelfCollapsed = action.payload
+			state.commonShelf!.isCollapsed = action.payload
 		},
 		setAnswerText: (state, action: PayloadAction<string>) => {
 			state.newCardModal.answerText = action.payload
@@ -100,7 +101,29 @@ const cupboardShelfList = createSlice({
 		setNotificationModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.notificationShelfModal.isOpen = action.payload
 		},
-
+		setFetchedCupboardDataIsLoading: (state, action: PayloadAction<boolean>) => {
+			state.isLoading = action.payload
+		},
+		setFetchedCupboardDataError: (state, action: PayloadAction<FetchBaseQueryError | SerializedError>) => {
+			if ('status' in action.payload) {
+				state.error = JSON.stringify(action.payload.data)				
+			} else {
+				state.error = JSON.stringify(action.payload.message)				
+			}
+		},
+		setFetchedCupboardData: (state, action: PayloadAction<CupboardSchema>) => {
+			const cupboard = action.payload
+			const commonShelf = cupboard.commonShelf
+			state.isLoading = false
+			state.commonShelf = commonShelf
+			state.newCardModal.shelfId = cupboard.shelves[0].id
+			shelvesAdapter.setAll(state, cupboard.shelves)
+			state.cupboardData = {
+				all: commonShelf.data.all,
+				train: commonShelf.data.train,
+				wait: commonShelf.data.wait,
+			}
+		},
 		// shelf control
 		deleteShelf: (state, action: PayloadAction<EntityId>) => {
 			shelvesAdapter.removeOne(state, action.payload)
@@ -114,14 +137,15 @@ const cupboardShelfList = createSlice({
 				fetchCupboardData.fulfilled,
 				(state, action: PayloadAction<CupboardSchema>) => {
 					const cupboard = action.payload
+					const commonShelf = cupboard.commonShelf
 					state.isLoading = false
-					state.commonShelfCollapsed = action.payload.commonShelfCollapsed
+					state.commonShelf = commonShelf
 					state.newCardModal.shelfId = cupboard.shelves[0].id
 					shelvesAdapter.setAll(state, cupboard.shelves)
 					state.cupboardData = {
-						all: cupboard.data.all,
-						train: cupboard.data.train,
-						wait: cupboard.data.wait,
+						all: commonShelf.data.all,
+						train: commonShelf.data.train,
+						wait: commonShelf.data.wait,
 					}
 				})
 			.addCase(
