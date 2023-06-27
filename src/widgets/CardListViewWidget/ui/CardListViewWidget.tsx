@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CardListViewWidget.module.scss';
-import { getViewPage, getViewPageIsMounted, getViewPageSavedShelf, getViewPageShelfId } from '@/features/ViewPageInitializer'
+import { getViewPage, getViewPageIsMounted, getViewPageSavedShelf, getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer'
 import { useSelector } from 'react-redux';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { CardSchema } from '@/entities/Card';
@@ -10,6 +10,8 @@ import { CardsListSkeleton } from './CardsListSkeleton';
 import { getViewPageCardsFiltered, getViewPageIsLoading } from '@/features/ViewPageInitializer';
 import { CardListItem } from './CardListItem/CardListItem';
 import { getViewPageCardsSorted } from '@/features/ViewPageInitializer'
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { MultiSelectScreen } from './MultiSelectScreen/MultiSelectScreen';
 
 interface CardListViewWidgetProps {
 	className?: string
@@ -21,24 +23,41 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	} = props
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
+	const dispatch = useAppDispatch()
 	const cards = useSelector(getViewPageCardsSorted)
 	const { t } = useTranslation()
-	// const [cardsSelected, setCardsSelected] = useState <{[key: string]: true}>({})
+	// const [cardsSelected, setSelectedCardIds] = useState <{[key: string]: true}>({})
 	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])
-	const [cardsSelected, setCardsSelected] = useState<string[]>([])
-	
+	const [selectedCardIds, setSelectedCardIds] = useState<string[]>([])
+
 	const onSelectCard = useCallback((cardId: string) => {
-		if (cardsSelected.includes(cardId)) {
-			const idsFiltered = cardsSelected.filter(id => id !== cardId)
-			setCardsSelected(idsFiltered)
+		dispatch(viewPageActions.setMultiSelect(true))
+		if (selectedCardIds.includes(cardId)) {
+			const idsFiltered = selectedCardIds.filter(id => id !== cardId)
+			setSelectedCardIds(idsFiltered)
+			return
 		}
-		setCardsSelected(prev => [...prev, cardId])
-	}, [cardsSelected])
+		setSelectedCardIds(prev => [...prev, cardId])
+	}, [selectedCardIds, dispatch])
+
+	const onSelectAllCards = () => {
+		dispatch(viewPageActions.setMultiSelect(true))
+		setSelectedCardIds([...cards.map(card => card._id)])
+	}
+
+	// console.log(selectedCardIds)
 
 	const content = useMemo(() => {
 		if (viewPageIsLoading) return []
-		return cards?.map(item => <CardListItem onSelectCard={onSelectCard} card={item} key={item._id} />)
-	}, [cards, viewPageIsLoading, onSelectCard])
+		return cards?.map(item => (
+			<CardListItem
+				selectedCardIds={selectedCardIds}
+				onSelectCard={onSelectCard}
+				card={item}
+				key={item._id}
+			/>)
+		)
+	}, [cards, viewPageIsLoading, onSelectCard, selectedCardIds])
 
 
 	if (!viewPageIsMounted || viewPageIsLoading || !content) {
@@ -51,9 +70,8 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 			cls.cardListViewWidget,
 			className)}
 		>
-			{/* <p>Полка {shelfId}</p> */}
-			{/* <p>Коробка {boxId}</p> */}
 			{content}
+			<MultiSelectScreen onSelectAllCards={onSelectAllCards} />
 		</ul>
 	)
 }

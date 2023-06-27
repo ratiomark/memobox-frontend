@@ -7,28 +7,28 @@ import { useState } from 'react';
 interface CheckBoxProps {
 	className?: string
 	onClick: () => void
-	// isChecked: boolean
+	isChecked: boolean
 }
 
 export const CheckBox = (props: CheckBoxProps) => {
 	const {
 		className,
-		// isChecked,
+		isChecked,
 		onClick,
 	} = props
-	const [isChecked, setIsChecked] = useState(false)
+	// const [isCheckedLocal, setIsCheckedLocal] = useState(isChecked)
 	const handleChange = () => {
-		setIsChecked(!isChecked)
+		// setIsCheckedLocal(!isCheckedLocal)
 		onClick()
 	}
-
+	// console.log(isChecked, isCheckedLocal)
 	return (
 		<div
 			className={clsx(
 				className ? '' : cls.switcherWrapper,
 				className
 			)}
-			// onClick={onClick}
+		// onClick={onClick}
 		>
 			<input
 				type="checkbox"

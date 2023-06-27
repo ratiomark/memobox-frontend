@@ -15,6 +15,7 @@ export const getViewPageSort = (state: StateSchema) => state.viewPage?.sort ?? '
 // export const getViewPageSort = (state: StateSchema) => state.viewPage?.sort ?? 'createdAt'
 export const getViewPageSortOrder = (state: StateSchema) => state.viewPage?.sortOrder ?? 'asc'
 export const getViewPageColumnSettingsIsOpen = (state: StateSchema) => state.viewPage?.columnSettingsIsOpen ?? false
+export const getViewPageMultiSelectIsActive = (state: StateSchema) => state.viewPage?.multiSelectIsActive
 
 export const getViewPageSavedShelf = (shelfId: string) =>
 	(state: StateSchema) => state.viewPage?.shelvesDataSaved?.[shelfId]

@@ -7,7 +7,7 @@ import { MyText } from '@/shared/ui/Typography';
 import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
 import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
-import { getViewPageColumns } from '@/features/ViewPageInitializer';
+import { getViewPageColumns, getViewPageMultiSelectIsActive } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { useMemo, useState } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
@@ -26,6 +26,7 @@ interface CardListItemProps {
 	className?: string
 	card: CardSchema
 	onSelectCard: (cardId: string) => void
+	selectedCardIds: string[]
 }
 
 export const CardListItem = (props: CardListItemProps) => {
@@ -33,10 +34,14 @@ export const CardListItem = (props: CardListItemProps) => {
 		className,
 		card,
 		onSelectCard,
+		selectedCardIds,
 	} = props
 	const { t } = useTranslation()
-	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])
-
+	const multiSelectIsActive = useSelector(getViewPageMultiSelectIsActive)
+	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
+	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
+	const onSelectCardHandle = () => onSelectCard(card._id)
+	const isCardSelected = selectedCardIds.includes(card._id)
 	const columns = useSelector(getViewPageColumns)
 	const columnsRendered = useMemo(() => {
 		return columns?.map(column => {
@@ -64,11 +69,14 @@ export const CardListItem = (props: CardListItemProps) => {
 	}, [card, columns])
 
 	return (
-		<li className={cls.item} >
-			<CheckBox onClick={onSelectCard} />
+		<li
+			className={clsx(cls.item)}
+			onClick={multiSelectIsActive ? onSelectCardHandle : null}
+		>
 			{/* <input type='checkbox' /> */}
 			<div className={clsx(
 				cls.CardListItem,
+				isCardSelected ? cls.CardListItemSelected : '',
 				className)}
 			>
 				<div className={cls.mainContentWrapper} >
@@ -77,6 +85,7 @@ export const CardListItem = (props: CardListItemProps) => {
 				</div>
 				{columnsRendered}
 				<div className={cls.icons} >
+					<CheckBox isChecked={isCardSelected} onClick={onSelectCardHandle} />
 					{/* <Icon
 					Svg={ShareIcon}
 					width={25}

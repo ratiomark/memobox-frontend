@@ -1,0 +1,25 @@
+.MultiSelectScreen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  background-color: white;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.wrapper {
+  display: flex;
+  width: min(100%, 1200px);
+  margin: 0 auto;
+
+  // height: var(--navbar-height);
+  // border: 1px solid red;
+  justify-content: space-between;
+}
+
+.innerWrapper {
+  display: flex;
+  gap: 20px;
+}

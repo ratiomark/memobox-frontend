@@ -2,6 +2,11 @@
 .item {
   display: flex;
   gap: 20px;
+  cursor: pointer;
+}
+
+.itemSelected {
+  // border: 1px solid red;
 }
 
 .CardListItem {
@@ -14,6 +19,11 @@
   gap: 40px;
   max-width: fit-content;
   min-width: calc(100% - 32px);
+  border: 1px solid transparent;
+}
+
+.CardListItemSelected {
+  border: 1px solid var(--accent);
 }
 
 .mainContentWrapper {

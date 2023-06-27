@@ -19,9 +19,11 @@ export interface ViewPageInitializerSchema {
 	cards: CardSchema[]
 	isLoading: boolean
 	error: string
+	//
 	columnSettingsIsOpen: boolean
 	sort: SortColumnValue
 	sortOrder: SortOrderType
+	multiSelectIsActive: boolean
 	// shelfTitle?: string
 	// boxId: string
 	shelvesDataSaved: {

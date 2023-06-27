@@ -16,6 +16,7 @@ const initialState: ViewPageInitializerSchema = {
 	cards: [],
 	shelfId: 'all',
 	boxId: 'new',
+	multiSelectIsActive: false,
 	shelvesDataSaved: {}
 }
 
@@ -40,6 +41,10 @@ const viewPageSlice = createSlice({
 		setColumnSettingsIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.columnSettingsIsOpen = action.payload
 		},
+		setMultiSelect: (state, action: PayloadAction<boolean>) => {
+			state.multiSelectIsActive = action.payload
+		},
+		// 
 		setActiveBoxId: (state, action: PayloadAction<string | number>) => {
 			state.boxId = action.payload
 		},
