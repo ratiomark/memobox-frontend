@@ -49,16 +49,28 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 
 	useEffect(() => {
 		if (!cupboardIsLoading) {
-			const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
-			const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
-			const buttonsWidthList: number[] = []
-			const addCardsButtonsWidthList: number[] = []
-			trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
-			addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
-			const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
-			const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
-			trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
-			addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
+			setTimeout(() => {
+				const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
+				const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
+				const buttonsWidthList: number[] = []
+				const addCardsButtonsWidthList: number[] = []
+				trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
+				addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
+				const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
+				const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
+				trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
+				addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
+			}, 100)
+			// const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
+			// const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
+			// const buttonsWidthList: number[] = []
+			// const addCardsButtonsWidthList: number[] = []
+			// trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
+			// addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
+			// const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
+			// const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
+			// trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
+			// addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
 		}
 	}, [cupboardIsLoading])
 

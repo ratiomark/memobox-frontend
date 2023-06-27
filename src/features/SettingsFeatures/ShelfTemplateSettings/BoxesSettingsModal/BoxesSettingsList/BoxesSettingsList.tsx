@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsList.module.scss';
 import { BoxSchema } from '@/entities/Box';
 import { BoxSettingsItem } from '../BoxSettingsItem/BoxSettingsItem';
-import { BoxSettingsItemNewCardsBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
+import { BoxSettingsItemNewCardsBox, BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
 import { Dispatch, SetStateAction } from 'react';
 import { TimingBlock } from '@/shared/types/DataBlock';
 import { ExtendedByIndexTimingBlock } from '../BoxesSettingsContent/BoxesSettingsContent';
@@ -34,15 +34,15 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 		setBoxesData([...start, ...end])
 	}
 
-	console.log('boxesSlice', boxesList.slice(1, boxesList.length - 1))
-	console.log('boxesList', boxesList)
+	// console.log('boxesSlice', boxesList.slice(1, boxesList.length - 1))
+	// console.log('boxesList', boxesList)
 
 	return (
 		<div className={clsx(
 			cls.BoxesSettingsList,
 			className)}
 		>
-			<BoxSettingsItemNewCardsBox />
+			<BoxSettingsSpecialBox type={'new'} />
 			{boxesList.slice(1, boxesList.length - 1).map(boxItem => {
 				return (
 					<BoxSettingsItem
@@ -52,7 +52,7 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 						key={boxItem.index}
 					/>)
 			})}
-			<p>Изученные</p>
+			<BoxSettingsSpecialBox type={'learnt'} />
 		</div>
 	)
 }

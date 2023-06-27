@@ -8,15 +8,23 @@ import { SortOrderType } from '@/shared/types/SortOrderType'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
-	columnSettingsIsOpen: false,
 	isLoading: true,
 	sort: 'createdAt',
 	sortOrder: 'asc',
 	error: '',
+	// 
 	cards: [],
+	cardsDataCurrent: {},
+	cardsDataEdited: {},
+	cardEditModalIsOpen: false,
+	currentCardId: '',
+	// 
 	shelfId: 'all',
 	boxId: 'new',
+	// 
 	multiSelectIsActive: false,
+	columnSettingsIsOpen: false,
+	// 
 	shelvesDataSaved: {}
 }
 
@@ -51,7 +59,45 @@ const viewPageSlice = createSlice({
 		setViewPageIsMounted: (state) => {
 			state._viewPageMounted = true
 		},
-
+		// edit cards
+		setCardEditModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.cardEditModalIsOpen = action.payload
+		},
+		setCurrentCardData: (state, action: PayloadAction<CardSchema>) => {
+			if (action.payload._id in state.cardsDataCurrent) null
+			else state.cardsDataCurrent[action.payload._id] = action.payload
+		},
+		setEditCardData: (state, action: PayloadAction<CardSchema>) => {
+			const cardId = action.payload._id
+			if (cardId in state.cardsDataEdited) null
+			else {
+				const obj = {
+					[cardId]: {
+						question: action.payload.question,
+						answer: action.payload.answer,
+						shelf: action.payload.shelf,
+						box: action.payload.box,
+					}
+				}
+				state.cardsDataEdited = { ...state.cardsDataEdited, ...obj }
+			}
+		},
+		setCurrentCardId: (state, action: PayloadAction<string>) => {
+			state.currentCardId = action.payload
+		},
+		setCardQuestionText: (state, action: PayloadAction<string>) => {
+			state.cardsDataEdited[state.currentCardId].question = action.payload
+		},
+		setCardAnswerText: (state, action: PayloadAction<string>) => {
+			state.cardsDataEdited[state.currentCardId].answer = action.payload
+		},
+		setCardShelfId: (state, action: PayloadAction<string>) => {
+			state.cardsDataEdited[state.currentCardId].shelf = action.payload
+		},
+		setCardBoxId: (state, action: PayloadAction<number>) => {
+			state.cardsDataEdited[state.currentCardId].box = action.payload
+		},
+		// 
 		initiateShelf: (state, action: PayloadAction<InitiateShelfPayload>) => {
 			// if (action.payload.shelfId in state.shelvesDataSaved) {
 			// 	null

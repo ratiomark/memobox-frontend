@@ -1,4 +1,10 @@
 export {
+	getViewPageEditModalIsOpen,
+	getViewPageEditedData,
+	getViewPageCurrentData,
+} from './model/selectors/getViewPageEditModal';
+
+export {
 	getViewPageShelfId, getViewPageBoxId,
 	getViewPageIsLoading,
 	getViewPageCards,

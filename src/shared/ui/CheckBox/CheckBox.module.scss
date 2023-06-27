@@ -7,6 +7,16 @@
   align-items: center;
   justify-content: end;
   gap: 16px;
+  cursor: pointer;
+}
+
+.checkBox {
+  cursor: pointer;
+
+  // color: red;
+  // accent-color: var(--accent);
+  border: 1px solid red;
+  outline: none;
 }
 
 .label {

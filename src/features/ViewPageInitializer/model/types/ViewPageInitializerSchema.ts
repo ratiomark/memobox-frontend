@@ -24,6 +24,20 @@ export interface ViewPageInitializerSchema {
 	sort: SortColumnValue
 	sortOrder: SortOrderType
 	multiSelectIsActive: boolean
+	// 
+	cardsDataCurrent: {
+		[key: string]: CardSchema
+	}
+	cardsDataEdited: {
+		[key: string]: {
+			question: string
+			answer: string
+			shelf: string
+			box: number
+		}
+	}
+	currentCardId: string
+	cardEditModalIsOpen: boolean
 	// shelfTitle?: string
 	// boxId: string
 	shelvesDataSaved: {

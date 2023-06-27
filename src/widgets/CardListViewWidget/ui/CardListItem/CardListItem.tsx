@@ -9,7 +9,7 @@ import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { getViewPageColumns, getViewPageMultiSelectIsActive } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
-import { useMemo, useState } from 'react';
+import { ChangeEvent, MouseEvent, SyntheticEvent, useMemo, useState } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
 
 const formatDate = (ISODate: string) => {
@@ -27,6 +27,7 @@ interface CardListItemProps {
 	card: CardSchema
 	onSelectCard: (cardId: string) => void
 	selectedCardIds: string[]
+	onOpenEditCardModal: (card: CardSchema) => void
 }
 
 export const CardListItem = (props: CardListItemProps) => {
@@ -35,12 +36,32 @@ export const CardListItem = (props: CardListItemProps) => {
 		card,
 		onSelectCard,
 		selectedCardIds,
+		onOpenEditCardModal,
 	} = props
 	const { t } = useTranslation()
 	const multiSelectIsActive = useSelector(getViewPageMultiSelectIsActive)
 	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
 	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
-	const onSelectCardHandle = () => onSelectCard(card._id)
+
+	const onSelectCardHandle = (e: ChangeEvent) => {
+		if (e.target.tagName === 'INPUT') onSelectCard(card._id)
+	}
+	const onSelectCardByCardClick = (e: MouseEvent) => {
+		// console.log(e.currentTarget.tagName)
+		// e.stopPropagation()
+		// if (e.currentTarget.tagName === 'INPUT') return
+		onSelectCard(card._id)
+	}
+	const onOpenEditCardModalHandle = (e: MouseEvent<HTMLLIElement>) => {
+		console.log(e.target.tagName)
+		if (e.target.tagName === 'INPUT') return
+		// console.log(e.currentTarget.tagName)
+		// console.log(e.target.toString())
+		// if (e.currentTarget.tagName === 'INPUT') return
+		onOpenEditCardModal(card)
+		// console.log('CLICK', e.target)
+		// return
+	}
 	const isCardSelected = selectedCardIds.includes(card._id)
 	const columns = useSelector(getViewPageColumns)
 	const columnsRendered = useMemo(() => {
@@ -71,13 +92,15 @@ export const CardListItem = (props: CardListItemProps) => {
 	return (
 		<li
 			className={clsx(cls.item)}
-			onClick={multiSelectIsActive ? onSelectCardHandle : null}
+			onClick={multiSelectIsActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
 		>
 			{/* <input type='checkbox' /> */}
-			<div className={clsx(
-				cls.CardListItem,
-				isCardSelected ? cls.CardListItemSelected : '',
-				className)}
+			<div
+				className={clsx(
+					cls.CardListItem,
+					isCardSelected ? cls.CardListItemSelected : '',
+				)}
+			// onClick={multiSelectIsActive ? onSelectCardHandle : onOpenEditCardModalHandle}
 			>
 				<div className={cls.mainContentWrapper} >
 					<MyText text={card.question} className={cls.mainContent} />

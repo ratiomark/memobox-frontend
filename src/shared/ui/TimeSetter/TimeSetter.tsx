@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './TimeSetter.module.scss';
-import { WheelEvent, useEffect, useState } from 'react';
+import { MouseEvent, WheelEvent, useEffect, useRef, useState } from 'react';
 import { Icon } from '../Icon';
 import { MyText } from '../Typography';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
@@ -20,6 +20,11 @@ interface TimeSetterProps {
 	months: number
 	onClose: () => void
 	lockSelector?: string
+	overlay?: boolean
+}
+
+const closeTimeSetter = (e: MouseEvent) => {
+	console.log(e.target)
 }
 
 export const TimeSetter = (props: TimeSetterProps) => {
@@ -31,7 +36,8 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		weeks: weeksProps = 0,
 		months: monthsProps = 0,
 		onClose,
-		lockSelector = '[data-testid="MainPage"]'
+		lockSelector = '[data-testid="MainPage"]',
+		overlay = true,
 	} = props
 	const [locked, setLocked] = useLockedBody(false, lockSelector)
 
@@ -41,6 +47,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	const [weeks, setWeeks] = useState(weeksProps)
 	const [months, setMonths] = useState(monthsProps)
 	const [disabled, setDisabled] = useState(false)
+	const timeSetterRef = useRef<HTMLDivElement>()
 
 	useEffect(() => {
 		const total = minutes + hours + days + weeks + months
@@ -54,6 +61,11 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		singleSetters.forEach(button => singleSettersWidthList.push(button.clientWidth))
 		const singleSetterMaxWidth = Math.ceil(Math.max(...singleSettersWidthList))
 		singleSetters.forEach(div => div.style.minWidth = `${singleSetterMaxWidth + 2}px`)
+	}, [])
+
+	useEffect(() => {
+		// timeSetterRef.current && timeSetterRef.current.addEventListener('click', closeTimeSetter)
+		// return () => window.removeEventListener('click', closeTimeSetter)
 	}, [])
 
 	useEffect(() => {
@@ -132,6 +144,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		<div className={clsx(
 			cls.TimeSetter,
 			className)}
+			ref={timeSetterRef}
 		>
 			<HStack gap='gap_16' className={cls.setterWrapper} align='center'>
 
@@ -189,7 +202,11 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					{t('save')}
 				</Button>
 			</HStack>
-			<Portal> <div className={cls.overlay} onClick={onClose} /></Portal>
+			{overlay &&
+				<Portal>
+					<div className={cls.overlay} onClick={onClose} />
+				</Portal>
+			}
 		</div>
 		// </div >
 	)

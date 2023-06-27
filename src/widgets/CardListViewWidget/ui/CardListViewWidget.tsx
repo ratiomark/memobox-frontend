@@ -1,17 +1,18 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CardListViewWidget.module.scss';
-import { getViewPage, getViewPageIsMounted, getViewPageSavedShelf, getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer'
+import { getViewPage, getViewPageIsMounted, getViewPageMultiSelectIsActive, getViewPageSavedShelf, getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer'
 import { useSelector } from 'react-redux';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { CardSchema } from '@/entities/Card';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { CardsListSkeleton } from './CardsListSkeleton';
 import { getViewPageCardsFiltered, getViewPageIsLoading } from '@/features/ViewPageInitializer';
 import { CardListItem } from './CardListItem/CardListItem';
 import { getViewPageCardsSorted } from '@/features/ViewPageInitializer'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { MultiSelectScreen } from './MultiSelectScreen/MultiSelectScreen';
+import { CardEditModal } from './CardEditModal';
 
 interface CardListViewWidgetProps {
 	className?: string
@@ -23,27 +24,57 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	} = props
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
+	const multiSelectIsActive = useSelector(getViewPageMultiSelectIsActive)
 	const dispatch = useAppDispatch()
 	const cards = useSelector(getViewPageCardsSorted)
 	const { t } = useTranslation()
-	// const [cardsSelected, setSelectedCardIds] = useState <{[key: string]: true}>({})
-	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])
+
 	const [selectedCardIds, setSelectedCardIds] = useState<string[]>([])
 
 	const onSelectCard = useCallback((cardId: string) => {
-		dispatch(viewPageActions.setMultiSelect(true))
+		if (!multiSelectIsActive) dispatch(viewPageActions.setMultiSelect(true))
+		// else if (selectedCardIds.length === 0) {
+		// 	dispatch(viewPageActions.setMultiSelect(false))
+		// }
 		if (selectedCardIds.includes(cardId)) {
 			const idsFiltered = selectedCardIds.filter(id => id !== cardId)
 			setSelectedCardIds(idsFiltered)
 			return
 		}
 		setSelectedCardIds(prev => [...prev, cardId])
-	}, [selectedCardIds, dispatch])
+		// if (selectedCardIds.length === 0) {
+		// 	dispatch(viewPageActions.setMultiSelect(false))
+		// }
+	}, [selectedCardIds, dispatch, multiSelectIsActive])
+
+	const onOpenEditCardModal = useCallback((card: CardSchema) => {
+		dispatch(viewPageActions.setCurrentCardData(card))
+		dispatch(viewPageActions.setCurrentCardId(card._id))
+		dispatch(viewPageActions.setCardEditModalIsOpen(true))
+		dispatch(viewPageActions.setEditCardData(card))
+	}, [dispatch])
+	// setCardEditModalIsOpen
+	// setCurrentCardData
+	// setCurrentCardId
+	// setCardQuestion
+	// setCardAnswer
+	// setCardShelfId
+	// setCardBoxId
 
 	const onSelectAllCards = () => {
 		dispatch(viewPageActions.setMultiSelect(true))
 		setSelectedCardIds([...cards.map(card => card._id)])
 	}
+
+	const onCancelMultiSelect = useCallback(() => {
+		dispatch(viewPageActions.setMultiSelect(false))
+		setSelectedCardIds([])
+	}, [setSelectedCardIds, dispatch])
+
+	useEffect(() => {
+		//отменю мульти селект, если изменяются карточки, а они меняются когда меняется полка\коробка
+		onCancelMultiSelect()
+	}, [cards, onCancelMultiSelect])
 
 	// console.log(selectedCardIds)
 
@@ -53,11 +84,12 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 			<CardListItem
 				selectedCardIds={selectedCardIds}
 				onSelectCard={onSelectCard}
+				onOpenEditCardModal={onOpenEditCardModal}
 				card={item}
 				key={item._id}
 			/>)
 		)
-	}, [cards, viewPageIsLoading, onSelectCard, selectedCardIds])
+	}, [cards, viewPageIsLoading, onSelectCard, selectedCardIds, onOpenEditCardModal])
 
 
 	if (!viewPageIsMounted || viewPageIsLoading || !content) {
@@ -71,7 +103,11 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 			className)}
 		>
 			{content}
-			<MultiSelectScreen onSelectAllCards={onSelectAllCards} />
+			<MultiSelectScreen
+				onCancelMultiSelect={onCancelMultiSelect}
+				onSelectAllCards={onSelectAllCards}
+			/>
+			<CardEditModal />
 		</ul>
 	)
 }

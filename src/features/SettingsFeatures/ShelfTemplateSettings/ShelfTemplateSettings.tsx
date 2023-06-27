@@ -21,7 +21,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 	const shelfTemplateSettings = useSelector(getUserShelfTemplateSettings)
 
 	const { t } = useTranslation()
-	
+
 	if (!shelfTemplateSettings) return <p>Загрузка</p>
 
 	return (

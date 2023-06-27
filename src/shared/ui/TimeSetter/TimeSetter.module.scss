@@ -8,12 +8,14 @@
   padding: 20px;
   border-radius: 4px;
   z-index: 100;
+  isolation: isolate;
 }
 
 .setterWrapper {
   margin-bottom: 20px;
   position: relative;
   z-index: 100;
+  isolation: isolate;
 }
 
 .overlay {
@@ -21,5 +23,6 @@
   cursor: pointer;
   inset: 0;
   z-index: 80;
+  isolation: isolate;
   background-color: rgb(128 128 128 / 11%);
 }

@@ -144,7 +144,7 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 				missedTrainingSetting={missedTrainingSetting}
 				isOpen={settingModalStates.missedTrainingModal}
 				onClose={toggleMissedTrainingModal}
-				lazy={true}
+				// lazy={true}
 			/>
 		</div>
 	)

@@ -63,6 +63,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 			{isTimeSetterOpen &&
 				<div className={cls.timeSetter} >
 					<TimeSetter
+						overlay={false}
 						minutes={boxItem.minutes}
 						hours={boxItem.hours}
 						days={boxItem.days}

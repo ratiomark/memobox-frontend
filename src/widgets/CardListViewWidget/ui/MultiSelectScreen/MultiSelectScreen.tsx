@@ -14,13 +14,14 @@ interface MultiSelectScreenProps {
 export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 	const {
 		className,
-		onSelectAllCards
+		onSelectAllCards,
+		onCancelMultiSelect
 	} = props
 	const multiSelectIsActive = useSelector(getViewPageMultiSelectIsActive)
 
 	const { t } = useTranslation()
 
-	// if (!multiSelectIsActive) return null
+	if (!multiSelectIsActive) return null
 
 	return (
 		<div className={clsx(
@@ -29,7 +30,7 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 		>
 			<div className={cls.wrapper} >
 				<div className={cls.innerWrapper} >
-					<Button>{t('cancel')}</Button>
+					<Button onClick={onCancelMultiSelect}>{t('cancel')}</Button>
 					<Button variant='cancel' color='attention'>{t('remove')}</Button>
 				</div>
 				<div className={cls.innerWrapper} >
