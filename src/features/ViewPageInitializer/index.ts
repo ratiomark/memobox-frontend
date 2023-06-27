@@ -6,8 +6,13 @@ export {
 	getViewPageIsMounted,
 	getViewPage,
 	// getViewPageSortItemsList,
+	getViewPageColumnSettingsIsOpen,
+	getViewPageCardsSorted,
 	getViewPageColumns,
 	getViewPageSavedShelf,
+	getViewPageSort,
+	getViewPageSortChecked,
+	getViewPageSortOrder,
 } from './model/selectors/getViewPageInitializer';
 
 export { viewPageReducer, viewPageActions } from './model/slice/viewPageSlice';

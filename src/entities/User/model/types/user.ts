@@ -48,5 +48,6 @@ export interface User {
 // если authData пустая, то юзер не авторизован, а если не пуст, то значит авторизован
 export interface UserSchema {
 	authData?: User
+	jsonSavedData?: JsonSavedData
 	_mounted: boolean
 }

@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
 import { USER_ID_LS_KEY, USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage'
 import { User, UserSchema } from '../types/user'
 import { setFeatureFlag } from '@/shared/lib/features'
 import { saveJsonSettings } from '../services/saveJsonSettings'
 import { JsonSettings } from '../types/JsonSettings'
 import { initAuthData } from '../services/initAuthData'
+import { SortColumnObject } from '../types/JsonSavedData'
 
 const initialState: UserSchema = {
 	_mounted: false
@@ -21,7 +22,23 @@ const userSlice = createSlice({
 			localStorage.setItem(USER_ID_LS_KEY, action.payload.id)
 			state._mounted = true
 		},
-
+		// VAR: тестирую jsonSavedData как отедльное поле
+		setColumn: (state, action: PayloadAction<SortColumnObject>) => {
+			if (state.jsonSavedData) {
+				const columns = [...state.jsonSavedData.viewPageColumns]
+				const columnsFiltered = columns.filter(column => {
+					return column.value !== action.payload.value
+				})
+				columnsFiltered.push(action.payload)
+				columnsFiltered.sort((a, b) => a.index - b.index)
+				state.jsonSavedData.viewPageColumns = columnsFiltered.sort((a, b) => a.index - b.index)
+				// state.jsonSavedData.viewPageColumns = [...columnsFiltered, action.payload]
+			}
+		},
+		setColumns: (state, action: PayloadAction<SortColumnObject[]>) => {
+			state.jsonSavedData!.viewPageColumns = action.payload
+		},
+		// setColumns
 		logout: (state) => {
 			state.authData = undefined
 			localStorage.removeItem(USER_ID_LS_KEY)
@@ -35,6 +52,7 @@ const userSlice = createSlice({
 					if (state.authData) {
 						state.authData.jsonSettings = action.payload
 					}
+
 				})
 			.addCase(
 				initAuthData.fulfilled,
@@ -42,6 +60,8 @@ const userSlice = createSlice({
 					state.authData = action.payload
 					setFeatureFlag(action.payload.features)
 					state._mounted = true
+					// VAR: тестирую jsonSavedData как отедльное поле
+					state.jsonSavedData = action.payload.jsonSavedData
 				})
 			.addCase(
 				initAuthData.rejected,

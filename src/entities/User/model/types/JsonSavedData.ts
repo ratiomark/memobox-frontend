@@ -12,10 +12,16 @@ export interface SortColumnObject {
 	index: number
 }
 
+export interface ShelfNameItem {
+	title: string,
+	isCollapsed: boolean,
+	id: string
+}
+
 export interface JsonSavedData {
 	viewPageShelfId?: string
 	viewPageBoxId?: string
 	commonShelfCollapsed: boolean
-	shelfNamesList: { title: string, isCollapsed: boolean }[]
+	shelfNamesList: ShelfNameItem[]
 	viewPageColumns: SortColumnObject[]
 }

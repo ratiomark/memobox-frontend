@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './SortControllerWrapper.module.scss';
-import { useParams, useSearchParams } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getViewPageColumns } from '@/features/ViewPageInitializer';
 import { MyText } from '@/shared/ui/Typography';
 import TriangleIcon from '@/shared/assets/icons/triangleIcon2.svg'
 import { Icon } from '@/shared/ui/Icon';
-import { SortColumnObject, SortColumnValue } from '../../model/types/SortControllerViewPageWidgetSchema';
+import { MouseEvent, useState } from 'react';
+import { SortColumnObject, SortColumnValue } from '@/entities/User';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { viewPageActions } from '@/features/ViewPageInitializer';
+import { SortOrderType } from '@/shared/types/SortOrderType';
 
 interface SortItemProps {
 	className?: string
@@ -20,17 +20,40 @@ export const SortItem = (props: SortItemProps) => {
 	const {
 		className,
 		column,
-		activeSort, 
+		activeSort,
 	} = props
 
-	const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+	const [sortOrder, setSortOrder] = useState<SortOrderType>('asc')
+	const dispatch = useAppDispatch()
 	const { t } = useTranslation()
-	const handleDirection = () => {
-		if (sortDirection === 'asc') {
-			setSortDirection('desc')
+
+	const onSortClick = () => {
+		// console.log('SORT')
+		if (sortOrder === 'asc') {
+			setSortOrder('desc')
+			dispatch(viewPageActions.setActiveSort(column.value))
+			dispatch(viewPageActions.setSortOrder('desc'))
 			return
 		}
-		setSortDirection('asc')
+		setSortOrder('asc')
+		dispatch(viewPageActions.setActiveSort(column.value))
+		dispatch(viewPageActions.setSortOrder('asc'))
+		// dispatch(viewPageActions.setActiveSort(column.value))
+		// dispatch(viewPageActions.setSortOrder(sortOrder))
+	}
+
+	const handleDirection = (e: MouseEvent) => {
+		e.stopPropagation()
+		// console.log('ORDER')
+		if (sortOrder === 'asc') {
+			setSortOrder('desc')
+			dispatch(viewPageActions.setActiveSort(column.value))
+			dispatch(viewPageActions.setSortOrder('desc'))
+			return
+		}
+		setSortOrder('asc')
+		dispatch(viewPageActions.setActiveSort(column.value))
+		dispatch(viewPageActions.setSortOrder('asc'))
 	}
 
 
@@ -40,14 +63,16 @@ export const SortItem = (props: SortItemProps) => {
 		<button
 			className={clsx(cls[`${sortValue}Wrapper`], cls.wrapper)}
 			key={sortValue}
-			onClick={handleDirection}
+			onClick={onSortClick}
 		>
-			<MyText text={t(column.content)} size='s' className={cls[sortValue]} />
+			<MyText text={t(column.content)} size='s' variant={activeSort === column.value ? 'accent' : 'primary'} className={cls[sortValue]} />
 			<Icon
+				// clickable
+				onClick={handleDirection}
 				width={8}
 				height={8}
 				Svg={TriangleIcon}
-				className={clsx(cls.arrow, sortDirection === 'asc' ? '' : cls.rotateArrow)}
+				className={clsx(cls.arrow, sortOrder === 'asc' ? '' : cls.rotateArrow)}
 				type={sortValue === activeSort ? 'main' : 'hint'}
 			/>
 		</button>

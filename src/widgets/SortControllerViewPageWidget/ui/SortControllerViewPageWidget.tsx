@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './SortControllerViewPageWidget.module.scss';
-import { getViewPageIsMounted, getViewPageIsLoading, getViewPageSortItemsList } from '@/features/ViewPageInitializer';
+import { getViewPageIsMounted, getViewPageIsLoading,  } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { MyText } from '@/shared/ui/Typography';
 

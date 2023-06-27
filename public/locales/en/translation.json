@@ -58,5 +58,6 @@
   },
   "shelf": "Shelf",
   "creation": "Creation",
-  "last training": "Last training"
+  "last training": "Last training",
+  "columns": "Columns"
 }

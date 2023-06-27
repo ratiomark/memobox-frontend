@@ -3,21 +3,27 @@ import { fetchBoxesDataByShelfId, FetchBoxesThunkResponse } from '../services/fe
 import { ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
 import { CardSchema } from '@/entities/Card'
 import { fetchCards } from '../services/fetchCards'
+import { SortColumnValue } from '@/entities/User'
+import { SortOrderType } from '@/shared/types/SortOrderType'
 
 const initialState: ViewPageInitializerSchema = {
-	// boxId: '',
 	_viewPageMounted: false,
+	columnSettingsIsOpen: false,
 	isLoading: true,
+	sort: 'createdAt',
+	sortOrder: 'asc',
 	error: '',
 	cards: [],
 	shelfId: 'all',
 	boxId: 'new',
 	shelvesDataSaved: {}
 }
+
 export interface InitiateShelfPayload {
 	shelfId: string
 	boxId: string
 }
+
 const viewPageSlice = createSlice({
 	name: 'viewPage',
 	initialState,
@@ -25,7 +31,16 @@ const viewPageSlice = createSlice({
 		setActiveShelfId: (state, action: PayloadAction<string>) => {
 			state.shelfId = action.payload
 		},
-		setActiveBoxId: (state, action: PayloadAction<string|number>) => {
+		setActiveSort: (state, action: PayloadAction<SortColumnValue>) => {
+			state.sort = action.payload
+		},
+		setSortOrder: (state, action: PayloadAction<SortOrderType>) => {
+			state.sortOrder = action.payload
+		},
+		setColumnSettingsIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.columnSettingsIsOpen = action.payload
+		},
+		setActiveBoxId: (state, action: PayloadAction<string | number>) => {
 			state.boxId = action.payload
 		},
 		setViewPageIsMounted: (state) => {

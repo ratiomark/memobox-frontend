@@ -5,11 +5,18 @@ import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLab
 import { useRef, } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { CardSchema } from '@/entities/Card';
-import { getViewPageCardsFiltered, getViewPageIsLoading, getViewPageIsMounted, getViewPageSavedShelf, getViewPageShelfId } from '@/features/ViewPageInitializer';
+import {
+	getViewPageCardsFiltered,
+	getViewPageIsLoading,
+	getViewPageIsMounted,
+	getViewPageShelfId,
+	viewPageActions
+} from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { ShelfRepresentedByBoxes } from '@/entities/Box';
-import { useNavigate } from 'react-router-dom';
 import cls from './StatsAndActionsViewPageWidget.module.scss';
+import { Button } from '@/shared/ui/Button';
+import { ColumnSettingModal } from './ColumnSettingModal/ColumnSettingModal';
 
 interface StatsData {
 	all: number
@@ -58,13 +65,14 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 	const {
 		className
 	} = props
-	// const [data, setData] = useState<any>()
-	// const [isLoading, setIsLoading] = useState(true)
-	// const dispatch = useAppDispatch()
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	const shelfId = useSelector(getViewPageShelfId) ?? '1'
 	const cards = useSelector(getViewPageCardsFiltered)
+	const dispatch = useAppDispatch()
+	const onOpenColumnSettingsModal = () => {
+		dispatch(viewPageActions.setColumnSettingsIsOpen(true))
+	}
 	// const shelfDataSaved = useSelector(getViewPageSavedShelf(shelfId ?? '1'))
 	// const boxId = useSelector(getViewPageSavedShelf(shelfId ?? '1'))?.lastBoxId
 	// const navigate = useNavigate()
@@ -89,25 +97,33 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 	const data = replaceCardsWithStatsData(cards)
 
 	return (
-		<HStack
-			max
-			className={clsx(
-				cls.statsAndActionsViewPageWidget,
-				className)}
-		>
-			<CompleteBigDataLabels data={data} isLoading={false} />
-			{/* <HStack gap='gap_14' className={cls.actions} >
-				<Button borderRadius='borderRadius_4'>{t('New shelf')}</Button>
-				<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
+		<>
+			<HStack
+				max
+				className={clsx(
+					cls.statsAndActionsViewPageWidget,
+					className)}
+			>
+				<CompleteBigDataLabels data={data} isLoading={false} />
+				<HStack gap='gap_14' className={cls.actions} >
+					<Button
+						onClick={onOpenColumnSettingsModal}
+						borderRadius='borderRadius_4'
+					>
+						{t('columns')}
+					</Button>
+					{/* <Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
 				<Icon
 					Svg={InfoIcon}
 					width={26}
 					height={26}
 					className={cls.info}
-				/>
+				/> */}
 
-			</HStack> */}
-		</HStack>
+				</HStack>
+			</HStack>
+			<ColumnSettingModal />
+		</>
 	)
 }
 

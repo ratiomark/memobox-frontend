@@ -9,10 +9,9 @@ import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { getViewPageColumns } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
-interface CardListItemProps {
-	className?: string
-	card: CardSchema
-}
+import { useMemo, useState } from 'react';
+import { CheckBox } from '@/shared/ui/CheckBox';
+
 const formatDate = (ISODate: string) => {
 	const date = new Date(ISODate)
 	const day = date.getUTCDate()
@@ -22,45 +21,75 @@ const formatDate = (ISODate: string) => {
 	const hours = date.getUTCHours()
 	return `${day}.${month}.${year}\n${hours}:${minutes < 10 ? '0' + minutes : minutes}`
 }
+
+interface CardListItemProps {
+	className?: string
+	card: CardSchema
+	onSelectCard: (cardId: string) => void
+}
+
 export const CardListItem = (props: CardListItemProps) => {
 	const {
 		className,
 		card,
+		onSelectCard,
 	} = props
-	const creationTime = formatDate(card.createdAt)
-	const lastTrainingTime = formatDate(card.lastTraining)
-	const columns = useSelector(getViewPageColumns)
 	const { t } = useTranslation()
+	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])
+
+	const columns = useSelector(getViewPageColumns)
+	const columnsRendered = useMemo(() => {
+		return columns?.map(column => {
+			if (column.enabled) { // VAR: отрисовываю данные, только для активных стобцов
+				const columnValue = column.value
+				const isColumnDate = columnValue === 'createdAt' || columnValue === 'lastTraining'
+				if (isColumnDate) {
+					return <MyText
+						className={cls[columnValue]}
+						key={column.index}
+						saveOriginal
+						text={formatDate(card[columnValue])}
+						size='s'
+					/>
+				} else {
+					return <MyText
+						className={cls[columnValue]}
+						key={column.index}
+						text={card[columnValue]}
+						size='s'
+					/>
+				}
+			}
+		})
+	}, [card, columns])
 
 	return (
-		<li className={clsx(
-			cls.CardListItem,
-			className)}
-		>
-			<MyText text={card.question} className={cls.mainContent} />
-			<MyText text={card.answer} className={cls.mainContent} />
-			{columns?.map(item => {
-				if (item.value === 'createdAt' || item.value === 'lastTraining') {
-					return <MyText key={item.index} saveOriginal text={formatDate(card[item.value])} size='s'  className={cls[item.value]} />
-				}
-				return <MyText key={item.index} text={card[item.value]} size='s' className={cls[item.value]}  />
-			})}
-			{/* <MyText text={card.shelf} size='s' /> */}
-			{/* <MyText saveOriginal text={creationTime} size='s' /> */}
-			{/* <MyText saveOriginal text={lastTrainingTime} size='s' /> */}
-			<div className={cls.icons} >
-				{/* <Icon
+		<li className={cls.item} >
+			<CheckBox onClick={onSelectCard} />
+			{/* <input type='checkbox' /> */}
+			<div className={clsx(
+				cls.CardListItem,
+				className)}
+			>
+				<div className={cls.mainContentWrapper} >
+					<MyText text={card.question} className={cls.mainContent} />
+					<MyText text={card.answer} className={cls.mainContent} />
+				</div>
+				{columnsRendered}
+				<div className={cls.icons} >
+					{/* <Icon
 					Svg={ShareIcon}
 					width={25}
 					height={25}
 				/> */}
-				<Icon
+					{/* <Icon
 					// width={28}
 					// height={28}
 					Svg={TrashIcon}
 					// type='cancel'
 					className={cls.trashIcon}
-				/>
+				/> */}
+				</div>
 			</div>
 		</li>
 	)

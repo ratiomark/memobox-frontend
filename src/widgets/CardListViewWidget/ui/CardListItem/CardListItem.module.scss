@@ -1,3 +1,9 @@
+/* stylelint-disable value-no-vendor-prefix */
+.item {
+  display: flex;
+  gap: 20px;
+}
+
 .CardListItem {
   border-radius: 4px;
   background-color: var(--bg);
@@ -6,7 +12,12 @@
   align-items: center;
   display: flex;
   gap: 40px;
+  max-width: fit-content;
+  min-width: calc(100% - 32px);
+}
 
+.mainContentWrapper {
+  width: 100%;
 }
 
 .icons {
@@ -15,46 +26,48 @@
 }
 
 .trashIcon {
-  // background-color: pink;
   fill: none;
+}
 
-  // padding: 20px;
-  color: rgb(255 0 0 / 75.5%);
+.mainContentWrapper {
+  width: 100%;
+  display: flex;
+  gap: 40px;
 }
 
 .mainContent {
-  width: 20%;
+  width: 100%;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: var(--view-rows);
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .createdAt {
-  
-  color: red;
+  // color: red;
   width: 80px;
-  border: 1px solid red;
+
+  // border: 1px solid red;
 }
 
 .shelf {
-  
-  color: blue;
+  // color: blue;
   width: 120px;
-   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+
+  //  display: -webkit-box;
+  // -webkit-line-clamp: var(--view-rows);
+  // -webkit-box-orient: vertical;
   overflow: hidden;
-  border: 1px solid blue;
+
+  // border: 1px solid blue;
 }
 
 .lastTraining {
-  
-    color: orange;
-  width: 80px;
-  border: 1px solid orange;
-}
+  // color: orange;
+  width: 88px;
 
+  // border: 1px solid orange;
+}
 
 // .mainContent {
 //   width: 20%;

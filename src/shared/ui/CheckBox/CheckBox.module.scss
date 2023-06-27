@@ -1,0 +1,44 @@
+.Switcher {
+
+}
+
+.switcherWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 16px;
+}
+
+.label {
+  cursor: pointer;
+}
+
+.switcher {
+  display: flex;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+  background-color: rgb(128 128 128 / 45.2%);
+  height: 20px;
+  width: 36px;
+  border-radius: 50px;
+  border: none;
+}
+
+.switcher_active {
+  background-color: var(--accent);
+}
+
+.switcherCircle {
+  height: 16px;
+  width: 16px;
+  border-radius: 50px;
+  background: var(--bg);
+  transform: translateX(2px);
+  transition: transform 0.3s;
+}
+
+.switcherCircle_active {
+  transition: transform 0.3s;
+  transform: translateX(18px);
+}

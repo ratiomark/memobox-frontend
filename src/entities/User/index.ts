@@ -1,10 +1,11 @@
+export type { SortColumnObject, SortColumnValue } from '@/widgets/SortControllerViewPageWidget';
+
 export {
 	getUserSettings,
 	getUserMissedTrainingSettings,
 	getUserNotificationSettings,
 	getUserShelfTemplateSettings,
 } from './model/selectors/getUserSettings';
-
 
 export {
 	getJsonSavedData,

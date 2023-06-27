@@ -1,0 +1,11 @@
+.ColumnItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 14px;
+  align-items: center;
+  border-radius: 4px;
+  background-color: var(--bg);
+  // background-color: var(--bg);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+  margin-bottom: 10px;
+}

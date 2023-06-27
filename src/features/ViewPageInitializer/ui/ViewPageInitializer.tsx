@@ -38,7 +38,6 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 
 
 	useEffect(() => {
-		// if (!shelfId) navigate(obtainRouteView('all', 'new'))
 		const boxIdChecked = boxId ?? 'new'
 		const shelfIdChecked = shelfId ?? 'all'
 		dispatch(viewPageActions.setViewPageIsMounted())
@@ -63,9 +62,9 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 			cls.viewPageInitializer,
 			className)}
 		>
+			{statsAndActionsViewPageBlock}
 			{shelvesListViewPageBlock}
 			{boxListViewPageBlock}
-			{statsAndActionsViewPageBlock}
 			{sortControllerViewPageBlock}
 			{cardListViewPageBlock}
 		</div>
