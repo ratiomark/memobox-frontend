@@ -7,7 +7,6 @@ import { MyText } from '../Typography';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Button } from '../Button';
 import { SingleSetter } from './SingleSetter';
-import { Overlay } from '../Overlay/Overlay';
 import { Portal } from '../Portal/Portal';
 import { HStack } from '../Stack';
 import useLockedBody from '@/shared/lib/helpers/hooks/useLockedBody';
@@ -144,7 +143,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		<div className={clsx(
 			cls.TimeSetter,
 			className)}
-			ref={timeSetterRef}
+		// ref={timeSetterRef}
 		>
 			<HStack gap='gap_16' className={cls.setterWrapper} align='center'>
 
@@ -202,42 +201,15 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					{t('save')}
 				</Button>
 			</HStack>
-			{overlay &&
+			<Portal>
+				<div className={cls.overlay} onClick={onClose} />
+			</Portal>
+			{/* {overlay &&
 				<Portal>
 					<div className={cls.overlay} onClick={onClose} />
 				</Portal>
-			}
+			} */}
 		</div>
 		// </div >
 	)
 }
-
-
-{/* <div
-				className={cls.minutesWrapper}
-				onWheel={onScrollMinutes}
-			>
-				<Icon
-					clickable
-					className={cls.iconRotated}
-					onClick={onUpClickMinutes}
-					Svg={ArrowBottomIcon}
-					width={28}
-					height={28}
-				/>
-				{minutes === 59
-					? <div className={cls.empty} />
-					: <MyText align='center' className={cls.smallTime} text={minutes + 1} />
-				}
-				<MyText align='center' text={minutes} variant='accent' />
-				{minutes === 0
-					? <div className={cls.empty} />
-					: <MyText align='center' className={cls.smallTime} text={minutes - 1} />
-				}
-				<Icon
-					clickable
-					onClick={onDownClickMinutes}
-					Svg={ArrowBottomIcon}
-					width={28}
-					height={28}
-				/> */}

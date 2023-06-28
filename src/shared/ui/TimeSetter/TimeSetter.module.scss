@@ -8,21 +8,21 @@
   padding: 20px;
   border-radius: 4px;
   z-index: 100;
-  isolation: isolate;
+  // isolation: isolate;
 }
 
 .setterWrapper {
   margin-bottom: 20px;
   position: relative;
   z-index: 100;
-  isolation: isolate;
+  // isolation: isolate;
 }
 
 .overlay {
   position: absolute;
   cursor: pointer;
   inset: 0;
-  z-index: 80;
-  isolation: isolate;
+  z-index: 12;
+  // isolation: isolate;
   background-color: rgb(128 128 128 / 11%);
 }

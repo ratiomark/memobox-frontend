@@ -22,14 +22,66 @@
 
 .boxesWrapper {
   display: grid;
-  grid-template-rows: 0fr;
+
+  // overflow: hidden;
+
+  // grid-template-rows: 0fr;
+  // transform: translateY(-300px);
   transition: grid-template-rows 0.3s ease;
+
+  // overflow: hidden;
 }
 
-.collapsed {
+.notCollapsed {
   grid-template-rows: 1fr;
 }
 
-.inner {
+.collapsed {
+  grid-template-rows: 0fr;
+
+  // transform: translateY(-30000px);
+}
+
+.collapsed .inner {
   overflow: hidden;
+
+  // animation: overflow-changer-back 0.3s ease;
+}
+
+.notCollapsed .inner {
+  // overflow: hidden;
+
+  // animation: overflow-changer-back 0.3 ease;
+
+  animation: overflow-changer 0.3s ease;
+
+  // animation: overflow-changer 0.3s ease normal forwards;
+}
+
+@keyframes overflow-changer {
+  0% {
+    overflow: hidden;
+  }
+
+  99% {
+    overflow: hidden;
+  }
+
+  100% {
+    overflow: initial;
+  }
+}
+
+@keyframes overflow-changer-back {
+  0% {
+    overflow: initial;
+  }
+
+  99% {
+    overflow: initial;
+  }
+
+  100% {
+    overflow: hidden;
+  }
 }

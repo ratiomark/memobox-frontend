@@ -54,6 +54,7 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 	return (
 		<div className={clsx(
 			cls.BoxesBlock,
+			// 'target',
 			className)}
 		>
 			{boxList}

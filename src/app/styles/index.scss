@@ -18,6 +18,10 @@ body {
   // scrollbar-gutter: stable both-edges;
 }
 
+#root {
+  // isolation: isolate;
+}
+
 .app,
 .app_modal,
 .app_drawer {

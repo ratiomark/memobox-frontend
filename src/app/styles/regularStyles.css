@@ -23,6 +23,10 @@
   bottom: 100%;
 }
 
+.target {
+  margin: 0;
+}
+
 .fw_300 {
   font-weight: 300;
 }

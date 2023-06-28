@@ -106,12 +106,12 @@ export const Box = (props: BoxPropsBase) => {
 		onAddNewCard(shelfId, boxItem.index)
 	}, [onAddNewCard, shelfId, boxItem.index])
 
-	// const timing = '1ч 20м'
-	// const minutes = 4
-	// const hours = 2
-	// const days = 0
-	// const weeks = 0
-	// const months = 0
+	const timing = '1ч 20м'
+	const minutes = 4
+	const hours = 2
+	const days = 0
+	const weeks = 0
+	const months = 0
 
 	if (specialType === 'none' || specialType === 'learnt') {
 		const title = specialType === 'none'
@@ -173,14 +173,14 @@ export const Box = (props: BoxPropsBase) => {
 				{buttons}
 				{isTimeSetterOpen &&
 					<div className={cls.timeSetter} >
-						{/* <TimeSetter
+						<TimeSetter
 							minutes={minutes}
 							hours={hours}
 							days={days}
 							weeks={weeks}
 							months={months}
 							onClose={onClose}
-						/> */}
+						/>
 					</div>
 				}
 				{/* <MyText className={cls.timing} text={timing} /> */}

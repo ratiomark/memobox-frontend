@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsList.module.scss';
 import { BoxSchema } from '@/entities/Box';
 import { BoxSettingsItem } from '../BoxSettingsItem/BoxSettingsItem';
-import { BoxSettingsItemNewCardsBox, BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
+import {  BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
 import { Dispatch, SetStateAction } from 'react';
 import { TimingBlock } from '@/shared/types/DataBlock';
 import { ExtendedByIndexTimingBlock } from '../BoxesSettingsContent/BoxesSettingsContent';
