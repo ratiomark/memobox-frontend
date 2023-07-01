@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { ShelfSchema } from '@/entities/Shelf';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { memo, useState } from 'react';
+import { Dispatch, SetStateAction, memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsContent.module.scss';
 import { BoxesSettingsList } from '../BoxesSettingsList/BoxesSettingsList';
@@ -9,6 +9,7 @@ import { Button } from '@/shared/ui/Button';
 import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { TimingBlock } from '@/shared/types/DataBlock';
+import { Overlay } from '@/shared/ui/Overlay/Overlay';
 
 
 export interface ExtendedByIndexTimingBlock extends TimingBlock {
@@ -18,11 +19,13 @@ export interface ExtendedByIndexTimingBlock extends TimingBlock {
 interface BoxesSettingsContentProps {
 	className?: string
 	shelfTemplate: TimingBlock[]
+	setIsAnyTimeSetterOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 	const {
-		shelfTemplate
+		shelfTemplate,
+		setIsAnyTimeSetterOpen,
 	} = props
 	// отрисовать коробки на основе данных полки
 	// кнопка "добавить коробку"
@@ -30,6 +33,9 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 	// кнопки установки времени
 	// пройти map через весь список коробок возвращая boxSettingsItem
 	// 
+	// const [isAnyTimeSetterOpen, setIsAnyTimeSetterOpen] = useState(false)
+	const [isAddBoxModeActive, setIsAddBoxModeActive] = useState(false)
+
 	const { t } = useTranslation()
 	const [boxesData, setBoxesData] = useState<ExtendedByIndexTimingBlock[]>(
 		[
@@ -39,12 +45,20 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 
 	return (
 		<VStack align='center' max>
+			{/* {isAnyTimeSetterOpen && <Overlay /> &} */}
 			{/* <Heading as='h2' title={shelf.title} /> */}
 			<BoxesSettingsList
+				isAddBoxModeActive={isAddBoxModeActive}
 				boxesList={boxesData}
 				setBoxesData={setBoxesData}
+				setIsAnyTimeSetterOpen={setIsAnyTimeSetterOpen}
 			/>
-			<Button onClick={() => console.log(boxesData)}>Consol</Button>
+			{/* <Button onClick={() => console.log(boxesData)}>Consol</Button> */}
+
+			{isAddBoxModeActive
+				? <Button onClick={() => setIsAddBoxModeActive(false)}>Cancel</Button>
+				: <Button onClick={() => setIsAddBoxModeActive(true)}>Add</Button>
+			}
 		</VStack>
 	)
 	// const timeSetter = (

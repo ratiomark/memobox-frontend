@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { HTMLAttributes, memo, ReactNode } from 'react';
 import cls from './Card.module.scss';
-
+import { motion, HTMLMotionProps, } from 'framer-motion'
 
 type CardVariant =
 	| 'normal'
@@ -24,13 +24,14 @@ const mapPaddingClass: Record<CardPadding, string> = {
 	'24': 'padding_24',
 }
 
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
+interface CardProps extends HTMLMotionProps<'div'> {
 	className?: string
 	children: ReactNode
 	variant?: CardVariant
 	padding?: CardPadding
 	horizontal?: boolean
 	max?: boolean
+	withHover?: boolean
 }
 
 export const Card = memo((props: CardProps) => {
@@ -41,11 +42,15 @@ export const Card = memo((props: CardProps) => {
 		max,
 		horizontal,
 		padding = '8',
+		withHover,
 		...otherProps
 	} = props
 	const paddingClass = mapPaddingClass[padding]
 	return (
-		<div
+
+		<motion.div
+			whileHover={{ scale: withHover ? 1.03 : 1 }}
+			transition={{ duration: 0.3 }}
 			className={clsx(
 				cls.Card,
 				cls[variant],
@@ -59,7 +64,7 @@ export const Card = memo((props: CardProps) => {
 			{...otherProps}
 		>
 			{children}
-		</div>
+		</motion.div>
 	)
 })
 Card.displayName = 'Card'

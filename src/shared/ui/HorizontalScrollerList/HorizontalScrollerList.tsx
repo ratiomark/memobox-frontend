@@ -6,23 +6,27 @@ import { ListBoxItems } from '../Popup/ui/ListBox/ListBox';
 import { AppLink } from '../AppLink/AppLink';
 import { Link } from 'react-router-dom';
 import { Skeleton } from '../Skeleton';
+import { MyText } from '../Typography';
 
 interface HorizontalScrollerListItem {
 	value: string
-	content: ReactNode
+	content: string
+	onChange: () => void
 }
 
 interface HorizontalScrollerListProps {
 	className?: string
 	items?: HorizontalScrollerListItem[]
 	value?: string
+	// onChange: (shelfId: string) => void
 }
 
 export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 	const {
 		className,
 		items,
-		value
+		value,
+		// onChange
 	} = props
 
 	const { t } = useTranslation()
@@ -30,9 +34,9 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 	const itemsRendered = useMemo(() => {
 		if (!items) return undefined
 		return items.map(item => {
-			// console.log(value, item.value)
+			console.log(value, item.value)
 			return (
-				<AppLink
+				<MyText
 					// activeClassName={cls.activeShelf}
 					// activeClassName={value === item.value ? cls.activeShelf : ''}
 					className={clsx(
@@ -40,10 +44,23 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 						value === item.value ? cls.activeShelf : ''
 					)}
 					key={item.value}
-					to={`/view/${item.value}/all`}
-				>
-					{item.content}
-				</AppLink>
+					text={item.content}
+					onClick={item.onChange}
+				/>
+
+
+				// <AppLink
+				// 	// activeClassName={cls.activeShelf}
+				// 	// activeClassName={value === item.value ? cls.activeShelf : ''}
+				// 	className={clsx(
+				// 		cls.gridElement,
+				// 		value === item.value ? cls.activeShelf : ''
+				// 	)}
+				// 	key={item.value}
+				// 	to={`/view/${item.value}/all`}
+				// >
+				// 	{item.content}
+				// </AppLink>
 			)
 		})
 	}, [items, value])

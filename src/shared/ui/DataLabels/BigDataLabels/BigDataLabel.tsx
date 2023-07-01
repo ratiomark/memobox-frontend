@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { MyText } from '../../Typography'
 import Spinner from '@/shared/assets/icons/spinner.svg'
 import cls from './BigDataLabel.module.scss'
+import { motion } from 'framer-motion'
 export type BigDataLabelType =
 	| 'all'
 	| 'train'
@@ -51,7 +52,13 @@ export const BigDataLabel = (props: BigDataLabelProps) => {
 
 	return (
 		<>
-			<div className={clsx(cls.BigDataLabel, [className])}>
+			<motion.div
+				// initial={{ x: -50 }}
+				// animate={{ x: 0 }}
+				// viewport={{ once: true }}
+				// transition={{ type: 'spring' }}
+				className={clsx(cls.BigDataLabel, [className])}
+			>
 				<div className={clsx(cls.coloredLeftSide, cls[type])}>
 					<div className={clsx(cls.dataHolder)}>
 						{content}
@@ -61,7 +68,7 @@ export const BigDataLabel = (props: BigDataLabelProps) => {
 							text={DataLabelName} />
 					</div>
 				</div>
-			</div>
+			</motion.div>
 		</>
 	)
 }

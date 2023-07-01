@@ -81,13 +81,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, forward
 			className={clsx(
 				cls.Button,
 				mods,
-				cls[variant],
+				disabled ? '' : cls[variant],
 				cls[size],
 				cls[borderRadius],
 				cls[color],
 				fontWeight ? mapFontWeightToClass[fontWeight] : '',
 				className
 			)}
+			disabled={disabled}
 			{...otherProps}
 		>
 			{addonLeft && <div className={cls.addonLeft}>{addonLeft}</div>}

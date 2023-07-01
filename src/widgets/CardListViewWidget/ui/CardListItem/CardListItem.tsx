@@ -11,6 +11,33 @@ import { getViewPageColumns, getViewPageMultiSelectIsActive } from '@/features/V
 import { useSelector } from 'react-redux';
 import { ChangeEvent, MouseEvent, SyntheticEvent, useMemo, useState } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
+import { motion } from 'framer-motion'
+
+const animations = {
+	selected: {
+		boxShadow: '0 0 3px 0px rgb(51 214 159 / 20%)',
+		// border: '1px solid var(--accent)',
+		transition: { duration: 0.7 }
+	},
+	regular: {
+		// boxShadow:  '0 1px 4px rgb(0 0 0 / 10%)'
+		// border: '1px solid var(--accent)',
+		// transition: { duration: 2 }
+	}
+}
+const liAnimations = {
+	hidden: {
+		opacity: 0.2,
+		// border: '1px solid var(--accent)',
+		// transition: { duration: 0.7 }
+	},
+	visible: {
+		opacity: 1,
+		// boxShadow:  '0 1px 4px rgb(0 0 0 / 10%)'
+		// border: '1px solid var(--accent)',
+		// transition: { duration: 2 }
+	}
+}
 
 const formatDate = (ISODate: string) => {
 	const date = new Date(ISODate)
@@ -90,15 +117,21 @@ export const CardListItem = (props: CardListItemProps) => {
 	}, [card, columns])
 
 	return (
-		<li
+		<motion.li
+			// variants={liAnimations}
+			// initial='hidden'
+			// whileInView='visible'
 			className={clsx(cls.item)}
 			onClick={multiSelectIsActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
 		>
 			{/* <input type='checkbox' /> */}
-			<div
+			<motion.div
+				// variants={animations}
+				// initial={false}
+				// animate={isCardSelected ? 'selected' : ''}
 				className={clsx(
 					cls.CardListItem,
-					isCardSelected ? cls.CardListItemSelected : '',
+					// isCardSelected ? cls.CardListItemSelected : '',
 				)}
 			// onClick={multiSelectIsActive ? onSelectCardHandle : onOpenEditCardModalHandle}
 			>
@@ -122,7 +155,7 @@ export const CardListItem = (props: CardListItemProps) => {
 					className={cls.trashIcon}
 				/> */}
 				</div>
-			</div>
-		</li>
+			</motion.div>
+		</motion.li>
 	)
 }

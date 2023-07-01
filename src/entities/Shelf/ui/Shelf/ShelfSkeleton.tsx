@@ -8,7 +8,7 @@ import { VStack } from '@/shared/ui/Stack';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { ShelfButtonsSkeleton } from '../../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtonsSkeleton';
 import { BoxesBlockSkeleton } from '@/entities/Box';
-
+import { motion } from 'framer-motion'
 
 interface ShelfProps {
 	className?: string
@@ -24,9 +24,13 @@ export const ShelfSkeleton = (props: ShelfProps) => {
 	} = props
 
 	return (
-		<div className={clsx(
-			cls.shelf,
-			[className])}
+		<motion.div
+			// initial={{ y: -300 }}
+			// animate={{ y: 0 }}
+			// transition={{ type:'spring', stiffness: 80, duration: 0.3 }}
+			className={clsx(
+				cls.shelf,
+				[className])}
 		>
 			<div className={cls.topShelfPart}>
 				<VStack align='start' gap='gap_8'>
@@ -42,9 +46,9 @@ export const ShelfSkeleton = (props: ShelfProps) => {
 			</div>
 			<div className={clsx(cls.boxesWrapper, !isCollapsed ? cls.collapsed : '')}>
 				<div className={cls.inner} >
-					<BoxesBlockSkeleton/>
+					<BoxesBlockSkeleton />
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	)
 }

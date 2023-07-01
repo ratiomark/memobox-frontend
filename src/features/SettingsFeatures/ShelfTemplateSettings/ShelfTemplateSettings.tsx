@@ -5,6 +5,8 @@ import { HDialog } from '@/shared/ui/HDialog';
 import { getUserShelfTemplateSettings } from '@/entities/User';
 import { useSelector } from 'react-redux';
 import { BoxesSettingsContent } from './BoxesSettingsModal/BoxesSettingsContent/BoxesSettingsContent';
+import { Overlay } from '@/shared/ui/Overlay/Overlay';
+import { useState } from 'react';
 
 interface ShelfTemplateSettingsProps {
 	className?: string
@@ -19,7 +21,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 		onClose
 	} = props
 	const shelfTemplateSettings = useSelector(getUserShelfTemplateSettings)
-
+	const [isAnyTimeSetterOpen, setIsAnyTimeSetterOpen] = useState(false)
 	const { t } = useTranslation()
 
 	if (!shelfTemplateSettings) return <p>Загрузка</p>
@@ -34,8 +36,11 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 				cls.ShelfTemplateSettings,
 				className)}
 			>
+
+				{/* {isAnyTimeSetterOpen && <div className={cls.overlay} />} */}
 				<BoxesSettingsContent
 					shelfTemplate={shelfTemplateSettings}
+					setIsAnyTimeSetterOpen={setIsAnyTimeSetterOpen}
 				/>
 			</div>
 		</HDialog>

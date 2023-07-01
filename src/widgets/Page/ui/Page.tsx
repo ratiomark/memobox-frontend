@@ -10,6 +10,8 @@ import { useInitialEffect } from '@/shared/lib/helpers/hooks/useInitialEffect';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { TestProps } from '@/shared/types/TestProps';
 import cls from './Page.module.scss';
+import { motion } from 'framer-motion'
+
 
 interface PageProps extends TestProps {
 	className?: string
@@ -17,6 +19,23 @@ interface PageProps extends TestProps {
 	onScrollEnd?: () => void
 	isLoading?: boolean
 }
+
+// const pageAnimations = {
+// 	hidden: {
+// 		opacity: 0,
+// 		// x: '-30vw',
+// 	},
+// 	visible: {
+// 		opacity: 1,
+// 		// x: 0,
+// 		transition: { delay: 0.1, duration: 1 }
+// 	},
+// 	exit: {
+// 		// x: '-50vw',
+// 		// opacity: 0,
+// 		transition: { duration: 0.5 }
+// 	}
+// }
 
 export const Page = memo((props: PageProps) => {
 	const {
@@ -56,7 +75,11 @@ export const Page = memo((props: PageProps) => {
 	})
 
 	return (
-		<main
+		<motion.main
+			// variants={pageAnimations}
+			// initial='hidden'
+			// animate='visible'
+			// exit='exit'
 			ref={wrapperRef}
 			className={clsx(cls.Page, className)}
 			onScroll={onScroll}
@@ -66,7 +89,7 @@ export const Page = memo((props: PageProps) => {
 				{children}
 			</div>
 			{onScrollEnd ? <div className={cls.trigger} ref={triggerRef} /> : null}
-		</main>
+		</motion.main>
 	)
 })
 Page.displayName = 'PageComponent'

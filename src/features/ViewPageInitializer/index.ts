@@ -20,6 +20,7 @@ export {
 	getViewPageSortChecked,
 	getViewPageSortOrder,
 	getViewPageMultiSelectIsActive,
+	getViewPageBoxIdChecked,
 } from './model/selectors/getViewPageInitializer';
 
 export { viewPageReducer, viewPageActions } from './model/slice/viewPageSlice';

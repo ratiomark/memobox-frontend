@@ -27,7 +27,10 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		shelf: {
 			index: shelfIndex,
 			id: shelfId,
-			isCollapsed
+			isCollapsed,
+			data: {
+				train: trainCardsCount
+			}
 		},
 		onAddNewCardClick,
 		onCollapseClick,
@@ -55,7 +58,8 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 
 
 	const onViewClick = () => {
-		navigate(obtainRouteView(shelfIndexEdited.toString()))
+		navigate(obtainRouteView(shelfId))
+		// navigate(obtainRouteView(shelfIndexEdited.toString()))
 	}
 
 	const onCollapseClickHandle = useCallback(() => {
@@ -90,6 +94,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 				fontWeight='300'
 				// className={cls.button}
 				variant='filled'
+				disabled={trainCardsCount === 0}
 				data-button-type='shelf-train'
 			>
 				{t('train') + ` (${positionTextTrain})`}

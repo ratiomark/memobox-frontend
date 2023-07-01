@@ -49,7 +49,8 @@ export const MyText = memo(
 			saveOriginal,
 			as: TagName = defaultElement,
 			'data-testid': dataTestId = 'Text',
-			drop
+			drop,
+			...otherProps
 		} = props;
 
 		if (drop) {
@@ -71,6 +72,7 @@ export const MyText = memo(
 					},
 				)}
 				data-testid={`${dataTestId}.Paragraph`}
+				{...otherProps}
 			>
 				{text ?? 'Что-то пошло не так(нет текста в компоненте Heading), обновите пожалуйста страницу'}
 			</TagName>

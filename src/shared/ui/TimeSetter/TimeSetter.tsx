@@ -201,14 +201,11 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					{t('save')}
 				</Button>
 			</HStack>
-			<Portal>
-				<div className={cls.overlay} onClick={onClose} />
-			</Portal>
-			{/* {overlay &&
+			{overlay &&
 				<Portal>
 					<div className={cls.overlay} onClick={onClose} />
 				</Portal>
-			} */}
+			}
 		</div>
 		// </div >
 	)

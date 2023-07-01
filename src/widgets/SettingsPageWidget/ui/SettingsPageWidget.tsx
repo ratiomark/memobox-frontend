@@ -17,6 +17,8 @@ import { Icon } from '@/shared/ui/Icon';
 import { MissedTrainingSettings } from '@/features/SettingsFeatures';
 import { NotificationSettings } from '@/features/SettingsFeatures/NotificationSettings/NotificationSettings';
 
+
+
 interface SettingsPageWidgetProps {
 	className?: string
 }
@@ -123,7 +125,9 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 				height={28}
 				className={cls.info}
 			/>
-		</Card>)
+		</Card>
+
+	)
 
 	return (
 		<div className={cls.settingsPageWidget} >
@@ -139,12 +143,12 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 				isOpen={settingModalStates.notificationModal}
 				onClose={toggleNotificationModal}
 			/>
-				
+
 			<MissedTrainingSettings
 				missedTrainingSetting={missedTrainingSetting}
 				isOpen={settingModalStates.missedTrainingModal}
 				onClose={toggleMissedTrainingModal}
-				// lazy={true}
+			// lazy={true}
 			/>
 		</div>
 	)

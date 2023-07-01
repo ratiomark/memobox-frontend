@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { memo, ReactNode, useCallback } from 'react';
+import { memo, ReactNode, useCallback, useMemo } from 'react';
 import { Card } from '../Card/Card';
 import cls from './Tabs.module.scss';
 import { FlexDirection, FlexAlign, Flex } from '../Stack/Flex/Flex';
@@ -33,17 +33,11 @@ export const Tabs = memo((props: TabsProps) => {
 		onTabClick(tab)
 	}, [onTabClick])
 
-	return (
-		<ul
-			// align={align}
-			// direction={direction}
-			// gap='gap_8'
-			className={clsx(
-				cls.Tabs,
-				[className])}
-		>
-			{tabs.map(item => {
+	const tabsRendered = useMemo(() => {
+		{
+			return tabs.map(item => {
 				const isSelected = value === item.value
+				// console.log(isSelected)
 				return (
 					<li
 						key={item.value}
@@ -57,7 +51,37 @@ export const Tabs = memo((props: TabsProps) => {
 						{item.content}
 					</li>
 				)
-			})}
+			})
+		}
+	}, [value, tabs, clickHandle])
+
+	return (
+		<ul
+			// align={align}
+			// direction={direction}
+			// gap='gap_8'
+			className={clsx(
+				cls.Tabs,
+				[className])}
+		>
+			{tabsRendered}
+			{/* {tabs.map(item => {
+				const isSelected = value === item.value
+				console.log(isSelected)
+				return (
+					<li
+						key={item.value}
+						// variant={isSelected ? 'light' : 'normal'}
+						className={clsx(
+							cls.tabItem,
+							{ [cls.selectedItem]: isSelected }
+						)}
+						onClick={clickHandle(item)}
+					>
+						{item.content}
+					</li>
+				)
+			})} */}
 		</ul>
 	)
 })

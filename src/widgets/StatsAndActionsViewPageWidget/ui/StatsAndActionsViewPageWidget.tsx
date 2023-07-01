@@ -17,6 +17,7 @@ import { ShelfRepresentedByBoxes } from '@/entities/Box';
 import cls from './StatsAndActionsViewPageWidget.module.scss';
 import { Button } from '@/shared/ui/Button';
 import { ColumnSettingModal } from './ColumnSettingModal/ColumnSettingModal';
+import { motion } from 'framer-motion'
 
 interface StatsData {
 	all: number
@@ -98,21 +99,25 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 
 	return (
 		<>
-			<HStack
-				max
-				className={clsx(
-					cls.statsAndActionsViewPageWidget,
-					className)}
+			<motion.div
+				initial={{ x: -50 }}
+				animate={{ x: 0 }}
 			>
-				<CompleteBigDataLabels data={data} isLoading={false} />
-				<HStack gap='gap_14' className={cls.actions} >
-					<Button
-						onClick={onOpenColumnSettingsModal}
-						borderRadius='borderRadius_4'
-					>
-						{t('columns')}
-					</Button>
-					{/* <Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
+				<HStack
+					max
+					className={clsx(
+						cls.statsAndActionsViewPageWidget,
+						className)}
+				>
+					<CompleteBigDataLabels data={data} isLoading={false} />
+					<HStack gap='gap_14' className={cls.actions} >
+						<Button
+							onClick={onOpenColumnSettingsModal}
+							borderRadius='borderRadius_4'
+						>
+							{t('columns')}
+						</Button>
+						{/* <Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
 				<Icon
 					Svg={InfoIcon}
 					width={26}
@@ -120,8 +125,9 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 					className={cls.info}
 				/> */}
 
+					</HStack>
 				</HStack>
-			</HStack>
+			</motion.div>
 			<ColumnSettingModal />
 		</>
 	)

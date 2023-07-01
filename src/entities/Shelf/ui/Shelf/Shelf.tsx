@@ -7,7 +7,7 @@ import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { ReactNode, memo, useCallback, useState } from 'react';
 import { ShelfSchema } from '../../model/types/ShelfSchema';
-
+import { motion } from 'framer-motion'
 
 export interface ShelfProps {
 	shelf: ShelfSchema
@@ -30,13 +30,16 @@ export const Shelf = memo((props: ShelfProps) => {
 			// index,
 		}
 	} = props
-
 	// const [shelfCollapsed, setShelfCollapsed] = useState(collapsed)
 
 	return (
-		<div className={clsx(
-			cls.shelf,
-			[className])}
+		<motion.div
+			// initial={{ opacity: 0.7 }}
+			// animate={{ opacity: 1 }}
+			// transition={{ duration: 1}}
+			className={clsx(
+				cls.shelf,
+				[className])}
 		>
 			<div className={cls.topShelfPart}>
 				<VStack align='start' gap='gap_8'>
@@ -52,7 +55,7 @@ export const Shelf = memo((props: ShelfProps) => {
 					{boxesBlock}
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	)
 })
 Shelf.displayName = 'Shelf'

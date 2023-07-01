@@ -18,6 +18,7 @@ const ViewPage = memo(() => {
 	return (
 		<>
 			{/* <Header /> */}
+			{/* <Header/> */}
 			<Page data-testid='MainPage'>
 				<ViewPageInitializer
 					shelvesListViewPageBlock={<ShelvesListViewWidget />}

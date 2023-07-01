@@ -85,7 +85,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 
 	const shelvesList = useMemo(() => {
 		if (cupboardIsLoading) return []
-		return cupboardShelves.map(shelf => {
+		return cupboardShelves.slice(2).map(shelf => {
 			const completeSmallDataLabels =
 				<CompleteSmallDataLabels
 					data={shelf.data}

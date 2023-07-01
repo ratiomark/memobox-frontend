@@ -13,7 +13,7 @@ import { Box, BoxesBlockSkeleton } from '@/entities/Box';
 import { CommonShelfBoxes } from '../CommonShelfBoxes/CommonShelfBoxes';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { CommonShelfButtonsSkeleton } from '../CommonShelfButtons/CommonShelfButtonsSkeleton';
-
+import { motion } from 'framer-motion'
 interface ShelfProps {
 	data?: {
 		all: number
@@ -54,9 +54,14 @@ export const CommonShelf = memo((props: ShelfProps) => {
 		: <CommonShelfButtons />
 
 	return (
-		<div className={clsx(
-			cls.shelf,
-			[className])}
+
+		<motion.div
+			// initial={{ y: -300 }}
+			// animate={{ y: 0 }}
+			// transition={{ type: 'spring', stiffness: 80, duration: 0.3 }}
+			className={clsx(
+				cls.shelf,
+				[className])}
 		>
 			<div className={cls.topShelfPart}>
 				<VStack align='start' gap='gap_8'>
@@ -70,7 +75,7 @@ export const CommonShelf = memo((props: ShelfProps) => {
 					{boxesBlock}
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	)
 })
 CommonShelf.displayName = 'CommonShelf'

@@ -9,7 +9,22 @@ export const getViewPageIsMounted = (state: StateSchema) => state.viewPage?._vie
 export const getViewPageIsLoading = (state: StateSchema) => state.viewPage?.isLoading
 // 
 export const getViewPageShelfId = (state: StateSchema) => state.viewPage?.shelfId
-export const getViewPageBoxId = (state: StateSchema) => state.viewPage?.boxId
+export const getViewPageBoxId = (state: StateSchema) => state.viewPage?.boxId ?? 'new'
+
+export const getViewPageBoxIdChecked = createSelector(
+	[
+		getViewPageShelfId,
+		getViewPageBoxId,
+	],
+	(shelfId, boxId) => {
+		if (shelfId !== 'all') return boxId
+		if (boxId === 'new' || boxId === 'all' || boxId === 'learnt' || boxId === 'learning') {
+			return boxId
+		}
+		return 'new'
+	}
+)
+
 // 
 export const getViewPageSort = (state: StateSchema) => state.viewPage?.sort ?? 'createdAt'
 // export const getViewPageSort = (state: StateSchema) => state.viewPage?.sort ?? 'createdAt'
@@ -43,7 +58,7 @@ export const getViewPageCardsFiltered = createSelector(
 	[
 		getViewPageCards,
 		getViewPageShelfId,
-		getViewPageBoxId,
+		getViewPageBoxIdChecked,
 	],
 	(cards, shelfId, boxId) => {
 		if (shelfId === 'all' && boxId === 'all') return cards

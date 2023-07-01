@@ -1,17 +1,18 @@
 import { Suspense, useCallback, useMemo } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { AppRouteProps, routeConfig } from '../../config/routeConfig/routeConfig'
 import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { ProtectedRoute } from './ProtectedRoute'
+import { AnimatePresence } from 'framer-motion'
 
 export const AppRouter = () => {
-
+	const location = useLocation()
 	const renderWithWrapper = useCallback((route: AppRouteProps) => {
 		const { path, authOnly, element, wrapper: Wrapper, roles, suspense: suspenseSkeleton } = route
 
 		const finalElement = (
 			<Suspense fallback={suspenseSkeleton ? suspenseSkeleton : <LoaderWidget />}>
-			{/* <Suspense fallback={<LoaderWidget />}> */}
+				{/* <Suspense fallback={<LoaderWidget />}> */}
 				{Wrapper
 					? <Wrapper>{element}</Wrapper>
 					: element
@@ -30,13 +31,15 @@ export const AppRouter = () => {
 	}, [])
 
 	const routes = Object.values(routeConfig).map(renderWithWrapper)
-
+	// console.log(location)
 	return (
-		<Suspense fallback={<h1>sdiofjweiofjweofi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>}>
-		{/* <Suspense fallback={<LoaderWidget />}> */}
-			<Routes>
-				{routes}
-			</Routes>
+		// <Suspense fallback={<h1>sdiofjweiofjweofi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>}>
+		<Suspense fallback={<LoaderWidget />}>
+			<AnimatePresence>
+				<Routes location={location} key={location.key}>
+					{routes}
+				</Routes>
+			</AnimatePresence>
 		</Suspense>
 	)
 }

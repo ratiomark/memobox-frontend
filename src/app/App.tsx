@@ -12,6 +12,7 @@ import clsx from 'clsx'
 import { Header } from '@/widgets/Sidebar'
 import './styles/regularStyles.css'
 import { useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 
 
 export const App = () => {
@@ -19,7 +20,7 @@ export const App = () => {
 	const dispatch = useAppDispatch()
 	const { theme } = useTheme()
 	const location = useLocation()
-	
+
 	useEffect(() => {
 		dispatch(initAuthData())
 	}, [dispatch, userMounted])
@@ -30,7 +31,9 @@ export const App = () => {
 		<div className={clsx('app', theme)}>
 			{location.pathname.split('/')[1] !== 'training' ? <Header /> : null}
 			<Suspense fallback={<LoaderWidget />}>
-				<AppRouter />
+				{/* <AnimatePresence> */}
+					<AppRouter />
+				{/* </AnimatePresence> */}
 				{/* <MainLayout
 				header={<NavBar />}
 				content={<AppRouter />}

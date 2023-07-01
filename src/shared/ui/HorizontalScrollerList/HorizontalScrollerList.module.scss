@@ -14,7 +14,8 @@
 .gridElement {
   inline-size: 100%;
   white-space: pre;
-
+  // position: relative;
+  cursor: pointer;
   // aspect-ratio: 16 / 9;
   // object-fit: cover;
 }

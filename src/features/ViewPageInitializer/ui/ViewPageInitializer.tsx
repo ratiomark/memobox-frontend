@@ -3,11 +3,13 @@ import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsy
 import clsx from 'clsx';
 import { ReactNode, memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { fetchBoxesDataByShelfId } from '../model/services/fetchBoxesDataByShelfId';
 import { viewPageActions, viewPageReducer } from '../model/slice/viewPageSlice';
 import cls from './ViewPageInitializer.module.scss';
 import { fetchCards } from '../model/services/fetchCards';
+import { useSelector } from 'react-redux';
+import { getViewPageBoxIdChecked, getViewPageIsMounted, getViewPageShelfId } from '..';
 // import { useSelector } from 'react-redux';
 // import { getJsonSavedData } from '@/entities/User';
 // import { saveUserJsonData } from '@/entities/User/model/services/saveUserJsonData';
@@ -33,18 +35,33 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 		boxListViewPageBlock,
 	} = props
 	const navigate = useNavigate()
+	
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { shelfId, boxId } = useParams<{ shelfId: string, boxId: string }>()
-
+	const viewPageIsMounter = useSelector(getViewPageIsMounted)
+	// const shelfIdFromStore = useSelector(getViewPageShelfId)
+	// const boxIdFromStore = useSelector(getViewPageBoxIdChecked)
+	// считать один раз shelfId и boxId, если они есть запушить в редакс, а потом перейти на страницу viewPage но так чтобы там был только адрес .../view 
+	useEffect(() => {
+		// console.log('Эффект')
+		if (!viewPageIsMounter) {
+			const boxIdChecked = boxId ?? 'new'
+			const shelfIdChecked = shelfId ?? 'all'
+			dispatch(viewPageActions.setViewPageIsMounted())
+			dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
+			navigate('/view', { replace: true })
+		}
+		// dispatch(fetchBoxesDataByShelfId({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
+	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])
 
 	useEffect(() => {
-		const boxIdChecked = boxId ?? 'new'
-		const shelfIdChecked = shelfId ?? 'all'
-		dispatch(viewPageActions.setViewPageIsMounted())
-		dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
-		// dispatch(fetchBoxesDataByShelfId({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
-
-	}, [shelfId, navigate, boxId, dispatch])
+		// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+		if (viewPageIsMounter && shelfId && boxId) {
+			dispatch(viewPageActions.setActiveShelfId(shelfId!))
+			dispatch(viewPageActions.setActiveBoxId(boxId))
+			navigate('/view', { replace: true })
+		}
+	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])
 
 	// dispatch(saveUserJsonData({ viewPageBoxId: boxIdChecked, viewPageShelfId: shelfId }))
 	// useEffect(() => {
@@ -52,10 +69,6 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	// 		dispatch(viewPageActions.setBoxId(boxId))
 	// 	}
 	// }, [boxId, dispatch])
-
-	// console.log(shelfId, boxId)
-
-	const { t } = useTranslation()
 
 	return (
 		<div className={clsx(

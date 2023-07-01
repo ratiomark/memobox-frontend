@@ -12,11 +12,24 @@ import { useEffect } from 'react';
 import { fetchCupboardData } from '../../model/services/fetchCupboardData';
 import { useGetCupboardDataQuery } from '@/entities/Cupboard';
 import { cupboardShelfListActions } from '../..';
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface CupboardShelfListWrapperProps {
 	className?: string
 }
-
+const skeletonItemsAnimation = {
+	visible: (i: number) => ({
+		opacity: 1,
+		transition: {
+			delay: i * 0.1
+		}
+	}),
+	hidden: { opacity: 0 },
+	exit: {
+		opacity: 0.4,
+		transition: { duration: 0.4 }
+	}
+}
 export const CupboardShelfListWrapper = (props: CupboardShelfListWrapperProps) => {
 	const {
 		className
@@ -36,21 +49,79 @@ export const CupboardShelfListWrapper = (props: CupboardShelfListWrapperProps) =
 		}
 
 	}, [dispatch, data, isLoading, error])
-	// useEffect(() => {
-	// 	dispatch(fetchCupboardData())
-	// }, [dispatch])
 
-	if (cupboardIsLoading) {
-		return <>
-			<CommonShelf data={undefined} isLoading={cupboardIsLoading} />
-			{shelfNamesList!.map(item => <ShelfSkeleton
-				isCollapsed={item.isCollapsed}
-				key={item.title}
-				title={item.title}
-			/>
-			)}
-		</>
-	}
 
-	return <CupboardShelfList />
+	return (
+		<>
+			<AnimatePresence mode='wait'>
+				{
+					cupboardIsLoading && (
+						<motion.div
+							variants={skeletonItemsAnimation}
+							initial='hidden'
+							animate='visible'
+							exit="exit"
+						>
+							<CommonShelf data={undefined} isLoading={cupboardIsLoading} />
+							{shelfNamesList!.map((item, index) => (
+								<motion.div
+									key={index}
+									// variants={skeletonItemsAnimation}
+									// custom={index}
+									// initial='hidden'
+									// animate='visible'
+									// exit="exit"
+								>
+									<ShelfSkeleton
+										isCollapsed={!item.isCollapsed}
+										key={item.title}
+										title={item.title}
+									/>
+								</motion.div>
+							)
+							)}
+						</motion.div>
+					)
+				}
+
+			</AnimatePresence>
+			<AnimatePresence>
+				<motion.div
+					initial={{ opacity: 0.4 }}
+					animate={{ opacity: 1 }}
+				>
+					<CupboardShelfList />
+
+				</motion.div>
+			</AnimatePresence>
+
+		</>)
+
+	// return <CupboardShelfList />
 }
+
+
+// if (cupboardIsLoading) {
+// 	return <AnimatePresence mode='wait'>
+// 		<CommonShelf data={undefined} isLoading={cupboardIsLoading} />
+// 		{shelfNamesList!.map((item, index) => (
+// 			<motion.div
+// 				key={index}
+// 				variants={skeletonItemsAnimation}
+// 				custom={index}
+// 				initial='hidden'
+// 				animate='visible'
+// 				exit="exit"
+// 			>
+// 				<ShelfSkeleton
+// 					isCollapsed={!item.isCollapsed}
+// 					key={item.title}
+// 					title={item.title}
+// 				/>
+// 			</motion.div>
+// 		)
+// 		)}
+// 	</AnimatePresence>
+// }
+
+// return <CupboardShelfList />

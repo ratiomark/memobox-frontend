@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { CreateNewShelfModal } from '@/features/CreateNewShelfModal';
-
+import { motion } from 'framer-motion'
 
 interface StatsAndActionsCupboardWidgetProps {
 	className?: string
@@ -41,32 +41,38 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	useHotkeys('n', onAddNewCardClick, { keyup: true })
 
 	return (
-		<HStack
-			max
-			className={clsx(
-				cls.statsAndActionsCupboardWidget,
-				className)}
+		<motion.div
+			// initial={{ y: -100 }}
+			// animate={{ y: 0 }}
+			// transition={{ type: 'spring', }}
 		>
-			<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
-			<ThemeSwitcher />
-			<HStack gap='gap_14' className={cls.actions} >
-				<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
-				<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
-				<Icon
-					Svg={InfoIcon}
-					width={26}
-					height={26}
-					className={cls.info}
-				/>
+			<HStack
+				max
+				className={clsx(
+					cls.statsAndActionsCupboardWidget,
+					className)}
+			>
+				<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
+				<ThemeSwitcher />
+				<HStack gap='gap_14' className={cls.actions} >
+					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
+					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
+					<Icon
+						Svg={InfoIcon}
+						width={26}
+						height={26}
+						className={cls.info}
+					/>
 
+				</HStack>
+				<CreateNewShelfModal
+					isOpen={newShelfModalIsOpen}
+					onClose={onCloseNewShelfModal}
+					onSubmit={() => console.log('Создаю новую полку с названием  ')}
+					shelfNames={['math']}
+				/>
 			</HStack>
-			<CreateNewShelfModal
-				isOpen={newShelfModalIsOpen}
-				onClose={onCloseNewShelfModal}
-				onSubmit={() => console.log('Создаю новую полку с названием  ')}
-				shelfNames={['math']}
-			/>
-		</HStack>
+		</motion.div>
 	)
 }
 // import clsx from 'clsx';
