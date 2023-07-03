@@ -19,7 +19,6 @@ export const App = () => {
 	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
 	const { theme } = useTheme()
-	const location = useLocation()
 
 	useEffect(() => {
 		dispatch(initAuthData())
@@ -29,18 +28,24 @@ export const App = () => {
 
 	return (
 		<div className={clsx('app', theme)}>
-			{location.pathname.split('/')[1] !== 'training' ? <Header /> : null}
+			<Header />
 			<Suspense fallback={<LoaderWidget />}>
-				{/* <AnimatePresence> */}
-					<AppRouter />
-				{/* </AnimatePresence> */}
-				{/* <MainLayout
-				header={<NavBar />}
-				content={<AppRouter />}
-				sidebar={<Sidebar />}
-				toolbar={<div>toolBar here</div>}
-			/> */}
+				<AppRouter />
 			</Suspense>
 		</div>
 	)
 }
+
+
+
+
+
+
+
+
+//  <MainLayout
+// 				header={<NavBar />}
+// 				content={<AppRouter />}
+// 				sidebar={<Sidebar />}
+// 				toolbar={<div>toolBar here</div>}
+// />

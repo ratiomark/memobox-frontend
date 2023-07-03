@@ -3,6 +3,7 @@
   display: flex;
   gap: 20px;
   cursor: pointer;
+  // border: 1px solid red;
 }
 
 .CardListItem {
@@ -37,6 +38,7 @@
   width: 100%;
   display: flex;
   gap: 40px;
+  
 }
 
 .mainContent {
@@ -45,6 +47,7 @@
   -webkit-line-clamp: var(--view-rows);
   -webkit-box-orient: vertical;
   overflow: hidden;
+  border: 1px solid red;
 }
 
 .createdAt {

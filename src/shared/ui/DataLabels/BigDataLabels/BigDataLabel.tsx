@@ -53,10 +53,10 @@ export const BigDataLabel = (props: BigDataLabelProps) => {
 	return (
 		<>
 			<motion.div
-				// initial={{ x: -50 }}
-				// animate={{ x: 0 }}
+				initial={{ x: -120 , opacity: 0}}
+				animate={{ x: 0, opacity: 1}}
 				// viewport={{ once: true }}
-				// transition={{ type: 'spring' }}
+				transition={{ type: 'spring', duration: 0.5}}
 				className={clsx(cls.BigDataLabel, [className])}
 			>
 				<div className={clsx(cls.coloredLeftSide, cls[type])}>

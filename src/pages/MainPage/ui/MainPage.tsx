@@ -3,8 +3,6 @@ import { Page } from '@/widgets/Page'
 import { StatsAndActionsCupboardWidget } from '@/widgets/StatsAndActionsCupboardWidget'
 import { Header } from '@/widgets/Sidebar'
 // eslint-disable-next-line custom-fsd-checker-plugin/public-api-imports
-import { CupboardShelvesWidget } from '@/widgets/CupboardShelvesWidget'
-import { useEffect } from 'react'
 import { CupboardShelfList } from '@/features/CupboardShelfList'
 import { CardModalNewCard } from '@/features/CupboardShelfList'
 import { CupboardShelfListWrapper } from '@/features/CupboardShelfList'

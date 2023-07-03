@@ -8,6 +8,7 @@ import { ThemeSwitcher } from '@/features/ThemeSwitcher'
 import { LangSwitcher } from '../LangSwitcher/LangSwitcher'
 
 import cls from './Header.module.scss'
+import { useLocation } from 'react-router-dom'
 
 interface SidebarProps {
 	className?: string
@@ -15,7 +16,7 @@ interface SidebarProps {
 
 export const Header = memo(({ className }: SidebarProps) => {
 	const headerItemsList = useSelector(getHeaderItems)
-
+	const location = useLocation()
 	const HeaderItemsListRendered = useMemo(() => {
 		return headerItemsList.map(item => (
 			<HeaderItem
@@ -24,7 +25,8 @@ export const Header = memo(({ className }: SidebarProps) => {
 			/>
 		))
 	}, [headerItemsList])
-
+	
+	if (location.pathname.split('/')[1] === 'training') return null
 
 	return (
 

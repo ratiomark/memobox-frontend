@@ -3,7 +3,6 @@ import { memo, ReactNode, useCallback, useMemo } from 'react';
 import { Card } from '../Card/Card';
 import cls from './Tabs.module.scss';
 import { FlexDirection, FlexAlign, Flex } from '../Stack/Flex/Flex';
-
 export interface TabItem {
 	value: string | number
 	content: ReactNode

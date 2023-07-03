@@ -13,6 +13,7 @@ import { getViewPageCardsSorted } from '@/features/ViewPageInitializer'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { MultiSelectScreen } from './MultiSelectScreen/MultiSelectScreen';
 import { CardEditModal } from './CardEditModal';
+import { motion } from 'framer-motion'
 
 interface CardListViewWidgetProps {
 	className?: string
@@ -98,9 +99,14 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 
 
 	return (
-		<ul className={clsx(
-			cls.cardListViewWidget,
-			className)}
+		<motion.ul
+			initial={{ x: -120, opacity: 0 }}
+			animate={{ x: 0, opacity: 1 }}
+			// viewport={{ once: true }}
+			transition={{ type: 'spring', duration: 0.5 }}
+			className={clsx(
+				cls.cardListViewWidget,
+				className)}
 		>
 			{content}
 			<MultiSelectScreen
@@ -108,7 +114,7 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 				onSelectAllCards={onSelectAllCards}
 			/>
 			<CardEditModal />
-		</ul>
+		</motion.ul>
 	)
 }
 // import clsx from 'clsx';

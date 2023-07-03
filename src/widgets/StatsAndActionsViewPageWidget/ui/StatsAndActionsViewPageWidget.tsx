@@ -100,8 +100,8 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 	return (
 		<>
 			<motion.div
-				initial={{ x: -50 }}
-				animate={{ x: 0 }}
+				// initial={{ x: -50 }}
+				// animate={{ x: 0 }}
 			>
 				<HStack
 					max

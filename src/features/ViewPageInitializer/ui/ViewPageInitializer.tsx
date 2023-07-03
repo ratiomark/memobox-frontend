@@ -55,9 +55,9 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])
 
 	useEffect(() => {
-		// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 		if (viewPageIsMounter && shelfId && boxId) {
-			dispatch(viewPageActions.setActiveShelfId(shelfId!))
+			// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+			dispatch(viewPageActions.setActiveShelfId(shelfId))
 			dispatch(viewPageActions.setActiveBoxId(boxId))
 			navigate('/view', { replace: true })
 		}

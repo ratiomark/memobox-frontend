@@ -14,6 +14,7 @@ import { t } from 'i18next';
 import { getViewPageBoxIdChecked } from '@/features/ViewPageInitializer';
 // import { useSelector } from 'react-redux';
 // import { getViewPage } from '@/features/ViewPageInitializer/model/selectors/getViewPageInitializer';
+import { motion } from 'framer-motion'
 const commonShelf = [
 	{ value: 'all', content: t('all') },
 	{ value: 'new', content: t('new') },
@@ -65,7 +66,7 @@ export const BoxesListViewWidget = memo((props: BoxesListViewWidgetProps) => {
 	const onBoxClick = useCallback((tabItem: TabItem) => {
 		dispatch(viewPageActions.setActiveBoxId(tabItem.value))
 	}, [dispatch])
-	// const onBoxClick = useCallback((tabItem: TabItem) => {
+	// const onBoxClick = useCallbackd((tabItem: TabItem) => {
 	// 	dispatch(viewPageActions.setActiveBoxId(tabItem.value))
 	// 	navigate(obtainRouteView(shelfId, tabItem.value))
 	// }, [dispatch, shelfId, navigate])
@@ -74,22 +75,27 @@ export const BoxesListViewWidget = memo((props: BoxesListViewWidgetProps) => {
 		return <Skeleton width={500} height={40} />
 	}
 	const hasActive = tabs.find((item) => item.value === boxId)
-	// const tabsD = tabs.length - 1
-	// console.log(hasActive, '  !!!!!!!!!   ', boxId)
 
 	return (
-		<div className={clsx(
-			cls.boxesListViewWidget,
-			className)}
+		<motion.div
+			// layout
+			// initial={{ x: -120, opacity: 0 }}
+			// animate={{ x: 0, opacity: 1 }}
+			// viewport={{ once: true }}
+			// transition={{ type: 'spring', duration: 0.5 }}
+			// layoutRoot
+			className={clsx(
+				cls.boxesListViewWidget,
+				className)}
 		>
 			<Tabs
 				tabs={tabs}
 				onTabClick={onBoxClick}
-				value={boxId?.toString() ?? 'new'}
-
+				value={hasActive ? boxId?.toString() : 'new'}
 			/>
 
-		</div>
+		</motion.div>
 	)
 })
+
 BoxesListViewWidget.displayName = 'BoxesListViewWidget'

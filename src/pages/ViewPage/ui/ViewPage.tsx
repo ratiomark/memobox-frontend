@@ -19,7 +19,7 @@ const ViewPage = memo(() => {
 		<>
 			{/* <Header /> */}
 			{/* <Header/> */}
-			<Page data-testid='MainPage'>
+			<Page saveScroll={false} data-testid='MainPage'>
 				<ViewPageInitializer
 					shelvesListViewPageBlock={<ShelvesListViewWidget />}
 					boxListViewPageBlock={<BoxesListViewWidget />}

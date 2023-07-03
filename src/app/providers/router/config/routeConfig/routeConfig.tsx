@@ -39,10 +39,11 @@ const Susp = () => {
 export type AppRoutes = keyof typeof AppRoutes;
 
 export const obtainRouteMain = () => '/'
-export const obtainRouteView = (shelfId?: string, boxId?: string|number) => {
-	return boxId
-		? `/view/${shelfId}/${boxId}`
-		: `/view/${shelfId}/all`
+
+export const obtainRouteView = (shelfId?: string, boxId?: string | number) => {
+	if (!shelfId) return '/view/all/all'
+	if (!boxId) return `/view/${shelfId}/all`
+	return `/view/${shelfId}/${boxId}`
 }
 
 export const obtainRouteTraining = (shelfId?: string, boxId?: string) => {

@@ -34,7 +34,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 	const itemsRendered = useMemo(() => {
 		if (!items) return undefined
 		return items.map(item => {
-			console.log(value, item.value)
+			// console.log(value, item.value)
 			return (
 				<MyText
 					// activeClassName={cls.activeShelf}

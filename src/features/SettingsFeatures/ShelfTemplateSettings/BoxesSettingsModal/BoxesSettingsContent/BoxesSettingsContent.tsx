@@ -52,6 +52,7 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 				boxesList={boxesData}
 				setBoxesData={setBoxesData}
 				setIsAnyTimeSetterOpen={setIsAnyTimeSetterOpen}
+				setIsAddBoxModeActive={setIsAddBoxModeActive}
 			/>
 			{/* <Button onClick={() => console.log(boxesData)}>Consol</Button> */}
 

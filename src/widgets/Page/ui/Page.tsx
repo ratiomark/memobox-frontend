@@ -18,6 +18,7 @@ interface PageProps extends TestProps {
 	children?: ReactNode,
 	onScrollEnd?: () => void
 	isLoading?: boolean
+	saveScroll?: boolean
 }
 
 // const pageAnimations = {
@@ -43,6 +44,7 @@ export const Page = memo((props: PageProps) => {
 		children,
 		onScrollEnd,
 		isLoading,
+		saveScroll = true,
 	} = props
 
 	const dispatch = useAppDispatch()
@@ -82,7 +84,7 @@ export const Page = memo((props: PageProps) => {
 			// exit='exit'
 			ref={wrapperRef}
 			className={clsx(cls.Page, className)}
-			onScroll={onScroll}
+			onScroll={saveScroll ? onScroll : undefined}
 			data-testid={props['data-testid'] ?? 'Page'}
 		>
 			<div className={cls.wrapper}>

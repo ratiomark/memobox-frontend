@@ -4,9 +4,10 @@ import { AppRouteProps, routeConfig } from '../../config/routeConfig/routeConfig
 import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { ProtectedRoute } from './ProtectedRoute'
 import { AnimatePresence } from 'framer-motion'
+import { Header } from '@/widgets/Sidebar'
 
 export const AppRouter = () => {
-	const location = useLocation()
+	// const location = useLocation()
 	const renderWithWrapper = useCallback((route: AppRouteProps) => {
 		const { path, authOnly, element, wrapper: Wrapper, roles, suspense: suspenseSkeleton } = route
 
@@ -35,8 +36,10 @@ export const AppRouter = () => {
 	return (
 		// <Suspense fallback={<h1>sdiofjweiofjweofi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>}>
 		<Suspense fallback={<LoaderWidget />}>
+			{/* {location.pathname.split('/')[1] !== 'training' ? <Header /> : null} */}
 			<AnimatePresence>
-				<Routes location={location} key={location.key}>
+				<Routes >
+					{/* <Routes location={location} key={location.key}> */}
 					{routes}
 				</Routes>
 			</AnimatePresence>

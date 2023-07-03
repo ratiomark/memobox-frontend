@@ -80,14 +80,8 @@ export const CardListItem = (props: CardListItemProps) => {
 		onSelectCard(card._id)
 	}
 	const onOpenEditCardModalHandle = (e: MouseEvent<HTMLLIElement>) => {
-		console.log(e.target.tagName)
-		if (e.target.tagName === 'INPUT') return
-		// console.log(e.currentTarget.tagName)
-		// console.log(e.target.toString())
-		// if (e.currentTarget.tagName === 'INPUT') return
+		if (e.target instanceof Element && e.target.tagName === 'INPUT') return
 		onOpenEditCardModal(card)
-		// console.log('CLICK', e.target)
-		// return
 	}
 	const isCardSelected = selectedCardIds.includes(card._id)
 	const columns = useSelector(getViewPageColumns)
