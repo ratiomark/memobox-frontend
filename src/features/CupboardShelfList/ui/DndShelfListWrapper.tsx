@@ -11,5 +11,5 @@ export const DndShelfListWrapper = (props: CupboardShelfListProps) => {
 		children,
 	} = props
 	const [, drop] = useDrop(() => ({ accept: 'shelf' }))
-	return <motion.div ref={drop}>{children}</motion.div>
+	return <motion.ul ref={drop}>{children}</motion.ul>
 }

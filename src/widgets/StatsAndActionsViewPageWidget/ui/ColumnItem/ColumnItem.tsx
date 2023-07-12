@@ -3,11 +3,15 @@ import { useTranslation } from 'react-i18next';
 import cls from './ColumnItem.module.scss';
 import { SortColumnObject } from '@/entities/User';
 import { Switcher } from '@/shared/ui/Switcher';
+import { Reorder, useDragControls, useMotionValue } from 'framer-motion';
+import DragDotsIcon from '@/shared/assets/icons/dragDotsIcon2.svg'
+import { Icon } from '@/shared/ui/Icon';
+import { useEffect, useState } from 'react';
 
 interface ColumnItemProps {
 	className?: string
 	column: SortColumnObject
-	onSwitchClick: (column: SortColumnObject) =>void
+	onSwitchClick: (column: SortColumnObject) => void
 	// SortColumnValue
 }
 
@@ -17,17 +21,70 @@ export const ColumnItem = (props: ColumnItemProps) => {
 		column,
 		onSwitchClick
 	} = props
-
-	const handleSwitchClick = () => onSwitchClick(column)
+	const [isDragging, setIsDragging] = useState(false)
 	const { t } = useTranslation()
+	const controls = useDragControls()
+	const isShelfColumn = column.value === 'shelf'
+	const handleSwitchClick = () => onSwitchClick(column)
+	const handleDragStart = () => {
+		setIsDragging(true);
+		document.body.classList.add('dragging');
+	}
+	const handleDragEnd = () => {
+		setIsDragging(false);
+		document.body.classList.remove('dragging');
+	}
+	// const y = useMotionValue(0);
+
+	// useEffect(() => {
+	// 	const unsubscribeY = y.onChange((currentY) => {
+	// 		// Здесь вы можете проверить, происходит ли перетаскивание по оси Y
+	// 		console.log('Dragging in Y direction: ', currentY);
+	// 	});
+
+	// 	// Отписываемся от слушателей при размонтировании компонента
+	// 	return () => {
+	// 		unsubscribeY();
+	// 	};
+	// }, [y]);
+
+	if (isShelfColumn) {
+		return (
+			<li
+				className={clsx(
+					cls.ColumnItem,
+					className)}
+			>
+				{t(column.content)}
+				<Switcher isChecked={column.enabled} onClickSwitcher={handleSwitchClick} />
+			</li>
+		)
+	}
+
 
 	return (
-		<li className={clsx(
-			cls.ColumnItem,
-			className)}
+		<Reorder.Item
+			value={column}
+			dragListener={false}
+			dragControls={controls}
+			onDragStart={handleDragStart}
+			onDragEnd={handleDragEnd}
+			className={clsx(
+				cls.ColumnItem,
+				className)}
 		>
+
+			<Icon
+				Svg={DragDotsIcon}
+				type={isDragging ? 'main' : 'hint'}
+				onPointerDown={(e) => controls.start(e)}
+				className={cls.dragIcon}
+				style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+				width={25}
+				height={25}
+			/>
 			{t(column.content)}
 			<Switcher isChecked={column.enabled} onClickSwitcher={handleSwitchClick} />
-		</li>
+		</Reorder.Item>
 	)
 }

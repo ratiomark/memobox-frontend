@@ -18,6 +18,11 @@ body {
   // scrollbar-gutter: stable both-edges;
 }
 
+// prevent text selection while DnD
+body.dragging * {
+  user-select: none;
+}
+
 #root {
   // isolation: isolate;
 }

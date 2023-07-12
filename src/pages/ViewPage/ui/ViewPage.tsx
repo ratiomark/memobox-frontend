@@ -4,7 +4,7 @@ import { BoxesListViewWidget } from '@/widgets/BoxesListViewWidget';
 import { CardListViewWidget } from '@/widgets/CardListViewWidget';
 import { Page } from '@/widgets/Page';
 import { ShelvesListViewWidget } from '@/widgets/ShelvesListViewWidget';
-import { SortControllerWrapper } from '@/widgets/SortControllerViewPageWidget';
+import { SortControllerViewPageWidget } from '@/widgets/SortControllerViewPageWidget';
 import { StatsAndActionsViewPageWidget } from '@/widgets/StatsAndActionsViewPageWidget';
 import { memo } from 'react';
 
@@ -15,10 +15,10 @@ const ViewPage = memo(() => {
 		<>
 			<Page saveScroll={false} data-testid='MainPage'>
 				<ViewPageInitializer
+					statsAndActionsViewPageBlock={<StatsAndActionsViewPageWidget />}
 					shelvesListViewPageBlock={<ShelvesListViewWidget />}
 					boxListViewPageBlock={<BoxesListViewWidget />}
-					statsAndActionsViewPageBlock={<StatsAndActionsViewPageWidget />}
-					sortControllerViewPageBlock={<SortControllerWrapper />}
+					sortControllerViewPageBlock={<SortControllerViewPageWidget />}
 					cardListViewPageBlock={<CardListViewWidget />}
 				/>
 			</Page>

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import cls from './SortControllerWrapper.module.scss';
+import cls from './SortControllerViewPageWidget.module.scss';
 import { MyText } from '@/shared/ui/Typography';
 import TriangleIcon from '@/shared/assets/icons/triangleIcon2.svg'
 import { Icon } from '@/shared/ui/Icon';

@@ -85,7 +85,7 @@ export const Shelf = memo((props: ShelfProps) => {
 
 	return (
 
-		<motion.div
+		<motion.li
 			ref={preview}
 			layout
 			transition={{ ease: 'linear', duration: dndIsActive ? 0.8 : 0 }}
@@ -110,7 +110,6 @@ export const Shelf = memo((props: ShelfProps) => {
 				/>
 				<div className={canDrop ? cls.handle2 : ''} />
 			</div>
-
 			<div
 				className={clsx(
 					cls.shelf,
@@ -131,12 +130,11 @@ export const Shelf = memo((props: ShelfProps) => {
 					{/* <div className={clsx(cls.boxesWrapper, !isCollapsed ? cls.collapsed : '')}> */}
 
 					<div className={cls.inner} >
-
 						{boxesBlock}
 					</div>
 				</div>
 			</div>
-		</motion.div>
+		</motion.li>
 
 	)
 })

@@ -33,25 +33,22 @@ import { AnimatePresence } from 'framer-motion';
 interface CupboardShelfListProps {
 	className?: string
 }
+let timerId: number;
 
-// Этот компонент будет работать с полками. 
 export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const {
 		className
 	} = props
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
-	// const shelfNamesList = useSelector(getUserShelfNamesList)
 	const cupboardData = useSelector(getCupboardData)
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
 
-	// const [, drop] = useDrop(() => ({ accept: 'shelf' }))
-
 	useEffect(() => {
 		if (!cupboardIsLoading) {
-			setTimeout(() => {
+			timerId = setTimeout(() => {
 				const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
 				const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
 				const buttonsWidthList: number[] = []
@@ -62,7 +59,8 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 				const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
 				trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
 				addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
-			}, 100)
+				clearTimeout(timerId)
+			}, 10)
 		}
 	}, [cupboardIsLoading])
 
@@ -76,13 +74,11 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	}, [dispatch])
 
 	const moveShelf = useCallback((dropAtIndex: number, shelfIndexDragged: number) => {
-		console.log('функция ', 'ставлю на: ', dropAtIndex, '  индекс: ', shelfIndexDragged)
+		// console.log('функция ', 'ставлю на: ', dropAtIndex, '  индекс: ', shelfIndexDragged)
 		if (dropAtIndex === shelfIndexDragged) return
 		const updates = []
 		const currentShelf = { ...cupboardShelves.find(shelf => shelf.index === shelfIndexDragged) } as ShelfSchema
 		updates.push({ id: currentShelf.id, changes: { index: dropAtIndex } })
-		// console.log(currentShelf.title)
-		// currentShelf!.index = dropAtIndex
 		if (dropAtIndex > shelfIndexDragged) {
 			cupboardShelves.forEach(shelf => {
 				if (shelf.index <= dropAtIndex && shelf.index > shelfIndexDragged) {

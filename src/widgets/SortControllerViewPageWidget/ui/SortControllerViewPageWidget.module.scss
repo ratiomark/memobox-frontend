@@ -1,8 +1,107 @@
-.sortControllerViewPageWidget {
+.SortControllerWrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 14px;
+  max-width: fit-content;
+  min-width: calc(100% - 32px);
+
+  // border: 1px solid green;
+}
+
+.mainContentWrapper {
+  width: 100%;
   display: flex;
   gap: 40px;
 }
 
 .mainContent {
-  width: 20%;
+  width: 100%;
+  display: flex;
+  gap: 40px;
+
+  // width: max-content;
+}
+
+.arrow {
+  transition: all 0.2s;
+
+  // &:hover {
+  //   transform: scale(2);
+  // }
+}
+
+.rotateArrow {
+  transform: rotate(180deg);
+
+  // &:hover {
+  //   transform: scale(2);
+  // }
+  // &:hover {
+  //   transform: scale(1.6);
+  // }
+}
+
+.wrapper {
+  // all: unset;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.createdAtWrapper {
+  // cursor: pointer;
+  gap: 8px;
+
+  // color: red;
+  width: 80px;
+
+  // border: 1px solid red;
+}
+
+.shelfWrapper {
+  // cursor: pointer;
+  justify-content: center;
+  gap: 8px;
+
+  // color: blue;
+  width: 120px;
+
+  // border: 1px solid blue;
+  text-align: center;
+}
+
+.lastTrainingWrapper {
+  // cursor: pointer;
+  // display: flex;
+  // align-items: center;
+  // flex-grow: 1;
+
+  // color: orange;
+  // max-width: 80px;
+  // border: 1px solid orange;
+}
+
+.createdAt {
+  // color: red;
+
+  // width: 70px;
+  // border: 1px solid red;
+}
+
+.shelf {
+  // color: blue;
+
+  // width: 120px;
+  // border: 1px solid blue;
+  text-align: center;
+}
+
+.lastTraining {
+  // color: orange;
+  width: 80px;
+
+  // border: 1px solid orange;
 }

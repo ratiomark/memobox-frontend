@@ -21,6 +21,7 @@ export interface StateSchema {
 	loginForm?: LoginSchema
 	viewPage?: ViewPageInitializerSchema
 	settingsShelfTemplate?: SettingsShelfTemplate
+	// sortColumns
 }
 
 // достаю ключи редьюсеров, чтобы передать их reducerManager, там где требуются ключи

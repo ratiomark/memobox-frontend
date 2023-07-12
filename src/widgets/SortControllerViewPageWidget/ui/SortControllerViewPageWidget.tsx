@@ -1,32 +1,48 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './SortControllerViewPageWidget.module.scss';
-import { getViewPageIsMounted, getViewPageIsLoading,  } from '@/features/ViewPageInitializer';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { getViewPageColumns, getViewPageSortOrder } from '@/features/ViewPageInitializer';
 import { MyText } from '@/shared/ui/Typography';
+import { SortItem } from './SortItem';
+import { getViewPageSort, getViewPageSortChecked } from '@/features/ViewPageInitializer';
+import { HStack } from '@/shared/ui/Stack';
 
-interface SortControllerViewPageWidgetProps {
+interface SortControllerWrapperProps {
 	className?: string
-	// columns: SortColumnObject[]
 }
 
-export const SortControllerViewPageWidget = (props: SortControllerViewPageWidgetProps) => {
+export const SortControllerViewPageWidget = (props: SortControllerWrapperProps) => {
 	const {
 		className
 	} = props
-	const viewPageIsMounted = useSelector(getViewPageIsMounted)
-	// const sortItemsList = useSelector(getViewPageSortItemsList)
-	const viewPageIsLoading = useSelector(getViewPageIsLoading)
+
+	const columns = useSelector(getViewPageColumns)
+	// const activeSort = useSelector(getViewPageSort)
+	const activeSort = useSelector(getViewPageSortChecked)
+	const sortOrder = useSelector(getViewPageSortOrder)
+
 	const { t } = useTranslation()
+
+	const columnsRendered = useMemo(() => {
+		return columns?.map(column => {
+			if (column.enabled) {
+				return <SortItem key={column.value} column={column} activeSort={activeSort} />
+			}
+		})
+	}, [columns, activeSort,])
 
 	return (
 		<div className={clsx(
-			cls.sortControllerViewPageWidget,
+			cls.SortControllerWrapper,
 			className)}
 		>
-			{/* <MyText text='question' className={cls.mainContent} /> */}
-			{/* <MyText text='answer' className={cls.mainContent} /> */}
-			{/* {sortItemsList.map(item => <MyText key={item} text={item} />)} */}
+			<div className={cls.mainContentWrapper} >
+				<MyText text={t('question')} className={cls.mainContent} size='s' />
+				<MyText text={t('answer')} className={cls.mainContent} size='s' />
+			</div>
+			{columnsRendered}
 		</div>
 	)
 }
