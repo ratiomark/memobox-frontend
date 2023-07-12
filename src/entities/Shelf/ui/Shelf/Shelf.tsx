@@ -5,14 +5,15 @@ import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDat
 import { ShelfButtons } from '../../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
-import { CSSProperties, ReactNode, memo, useCallback, useState } from 'react';
+import { CSSProperties, ReactNode, memo, useCallback, useMemo, useState } from 'react';
 import { ShelfSchema } from '../../model/types/ShelfSchema';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useDrag, useDrop } from 'react-dnd';
 import DragDotsIcon from '@/shared/assets/icons/dragDotsIcon2.svg'
 import { Icon } from '@/shared/ui/Icon';
 
-
+let dndIsActiveValue = false
+let timerId: number;
 export interface ShelfProps {
 	shelf: ShelfSchema
 	completeSmallDataLabelsBlock: ReactNode
@@ -71,20 +72,32 @@ export const Shelf = memo((props: ShelfProps) => {
 		},
 	}), [moveShelf, index])
 
+	const dndIsActive = useMemo(() => {
+		if (isOver || isDrag || canDrop) {
+			dndIsActiveValue = true
+		}
+		timerId = setTimeout(() => {
+			dndIsActiveValue = false
+			clearTimeout(timerId)
+		}, 1000)
+		return dndIsActiveValue
+	}, [isOver, isDrag, canDrop])
+
 	return (
 
 		<motion.div
 			ref={preview}
 			layout
-			// transition={{type: 'tween'}}
+			transition={{ ease: 'linear', duration: dndIsActive ? 0.8 : 0 }}
+			// transition={{ type: 'spring', stiffness: 900 }}
 			// ref={node => preview(drop(node))}
 			style={{
 				transform: isOver ? 'translateY(-15px) scale(1.02)' : 'none',
 				// scale: isDrag ? 1.02 : 1,
 				// border: isOver ? '1px solid var(--accent)' : '',
-				boxShadow: isOver ? '0 1px 4px rgba(var(--accent), 0.5)' : '',
+				// boxShadow: isOver ? '0 1px 4px rgba(var(--accent), 0.5)' : '',
 				// marginBottom: isOver ? '30px' : '1px',
-				transition: 'all 0.5s ease',
+				// transition: 'transform 0.5s ease',
 			}}
 			className={cls.shelfWrapper}
 		>
@@ -104,7 +117,7 @@ export const Shelf = memo((props: ShelfProps) => {
 					[className])}
 				style={{
 					marginBottom: isOver ? '45px' : '30px',
-					transition: 'all 0.6s ease',
+					transition: 'margin 0.6s ease',
 				}}
 			>
 				<div className={cls.topShelfPart}>

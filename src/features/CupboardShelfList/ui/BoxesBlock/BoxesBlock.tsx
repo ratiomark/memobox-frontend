@@ -52,12 +52,12 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 	}, [shelf.boxesData, onAddNewCardClick, onViewClick, shelf.id])
 
 	return (
-		<div className={clsx(
+		<ul className={clsx(
 			cls.BoxesBlock,
 			// 'target',
 			className)}
 		>
 			{boxList}
-		</div>
+		</ul>
 	)
 }

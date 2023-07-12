@@ -135,9 +135,8 @@ export const Box = (props: BoxPropsBase) => {
 			data={data}
 		/>
 
-		const onClose = () => {
-			setIsTimeSetterOpen(false)
-		}
+		const onClose = () => setIsTimeSetterOpen(false)
+
 		const buttons = (
 			<HStack
 				className={cls.buttonsBlock}
@@ -177,8 +176,9 @@ export const Box = (props: BoxPropsBase) => {
 				/>
 			</HStack>
 		)
+
 		return (
-			<div className={clsx(cls.Box, [className])} >
+			<li className={clsx(cls.Box, [className])} >
 				<div className={cls.boxInnerWrapper} >
 					{title}
 					{completeSmallDataLabels}
@@ -208,6 +208,7 @@ export const Box = (props: BoxPropsBase) => {
 									weeks={weeks}
 									months={months}
 									onClose={onClose}
+									onSaveTime={() => { }}
 								// VAR: тут нужен колбек на сохранение времени у коробки
 								/>
 								{/* </div> */}
@@ -217,13 +218,13 @@ export const Box = (props: BoxPropsBase) => {
 					<MyText className={cls.timing} text={timing} />
 				</div>
 				<Button onClick={startTraining} variant='filledBox' disabled={data.train < 1} className={cls.trainButton} >{t('train')}</Button>
-			</div>
+			</li>
 		)
 	}
 
 	const title = <Heading as='h5' className={cls.title} title={t('new cards')} />
 	return (
-		<div className={clsx(cls.Box, [className])} >
+		<li className={clsx(cls.Box, [className])} >
 			<div className={cls.boxInnerWrapper} >
 
 
@@ -257,6 +258,6 @@ export const Box = (props: BoxPropsBase) => {
 			</div>
 			<div className={cls.timingLayout} />
 			<Button onClick={startTraining} variant='filledBox' disabled={data.all < 1} className={cls.trainButton} >{t('train')}</Button>
-		</div>
+		</li>
 	)
 }
