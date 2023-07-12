@@ -8,6 +8,7 @@ import { UISchema } from '@/features/ScrollSave';
 // import { CardModalSchema } from '@/features/CardModal';
 import { ViewPageInitializerSchema } from '@/features/ViewPageInitializer';
 import { CupboardPageSchema } from '@/features/CupboardShelfList';
+import { SettingsShelfTemplate } from '@/features/SettingsFeatures'
 
 // loginForm делаю не обязательным, таким образом я могу подружать его позже с помощью асинхронна и ТС не будет ругаться на то что я не объявил его в rootReducers
 export interface StateSchema {
@@ -19,6 +20,7 @@ export interface StateSchema {
 	// async reducers
 	loginForm?: LoginSchema
 	viewPage?: ViewPageInitializerSchema
+	settingsShelfTemplate?: SettingsShelfTemplate
 }
 
 // достаю ключи редьюсеров, чтобы передать их reducerManager, там где требуются ключи

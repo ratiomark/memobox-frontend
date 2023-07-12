@@ -106,9 +106,9 @@ const cupboardShelfList = createSlice({
 		},
 		setFetchedCupboardDataError: (state, action: PayloadAction<FetchBaseQueryError | SerializedError>) => {
 			if ('status' in action.payload) {
-				state.error = JSON.stringify(action.payload.data)				
+				state.error = JSON.stringify(action.payload.data)
 			} else {
-				state.error = JSON.stringify(action.payload.message)				
+				state.error = JSON.stringify(action.payload.message)
 			}
 		},
 		setFetchedCupboardData: (state, action: PayloadAction<CupboardSchema>) => {
@@ -123,6 +123,14 @@ const cupboardShelfList = createSlice({
 				train: commonShelf.data.train,
 				wait: commonShelf.data.wait,
 			}
+		},
+		moveShelfByIndex: (state, action: PayloadAction<ShelfSchema[]>) => {
+			shelvesAdapter.setAll(state, action.payload)
+			// const currentShelf = shelvesAdapter.selectAll
+		},
+		updateIndexes: (state, action: PayloadAction<Array<{ id: EntityId, changes: { index: number } }>>) => {
+			shelvesAdapter.updateMany(state, action.payload)
+			// const currentShelf = shelvesAdapter.selectAll
 		},
 		// shelf control
 		deleteShelf: (state, action: PayloadAction<EntityId>) => {

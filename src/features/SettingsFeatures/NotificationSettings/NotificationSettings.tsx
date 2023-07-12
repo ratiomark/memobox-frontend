@@ -106,6 +106,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 							onUpClick={onEmailUpClick}
 							onDownClick={onEmailDownClick}
 							onWheelScroll={onScrollEmailMinNotification}
+							disabled={!emailEnabled}
 						/>
 						<Button
 							variant='filled'
@@ -131,6 +132,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 							onUpClick={onPushUpClick}
 							onDownClick={onPushDownClick}
 							onWheelScroll={onScrollPushMinNotification}
+							disabled={!pushEnabled}
 						/>
 					</div>
 				</div>

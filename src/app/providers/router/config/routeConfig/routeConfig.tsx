@@ -8,6 +8,7 @@ import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { ViewPage } from '@/pages/ViewPage';
 import { TrainingPage } from '@/pages/TrainingPage';
 import { ReactNode } from 'react';
+import { TrashPage } from '@/pages/TrashPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -86,7 +87,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	},
 	trash: {
 		path: obtainRouteTrash(),
-		element: <MainPage />
+		element: <TrashPage />
 	},
 	training: {
 		path: obtainRouteTraining(':shelfId', ':boxId'),

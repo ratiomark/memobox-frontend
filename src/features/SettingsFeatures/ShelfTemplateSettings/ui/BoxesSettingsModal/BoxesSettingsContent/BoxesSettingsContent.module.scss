@@ -6,6 +6,22 @@
   position: relative;
 }
 
+// .mainWrapper{
+//   overflow-x: scroll;
+//   width: max-content;
+//   max-width: 1200px;
+// }
+.wrapper {
+  // overflow-x: scroll;
+  // width: max-content;
+  // max-width: 1200px;
+}
+
+.title {
+  font-size: 15px;
+  color: rebeccapurple;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -6,8 +6,46 @@
 
   // background-color: var(--bg);
   padding: 10px 20px 10px 15px;
+  position: relative;
+
+  // z-index: 5;
+  // isolation: isolate;
 
   // transition: all 2s;
+}
+
+.shelfWrapper {
+  position: relative;
+
+  // z-index: 5;
+}
+
+.handle {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 100%;
+  position: absolute;
+  left: -40px;
+  top: 0;
+
+  // top: calc(50% - 20px);
+  // background-color: red;
+  cursor: grab;
+  z-index: 2;
+  isolation: isolate;
+}
+
+.handle2 {
+  width: 600px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: transparent;
+
+  // background-color: green;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .titleSkeleton {

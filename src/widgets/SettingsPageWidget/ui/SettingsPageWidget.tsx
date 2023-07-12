@@ -15,8 +15,7 @@ import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import cls from './SettingsPageWidget.module.scss';
 import { Icon } from '@/shared/ui/Icon';
 import { MissedTrainingSettings } from '@/features/SettingsFeatures';
-import { NotificationSettings } from '@/features/SettingsFeatures/NotificationSettings/NotificationSettings';
-
+import { NotificationSettings } from '@/features/SettingsFeatures'
 
 
 interface SettingsPageWidgetProps {
@@ -59,7 +58,6 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			tabIndex={0}
 			className={cls.card}
 			onClick={toggleShelfTemplateModal}>
-			{/* onClick={openShelfTemplate}> */}
 			<Heading
 				className={cls.settingTitle}
 				as='h2'

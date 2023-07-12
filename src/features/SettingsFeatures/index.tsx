@@ -2,4 +2,6 @@ export { NotificationSettings } from './NotificationSettings/NotificationSetting
 
 export { MissedTrainingSettings } from './MissedTrainingSettings/MissedTrainingSettings'
 
-export { ShelfTemplateSettings } from './ShelfTemplateSettings/ShelfTemplateSettings'
+export { ShelfTemplateSettings } from './ShelfTemplateSettings/ui/ShelfTemplateSettings'
+
+export type { SettingsShelfTemplate } from './ShelfTemplateSettings/model/types/SettingsShelfTemplate'

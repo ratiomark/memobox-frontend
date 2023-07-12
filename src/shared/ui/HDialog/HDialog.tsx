@@ -28,7 +28,7 @@ export const HDialog = (props: HDialogProps) => {
 	} = props
 	const { theme } = useTheme()
 
-	// if (lazy && !isOpen) return null
+	if (lazy && !isOpen) return null
 
 	return (
 		<Dialog

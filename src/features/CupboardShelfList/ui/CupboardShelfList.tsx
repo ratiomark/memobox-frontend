@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useCallback, useEffect, useMemo } from 'react';
+import { DndProvider, useDrop } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { fetchCupboardData } from '../model/services/fetchCupboardData';
 import { useSelector } from 'react-redux';
 import {
@@ -17,7 +19,7 @@ import { Skeleton } from '@/shared/ui/Skeleton';
 import { ShelfItem } from './ShelfItem/ShelfItem';
 import { ShelfButtons } from './ShelfButtons/ShelfButtons';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
-import { ShelfSkeleton } from '@/entities/Shelf';
+import { ShelfSchema, ShelfSkeleton } from '@/entities/Shelf';
 import { getUserShelfNamesList } from '@/entities/User';
 import { CommonShelf } from './CommonShelf/CommonShelf';
 import { BoxesSettingsModal } from './BoxesSettingsModal/BoxesSettingsModal/BoxesSettingsModal';
@@ -25,6 +27,8 @@ import { BoxesBlockWrapper } from './BoxesBlock/BoxesBlockWrapper';
 import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModal/MissedTrainingSettings';
 import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
 import { CardModalNewCard } from '..';
+import { DndShelfListWrapper } from './DndShelfListWrapper';
+import { AnimatePresence } from 'framer-motion';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -41,11 +45,9 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const cupboardData = useSelector(getCupboardData)
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
-	const cupboardShelves = useSelector(getCupboardState.selectAll)
+	const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
 
-	// useEffect(() => {
-	// 	dispatch(fetchCupboardData())
-	// }, [dispatch])
+	// const [, drop] = useDrop(() => ({ accept: 'shelf' }))
 
 	useEffect(() => {
 		if (!cupboardIsLoading) {
@@ -61,16 +63,6 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 				trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
 				addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
 			}, 100)
-			// const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
-			// const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
-			// const buttonsWidthList: number[] = []
-			// const addCardsButtonsWidthList: number[] = []
-			// trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
-			// addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
-			// const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
-			// const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
-			// trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
-			// addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
 		}
 	}, [cupboardIsLoading])
 
@@ -83,9 +75,33 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isCollapsed } }))
 	}, [dispatch])
 
+	const moveShelf = useCallback((dropAtIndex: number, shelfIndexDragged: number) => {
+		console.log('функция ', 'ставлю на: ', dropAtIndex, '  индекс: ', shelfIndexDragged)
+		if (dropAtIndex === shelfIndexDragged) return
+		const updates = []
+		const currentShelf = { ...cupboardShelves.find(shelf => shelf.index === shelfIndexDragged) } as ShelfSchema
+		updates.push({ id: currentShelf.id, changes: { index: dropAtIndex } })
+		// console.log(currentShelf.title)
+		// currentShelf!.index = dropAtIndex
+		if (dropAtIndex > shelfIndexDragged) {
+			cupboardShelves.forEach(shelf => {
+				if (shelf.index <= dropAtIndex && shelf.index > shelfIndexDragged) {
+					updates.push({ id: shelf.id, changes: { index: shelf.index - 1 } })
+				}
+			})
+		} else {
+			cupboardShelves.forEach(shelf => {
+				if (shelf.index >= dropAtIndex && shelf.index < shelfIndexDragged) {
+					updates.push({ id: shelf.id, changes: { index: shelf.index + 1 } })
+				}
+			})
+		}
+		dispatch(cupboardShelfListActions.updateIndexes(updates))
+	}, [cupboardShelves, dispatch])
+
 	const shelvesList = useMemo(() => {
 		if (cupboardIsLoading) return []
-		return cupboardShelves.slice(2).map(shelf => {
+		return cupboardShelves.map(shelf => {
 			const completeSmallDataLabels =
 				<CompleteSmallDataLabels
 					data={shelf.data}
@@ -103,6 +119,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 					key={shelf.id}
 					shelf={shelf}
 					boxesBlock={boxesBlock}
+					moveShelf={moveShelf}
 					completeSmallDataLabelsBlock={
 						completeSmallDataLabels
 					}
@@ -111,7 +128,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			)
 		})
 
-	}, [cupboardIsLoading, cupboardShelves, onAddNewCardClick, onCollapseClick])
+	}, [cupboardIsLoading, cupboardShelves, onAddNewCardClick, onCollapseClick, moveShelf])
 
 	// if (cupboardIsLoading) {
 	// 	return <>
@@ -125,8 +142,15 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			cls.cupboardShelfList,
 			className)}
 		>
-			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
-			{shelvesList}
+			{/* <CommonShelf data={cupboardData} isLoading={cupboardIsLoading} /> */}
+			{/* <AnimatePresence> */}
+
+			<DndProvider backend={HTML5Backend}>
+				<DndShelfListWrapper>
+					{shelvesList}
+				</DndShelfListWrapper>
+			</DndProvider>
+			{/* </AnimatePresence> */}
 			<BoxesSettingsModal />
 			<MissedTrainingSettingsModal />
 			<NotificationSettingsModal />

@@ -10,6 +10,7 @@ import { SingleSetter } from './SingleSetter';
 import { Portal } from '../Portal/Portal';
 import { HStack } from '../Stack';
 import useLockedBody from '@/shared/lib/helpers/hooks/useLockedBody';
+import { TimingBlock } from '@/shared/types/DataBlock';
 interface TimeSetterProps {
 	className?: string
 	minutes: number
@@ -20,6 +21,7 @@ interface TimeSetterProps {
 	onClose: () => void
 	lockSelector?: string
 	overlay?: boolean
+	onSaveTime: (timeObject: TimingBlock) => void
 }
 
 const closeTimeSetter = (e: MouseEvent) => {
@@ -37,6 +39,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		onClose,
 		lockSelector = '[data-testid="MainPage"]',
 		overlay = true,
+		onSaveTime,
 	} = props
 	const [locked, setLocked] = useLockedBody(false, lockSelector)
 
@@ -47,6 +50,11 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	const [months, setMonths] = useState(monthsProps)
 	const [disabled, setDisabled] = useState(false)
 	const timeSetterRef = useRef<HTMLDivElement>()
+
+
+	const onSaveTimeHandle = () => {
+		onSaveTime({ minutes, hours, days, weeks, months })
+	}
 
 	useEffect(() => {
 		const total = minutes + hours + days + weeks + months
@@ -190,13 +198,14 @@ export const TimeSetter = (props: TimeSetterProps) => {
 
 			</HStack>
 			<HStack justify='between' max >
-				<Button fontWeight='300'>
+				<Button fontWeight='300' onClick={onClose}>
 					{t('cancel')}
 				</Button>
 				<Button
 					fontWeight='300'
 					variant='filled'
 					disabled={disabled}
+					onClick={onSaveTimeHandle}
 				>
 					{t('save')}
 				</Button>

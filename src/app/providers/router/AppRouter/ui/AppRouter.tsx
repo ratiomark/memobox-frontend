@@ -37,12 +37,12 @@ export const AppRouter = () => {
 		// <Suspense fallback={<h1>sdiofjweiofjweofi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>}>
 		<Suspense fallback={<LoaderWidget />}>
 			{/* {location.pathname.split('/')[1] !== 'training' ? <Header /> : null} */}
-			<AnimatePresence>
+			{/* <AnimatePresence> */}
 				<Routes >
 					{/* <Routes location={location} key={location.key}> */}
 					{routes}
 				</Routes>
-			</AnimatePresence>
+			{/* </AnimatePresence> */}
 		</Suspense>
 	)
 }
