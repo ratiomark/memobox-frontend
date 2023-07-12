@@ -116,6 +116,7 @@ export const Shelf = memo((props: ShelfProps) => {
 				</div>
 				<div className={clsx(cls.boxesWrapper, isCollapsed ? cls.collapsed : cls.notCollapsed)}>
 					{/* <div className={clsx(cls.boxesWrapper, !isCollapsed ? cls.collapsed : '')}> */}
+
 					<div className={cls.inner} >
 
 						{boxesBlock}
