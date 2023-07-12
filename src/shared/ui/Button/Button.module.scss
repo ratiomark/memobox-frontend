@@ -68,6 +68,19 @@
   background: none;
 }
 
+.filledBox {
+  color: var(--button-filled-text-color);
+
+  &.main {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
 .filled {
   color: var(--button-filled-text-color);
 

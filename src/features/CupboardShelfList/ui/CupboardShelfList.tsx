@@ -142,7 +142,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			cls.cupboardShelfList,
 			className)}
 		>
-			{/* <CommonShelf data={cupboardData} isLoading={cupboardIsLoading} /> */}
+			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
 			{/* <AnimatePresence> */}
 
 			<DndProvider backend={HTML5Backend}>

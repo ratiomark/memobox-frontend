@@ -8,10 +8,11 @@ import EyeIcon from '@/shared/assets/icons/eye2.svg'
 
 import cls from './CommonShelfBoxes.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useSelector } from 'react-redux';
 import { getCupboardCommonShelf } from '../../model/selectors/getCupboardShelfList';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
+import { Button } from '@/shared/ui/Button';
 
 interface CommonShelfBoxesProps {
 	className?: string
@@ -33,6 +34,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 	const onLearntCardsClick = () => {
 		navigate(obtainRouteView('all', 'learnt'))
 	}
+	const startTrainingNewCards = () => navigate(obtainRouteTraining('all', 'new'))
 	const { t } = useTranslation()
 	return (
 		<div className={cls.CommonShelfBoxes} >
@@ -56,7 +58,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 						height={20}
 					/>
 				</HStack>
-
+				<Button onClick={startTrainingNewCards} variant='filledBox' disabled={commonShelf?.new.all < 1} className={cls.trainButton} >{t('train')}</Button>
 			</div>
 			<div className={clsx(cls.Box, [className])} >
 				<Heading as='h5' className={cls.title} title={t('learning cards')} />

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import cls from './Box.module.scss'
-import { Card } from '@/shared/ui/Card';
+// import { Card } from '@/shared/ui/Card';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { DataBlock, TimingBlock } from '@/shared/types/DataBlock';
 import { SmallDataLabel } from '@/shared/ui/DataLabels';
@@ -18,6 +18,9 @@ import { useCallback, useState } from 'react';
 import { TimeSetter } from '@/shared/ui/TimeSetter';
 import { BoxSchema } from '../model/types/BoxSchema';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Button } from '@/shared/ui/Button';
+import { obtainRouteTraining } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { useNavigate } from 'react-router-dom';
 
 // interface BoxPropsBase {
 // 	className?: string
@@ -34,9 +37,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 interface BoxPropsBase {
 	className?: string
-	// boxId: string
 	boxItem: BoxSchema
-	// index: number
 	shelfId: string
 	onAddNewCard: (shelfId: string, boxIndex: number) => void
 	onBoxViewClick: (shelfId: string, boxIndex: number | string) => void
@@ -94,6 +95,7 @@ export const Box = (props: BoxPropsBase) => {
 	const { data, specialType } = boxItem
 	const [isTimeSetterOpen, setIsTimeSetterOpen] = useState(false)
 	const { t } = useTranslation()
+	const navigate = useNavigate()
 
 	const onBoxViewClickHandle = useCallback(() => {
 		let boxId: string | number;
@@ -110,6 +112,10 @@ export const Box = (props: BoxPropsBase) => {
 	const onAddNewCardHandle = useCallback(() => {
 		onAddNewCard(shelfId, boxItem.index)
 	}, [onAddNewCard, shelfId, boxItem.index])
+
+	const startTraining = () => {
+		navigate(obtainRouteTraining(shelfId, boxItem._id))
+	}
 
 	const timing = '1ч 20м'
 	const minutes = 4
@@ -173,41 +179,44 @@ export const Box = (props: BoxPropsBase) => {
 		)
 		return (
 			<div className={clsx(cls.Box, [className])} >
-				{title}
-				{completeSmallDataLabels}
-				{buttons}
-				<AnimatePresence mode="wait">
-					{isTimeSetterOpen &&
-						<motion.div
-							// key='key'
-							variants={timeSetterAnimation}
-							initial='hidden'
-							animate='visible'
-							// animate={
-							// 	{ from: 'center' }
-							// }
-							exit='exit'
-							style={{ overflow: 'hidden' }}
-							// initial={{ opacity: 0 }}
-							// animate={{ opacity: 1 }}
-							// exit={{ opacity: 0 }}
-							className={cls.timeSetter}
-						>
-							{/* <div className={cls.timeSetter}> */}
-							<TimeSetter
-								minutes={minutes}
-								hours={hours}
-								days={days}
-								weeks={weeks}
-								months={months}
-								onClose={onClose}
-							/>
-							{/* </div> */}
-						</motion.div>
-					}
-				</AnimatePresence>
-
-				{/* <MyText className={cls.timing} text={timing} /> */}
+				<div className={cls.boxInnerWrapper} >
+					{title}
+					{completeSmallDataLabels}
+					{buttons}
+					<AnimatePresence mode="wait">
+						{isTimeSetterOpen &&
+							<motion.div
+								// key='key'
+								variants={timeSetterAnimation}
+								initial='hidden'
+								animate='visible'
+								// animate={
+								// 	{ from: 'center' }
+								// }
+								exit='exit'
+								style={{ overflow: 'hidden' }}
+								// initial={{ opacity: 0 }}
+								// animate={{ opacity: 1 }}
+								// exit={{ opacity: 0 }}
+								className={cls.timeSetter}
+							>
+								{/* <div className={cls.timeSetter}> */}
+								<TimeSetter
+									minutes={minutes}
+									hours={hours}
+									days={days}
+									weeks={weeks}
+									months={months}
+									onClose={onClose}
+								// VAR: тут нужен колбек на сохранение времени у коробки
+								/>
+								{/* </div> */}
+							</motion.div>
+						}
+					</AnimatePresence>
+					<MyText className={cls.timing} text={timing} />
+				</div>
+				<Button onClick={startTraining} variant='filledBox' disabled={data.train < 1} className={cls.trainButton} >{t('train')}</Button>
 			</div>
 		)
 	}
@@ -215,34 +224,39 @@ export const Box = (props: BoxPropsBase) => {
 	const title = <Heading as='h5' className={cls.title} title={t('new cards')} />
 	return (
 		<div className={clsx(cls.Box, [className])} >
-			{title}
-			<SmallDataLabel
-				className={cls.dataLabels}
-				type='all'
-				isLoading={false}
-				cardsCount={data.all}
-			/>
-			<HStack
-				className={cls.buttonsBlock}
-				gap='gap_8'>
-				<Icon
-					className={cls.icon}
-					Svg={PlusIcon}
-					clickable
-					onClick={onAddNewCardHandle}
-					width={20}
-					height={20}
-				/>
-				<Icon
-					className={cls.icon}
-					Svg={EyeIcon}
-					clickable
-					onClick={onBoxViewClickHandle}
-					width={20}
-					height={20}
-				/>
-			</HStack>
+			<div className={cls.boxInnerWrapper} >
 
+
+				{title}
+				<SmallDataLabel
+					className={cls.dataLabels}
+					type='all'
+					isLoading={false}
+					cardsCount={data.all}
+				/>
+				<HStack
+					className={cls.buttonsBlock}
+					gap='gap_8'>
+					<Icon
+						className={cls.icon}
+						Svg={PlusIcon}
+						clickable
+						onClick={onAddNewCardHandle}
+						width={20}
+						height={20}
+					/>
+					<Icon
+						className={cls.icon}
+						Svg={EyeIcon}
+						clickable
+						onClick={onBoxViewClickHandle}
+						width={20}
+						height={20}
+					/>
+				</HStack>
+			</div>
+			<div className={cls.timingLayout} />
+			<Button onClick={startTraining} variant='filledBox' disabled={data.all < 1} className={cls.trainButton} >{t('train')}</Button>
 		</div>
 	)
 }

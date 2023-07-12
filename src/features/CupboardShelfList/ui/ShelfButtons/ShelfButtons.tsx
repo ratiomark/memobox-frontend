@@ -93,6 +93,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 			<Button
 				fontWeight='300'
 				// className={cls.button}
+				onClick={startTraining}
 				variant='filled'
 				disabled={trainCardsCount === 0}
 				data-button-type='shelf-train'

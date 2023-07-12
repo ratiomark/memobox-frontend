@@ -8,6 +8,7 @@ export type ButtonVariant =
 	| 'empty'
 	| 'outline'
 	| 'filled'
+	| 'filledBox'
 	| 'cancel'
 // | 'listBox'
 
