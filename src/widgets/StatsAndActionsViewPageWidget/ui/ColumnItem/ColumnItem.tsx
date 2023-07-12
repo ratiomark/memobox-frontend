@@ -34,19 +34,6 @@ export const ColumnItem = (props: ColumnItemProps) => {
 		setIsDragging(false);
 		document.body.classList.remove('dragging');
 	}
-	// const y = useMotionValue(0);
-
-	// useEffect(() => {
-	// 	const unsubscribeY = y.onChange((currentY) => {
-	// 		// Здесь вы можете проверить, происходит ли перетаскивание по оси Y
-	// 		console.log('Dragging in Y direction: ', currentY);
-	// 	});
-
-	// 	// Отписываемся от слушателей при размонтировании компонента
-	// 	return () => {
-	// 		unsubscribeY();
-	// 	};
-	// }, [y]);
 
 	if (isShelfColumn) {
 		return (

@@ -28,7 +28,7 @@ import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModa
 import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
 import { CardModalNewCard } from '..';
 import { DndShelfListWrapper } from './DndShelfListWrapper';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, Reorder } from 'framer-motion';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -95,6 +95,10 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 		dispatch(cupboardShelfListActions.updateIndexes(updates))
 	}, [cupboardShelves, dispatch])
 
+	const reorderShelves = useCallback((shelves: ShelfSchema[]) => {
+		dispatch(cupboardShelfListActions.reorderShelves(shelves))
+	}, [dispatch])
+
 	const shelvesList = useMemo(() => {
 		if (cupboardIsLoading) return []
 		return cupboardShelves.map(shelf => {
@@ -141,11 +145,17 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
 			{/* <AnimatePresence> */}
 
-			<DndProvider backend={HTML5Backend}>
-				<DndShelfListWrapper>
-					{shelvesList}
-				</DndShelfListWrapper>
-			</DndProvider>
+			{/* <DndProvider backend={HTML5Backend}> */}
+			{/* <DndShelfListWrapper> */}
+			<Reorder.Group
+				values={cupboardShelves}
+				onReorder={reorderShelves}
+			// style={{ overflow: 'hidden' }}
+			>
+				{shelvesList}
+			</Reorder.Group>
+			{/* </DndShelfListWrapper> */}
+			{/* </DndProvider> */}
 			{/* </AnimatePresence> */}
 			<BoxesSettingsModal />
 			<MissedTrainingSettingsModal />

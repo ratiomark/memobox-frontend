@@ -53,7 +53,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 					className)}
 			>
 				<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
-				<ThemeSwitcher />
+				{/* <ThemeSwitcher /> */}
 				<HStack gap='gap_14' className={cls.actions} >
 					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
 					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>

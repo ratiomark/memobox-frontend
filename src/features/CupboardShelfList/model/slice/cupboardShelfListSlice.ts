@@ -124,12 +124,18 @@ const cupboardShelfList = createSlice({
 				wait: commonShelf.data.wait,
 			}
 		},
-		moveShelfByIndex: (state, action: PayloadAction<ShelfSchema[]>) => {
-			shelvesAdapter.setAll(state, action.payload)
-			// const currentShelf = shelvesAdapter.selectAll
-		},
+
 		updateIndexes: (state, action: PayloadAction<Array<{ id: EntityId, changes: { index: number } }>>) => {
 			shelvesAdapter.updateMany(state, action.payload)
+			// const currentShelf = shelvesAdapter.selectAll
+		},
+		reorderShelves: (state, action: PayloadAction<ShelfSchema[]>) => {
+			const updates = action.payload.map((shelf, index) => ({
+				id: shelf.id,
+				changes: { index }
+			}))
+			shelvesAdapter.updateMany(state, updates)
+			// shelvesAdapter.updateMany(state, action.payload)
 			// const currentShelf = shelvesAdapter.selectAll
 		},
 		// shelf control
