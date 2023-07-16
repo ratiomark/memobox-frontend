@@ -24,8 +24,33 @@ export interface NotificationSettings {
 	notificationEmails: NotificationEmails[]
 }
 
-interface TimeSleepSettings {
-	timeSleepEnabled: boolean
+export interface TimeSleepDataObject {
+	up: {
+		hours: number
+		minutes: number
+	}
+	down: {
+		hours: number
+		minutes: number
+	}
+}
+
+export type DaysOfWeek =
+	| 'monday'
+	| 'tuesday'
+	| 'wednesday'
+	| 'thursday'
+	| 'friday'
+	| 'saturday'
+	| 'sunday'
+
+export interface TimeSleepSettings {
+	isTimeSleepEnabled: boolean
+	isDayByDayOptionEnabled: boolean
+	generalTimeSleepData: TimeSleepDataObject
+	dayByDayTimeSleepData?: {
+		[key in DaysOfWeek]: TimeSleepDataObject
+	}
 }
 
 // то что возвращает бекэнд
@@ -37,6 +62,7 @@ export interface User {
 		notifications: NotificationSettings
 		missedTrainingAction: 'none' | 'additionalTraining' | 'sendBackwards'
 		shelfTemplate: TimingBlock[]
+		timeSleep: TimeSleepSettings
 	}
 	role?: UserRole[]
 	features?: Partial<FeatureFlags>

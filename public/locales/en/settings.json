@@ -3,5 +3,13 @@
   "time sleep": "Time sleep",
   "missed training": "Missed training",
   "notifications": "Notifications",
-  
+  "days": {
+    "monday": "Mon",
+    "tuesday": "Tue",
+    "wednesday": "Wed",
+    "thursday": "Thu",
+    "friday": "Fri",
+    "saturday": "Sat",
+    "sunday": "Sun"
+  }
 }

@@ -5,7 +5,7 @@ import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDat
 import { ShelfButtons } from '../../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
-import { CSSProperties, ReactNode, memo, useCallback, useMemo, useState } from 'react';
+import { CSSProperties, ReactNode, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { ShelfSchema } from '../../model/types/ShelfSchema';
 import { AnimatePresence, Reorder, motion, useDragControls } from 'framer-motion'
 import { useDrag, useDrop } from 'react-dnd';
@@ -14,6 +14,7 @@ import { Icon } from '@/shared/ui/Icon';
 import { drop } from 'lodash';
 
 const dndIsActiveValue = false
+const isCollapsingValue = false
 let timerId: number;
 export interface ShelfProps {
 	shelf: ShelfSchema
@@ -40,6 +41,7 @@ export const Shelf = memo((props: ShelfProps) => {
 	} = props
 
 	const [isDragging, setIsDragging] = useState(false)
+	const [isCollapsing, setIsCollapsing] = useState(false)
 	const { t } = useTranslation()
 	const controls = useDragControls()
 
@@ -57,16 +59,36 @@ export const Shelf = memo((props: ShelfProps) => {
 		document.body.classList.remove('dragging');
 	}
 
+	// useEffect(() => {
+	// 	if (isCollapsed) return
+	// 	setIsCollapsing(true)
+	// 	setTimeout(() => {
+	// 		setIsCollapsing(false)
+	// 	}, 500)
+	// }, [isCollapsed])
+	// const isCollapsingNow = useMemo(() => {
+	// 	if (isCollapsed) return false
+	// 	setTimeout(() => {
+	// 		setIsCollapsing(false)
+	// 	}, 100000)
+	// 	setIsCollapsing(true)
+	// 	return isCollapsingValue
+	// }, [isCollapsed])
+
 	return (
 		<Reorder.Item
 			value={props.shelf}
-			layout
+			// layout
 			dragListener={false}
 			dragControls={controls}
 			onDragStart={handleDragStart}
 			onDragEnd={handleDragEnd}
 			drag
+			// transition={{ type: 'spring', stiffness: isDragging ? 40 : 2000 }}
+			// transition={{ type: 'spring', stiffness: isDragging ? 100 : 0, velocity: 0, restSpeed: 0 }}
 			// dragConstraints={{ left: 30, right: 30 }}
+			// transition={{ duration: isCollapsingNow ? 0 : 0.5 }}
+			// transition={{ duration: isCollapsing ? 0 : 0.5 }}
 			// transition={isDragging ? { type: 'spring', duration: 1 } : { ease: 'linear', duration: 0.1 }}
 			// transition={{ type: 'spring', stiffness: 900 }}
 			// ref={node => preview(drop(node))}
@@ -101,13 +123,22 @@ export const Shelf = memo((props: ShelfProps) => {
 					</VStack>
 					{shelfButtonsBlock}
 				</div>
-				<div className={clsx(cls.boxesWrapper, isCollapsed ? cls.collapsed : cls.notCollapsed)}>
-					{/* <div className={clsx(cls.boxesWrapper, !isCollapsed ? cls.collapsed : '')}> */}
-
+				<motion.div
+					// onClick={toggleExpand}
+					// layout
+					initial={false}
+					style={{ overflow: isCollapsed ? 'hidden' : 'unset' }}
+					animate={{ height: isCollapsed ? 0 : 'auto' }}
+					// transition={{ duration: isCollapsed ? 0.5 : 0.5 }}
+					transition={{ stiffness: 0, velocity: 0 }}
+				>
+					{boxesBlock}
+				</motion.div>
+				{/* <div className={clsx(cls.boxesWrapper, isCollapsed ? cls.collapsed : cls.notCollapsed)}>
 					<div className={cls.inner} >
 						{boxesBlock}
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</Reorder.Item>
 

@@ -13,7 +13,6 @@ interface MissedTrainingSettingsProps {
 	className?: string
 	isOpen: boolean
 	onClose: () => void,
-	missedTrainingSetting: string
 	onSubmit?: () => void
 }
 
@@ -24,9 +23,9 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 		className,
 		isOpen,
 		onClose,
-		missedTrainingSetting,
 	} = props
 
+	const missedTrainingSetting = useSelector(getUserMissedTrainingSettings)
 	const { t } = useTranslation()
 
 	const items = useMemo(() => ([

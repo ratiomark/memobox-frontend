@@ -14,6 +14,7 @@ import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { CreateNewShelfModal } from '@/features/CreateNewShelfModal';
 import { motion } from 'framer-motion'
+import { getUserShelfNamesList } from '@/entities/User';
 
 interface StatsAndActionsCupboardWidgetProps {
 	className?: string
@@ -24,6 +25,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 		className
 	} = props
 	const [newShelfModalIsOpen, setNewShelfModalIsOpen] = useState(false)
+	// const shelfNames = useSelector(getUserShelfNamesList)?.map(shelf => shelf.title)
 	// const { data, isLoading } = useGetCupboardDataQuery()
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
@@ -42,9 +44,9 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 
 	return (
 		<motion.div
-			// initial={{ y: -100 }}
-			// animate={{ y: 0 }}
-			// transition={{ type: 'spring', }}
+		// initial={{ y: -100 }}
+		// animate={{ y: 0 }}
+		// transition={{ type: 'spring', }}
 		>
 			<HStack
 				max
@@ -69,7 +71,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 					isOpen={newShelfModalIsOpen}
 					onClose={onCloseNewShelfModal}
 					onSubmit={() => console.log('Создаю новую полку с названием  ')}
-					shelfNames={['math']}
+					// shelfNames={shelfNames}
 				/>
 			</HStack>
 		</motion.div>

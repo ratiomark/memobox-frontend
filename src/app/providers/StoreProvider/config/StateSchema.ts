@@ -1,6 +1,6 @@
 import { EnhancedStore } from '@reduxjs/toolkit';
 // import { AxiosInstance } from 'axios';
-import { UserSchema } from '@/entities/User';
+import { TimeSleepSettings, UserSchema } from '@/entities/User';
 import { IReducerManager } from './reducerManager';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { LoginSchema } from '@/features/AuthByUsername';
@@ -21,6 +21,7 @@ export interface StateSchema {
 	loginForm?: LoginSchema
 	viewPage?: ViewPageInitializerSchema
 	settingsShelfTemplate?: SettingsShelfTemplate
+	settingsTimeSleep?: Partial<TimeSleepSettings>
 	// sortColumns
 }
 

@@ -79,7 +79,10 @@ const cupboardShelfList = createSlice({
 		// boxes settings
 		setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
 			state.boxesSettingsShelfId = action.payload
-			state.isBoxesSettingsModalOpen = true
+			// state.isBoxesSettingsModalOpen = true
+		},
+		setBoxesSettingsModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.isBoxesSettingsModalOpen = action.payload
 		},
 		closeBoxesSettingsModal: (state) => {
 			state.isBoxesSettingsModalOpen = false

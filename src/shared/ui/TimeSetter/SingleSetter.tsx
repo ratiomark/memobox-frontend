@@ -8,9 +8,9 @@ import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Button } from '../Button';
 interface TimeSetterProps {
 	className?: string
-	time: number
+	time: number | string
 	maxTime: number,
-	title: string
+	title?: string
 	onUpClick: () => void
 	onDownClick: () => void
 	onWheelScroll: (e: WheelEvent<HTMLElement>) => void
@@ -68,9 +68,9 @@ export const SingleSetter = (props: TimeSetterProps) => {
 		arrowDown = (<Icon
 			className={
 				clsx(
-					time === 0 ? cls.iconDisabled : ''
+					time == 0 || time == '00' ? cls.iconDisabled : ''
 				)}
-			type={time === 0 ? 'disabled' : 'main'}
+			type={time == 0 || time == '00' ? 'disabled' : 'main'}
 			clickable
 			onClick={onDownClick}
 			Svg={ArrowBottomIcon}
@@ -86,7 +86,7 @@ export const SingleSetter = (props: TimeSetterProps) => {
 			onWheel={disabled ? undefined : onWheelScroll}
 			data-time-setter="time-setter"
 		>
-			<MyText className={cls.title} text={title} />
+			{title && <MyText className={cls.title} text={title} />}
 			{arrowUp}
 
 			{/* {time === maxTime

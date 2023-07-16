@@ -91,11 +91,7 @@
     &:hover {
       background-color: transparent;
       color: var(--cancel);
-
-      // 666
     }
-
-    // border: 1px solid var(--cancel);
   }
 
   &.orange {
@@ -105,8 +101,6 @@
     &:hover {
       background-color: transparent;
       color: var(--wait-color);
-
-      // 666
     }
   }
 

@@ -2,5 +2,14 @@
   "shelf template": "Настройки создания новых полок",
   "time sleep": "Время сна",
   "missed training": "Пропущенные тренировки",
-  "notifications": "Уведомления"
+  "notifications": "Уведомления",
+  "days": {
+    "monday": "Пн",
+    "tuesday": "Вт",
+    "wednesday": "Ср",
+    "thursday": "Чт",
+    "friday": "Пт",
+    "saturday": "Сб",
+    "sunday": "Вс"
+  }
 }

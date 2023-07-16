@@ -1,0 +1,26 @@
+.settingsPageWidget {
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+.card {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.settingTitle {
+  font-size: 17px;
+}
+
+.info {
+  position: relative;
+  z-index: 5;
+}

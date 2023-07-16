@@ -31,13 +31,16 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 	// 	navigate(obtainRouteView(shelfPosition.toString()))
 	// }
 	const shelfNamesList = useSelector(getUserShelfNamesList)
+	
 	const dispatch = useAppDispatch()
+	
 	const onDeleteClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
 	}, [dispatch, shelfId])
 
 	const onBoxesSettingsClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.setBoxesSettingsShelfId(shelfId))
+		dispatch(cupboardShelfListActions.setBoxesSettingsModalIsOpen(true))
 	}, [dispatch, shelfId])
 
 	const onMissedTrainingClick = useCallback(() => {

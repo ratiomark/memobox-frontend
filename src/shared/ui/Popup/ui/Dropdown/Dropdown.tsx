@@ -34,7 +34,7 @@ export const Dropdown = (props: DropdownProps) => {
 
 	return (
 		<Menu
-			as='div'
+			as='ul'
 			className={clsx(
 				cls.Dropdown,
 				[className])}

@@ -82,7 +82,9 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 			>
 				{t('Add card with hot key') + ` (${positionTextCard})`}
 			</Button>
+
 			<SettingButton shelfId={shelfId} />
+			
 			<Button
 				// className={cls.button}
 				fontWeight='300'

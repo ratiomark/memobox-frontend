@@ -24,8 +24,10 @@
   "inputs": {
     "MANDATORY_INPUT": "Это обязательное поле",
     "HAS_TO_BE_MORE_THAN_3": "Не менее трех символов",
-    "STOP_LYING_ABOUT_AGE": "Пожалуйста, укажи настоящий возраст"
+    "STOP_LYING_ABOUT_AGE": "Пожалуйста, укажи настоящий возраст",
+    "SHELF_NAME_ALREADY_EXISTS": "Полка с таким именем уже существует"
   },
+  "write shelf name": "Укажите название новой полки",
   "Close button": "Закрыть",
   "common shelf name": "Общая полка",
   "settingsItems": {

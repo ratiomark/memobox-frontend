@@ -31,8 +31,8 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 		setBoxesData([...start, ...end])
 	}
 
-	console.log('boxesSlice', boxesList.slice(1, boxesList.length - 1))
-	console.log('boxesList', boxesList)
+	// console.log('boxesSlice', boxesList.slice(1, boxesList.length - 1))
+	// console.log('boxesList', boxesList)
 
 	return (
 		<div className={clsx(

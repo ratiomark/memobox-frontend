@@ -1,10 +1,15 @@
-export type { SortColumnObject, SortColumnValue } from '@/widgets/SortControllerViewPageWidget';
+export type { TimeSleepSettings, DaysOfWeek, TimeSleepDataObject, } from './model/types/user';
+// export { DaysOfWeek, TimeSleepDataObject } from '@/features/SettingsFeatures/TimeSleepSettings/TimeSleepSettings';
+
+
+export type { SortColumnObject, SortColumnValue } from './model/types/JsonSavedData';
 
 export {
 	getUserSettings,
 	getUserMissedTrainingSettings,
 	getUserNotificationSettings,
 	getUserShelfTemplateSettings,
+	getUserTimeSleepSettings,
 } from './model/selectors/getUserSettings';
 
 export {
@@ -25,4 +30,6 @@ export {
 	isUserAdmin,
 	isUserManager,
 } from './model/selectors/rolesSelector'
-export type { UserSchema, User, UserRole } from './model/types/user'; 
+export type { UserSchema, User, UserRole } from './model/types/user';
+
+

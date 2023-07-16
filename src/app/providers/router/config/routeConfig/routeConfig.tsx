@@ -9,6 +9,7 @@ import { ViewPage } from '@/pages/ViewPage';
 import { TrainingPage } from '@/pages/TrainingPage';
 import { ReactNode } from 'react';
 import { TrashPage } from '@/pages/TrashPage';
+import { SettingsPageWidgetSkeleton } from '@/widgets/SettingsPageWidget';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -29,13 +30,17 @@ export const AppRoutes = {
 	forbidden_page: 'forbidden_page',
 	PAGE_NOT_FOUND: 'PAGE_NOT_FOUND',
 } as const;
-const Susp = () => {
-	return (<div>
-		<h1>fiojwefiowejf iowejf woeifjweofijweoif wejfiowej weiofj weiof jweiofjw fiowjfiowe fj</h1>
-		<h1>fiojwefiowejf iowejf woeifjweofijweoif wejfiowej weiofj weiof jweiofjw fiowjfiowe fj</h1>
-		<h1>fiojwefiowejf iowejf woeifjweofijweoif wejfiowej weiofj weiof jweiofjw fiowjfiowe fj</h1>
-	</div>)
-}
+
+// const Susp = () => {
+// 	return (<Page>
+// 		<div className={cls.settingsPageWidget} >
+// 			<Skeleton width={'100%'} height={56} />
+// 			<Skeleton width={'100%'} height={56} />
+// 			<Skeleton width={'100%'} height={56} />
+// 			<Skeleton width={'100%'} height={56} />
+// 		</div>
+// 	</Page>)
+// }
 
 export type AppRoutes = keyof typeof AppRoutes;
 
@@ -65,21 +70,20 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	main: {
 		path: obtainRouteMain(),
 		element: <MainPage />,
-		// wrapper: Page
+		// suspense: <SettingsPageWidgetSkeleton />
 	},
 	view: {
 		path: obtainRouteView(':shelfId', ':boxId'),
 		element: <ViewPage />,
-		// suspense: <Susp />
 	},
 	viewEmpty: {
 		path: '/view',
 		element: <ViewPage />,
-		// suspense: <Susp />
 	},
 	settings: {
 		path: obtainRouteSettings(),
-		element: <SettingsPage />
+		element: <SettingsPage />,
+		suspense: <SettingsPageWidgetSkeleton />
 	},
 	stats: {
 		path: obtainRouteStats(),

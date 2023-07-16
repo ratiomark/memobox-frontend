@@ -7,10 +7,12 @@ import { Heading } from '@/shared/ui/Typography';
 import { Button } from '@/shared/ui/Button';
 import { HStack } from '@/shared/ui/Stack';
 import { HDialog } from '@/shared/ui/HDialog';
+import { getUserShelfNamesList } from '@/entities/User';
+import { useSelector } from 'react-redux';
 
 interface CreateNewShelfModalProps {
 	className?: string
-	shelfNames: string[]
+	// shelfNames: string[]
 	onSubmit: () => void
 	onClose: () => void
 	isOpen: boolean
@@ -19,17 +21,18 @@ interface CreateNewShelfModalProps {
 export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 	const {
 		className,
-		shelfNames,
+		// shelfNames,
 		onClose,
 		onSubmit,
 		isOpen
 	} = props
 	const [shelfName, setShelfName] = useState('')
 	const [inputErrors, setInputErrors] = useState<string[]>([])
-	const { t } = useTranslation()
+	const { t } = useTranslation('translation')
+	const shelfNames = useSelector(getUserShelfNamesList)?.map(shelf => shelf.title)
 	const onChangeShelfName = (value: string) => {
 		setShelfName(value)
-		if (shelfNames.includes(value)) setInputErrors([t('polka-s-takimi-imenem-uzhe-est')])
+		if (shelfNames?.includes(value)) setInputErrors([t('inputs.SHELF_NAME_ALREADY_EXISTS')])
 		else setInputErrors([])
 	}
 
@@ -48,7 +51,7 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 				cls.CreateNewShelfModal,
 				className)}
 			>
-				<Heading as='h2' className={cls.title} title={t('ukazhite-nazvanie-novoi-polki')} />
+				<Heading as='h2' className={cls.title} title={t('write shelf name')} />
 				<Input
 					value={shelfName}
 					onChangeString={onChangeShelfName}

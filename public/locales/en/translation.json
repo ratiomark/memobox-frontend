@@ -25,8 +25,10 @@
   "inputs": {
     "MANDATORY_INPUT": "This field is required",
     "HAS_TO_BE_MORE_THAN_3": "Minimum 4 symbols",
-    "STOP_LYING_ABOUT_AGE": "Please, write your actual age"
+    "STOP_LYING_ABOUT_AGE": "Please, write your actual age",
+    "SHELF_NAME_ALREADY_EXISTS": "Shelf already exists"
   },
+  "write shelf name": "Specify a name for the new shelf",
   "Close button": "Close",
   "common shelf name": "Common shelf",
   "settingsItems": {

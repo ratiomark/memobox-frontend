@@ -1,3 +1,5 @@
+export { TimeSleepSettings } from './TimeSleepSettings/ui/TimeSleepSettings'
+
 export { NotificationSettings } from './NotificationSettings/NotificationSettings'
 
 export { MissedTrainingSettings } from './MissedTrainingSettings/MissedTrainingSettings'

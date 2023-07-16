@@ -11,6 +11,9 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { BoxesSettingsContent } from '../BoxesSettingsContent/BoxesSettingsContent';
 import cls from './BoxesSettingsModal.module.scss';
+import { HStack } from '@/shared/ui/Stack';
+import clsx from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 interface BoxesSettingsModalProps {
@@ -34,23 +37,41 @@ export const BoxesSettingsModal = memo((props: BoxesSettingsModalProps) => {
 	const shelf = useSelector((state: StateSchema) => getShelfById(state, shelfId))
 
 	const onCloseBoxesSettings = () => {
-		dispatch(cupboardShelfListActions.closeBoxesSettingsModal())
+		dispatch(cupboardShelfListActions.setBoxesSettingsModalIsOpen(false))
 	}
-	console.log(isOpen)
+	if (!shelf) return null
+
+	console.log(shelf.boxesData, isOpen)
 	return (
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseBoxesSettings}
 		>
-			<div
+			<AnimatePresence initial={false} mode='wait'>
+				<motion.div
+					layout
+					className={clsx(
+						cls.ShelfTemplateSettings,
+						className)}
+				>
+					<BoxesSettingsContent shelf={shelf} />
+					<HStack max justify='between'>
+						<Button variant='empty'>{t('cancel')}</Button>
+						<Button variant='filled'>{t('save')}</Button>
+					</HStack>
+				</motion.div>
+			</AnimatePresence>
+
+			{/* <div
 				className={cls.cardModal}
 			>
 				<BoxesSettingsContent shelf={shelf!} />
+				
 				<div className={cls.actions} >
 					<Button>{t('cancel')}</Button>
 					<Button>{t('save')}</Button>
 				</div>
-			</div>
+			</div> */}
 		</HDialog>
 	)
 	// return (

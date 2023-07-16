@@ -51,7 +51,7 @@ export const Heading = memo(
 
 		const sizeClass = mapSizeToClass[size];
 
-		const additionalClasses = [className, cls[variant], cls[align], cls[sizeClass]];
+		const additionalClasses = [cls[variant], cls[align], cls[sizeClass], className];
 
 
 		return (
@@ -63,7 +63,7 @@ export const Heading = memo(
 						[cls.bold]: bold,
 					},
 				)}
-				data-testid={`${dataTestId}.Header`}
+				data-testid={`${dataTestId}.Heading`}
 			>
 				{title ?? 'Что-то пошло не так(нет текста в компоненте Heading), обновите пожалуйста страницу'}
 			</TagName>
