@@ -13,6 +13,7 @@ import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { SettingButton } from '../SettingsButton/SettingsButton';
 import { ShelfSchema } from '@/entities/Shelf';
+import { useUpdateShelfMutation } from '@/entities/Shelf'
 
 interface ShelfButtonsProps {
 	className?: string
@@ -35,6 +36,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		onAddNewCardClick,
 		onCollapseClick,
 	} = props
+	const [updateShelfMutation] = useUpdateShelfMutation()
 
 	const shelfIndexEdited = shelfIndex + 1
 	let positionTextCard = '';
@@ -48,6 +50,24 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 	const startTraining = () => {
 		navigate(obtainRouteTraining(shelfId, 'all'))
 	}
+
+	useEffect(() => {
+		// fetch('http://localhost:8000/data/cupboard/shelves', {
+		// 	headers: { Authorization: 'token' },
+		// 	method: 'GET',
+		// }).then(response => {
+		// 	if (!response.ok) {
+		// 		throw new Error(`Ошибка, статус ${response.status}`);
+		// 	}
+		// 	return response.json();
+		// })
+		// 	.then(data => {
+		// 		console.log(data);
+		// 	})
+		// 	.catch(error => {
+		// 		console.error(error);
+		// 	});
+	}, [])
 
 	const onAddNewCardHandle = useCallback(() => {
 		onAddNewCardClick(shelfId)
@@ -64,7 +84,8 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 
 	const onCollapseClickHandle = useCallback(() => {
 		onCollapseClick(shelfId, !isCollapsed)
-	}, [onCollapseClick, shelfId, isCollapsed])
+		updateShelfMutation({ ...props.shelf, isCollapsed: !isCollapsed })
+	}, [onCollapseClick, shelfId, isCollapsed, updateShelfMutation, props.shelf])
 
 	const { t } = useTranslation()
 
@@ -84,7 +105,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 			</Button>
 
 			<SettingButton shelfId={shelfId} />
-			
+
 			<Button
 				// className={cls.button}
 				fontWeight='300'

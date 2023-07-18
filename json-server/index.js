@@ -66,6 +66,19 @@ server.post('/login', (req, res) => {
 	}
 });
 
+server.get('/cupboard', (req, res) => {
+
+	const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
+	// console.log(db)
+	const responseData = {
+		commonShelf: db.commonShelf,
+		shelves: db.shelves
+	};
+
+	res.json(responseData);
+
+});
+
 // проверяем, авторизован ли пользователь
 // eslint-disable-next-line
 server.use((req, res, next) => {

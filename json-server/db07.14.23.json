@@ -1971,31 +1971,10 @@
       "isCollapsed": false
     }
   },
-  "commonShelf": {
-    "new": {
-      "all": 11
-    },
-    "learning": {
-      "all": 70,
-      "train": 33,
-      "wait": 37
-    },
-    "learnt": {
-      "all": 19,
-      "train": 8,
-      "wait": 11
-    },
-    "data": {
-      "all": 100,
-      "train": 52,
-      "wait": 48
-    },
-    "isCollapsed": false
-  },
   "shelves": [
     {
       "id": "648c920baa3edb04cec38442",
-      "index": 2,
+      "index": 0,
       "isCollapsed": true,
       "title": "math",
       "boxesData": [
@@ -2098,14 +2077,12 @@
         "all": 16,
         "train": 9,
         "wait": 7
-      },
-      "isDeleting": false,
-      "missedTrainingAction": "backwards"
+      }
     },
     {
       "id": "648c920b3e40b5930a6e1603",
-      "index": 0,
-      "isCollapsed": false,
+      "index": 1,
+      "isCollapsed": true,
       "title": "books",
       "boxesData": [
         {
@@ -2207,9 +2184,7 @@
         "all": 21,
         "train": 9,
         "wait": 12
-      },
-      "isDeleting": false,
-      "missedTrainingAction": "additional"
+      }
     },
     {
       "id": "648c920b6adf96517748f3c1",
@@ -2299,9 +2274,7 @@
         "all": 27,
         "train": 16,
         "wait": 11
-      },
-      "isDeleting": false,
-      "missedTrainingAction": "backwards"
+      }
     },
     {
       "id": "648c920b07d1f8f9ed46604e",
@@ -2391,8 +2364,7 @@
         "all": 20,
         "train": 9,
         "wait": 11
-      },
-      "missedTrainingAction": "additional"
+      }
     },
     {
       "id": "648c920beba56ba6cd7db7bb",

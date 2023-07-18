@@ -7,15 +7,18 @@ export const cupboardApi = rtkApi.injectEndpoints({
 		getCupboardData: build.query<CupboardSchema, void>({
 			query: () => ({
 				url: '/cupboard',
+				// url: '/cupboard',
 				method: 'GET'
 			}),
 			transformResponse: (response: CupboardSchema, meta, arg) => {
+				console.log(response)
 				const shelves = response.shelves.map(shelf => {
 					return { ...shelf, isDeleting: false }
 				})
 				response.shelves = shelves
 				return response
 			},
+			providesTags: ['Shelves']
 		}),
 		getShelves: build.query<ShelfSchema[], void>({
 			query: () => ({

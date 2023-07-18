@@ -24,7 +24,45 @@ export const memoboxApi = rtkApi.injectEndpoints({
 				method: 'GET'
 			}),
 		}),
+		updateShelf: build.mutation<ShelfSchema, Partial<ShelfSchema>>({
+			query: (arg) => ({
+				url: `/shelves/${arg.id}`,
+				// params: { id: arg.id },
+				method: 'PATCH',
+				// headers: {
+				// 	'Content-Type': 'application/json'
+				// },
+				body: {
+					// обновленные данные объекта
+					// isCollapsed: arg.isCollapsed
+					// ...arg,
+					...arg
+				}
+				// body: { isCollapsed: arg.isCollapsed }
+			}),
+			// invalidatesTags: ['Shelves']
+		}),
+		updateShelfWithTag: build.mutation<ShelfSchema, Partial<ShelfSchema>>({
+			query: (arg) => ({
+				url: `/shelves/${arg.id}`,
+				// params: { id: arg.id },
+				method: 'PATCH',
+				// headers: {
+				// 	'Content-Type': 'application/json'
+				// },
+				body: {
+					// обновленные данные объекта
+					// isCollapsed: arg.isCollapsed
+					// ...arg,
+					...arg
+				}
+				// body: { isCollapsed: arg.isCollapsed }
+			}),
+			invalidatesTags: ['Shelves']
+		}),
 	}),
 })
 export const memoboxGetShelves = memoboxApi.endpoints.getShelves.initiate
 export const { useGetShelvesQuery } = memoboxApi
+export const { useUpdateShelfMutation } = memoboxApi
+export const { useUpdateShelfWithTagMutation } = memoboxApi

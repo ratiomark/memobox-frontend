@@ -97,6 +97,10 @@ const cupboardShelfList = createSlice({
 		setMissedTrainingModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.missedTrainingModal.isOpen = action.payload
 		},
+		dropMissedTrainingShelfAndBoxId: (state) => {
+			state.missedTrainingModal.shelfId = ''
+			state.missedTrainingModal.boxId = ''
+		},
 		// shelf notification
 		setNotificationModalShelfId: (state, action: PayloadAction<string>) => {
 			state.notificationShelfModal.shelfId = action.payload

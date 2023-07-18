@@ -1,9 +1,7 @@
-import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import { RadioGroup } from '@headlessui/react';
-import RadioButtonIcon from '@/shared/assets/icons/radioButtonIcon.svg'
-import { Fragment, ReactNode } from 'react';
-import { Icon } from '../Icon';
+import clsx from 'clsx';
+import { Fragment, ReactNode, forwardRef, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import cls from './MyRadioGroup.module.scss';
 
 interface RadioItem {
@@ -17,14 +15,26 @@ interface MyRadioGroupProps {
 	items: RadioItem[]
 }
 
-export const MyRadioGroup = (props: MyRadioGroupProps) => {
+export const MyRadioGroup = forwardRef<any, MyRadioGroupProps>((props, forwardedRef) => {
 	const {
 		className,
 		value,
 		onChange,
-		items
+		items,
+
 	} = props
 	// const [plan, setPlan] = useState(plans[0])
+	const rootRef = useRef<HTMLDivElement>(null)
+	useEffect(() => {
+		if (rootRef && rootRef.current) {
+			const radio = rootRef.current.querySelector('[data-headlessui-state="checked"]') as HTMLLIElement;
+			// console.log('radio')
+			// console.log(radio)
+			if (radio) {
+				radio.focus();
+			}
+		}
+	}, [value])
 
 	const { t } = useTranslation()
 
@@ -40,6 +50,7 @@ export const MyRadioGroup = (props: MyRadioGroupProps) => {
 			by="value"
 			value={value}
 			onChange={onChange}
+			ref={rootRef}
 		>
 			<RadioGroup.Label>Missed Training</RadioGroup.Label>
 			{items.map((item) => (
@@ -64,4 +75,4 @@ export const MyRadioGroup = (props: MyRadioGroupProps) => {
 			))}
 		</RadioGroup>
 	)
-}
+})

@@ -69,6 +69,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 						days={boxItem.timing.days}
 						weeks={boxItem.timing.weeks}
 						months={boxItem.timing.months}
+						onSaveTime={() => alert('тут должен быть колбек')}
 						onClose={onClose}
 					/>
 				</div>

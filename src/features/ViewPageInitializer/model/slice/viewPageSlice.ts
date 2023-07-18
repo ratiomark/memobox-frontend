@@ -32,7 +32,7 @@ export interface InitiateShelfPayload {
 	shelfId: string
 	boxId: string
 }
-
+// Можно пройти по всем карточкам и записать максимальную коробку для каждой полки. При переходе на полку чекать превышает ли текущая коробка максимальную коробку
 const viewPageSlice = createSlice({
 	name: 'viewPage',
 	initialState,
