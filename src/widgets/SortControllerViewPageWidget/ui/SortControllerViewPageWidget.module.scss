@@ -3,8 +3,9 @@
   align-items: center;
   gap: 40px;
   padding: 0 14px;
-  max-width: fit-content;
-  min-width: calc(100% - 32px);
+
+  // max-width: fit-content;
+  // min-width: calc(100% - 32px);
 
   // border: 1px solid green;
 }
@@ -20,7 +21,7 @@
   display: flex;
   gap: 40px;
 
-  // width: max-content;
+  // border: 1px solid green;
 }
 
 .arrow {
@@ -54,11 +55,13 @@
 .createdAtWrapper {
   // cursor: pointer;
   gap: 8px;
-
-  // color: red;
   width: 80px;
 
   // border: 1px solid red;
+}
+
+.createdAt {
+  width: 80px;
 }
 
 .shelfWrapper {
@@ -73,35 +76,20 @@
   text-align: center;
 }
 
-.lastTrainingWrapper {
-  // cursor: pointer;
-  // display: flex;
-  // align-items: center;
-  // flex-grow: 1;
-
-  // color: orange;
-  // max-width: 80px;
-  // border: 1px solid orange;
-}
-
-.createdAt {
-  // color: red;
-
-  // width: 70px;
-  // border: 1px solid red;
-}
-
 .shelf {
-  // color: blue;
-
-  // width: 120px;
-  // border: 1px solid blue;
   text-align: center;
+}
+
+.lastTrainingWrapper {
+  min-width: 90px;
+  max-width: 90px;
+
+  // border: 1px solid orange;
 }
 
 .lastTraining {
   // color: orange;
-  width: 80px;
+  width: 90px;
 
   // border: 1px solid orange;
 }

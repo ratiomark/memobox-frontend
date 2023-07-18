@@ -134,22 +134,25 @@ export const CardListItem = (props: CardListItemProps) => {
 					<MyText text={card.answer} className={cls.mainContent} />
 				</div>
 				{columnsRendered}
-				<div className={cls.icons} >
-					<CheckBox isChecked={isCardSelected} onClick={onSelectCardHandle} />
-					{/* <Icon
+
+			</motion.div>
+		</motion.li>
+	)
+}
+
+
+//<div className={cls.icons} >
+{/* <CheckBox isChecked={isCardSelected} onClick={onSelectCardHandle} /> */ }
+{/* <Icon
 					Svg={ShareIcon}
 					width={25}
 					height={25}
 				/> */}
-					{/* <Icon
+{/* <Icon
 					// width={28}
 					// height={28}
 					Svg={TrashIcon}
 					// type='cancel'
 					className={cls.trashIcon}
 				/> */}
-				</div>
-			</motion.div>
-		</motion.li>
-	)
-}
+//</div>

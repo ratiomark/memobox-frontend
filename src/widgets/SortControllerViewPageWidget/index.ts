@@ -1,6 +1,6 @@
 export { SortControllerViewPageWidget } from './ui/SortControllerViewPageWidget';
 
-export { sortControllerViewPageWidgetReducer, sortControllerViewPageWidgetActions } from './model/slice/sortControllerViewPageWidgetSlice';
+// export { sortControllerViewPageWidgetReducer, sortControllerViewPageWidgetActions } from './model/slice/sortControllerViewPageWidgetSlice';
 export type {
 	SortColumnObject,
 	SortColumnValue,

@@ -3,10 +3,20 @@
   min-width: 400px;
 
   // background-color: #f5f6fa;
-  padding: 20px 40px;
+  padding: 10px 40px;
 }
 
 .contentWrapper {
   padding-top: 20px;
   padding-bottom: 30px;
+}
+
+.rowsInCardWrapper {
+  margin-top: 20px;
+  padding: 12px 14px;
+}
+
+.rowsOptionTitle {
+  padding-bottom: 8px;
+  font-size: 15px;
 }

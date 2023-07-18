@@ -60,5 +60,9 @@
   "shelf": "Полка",
   "creation": "Создание",
   "last training": "Последнее повторение",
-  "columns": "Столбцы"
+  "columns": "Столбцы",
+  "answer": "Ответ",
+  "question": "Вопрос",
+  "table settings": "Настройки таблицы",
+  "rows count in cards": "Кол-во строк в карточке"
 }

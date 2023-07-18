@@ -1365,6 +1365,7 @@
       },
       "jsonSavedData": {
         "commonShelfCollapsed": true,
+        "viewPageCardRowsCount": 2,
         "viewPageColumns": [
           {
             "value": "shelf",

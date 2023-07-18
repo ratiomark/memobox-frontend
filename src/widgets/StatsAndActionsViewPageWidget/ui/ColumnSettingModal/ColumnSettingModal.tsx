@@ -7,16 +7,30 @@ import { getViewPageColumnSettingsIsOpen, getViewPageColumns, viewPageActions } 
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { Button } from '@/shared/ui/Button';
 import { HStack } from '@/shared/ui/Stack';
-import { Heading } from '@/shared/ui/Typography';
+import { Heading, MyText } from '@/shared/ui/Typography';
 import { ColumnItem } from '../ColumnItem/ColumnItem';
-import { SortColumnObject, getUserSavedDataViewPageColumns, userActions } from '@/entities/User';
-import { useState } from 'react';
+import {
+	SortColumnObject,
+	getUserSavedDataViewPageColumns,
+	getUserSavedDataViewPageRowsCount,
+	userActions
+} from '@/entities/User';
+import { useEffect, useState } from 'react';
 import { Reorder, motion } from 'framer-motion';
 import { ReducersList } from '@/shared/lib/helpers/hooks/useAsyncReducer';
+import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
+import { Card } from '@/shared/ui/Card';
 
 interface ColumnSettingModalProps {
 	className?: string
 }
+
+const rowItems: TabItem[] = [
+	{ content: '1', value: '1' },
+	{ content: '2', value: '2' },
+	{ content: '3', value: '3' },
+	{ content: '4', value: '4' },
+]
 
 export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 	const {
@@ -24,15 +38,23 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 	} = props
 	const dispatch = useAppDispatch()
 	const columns = useSelector(getUserSavedDataViewPageColumns)
-	const columnsExample = useSelector(getViewPageColumns)
-	const [localColumns, setLocalColumns] = useState(columnsExample)
+	const rowsCount = useSelector(getUserSavedDataViewPageRowsCount) ?? '2'
 	const { t } = useTranslation()
+
+	useEffect(() => {
+		const root = document.querySelector('#root') as HTMLElement
+		root.style.setProperty('--view-rows', rowsCount?.toString() ?? '2')
+	}, [rowsCount])
 
 	const isOpen = useSelector(getViewPageColumnSettingsIsOpen) ?? false
 	const onClose = () => {
 		dispatch(viewPageActions.setColumnSettingsIsOpen(false))
 	}
-	// userActions.setColumn
+
+	const onRowValueClick = (tab: TabItem) => {
+		dispatch(userActions.setViewPageCardRowsCount(tab.value))
+	}
+
 	const onClickSwitchColumn = (column: SortColumnObject) => {
 		const columnCopy = { ...column }
 		columnCopy.enabled = !columnCopy.enabled
@@ -43,12 +65,7 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 		dispatch(userActions.reorderColumns(order))
 	}
 
-	// const columnsRendered = localColumns?.map(column => (
-	// 	<ColumnItem
-	// 		key={column.value}
-	// 		column={column}
-	// 		onSwitchClick={onClickSwitchColumn}
-	// 	/>))
+
 	const columnsRendered = columns?.map(column => (
 		<ColumnItem
 			key={column.value}
@@ -66,20 +83,22 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 				className)}
 			>
 
-				<Heading title={t('Columns settings')} />
+				<Heading title={t('table settings')} />
 				<motion.div layout className={cls.contentWrapper} >
 					{/* {columns?.map(column => <ColumnItem key={column.value} column={column} />)} */}
 					<Reorder.Group
 						// axis=''
 						values={columns!}
-						onReorder={(order) => {
-							console.log(order)
-							onSetColumns(order)
-							// setLocalColumns(order)
-						}}
+						onReorder={onSetColumns}
 					>
 						{columnsRendered}
 					</Reorder.Group>
+					<Card className={cls.rowsInCardWrapper} >
+
+						<MyText text={t('rows count in cards')}  className={cls.rowsOptionTitle} />
+						<Tabs tabs={rowItems} value={rowsCount.toString()} onTabClick={onRowValueClick} />
+					</Card>
+
 				</motion.div>
 				<HStack justify='between' max>
 					<Button onClick={onClose}>{t('cancel')}</Button>

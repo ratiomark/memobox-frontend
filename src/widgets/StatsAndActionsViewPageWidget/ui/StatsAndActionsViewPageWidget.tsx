@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
 import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLabels/CompleteBigDataLabels';
-import { useRef, } from 'react';
+import { useEffect, useRef, } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { CardSchema } from '@/entities/Card';
 import {
@@ -68,12 +68,16 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 	} = props
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
-	const shelfId = useSelector(getViewPageShelfId) ?? '1'
+	// const shelfId = useSelector(getViewPageShelfId) ?? '1'
 	const cards = useSelector(getViewPageCardsFiltered)
 	const dispatch = useAppDispatch()
 	const onOpenColumnSettingsModal = () => {
 		dispatch(viewPageActions.setColumnSettingsIsOpen(true))
 	}
+
+	// useEffect(() => {
+
+	// }, [])
 	// const shelfDataSaved = useSelector(getViewPageSavedShelf(shelfId ?? '1'))
 	// const boxId = useSelector(getViewPageSavedShelf(shelfId ?? '1'))?.lastBoxId
 	// const navigate = useNavigate()
@@ -100,8 +104,8 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 	return (
 		<>
 			<motion.div
-				// initial={{ x: -50 }}
-				// animate={{ x: 0 }}
+			// initial={{ x: -50 }}
+			// animate={{ x: 0 }}
 			>
 				<HStack
 					max
@@ -115,7 +119,7 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 							onClick={onOpenColumnSettingsModal}
 							borderRadius='borderRadius_4'
 						>
-							{t('columns')}
+							{t('table settings')}
 						</Button>
 						{/* <Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
 				<Icon

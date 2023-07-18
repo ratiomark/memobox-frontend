@@ -17,6 +17,7 @@ export {
 	getUserShelfNamesList,
 	getUserSavedDataCommonShelfCollapsed,
 	getUserSavedDataViewPageColumns,
+	getUserSavedDataViewPageRowsCount,
 } from './model/selectors/getJsonSavedData';
 export { initAuthData } from './model/services/initAuthData';
 

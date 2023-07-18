@@ -39,6 +39,9 @@ const viewPageSlice = createSlice({
 	reducers: {
 		setActiveShelfId: (state, action: PayloadAction<string>) => {
 			state.shelfId = action.payload
+			if (action.payload !== 'all' && state.boxId === 'learning') {
+				state.boxId = 'new'
+			}
 		},
 		setActiveSort: (state, action: PayloadAction<SortColumnValue>) => {
 			state.sort = action.payload

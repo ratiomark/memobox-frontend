@@ -21,6 +21,7 @@ export interface ShelfNameItem {
 export interface JsonSavedData {
 	viewPageShelfId?: string
 	viewPageBoxId?: string
+	viewPageCardRowsCount: number | string
 	commonShelfCollapsed: boolean
 	shelfNamesList: ShelfNameItem[]
 	viewPageColumns: SortColumnObject[]

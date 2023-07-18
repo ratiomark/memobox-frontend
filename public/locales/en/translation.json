@@ -61,5 +61,9 @@
   "shelf": "Shelf",
   "creation": "Creation",
   "last training": "Last training",
-  "columns": "Columns"
+  "columns": "Columns",
+  "answer": "Answer",
+  "question": "Question",
+  "table settings": "Table setting",
+  "rows count in cards": "Lines in the card"
 }

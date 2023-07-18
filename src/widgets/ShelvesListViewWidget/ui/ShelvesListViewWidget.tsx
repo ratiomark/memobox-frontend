@@ -70,14 +70,7 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 				Svg={MultiSelectIcon}
 			/>
 			{/* {isShelvesLoading ? <Skeleton width={400} height={18} /> : null} */}
-			{/* Общая полка */}
 			{/* горизонтальный скролл списка с полками */}
-			{/* <AppLink text={} */}
-			{/* <ListBox
-				value={shelfId}
-				items={items}
-				onChange={onChangeShelf}
-			/> */}
 			<HorizontalScrollerList value={shelfId} items={items} />
 
 		</div>

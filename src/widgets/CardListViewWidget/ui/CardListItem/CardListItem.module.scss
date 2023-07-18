@@ -3,6 +3,7 @@
   display: flex;
   gap: 20px;
   cursor: pointer;
+
   // border: 1px solid red;
 }
 
@@ -15,8 +16,9 @@
   align-items: center;
   display: flex;
   gap: 40px;
-  max-width: fit-content;
-  min-width: calc(100% - 32px);
+
+  // max-width: fit-content;
+  // min-width: calc(100% - 32px);
   border: 1px solid transparent;
 }
 
@@ -38,7 +40,6 @@
   width: 100%;
   display: flex;
   gap: 40px;
-  
 }
 
 .mainContent {
@@ -47,12 +48,14 @@
   -webkit-line-clamp: var(--view-rows);
   -webkit-box-orient: vertical;
   overflow: hidden;
-  border: 1px solid red;
+
+  // border: 1px solid red;
 }
 
 .createdAt {
-  // color: red;
-  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+  padding-left: 5px;
 
   // border: 1px solid red;
 }
@@ -71,7 +74,9 @@
 
 .lastTraining {
   // color: orange;
-  width: 88px;
+  min-width: 90px;
+  max-width: 90px;
+  padding-left: 8px;
 
   // border: 1px solid orange;
 }
