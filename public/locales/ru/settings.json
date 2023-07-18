@@ -3,6 +3,11 @@
   "time sleep": "Время сна",
   "missed training": "Пропущенные тренировки",
   "notifications": "Уведомления",
+  "enable day by day": "Настроить по дням недели",
+  "cancel": "Отмена",
+  "save": "Сохранить",
+  "start sleep": "Начало сна",
+  "end sleep": "Конец сна",
   "days": {
     "monday": "Пн",
     "tuesday": "Вт",

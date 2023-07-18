@@ -7,6 +7,7 @@ interface SwitcherProps {
 	className?: string
 	onClickSwitcher: () => void
 	isChecked: boolean
+	disabled?: boolean
 	title?: string
 }
 
@@ -15,6 +16,7 @@ export const Switcher = (props: SwitcherProps) => {
 		className,
 		isChecked,
 		onClickSwitcher,
+		disabled,
 		title
 	} = props
 
@@ -26,17 +28,19 @@ export const Switcher = (props: SwitcherProps) => {
 				className ? '' : cls.switcherWrapper,
 				className
 			)}
-			onClick={onClickSwitcher}
+			onClick={disabled ? undefined : onClickSwitcher}
 		>
 			{title &&
-				<p className={cls.label}>
+				<p
+					className={cls.label}>
 					{title}
 				</p>
 			}
 			<div
 				className={clsx(
 					cls.switcher,
-					{ [cls.switcher_active]: isChecked }
+					{ [cls.switcher_active]: isChecked },
+					disabled ? '' : cls.pointer
 				)}
 			>
 				<div
@@ -46,7 +50,7 @@ export const Switcher = (props: SwitcherProps) => {
 					)}
 				/>
 			</div>
-		</div>
+		</div >
 	)
 	// return (
 	// 	<Switch.Group>

@@ -17,12 +17,17 @@
   display: flex;
   align-items: center;
   outline: none;
-  cursor: pointer;
+
+  // cursor: pointer;
   background-color: rgb(128 128 128 / 45.2%);
   height: 20px;
   width: 36px;
   border-radius: 50px;
   border: none;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .switcher_active {

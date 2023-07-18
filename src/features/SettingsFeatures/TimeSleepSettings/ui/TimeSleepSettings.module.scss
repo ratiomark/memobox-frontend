@@ -1,5 +1,7 @@
 .TimeSleepSettings {
-  min-width: 700px;
+  width: 700px;
+
+  // max-height: 80%;
 }
 
 .detailsBlock {
@@ -21,6 +23,21 @@
 }
 
 .content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 15px 15px 15px 10px;
+}
+
+.inner {
+  max-height: 300px;
+  overflow: auto;
+  padding-right: 40px;
+}
+
+.dayByDayActivator {
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
+  align-items: start;
+  min-width: 100%;
+  justify-content: end;
 }

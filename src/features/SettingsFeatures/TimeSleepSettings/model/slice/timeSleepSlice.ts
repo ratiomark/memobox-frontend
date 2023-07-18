@@ -27,28 +27,33 @@ const timeSleepSettings = createSlice({
 			if (dayType === 'general') {
 				const currentMinute = state.generalTimeSleepData![sleepMode].minutes
 				const operationValue = operation === 'minus' ? -5 : 5
+				if (currentMinute === 0 && operationValue === -5) return
+				if (currentMinute === 55 && operationValue === 5) return
 				state.generalTimeSleepData![sleepMode].minutes = currentMinute + operationValue
 			} else {
 				const currentMinute = state.dayByDayTimeSleepData![dayType][sleepMode].minutes
 				const operationValue = operation === 'minus' ? -5 : 5
+				if (currentMinute === 0 && operationValue === -5) return
+				if (currentMinute === 55 && operationValue === 5) return
 				state.dayByDayTimeSleepData![dayType][sleepMode].minutes = currentMinute + operationValue
 			}
 		},
 		setHours: (state, action: PayloadAction<SetTimePayloadAction>) => {
 			const { dayType, operation, sleepMode } = action.payload
 			if (dayType === 'general') {
-				const currentMinute = state.generalTimeSleepData![sleepMode].hours
+				const currentHours = state.generalTimeSleepData![sleepMode].hours
 				const operationValue = operation === 'minus' ? -1 : 1
-				state.generalTimeSleepData![sleepMode].hours = currentMinute + operationValue
+				if (currentHours === 0 && operationValue === -1) return
+				if (currentHours === 23 && operationValue === 1) return
+				state.generalTimeSleepData![sleepMode].hours = currentHours + operationValue
 			} else {
-				const currentMinute = state.dayByDayTimeSleepData![dayType][sleepMode].hours
+				const currentHours = state.dayByDayTimeSleepData![dayType][sleepMode].hours
 				const operationValue = operation === 'minus' ? -1 : 1
-				state.dayByDayTimeSleepData![dayType][sleepMode].hours = currentMinute + operationValue
+				if (currentHours === 0 && operationValue === -1) return
+				if (currentHours === 23 && operationValue === 1) return
+				state.dayByDayTimeSleepData![dayType][sleepMode].hours = currentHours + operationValue
 			}
 		}
-		// setGeneral: (state) => {
-		// 	state.isTimeSleepEnabled = !state.isDayByDayOptionEnabled
-		// },
 	}
 })
 

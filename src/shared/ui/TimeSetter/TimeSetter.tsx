@@ -11,6 +11,7 @@ import { Portal } from '../Portal/Portal';
 import { HStack } from '../Stack';
 import useLockedBody from '@/shared/lib/helpers/hooks/useLockedBody';
 import { TimingBlock } from '@/shared/types/DataBlock';
+
 interface TimeSetterProps {
 	className?: string
 	minutes: number
@@ -22,10 +23,6 @@ interface TimeSetterProps {
 	lockSelector?: string
 	overlay?: boolean
 	onSaveTime: (timeObject: TimingBlock) => void
-}
-
-const closeTimeSetter = (e: MouseEvent) => {
-	console.log(e.target)
 }
 
 export const TimeSetter = (props: TimeSetterProps) => {
@@ -88,7 +85,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		if (minutes === 0) return //setMinutes(59);
 		setMinutes(minutes => minutes - 1)
 	}
-	const onScrollMinutes = (e: WheelEvent<HTMLElement>) => {
+	const onScrollMinutes = (e: WheelEvent<HTMLElement> | globalThis.WheelEvent) => {
 		if (e.deltaY > 0) onDownClickMinutes()
 		else onUpClickMinutes()
 	}
@@ -101,7 +98,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		if (hours === 0) return //setHours(23);
 		setHours(hours => hours - 1)
 	}
-	const onScrollHours = (e: WheelEvent<HTMLElement>) => {
+	const onScrollHours = (e: WheelEvent<HTMLElement> | globalThis.WheelEvent) => {
 		if (e.deltaY > 0) onDownClickHours()
 		else onUpClickHours()
 	}
@@ -114,7 +111,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		if (days === 0) return //setDays(23);
 		setDays(days => days - 1)
 	}
-	const onScrollDays = (e: WheelEvent<HTMLElement>) => {
+	const onScrollDays = (e: WheelEvent<HTMLElement> | globalThis.WheelEvent) => {
 		if (e.deltaY > 0) onDownClickDays()
 		else onUpClickDays()
 	}
@@ -127,7 +124,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		if (weeks === 0) return //setHours(23);
 		setWeeks(weeks => weeks - 1)
 	}
-	const onScrollWeeks = (e: WheelEvent<HTMLElement>) => {
+	const onScrollWeeks = (e: WheelEvent<HTMLElement> | globalThis.WheelEvent) => {
 		if (e.deltaY > 0) onDownClickWeeks()
 		else onUpClickWeeks()
 	}
@@ -140,7 +137,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		if (months === 0) return //setHours(23);
 		setMonths(months => months - 1)
 	}
-	const onScrollMonths = (e: WheelEvent<HTMLElement>) => {
+	const onScrollMonths = (e: WheelEvent<HTMLElement> | globalThis.WheelEvent) => {
 		if (e.deltaY > 0) onDownClickMonths()
 		else onUpClickMonths()
 	}

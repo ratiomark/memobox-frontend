@@ -3,6 +3,11 @@
   "time sleep": "Time sleep",
   "missed training": "Missed training",
   "notifications": "Notifications",
+  "enable day by day": "Customize by day of the week",
+  "cancel": "Cancel",
+  "save": "Save",
+  "start sleep": "Beginning of sleep",
+  "end sleep": "End of sleep",
   "days": {
     "monday": "Mon",
     "tuesday": "Tue",

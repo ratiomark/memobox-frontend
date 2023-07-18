@@ -44,7 +44,8 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const cupboardData = useSelector(getCupboardData)
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
-	const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
+	const cupboardShelves = useSelector(getCupboardState.selectAll)
+	// const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
 
 	useEffect(() => {
 		if (!cupboardIsLoading) {
