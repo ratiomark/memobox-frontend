@@ -61,6 +61,11 @@
   align-items: center;
 }
 
+.bottomBoxesWrapper {
+  // overflow: auto;
+  // clip-path: inset(0);
+}
+
 .boxesWrapper {
   display: grid;
 

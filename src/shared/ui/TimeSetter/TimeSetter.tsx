@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './TimeSetter.module.scss';
-import { MouseEvent, WheelEvent, useEffect, useRef, useState } from 'react';
+import { CSSProperties, MouseEvent, WheelEvent, useEffect, useRef, useState } from 'react';
 import { Icon } from '../Icon';
 import { MyText } from '../Typography';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
@@ -11,40 +11,50 @@ import { Portal } from '../Portal/Portal';
 import { HStack } from '../Stack';
 import useLockedBody from '@/shared/lib/helpers/hooks/useLockedBody';
 import { TimingBlock } from '@/shared/types/DataBlock';
+import { timingDataDefault } from '@/shared/const/timingBlock';
 
 interface TimeSetterProps {
 	className?: string
-	minutes: number
-	hours: number
-	days: number
-	weeks: number
-	months: number
+	timingData?: TimingBlock
+	// minutes: number
+	// hours: number
+	// days: number
+	// weeks: number
+	// months: number
 	onClose: () => void
 	lockSelector?: string
 	overlay?: boolean
 	onSaveTime: (timeObject: TimingBlock) => void
+	styles?: CSSProperties
 }
 
 export const TimeSetter = (props: TimeSetterProps) => {
 	const {
 		className,
-		minutes: minutesProps = 0,
-		hours: hoursProps = 0,
-		days: daysProps = 0,
-		weeks: weeksProps = 0,
-		months: monthsProps = 0,
+		styles,
+		timingData = timingDataDefault,
+		// minutes: minutesProps = 0,
+		// hours: hoursProps = 0,
+		// days: daysProps = 0,
+		// weeks: weeksProps = 0,
+		// months: monthsProps = 0,
 		onClose,
 		lockSelector = '[data-testid="MainPage"]',
 		overlay = true,
 		onSaveTime,
 	} = props
 	const [locked, setLocked] = useLockedBody(false, lockSelector)
-
-	const [minutes, setMinutes] = useState(minutesProps)
-	const [hours, setHours] = useState(hoursProps)
-	const [days, setDays] = useState(daysProps)
-	const [weeks, setWeeks] = useState(weeksProps)
-	const [months, setMonths] = useState(monthsProps)
+	// const {}
+	const [minutes, setMinutes] = useState(timingData.minutes)
+	const [hours, setHours] = useState(timingData.hours)
+	const [days, setDays] = useState(timingData.days)
+	const [weeks, setWeeks] = useState(timingData.weeks)
+	const [months, setMonths] = useState(timingData.months)
+	// const [minutes, setMinutes] = useState(minutesProps)
+	// const [hours, setHours] = useState(hoursProps)
+	// const [days, setDays] = useState(daysProps)
+	// const [weeks, setWeeks] = useState(weeksProps)
+	// const [months, setMonths] = useState(monthsProps)
 	const [disabled, setDisabled] = useState(false)
 	const timeSetterRef = useRef<HTMLDivElement>()
 
@@ -72,10 +82,10 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		// return () => window.removeEventListener('click', closeTimeSetter)
 	}, [])
 
-	useEffect(() => {
-		setLocked(true)
-		return () => setLocked(!locked)
-	}, [setLocked, locked])
+	// useEffect(() => {
+	// 	setLocked(true)
+	// 	return () => setLocked(!locked)
+	// }, [setLocked, locked])
 
 	const onUpClickMinutes = () => {
 		if (minutes === 59) return //setMinutes(0);
@@ -145,36 +155,24 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	const { t } = useTranslation()
 
 	return (
-		<div className={clsx(
-			cls.TimeSetter,
-			className)}
+		<div
+			className={clsx(
+				cls.TimeSetter,
+				className
+			)}
+			style={styles}
+			id='timeSetter'
 		// ref={timeSetterRef}
 		>
 			<HStack gap='gap_16' className={cls.setterWrapper} align='center'>
-
+				{/* <div className={cls.line} /> */}
 				<SingleSetter
-					time={months}
-					onUpClick={onUpClickMonths}
-					onDownClick={onDownClickMonths}
-					onWheelScroll={onScrollMonths}
-					maxTime={24}
-					title={t('months')}
-				/>
-				<SingleSetter
-					time={weeks}
-					onUpClick={onUpClickWeeks}
-					onDownClick={onDownClickWeeks}
-					onWheelScroll={onScrollWeeks}
-					maxTime={4}
-					title={t('weeks')}
-				/>
-				<SingleSetter
-					time={days}
-					onUpClick={onUpClickDays}
-					onDownClick={onDownClickDays}
-					onWheelScroll={onScrollDays}
-					maxTime={29}
-					title={t('days')}
+					time={minutes}
+					onUpClick={onUpClickMinutes}
+					onDownClick={onDownClickMinutes}
+					onWheelScroll={onScrollMinutes}
+					maxTime={59}
+					title={t('minutes')}
 				/>
 				<SingleSetter
 					time={hours}
@@ -185,16 +183,31 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					title={t('hours')}
 				/>
 				<SingleSetter
-					time={minutes}
-					onUpClick={onUpClickMinutes}
-					onDownClick={onDownClickMinutes}
-					onWheelScroll={onScrollMinutes}
-					maxTime={59}
-					title={t('minutes')}
+					time={days}
+					onUpClick={onUpClickDays}
+					onDownClick={onDownClickDays}
+					onWheelScroll={onScrollDays}
+					maxTime={29}
+					title={t('days')}
 				/>
-
+				<SingleSetter
+					time={weeks}
+					onUpClick={onUpClickWeeks}
+					onDownClick={onDownClickWeeks}
+					onWheelScroll={onScrollWeeks}
+					maxTime={4}
+					title={t('weeks')}
+				/>
+				<SingleSetter
+					time={months}
+					onUpClick={onUpClickMonths}
+					onDownClick={onDownClickMonths}
+					onWheelScroll={onScrollMonths}
+					maxTime={24}
+					title={t('months')}
+				/>
 			</HStack>
-			<HStack justify='between' max >
+			<HStack justify='between' className={cls.buttonsWrapper}  >
 				<Button fontWeight='300' onClick={onClose}>
 					{t('cancel')}
 				</Button>
@@ -207,11 +220,11 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					{t('save')}
 				</Button>
 			</HStack>
-			{overlay &&
+			{/* {overlay &&
 				<Portal>
 					<div className={cls.overlay} onClick={onClose} />
 				</Portal>
-			}
+			} */}
 		</div>
 		// </div >
 	)

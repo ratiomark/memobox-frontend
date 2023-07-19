@@ -103,7 +103,6 @@ export const Shelf = memo((props: ShelfProps) => {
 					Svg={DragDotsIcon}
 					type={isDragging ? 'main' : 'hint'}
 					onPointerDown={(e) => controls.start(e)}
-					// className={cls.dragIcon}
 					style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
 					width={25}
 					height={25}
@@ -123,6 +122,8 @@ export const Shelf = memo((props: ShelfProps) => {
 					</VStack>
 					{shelfButtonsBlock}
 				</div>
+				{/* <div className={cls.bottomBoxesWrapper} > */}
+
 				<motion.div
 					// onClick={toggleExpand}
 					// layout
@@ -134,6 +135,7 @@ export const Shelf = memo((props: ShelfProps) => {
 				>
 					{boxesBlock}
 				</motion.div>
+				{/* </div> */}
 				{/* <div className={clsx(cls.boxesWrapper, isCollapsed ? cls.collapsed : cls.notCollapsed)}>
 					<div className={cls.inner} >
 						{boxesBlock}

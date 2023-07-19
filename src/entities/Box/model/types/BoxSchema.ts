@@ -19,6 +19,11 @@ export interface RegularAndLearntCardsBox extends BoxBaseSchema {
 	missedTrainingAction?: MissedTrainingValues
 }
 
+export interface BoxCoordinates {
+	x: number
+	y: number
+}
+
 // export interface LearntCardBox extends BoxBaseSchema {
 // 	specialType: 'learnt',
 // 	data: DataBlock

@@ -7,6 +7,9 @@ import { CupboardSchema } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
 import { StateSchema } from '@/app/providers/StoreProvider'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
+import { timingDataDefault } from '@/shared/const/timingBlock'
+import { TimingBlock } from '@/shared/types/DataBlock'
+import { BoxCoordinates } from '@/entities/Box'
 
 const initialState: CupboardPageSchema = {
 	isLoading: true,
@@ -24,6 +27,15 @@ const initialState: CupboardPageSchema = {
 	notificationShelfModal: {
 		shelfId: '',
 		isOpen: false,
+	},
+	boxTimeSetterModal: {
+		isOpen: false,
+		boxTimingData: timingDataDefault,
+		boxId: '',
+		boxCoordinates: {
+			x: 0,
+			y: 0,
+		},
 	},
 	newCardModal: {
 		shelfId: '',
@@ -81,6 +93,25 @@ const cupboardShelfList = createSlice({
 			state.boxesSettingsShelfId = action.payload
 			// state.isBoxesSettingsModalOpen = true
 		},
+		// TimeSetterModal
+
+		setTimingSetterModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.boxTimeSetterModal.isOpen = action.payload
+		},
+		setTimingSetterModalBoxId: (state, action: PayloadAction<string>) => {
+			state.boxTimeSetterModal.boxId = action.payload
+		},
+		setTimingSetterBoxTimingData: (state, action: PayloadAction<TimingBlock>) => {
+			state.boxTimeSetterModal.boxTimingData = action.payload
+		},
+		setTimingSetterBoxCoordinates: (state, action: PayloadAction<BoxCoordinates>) => {
+			state.boxTimeSetterModal.boxCoordinates = {
+				x: action.payload.x,
+				y: action.payload.y
+			}
+		},
+
+		// 
 		setBoxesSettingsModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.isBoxesSettingsModalOpen = action.payload
 		},

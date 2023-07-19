@@ -26,9 +26,12 @@ import { BoxesSettingsModal } from './BoxesSettingsModal/BoxesSettingsModal/Boxe
 import { BoxesBlockWrapper } from './BoxesBlock/BoxesBlockWrapper';
 import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModal/MissedTrainingSettings';
 import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
-import { CardModalNewCard } from '..';
 import { DndShelfListWrapper } from './DndShelfListWrapper';
 import { AnimatePresence, Reorder } from 'framer-motion';
+import { BoxTimeSetterModal } from './Modals/BoxTimeSetterModal/BoxTimeSetterModal';
+import { CardModalNewCard } from './Modals/CardModalNewCard/CardModalNewCard';
+import { TimeSetter } from '@/shared/ui/TimeSetter';
+import { useUpdateShelvesOrderMutation } from '@/entities/Cupboard/model/api/cupboardApi';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -45,8 +48,15 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
+	const [updateShelvesMutation] = useUpdateShelvesOrderMutation()
 	// const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
 
+	// useEffect(() => {
+		// updateShelvesOrder
+
+	// }, [cupboardShelves])
+
+	console.log(cupboardShelves)
 	useEffect(() => {
 		if (!cupboardIsLoading) {
 			timerId = setTimeout(() => {
@@ -139,9 +149,9 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	// }
 
 	return (
-		<div className={clsx(
-			cls.cupboardShelfList,
-			className)}
+		<div
+			className={cls.cupboardShelfList}
+			id='cupboardShelfList'
 		>
 			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
 			{/* <AnimatePresence> */}
@@ -162,6 +172,13 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			<MissedTrainingSettingsModal />
 			<NotificationSettingsModal />
 			<CardModalNewCard />
+			<BoxTimeSetterModal />
+			<div className={cls.timeSetterTemplateHidden} >
+				<TimeSetter
+					onClose={() => { }}
+					onSaveTime={() => { }}
+				/>
+			</div>
 		</div>
 	)
 }

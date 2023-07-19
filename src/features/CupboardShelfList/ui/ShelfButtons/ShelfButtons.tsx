@@ -12,8 +12,8 @@ import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { SettingButton } from '../SettingsButton/SettingsButton';
-import { ShelfSchema } from '@/entities/Shelf';
-import { useUpdateShelfMutation } from '@/entities/Shelf'
+import { ShelfSchema, useUpdateShelfWithTagMutation } from '@/entities/Shelf';
+
 
 interface ShelfButtonsProps {
 	className?: string
@@ -36,7 +36,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		onAddNewCardClick,
 		onCollapseClick,
 	} = props
-	const [updateShelfMutation] = useUpdateShelfMutation()
+	const [updateShelfMutation] = useUpdateShelfWithTagMutation()
 
 	const shelfIndexEdited = shelfIndex + 1
 	let positionTextCard = '';

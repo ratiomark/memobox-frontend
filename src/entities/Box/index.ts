@@ -6,5 +6,7 @@ export type {
 	NewCardsBox,
 	RegularAndLearntCardsBox,
 	BoxSchema,
+	BoxCoordinates,
 } from './model/types/BoxSchema'
+
 export { Box } from './ui/Box'; 

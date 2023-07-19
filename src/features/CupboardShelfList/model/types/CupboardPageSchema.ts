@@ -1,8 +1,10 @@
+import { BoxCoordinates } from '@/entities/Box'
 import { CupboardSchema } from '@/entities/Cupboard'
 import { CommonShelfBackendResponse } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
-import { DataBlock } from '@/shared/types/DataBlock'
+import { DataBlock, TimingBlock } from '@/shared/types/DataBlock'
 import { EntityState } from '@reduxjs/toolkit'
+
 
 export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	isLoading: boolean
@@ -31,4 +33,14 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	// shelvesDeletionIds?: string[]
 	// shelves: ShelfSchema[]
 	cupboardData: DataBlock
+	boxTimeSetterModal: {
+		isOpen: boolean
+		boxCoordinates: BoxCoordinates
+		boxTimingData: TimingBlock
+		boxId: string
+	},
+	// boxCoordinates: {
+	// 	x: number
+	// 	y: number
+	// }
 }

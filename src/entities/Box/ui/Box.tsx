@@ -14,9 +14,9 @@ import SettingsIcon from '@/shared/assets/icons/settingsIcon2.svg'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
 import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
-import { useCallback, useState } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 import { TimeSetter } from '@/shared/ui/TimeSetter';
-import { BoxSchema } from '../model/types/BoxSchema';
+import { BoxCoordinates, BoxSchema } from '../model/types/BoxSchema';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/shared/ui/Button';
 import { obtainRouteTraining } from '@/app/providers/router/config/routeConfig/routeConfig';
@@ -41,6 +41,7 @@ interface BoxPropsBase {
 	shelfId: string
 	onAddNewCard: (shelfId: string, boxIndex: number) => void
 	onBoxViewClick: (shelfId: string, boxIndex: number | string) => void
+	onOpenTimeSetter: (coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string) => void
 }
 
 
@@ -87,6 +88,7 @@ export const Box = (props: BoxPropsBase) => {
 		shelfId,
 		onAddNewCard,
 		onBoxViewClick,
+		onOpenTimeSetter,
 		// onTimerClick,
 		// allCards,
 		// waitCards,
@@ -118,11 +120,11 @@ export const Box = (props: BoxPropsBase) => {
 	}
 
 	const timing = '1ч 20м'
-	const minutes = 4
-	const hours = 2
-	const days = 0
-	const weeks = 0
-	const months = 0
+	// const minutes = 4
+	// const hours = 2
+	// const days = 0
+	// const weeks = 0
+	// const months = 0
 
 	if (specialType === 'none' || specialType === 'learnt') {
 		const title = specialType === 'none'
@@ -136,6 +138,13 @@ export const Box = (props: BoxPropsBase) => {
 		/>
 
 		const onClose = () => setIsTimeSetterOpen(false)
+		const onOpenTimeSetterHandle = (e: MouseEvent) => {
+			// const x = e.clientX
+			// const y = e.clientY
+			const coordinates = { x: e.clientX, y: e.clientY }
+			onOpenTimeSetter(coordinates, boxItem.timing, boxItem._id)
+			// console.log(`Координаты кнопки: X=${x}, Y=${y}`);
+		}
 
 		const buttons = (
 			<HStack
@@ -161,7 +170,7 @@ export const Box = (props: BoxPropsBase) => {
 					className={cls.icon}
 					Svg={TimeIcon}
 					clickable
-					onClick={() => setIsTimeSetterOpen(true)}
+					onClick={onOpenTimeSetterHandle}
 					// onClick={onTimerClick}
 					width={20}
 					height={20}
@@ -183,38 +192,7 @@ export const Box = (props: BoxPropsBase) => {
 					{title}
 					{completeSmallDataLabels}
 					{buttons}
-					<AnimatePresence mode="wait">
-						{isTimeSetterOpen &&
-							<motion.div
-								// key='key'
-								variants={timeSetterAnimation}
-								initial='hidden'
-								animate='visible'
-								// animate={
-								// 	{ from: 'center' }
-								// }
-								exit='exit'
-								style={{ overflow: 'hidden' }}
-								// initial={{ opacity: 0 }}
-								// animate={{ opacity: 1 }}
-								// exit={{ opacity: 0 }}
-								className={cls.timeSetter}
-							>
-								{/* <div className={cls.timeSetter}> */}
-								<TimeSetter
-									minutes={minutes}
-									hours={hours}
-									days={days}
-									weeks={weeks}
-									months={months}
-									onClose={onClose}
-									onSaveTime={() => { }}
-								// VAR: тут нужен колбек на сохранение времени у коробки
-								/>
-								{/* </div> */}
-							</motion.div>
-						}
-					</AnimatePresence>
+
 					<MyText className={cls.timing} text={timing} />
 				</div>
 				<Button onClick={startTraining} variant='filledBox' disabled={data.train < 1} className={cls.trainButton} >{t('train')}</Button>
@@ -261,3 +239,38 @@ export const Box = (props: BoxPropsBase) => {
 		</li>
 	)
 }
+
+
+
+// <AnimatePresence mode="wait">
+// 	{isTimeSetterOpen &&
+// 		<motion.div
+// 			// key='key'
+// 			variants={timeSetterAnimation}
+// 			initial='hidden'
+// 			animate='visible'
+// 			// animate={
+// 			// 	{ from: 'center' }
+// 			// }
+// 			exit='exit'
+// 			style={{ overflow: 'hidden' }}
+// 			// initial={{ opacity: 0 }}
+// 			// animate={{ opacity: 1 }}
+// 			// exit={{ opacity: 0 }}
+// 			className={cls.timeSetter}
+// 		>
+// 			{/* <div className={cls.timeSetter}> */}
+// 			<TimeSetter
+// 				minutes={minutes}
+// 				hours={hours}
+// 				days={days}
+// 				weeks={weeks}
+// 				months={months}
+// 				onClose={onClose}
+// 				onSaveTime={() => { }}
+// 			// VAR: тут нужен колбек на сохранение времени у коробки
+// 			/>
+// 			{/* </div> */}
+// 		</motion.div>
+// 	}
+// </AnimatePresence>

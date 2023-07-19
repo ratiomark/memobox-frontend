@@ -31,9 +31,9 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 	// 	navigate(obtainRouteView(shelfPosition.toString()))
 	// }
 	const shelfNamesList = useSelector(getUserShelfNamesList)
-	
+	// const [updateShelfMutation] = useUpdateShelfMutation()
 	const dispatch = useAppDispatch()
-	
+
 	const onDeleteClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
 	}, [dispatch, shelfId])

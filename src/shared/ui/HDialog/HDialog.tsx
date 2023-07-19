@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './HDialog.module.scss';
-import { MutableRefObject, ReactNode } from 'react';
+import { CSSProperties, MutableRefObject, ReactNode } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Overlay } from '../Overlay/Overlay';
 import { useTheme } from '@/shared/context/useTheme';
@@ -14,6 +14,9 @@ interface HDialogProps {
 	// initialFocus?: MutableRefObject<HTMLElement | null>
 	max?: boolean
 	lazy?: boolean
+	noBackground?: boolean
+	styles?: CSSProperties
+	unmount?: boolean
 }
 
 export const HDialog = (props: HDialogProps) => {
@@ -24,7 +27,10 @@ export const HDialog = (props: HDialogProps) => {
 		onClose,
 		// initialFocus,
 		max = false,
+		noBackground = false,
+		styles,
 		children,
+		unmount,
 	} = props
 	const { theme } = useTheme()
 
@@ -36,8 +42,12 @@ export const HDialog = (props: HDialogProps) => {
 				cls.HDialog,
 				theme,
 				'app_modal',
-				className)
+				className
+				// !unmount ? 'hidden' :
+			)
 			}
+			unmount={unmount}
+			style={styles}
 			// initialFocus={initialFocus}
 			open={isOpen}
 			onClose={onClose}

@@ -46,7 +46,19 @@ export const cupboardApi = rtkApi.injectEndpoints({
 			// 	return data
 			// },
 		}),
-
+		updateShelvesOrder: build.mutation<ShelfSchema, ShelfSchema[]>({
+			query: (arg) => ({
+				url: '/shelves',
+				// params: { id: arg.id },
+				method: 'PUT',
+				// headers: {
+				// 	'Content-Type': 'application/json'
+				// },
+				body: JSON.stringify(arg)
+				// body: { isCollapsed: arg.isCollapsed }
+			}),
+			invalidatesTags: ['Shelves']
+		}),
 		// getMovieByIdBeatFilm: build.query<MovieSchema | undefined, string>({
 		// 	query: (id) => ({
 		// 		url: 'https://api.nomoreparties.co/beatfilm-movies',
@@ -65,3 +77,4 @@ export const cupboardGetData = cupboardApi.endpoints.getCupboardData.initiate
 export const { useGetCupboardDataQuery } = cupboardApi
 export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 export const { useGetShelvesQuery } = cupboardApi
+export const { useUpdateShelvesOrderMutation } = cupboardApi
