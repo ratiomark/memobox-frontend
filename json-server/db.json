@@ -1995,8 +1995,8 @@
   "shelves": [
     {
       "id": "648c920baa3edb04cec38442",
-      "index": 0,
-      "isCollapsed": false,
+      "index": 1,
+      "isCollapsed": true,
       "title": "math",
       "boxesData": [
         {
@@ -2077,59 +2077,8 @@
           }
         },
         {
-          "_id": "648c920b42ff6a3183c9537e2",
-          "index": 5,
-          "specialType": "none",
-          "data": {
-            "all": 2,
-            "train": 1,
-            "wait": 1
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920sdfsb42ff6a3183c9537e2",
-          "index": 6,
-          "specialType": "none",
-          "data": {
-            "all": 2,
-            "train": 1,
-            "wait": 1
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920sdfsb42dsff6a3183c9537e2",
-          "index": 7,
-          "specialType": "none",
-          "data": {
-            "all": 2,
-            "train": 1,
-            "wait": 1
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
           "_id": "648c920bb89bead4305761a6",
-          "index": 8,
+          "index": 5,
           "specialType": "learnt",
           "data": {
             "all": 5,
@@ -2150,12 +2099,102 @@
         "train": 9,
         "wait": 7
       },
-      "isDeleting": false,
-      "missedTrainingAction": "backwards"
+      "isDeleting": false
+    },
+    {
+      "id": "648c920b07d1f8f9ed46604e",
+      "index": 1,
+      "isCollapsed": true,
+      "title": "facts",
+      "boxesData": [
+        {
+          "_id": "648c920bb26ca5ad01d95fc4",
+          "index": 0,
+          "specialType": "new",
+          "data": {
+            "all": 3,
+            "train": null
+          }
+        },
+        {
+          "_id": "648c920be2995e8d1c585be5",
+          "index": 1,
+          "specialType": "none",
+          "data": {
+            "all": 3,
+            "train": 1,
+            "wait": 2
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920bddc77c636d511d81",
+          "index": 2,
+          "specialType": "none",
+          "data": {
+            "all": 8,
+            "train": 4,
+            "wait": 4
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920b609485fe207e7da6",
+          "index": 3,
+          "specialType": "none",
+          "data": {
+            "all": 3,
+            "train": 0,
+            "wait": 3
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920b609485fe207easf6",
+          "index": 4,
+          "specialType": "learnt",
+          "data": {
+            "all": 3,
+            "train": 1,
+            "wait": 2
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        }
+      ],
+      "data": {
+        "all": 20,
+        "train": 9,
+        "wait": 11
+      },
+      "isDeleting": false
     },
     {
       "id": "648c920b3e40b5930a6e1603",
-      "index": 1,
+      "index": 2,
       "isCollapsed": true,
       "title": "books",
       "boxesData": [
@@ -2259,196 +2298,11 @@
         "train": 9,
         "wait": 12
       },
-      "isDeleting": false,
-      "missedTrainingAction": "additional"
-    },
-    {
-      "id": "648c920b6adf96517748f3c1",
-      "index": 1,
-      "isCollapsed": true,
-      "title": "английский",
-      "boxesData": [
-        {
-          "_id": "648c920bb9f34563e51dc7c2",
-          "index": 0,
-          "specialType": "new",
-          "data": {
-            "all": 2,
-            "train": null
-          }
-        },
-        {
-          "_id": "648c920b1ab0db449c60fa6c",
-          "index": 1,
-          "specialType": "none",
-          "data": {
-            "all": 5,
-            "train": 4,
-            "wait": 1
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920bf46cf9b533a32075",
-          "index": 2,
-          "specialType": "none",
-          "data": {
-            "all": 3,
-            "train": 0,
-            "wait": 3
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920bf5f065d98a38788b",
-          "index": 3,
-          "specialType": "none",
-          "data": {
-            "all": 5,
-            "train": 3,
-            "wait": 2
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920baf3426c25284a0a1",
-          "index": 4,
-          "specialType": "learnt",
-          "data": {
-            "all": 12,
-            "train": 7,
-            "wait": 5
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        }
-      ],
-      "data": {
-        "all": 27,
-        "train": 16,
-        "wait": 11
-      },
-      "isDeleting": false,
-      "missedTrainingAction": "backwards"
-    },
-    {
-      "id": "648c920b07d1f8f9ed46604e",
-      "index": 0,
-      "isCollapsed": true,
-      "title": "facts",
-      "boxesData": [
-        {
-          "_id": "648c920bb26ca5ad01d95fc4",
-          "index": 0,
-          "specialType": "new",
-          "data": {
-            "all": 3,
-            "train": null
-          }
-        },
-        {
-          "_id": "648c920be2995e8d1c585be5",
-          "index": 1,
-          "specialType": "none",
-          "data": {
-            "all": 3,
-            "train": 1,
-            "wait": 2
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920bddc77c636d511d81",
-          "index": 2,
-          "specialType": "none",
-          "data": {
-            "all": 8,
-            "train": 4,
-            "wait": 4
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920b609485fe207e7da6",
-          "index": 3,
-          "specialType": "none",
-          "data": {
-            "all": 3,
-            "train": 0,
-            "wait": 3
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        },
-        {
-          "_id": "648c920b609485fe207easf6",
-          "index": 4,
-          "specialType": "learnt",
-          "data": {
-            "all": 3,
-            "train": 1,
-            "wait": 2
-          },
-          "timing": {
-            "minutes": 0,
-            "hours": 0,
-            "days": 0,
-            "weeks": 0,
-            "months": 0
-          }
-        }
-      ],
-      "data": {
-        "all": 20,
-        "train": 9,
-        "wait": 11
-      },
-      "missedTrainingAction": "additional",
       "isDeleting": false
     },
     {
       "id": "648c920beba56ba6cd7db7bb",
-      "index": 4,
+      "index": 2,
       "isCollapsed": true,
       "title": "biology",
       "boxesData": [
@@ -2551,7 +2405,99 @@
         "all": 16,
         "train": 9,
         "wait": 7
-      }
+      },
+      "isDeleting": false
+    },
+    {
+      "id": "648c920b6adf96517748f3c1",
+      "index": 4,
+      "isCollapsed": true,
+      "title": "английский",
+      "boxesData": [
+        {
+          "_id": "648c920bb9f34563e51dc7c2",
+          "index": 0,
+          "specialType": "new",
+          "data": {
+            "all": 2,
+            "train": null
+          }
+        },
+        {
+          "_id": "648c920b1ab0db449c60fa6c",
+          "index": 1,
+          "specialType": "none",
+          "data": {
+            "all": 5,
+            "train": 4,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920bf46cf9b533a32075",
+          "index": 2,
+          "specialType": "none",
+          "data": {
+            "all": 3,
+            "train": 0,
+            "wait": 3
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920bf5f065d98a38788b",
+          "index": 3,
+          "specialType": "none",
+          "data": {
+            "all": 5,
+            "train": 3,
+            "wait": 2
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920baf3426c25284a0a1",
+          "index": 4,
+          "specialType": "learnt",
+          "data": {
+            "all": 12,
+            "train": 7,
+            "wait": 5
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        }
+      ],
+      "data": {
+        "all": 27,
+        "train": 16,
+        "wait": 11
+      },
+      "isDeleting": false
     }
   ]
 }

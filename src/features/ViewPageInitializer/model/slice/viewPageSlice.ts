@@ -5,6 +5,7 @@ import { CardSchema } from '@/entities/Card'
 import { fetchCards } from '../services/fetchCards'
 import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
+import { CardSchemaExtended } from '@/entities/Card'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
@@ -21,6 +22,8 @@ const initialState: ViewPageInitializerSchema = {
 	// 
 	shelfId: 'all',
 	boxId: 'new',
+	//
+	selectedCardIds: [],
 	// 
 	multiSelectIsActive: false,
 	columnSettingsIsOpen: false,
@@ -52,8 +55,45 @@ const viewPageSlice = createSlice({
 		setColumnSettingsIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.columnSettingsIsOpen = action.payload
 		},
-		setMultiSelect: (state, action: PayloadAction<boolean>) => {
+		// multiSelect
+		addOrRemoveCardFromSelectedCardId: (state, action: PayloadAction<string>) => {
+			if (state.selectedCardIds.includes(action.payload)) {
+				state.selectedCardIds = state.selectedCardIds.filter(cardId => cardId !== action.payload)
+			} else {
+				// возможно тут ошибка!!!
+				state.selectedCardIds.push(action.payload)
+			}
+			if (!state.selectedCardIds.length) {
+				state.multiSelectIsActive = false
+			} else {
+				state.multiSelectIsActive = true
+			}
+		},
+		selectAllCards: (state, action: PayloadAction<string[]>) => {
+			state.selectedCardIds = action.payload
+		},
+		cancelMultiSelect: (state) => {
+			state.selectedCardIds = []
+			state.multiSelectIsActive = false
+		},
+		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
 			state.multiSelectIsActive = action.payload
+		},
+		removeCard: (state, action: PayloadAction<CardSchemaExtended>) => {
+			state.cards.find(card => {
+				if (card._id === action.payload._id) {
+					card.deleted = true
+					return true
+				}
+			})
+		},
+		removeSelectedCards: (state) => {
+			state.cards = state.cards.map(card => {
+				if (state.selectedCardIds.includes(card._id)) {
+					card.deleted = true
+				}
+				return card
+			})
 		},
 		// 
 		setActiveBoxId: (state, action: PayloadAction<string | number>) => {
@@ -66,11 +106,11 @@ const viewPageSlice = createSlice({
 		setCardEditModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.cardEditModalIsOpen = action.payload
 		},
-		setCurrentCardData: (state, action: PayloadAction<CardSchema>) => {
+		setCurrentCardData: (state, action: PayloadAction<CardSchemaExtended>) => {
 			if (action.payload._id in state.cardsDataCurrent) null
 			else state.cardsDataCurrent[action.payload._id] = action.payload
 		},
-		setEditCardData: (state, action: PayloadAction<CardSchema>) => {
+		setEditCardData: (state, action: PayloadAction<CardSchemaExtended>) => {
 			const cardId = action.payload._id
 			if (cardId in state.cardsDataEdited) null
 			else {
@@ -137,7 +177,7 @@ const viewPageSlice = createSlice({
 				})
 			.addCase(
 				fetchCards.fulfilled,
-				(state, action: PayloadAction<CardSchema[]>) => {
+				(state, action: PayloadAction<CardSchemaExtended[]>) => {
 					state.isLoading = false
 					state.cards = action.payload
 					state.error = ''

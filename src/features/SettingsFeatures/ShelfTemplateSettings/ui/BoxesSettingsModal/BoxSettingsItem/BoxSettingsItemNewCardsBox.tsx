@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Heading } from '@/shared/ui/Typography';
 import cls from './BoxSettingsItem.module.scss';
 import { motion } from 'framer-motion'
-import { DURATION_SEC } from '@/shared/const/animationConsts';
+import { DURATION_SEC } from '@/shared/const/animation';
 
 interface BoxSettingSpecialBoxProps {
 	type: 'new' | 'learnt'

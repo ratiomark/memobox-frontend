@@ -19,6 +19,7 @@ import { Skeleton } from '@/shared/ui/Skeleton';
 import cls from './CardModalNewCard.module.scss';
 import { getCupboardIsLoading, getCupboardError } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
+import { useWindowHeight } from '@/shared/lib/helpers/hooks/useWindowHeight';
 
 
 interface CardModalNewCardProps {
@@ -39,7 +40,14 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
 	const boxIdCardModal = useSelector(getBoxIndexCardModal)
+	const [height, setHeight] = useState('500px')
 	const refTextArea = useRef() as MutableRefObject<HTMLTextAreaElement>
+	const windowHeight = useWindowHeight()
+
+	useEffect(() => {
+		setHeight(`${windowHeight * 0.8 - 55}px`)
+	}, [windowHeight])
+
 
 	const shelfItems = useMemo(() => {
 		if (cupboardIsLoading) return []
@@ -70,9 +78,9 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	}, [cupboardIsLoading, shelfIdCardModal, cupboardShelves])
 
 	// useEffect(() => {
-		// if (isOpen && refTextArea.current) {
-		// refTextArea.current.focus()
-		// }
+	// if (isOpen && refTextArea.current) {
+	// refTextArea.current.focus()
+	// }
 
 	// })
 
@@ -103,14 +111,14 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	let shelvesAndBoxes;
 	if (cupboardIsLoading) {
 		shelvesAndBoxes = (
-			<div className={cls.grid} >
+			<div className={cls.grid} key='shelvesAndBoxes' >
 				<Skeleton width={200} height={67} />
 				<Skeleton width={200} height={67} />
 			</div>
 		)
 	} else {
 		shelvesAndBoxes = (
-			<div className={cls.grid} >
+			<div className={cls.grid} key='shelvesAndBoxes' >
 				<ListBox
 					label='shelf'
 					value={shelfIdCardModal}
@@ -135,17 +143,23 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseCardModal}
-			max
+			className={cls.cardModalPanel}
+			// max
+			// pane
+			panelWithMainPadding={false}
+		// panelWithBackground={false}
 		// lazy
 		>
 			<div
 				className={cls.cardModal}
 			>
+				<div className={cls.emptySpace} />
 				<VStack
 					className={cls.mainContent}
 					max
 					align='left'
 					gap='gap_32'
+					style={{ height }}
 				>
 					<HStack
 						className={cls.shelvesAndBoxesWrapper}
@@ -174,6 +188,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 					</div>
 
 				</VStack>
+				<div className={cls.emptySpace} />
 				<div className={cls.actions} >
 					<Button>{t('Назад')}</Button>
 					<Button>{t('Сохранить')}</Button>
@@ -228,4 +243,3 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	// 	</Modal>
 	// )
 })
-CardModalNewCard.displayName = 'CardModalNewCard'

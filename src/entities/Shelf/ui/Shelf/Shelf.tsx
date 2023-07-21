@@ -12,9 +12,11 @@ import { useDrag, useDrop } from 'react-dnd';
 import DragDotsIcon from '@/shared/assets/icons/dragDotsIcon2.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { drop } from 'lodash';
+import { Collapsible } from '@/shared/ui/Collapsible';
+import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 
-const dndIsActiveValue = false
-const isCollapsingValue = false
+// const dndIsActiveValue = false
+// const isCollapsingValue = false
 let timerId: number;
 export interface ShelfProps {
 	shelf: ShelfSchema
@@ -83,7 +85,7 @@ export const Shelf = memo((props: ShelfProps) => {
 			dragControls={controls}
 			onDragStart={handleDragStart}
 			onDragEnd={handleDragEnd}
-			drag
+			// drag
 			// transition={{ type: 'spring', stiffness: isDragging ? 40 : 2000 }}
 			// transition={{ type: 'spring', stiffness: isDragging ? 100 : 0, velocity: 0, restSpeed: 0 }}
 			// dragConstraints={{ left: 30, right: 30 }}
@@ -91,11 +93,6 @@ export const Shelf = memo((props: ShelfProps) => {
 			// transition={{ duration: isCollapsing ? 0 : 0.5 }}
 			// transition={isDragging ? { type: 'spring', duration: 1 } : { ease: 'linear', duration: 0.1 }}
 			// transition={{ type: 'spring', stiffness: 900 }}
-			// ref={node => preview(drop(node))}
-			// style={{
-			// transform: isDragging ? 'translateY(-15px) scale(1.5)' : 'none',
-			// 	// transition: 'transform 0.5s ease',
-			// }}
 			className={cls.shelfWrapper}
 		>
 			<div className={cls.handle} >
@@ -124,7 +121,7 @@ export const Shelf = memo((props: ShelfProps) => {
 				</div>
 				{/* <div className={cls.bottomBoxesWrapper} > */}
 
-				<motion.div
+				{/* <motion.div
 					// onClick={toggleExpand}
 					// layout
 					initial={false}
@@ -134,8 +131,15 @@ export const Shelf = memo((props: ShelfProps) => {
 					transition={{ stiffness: 0, velocity: 0 }}
 				>
 					{boxesBlock}
-				</motion.div>
+				</motion.div> */}
 				{/* </div> */}
+				<Collapsible
+					isOpen={!isCollapsed}
+					initial={false}
+					animationDuration={DURATION_SHELF_COLLAPSING_SEC}
+				>
+					{boxesBlock}
+				</Collapsible>
 				{/* <div className={clsx(cls.boxesWrapper, isCollapsed ? cls.collapsed : cls.notCollapsed)}>
 					<div className={cls.inner} >
 						{boxesBlock}

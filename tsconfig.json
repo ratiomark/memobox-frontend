@@ -16,6 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -34,8 +35,9 @@
   },
   "include": [
     "src",
-    "vite-env.d.ts"
-, "src/features/SettingsFeatures/TimeSleepSettings/ui/GeneralHoursMinutesComponent/.tsx"  ],
+    "vite-env.d.ts",
+    "src/features/SettingsFeatures/TimeSleepSettings/ui/GeneralHoursMinutesComponent/.tsx"
+  ],
   "exclude": [
     "./.fttemplates"
   ],

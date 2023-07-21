@@ -27,9 +27,10 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 		isOpen
 	} = props
 	const [shelfName, setShelfName] = useState('')
-	const [inputErrors, setInputErrors] = useState<string[]>([])
+	const [inputErrors, setInputErrors] = useState([])
 	const { t } = useTranslation('translation')
 	const shelfNames = useSelector(getUserShelfNamesList)?.map(shelf => shelf.title)
+
 	const onChangeShelfName = (value: string) => {
 		setShelfName(value)
 		if (shelfNames?.includes(value)) setInputErrors([t('inputs.SHELF_NAME_ALREADY_EXISTS')])

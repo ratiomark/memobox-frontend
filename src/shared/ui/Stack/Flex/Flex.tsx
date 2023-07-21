@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ComponentProps, ElementType, ReactNode, memo } from 'react';
+import { CSSProperties, ComponentProps, ElementType, ReactNode, memo } from 'react';
 import cls from './Flex.module.scss';
 
 export type FlexJustify =
@@ -39,6 +39,7 @@ export type FlexOwnProps<E extends ElementType = ElementType> = {
 	max?: boolean
 	gap?: FlexGap
 	children?: ReactNode
+	style?: CSSProperties
 	as?: E
 }
 

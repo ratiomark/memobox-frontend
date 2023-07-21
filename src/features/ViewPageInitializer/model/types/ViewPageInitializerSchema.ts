@@ -1,8 +1,12 @@
 import { ShelfRepresentedByBoxes } from '@/entities/Box'
-import { CardSchema } from '@/entities/Card'
+import { CardSchema, CardSchemaExtended } from '@/entities/Card'
 import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
 
+
+// export interface CardSchemaExtended extends CardSchema {
+// 	deleted: boolean
+// }
 // export interface ViewPageInitializerSchema {
 // 	shelfId: string
 // 	shelfTitle?: string
@@ -16,7 +20,7 @@ export interface ViewPageInitializerSchema {
 	shelfId: string
 	boxId: string | number
 	_viewPageMounted: boolean
-	cards: CardSchema[]
+	cards: CardSchemaExtended[]
 	isLoading: boolean
 	error: string
 	//
@@ -26,7 +30,7 @@ export interface ViewPageInitializerSchema {
 	multiSelectIsActive: boolean
 	// 
 	cardsDataCurrent: {
-		[key: string]: CardSchema
+		[key: string]: CardSchemaExtended
 	}
 	cardsDataEdited: {
 		[key: string]: {
@@ -38,6 +42,7 @@ export interface ViewPageInitializerSchema {
 	}
 	currentCardId: string
 	cardEditModalIsOpen: boolean
+	selectedCardIds: string[]
 	// shelfTitle?: string
 	// boxId: string
 	shelvesDataSaved: {

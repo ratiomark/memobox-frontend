@@ -5,6 +5,7 @@ import { CSSProperties, MutableRefObject, ReactNode } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Overlay } from '../Overlay/Overlay';
 import { useTheme } from '@/shared/context/useTheme';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface HDialogProps {
 	className?: string
@@ -14,9 +15,11 @@ interface HDialogProps {
 	// initialFocus?: MutableRefObject<HTMLElement | null>
 	max?: boolean
 	lazy?: boolean
-	noBackground?: boolean
 	styles?: CSSProperties
 	unmount?: boolean
+	panelWithMainPadding?: boolean
+	panelWithBackground?: boolean
+	panelAbsolute?: boolean
 }
 
 export const HDialog = (props: HDialogProps) => {
@@ -27,10 +30,12 @@ export const HDialog = (props: HDialogProps) => {
 		onClose,
 		// initialFocus,
 		max = false,
-		noBackground = false,
 		styles,
 		children,
 		unmount,
+		panelWithBackground = true,
+		panelWithMainPadding = true,
+		panelAbsolute,
 	} = props
 	const { theme } = useTheme()
 
@@ -42,24 +47,31 @@ export const HDialog = (props: HDialogProps) => {
 				cls.HDialog,
 				theme,
 				'app_modal',
-				className
-				// !unmount ? 'hidden' :
-			)
-			}
-			unmount={unmount}
-			style={styles}
+			)}
+			// unmount={unmount}
 			// initialFocus={initialFocus}
 			open={isOpen}
 			onClose={onClose}
 		>
+
 			<div className={cls.overlay} />
-			<div className={cls.content} >
+
+			<div className={cls.content}>
 				<Dialog.Panel
-					className={max ? cls.panelMax : cls.panel}
+					className={clsx(
+						cls.panel,
+						{ [cls.panelPaddingMain]: panelWithMainPadding },
+						{ [cls.panelMax]: max },
+						{ [cls.panelBg]: panelWithBackground },
+						{ [cls.panelAbsolute]: panelAbsolute },
+						className
+					)}
+					style={styles}
 				>
 					{children}
 				</Dialog.Panel>
 			</div>
-		</Dialog>
+
+		</Dialog >
 	)
 }

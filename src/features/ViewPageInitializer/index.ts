@@ -1,3 +1,5 @@
+export { getViewPageSelectedCardIds } from './model/selectors/getViewPageMultiSelect';
+
 export {
 	getViewPageEditModalIsOpen,
 	getViewPageEditedData,
@@ -22,6 +24,8 @@ export {
 	getViewPageMultiSelectIsActive,
 	getViewPageBoxIdChecked,
 } from './model/selectors/getViewPageInitializer';
+
+
 
 export { viewPageReducer, viewPageActions } from './model/slice/viewPageSlice';
 export type { ViewPageInitializerSchema } from './model/types/ViewPageInitializerSchema';

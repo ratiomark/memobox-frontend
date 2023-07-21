@@ -4,7 +4,7 @@ import { Icon } from '@/shared/ui/Icon';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './ShelfButtons.module.scss';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
@@ -13,6 +13,9 @@ import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { SettingButton } from '../SettingsButton/SettingsButton';
 import { ShelfSchema, useUpdateShelfWithTagMutation } from '@/entities/Shelf';
+import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
+import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce';
+import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 
 
 interface ShelfButtonsProps {
@@ -79,13 +82,18 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 
 	const onViewClick = () => {
 		navigate(obtainRouteView(shelfId))
-		// navigate(obtainRouteView(shelfIndexEdited.toString()))
 	}
+
 
 	const onCollapseClickHandle = useCallback(() => {
 		onCollapseClick(shelfId, !isCollapsed)
 		updateShelfMutation({ ...props.shelf, isCollapsed: !isCollapsed })
 	}, [onCollapseClick, shelfId, isCollapsed, updateShelfMutation, props.shelf])
+
+	const onCollapseClickHandleDebounced = useThrottle(
+		onCollapseClickHandle,
+		DURATION_SHELF_COLLAPSING_SEC * 1000 + 10
+	)
 
 	const { t } = useTranslation()
 
@@ -96,7 +104,6 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		>
 			<Button
 				fontWeight='300'
-
 				// className={cls.button}
 				onClick={onAddNewCardHandle}
 				data-button-type="shelf-add-card"
@@ -129,7 +136,8 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 				clickable
 				type='hint'
 				Svg={ArrowBottomIcon}
-				onClick={onCollapseClickHandle}
+				onClick={onCollapseClickHandleDebounced}
+			
 			/>
 		</div>
 	)

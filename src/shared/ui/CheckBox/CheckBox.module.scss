@@ -12,6 +12,9 @@
 
 .checkBox {
   cursor: pointer;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  accent-color: var(--accent);
 
   // color: red;
   // accent-color: var(--accent);

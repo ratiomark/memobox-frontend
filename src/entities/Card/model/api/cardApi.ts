@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import { CardSchema } from '../types/CardSchema';
+import { CardSchema, CardSchemaExtended } from '../types/CardSchema';
 
 export const cardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
@@ -13,11 +13,14 @@ export const cardApi = rtkApi.injectEndpoints({
 				}
 			}),
 		}),
-		getAllCards: build.query<CardSchema[], void>({
+		getAllCards: build.query<CardSchemaExtended[], void>({
 			query: () => ({
 				url: '/cards',
 				method: 'GET',
 			}),
+			transformResponse: (response: CardSchema[], meta, arg) => { 
+				return response.map(card=>({...card, deleted: false}))
+			}
 		}),
 		getBoxByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
 			query: ({ shelfId, boxId }) => ({

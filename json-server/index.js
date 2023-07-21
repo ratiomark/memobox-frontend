@@ -66,17 +66,76 @@ server.post('/login', (req, res) => {
 	}
 });
 
-server.get('/cupboard', (req, res) => {
+server.get('/cupboard', async (req, res) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
 
-	const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
+		const db = JSON.parse(data);
+		const responseData = {
+			commonShelf: db.commonShelf,
+			shelves: db.shelves
+		};
+		res.send(responseData);
+	})
+	// const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
 	// console.log(db)
-	const responseData = {
-		commonShelf: db.commonShelf,
-		shelves: db.shelves
-	};
+	// const responseData = {
+	// 	commonShelf: db.commonShelf,
+	// 	shelves: db.shelves
+	// };
 
-	res.json(responseData);
+	// res.json(responseData);
 
+});
+// server.put('/shelves', (req, res) => {
+// 	const newShelves = req.body;
+// 	// console.log(newShelves)
+// 	// Читаем текущий файл JSON
+// 	const db = JSON.parse(fs.readFileSync(path.join(__dirname, 'db.json'), 'UTF-8'))
+// 	// console.log(db)
+
+// 	db.shelves = newShelves;
+
+// 	// Перезаписываем файл JSON с обновленными данными
+// 	fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8');
+
+// 	// Отправляем обновленные данные обратно клиенту
+// 	res.send(newShelves);
+// });
+
+
+server.put('/shelves', (req, res) => {
+	const newShelves = req.body;
+
+	// Читаем текущий файл JSON
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+
+		// Обновляем поле shelves
+		db.shelves = newShelves;
+
+		// Перезаписываем файл JSON с обновленными данными
+		fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
+			if (err) {
+				console.error(err);
+				res.status(500).send({ message: 'Server error' });
+				return;
+			}
+
+			// Отправляем обновленные данные обратно клиенту
+			res.send(newShelves);
+		});
+	});
 });
 
 // проверяем, авторизован ли пользователь

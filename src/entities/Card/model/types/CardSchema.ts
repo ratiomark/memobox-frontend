@@ -16,3 +16,7 @@ export interface CardSchema {
 	createdAt: string
 	lastTraining: string
 }
+
+export interface CardSchemaExtended extends CardSchema {
+	deleted: boolean
+}

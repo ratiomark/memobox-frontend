@@ -15,9 +15,11 @@ interface IconBaseProps extends SvgProps {
 interface UnClickableProps extends IconBaseProps {
 	clickable?: false
 }
+
 interface ClickableProps extends IconBaseProps {
 	clickable: true
 	onClick: (() => void) | ((e: MouseEvent<any>) => void)
+	// preventClick?: boolean
 }
 
 type IconProps = UnClickableProps | ClickableProps
@@ -38,7 +40,7 @@ export const Icon = (props: IconProps) => {
 			<button
 				style={{ width, height }}
 				type='button'
-				onClick={props.onClick}
+				onClick={	props.onClick}
 				className={clsx(cls.button, className)}
 			>
 				<Svg

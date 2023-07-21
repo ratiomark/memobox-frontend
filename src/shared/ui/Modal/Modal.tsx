@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import { Portal } from '../Portal/Portal';
 import cls from './Modal.module.scss'
 import { Overlay } from '../Overlay/Overlay';
@@ -13,6 +13,8 @@ interface ModalProps {
 	lazy?: boolean;
 	onClose?: () => void;
 	animationDelay?: number
+	style?: CSSProperties
+	panelAbsolute?: boolean
 }
 
 export const Modal = (props: ModalProps) => {
@@ -22,7 +24,9 @@ export const Modal = (props: ModalProps) => {
 		isOpen,
 		onClose,
 		lazy,
-		animationDelay = 300
+		animationDelay = 300,
+		style,
+		panelAbsolute = false,
 	} = props
 	const { theme } = useTheme()
 	const {
@@ -42,7 +46,13 @@ export const Modal = (props: ModalProps) => {
 		<Portal>
 			<div className={clsx(cls.Modal, mods, className, theme, 'app_modal')} >
 				<Overlay onClick={onCloseHandler} />
-				<div className={cls.content} >
+				<div
+					style={style}
+					className={clsx(
+						// cls.content
+						{ [cls.panelAbsolute]: panelAbsolute }
+					)}
+				>
 					{children}
 				</div>
 			</div>

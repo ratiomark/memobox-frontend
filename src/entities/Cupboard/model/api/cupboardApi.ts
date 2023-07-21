@@ -52,9 +52,10 @@ export const cupboardApi = rtkApi.injectEndpoints({
 				// params: { id: arg.id },
 				method: 'PUT',
 				// headers: {
+
 				// 	'Content-Type': 'application/json'
 				// },
-				body: JSON.stringify(arg)
+				body: arg
 				// body: { isCollapsed: arg.isCollapsed }
 			}),
 			invalidatesTags: ['Shelves']

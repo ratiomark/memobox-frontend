@@ -17,6 +17,8 @@ import {
 } from '../../../model/selectors/getBoxTimingSetterModal';
 import { TimeSetter } from '@/shared/ui/TimeSetter';
 import { useEffect, useRef, useState } from 'react';
+import { Modal } from '@/shared/ui/Modal/Modal';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface MissedTrainingSettingsProps {
 	className?: string
@@ -51,6 +53,7 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 			const timeSetterRect = timeSetter.getBoundingClientRect()
 			timeSetterSizes.current.height = timeSetterRect.height
 			timeSetterSizes.current.width = timeSetterRect.width
+			console.log(timeSetterSizes)
 			const cupboardShelfList = document.querySelector('#cupboardShelfList') as HTMLDivElement
 			const cupboardShelfListSizes = cupboardShelfList.getBoundingClientRect()
 			cupboardShelfListRects.current.x = cupboardShelfListSizes.x
@@ -86,37 +89,34 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 		// dispatch(cupboardShelfListActions.dropMissedTrainingShelfAndBoxId())
 	}
 
-	const onSaveMissedTraining = () => {
+	const onSaveTime = () => {
+		dispatch(cupboardShelfListActions.setTimingSetterModalIsOpen(false))
 		// if (!boxId) {
 		// 	// console.log(value.value)
 		// 	updateShelfMutation({ id: shelfId, missedTrainingAction: value.value as MissedTrainingValues })
 		// 	onCloseHandle()
 		// }
 	}
-	console.log('Окно открыто')
+
 	return (
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseHandle}
-			unmount={false}
+			panelAbsolute
+			panelWithMainPadding={false}
+			styles={{ left: coordinatesChecked.x, top: coordinatesChecked.y }}
+		// lazy
 		>
-			<div
-				className={clsx(
-					cls.BoxTimeSetter,
-					className)}
-				style={{ left: coordinatesChecked.x, top: coordinatesChecked.y }}
-			>
-				<TimeSetter
-					timingData={timingData}
-					// styles={{ left: coordinates.x, top: coordinates.y }}
-					onClose={onCloseHandle}
-					onSaveTime={() => { }}
-				/>
-				{/* <HStack justify='between' max>
+			<TimeSetter
+				timingData={timingData}
+				onClose={onCloseHandle}
+				onSaveTime={onSaveTime}
+			/>
+			{/* <HStack justify='between' max>
 					<Button onClick={onCloseHandle}>{t('cancel')}</Button>
 					<Button onClick={onSaveMissedTraining} variant='filled'>{t('save')}</Button>
 				</HStack> */}
-			</div>
-		</HDialog>
+		</HDialog >
 	)
 }
+

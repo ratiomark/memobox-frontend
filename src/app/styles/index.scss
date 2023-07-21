@@ -49,10 +49,9 @@ body.dragging * {
 }
 
 // *:focus {
-// outline: none;
-// box-shadow: 0 0 5px 3px rgba(#33d69f, 0.2), 0 0 1px 1px rgba(#33d69f, 0.8);
-
-// border: 1px solid var(--accent);
+//   outline: none;
+//   box-shadow: 0 0 5px 3px rgba(#33d69f, 0.2), 0 0 1px 1px rgba(#33d69f, 0.8);
+//   border: 1px solid var(--accent);
 // }
 
 // .bottom_left {
@@ -104,7 +103,7 @@ body.dragging * {
 
 ::-webkit-scrollbar {
   /* Укажи ширину вертикального скроллбара */
-  width: 5px;
+  width: var(--scroll-bar-main-width);
   height: 5px;
 
   // margin-right: 20px;

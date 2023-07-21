@@ -4,6 +4,7 @@ import cls from './MultiSelectScreen.module.scss';
 import { useSelector } from 'react-redux';
 import { getViewPageMultiSelectIsActive } from '@/features/ViewPageInitializer';
 import { Button } from '@/shared/ui/Button';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 interface MultiSelectScreenProps {
 	className?: string
@@ -17,9 +18,13 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 		onSelectAllCards,
 		onCancelMultiSelect
 	} = props
+	// useHotkeys('a', () => onCancelMultiSelect())
+	// useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true, preventDefault: true, })
+	// useHotkeys(positionTextTrain, startTraining,)
+
 	const multiSelectIsActive = useSelector(getViewPageMultiSelectIsActive)
 
-	const { t } = useTranslation()
+	const { t } = useTranslation('viewPage')
 
 	if (!multiSelectIsActive) return null
 

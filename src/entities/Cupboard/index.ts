@@ -6,5 +6,6 @@ export {
 	cupboardGetShelves,
 	cupboardGetData,
 	useGetCupboardDataQuery,
-	useGetShelvesQuery
+	useGetShelvesQuery,
+	useUpdateShelvesOrderMutation,
 } from './model/api/cupboardApi'

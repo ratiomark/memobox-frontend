@@ -202,9 +202,22 @@
 .cancel {
   border: var(--border-cancel);
   background: none;
+  color: var(--cancel);
+
+  // &.attention {
+  //   color: var(--cancel);
+  //   background: var(--red-light);
+  //   border: 1px solid  var(--red-light);
+
+  //   &:hover {
+  //     background-color: transparent;
+  //     color: var(--red-light);
+  //   }
+  // }
 
   &:hover {
-    color: var(--cancel);
+    background-color: var(--cancel);
+    color: var(--button-filled-text-color);
 
     .addonLeft svg,
     .addonRight svg {

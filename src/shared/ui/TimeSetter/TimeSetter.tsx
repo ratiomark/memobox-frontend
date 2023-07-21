@@ -28,10 +28,10 @@ interface TimeSetterProps {
 	styles?: CSSProperties
 }
 
+let singleSetterMaxWidth: number;
 export const TimeSetter = (props: TimeSetterProps) => {
 	const {
 		className,
-		styles,
 		timingData = timingDataDefault,
 		// minutes: minutesProps = 0,
 		// hours: hoursProps = 0,
@@ -39,12 +39,12 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		// weeks: weeksProps = 0,
 		// months: monthsProps = 0,
 		onClose,
-		lockSelector = '[data-testid="MainPage"]',
+		// lockSelector = '[data-testid="MainPage"]',
 		overlay = true,
 		onSaveTime,
 	} = props
-	const [locked, setLocked] = useLockedBody(false, lockSelector)
-	// const {}
+	// const [locked, setLocked] = useLockedBody(false, lockSelector)
+	// const timeSetterRef = useRef<HTMLDivElement>()
 	const [minutes, setMinutes] = useState(timingData.minutes)
 	const [hours, setHours] = useState(timingData.hours)
 	const [days, setDays] = useState(timingData.days)
@@ -56,7 +56,6 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	// const [weeks, setWeeks] = useState(weeksProps)
 	// const [months, setMonths] = useState(monthsProps)
 	const [disabled, setDisabled] = useState(false)
-	const timeSetterRef = useRef<HTMLDivElement>()
 
 
 	const onSaveTimeHandle = () => {
@@ -70,17 +69,17 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	}, [minutes, hours, days, weeks, months])
 
 	useEffect(() => {
-		const singleSetters = document.querySelectorAll('[data-time-setter="time-setter"]') as NodeListOf<HTMLDivElement>
-		const singleSettersWidthList: number[] = []
-		singleSetters.forEach(button => singleSettersWidthList.push(button.clientWidth))
-		const singleSetterMaxWidth = Math.ceil(Math.max(...singleSettersWidthList))
+		const singleSetters = document.querySelectorAll('[data-time-setter="time-setter-single-setter-component"]') as NodeListOf<HTMLDivElement>
+		if (!singleSetterMaxWidth) {
+			const singleSettersWidthList: number[] = []
+			singleSetters.forEach(button => singleSettersWidthList.push(button.clientWidth))
+			singleSetterMaxWidth = Math.ceil(Math.max(...singleSettersWidthList))
+			console.log('Установленна одинаковая ширина столбцов')
+		}
 		singleSetters.forEach(div => div.style.minWidth = `${singleSetterMaxWidth + 2}px`)
 	}, [])
 
-	useEffect(() => {
-		// timeSetterRef.current && timeSetterRef.current.addEventListener('click', closeTimeSetter)
-		// return () => window.removeEventListener('click', closeTimeSetter)
-	}, [])
+
 
 	// useEffect(() => {
 	// 	setLocked(true)
@@ -160,7 +159,6 @@ export const TimeSetter = (props: TimeSetterProps) => {
 				cls.TimeSetter,
 				className
 			)}
-			style={styles}
 			id='timeSetter'
 		// ref={timeSetterRef}
 		>
@@ -226,6 +224,6 @@ export const TimeSetter = (props: TimeSetterProps) => {
 				</Portal>
 			} */}
 		</div>
-		// </div >
+
 	)
 }

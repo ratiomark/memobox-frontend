@@ -31,12 +31,14 @@ import { AnimatePresence, Reorder } from 'framer-motion';
 import { BoxTimeSetterModal } from './Modals/BoxTimeSetterModal/BoxTimeSetterModal';
 import { CardModalNewCard } from './Modals/CardModalNewCard/CardModalNewCard';
 import { TimeSetter } from '@/shared/ui/TimeSetter';
-import { useUpdateShelvesOrderMutation } from '@/entities/Cupboard/model/api/cupboardApi';
+import { useUpdateShelvesOrderMutation } from '@/entities/Cupboard';
 
 interface CupboardShelfListProps {
 	className?: string
 }
 let timerId: number;
+let reorderTimerId: number;
+const tepmt = 0;
 
 export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const {
@@ -50,13 +52,26 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 	const [updateShelvesMutation] = useUpdateShelvesOrderMutation()
 	// const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
+	// useEffect(() => {
+	// 	console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+		
+	// }, [])
+	
 
 	// useEffect(() => {
-		// updateShelvesOrder
+	// 	if (cupboardShelves.length > 0) {
+	// 		if (tepmt === 0) {
+	// 			tepmt = 1
+	// 			return
+	// 		}
+	// 		reorderTimerId = setTimeout(() => {
+	// 			updateShelvesMutation(cupboardShelves)
+	// 		}, 1500)
+	// 	}
+	// 	return () => clearTimeout(reorderTimerId)
+	// }, [cupboardShelves, updateShelvesMutation])
 
-	// }, [cupboardShelves])
-
-	console.log(cupboardShelves)
+	// console.log(cupboardShelves)
 	useEffect(() => {
 		if (!cupboardIsLoading) {
 			timerId = setTimeout(() => {
@@ -160,6 +175,12 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			{/* <DndShelfListWrapper> */}
 			<Reorder.Group
 				values={cupboardShelves}
+				onDragEnd={(event, info) => {
+					console.log(info.point.x, info.point.y)
+					console.log(event)
+					console.log(info)
+				}
+				}
 				onReorder={reorderShelves}
 			// style={{ overflow: 'hidden' }}
 			>

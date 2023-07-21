@@ -1,5 +1,6 @@
 import { getJsonSavedData, getUserAuthData } from '@/entities/User';
 import { ViewPageInitializer } from '@/features/ViewPageInitializer';
+import { CardScroller } from '@/shared/ui/CardScroller';
 import { BoxesListViewWidget } from '@/widgets/BoxesListViewWidget';
 import { CardListViewWidget } from '@/widgets/CardListViewWidget';
 import { Page } from '@/widgets/Page';
@@ -14,6 +15,10 @@ const ViewPage = memo(() => {
 	return (
 		<>
 			<Page saveScroll={false} data-testid='MainPage'>
+				{/* <div style={{ width: 700 }}>
+
+					<CardScroller />
+				</div> */}
 				<ViewPageInitializer
 					statsAndActionsViewPageBlock={<StatsAndActionsViewPageWidget />}
 					shelvesListViewPageBlock={<ShelvesListViewWidget />}

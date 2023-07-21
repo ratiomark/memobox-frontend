@@ -1,13 +1,17 @@
 .TimeSetter {
   // display: flex;
+  // flex-direction: column;
+
   // gap: 20px;
   // min-width: 500px;
   background: white;
   box-shadow: rgb(0 0 0 / 10%) 0 4px 6px -1px, rgb(0 0 0 / 6%) 0 2px 4px -1px;
-  position: relative;
+
+  // position: relative;
   padding: 20px;
   border-radius: 4px;
   z-index: 100;
+  width: fit-content;
   max-width: fit-content;
 
   // isolation: isolate;
@@ -15,7 +19,8 @@
 
 .setterWrapper {
   margin-bottom: 20px;
-  position: relative;
+
+  // position: relative;
   z-index: 100;
 
   // isolation: isolate;

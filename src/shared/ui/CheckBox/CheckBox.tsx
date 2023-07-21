@@ -16,20 +16,18 @@ export const CheckBox = (props: CheckBoxProps) => {
 		isChecked,
 		onClick,
 	} = props
-	// const [isCheckedLocal, setIsCheckedLocal] = useState(isChecked)
-	const handleChange = (e: ChangeEvent) => {
-		// e.stopPropagation()
-		// console.log('CHANGE')
-		// setIsCheckedLocal(!isCheckedLocal)
+	
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		onClick(e)
+		e.target.blur();
 	}
-	// console.log(isChecked, isCheckedLocal)
+	
 	return (
 		<input
 			type="checkbox"
 			checked={isChecked}
 			onChange={handleChange}
-			className={cls.checkBox}
+			className={clsx(cls.checkBox, className)}
 		/>
 
 	)

@@ -22,7 +22,7 @@
 // }
 
 .content {
-  padding: 20px 4px 20px 20px;
+  // padding: 20px 4px 20px 20px;
   width: min(1200px, 80%);
 
   // height: 100%;
@@ -32,6 +32,10 @@
   border-radius: 12px;
   transform: scale(0.5);
   transition: transform 0.3s;
+}
+
+.panelAbsolute {
+  position: absolute;
 }
 
 .opened {

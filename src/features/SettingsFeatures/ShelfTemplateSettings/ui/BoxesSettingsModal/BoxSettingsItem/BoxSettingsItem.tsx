@@ -20,7 +20,7 @@ import { settingsShelfTemplateActions } from '../../../model/slice/shelfTemplate
 import { delay } from '@reduxjs/toolkit/dist/utils';
 import { AddBoxIcon } from './AddBoxIcon';
 import { StateSchema } from '@/app/providers/StoreProvider';
-import { DURATION_MILLISEC, DURATION_SEC, } from '@/shared/const/animationConsts';
+import { DURATION_MILLISEC, DURATION_SEC, } from '@/shared/const/animation';
 
 interface BoxSettingsItemProps {
 	className?: string

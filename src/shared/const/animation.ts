@@ -1,0 +1,3 @@
+export const DURATION_SEC = 0.5
+export const DURATION_MILLISEC = 500
+export const DURATION_SHELF_COLLAPSING_SEC = 0.3

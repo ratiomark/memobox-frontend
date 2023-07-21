@@ -29,7 +29,7 @@ export const SingleSetter = (props: TimeSetterProps) => {
 		title,
 		disabled,
 	} = props
-	
+
 	const divRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -100,7 +100,7 @@ export const SingleSetter = (props: TimeSetterProps) => {
 		<div
 			className={cls.timeWrapper}
 			ref={divRef}
-			data-time-setter="time-setter"
+			data-time-setter="time-setter-single-setter-component"
 		>
 			{title && <MyText className={cls.title} text={title} />}
 			{arrowUp}

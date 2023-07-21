@@ -139,11 +139,13 @@ export const Box = (props: BoxPropsBase) => {
 
 		const onClose = () => setIsTimeSetterOpen(false)
 		const onOpenTimeSetterHandle = (e: MouseEvent) => {
-			// const x = e.clientX
-			// const y = e.clientY
-			const coordinates = { x: e.clientX, y: e.clientY }
+			const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+			// передаю координаты центра элемента по которому призошел клик
+			const coordinates = {
+				x: x + width / 2,
+				y: y + height / 2
+			}
 			onOpenTimeSetter(coordinates, boxItem.timing, boxItem._id)
-			// console.log(`Координаты кнопки: X=${x}, Y=${y}`);
 		}
 
 		const buttons = (
