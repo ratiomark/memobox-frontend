@@ -1,12 +1,43 @@
-.substitute {
-  height: 162px;
-}
-
 .BoxesBlock {
   display: flex;
   gap: 15px;
+
+  // padding: 15px 10px 10px;
+
+  // overflow: auto;
+  // overflow-x: scroll;
+  // overflow-y: hidden;
+
+  // &::-webkit-scrollbar-thumb {
+  //   /* Укажи цвет скроллбара */
+  //   background: #97979751;
+
+  //   /* Укажи радиус скругления скроллбара */
+  //   border-radius: 10px;
+  // }
+}
+
+.commonWrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.setBoxesLeft {
+  left: 0;
+
+  // padding-bottom: 50px;
+}
+
+.substitute {
+  position: relative;
+  height: 215px;
   padding: 15px 10px 10px;
-  overflow: auto;
+
+  // padding-bottom: 50px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  // margin-left: 100px;
 
   &::-webkit-scrollbar-thumb {
     /* Укажи цвет скроллбара */

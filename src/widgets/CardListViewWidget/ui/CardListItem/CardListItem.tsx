@@ -12,9 +12,9 @@ import { useSelector } from 'react-redux';
 import { ChangeEvent, MouseEvent, SyntheticEvent, useMemo, useState } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
 import { AnimatePresence, motion } from 'framer-motion'
-import { Collapsible } from '@/shared/ui/Collapsible';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { Button } from '@/shared/ui/Button';
+import { Collapsible } from '@/shared/ui/Animations';
 
 const animations = {
 	selected: {
@@ -136,7 +136,7 @@ export const CardListItem = (props: CardListItemProps) => {
 			initial={false}
 			isOpen={!card.deleted}
 		>
-		
+
 			<motion.li
 				// variants={liAnimations}
 				// initial='hidden'
@@ -162,9 +162,9 @@ export const CardListItem = (props: CardListItemProps) => {
 						<MyText text={card.answer} className={cls.mainContent} />
 					</div>
 					{columnsRendered}
-					<Button disabled={multiSelectIsActive} onClick={onDeleteCard}>del</Button>
+					{/* <Button disabled={multiSelectIsActive} onClick={onDeleteCard}>del</Button> */}
 				</motion.div>
-		</motion.li>
+			</motion.li>
 
 
 		</Collapsible>

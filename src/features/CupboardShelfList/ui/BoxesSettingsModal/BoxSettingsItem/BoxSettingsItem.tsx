@@ -61,7 +61,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 			>
 				remove
 			</Button>
-			{isTimeSetterOpen &&
+			{/* {isTimeSetterOpen &&
 				<div className={cls.timeSetter} >
 					<TimeSetter
 						minutes={boxItem.timing.minutes}
@@ -73,7 +73,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 						onClose={onClose}
 					/>
 				</div>
-			}
+			} */}
 			<p>Время</p>
 		</div>
 	)

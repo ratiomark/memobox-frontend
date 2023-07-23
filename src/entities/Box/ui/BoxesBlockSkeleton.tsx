@@ -8,9 +8,9 @@ export const BoxesBlockSkeleton = () => {
 	return (
 		<div className={cls.BoxesBlock}
 		>
-			<Skeleton width={150} height={137}/>
-			<Skeleton width={150} height={137}/>
-			<Skeleton width={150} height={137}/>
+			<Skeleton width={150} height={166} />
+			<Skeleton width={150} height={166} />
+			<Skeleton width={150} height={166} />
 		</div>
 	)
 }

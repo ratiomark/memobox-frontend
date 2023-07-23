@@ -4,7 +4,7 @@ import { Icon } from '@/shared/ui/Icon';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CommonShelfButtons.module.scss';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,9 @@ import { useSelector } from 'react-redux';
 import { getCupboardCommonShelfCollapsed } from '../../model/selectors/getCupboardShelfList';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../..';
+import { useUpdateCommonShelfMutation } from '@/entities/Shelf';
+import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
+import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 
 interface ShelfButtonsProps {
 	className?: string
@@ -25,6 +28,8 @@ export const CommonShelfButtons = (props: ShelfButtonsProps) => {
 	const {
 		className,
 	} = props
+	const [updateCommonShelfMutation] = useUpdateCommonShelfMutation()
+
 	const navigate = useNavigate()
 	const startTraining = () => {
 		navigate(obtainRouteTraining('all', 'all'))
@@ -36,9 +41,17 @@ export const CommonShelfButtons = (props: ShelfButtonsProps) => {
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
 	const dispatch = useAppDispatch()
 
-	const onCollapseClick = () => {
+	const onCollapseClick = useCallback(() => {
+		console.log('commonShelfCollapsed   ', commonShelfCollapsed)
+		updateCommonShelfMutation(!commonShelfCollapsed)
 		dispatch(cupboardShelfListActions.setCommonShelfCollapsed(!commonShelfCollapsed))
-	}
+	}, [dispatch, updateCommonShelfMutation, commonShelfCollapsed,])
+
+	const onCollapseClickHandle = useThrottle(
+		onCollapseClick,
+		DURATION_SHELF_COLLAPSING_SEC * 1000 + 10,
+		{ leading: true, trailing: false }
+	)
 
 	const { t } = useTranslation()
 
@@ -67,7 +80,7 @@ export const CommonShelfButtons = (props: ShelfButtonsProps) => {
 				clickable
 				type='hint'
 				Svg={ArrowBottomIcon}
-				onClick={onCollapseClick}
+				onClick={onCollapseClickHandle}
 			/>
 			{/* <ButtonIcon
 				className={cls.buttonIcon}

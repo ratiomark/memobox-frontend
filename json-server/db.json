@@ -1990,12 +1990,12 @@
       "train": 52,
       "wait": 48
     },
-    "isCollapsed": false
+    "isCollapsed": true
   },
   "shelves": [
     {
       "id": "648c920baa3edb04cec38442",
-      "index": 1,
+      "index": 0,
       "isCollapsed": true,
       "title": "math",
       "boxesData": [
@@ -2077,8 +2077,110 @@
           }
         },
         {
-          "_id": "648c920bb89bead4305761a6",
+          "_id": "648c920b42ff6a1w83c9537e2",
           "index": 5,
+          "specialType": "none",
+          "data": {
+            "all": 2,
+            "train": 1,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920b42ff6a183dc9537e2",
+          "index": 6,
+          "specialType": "none",
+          "data": {
+            "all": 2,
+            "train": 1,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920b42ff6a183c953a7e2",
+          "index": 7,
+          "specialType": "none",
+          "data": {
+            "all": 2,
+            "train": 1,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "6488c920b42ff6a183c953a7e2",
+          "index": 8,
+          "specialType": "none",
+          "data": {
+            "all": 2,
+            "train": 1,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "6498c920b42ff6a183c953a7e2",
+          "index": 9,
+          "specialType": "none",
+          "data": {
+            "all": 2,
+            "train": 1,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "64810c920b42ff6a183c953a7e2",
+          "index": 10,
+          "specialType": "none",
+          "data": {
+            "all": 2,
+            "train": 1,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "64811c920bb89bead4305761a6",
+          "index": 11,
           "specialType": "learnt",
           "data": {
             "all": 5,
@@ -2099,7 +2201,8 @@
         "train": 9,
         "wait": 7
       },
-      "isDeleting": false
+      "isDeleting": false,
+      "missedTrainingAction": "additional"
     },
     {
       "id": "648c920b07d1f8f9ed46604e",
@@ -2190,11 +2293,12 @@
         "train": 9,
         "wait": 11
       },
-      "isDeleting": false
+      "isDeleting": false,
+      "missedTrainingAction": "backwards"
     },
     {
       "id": "648c920b3e40b5930a6e1603",
-      "index": 2,
+      "index": 1,
       "isCollapsed": true,
       "title": "books",
       "boxesData": [

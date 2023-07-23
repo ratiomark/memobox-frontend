@@ -1,15 +1,14 @@
-import { createEntityAdapter, createSelector, createSlice, EntityId, IdSelector, PayloadAction, SerializedError } from '@reduxjs/toolkit'
-import { CupboardPageSchema } from '../types/CupboardPageSchema'
-import { User } from '@/entities/User'
-import { setFeatureFlag } from '@/shared/lib/features'
-import { fetchCupboardData } from '../services/fetchCupboardData'
+import { StateSchema } from '@/app/providers/StoreProvider'
+import { BoxCoordinates } from '@/entities/Box'
 import { CupboardSchema } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
-import { StateSchema } from '@/app/providers/StoreProvider'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import { timingDataDefault } from '@/shared/const/timingBlock'
+import { localDataService } from '@/shared/lib/helpers/common/localStorage'
 import { TimingBlock } from '@/shared/types/DataBlock'
-import { BoxCoordinates } from '@/entities/Box'
+import { createEntityAdapter, createSlice, EntityId, PayloadAction, SerializedError } from '@reduxjs/toolkit'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
+import { fetchCupboardData } from '../services/fetchCupboardData'
+import { CupboardPageSchema } from '../types/CupboardPageSchema'
 
 const initialState: CupboardPageSchema = {
 	isLoading: true,
@@ -155,6 +154,14 @@ const cupboardShelfList = createSlice({
 			state.isLoading = false
 			state.commonShelf = commonShelf
 			state.newCardModal.shelfId = cupboard.shelves[0].id
+			// localDataService.setShelves(cupboard.shelves)
+			// const setToLSList = cupboard.shelves.map(shelf => {
+			// 	return {
+			// 		...shelf,
+			// 		// title: shelf.title, index: shelf.index, isCollapsed: shelf.isCollapsed, id: shelf.id,
+			// 	}
+			// })
+			// storage.setItem('shelves', setToLSList)
 			shelvesAdapter.setAll(state, cupboard.shelves)
 			state.cupboardData = {
 				all: commonShelf.data.all,
@@ -165,6 +172,11 @@ const cupboardShelfList = createSlice({
 
 		updateIndexes: (state, action: PayloadAction<Array<{ id: EntityId, changes: { index: number } }>>) => {
 			shelvesAdapter.updateMany(state, action.payload)
+			// const a = shelvesAdapter.updateMany(state, action.payload)
+			// const e = a.entities
+			// const shelves = Object.entries(e)
+			// const sss = shelves.so
+			// localDataService.setShelves(a.entities)
 			// const currentShelf = shelvesAdapter.selectAll
 		},
 		reorderShelves: (state, action: PayloadAction<ShelfSchema[]>) => {
@@ -181,6 +193,11 @@ const cupboardShelfList = createSlice({
 			shelvesAdapter.removeOne(state, action.payload)
 		},
 		updateShelf: shelvesAdapter.updateOne,
+		// updateShelvesInLocalData: (state) => {
+		// 	// const shelvesEnteties = shelvesAdapter.
+
+		// },
+
 	},
 
 	extraReducers: (builder) => {

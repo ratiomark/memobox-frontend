@@ -12,7 +12,7 @@ import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { SettingButton } from '../SettingsButton/SettingsButton';
-import { ShelfSchema, useUpdateShelfWithTagMutation } from '@/entities/Shelf';
+import { ShelfSchema, useUpdateShelfMutation, useUpdateShelfWithTagMutation } from '@/entities/Shelf';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
@@ -39,7 +39,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		onAddNewCardClick,
 		onCollapseClick,
 	} = props
-	const [updateShelfMutation] = useUpdateShelfWithTagMutation()
+	const [updateShelfMutation] = useUpdateShelfMutation()
 
 	const shelfIndexEdited = shelfIndex + 1
 	let positionTextCard = '';
@@ -86,59 +86,63 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 
 
 	const onCollapseClickHandle = useCallback(() => {
+		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!click')
 		onCollapseClick(shelfId, !isCollapsed)
 		updateShelfMutation({ ...props.shelf, isCollapsed: !isCollapsed })
 	}, [onCollapseClick, shelfId, isCollapsed, updateShelfMutation, props.shelf])
 
 	const onCollapseClickHandleDebounced = useThrottle(
 		onCollapseClickHandle,
-		DURATION_SHELF_COLLAPSING_SEC * 1000 + 10
+		DURATION_SHELF_COLLAPSING_SEC * 1000 + 100,
+		{ leading: true, trailing: false }
 	)
 
 	const { t } = useTranslation()
 
 	return (
-		<div className={clsx(
-			cls.ShelfButtons,
-			[className])}
-		>
-			<Button
-				fontWeight='300'
-				// className={cls.button}
-				onClick={onAddNewCardHandle}
-				data-button-type="shelf-add-card"
+		<div>
+			<div className={clsx(
+				cls.ShelfButtons,
+				[className])}
 			>
-				{t('Add card with hot key') + ` (${positionTextCard})`}
-			</Button>
+				<Button
+					fontWeight='300'
+					// className={cls.button}
+					onClick={onAddNewCardHandle}
+					data-button-type="shelf-add-card"
+				>
+					{t('Add card with hot key') + ` (${positionTextCard})`}
+				</Button>
 
-			<SettingButton shelfId={shelfId} />
+				<SettingButton shelfId={shelfId} />
 
-			<Button
-				// className={cls.button}
-				fontWeight='300'
-				onClick={onViewClick}
-			>
-				{t('view')}
-			</Button>
-			<Button
-				fontWeight='300'
-				// className={cls.button}
-				onClick={startTraining}
-				variant='filled'
-				disabled={trainCardsCount === 0}
-				data-button-type='shelf-train'
-			>
-				{t('train') + ` (${positionTextTrain})`}
-			</Button>
-			<Icon
-				className={
-					clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
-				clickable
-				type='hint'
-				Svg={ArrowBottomIcon}
-				onClick={onCollapseClickHandleDebounced}
-			
-			/>
+				<Button
+					// className={cls.button}
+					fontWeight='300'
+					onClick={onViewClick}
+				>
+					{t('view')}
+				</Button>
+				<Button
+					fontWeight='300'
+					// className={cls.button}
+					onClick={startTraining}
+					variant='filled'
+					disabled={trainCardsCount === 0}
+					data-button-type='shelf-train'
+				>
+					{t('train') + ` (${positionTextTrain})`}
+				</Button>
+				<Icon
+					className={
+						clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
+					clickable
+					type='hint'
+					Svg={ArrowBottomIcon}
+					onClick={onCollapseClickHandleDebounced}
+
+				/>
+			</div>
 		</div>
 	)
 })

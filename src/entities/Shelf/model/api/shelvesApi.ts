@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import { CupboardSchema } from '@/entities/Cupboard';
+import { CommonShelfBackendResponse, CupboardSchema } from '@/entities/Cupboard';
 import { ShelfSchema } from '../types/ShelfSchema';
 
 
@@ -42,6 +42,23 @@ export const memoboxApi = rtkApi.injectEndpoints({
 			}),
 			// invalidatesTags: ['Shelves']
 		}),
+		updateCommonShelf: build.mutation<CommonShelfBackendResponse, boolean>({
+			query: (arg) => ({
+				url: '/commonShelf/isCollapsed',
+				// params: { id: arg.id },
+				method: 'PATCH',
+				// headers: {
+				// 	'Content-Type': 'application/json'
+				// },
+				body: { isCollapsed: arg }
+				// обновленные данные объекта
+				// isCollapsed: arg.isCollapsed
+				// ...arg,
+				// arg
+				// body: { isCollapsed: arg.isCollapsed }
+			}),
+			// invalidatesTags: ['Shelves']
+		}),
 		updateShelfWithTag: build.mutation<ShelfSchema, Partial<ShelfSchema>>({
 			query: (arg) => ({
 				url: `/shelves/${arg.id}`,
@@ -66,3 +83,4 @@ export const memoboxGetShelves = memoboxApi.endpoints.getShelves.initiate
 export const { useGetShelvesQuery } = memoboxApi
 export const { useUpdateShelfMutation } = memoboxApi
 export const { useUpdateShelfWithTagMutation } = memoboxApi
+export const { useUpdateCommonShelfMutation } = memoboxApi

@@ -32,6 +32,10 @@ import { BoxTimeSetterModal } from './Modals/BoxTimeSetterModal/BoxTimeSetterMod
 import { CardModalNewCard } from './Modals/CardModalNewCard/CardModalNewCard';
 import { TimeSetter } from '@/shared/ui/TimeSetter';
 import { useUpdateShelvesOrderMutation } from '@/entities/Cupboard';
+import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
+// import { storage } from '@/shared/lib/helpers/common/localStorage';
+import { ShelfButtonsSkeleton } from './ShelfButtons/ShelfButtonsSkeleton';
+import { localDataService } from '@/shared/lib/helpers/common/localStorage';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -52,11 +56,10 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 	const [updateShelvesMutation] = useUpdateShelvesOrderMutation()
 	// const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
-	// useEffect(() => {
-	// 	console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-		
-	// }, [])
-	
+	useEffect(() => {
+		localDataService.setShelves(cupboardShelves)
+	}, [cupboardShelves])
+
 
 	// useEffect(() => {
 	// 	if (cupboardShelves.length > 0) {
@@ -126,20 +129,49 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	}, [dispatch])
 
 	const shelvesList = useMemo(() => {
-		if (cupboardIsLoading) return []
-		return cupboardShelves.map(shelf => {
+		let shelvesData;
+		if (cupboardIsLoading) {
+			const shelvesFromLocalData = localDataService.getShelves()
+			// return []
+			if (!shelvesFromLocalData) {
+				// тут нужно вернуть скелетон или вообще ничего не возвращать
+				return []
+			} else {
+				shelvesData = shelvesFromLocalData
+			}
+		} else {
+			shelvesData = cupboardShelves
+		}
+		return shelvesData.map(shelf => {
 			const completeSmallDataLabels =
 				<CompleteSmallDataLabels
 					data={shelf.data}
 					isLoading={cupboardIsLoading}
 				/>
-			const buttons =
-				<ShelfButtons
-					shelf={shelf}
-					onAddNewCardClick={onAddNewCardClick}
-					onCollapseClick={onCollapseClick}
+			const buttons = (
+				<AnimateSkeletonLoader
+					// animateSkeletonFadeOutTime={1}
+					// animateComponentAfterLoadingFadeInTime={1}
+					// commonWrapper
+					classNameForCommonWrapper={cls.commonWrapper}
+					skeletonComponent={<ShelfButtonsSkeleton />}
+					componentAfterLoading={<ShelfButtons
+						shelf={shelf}
+						onAddNewCardClick={onAddNewCardClick}
+						onCollapseClick={onCollapseClick}
+					/>}
+					noDelay={!cupboardIsLoading}
+					isLoading={cupboardIsLoading}
 				/>
-			const boxesBlock = <BoxesBlockWrapper shelf={shelf} />
+			)
+			// const buttons =
+			// 	<ShelfButtons
+			// 		shelf={shelf}
+			// 		onAddNewCardClick={onAddNewCardClick}
+			// 		onCollapseClick={onCollapseClick}
+			// 	/>
+			const boxesBlock = <BoxesBlockWrapper isLoading={cupboardIsLoading} shelf={shelf} />
+
 			return (
 				<ShelfItem
 					key={shelf.id}
@@ -162,7 +194,11 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	// 		{shelfNamesList!.map(title => <ShelfSkeleton key={title} title={title} />)}
 	// 	</>
 	// }
-
+	// const actualShelvesList = (
+	// 	<AnimateSkeletonLoader
+	// 		skeletonComponent={<>{shelfNamesList!.map(title => <ShelfSkeleton key={title} title={title} />)}</>}
+	// 	/>
+	// )
 	return (
 		<div
 			className={cls.cupboardShelfList}
@@ -174,15 +210,14 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			{/* <DndProvider backend={HTML5Backend}> */}
 			{/* <DndShelfListWrapper> */}
 			<Reorder.Group
-				values={cupboardShelves}
-				onDragEnd={(event, info) => {
-					console.log(info.point.x, info.point.y)
-					console.log(event)
-					console.log(info)
-				}
-				}
+				values={cupboardIsLoading ? localDataService.getShelves() : cupboardShelves}
+				// onDragEnd={(event, info) => {
+				// 	console.log(info.point.x, info.point.y)
+				// 	console.log(event)
+				// 	console.log(info)
+				// }
+				// }
 				onReorder={reorderShelves}
-			// style={{ overflow: 'hidden' }}
 			>
 				{shelvesList}
 			</Reorder.Group>

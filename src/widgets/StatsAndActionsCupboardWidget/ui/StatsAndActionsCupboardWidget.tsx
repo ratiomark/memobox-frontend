@@ -15,6 +15,8 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { CreateNewShelfModal } from '@/features/CreateNewShelfModal';
 import { motion } from 'framer-motion'
 import { getUserShelfNamesList } from '@/entities/User';
+import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
+import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface StatsAndActionsCupboardWidgetProps {
 	className?: string
@@ -40,6 +42,29 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 		dispatch(cupboardShelfListActions.setCardModalIsOpen(true))
 	}, [dispatch])
 
+	const buttons = (
+		<AnimateSkeletonLoader
+			classNameForCommonWrapper={cls.commonWrapper}
+			skeletonComponent={<Skeleton width={70} height={24} />}
+			componentAfterLoading={
+				<HStack gap='gap_14' className={cls.actions}>
+					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
+					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
+					<Icon
+						Svg={InfoIcon}
+						width={26}
+						height={26}
+						className={cls.info}
+					/>
+				</HStack>
+			}
+			isLoading={cupboardIsLoading}
+		/>
+	)
+
+
+
+
 	useHotkeys('n', onAddNewCardClick, { keyup: true })
 
 	return (
@@ -56,22 +81,23 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 			>
 				<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
 				{/* <ThemeSwitcher /> */}
-				<HStack gap='gap_14' className={cls.actions} >
-					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
+				{buttons}
+				{/* <HStack gap='gap_14' className={cls.actions} > */}
+				{/* <Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
 					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
 					<Icon
 						Svg={InfoIcon}
 						width={26}
 						height={26}
 						className={cls.info}
-					/>
+					/> */}
 
-				</HStack>
+				{/* </HStack> */}
 				<CreateNewShelfModal
 					isOpen={newShelfModalIsOpen}
 					onClose={onCloseNewShelfModal}
 					onSubmit={() => console.log('Создаю новую полку с названием  ')}
-					// shelfNames={shelfNames}
+				// shelfNames={shelfNames}
 				/>
 			</HStack>
 		</motion.div>

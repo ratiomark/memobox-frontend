@@ -12,8 +12,9 @@ import { useDrag, useDrop } from 'react-dnd';
 import DragDotsIcon from '@/shared/assets/icons/dragDotsIcon2.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { drop } from 'lodash';
-import { Collapsible } from '@/shared/ui/Collapsible';
+
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
+import { Collapsible } from '@/shared/ui/Animations';
 
 // const dndIsActiveValue = false
 // const isCollapsingValue = false
@@ -47,7 +48,7 @@ export const Shelf = memo((props: ShelfProps) => {
 	const { t } = useTranslation()
 	const controls = useDragControls()
 
-
+	console.log('SHELF   ', props.shelf.isLoading)
 	const handleDragStart = () => {
 		setIsDragging(true);
 		document.body.classList.add('dragging');
@@ -118,6 +119,14 @@ export const Shelf = memo((props: ShelfProps) => {
 						{completeSmallDataLabelsBlock}
 					</VStack>
 					{shelfButtonsBlock}
+					{/* <div>
+						<div style={{ position: 'relative', zIndex: 8 }}>
+						</div>
+						<div style={{ position: 'relative', zIndex: 4 }}>
+							<div style={{ position: 'absolute', width: 100, height: 20, background: '#bbb', zIndex: 4 }} />
+							<div style={{ position: 'absolute', width: 100, height: 20, background: 'green', zIndex: 5 }} />
+						</div>
+					</div> */}
 				</div>
 				{/* <div className={cls.bottomBoxesWrapper} > */}
 
@@ -135,8 +144,10 @@ export const Shelf = memo((props: ShelfProps) => {
 				{/* </div> */}
 				<Collapsible
 					isOpen={!isCollapsed}
-					initial={false}
+					// initial={false}
+					initial={props.shelf.isLoading}
 					animationDuration={DURATION_SHELF_COLLAPSING_SEC}
+				// animationDuration={DURATION_SHELF_COLLAPSING_SEC}
 				>
 					{boxesBlock}
 				</Collapsible>

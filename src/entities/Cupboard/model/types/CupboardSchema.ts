@@ -1,7 +1,7 @@
 import { ShelfSchema } from '@/entities/Shelf';
 import { DataBlock } from '@/shared/types/DataBlock';
 export interface CommonShelfBackendResponse {
-	isCollapsed: boolean
+	isCollapsed?: boolean
 	new: { all: number }
 	learning: DataBlock
 	learnt: DataBlock

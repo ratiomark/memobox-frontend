@@ -56,9 +56,6 @@ export const Tabs = memo((props: TabsProps) => {
 
 	return (
 		<ul
-			// align={align}
-			// direction={direction}
-			// gap='gap_8'
 			className={clsx(
 				cls.Tabs,
 				[className])}

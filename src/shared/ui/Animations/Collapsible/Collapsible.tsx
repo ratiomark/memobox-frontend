@@ -1,4 +1,4 @@
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, animate, m } from 'framer-motion';
 import { ReactNode, useMemo } from 'react';
 
 interface CollapsibleProps {
@@ -41,7 +41,7 @@ export const Collapsible = (props: CollapsibleProps) => {
 			key={_ID}
 			data-id={_ID}
 			layout={layout}
-			initial="collapsed"
+			initial={'collapsed'}
 			animate={isOpen ? 'open' : 'collapsed'}
 			exit="collapsed"
 			transition={{
@@ -52,6 +52,7 @@ export const Collapsible = (props: CollapsibleProps) => {
 				open: {
 					height: 'auto',
 					overflow: 'hidden',
+					// transitionEnd: { overflowY: 'hidden', overflowX: 'auto' }
 					transitionEnd: { overflow: 'visible' }
 				},
 				collapsed: { height: 0, overflow: 'hidden' }

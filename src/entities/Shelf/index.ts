@@ -1,6 +1,10 @@
 // export { shelfReducer, shelfActions } from './model/slice/shelfSlice';
 
-export { useUpdateShelfWithTagMutation, useUpdateShelfMutation } from './model/api/shelvesApi';
+export {
+	useUpdateShelfWithTagMutation,
+	useUpdateShelfMutation,
+	useUpdateCommonShelfMutation,
+} from './model/api/shelvesApi';
 
 export { ShelfButtons } from '../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons';
 

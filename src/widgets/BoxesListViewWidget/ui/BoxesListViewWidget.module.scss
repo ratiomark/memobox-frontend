@@ -1,3 +1,70 @@
-.boxesListViewWidget {
+.boxesListViewWidgetWrapper {
+  // max-width: 100%;
+  // overflow: auto;
+  margin-left: 5px;
+  padding-bottom: 10px;
+  position: relative;
+  display: flex;
+  justify-content: end;
+  min-height: 35px;
+  height: 1px; /* Требуется, чтобы дочерний блок взял высоту 100% */
+}
 
+.boxesListViewWidget {
+  // max-width: 100%;
+
+  // overflow: auto;
+  margin-left: 5px;
+  padding-bottom: 10px;
+
+  &::-webkit-scrollbar-thumb {
+    /* Укажи цвет скроллбара */
+    background: #97979751;
+
+    /* Укажи радиус скругления скроллбара */
+    border-radius: 10px;
+  }
+
+  // position: relative;
+}
+
+.rightTransparent {
+  background: red;
+
+  // float: left;
+
+  // background: linear-gradient(to right, #fff0, var(--bg));
+  width: 100px;
+
+  // height: 50px;
+
+  // margin: 0 auto;
+}
+
+.additional {
+  height: 100%;
+}
+
+.tabsList {
+  position: absolute;
+  height: 100%;
+  left: 10px;
+  right: 10px;
+  top: 10px;
+  bottom: 10px;
+
+  // width: 30px;
+  // position: absolute;
+  // left: 0;
+  // top: 0;
+
+  // // bottom: 0;
+  // float: left;
+
+  // height: 100%;
+
+  // margin-left: 5px;
+
+  // max-width: 100%;
+  // overflow: auto;
 }

@@ -77,6 +77,7 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 		<HDialog
 			isOpen={isOpen}
 			onClose={onClose}
+			panelWithMainPadding={false}
 		>
 			<div className={clsx(
 				cls.ColumnSettingModal,
@@ -95,7 +96,7 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 					</Reorder.Group>
 					<Card className={cls.rowsInCardWrapper} >
 
-						<MyText text={t('rows count in cards')}  className={cls.rowsOptionTitle} />
+						<MyText text={t('rows count in cards')} className={cls.rowsOptionTitle} />
 						<Tabs tabs={rowItems} value={rowsCount.toString()} onTabClick={onRowValueClick} />
 					</Card>
 

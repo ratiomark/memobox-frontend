@@ -16,6 +16,9 @@
   border-right: 1px solid var(--accent);
   transition: all 0.3s;
 
+  // word-wrap: ;
+  white-space: nowrap;
+
   &:hover {
     background-color: var(--accent);
     color: var(--shelf-bg);

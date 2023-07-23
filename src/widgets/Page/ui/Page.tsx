@@ -74,7 +74,7 @@ export const Page = memo((props: PageProps) => {
 			position: e.currentTarget.scrollTop,
 			path: pathname
 		}))
-	})
+	}, 500, { leading: true, trailing: true })
 
 	return (
 		<motion.main

@@ -85,18 +85,18 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 
 	const { t } = useTranslation()
 
-	if (!viewPageIsMounted || viewPageIsLoading) {
-		return (
-			<HStack
-				max
-				className={clsx(
-					cls.statsAndActionsViewPageWidget,
-					className)}
-			>
-				<CompleteBigDataLabels data={undefined} isLoading={true} />
-			</HStack>
-		)
-	}
+	// if (!viewPageIsMounted || viewPageIsLoading) {
+	// 	return (
+	// 		<HStack
+	// 			max
+	// 			className={clsx(
+	// 				cls.statsAndActionsViewPageWidget,
+	// 				className)}
+	// 		>
+	// 			<CompleteBigDataLabels data={undefined} isLoading={true} />
+	// 		</HStack>
+	// 	)
+	// }
 
 	// const data = getStatsFromBoxIdAndData(boxId, shelfDataSaved?.data)
 	const data = replaceCardsWithStatsData(cards)
@@ -113,7 +113,7 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 						cls.statsAndActionsViewPageWidget,
 						className)}
 				>
-					<CompleteBigDataLabels data={data} isLoading={false} />
+					<CompleteBigDataLabels data={viewPageIsLoading ? undefined : data} isLoading={viewPageIsLoading ?? true} />
 					<HStack gap='gap_14' className={cls.actions} >
 						<Button
 							onClick={onOpenColumnSettingsModal}

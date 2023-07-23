@@ -14,16 +14,21 @@
   position: relative;
 }
 
+.Box:last-of-type {
+  margin-right: 10px;
+}
+
+.Box:first-of-type {
+  margin-left: 10px;
+  justify-content: start;
+}
+
 .boxInnerWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 5px 10px;
-}
-
-.Box:first-of-type {
-  justify-content: start;
 }
 
 .title {

@@ -67,7 +67,7 @@ server.post('/login', (req, res) => {
 });
 
 server.get('/cupboard', async (req, res) => {
-	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', async (err, data) => {
 		if (err) {
 			console.error(err);
 			res.status(500).send({ message: 'Server error' });
@@ -79,7 +79,11 @@ server.get('/cupboard', async (req, res) => {
 			commonShelf: db.commonShelf,
 			shelves: db.shelves
 		};
-		res.send(responseData);
+
+		setTimeout(() => {
+			res.send(responseData)
+		}, 2000);
+		// res.send(responseData);
 	})
 	// const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
 	// console.log(db)
@@ -134,6 +138,33 @@ server.put('/shelves', (req, res) => {
 
 			// Отправляем обновленные данные обратно клиенту
 			res.send(newShelves);
+		});
+	});
+});
+
+server.patch('/commonShelf/isCollapsed', (req, res) => {
+	const { isCollapsed } = req.body;
+	// console.log(req)
+	console.log(isCollapsed)
+	// Читаем текущий файл JSON
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const commonShelf = db.commonShelf
+		commonShelf.isCollapsed = isCollapsed;
+
+		fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
+			if (err) {
+				console.error(err);
+				res.status(500).send({ message: 'Server error' });
+				return;
+			}
+			res.send(commonShelf);
 		});
 	});
 });

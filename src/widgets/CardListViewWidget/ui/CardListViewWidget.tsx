@@ -137,7 +137,7 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					// viewport={{ once: true }}
-					// transition={{ type: 'spring', duration: 0.4, delay: 0.3 }}
+					transition={{ duration: 0.4, delay: 0.3 }}
 					// transition={{ type: 'spring', duration: 2, delay: 0.33 }}
 					className={clsx(
 						cls.cardListViewWidget,

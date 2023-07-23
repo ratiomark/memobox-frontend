@@ -1,9 +1,9 @@
 .ColumnSettingModal {
   // display: flex;
   min-width: 400px;
-
-  // background-color: #f5f6fa;
-  padding: 10px 40px;
+  background-color: #f5f6fa;
+  padding: 30px 60px;
+  border-radius: var(--border-radius-main);
 }
 
 .contentWrapper {
