@@ -1,24 +1,70 @@
 .HorizontalScrollerList {
+  height: 100%;
+  // width: 100%;
   display: grid;
+  place-items: center center;
 
-  // делает флоу грида колонками(по дефолту грид выстраивает детей в ряды)
-  grid-auto-flow: column;
-  overflow-x: auto;
-  gap: 20px;
-  justify-content: start;
-
-  // скроллит список, если курсор в области списка(не вызывает случайного скролла страницы)
-  // overscroll-behavior-inline: contain;
+  // background: #4da6ff;
 }
 
-.gridElement {
-  inline-size: 100%;
-  white-space: pre;
-  // position: relative;
+.HorizontalScrollerList__container {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
+  perspective: 150px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.item {
+  position: relative;
+  display: inline-block;
+
+  // height: 80px;
+  // width: 80px;
+  // background: white;
+  // margin: 2rem 1rem;
+  margin-right: 20px;
+
+  // border-radius: 15px;
   cursor: pointer;
-  // aspect-ratio: 16 / 9;
-  // object-fit: cover;
+
+  &:first-of-type {
+    // margin-left: 15rem;
+  }
+
+  &:last-of-type {
+    margin-right: 15rem;
+  }
 }
+
+// .HorizontalScrollerList {
+//   display: grid;
+
+//   // делает флоу грида колонками(по дефолту грид выстраивает детей в ряды)
+//   grid-auto-flow: column;
+//   overflow-x: auto;
+//   gap: 20px;
+//   justify-content: start;
+
+//   // скроллит список, если курсор в области списка(не вызывает случайного скролла страницы)
+//   // overscroll-behavior-inline: contain;
+// }
+
+// .gridElement {
+//   inline-size: 100%;
+//   white-space: pre;
+
+//   // position: relative;
+//   cursor: pointer;
+
+//   // aspect-ratio: 16 / 9;
+//   // object-fit: cover;
+// }
 
 .activeShelf {
   color: var(--accent);

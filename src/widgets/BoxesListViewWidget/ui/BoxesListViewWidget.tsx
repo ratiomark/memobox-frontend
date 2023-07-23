@@ -76,11 +76,11 @@ export const BoxesListViewWidget = memo((props: BoxesListViewWidgetProps) => {
 		return <Skeleton width={500} height={40} />
 	}
 	const hasActive = tabs.find((item) => item.value === boxId)
-	console.log(hasActive, boxId)
+	// console.log(hasActive, boxId)
 	return (
-		<div style={{ maxWidth: 500 ,}}>
+		<div style={{ maxWidth: 500, }}>
 
-			<CardScroller />
+			{/* <CardScroller /> */}
 		</div>
 	)
 	// return (

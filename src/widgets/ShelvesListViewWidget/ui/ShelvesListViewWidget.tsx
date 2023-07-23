@@ -41,7 +41,7 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 		dispatch(viewPageActions.setActiveShelfId(shelfId))
 		// navigate(obtainRouteView(shelfId))
 	}, [dispatch])
-	
+
 	const items = useMemo(() => {
 		if (isShelvesLoading) return []
 		const items = [{ value: 'all', content: t('common shelf name'), onChange: () => onChangeShelf('all') }]
@@ -50,6 +50,20 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 				value: shelfItem.id,
 				content: shelfItem.title,
 				onChange: () => onChangeShelf(shelfItem.id),
+			})
+		})
+		shelvesData?.forEach(shelfItem => {
+			items.push({
+				value: shelfItem.id+'ds',
+				content: shelfItem.title+ ' 2',
+				onChange: () => onChangeShelf(shelfItem.id+'ds'),
+			})
+		})
+		shelvesData?.forEach(shelfItem => {
+			items.push({
+				value: shelfItem.id+'dss',
+				content: shelfItem.title+ ' 3',
+				onChange: () => onChangeShelf(shelfItem.id+'dss'),
 			})
 		})
 		return items

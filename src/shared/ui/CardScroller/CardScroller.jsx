@@ -2,7 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './CardsScroller.scss'
 
+// const cards = ['math','facts','books','biology','английский'];
 const cards = [1, 2, 3, 4, 5,];
+
 // const cards = [1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13,14];
 const cardVariants = {
 	selected: {
@@ -37,6 +39,9 @@ export const CardScroller = () => {
 	const containerRef = useRef();
 	const cardRefs = useRef([]);
 	
+  useEffect(() => {
+    console.log('CardScroller',  cardRefs)
+  })
 	// useEffect(() => {
 	// 	const { scrollWidth, clientWidth } = containerRef.current;
 	// 	console.log('scroll WIDTH:   ', scrollWidth)
@@ -94,7 +99,8 @@ export const CardScroller = () => {
 		if (isDragging) {
 			const x = e.pageX - containerRef.current.offsetLeft;
 			const walk = x - startX;
-			// if (Math.abs(walk) < 5) selectCard(card);
+			console.log('WALK ', walk)
+			if (Math.abs(walk) < 5) selectCard(card);
 		} else selectCard(card);
 	}
 	
@@ -115,6 +121,7 @@ export const CardScroller = () => {
 						key={card}
 						ref={el => cardRefs.current.push(el)}
 						onMouseUp={e => handleCardMouseUp(e, card)}
+						onClick={e => handleCardMouseUp(e, card)}
 						// onClick={() => {
 						// 	if (isDragging) {
 						// 		return 
