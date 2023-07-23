@@ -35,7 +35,7 @@ import { useUpdateShelvesOrderMutation } from '@/entities/Cupboard';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 // import { storage } from '@/shared/lib/helpers/common/localStorage';
 import { ShelfButtonsSkeleton } from './ShelfButtons/ShelfButtonsSkeleton';
-import { localDataService } from '@/shared/lib/helpers/common/localStorage';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 interface CupboardShelfListProps {
 	className?: string

@@ -14,7 +14,7 @@ import { CommonShelfButtonsSkeleton } from '../CommonShelfButtons/CommonShelfBut
 import { AnimatePresence, motion } from 'framer-motion'
 import cls from './CommonShelf.module.scss';
 import { AnimateSkeletonLoader, Collapsible } from '@/shared/ui/Animations';
-import { localDataService } from '@/shared/lib/helpers/common/localStorage';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 
 

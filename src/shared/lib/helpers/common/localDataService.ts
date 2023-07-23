@@ -80,5 +80,6 @@ class LocalDataService implements ILocalDataService {
 	}
 }
 
+
 const storage = new LocalStorageService();
 export const localDataService = new LocalDataService(storage)
