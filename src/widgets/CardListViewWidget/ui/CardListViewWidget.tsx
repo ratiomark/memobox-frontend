@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CardListViewWidget.module.scss';
-import { getViewPage, getViewPageIsMounted, getViewPageMultiSelectIsActive, getViewPageSavedShelf, getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer'
+import { getViewPage, getViewPageIsMounted, getViewPageMoveCardsModalIsOpen, getViewPageMultiSelectIsActive, getViewPageSavedShelf, getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer'
 import { useSelector } from 'react-redux';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { CardSchema, CardSchemaExtended } from '@/entities/Card';
@@ -12,9 +12,10 @@ import { CardListItem } from './CardListItem/CardListItem';
 import { getViewPageCardsSorted } from '@/features/ViewPageInitializer'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { MultiSelectScreen } from './MultiSelectScreen/MultiSelectScreen';
-import { CardEditModal } from './CardEditModal';
 import { AnimatePresence, motion } from 'framer-motion'
 import { isHotkeyPressed, useHotkeys } from 'react-hotkeys-hook';
+import { CardEditModal } from './CardEditModal/CardEditModal';
+import { MoveCardsModal } from './MoveCardsModal/MoveCardsModal';
 
 interface CardListViewWidgetProps {
 	className?: string
@@ -29,6 +30,7 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	const multiSelectIsActive = useSelector(getViewPageMultiSelectIsActive)
 	const dispatch = useAppDispatch()
 	const cards = useSelector(getViewPageCardsSorted)
+	const moveCardsModalIsOpen = useSelector(getViewPageMoveCardsModalIsOpen)
 	// const cardListRef = useRef(null)
 	// const { t } = useTranslation()
 
@@ -72,9 +74,14 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	}, [dispatch])
 
 
-	useHotkeys('esc', onCancelMultiSelect, { enabled: multiSelectIsActive })
+	const onMoveCardsClick = useCallback(() => {
+		dispatch(viewPageActions.setMoveCardsModalIsOpen(true))
+	}, [dispatch])
+
+	useHotkeys('esc', onCancelMultiSelect, { enabled: multiSelectIsActive && !moveCardsModalIsOpen })
 	useHotkeys('a', onSelectAllCards, { enabled: multiSelectIsActive })
 	useHotkeys('r', onRemoveCards, { enabled: multiSelectIsActive })
+	useHotkeys('m', onMoveCardsClick, { enabled: multiSelectIsActive })
 
 	useEffect(() => {
 		//отменю мульти селект, если изменяются карточки, а они меняются когда меняется полка\коробка
@@ -164,8 +171,10 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 			<MultiSelectScreen
 				onCancelMultiSelect={onCancelMultiSelect}
 				onSelectAllCards={onSelectAllCards}
+				onMoveCardsClick={onMoveCardsClick}
 			/>
 			<CardEditModal />
+			<MoveCardsModal />
 		</>
 	)
 }

@@ -7,6 +7,7 @@ import { AppLink } from '../AppLink/AppLink'
 import { Link } from 'react-router-dom'
 import { Skeleton } from '../Skeleton'
 import { MyText } from '../Typography'
+import { HStack } from '../Stack'
 
 interface HorizontalScrollerListItem {
 	value: string
@@ -86,7 +87,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 	const { t } = useTranslation()
 
 	const itemsRendered = useMemo(() => {
-		if (!items || !value) return undefined
+		if (!items?.length || !value) return undefined
 		return items.map((item, index) => (
 			<li
 				className={clsx(
@@ -102,7 +103,14 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 		))
 	}, [items, value])
 
-	if (!itemsRendered) return (<Skeleton width={'100%'} height={24} />)
+	if (!itemsRendered) {
+		return (<HStack gap='gap_14'>
+			<Skeleton width={120} borderRadius='12px' height={24} />
+			<Skeleton width={70} borderRadius='12px' height={24} />
+			<Skeleton width={100} borderRadius='12px' height={24} />
+			<Skeleton width={90} borderRadius='12px' height={24} />
+		</HStack>)
+	}
 
 	return (
 		<div

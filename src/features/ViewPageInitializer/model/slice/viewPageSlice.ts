@@ -6,6 +6,7 @@ import { fetchCards, FetchCardsThunkResponse } from '../services/fetchCards'
 import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
 import { CardSchemaExtended } from '@/entities/Card'
+import { isNumeric } from '@/shared/lib/helpers/common/isNumeric'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
@@ -19,6 +20,8 @@ const initialState: ViewPageInitializerSchema = {
 	cardsDataEdited: {},
 	cardEditModalIsOpen: false,
 	currentCardId: '',
+	// 
+	moveCardsModalIsOpen: false,
 	// 
 	shelvesData: {},
 	// 
@@ -43,8 +46,16 @@ const viewPageSlice = createSlice({
 	initialState,
 	reducers: {
 		setActiveShelfId: (state, action: PayloadAction<string>) => {
-			state.shelfId = action.payload
-			if (action.payload !== 'all' && state.boxId === 'learning') {
+			const shelfId = action.payload
+			state.shelfId = shelfId
+			if (shelfId === 'all') return
+			const maxIndexForShelf = state.shelvesData[shelfId].maxIndexBox
+			// превосходит ли текущая выбранная коробка например box5 максимальную коробку у выбранной полки
+			if (isNumeric(state.boxId) && +state.boxId >= maxIndexForShelf) {
+				state.boxId = 'new'
+				return
+			}
+			if (shelfId !== 'all' && state.boxId === 'learning') {
 				state.boxId = 'new'
 			}
 		},
@@ -104,6 +115,13 @@ const viewPageSlice = createSlice({
 		setViewPageIsMounted: (state) => {
 			state._viewPageMounted = true
 		},
+		//  move cards modal
+		setMoveCardsModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.moveCardsModalIsOpen = action.payload
+		},
+		// setViewPageIsMounted: (state) => {
+		// 	state._viewPageMounted = true
+		// },
 		// edit cards
 		setCardEditModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.cardEditModalIsOpen = action.payload

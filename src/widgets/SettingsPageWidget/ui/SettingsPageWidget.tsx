@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { ShelfTemplateSettings, TimeSleepSettings } from '@/features/SettingsFeatures';
-import { Heading, MyText } from '@/shared/ui/Typography';
+import { Heading } from '@/shared/ui/Typography';
 import { MouseEvent, useState } from 'react';
 import { Card } from '@/shared/ui/Card';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'

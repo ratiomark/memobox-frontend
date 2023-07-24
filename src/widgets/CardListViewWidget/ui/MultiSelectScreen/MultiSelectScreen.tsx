@@ -10,13 +10,15 @@ interface MultiSelectScreenProps {
 	className?: string
 	onSelectAllCards: () => void
 	onCancelMultiSelect: () => void
+	onMoveCardsClick: () => void
 }
 
 export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 	const {
 		className,
 		onSelectAllCards,
-		onCancelMultiSelect
+		onCancelMultiSelect,
+		onMoveCardsClick
 	} = props
 	// useHotkeys('a', () => onCancelMultiSelect())
 	// useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true, preventDefault: true, })
@@ -40,7 +42,7 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 				</div>
 				<div className={cls.innerWrapper} >
 					<Button onClick={onSelectAllCards}>{t('select all')}</Button>
-					<Button>{t('move selected cards')}</Button>
+					<Button onClick={onMoveCardsClick}>{t('move selected cards')}</Button>
 				</div>
 
 

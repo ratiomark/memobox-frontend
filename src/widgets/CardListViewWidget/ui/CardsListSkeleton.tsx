@@ -17,9 +17,6 @@ export const CardsListSkeleton = () => {
 			<Skeleton width={'100%'} height={64} />
 			<Skeleton width={'100%'} height={64} />
 			<Skeleton width={'100%'} height={64} />
-			<Skeleton width={'100%'} height={64} />
-			<Skeleton width={'100%'} height={64} />
-			<Skeleton width={'100%'} height={64} />
 		</VStack>
 	)
 

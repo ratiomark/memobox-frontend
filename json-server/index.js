@@ -4,6 +4,7 @@ const jsonServer = require('json-server');
 const path = require('path');
 const https = require('https');
 const http = require('http');
+const { handleError } = require('./helpers');
 
 const options = {
 	key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
@@ -20,7 +21,7 @@ server.use(jsonServer.bodyParser);
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
 // server.use(async (req, res, next) => {
 // 	await new Promise((res) => {
-// 		setTimeout(res, 1000);
+// 		setTimeout(res, 4000);
 // 	});
 // 	next();
 // });
@@ -123,12 +124,13 @@ server.get('/cards', async (req, res) => {
 			shelvesAndBoxesData
 		};
 
-		res.send(responseData)
-
-		// res.send(responseData);
+		// setTimeout(() => {
+		// 	res.send(responseData)
+		// }, 4000);
+		res.send(responseData);
 	})
-
 });
+
 // server.put('/shelves', (req, res) => {
 // 	const newShelves = req.body;
 // 	// console.log(newShelves)

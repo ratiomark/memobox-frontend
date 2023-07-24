@@ -47,8 +47,9 @@ export interface ViewPageInitializerSchema {
 	currentCardId: string
 	cardEditModalIsOpen: boolean
 	selectedCardIds: string[]
-	// shelfTitle?: string
-	// boxId: string
+	// 
+	moveCardsModalIsOpen: boolean
+	// 
 	shelvesDataSaved: {
 		[shelfId: string]: {
 			data: ShelfRepresentedByBoxes,

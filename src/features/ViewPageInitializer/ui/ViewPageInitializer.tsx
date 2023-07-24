@@ -1,18 +1,12 @@
-import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
-import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import clsx from 'clsx';
+import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { ReactNode, memo, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { fetchBoxesDataByShelfId } from '../model/services/fetchBoxesDataByShelfId';
+import { useNavigate, useParams } from 'react-router-dom';
 import { viewPageActions, viewPageReducer } from '../model/slice/viewPageSlice';
-import cls from './ViewPageInitializer.module.scss';
 import { fetchCards } from '../model/services/fetchCards';
 import { useSelector } from 'react-redux';
-import { getViewPageBoxIdChecked, getViewPageIsMounted, getViewPageShelfId } from '..';
-// import { useSelector } from 'react-redux';
-// import { getJsonSavedData } from '@/entities/User';
-// import { saveUserJsonData } from '@/entities/User/model/services/saveUserJsonData';
+import { getViewPageIsMounted } from '../model/selectors/getViewPageInitializer';
+import cls from './ViewPageInitializer.module.scss';
 
 interface ViewPageInitializerProps {
 	className?: string
@@ -22,9 +16,11 @@ interface ViewPageInitializerProps {
 	sortControllerViewPageBlock: ReactNode
 	cardListViewPageBlock: ReactNode
 }
+
 const reducers: ReducersList = {
 	viewPage: viewPageReducer
 }
+
 export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	const {
 		className,
@@ -35,13 +31,11 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 		boxListViewPageBlock,
 	} = props
 	const navigate = useNavigate()
-	
+
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { shelfId, boxId } = useParams<{ shelfId: string, boxId: string }>()
 	const viewPageIsMounter = useSelector(getViewPageIsMounted)
-	// const shelfIdFromStore = useSelector(getViewPageShelfId)
-	// const boxIdFromStore = useSelector(getViewPageBoxIdChecked)
-	// считать один раз shelfId и boxId, если они есть запушить в редакс, а потом перейти на страницу viewPage но так чтобы там был только адрес .../view 
+
 	useEffect(() => {
 		// console.log('Эффект')
 		if (!viewPageIsMounter) {
@@ -83,4 +77,5 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 		</div>
 	)
 })
+
 ViewPageInitializer.displayName = 'ViewPageInitializer'

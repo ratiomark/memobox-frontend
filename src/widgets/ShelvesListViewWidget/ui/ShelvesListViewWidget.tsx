@@ -2,20 +2,13 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { Icon } from '@/shared/ui/Icon';
-import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
-import cls from './ShelvesListViewWidget.module.scss';
 import { memo, useCallback, useMemo } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer';
-import { ListBox } from '@/shared/ui/Popup';
-import { MyText } from '@/shared/ui/Typography';
-import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { HorizontalScrollerList } from '@/shared/ui/HorizontalScrollerList';
-import { useNavigate } from 'react-router-dom';
-import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
-import { Skeleton } from '@/shared/ui/Skeleton';
-// import { getLastBoxIdByShelfId } from '@/features/ViewPageInitializer/model/selectors/getViewPageInitializer';
+import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
+import cls from './ShelvesListViewWidget.module.scss';
 
 
 interface ShelvesListViewWidgetProps {
@@ -29,17 +22,12 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	const { t } = useTranslation()
-	const navigate = useNavigate()
-
-	// }, [shelvesData, isShelvesLoading])
-	// // нужно подтягивать полку + коробку которую последний раз смотрел пользвоатель, то есть юзать jsonSettings юзера. Если там будет пусто, то юзать первую полку с отображением "все".
+	
 	const dispatch = useAppDispatch()
 	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
-	// const lastBoxId = useSelector(getLastBoxIdByShelfId(shelfId!))
 
 	const onChangeShelf = useCallback((shelfId: string) => {
 		dispatch(viewPageActions.setActiveShelfId(shelfId))
-		// navigate(obtainRouteView(shelfId))
 	}, [dispatch])
 
 	const items = useMemo(() => {
@@ -68,13 +56,7 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 		// })
 		return items
 	}, [shelvesData, isShelvesLoading, onChangeShelf, t])
-	// const onChangeShelf = useCallback((shelfId: string) => {
-	// 	dispatch(viewPageActions.setActiveShelfId(shelfId))
-	// 	navigate(obtainRouteView(shelfId))
-	// }, [dispatch, navigate])
-
-	// if (!items) return <p>загрукза</p>
-
+	
 	return (
 		<div className={clsx(
 			cls.shelvesListViewWidget,
@@ -83,10 +65,7 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 			<Icon
 				Svg={MultiSelectIcon}
 			/>
-			{/* {isShelvesLoading ? <Skeleton width={400} height={18} /> : null} */}
-			{/* горизонтальный скролл списка с полками */}
 			<HorizontalScrollerList value={shelfId} items={items} />
-
 		</div>
 	)
 })
