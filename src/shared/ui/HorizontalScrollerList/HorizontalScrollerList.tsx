@@ -44,7 +44,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 	// 	isDragging: false
 	// })
 	const containerRef = useRef<HTMLUListElement>(null)
-	const cardRefs = useRef<HTMLLIElement[]>([])
+	const itemRefs = useRef<HTMLLIElement[]>([])
 	const mounted = useRef(false)
 
 	// useEffect(() => {
@@ -66,7 +66,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 
 	// const selectItem = (item: HorizontalScrollerListItem, indexPlus1: number) => {
 	// 	setSelectedItem(item)
-	// 	cardRefs.current[indexPlus1 - 1].scrollIntoView({
+	// 	itemRefs.current[indexPlus1 - 1].scrollIntoView({
 	// 		behavior: 'smooth',
 	// 		block: 'nearest',
 	// 		inline: 'center'
@@ -75,7 +75,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 	// }
 
 	const handleSelectItem = (e: MouseEvent, item: HorizontalScrollerListItem, indexPlus1: number) => {
-		cardRefs.current[indexPlus1 - 1].scrollIntoView({
+		itemRefs.current[indexPlus1 - 1].scrollIntoView({
 			behavior: 'smooth',
 			block: 'nearest',
 			inline: 'center'
@@ -94,7 +94,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 					value === item.value ? cls.activeShelf : ''
 				)}
 				key={item.value}
-				ref={el => cardRefs.current.push(el!)}
+				ref={el => itemRefs.current.push(el!)}
 				onClick={e => handleSelectItem(e, item, index + 1)}
 			>
 				{item.content}
@@ -122,7 +122,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 							selectedItem.value === item.value ? cls.activeShelf : ''
 						)}
 						key={item.value}
-						ref={el => cardRefs.current.push(el!)}
+						ref={el => itemRefs.current.push(el!)}
 						onClick={e => handleSelectItem(e, item, index + 1)}
 					>
 

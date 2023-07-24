@@ -95,6 +95,30 @@ server.get('/cupboard', async (req, res) => {
 	// res.json(responseData);
 
 });
+server.get('/cards', async (req, res) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', async (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const shelvesAndBoxesData = {}
+		const shelves = db.shelves.forEach(shelf => {
+			shelf.map
+		})
+		const responseData = {
+			commonShelf: db.cards,
+			shelves: db.shelves
+		};
+
+		res.send(responseData)
+		
+		// res.send(responseData);
+	})
+
+});
 // server.put('/shelves', (req, res) => {
 // 	const newShelves = req.body;
 // 	// console.log(newShelves)

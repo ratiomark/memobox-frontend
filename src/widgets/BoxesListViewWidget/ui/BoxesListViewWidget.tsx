@@ -77,46 +77,45 @@ export const BoxesListViewWidget = memo((props: BoxesListViewWidgetProps) => {
 	}
 	const hasActive = tabs.find((item) => item.value === boxId)
 	// console.log(hasActive, boxId)
-	return (
-		<div style={{ maxWidth: 500, }}>
-
-			{/* <CardScroller /> */}
-		</div>
-	)
 	// return (
-	// 	<div className={cls.boxesListViewWidgetWrapper}>
-	// 		{/* <motion.div
-	// 			// layout
-	// 			// initial={{ x: -120, opacity: 0 }}
-	// 			// animate={{ x: 0, opacity: 1 }}
-	// 			// viewport={{ once: true }}
-	// 			// transition={{ type: 'spring', duration: 0.5 }}
-	// 			// layoutRoot
-	// 			className={clsx(
-	// 				cls.boxesListViewWidget,
-	// 				className)}
-	// 		>
-	// 			<Tabs
-	// 				tabs={tabs}
-	// 				onTabClick={onBoxClick}
-	// 				className={cls.tabsList}
-	// 				value={hasActive ? boxId?.toString() : 'new'}
-	// 			/>
-	// 		</motion.div> */}
-	// 		{/* <div className={cls.additional}>
-	// 			</div> */}
+	// 	<div style={{ maxWidth: 500, }}>
 
-	// 		<Tabs
-	// 			tabs={tabs}
-	// 			onTabClick={onBoxClick}
-	// 			className={cls.tabsList}
-	// 			value={hasActive ? boxId?.toString() : 'new'}
-	// 			/>
-	// 		<div className={cls.rightTransparent}
-	// 			// style={{ position: 'absolute', right: 0, top: 0, height: '100%', }}
-	// 		/>
+	// 		{/* <CardScroller /> */}
 	// 	</div>
 	// )
+	return (
+		<div className={cls.boxesListViewWidgetWrapper}>
+			{/* <motion.div
+				// layout
+				// initial={{ x: -120, opacity: 0 }}
+				// animate={{ x: 0, opacity: 1 }}
+				// viewport={{ once: true }}
+				// transition={{ type: 'spring', duration: 0.5 }}
+				// layoutRoot
+				className={clsx(
+					cls.boxesListViewWidget,
+					className)}
+			>
+				<Tabs
+					tabs={tabs}
+					onTabClick={onBoxClick}
+					className={cls.tabsList}
+					value={hasActive ? boxId?.toString() : 'new'}
+				/>
+			</motion.div> */}
+			{/* <div className={cls.additional}>
+				</div> */}
+
+			<Tabs
+				tabs={tabs}
+				onTabClick={onBoxClick}
+				// className={cls.tabsList}
+				value={hasActive ? boxId?.toString() : 'new'}
+				/>
+			{/* <div   style={{ position: 'absolute', right: 0, top: 0, height: '100%', }} className={cls.rightTransparent}/> */}
+			
+		</div>
+	)
 })
 
 BoxesListViewWidget.displayName = 'BoxesListViewWidget'

@@ -52,20 +52,20 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 				onChange: () => onChangeShelf(shelfItem.id),
 			})
 		})
-		shelvesData?.forEach(shelfItem => {
-			items.push({
-				value: shelfItem.id+'ds',
-				content: shelfItem.title+ ' 2',
-				onChange: () => onChangeShelf(shelfItem.id+'ds'),
-			})
-		})
-		shelvesData?.forEach(shelfItem => {
-			items.push({
-				value: shelfItem.id+'dss',
-				content: shelfItem.title+ ' 3',
-				onChange: () => onChangeShelf(shelfItem.id+'dss'),
-			})
-		})
+		// shelvesData?.forEach(shelfItem => {
+		// 	items.push({
+		// 		value: shelfItem.id+'ds',
+		// 		content: shelfItem.title+ ' 2',
+		// 		onChange: () => onChangeShelf(shelfItem.id+'ds'),
+		// 	})
+		// })
+		// shelvesData?.forEach(shelfItem => {
+		// 	items.push({
+		// 		value: shelfItem.id+'dss',
+		// 		content: shelfItem.title+ ' 3',
+		// 		onChange: () => onChangeShelf(shelfItem.id+'dss'),
+		// 	})
+		// })
 		return items
 	}, [shelvesData, isShelvesLoading, onChangeShelf, t])
 	// const onChangeShelf = useCallback((shelfId: string) => {
