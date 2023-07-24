@@ -22,6 +22,15 @@ export const cardApi = rtkApi.injectEndpoints({
 				return response.map(card=>({...card, deleted: false}))
 			}
 		}),
+		// getAllCards: build.query<CardSchemaExtended[], void>({
+		// 	query: () => ({
+		// 		url: '/cards',
+		// 		method: 'GET',
+		// 	}),
+		// 	transformResponse: (response: CardSchema[], meta, arg) => { 
+		// 		return response.map(card=>({...card, deleted: false}))
+		// 	}
+		// }),
 		getBoxByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
 			query: ({ shelfId, boxId }) => ({
 				url: '/cards',

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchBoxesDataByShelfId, FetchBoxesThunkResponse } from '../services/fetchBoxesDataByShelfId'
 import { ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
 import { CardSchema } from '@/entities/Card'
-import { fetchCards } from '../services/fetchCards'
+import { fetchCards, FetchCardsThunkResponse } from '../services/fetchCards'
 import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
 import { CardSchemaExtended } from '@/entities/Card'
@@ -159,27 +159,27 @@ const viewPageSlice = createSlice({
 
 	extraReducers: (builder) => {
 		builder
-			.addCase(
-				fetchBoxesDataByShelfId.fulfilled,
-				(state, action: PayloadAction<FetchBoxesThunkResponse>) => {
-					const shelfId = Object.keys(action.payload)[0]
-					state.shelvesDataSaved[shelfId]['isLoading'] = false
-					state.shelvesDataSaved[shelfId]['data'] = action.payload[shelfId]
-					state.shelvesDataSaved[shelfId]['error'] = undefined
-				})
-			.addCase(
-				fetchBoxesDataByShelfId.rejected,
-				(state, action) => {
-					if (action.payload) {
-						state.shelvesDataSaved[action.payload]['error'] = `some error when fetching cards shelfId = ${action.payload}`
-						state.shelvesDataSaved[action.payload]['isLoading'] = false
-					}
-				})
+			// .addCase(
+			// 	fetchBoxesDataByShelfId.fulfilled,
+			// 	(state, action: PayloadAction<FetchBoxesThunkResponse>) => {
+			// 		const shelfId = Object.keys(action.payload)[0]
+			// 		state.shelvesDataSaved[shelfId]['isLoading'] = false
+			// 		state.shelvesDataSaved[shelfId]['data'] = action.payload[shelfId]
+			// 		state.shelvesDataSaved[shelfId]['error'] = undefined
+			// 	})
+			// .addCase(
+			// 	fetchBoxesDataByShelfId.rejected,
+			// 	(state, action) => {
+			// 		if (action.payload) {
+			// 			state.shelvesDataSaved[action.payload]['error'] = `some error when fetching cards shelfId = ${action.payload}`
+			// 			state.shelvesDataSaved[action.payload]['isLoading'] = false
+			// 		}
+			// 	})
 			.addCase(
 				fetchCards.fulfilled,
-				(state, action: PayloadAction<CardSchemaExtended[]>) => {
+				(state, action: PayloadAction<FetchCardsThunkResponse>) => {
 					state.isLoading = false
-					state.cards = action.payload
+					state.cards = action.payload.cards
 					state.error = ''
 				})
 			.addCase(
@@ -196,6 +196,27 @@ const viewPageSlice = createSlice({
 					state.isLoading = true
 					state.error = ''
 				})
+		// .addCase(
+		// 	fetchCards.fulfilled,
+		// 	(state, action: PayloadAction<CardSchemaExtended[]>) => {
+		// 		state.isLoading = false
+		// 		state.cards = action.payload
+		// 		state.error = ''
+		// 	})
+		// .addCase(
+		// 	fetchCards.rejected,
+		// 	(state, action) => {
+		// 		if (action.payload) {
+		// 			state.isLoading = false
+		// 			state.error = action.payload
+		// 		}
+		// 	})
+		// .addCase(
+		// 	fetchCards.pending,
+		// 	(state) => {
+		// 		state.isLoading = true
+		// 		state.error = ''
+		// 	})
 	}
 })
 

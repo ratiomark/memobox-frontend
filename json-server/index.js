@@ -106,15 +106,25 @@ server.get('/cards', async (req, res) => {
 		const db = JSON.parse(data);
 		const shelvesAndBoxesData = {}
 		const shelves = db.shelves.forEach(shelf => {
-			shelf.map
+
+			const boxes = shelf.boxesData
+				.map(box => ({ id: box._id, index: box.index }))
+				.sort((a, b) => a.index - b.index)
+
+			shelvesAndBoxesData[shelf.id] = {
+				maxIndexBox: shelf.boxesData.length,
+				boxesItems: boxes,
+				shelfTitle: shelf.title,
+			}
+
 		})
 		const responseData = {
-			commonShelf: db.cards,
-			shelves: db.shelves
+			cards: db.cards,
+			shelvesAndBoxesData
 		};
 
 		res.send(responseData)
-		
+
 		// res.send(responseData);
 	})
 
