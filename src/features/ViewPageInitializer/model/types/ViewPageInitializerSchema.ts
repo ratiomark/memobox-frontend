@@ -2,6 +2,7 @@ import { ShelfRepresentedByBoxes } from '@/entities/Box'
 import { CardSchema, CardSchemaExtended } from '@/entities/Card'
 import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
+import { ShelvesDataViewPage } from '../services/fetchCards'
 
 
 // export interface CardSchemaExtended extends CardSchema {
@@ -20,9 +21,12 @@ export interface ViewPageInitializerSchema {
 	shelfId: string
 	boxId: string | number
 	_viewPageMounted: boolean
-	cards: CardSchemaExtended[]
+	// 
 	isLoading: boolean
 	error: string
+	// 
+	cards: CardSchemaExtended[]
+	shelvesData: ShelvesDataViewPage
 	//
 	columnSettingsIsOpen: boolean
 	sort: SortColumnValue

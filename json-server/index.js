@@ -112,7 +112,7 @@ server.get('/cards', async (req, res) => {
 				.sort((a, b) => a.index - b.index)
 
 			shelvesAndBoxesData[shelf.id] = {
-				maxIndexBox: shelf.boxesData.length,
+				maxIndexBox: shelf.boxesData.length - 1,
 				boxesItems: boxes,
 				shelfTitle: shelf.title,
 			}

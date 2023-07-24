@@ -17,11 +17,13 @@ export interface FetchBoxesThunkResponse {
 	[shelfId: string]: ShelfRepresentedByBoxes
 }
 
+export interface ShelvesDataViewPage {
+	[shelfId: string]: ShelfData
+}
+
 export interface FetchCardsThunkResponse {
 	cards: CardSchemaExtended[]
-	shelvesAndBoxesData: {
-		[shelfId: string]: ShelfData
-	}
+	shelvesAndBoxesData: ShelvesDataViewPage
 }
 
 export interface ErrorTextAndShelfIdObj {
@@ -30,7 +32,7 @@ export interface ErrorTextAndShelfIdObj {
 }
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const fetchCards = createAsyncThunk<FetchCardsThunkResponse[], FetchBoxesThunkArg, { state: StateSchema, rejectValue: string, extra: ThunkExtraArg }>(
+export const fetchCards = createAsyncThunk<FetchCardsThunkResponse, FetchBoxesThunkArg, { state: StateSchema, rejectValue: string, extra: ThunkExtraArg }>(
 	'viewPage/fetchCards',
 	async ({ shelfId, boxId }, thunkAPI) => {
 
@@ -43,6 +45,7 @@ export const fetchCards = createAsyncThunk<FetchCardsThunkResponse[], FetchBoxes
 			const cards = await dispatch(getAllCards()).unwrap()
 			// console.log(cards)
 			if (!cards) throw new Error()
+			console.log(cards)
 			return cards
 			// return cards.map(card => ({ ...card, deleted: false }))
 

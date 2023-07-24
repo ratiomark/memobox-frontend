@@ -1,6 +1,9 @@
 import { rtkApi } from '@/shared/api/rtkApi';
 import { CardSchema, CardSchemaExtended } from '../types/CardSchema';
 
+// eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
+import { FetchCardsThunkResponse } from '@/features/ViewPageInitializer';
+
 export const cardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
 		getCardsByShelfId: build.query<CardSchema[], string>({
@@ -13,13 +16,14 @@ export const cardApi = rtkApi.injectEndpoints({
 				}
 			}),
 		}),
-		getAllCards: build.query<CardSchemaExtended[], void>({
+		getAllCards: build.query<FetchCardsThunkResponse, void>({
 			query: () => ({
 				url: '/cards',
 				method: 'GET',
 			}),
-			transformResponse: (response: CardSchema[], meta, arg) => { 
-				return response.map(card=>({...card, deleted: false}))
+			transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
+				response.cards.forEach(card => ({ ...card, deleted: false }))
+				return response
 			}
 		}),
 		// getAllCards: build.query<CardSchemaExtended[], void>({

@@ -5,7 +5,6 @@ export {
 	getViewPageEditedData,
 	getViewPageCurrentData,
 } from './model/selectors/getViewPageEditModal';
-
 export {
 	getViewPageShelfId, getViewPageBoxId,
 	getViewPageIsLoading,
@@ -28,5 +27,6 @@ export {
 
 
 export { viewPageReducer, viewPageActions } from './model/slice/viewPageSlice';
+export type { FetchCardsThunkResponse } from './model/services/fetchCards';
 export type { ViewPageInitializerSchema } from './model/types/ViewPageInitializerSchema';
 export { ViewPageInitializer } from './ui/ViewPageInitializer';

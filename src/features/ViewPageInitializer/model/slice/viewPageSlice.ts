@@ -20,6 +20,8 @@ const initialState: ViewPageInitializerSchema = {
 	cardEditModalIsOpen: false,
 	currentCardId: '',
 	// 
+	shelvesData: {},
+	// 
 	shelfId: 'all',
 	boxId: 'new',
 	//
@@ -180,6 +182,7 @@ const viewPageSlice = createSlice({
 				(state, action: PayloadAction<FetchCardsThunkResponse>) => {
 					state.isLoading = false
 					state.cards = action.payload.cards
+					state.shelvesData = action.payload.shelvesAndBoxesData
 					state.error = ''
 				})
 			.addCase(
