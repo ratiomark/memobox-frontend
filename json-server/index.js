@@ -4,8 +4,12 @@ const jsonServer = require('json-server');
 const path = require('path');
 const https = require('https');
 const http = require('http');
-const { handleError } = require('./helpers');
+// const { handleError } = require('./helpers');
+const cors = require('cors');
 
+
+
+// Then use it before your routes are set up:
 const options = {
 	key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
 	cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem')),
@@ -14,7 +18,12 @@ const options = {
 const server = jsonServer.create();
 
 const router = jsonServer.router(path.resolve(__dirname, 'db.json'));
-
+// server.use(cors());
+server.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+	res.header('Access-Control-Allow-Headers', '*')
+	next()
+})
 server.use(jsonServer.defaults({}));
 server.use(jsonServer.bodyParser);
 
@@ -81,10 +90,10 @@ server.get('/cupboard', async (req, res) => {
 			shelves: db.shelves
 		};
 
-		setTimeout(() => {
-			res.send(responseData)
-		}, 2000);
-		// res.send(responseData);
+		// setTimeout(() => {
+		// 	res.send(responseData)
+		// }, 2000);
+		res.send(responseData);
 	})
 	// const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
 	// console.log(db)
@@ -92,10 +101,61 @@ server.get('/cupboard', async (req, res) => {
 	// 	commonShelf: db.commonShelf,
 	// 	shelves: db.shelves
 	// };
-
 	// res.json(responseData);
-
 });
+
+// изменяет данные карточек
+server.patch('/cards', async (req, res) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', async (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const cards = db.cards
+		const { requestAction, cardIds } = req.body
+
+		let cardsUpdated;
+		switch (requestAction) {
+			case 'moveCards':
+				const { boxIndex, shelfId } = req.body
+				cardsUpdated = cards.map(card => {
+					if (cardIds.includes(card._id)) {
+						card.box = Number(boxIndex)
+						card.shelf = shelfId
+						return card
+					}
+					return card
+				})
+				db.cards = cardsUpdated
+				break;
+			case 'removeCards':
+				cardsUpdated = cards.map(card => {
+					if (cardIds.includes(card._id)) {
+						card.deleted = true
+						return card
+					}
+					return card
+				})
+				db.cards = cardsUpdated
+			default:
+				res.json({ data: 'requestAction is not implemented' })
+		}
+
+		fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
+			if (err) {
+				console.error(err);
+				res.status(500).send({ message: 'Server error' });
+				return;
+			}
+
+			res.send(cardsUpdated);
+		});
+	})
+})
+
 server.get('/cards', async (req, res) => {
 	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', async (err, data) => {
 		if (err) {
@@ -120,7 +180,7 @@ server.get('/cards', async (req, res) => {
 
 		})
 		const responseData = {
-			cards: db.cards,
+			cards: db.cards.filter(card => !card.deleted),
 			shelvesAndBoxesData
 		};
 

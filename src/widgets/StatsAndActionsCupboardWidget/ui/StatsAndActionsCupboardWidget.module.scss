@@ -5,6 +5,20 @@
   position: relative;
 }
 
+.wrapper {
+  display: flex;
+  width: 520px;
+  justify-content: space-between;
+}
+
+.ShelfButtons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  // width: max-content;
+}
+
 .info {
   margin-left: 3px;
 }

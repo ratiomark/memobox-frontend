@@ -5,3 +5,4 @@ import { getUserSavedDataViewPageColumns } from '@/entities/User';
 import { createSelector } from '@reduxjs/toolkit';
 
 export const getViewPageSelectedCardIds = (state: StateSchema) => state.viewPage?.selectedCardIds
+export const getViewPageMultiSelectIsActive = (state: StateSchema) => state.viewPage?.isMultiSelectActive

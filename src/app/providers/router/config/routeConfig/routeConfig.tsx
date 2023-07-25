@@ -10,6 +10,7 @@ import { TrainingPage } from '@/pages/TrainingPage';
 import { ReactNode } from 'react';
 import { TrashPage } from '@/pages/TrashPage';
 import { SettingsPageWidgetSkeleton } from '@/widgets/SettingsPageWidget';
+import { StatsAndActionsCupboardWidgetSkeleton } from '@/widgets/StatsAndActionsCupboardWidget';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -70,7 +71,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	main: {
 		path: obtainRouteMain(),
 		element: <MainPage />,
-		// suspense: <SettingsPageWidgetSkeleton />
+		suspense: <StatsAndActionsCupboardWidgetSkeleton />
 	},
 	view: {
 		path: obtainRouteView(':shelfId', ':boxId'),

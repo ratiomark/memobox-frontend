@@ -1,3 +1,18 @@
-.CardEditModal {
+.MoveCardsModal {
+  max-width: 400px;
+}
 
+.listBoxWrapper {
+  padding-bottom: 20px;
+}
+
+.mainWrapper {
+  padding-bottom: 40px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

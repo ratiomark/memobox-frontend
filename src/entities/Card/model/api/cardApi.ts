@@ -4,6 +4,24 @@ import { CardSchema, CardSchemaExtended } from '../types/CardSchema';
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { FetchCardsThunkResponse } from '@/features/ViewPageInitializer';
 
+// type 
+// type: 'moveCards' | 'removeCards'
+interface UpdateCardsRequestBase {
+	cardIds: string[]
+}
+
+interface MoveCardsRequest extends UpdateCardsRequestBase {
+	requestAction: 'moveCards'
+	shelfId: string
+	boxIndex: number | string
+}
+
+interface RemoveCardsRequest extends UpdateCardsRequestBase {
+	requestAction: 'removeCards'
+}
+
+type UpdateCardsRequest = MoveCardsRequest | RemoveCardsRequest
+
 export const cardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
 		getCardsByShelfId: build.query<CardSchema[], string>({
@@ -24,7 +42,17 @@ export const cardApi = rtkApi.injectEndpoints({
 			transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
 				response.cards.forEach(card => ({ ...card, deleted: false }))
 				return response
-			}
+			},
+			providesTags: ['Cards']
+		}),
+		updateCards: build.mutation<CardSchema[], UpdateCardsRequest>({
+			query: (arg) => ({
+
+				url: '/cards',
+				method: 'PATCH',
+				body: { ...arg }
+			}),
+			invalidatesTags: ['Cards']
 		}),
 		// getAllCards: build.query<CardSchemaExtended[], void>({
 		// 	query: () => ({
@@ -57,6 +85,7 @@ export const cardApi = rtkApi.injectEndpoints({
 
 export const { useGetCardsByShelfIdQuery } = cardApi
 export const { useGetAllCardsQuery } = cardApi
+export const { useUpdateCardsMutation } = cardApi
 export const getAllCards = cardApi.endpoints.getAllCards.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate

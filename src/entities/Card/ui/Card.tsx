@@ -6,19 +6,19 @@ interface CardProps {
 	className?: string
 }
 
-export const Card = (props: CardProps) => {
-	const {
-		className
-	} = props
+// export const Card = (props: CardProps) => {
+// 	const {
+// 		className
+// 	} = props
 
-	const { t } = useTranslation()
+// 	const { t } = useTranslation()
 
-	return (
-		<div className={clsx(
-			cls.card,
-			className)}
-		>
+// 	return (
+// 		<div className={clsx(
+// 			cls.card,
+// 			className)}
+// 		>
 
-		</div>
-	)
-}
+// 		</div>
+// 	)
+// }

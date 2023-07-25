@@ -1,30 +1,44 @@
+export { getViewPageShelvesDataDictionary } from './model/selectors/getViewPageShelvesDataDictionary';
+
+export {
+	getViewPageColumnSettingsIsOpen,
+	getViewPageSort,
+	getViewPageSortOrder
+} from './model/selectors/getViewPageSorting';
+
+
 export {
 	getViewPageMoveCardsModalIsOpen
 } from './model/selectors/getViewPageMoveCardsModal';
 
-export { getViewPageSelectedCardIds } from './model/selectors/getViewPageMultiSelect';
+export {
+	getViewPageSelectedCardIds,
+	getViewPageMultiSelectIsActive
+} from './model/selectors/getViewPageMultiSelect';
+
 
 export {
 	getViewPageEditModalIsOpen,
 	getViewPageEditedData,
 	getViewPageCurrentData,
 } from './model/selectors/getViewPageEditModal';
+
 export {
-	getViewPageShelfId, getViewPageBoxId,
+	getViewPageShelfId,
+	getViewPageBoxId,
 	getViewPageIsLoading,
 	getViewPageCards,
 	getViewPageCardsFiltered,
 	getViewPageIsMounted,
-	getViewPage,
-	// getViewPageSortItemsList,
-	getViewPageColumnSettingsIsOpen,
+	// 
+
 	getViewPageCardsSorted,
 	getViewPageColumns,
 	getViewPageSavedShelf,
-	getViewPageSort,
+
 	getViewPageSortChecked,
-	getViewPageSortOrder,
-	getViewPageMultiSelectIsActive,
+
+
 	getViewPageBoxIdChecked,
 } from './model/selectors/getViewPageInitializer';
 

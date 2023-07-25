@@ -4,7 +4,7 @@ import { USER_ID_LS_KEY } from '@/shared/const/localStorage'
 export const rtkApi = createApi({
 	// уникальное имя для сервиса, который будет встроенн в стор
 	reducerPath: 'myApi',
-	tagTypes: ['Shelves'],
+	tagTypes: ['Shelves', 'Cards'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: __API__,
 		// функция интерцептор, которая ?(будет добавлять соответствующий хедер в наш конфиг)?

@@ -1,10 +1,8 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { getUserSavedDataViewPageColumns } from '@/entities/User';
-// import { SortColumnObject } from '@/entities/User/model/types/JsonSavedData';
-// import { SortColumnObject } from '@/widgets/SortControllerViewPageWidget/model/types/SortControllerViewPageWidgetSchema';
 import { createSelector } from '@reduxjs/toolkit';
+import { getViewPageSort, getViewPageSortOrder } from './getViewPageSorting';
 
-export const getViewPage = (state: StateSchema) => state.viewPage
 export const getViewPageIsMounted = (state: StateSchema) => state.viewPage?._viewPageMounted
 export const getViewPageIsLoading = (state: StateSchema) => state.viewPage?.isLoading
 // 
@@ -26,20 +24,17 @@ export const getViewPageBoxIdChecked = createSelector(
 )
 
 // 
-export const getViewPageSort = (state: StateSchema) => state.viewPage?.sort ?? 'createdAt'
 // export const getViewPageSort = (state: StateSchema) => state.viewPage?.sort ?? 'createdAt'
-export const getViewPageSortOrder = (state: StateSchema) => state.viewPage?.sortOrder ?? 'asc'
-export const getViewPageColumnSettingsIsOpen = (state: StateSchema) => state.viewPage?.columnSettingsIsOpen ?? false
-export const getViewPageMultiSelectIsActive = (state: StateSchema) => state.viewPage?.multiSelectIsActive
+// export const getViewPageSortOrder = (state: StateSchema) => state.viewPage?.sortOrder ?? 'asc'
+// export const getViewPageColumnSettingsIsOpen = (state: StateSchema) => state.viewPage?.isTableSettingsModalOpen ?? false
 
 // 
-export const getViewPageCardEditModalIsOpen = (state: StateSchema) => state.viewPage?.cardEditModalIsOpen
 
 export const getViewPageSavedShelf = (shelfId: string) =>
 	(state: StateSchema) => state.viewPage?.shelvesDataSaved?.[shelfId]
 
-export const getLastBoxIdByShelfId = (shelfId: string) =>
-	(state: StateSchema) => state.viewPage?.shelvesDataSaved[shelfId].lastBoxId ?? 'new'
+// export const getLastBoxIdByShelfId = (shelfId: string) =>
+// 	(state: StateSchema) => state.viewPage?.shelvesDataSaved[shelfId].lastBoxId ?? 'new'
 
 export const getViewPageCards = (state: StateSchema) => state.viewPage?.cards
 

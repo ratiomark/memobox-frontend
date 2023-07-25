@@ -6,7 +6,7 @@
 
 .Box {
   border-radius: 4px;
-  box-shadow: rgb(0 0 0 / 10%) 0 4px 6px -1px, rgb(0 0 0 / 6%) 0 2px 4px -1px;
+  box-shadow: var(--entity-box-box-shadow);
   position: relative;
   min-width: 140px;
 }

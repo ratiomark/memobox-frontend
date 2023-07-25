@@ -64,10 +64,18 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 		if (cupboardIsLoading) return []
 		const currentShelf = cupboardShelves.find(shelf => shelf.id === shelfIdCardModal)
 		const itemsList = currentShelf!.boxesData.map(box => {
-			let content
-			if (box.specialType === 'none') content = `Kоробка ${box.index}`
-			else if (box.specialType === 'new') content = 'Новые карточки'
-			else content = 'Изученные'
+			let content;
+			switch (box.specialType) {
+				case 'none':
+					content = `${t('box text')} ${box.index}`
+					break;
+				case 'new':
+					content = t('new cards')
+					break
+				default:
+					content = t('learnt cards')
+					break;
+			}
 			return {
 				value: box.index,
 				// value: box._id,
@@ -75,7 +83,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 			}
 		})
 		return itemsList
-	}, [cupboardIsLoading, shelfIdCardModal, cupboardShelves])
+	}, [cupboardIsLoading, shelfIdCardModal, cupboardShelves, t])
 
 	// useEffect(() => {
 	// if (isOpen && refTextArea.current) {
@@ -120,7 +128,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 		shelvesAndBoxes = (
 			<div className={cls.grid} key='shelvesAndBoxes' >
 				<ListBox
-					label='shelf'
+					label={t('shelf')}
 					value={shelfIdCardModal}
 					items={shelfItems}
 					onChange={onChangeShelf}
@@ -128,7 +136,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 					sameWidth
 				/>
 				<ListBox
-					label='shelf'
+					label={t('box text')}
 					value={boxIdCardModal}
 					items={boxItems}
 					onChange={onChangeBox}

@@ -44,7 +44,7 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 	const dispatch = useAppDispatch()
 	const data = useSelector(getViewPageEditedData)
 	const onCloseEditModal = () => {
-		dispatch(viewPageActions.setCardEditModalIsOpen(false))
+		dispatch(viewPageActions.setIsCardEditModalOpen(false))
 	}
 	const cardEditedData = useSelector(getViewPageEditedData)
 	const questionText = cardEditedData?.question

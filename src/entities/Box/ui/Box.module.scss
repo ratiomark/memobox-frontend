@@ -10,7 +10,9 @@
   min-width: 140px;
 
   // border: 1px solid red;
-  box-shadow: rgb(0 0 0 / 10%) 0 4px 6px -1px, rgb(0 0 0 / 6%) 0 2px 4px -1px;
+  box-shadow: var(--entity-box-box-shadow);
+
+  // box-shadow: rgb(0 0 0 / 10%) 0 4px 6px -1px, rgb(0 0 0 / 6%) 0 2px 4px -1px;
   position: relative;
 }
 

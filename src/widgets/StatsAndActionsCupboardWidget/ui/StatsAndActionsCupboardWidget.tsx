@@ -17,6 +17,7 @@ import { motion } from 'framer-motion'
 import { getUserShelfNamesList } from '@/entities/User';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
+import { ButtonsSkeleton } from './ButtonsSkeleton';
 
 interface StatsAndActionsCupboardWidgetProps {
 	className?: string
@@ -45,7 +46,8 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const buttons = (
 		<AnimateSkeletonLoader
 			classNameForCommonWrapper={cls.commonWrapper}
-			skeletonComponent={<Skeleton width={70} height={24} />}
+			skeletonComponent={<ButtonsSkeleton />}
+			// animateComponentAfterLoadingFadeInTime={DURA}
 			componentAfterLoading={
 				<HStack gap='gap_14' className={cls.actions}>
 					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
@@ -58,6 +60,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 					/>
 				</HStack>
 			}
+			noDelay={!cupboardIsLoading}
 			isLoading={cupboardIsLoading}
 		/>
 	)

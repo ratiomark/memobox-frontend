@@ -28,10 +28,10 @@ export interface ViewPageInitializerSchema {
 	cards: CardSchemaExtended[]
 	shelvesData: ShelvesDataViewPage
 	//
-	columnSettingsIsOpen: boolean
+	isTableSettingsModalOpen: boolean
 	sort: SortColumnValue
 	sortOrder: SortOrderType
-	multiSelectIsActive: boolean
+	isMultiSelectActive: boolean
 	// 
 	cardsDataCurrent: {
 		[key: string]: CardSchemaExtended
@@ -45,10 +45,10 @@ export interface ViewPageInitializerSchema {
 		}
 	}
 	currentCardId: string
-	cardEditModalIsOpen: boolean
+	isCardEditModalOpen: boolean
 	selectedCardIds: string[]
 	// 
-	moveCardsModalIsOpen: boolean
+	isMoveCardsModalOpen: boolean
 	// 
 	shelvesDataSaved: {
 		[shelfId: string]: {

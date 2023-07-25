@@ -29,6 +29,8 @@
   },
   "write shelf name": "Укажите название новой полки",
   "Close button": "Закрыть",
+  "back button": "Назад",
+  "move cards": "Переместить карточки",
   "common shelf name": "Общая полка",
   "settingsItems": {
     "settings": "Настройки",
@@ -64,5 +66,6 @@
   "answer": "Ответ",
   "question": "Вопрос",
   "table settings": "Настройки таблицы",
-  "rows count in cards": "Кол-во строк в карточке"
+  "rows count in cards": "Кол-во строк в карточке",
+  "choose shelf from list": "Пожалуйста, выберите полку из списка"
 }

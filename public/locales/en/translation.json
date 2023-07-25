@@ -30,6 +30,8 @@
   },
   "write shelf name": "Specify a name for the new shelf",
   "Close button": "Close",
+  "back button": "Back",
+  "move cards": "Move cards",
   "common shelf name": "Common shelf",
   "settingsItems": {
     "settings": "Settings",
@@ -65,5 +67,6 @@
   "answer": "Answer",
   "question": "Question",
   "table settings": "Table setting",
-  "rows count in cards": "Lines in the card"
+  "rows count in cards": "Lines in the card",
+  "choose shelf from list": "Please, choose shelf from list"
 }

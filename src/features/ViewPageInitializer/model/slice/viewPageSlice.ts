@@ -16,22 +16,20 @@ const initialState: ViewPageInitializerSchema = {
 	error: '',
 	// 
 	cards: [],
+	shelvesData: {},
 	cardsDataCurrent: {},
 	cardsDataEdited: {},
-	cardEditModalIsOpen: false,
+	isCardEditModalOpen: false,
 	currentCardId: '',
 	// 
-	moveCardsModalIsOpen: false,
-	// 
-	shelvesData: {},
+	isMoveCardsModalOpen: false,
 	// 
 	shelfId: 'all',
 	boxId: 'new',
-	//
-	selectedCardIds: [],
 	// 
-	multiSelectIsActive: false,
-	columnSettingsIsOpen: false,
+	selectedCardIds: [],
+	isMultiSelectActive: false,
+	isTableSettingsModalOpen: false,
 	// 
 	shelvesDataSaved: {}
 }
@@ -66,20 +64,19 @@ const viewPageSlice = createSlice({
 			state.sortOrder = action.payload
 		},
 		setColumnSettingsIsOpen: (state, action: PayloadAction<boolean>) => {
-			state.columnSettingsIsOpen = action.payload
+			state.isTableSettingsModalOpen = action.payload
 		},
 		// multiSelect
-		addOrRemoveCardFromSelectedCardId: (state, action: PayloadAction<string>) => {
+		addOrRemoveCardFromSelectedCardIds: (state, action: PayloadAction<string>) => {
 			if (state.selectedCardIds.includes(action.payload)) {
 				state.selectedCardIds = state.selectedCardIds.filter(cardId => cardId !== action.payload)
 			} else {
-				// возможно тут ошибка!!!
 				state.selectedCardIds.push(action.payload)
 			}
 			if (!state.selectedCardIds.length) {
-				state.multiSelectIsActive = false
+				state.isMultiSelectActive = false
 			} else {
-				state.multiSelectIsActive = true
+				state.isMultiSelectActive = true
 			}
 		},
 		selectAllCards: (state, action: PayloadAction<string[]>) => {
@@ -87,10 +84,10 @@ const viewPageSlice = createSlice({
 		},
 		cancelMultiSelect: (state) => {
 			state.selectedCardIds = []
-			state.multiSelectIsActive = false
+			state.isMultiSelectActive = false
 		},
 		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
-			state.multiSelectIsActive = action.payload
+			state.isMultiSelectActive = action.payload
 		},
 		removeCard: (state, action: PayloadAction<CardSchemaExtended>) => {
 			state.cards.find(card => {
@@ -117,14 +114,14 @@ const viewPageSlice = createSlice({
 		},
 		//  move cards modal
 		setMoveCardsModalIsOpen: (state, action: PayloadAction<boolean>) => {
-			state.moveCardsModalIsOpen = action.payload
+			state.isMoveCardsModalOpen = action.payload
 		},
 		// setViewPageIsMounted: (state) => {
 		// 	state._viewPageMounted = true
 		// },
 		// edit cards
-		setCardEditModalIsOpen: (state, action: PayloadAction<boolean>) => {
-			state.cardEditModalIsOpen = action.payload
+		setIsCardEditModalOpen: (state, action: PayloadAction<boolean>) => {
+			state.isCardEditModalOpen = action.payload
 		},
 		setCurrentCardData: (state, action: PayloadAction<CardSchemaExtended>) => {
 			if (action.payload._id in state.cardsDataCurrent) null
@@ -174,6 +171,12 @@ const viewPageSlice = createSlice({
 		},
 		setLastBoxId: (state, action: PayloadAction<{ shelfId: string, boxId: string }>) => {
 			state.shelvesDataSaved[action.payload.shelfId]['lastBoxId'] = action.payload.boxId
+		},
+		setFetchedData: (state, action: PayloadAction<FetchCardsThunkResponse>) => {
+			state.cards = action.payload.cards
+			state.shelvesData = action.payload.shelvesAndBoxesData
+			state.isLoading = false
+			state.error = ''
 		}
 	},
 

@@ -7,7 +7,7 @@ import { MyText } from '@/shared/ui/Typography';
 import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
 import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
-import { getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, viewPageActions } from '@/features/ViewPageInitializer';
+import { getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelfId, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { ChangeEvent, MouseEvent, SyntheticEvent, useMemo, useState } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
@@ -69,8 +69,9 @@ export const CardListItem = (props: CardListItemProps) => {
 		onOpenEditCardModal,
 	} = props
 	const { t } = useTranslation()
-	const multiSelectIsActive = useSelector(getViewPageMultiSelectIsActive)
+	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
+	const shelvesDataDictionary = useSelector(getViewPageShelvesDataDictionary)
 	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
 	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
 	const dispatch = useAppDispatch()
@@ -118,17 +119,20 @@ export const CardListItem = (props: CardListItemProps) => {
 						text={formatDate(card[columnValue])}
 						size='s'
 					/>
-				} else {
+				} else if (columnValue === 'shelf') {
 					return <MyText
 						className={cls[columnValue]}
+						align='center'
 						key={column.index}
-						text={card[columnValue]}
+						// text={card[columnValue]}
+						text={shelvesDataDictionary?.[card[columnValue]]?.shelfTitle ?? 'Ошибка в данных'}
 						size='s'
 					/>
 				}
 			}
 		})
-	}, [card, columns])
+		// }, [card, columns,])
+	}, [card, columns, shelvesDataDictionary])
 
 	return (
 		<Collapsible
@@ -136,17 +140,12 @@ export const CardListItem = (props: CardListItemProps) => {
 			initial={false}
 			isOpen={!card.deleted}
 		>
-
 			<motion.li
-				// variants={liAnimations}
-				// initial='hidden'
-				// exit={{ opacity: 0 }}
-				// whileInView='visible'
 				className={clsx(cls.item)}
-				onClick={multiSelectIsActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
+				onClick={isMultiSelectActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
 			>
 				<CheckBox className={cls.checkBox} isChecked={isCardSelected} onClick={onSelectCardHandle} />
-				{/* <input type='checkbox' /> */}
+
 				<motion.div
 					// variants={animations}
 					// initial={false}
@@ -155,17 +154,16 @@ export const CardListItem = (props: CardListItemProps) => {
 						cls.CardListItem,
 						// isCardSelected ? cls.CardListItemSelected : '',
 					)}
-				// onClick={multiSelectIsActive ? onSelectCardHandle : onOpenEditCardModalHandle}
+				// onClick={isMultiSelectActive ? onSelectCardHandle : onOpenEditCardModalHandle}
 				>
 					<div className={cls.mainContentWrapper} >
 						<MyText text={card.question} className={cls.mainContent} />
 						<MyText text={card.answer} className={cls.mainContent} />
 					</div>
 					{columnsRendered}
-					{/* <Button disabled={multiSelectIsActive} onClick={onDeleteCard}>del</Button> */}
+					{/* <Button disabled={isMultiSelectActive} onClick={onDeleteCard}>del</Button> */}
 				</motion.div>
 			</motion.li>
-
 
 		</Collapsible>
 

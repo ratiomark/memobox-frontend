@@ -123,6 +123,20 @@ body.dragging * {
   50% { r: 3px; }
 }
 
+.pageStyles {
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 20px;
+  height: calc(100vh - var(--navbar-height));
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+.pageWrapperStyles {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+}
+
 // *::-webkit-scrollbar {
 //   width: 12px;               /* ширина scrollbar */
 //   height: 8px;

@@ -7,6 +7,7 @@ import { fetchCards } from '../model/services/fetchCards';
 import { useSelector } from 'react-redux';
 import { getViewPageIsMounted } from '../model/selectors/getViewPageInitializer';
 import cls from './ViewPageInitializer.module.scss';
+import { useGetAllCardsQuery } from '@/entities/Card';
 
 interface ViewPageInitializerProps {
 	className?: string
@@ -31,6 +32,7 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 		boxListViewPageBlock,
 	} = props
 	const navigate = useNavigate()
+	const { isLoading, data } = useGetAllCardsQuery()
 
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { shelfId, boxId } = useParams<{ shelfId: string, boxId: string }>()
@@ -38,24 +40,32 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 
 	useEffect(() => {
 		// console.log('Эффект')
-		if (!viewPageIsMounter) {
+		if (!viewPageIsMounter && !isLoading && data) {
 			const boxIdChecked = boxId ?? 'new'
 			const shelfIdChecked = shelfId ?? 'all'
 			dispatch(viewPageActions.setViewPageIsMounted())
-			dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
+			dispatch(viewPageActions.setActiveShelfId(shelfIdChecked))
+			dispatch(viewPageActions.setActiveBoxId(boxIdChecked))
+			dispatch(viewPageActions.setFetchedData(data))
+			// dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked, data }))
 			navigate('/view', { replace: true })
 		}
-		// dispatch(fetchBoxesDataByShelfId({ shelfId: shelfIdChecked, boxId: boxIdChecked }))
-	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])
+	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter, isLoading, data])
 
 	useEffect(() => {
 		if (viewPageIsMounter && shelfId && boxId) {
-			// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 			dispatch(viewPageActions.setActiveShelfId(shelfId))
 			dispatch(viewPageActions.setActiveBoxId(boxId))
 			navigate('/view', { replace: true })
 		}
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])
+	
+	useEffect(() => {
+		if (viewPageIsMounter && !isLoading && data) {
+			dispatch(viewPageActions.setFetchedData(data))
+		}
+	}, [isLoading, data, dispatch, viewPageIsMounter])
+
 
 	// dispatch(saveUserJsonData({ viewPageBoxId: boxIdChecked, viewPageShelfId: shelfId }))
 	// useEffect(() => {
