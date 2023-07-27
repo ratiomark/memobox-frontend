@@ -165,18 +165,13 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		>
 			<TimeSetter
 				overlay={false}
-				minutes={minutes}
-				hours={hours}
-				days={days}
-				weeks={weeks}
-				months={months}
 				onClose={onCloseTimeSetter}
 				onSaveTime={onSetNewBoxTime}
 				lockSelector='[data-testid="Page"]'
 			/>
 		</motion.div>
 		<Overlay onClick={onCloseTimeSetter} transparent />
-	</>), [minutes, hours, days, weeks, months, isBoxSaved, onSetNewBoxTime, onCloseTimeSetter])
+	</>), [ isBoxSaved, onSetNewBoxTime, onCloseTimeSetter])
 
 	return (
 		<AnimatePresence>
