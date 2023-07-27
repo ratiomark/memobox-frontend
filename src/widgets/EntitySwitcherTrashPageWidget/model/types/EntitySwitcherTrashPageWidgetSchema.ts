@@ -1,4 +1,4 @@
 
-export interface EntitySwitcherTrashPageWidgetSchema {
+// export interface EntitySwitcherTrashPageWidgetSchema {
 
-}
+// }

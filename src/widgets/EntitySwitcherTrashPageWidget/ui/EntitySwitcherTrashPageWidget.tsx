@@ -4,7 +4,9 @@ import cls from './EntitySwitcherTrashPageWidget.module.scss';
 import { useSelector } from 'react-redux';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { useMemo } from 'react';
-import { getTrashPageActiveEntity } from '@/features/TrashPageInitializer';
+import { getTrashPageActiveEntity, trashPageActions } from '@/features/TrashPageInitializer';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { TrashPageEntityType } from '@/features/TrashPageInitializer';
 
 interface EntitySwitcherTrashPageWidgetProps {
 	className?: string
@@ -14,8 +16,13 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 	const {
 		className
 	} = props
-	const activeEntityValue = useSelector(getTrashPageActiveEntity) ?? 'shelves'
-	const { t } = useTranslation()
+	const activeEntityValue = useSelector(getTrashPageActiveEntity)
+	const dispatch = useAppDispatch()
+	const { t } = useTranslation('trash-page')
+
+	const onTabClick = (tab: TabItem) => {
+		dispatch(trashPageActions.setActiveEntity(tab.value as TrashPageEntityType))
+	}
 
 	const items: TabItem[] = useMemo(() => {
 		return [
@@ -44,6 +51,8 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 			<Tabs
 				tabs={items}
 				value={activeEntityValue}
+				onTabClick={onTabClick}
+				classNameForTab={cls.tab}
 			/>
 		</div>
 	)

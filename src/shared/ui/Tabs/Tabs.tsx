@@ -15,6 +15,7 @@ interface TabsProps {
 	onTabClick: (tab: TabItem) => void
 	direction?: FlexDirection
 	align?: FlexAlign
+	classNameForTab?: string
 }
 
 export const Tabs = memo((props: TabsProps) => {
@@ -25,6 +26,7 @@ export const Tabs = memo((props: TabsProps) => {
 		onTabClick,
 		direction = 'row',
 		align = 'center',
+		classNameForTab,
 	} = props
 
 	// VAR: Замыкание! 
@@ -42,7 +44,8 @@ export const Tabs = memo((props: TabsProps) => {
 						// variant={isSelected ? 'light' : 'normal'}
 						className={clsx(
 							cls.tabItem,
-							{ [cls.selectedItem]: isSelected }
+							{ [cls.selectedItem]: isSelected },
+							classNameForTab,
 						)}
 						onClick={clickHandle(item)}
 					>
@@ -51,7 +54,7 @@ export const Tabs = memo((props: TabsProps) => {
 				)
 			})
 		}
-	}, [value, tabs, clickHandle])
+	}, [value, tabs, clickHandle, classNameForTab])
 
 	return (
 		<div

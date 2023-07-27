@@ -9,6 +9,7 @@ import { UISchema } from '@/features/ScrollSave';
 import { ViewPageInitializerSchema } from '@/features/ViewPageInitializer';
 import { CupboardPageSchema } from '@/features/CupboardShelfList';
 import { SettingsShelfTemplate } from '@/features/SettingsFeatures'
+import { TrashPageInitializerSchema } from '@/features/TrashPageInitializer';
 
 // loginForm делаю не обязательным, таким образом я могу подружать его позже с помощью асинхронна и ТС не будет ругаться на то что я не объявил его в rootReducers
 export interface StateSchema {
@@ -20,6 +21,7 @@ export interface StateSchema {
 	// async reducers
 	loginForm?: LoginSchema
 	viewPage?: ViewPageInitializerSchema
+	trashPage?: TrashPageInitializerSchema
 	settingsShelfTemplate?: SettingsShelfTemplate
 	settingsTimeSleep?: Partial<TimeSleepSettings>
 	// sortColumns
