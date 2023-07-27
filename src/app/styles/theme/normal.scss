@@ -37,13 +37,13 @@ $colors: (
   // redesigned
   --dark-bg: #fff;
   --bg: #fbfbfb;
-  --cancel-rgb-2: rgb(var(--cancel-rgb) / 20%);
-  --accent-rgb-2: rgb(var(--accent-rgb) / 20%);
-
-  // --cancel-rgb-5: cl(--cancel-rgb, 50%);
+  --light-bg: #e2eef1;
+  --shelf-bg: #fcfcfc;
 
   // --bg: #eff5f6;
-  --light-bg: #e2eef1;
+
+  --cancel-rgb-2: rgb(var(--cancel-rgb) / 20%);
+  --accent-rgb-2: rgb(var(--accent-rgb) / 20%);
 
   // --text: #141c1f;
   // --hint: #adbcc0;
@@ -53,7 +53,6 @@ $colors: (
   // --accent: #33d69f;
   // --accent-bg: #e6faf3;
   // --wait-color: #ff8b57;
-  --shelf-bg: #fcfcfc;
   --active-list-item-popover: rgb(128 128 128 / 9.2%);
   --button-color-training-empty: #f5f6fa;
   --button-color-training-filled: blue;
