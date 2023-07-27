@@ -11,6 +11,10 @@ import { fetchCupboardData } from '../services/fetchCupboardData'
 import { CupboardPageSchema } from '../types/CupboardPageSchema'
 
 const initialState: CupboardPageSchema = {
+	isDataAlreadyInStore: false,
+	isNeedRefetch: false,
+	isNeedStop: true,
+	isFirstRender: true,
 	isLoading: true,
 	error: '',
 	entities: {},
@@ -141,6 +145,18 @@ const cupboardShelfList = createSlice({
 		setFetchedCupboardDataIsLoading: (state, action: PayloadAction<boolean>) => {
 			state.isLoading = action.payload
 		},
+		setIsDataAlreadyInStore: (state, action: PayloadAction<boolean>) => {
+			state.isDataAlreadyInStore = action.payload
+		},
+		setIsFirstRender: (state, action: PayloadAction<boolean>) => {
+			state.isFirstRender = action.payload
+		},
+		setIsNeedRefetch: (state, action: PayloadAction<boolean>) => {
+			state.isNeedRefetch = action.payload
+		},
+		setIsNeedStop: (state, action: PayloadAction<boolean>) => {
+			state.isNeedStop = action.payload
+		},
 		setFetchedCupboardDataError: (state, action: PayloadAction<FetchBaseQueryError | SerializedError>) => {
 			if ('status' in action.payload) {
 				state.error = JSON.stringify(action.payload.data)
@@ -154,14 +170,28 @@ const cupboardShelfList = createSlice({
 			state.isLoading = false
 			state.commonShelf = commonShelf
 			state.newCardModal.shelfId = cupboard.shelves[0].id
-			// localDataService.setShelves(cupboard.shelves)
-			// const setToLSList = cupboard.shelves.map(shelf => {
-			// 	return {
-			// 		...shelf,
-			// 		// title: shelf.title, index: shelf.index, isCollapsed: shelf.isCollapsed, id: shelf.id,
-			// 	}
-			// })
-			// storage.setItem('shelves', setToLSList)
+			if (state.isDataAlreadyInStore) {
+				state.isFirstRender = false
+				// const shelves = cupboard.shelves.map(shelf => ({ ...shelf, isLoading: false }))
+				// shelvesAdapter.setAll(state, cupboard.shelves)
+			}
+			// const shelves = cupboard.shelves.map(shelf => ({ ...shelf, isLoading: true }))
+			// shelvesAdapter.setAll(state, shelves)
+			shelvesAdapter.setAll(state, cupboard.shelves)
+			state.isDataAlreadyInStore = true
+			state.isNeedRefetch = true
+			state.cupboardData = {
+				all: commonShelf.data.all,
+				train: commonShelf.data.train,
+				wait: commonShelf.data.wait,
+			}
+		},
+		setFetchedCupboardDataWhenAlreadyInStore: (state, action: PayloadAction<CupboardSchema>) => {
+			const cupboard = action.payload
+			const commonShelf = cupboard.commonShelf
+			state.isLoading = false
+			state.commonShelf = commonShelf
+			state.newCardModal.shelfId = cupboard.shelves[0].id
 			shelvesAdapter.setAll(state, cupboard.shelves)
 			state.cupboardData = {
 				all: commonShelf.data.all,
@@ -169,7 +199,6 @@ const cupboardShelfList = createSlice({
 				wait: commonShelf.data.wait,
 			}
 		},
-
 		updateIndexes: (state, action: PayloadAction<Array<{ id: EntityId, changes: { index: number } }>>) => {
 			shelvesAdapter.updateMany(state, action.payload)
 			// const a = shelvesAdapter.updateMany(state, action.payload)
@@ -207,6 +236,7 @@ const cupboardShelfList = createSlice({
 				(state, action: PayloadAction<CupboardSchema>) => {
 					const cupboard = action.payload
 					const commonShelf = cupboard.commonShelf
+					// state.isDataAlreadyInStore = true
 					state.isLoading = false
 					state.commonShelf = commonShelf
 					state.newCardModal.shelfId = cupboard.shelves[0].id

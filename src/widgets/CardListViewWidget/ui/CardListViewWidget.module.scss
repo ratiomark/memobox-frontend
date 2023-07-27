@@ -1,6 +1,26 @@
 .cardListViewWidget {
   display: flex;
   flex-direction: column;
+
   // gap: 8px;
   height: 100%;
+}
+
+.cardsWrapper {
+  position: relative;
+
+  // overflow: hidden;
+
+  // display: inline-block;
+  max-width: 100%;
+}
+
+.cardsSkeletonWrapper {
+  max-width: 1200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton {
+  width: 19000px;
 }

@@ -11,7 +11,7 @@ export const cupboardApi = rtkApi.injectEndpoints({
 				method: 'GET'
 			}),
 			transformResponse: (response: CupboardSchema, meta, arg) => {
-				console.log(response)
+				// console.log(response)
 				const shelves = response.shelves.map(shelf => {
 					return { ...shelf, isDeleting: false }
 				})

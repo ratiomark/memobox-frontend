@@ -28,12 +28,12 @@ server.use(jsonServer.defaults({}));
 server.use(jsonServer.bodyParser);
 
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
-// server.use(async (req, res, next) => {
-// 	await new Promise((res) => {
-// 		setTimeout(res, 4000);
-// 	});
-// 	next();
-// });
+server.use(async (req, res, next) => {
+	await new Promise((res) => {
+		setTimeout(res, 1000);
+	});
+	next();
+});
 
 // server.get('/cards', async (req, res) => {
 // 	const shelf = req.originalUrl.split('?')[1].split('=')[1]
@@ -85,15 +85,17 @@ server.get('/cupboard', async (req, res) => {
 		}
 
 		const db = JSON.parse(data);
+		const shelves = db.shelves.filter(shelf => !shelf.isDeleted)
+		// console.log(db.shelves)
 		const responseData = {
 			commonShelf: db.commonShelf,
-			shelves: db.shelves
+			shelves
 		};
 
-		// setTimeout(() => {
-		// 	res.send(responseData)
-		// }, 2000);
-		res.send(responseData);
+		setTimeout(() => {
+			res.send(responseData)
+		}, 2000);
+		// res.send(responseData);
 	})
 	// const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
 	// console.log(db)
@@ -140,6 +142,27 @@ server.patch('/cards', async (req, res) => {
 					return card
 				})
 				db.cards = cardsUpdated
+				break
+			case 'restoreCards':
+				cardsUpdated = cards.map(card => {
+					if (cardIds.includes(card._id)) {
+						card.deleted = false
+						return card
+					}
+					return card
+				})
+				db.cards = cardsUpdated
+				break
+			case 'removeCardsFromTrash':
+				// cardsUpdated = cards.map(card => {
+				// 	if (cardIds.includes(card._id)) {
+				// 		card.deleted = false
+				// 		return card
+				// 	}
+				// 	return card
+				// })
+				// db.cards = cardsUpdated
+				break
 			default:
 				res.json({ data: 'requestAction is not implemented' })
 		}
@@ -166,21 +189,32 @@ server.get('/cards', async (req, res) => {
 
 		const db = JSON.parse(data);
 		const shelvesAndBoxesData = {}
-		const shelves = db.shelves.forEach(shelf => {
+		const shelvesDeleted = db.shelves.reduce((acc, curr) => {
+			acc[curr.id] = curr.isDeleted
+			return acc
+		}, {})
+		
+		const shelves = db.shelves
+			.forEach(shelf => {
 
-			const boxes = shelf.boxesData
-				.map(box => ({ id: box._id, index: box.index }))
-				.sort((a, b) => a.index - b.index)
+				const boxes = shelf.boxesData
+					.map(box => ({ id: box._id, index: box.index }))
+					.sort((a, b) => a.index - b.index)
 
-			shelvesAndBoxesData[shelf.id] = {
-				maxIndexBox: shelf.boxesData.length - 1,
-				boxesItems: boxes,
-				shelfTitle: shelf.title,
-			}
+				shelvesAndBoxesData[shelf.id] = {
+					maxIndexBox: shelf.boxesData.length - 1,
+					boxesItems: boxes,
+					shelfTitle: shelf.title,
+				}
 
-		})
+			})
 		const responseData = {
-			cards: db.cards.filter(card => !card.deleted),
+			cards: db.cards.filter(card => {
+				if (!card.deleted && !shelvesDeleted[card.shelf]) {
+					return true
+				}
+				return false
+			}),
 			shelvesAndBoxesData
 		};
 
@@ -234,6 +268,42 @@ server.put('/shelves', (req, res) => {
 
 			// Отправляем обновленные данные обратно клиенту
 			res.send(newShelves);
+		});
+	});
+});
+
+server.delete('/shelves', (req, res) => {
+	const { shelfId } = req.body;
+
+	// Читаем текущий файл JSON
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+
+		// Обновляем поле shelves
+		db.shelves = db.shelves.map(shelf => {
+			if (shelf.id === shelfId) {
+				return { ...shelf, isDeleted: true }
+			}
+			return shelf
+		})
+
+		// Перезаписываем файл JSON с обновленными данными
+		fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
+			if (err) {
+				console.error(err);
+				res.status(500).send({ message: 'Server error' });
+				return;
+			}
+
+			// Отправляем обновленные данные обратно клиенту
+			// res.send(newShelves);
+			res.json({ message: 'полка удалена' })
 		});
 	});
 });

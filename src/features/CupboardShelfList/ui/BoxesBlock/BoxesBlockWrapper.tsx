@@ -20,7 +20,7 @@ export const BoxesBlockWrapper = (props: BoxesBlockProps) => {
 		<AnimateSkeletonLoader
 			skeletonComponent={<BoxesBlockSkeleton />}
 			componentAfterLoading={<BoxesBlock shelf={props.shelf} />}
-			animateSkeletonFadeOutTime={DURATION_SHELF_COLLAPSING_SEC}
+			// animateSkeletonFadeOutTime={DURATION_SHELF_COLLAPSING_SEC}
 			// commonWrapper={false}
 			noDelay={!isLoading}
 			classNameForCommonWrapper={cls.substitute}

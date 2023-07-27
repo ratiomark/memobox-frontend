@@ -1,18 +1,58 @@
+$colors: (
+  "--text": #141c1f,
+  "--hint": #adbcc0,
+  "--save": #62de85,
+  "--icon": #5ed3f3,
+  "--accent": #33d69f,
+  "--accent-bg": #e6faf3,
+  "--wait-color": #ff8b57,
+  "--cancel": #f77,
+);
+
+@function HexToRGB($hex) {
+  @return red($hex) green($hex) blue($hex);
+}
+
+@function HexToRGBComas($hex) {
+  @return red($hex), green($hex), blue($hex);
+}
+
+@function ccc($name, $opacity: false) {
+  @return rgb(var(#{unquote($name)}));
+}
+
 .app_light_theme {
+  @if $colors {
+    @each $key, $value in $colors {
+      // --color-#{$key}: #{$value};
+      #{$key}-rgb: #{HexToRGB($value)};
+    }
+
+    @each $key, $value in $colors {
+      // --color-#{$key}: #{$value};
+      #{$key}: #{$value};
+    }
+  }
+
   // redesigned
   --dark-bg: #fff;
   --bg: #fbfbfb;
+  --cancel-rgb-2: rgb(var(--cancel-rgb) / 20%);
+  --accent-rgb-2: rgb(var(--accent-rgb) / 20%);
+
+  // --cancel-rgb-5: cl(--cancel-rgb, 50%);
 
   // --bg: #eff5f6;
   --light-bg: #e2eef1;
-  --text: #141c1f;
-  --hint: #adbcc0;
-  --cancel: #f77;
-  --save: #62de85;
-  --icon: #5ed3f3;
-  --accent: #33d69f;
-  --accent-bg: #e6faf3;
-  --wait-color: #ff8b57;
+
+  // --text: #141c1f;
+  // --hint: #adbcc0;
+  // --cancel: #f77;
+  // --save: #62de85;
+  // --icon: #5ed3f3;
+  // --accent: #33d69f;
+  // --accent-bg: #e6faf3;
+  // --wait-color: #ff8b57;
   --shelf-bg: #fcfcfc;
   --active-list-item-popover: rgb(128 128 128 / 9.2%);
   --button-color-training-empty: #f5f6fa;

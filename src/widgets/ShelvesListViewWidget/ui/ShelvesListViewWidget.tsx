@@ -2,13 +2,21 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { Icon } from '@/shared/ui/Icon';
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo, useRef } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
-import { getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer';
+import {
+	getViewPageIsLoading,
+	getViewPageIsMounted,
+	getViewPageShelfId,
+	viewPageActions,
+} from '@/features/ViewPageInitializer';
 import { HorizontalScrollerList } from '@/shared/ui/HorizontalScrollerList';
 import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
 import cls from './ShelvesListViewWidget.module.scss';
+import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
+import { Skeleton } from '@/shared/ui/Skeleton';
+import { HStack } from '@/shared/ui/Stack';
 
 
 interface ShelvesListViewWidgetProps {
@@ -22,16 +30,17 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	const { t } = useTranslation()
-	
+
 	const dispatch = useAppDispatch()
 	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
+
 
 	const onChangeShelf = useCallback((shelfId: string) => {
 		dispatch(viewPageActions.setActiveShelfId(shelfId))
 	}, [dispatch])
 
 	const items = useMemo(() => {
-		if (isShelvesLoading) return []
+		if (isShelvesLoading) return
 		const items = [{ value: 'all', content: t('common shelf name'), onChange: () => onChangeShelf('all') }]
 		shelvesData?.forEach(shelfItem => {
 			items.push({
@@ -40,6 +49,34 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 				onChange: () => onChangeShelf(shelfItem.id),
 			})
 		})
+		// shelvesData?.forEach(shelfItem => {
+		// 	items.push({
+		// 		value: shelfItem.id + 'ds',
+		// 		content: shelfItem.title + ' 2',
+		// 		onChange: () => onChangeShelf(shelfItem.id + 'ds'),
+		// 	})
+		// })
+		// shelvesData?.forEach(shelfItem => {
+		// 	items.push({
+		// 		value: shelfItem.id + 'dss',
+		// 		content: shelfItem.title + ' 3',
+		// 		onChange: () => onChangeShelf(shelfItem.id + 'dss'),
+		// 	})
+		// })
+		// shelvesData?.forEach(shelfItem => {
+		// 	items.push({
+		// 		value: shelfItem.id+'ds',
+		// 		content: shelfItem.title+ ' 2',
+		// 		onChange: () => onChangeShelf(shelfItem.id+'ds'),
+		// 	})
+		// })
+		// shelvesData?.forEach(shelfItem => {
+		// 	items.push({
+		// 		value: shelfItem.id+'dss',
+		// 		content: shelfItem.title+ ' 3',
+		// 		onChange: () => onChangeShelf(shelfItem.id+'dss'),
+		// 	})
+		// })
 		// shelvesData?.forEach(shelfItem => {
 		// 	items.push({
 		// 		value: shelfItem.id+'ds',
@@ -56,20 +93,50 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 		// })
 		return items
 	}, [shelvesData, isShelvesLoading, onChangeShelf, t])
-	
+
+
+	const content = (
+		<AnimateSkeletonLoader
+			isLoading={isShelvesLoading}
+			noDelay={(items && items?.length > 1)}
+			skeletonComponent={(
+				<HStack gap='gap_14' >
+					<Skeleton width={32} height={32} borderRadius='4px' />
+					<Skeleton width={120} borderRadius='12px' height={24} />
+					<Skeleton width={70} borderRadius='12px' height={24} />
+					<Skeleton width={100} borderRadius='12px' height={24} />
+					<Skeleton width={90} borderRadius='12px' height={24} />
+				</HStack >
+			)}
+			commonWrapper={false}
+			classNameAbsoluteParts={cls.shelfItems}
+			componentAfterLoading={(
+				<div
+					className={cls.wrapper}
+				>
+					<Icon
+						Svg={MultiSelectIcon}
+						className={cls.listIcon}
+					/>
+					<HorizontalScrollerList value={shelfId} items={items} />
+				</div>
+			)}
+		/>)
+
+
 	return (
 		<div className={clsx(
 			cls.shelvesListViewWidget,
 			className)}
 		>
-			<Icon
+			{/* <Icon
 				Svg={MultiSelectIcon}
-			/>
-			<HorizontalScrollerList value={shelfId} items={items} />
+			/> */}
+			{/* <HorizontalScrollerList value={shelfId} items={items} /> */}
+			{content}
 		</div>
 	)
 })
-ShelvesListViewWidget.displayName = 'ShelvesListViewWidget'
 
 // export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) => {
 // 	const {

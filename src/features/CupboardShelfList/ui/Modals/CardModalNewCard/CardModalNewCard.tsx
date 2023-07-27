@@ -127,22 +127,28 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	} else {
 		shelvesAndBoxes = (
 			<div className={cls.grid} key='shelvesAndBoxes' >
-				<ListBox
-					label={t('shelf')}
-					value={shelfIdCardModal}
-					items={shelfItems}
-					onChange={onChangeShelf}
-					max
-					sameWidth
-				/>
-				<ListBox
-					label={t('box text')}
-					value={boxIdCardModal}
-					items={boxItems}
-					onChange={onChangeBox}
-					max
-					sameWidth
-				/>
+				<div className={cls.listBoxWrapper}>
+
+					<ListBox
+						label={t('shelf')}
+						value={shelfIdCardModal}
+						items={shelfItems}
+						onChange={onChangeShelf}
+						max
+						sameWidth
+					/>
+				</div>
+				<div className={cls.listBoxWrapper}>
+
+					<ListBox
+						label={t('box text')}
+						value={boxIdCardModal}
+						items={boxItems}
+						onChange={onChangeBox}
+						max
+						sameWidth
+					/>
+				</div>
 			</div>)
 	}
 

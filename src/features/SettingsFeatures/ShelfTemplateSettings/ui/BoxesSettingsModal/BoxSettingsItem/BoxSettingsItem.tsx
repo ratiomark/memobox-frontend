@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import cls from './BoxSettingsItem.module.scss';
 import { BoxSchema } from '@/entities/Box';
 import { Heading } from '@/shared/ui/Typography';
-import TimeIcon from '@/shared/assets/icons/timeIcon.svg'
+import TimeIcon2 from '@/shared/assets/icons/timeIcon.svg'
+import TimeIcon from '@/shared/assets/icons/timeIcon2.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react';
 import { TimeSetter } from '@/shared/ui/TimeSetter';
@@ -17,10 +18,12 @@ import { useSelector } from 'react-redux';
 import { getBoxIsTimeSetterOpen, getSettingsShelfTemplateMode } from '../../../model/selectors/settingsShelfTemplate';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { settingsShelfTemplateActions } from '../../../model/slice/shelfTemplateSlice';
-import { delay } from '@reduxjs/toolkit/dist/utils';
 import { AddBoxIcon } from './AddBoxIcon';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { DURATION_MILLISEC, DURATION_SEC, } from '@/shared/const/animation';
+import TrashIcon2 from '@/shared/assets/icons/trashIcon.svg'
+import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
+import { HStack } from '@/shared/ui/Stack';
 
 interface BoxSettingsItemProps {
 	className?: string
@@ -102,12 +105,14 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 	)
 
 	const timerIcon = (<Icon
-		className={cls.icon}
 		Svg={TimeIcon}
+		fill={false}
 		clickable
 		onClick={onOpenTimeSetter}
 		width={20}
 		height={20}
+		buttonSameSize={false}
+		className={clsx(cls.icon, cls.timerIcon)}
 	/>)
 
 	const timerIconAnimated = (<AnimatePresence mode='wait'>
@@ -123,7 +128,19 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		}
 	</AnimatePresence>)
 
-	const removeButton = <Button onClick={onRemoveClick}>remove</Button>
+	const removeButton = (
+		<Icon
+			Svg={TrashIcon}
+			type='cancel'
+			clickable
+			fill={false}
+			width={22}
+			height={22}
+			onClick={onRemoveClick}
+			buttonSameSize={false}
+			className={clsx(cls.icon, cls.removeIcon)}
+		/>)
+	// const removeButton = <Button onClick={onRemoveClick}>remove</Button>
 
 	const removeButtonAnimated = (<AnimatePresence mode='wait'>
 		{!isAddBoxModeActive &&
@@ -180,8 +197,11 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 							className)}
 						>
 							{title}
-							{timerIconAnimated}
-							{removeButtonAnimated}
+							<HStack max justify='center' gap='gap_4'>
+								{timerIconAnimated}
+								{removeButtonAnimated}
+
+							</HStack>
 							<p>{getTiming(boxItem)}</p>
 
 							<AnimatePresence mode='wait'>

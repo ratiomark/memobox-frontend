@@ -1990,13 +1990,13 @@
       "train": 52,
       "wait": 48
     },
-    "isCollapsed": true
+    "isCollapsed": false
   },
   "shelves": [
     {
       "id": "648c920baa3edb04cec38442",
       "index": 0,
-      "isCollapsed": false,
+      "isCollapsed": true,
       "title": "math",
       "boxesData": [
         {
@@ -2202,7 +2202,6 @@
         "wait": 7
       },
       "isDeleting": false,
-      "isDeleted": false,
       "missedTrainingAction": "additional"
     },
     {
@@ -2295,12 +2294,11 @@
         "wait": 11
       },
       "isDeleting": false,
-      "missedTrainingAction": "backwards",
-      "isDeleted": false
+      "missedTrainingAction": "backwards"
     },
     {
       "id": "648c920b3e40b5930a6e1603",
-      "index": 2,
+      "index": 0,
       "isCollapsed": true,
       "title": "books",
       "boxesData": [
@@ -2404,13 +2402,11 @@
         "train": 9,
         "wait": 12
       },
-      "isDeleting": false,
-      "isLoading": true,
-      "isDeleted": true
+      "isDeleting": false
     },
     {
       "id": "648c920beba56ba6cd7db7bb",
-      "index": 3,
+      "index": 0,
       "isCollapsed": true,
       "title": "biology",
       "boxesData": [
@@ -2514,8 +2510,7 @@
         "train": 9,
         "wait": 7
       },
-      "isDeleting": false,
-      "isDeleted": false
+      "isDeleting": false
     },
     {
       "id": "648c920b6adf96517748f3c1",
@@ -2606,8 +2601,7 @@
         "train": 16,
         "wait": 11
       },
-      "isDeleting": false,
-      "isDeleted": false
+      "isDeleting": false
     }
   ]
 }

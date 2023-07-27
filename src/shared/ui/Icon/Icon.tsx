@@ -10,6 +10,7 @@ interface IconBaseProps extends SvgProps {
 	className?: string
 	Svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 	type?: 'main' | 'hint' | 'cancel' | 'disabled'
+	fill?: boolean
 }
 
 interface UnClickableProps extends IconBaseProps {
@@ -19,6 +20,7 @@ interface UnClickableProps extends IconBaseProps {
 interface ClickableProps extends IconBaseProps {
 	clickable: true
 	onClick: (() => void) | ((e: MouseEvent<any>) => void)
+	buttonSameSize?: boolean
 	// preventClick?: boolean
 }
 
@@ -32,22 +34,26 @@ export const Icon = (props: IconProps) => {
 		height = 32,
 		type = 'main',
 		clickable = false,
+		fill = true,
 		...otherProps
 	} = props
 
 	if (props.clickable) {
+		const { buttonSameSize = false } = props
 		return (
 			<button
-				style={{ width, height }}
+				style={buttonSameSize ? { width, height } : undefined}
 				type='button'
-				onClick={	props.onClick}
+				onClick={props.onClick}
 				className={clsx(cls.button, className)}
 			>
 				<Svg
 					className={clsx(
 						cls.Icon,
-						cls[type]
+						cls[type],
+						{ [cls[type + '_fill']]: fill },
 					)}
+					// style={!fill ? { fill: '' } : {}}
 					width={width}
 					height={height}
 					{...otherProps}
@@ -62,7 +68,8 @@ export const Icon = (props: IconProps) => {
 			className={clsx(
 				cls.Icon,
 				cls[type],
-				className
+				{ [cls[type + '_fill']]: fill },
+				className,
 			)}
 			width={width}
 			height={height}

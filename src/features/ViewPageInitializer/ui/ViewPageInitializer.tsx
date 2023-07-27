@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { ReactNode, memo, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,8 +5,8 @@ import { viewPageActions, viewPageReducer } from '../model/slice/viewPageSlice';
 import { fetchCards } from '../model/services/fetchCards';
 import { useSelector } from 'react-redux';
 import { getViewPageIsMounted } from '../model/selectors/getViewPageInitializer';
-import cls from './ViewPageInitializer.module.scss';
 import { useGetAllCardsQuery } from '@/entities/Card';
+import cls from './ViewPageInitializer.module.scss';
 
 interface ViewPageInitializerProps {
 	className?: string
@@ -59,7 +58,7 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 			navigate('/view', { replace: true })
 		}
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])
-	
+
 	useEffect(() => {
 		if (viewPageIsMounter && !isLoading && data) {
 			dispatch(viewPageActions.setFetchedData(data))
@@ -75,10 +74,7 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	// }, [boxId, dispatch])
 
 	return (
-		<div className={clsx(
-			cls.viewPageInitializer,
-			className)}
-		>
+		<div className={cls.viewPageInitializer}>
 			{statsAndActionsViewPageBlock}
 			{shelvesListViewPageBlock}
 			{boxListViewPageBlock}

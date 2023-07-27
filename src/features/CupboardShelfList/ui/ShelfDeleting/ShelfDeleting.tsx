@@ -7,6 +7,11 @@ import { cupboardShelfListActions } from '../..';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { Button } from '@/shared/ui/Button';
+import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
+import { useRemoveShelfMutation } from '@/entities/Shelf';
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { useSelector } from 'react-redux';
+import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
 
 interface ShelfDeletingProps {
 	id: string
@@ -20,14 +25,32 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 	} = props
 
 	const dispatch = useAppDispatch()
-
+	const [removeShelfMutation] = useRemoveShelfMutation()
+	const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
+	// timerId = setTimeout(() => {
+	// 	if (isShelfDeleting) {
+	// 		dispatch(cupboardShelfListActions.deleteShelf(shelfId))
+	// 		removeShelfMutation(shelfId)
+	// 	}
+	// 	clearTimeout(timerId)
+	// }, DURATION_SHELF_DELETION_MILLISEC)
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			// dispatch(cupboardShelfListActions.deleteShelf(id))
-		}, 9000)
+		console.log('Я в АААААААААААААА')
+		const timerId = setTimeout(() => {
+			console.log('ТАЙМАУТА')
+			if (isShelfDeleting) {
+				console.log('Я в ГЛВАВВЕЕЕА')
+				dispatch(cupboardShelfListActions.deleteShelf(id))
+				removeShelfMutation(id)
+			}
+			clearTimeout(timerId)
+		}, DURATION_SHELF_DELETION_MILLISEC)
+		// const timer = setTimeout(() => {
+		// 	// dispatch(cupboardShelfListActions.deleteShelf(id))
+		// }, DURATION_SHELF_DELETION_MILLISEC)
 
-		return () => clearTimeout(timer)
-	}, [id, dispatch])
+		return () => clearTimeout(timerId)
+	}, [id, dispatch, isShelfDeleting, removeShelfMutation])
 
 	const onCancelDeletion = () => dispatch(cupboardShelfListActions.updateShelf({ id, changes: { isDeleting: false } }))
 

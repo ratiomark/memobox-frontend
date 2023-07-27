@@ -10,15 +10,9 @@ import { StatsAndActionsViewPageWidget } from '@/widgets/StatsAndActionsViewPage
 import { memo } from 'react';
 
 const ViewPage = memo(() => {
-	// const { t, i18n } = useTranslation()
-
 	return (
 		<>
-			<Page saveScroll={false} data-testid='MainPage'>
-				{/* <div style={{ width: 700 }}>
-
-					<CardScroller />
-				</div> */}
+			<Page saveScroll={false} data-testid='ViewPage'>
 				<ViewPageInitializer
 					statsAndActionsViewPageBlock={<StatsAndActionsViewPageWidget />}
 					shelvesListViewPageBlock={<ShelvesListViewWidget />}

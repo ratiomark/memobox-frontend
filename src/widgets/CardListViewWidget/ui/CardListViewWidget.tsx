@@ -19,6 +19,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useHotkeys } from 'react-hotkeys-hook';
 import { CardEditModal } from './CardEditModal/CardEditModal';
 import { MoveCardsModal } from './MoveCardsModal/MoveCardsModal';
+import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 
 interface CardListViewWidgetProps {
 	className?: string
@@ -73,8 +74,8 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 
 	const onRemoveCards = useCallback(() => {
 		dispatch(viewPageActions.removeSelectedCards())
-		updateCardsMutation({})
-	}, [dispatch, updateCardsMutation])
+		// updateCardsMutation({ cardIds: })
+	}, [dispatch])
 
 
 	const onMoveCardsClick = useCallback(() => {
@@ -95,7 +96,7 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 
 
 	const content = useMemo(() => {
-		if (viewPageIsLoading) return []
+		if (!viewPageIsMounted || viewPageIsLoading) return
 		return cards?.map(item => (
 			<CardListItem
 				// selectedCardIds={selectedCardIds}
@@ -105,69 +106,29 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 				key={item._id}
 			/>)
 		)
-	}, [cards, viewPageIsLoading, onSelectCard, onOpenEditCardModal])
+	}, [cards, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])
 
-
-	// if (!viewPageIsMounted || viewPageIsLoading || !content) {
-	// 	return <CardsListSkeleton />
-	// }
-
-	const contentLoading = (
-		<AnimatePresence>
-			{(!viewPageIsMounted || viewPageIsLoading || !content) &&
-				<motion.div
-					exit={{
-						opacity: 0,
-						// backgroundColor: '#fbfbfb',
-						transition: {
-							opacity: {
-								duration: 0.3
-								// duration: 0.3
-							}
-						}
-					}}
-					// exit={{ opacity: 0, transition: { opacity: { duration: 0.3} } }}
-					style={{ position: 'absolute', inset: 0 }}
-				>
-					<CardsListSkeleton />
-
-				</motion.div>
-			}
-		</AnimatePresence >
-	)
-
-	const contentReady = (
-		<AnimatePresence >
-			{content.length &&
-				<motion.ul
-					// ref={cardListRef}
-					// ref={ref}
-					// tabIndex={1}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					// viewport={{ once: true }}
-					transition={{ duration: 0.4, delay: 0.3 }}
-					// transition={{ type: 'spring', duration: 2, delay: 0.33 }}
-					className={clsx(
-						cls.cardListViewWidget,
-						className)}
-				>
-					{content}
-					{/* <MultiSelectScreen
-						onCancelMultiSelect={onCancelMultiSelect}
-						onSelectAllCards={onSelectAllCards}
-					/>
-					<CardEditModal /> */}
-				</motion.ul>
-			}
-		</AnimatePresence>
+	const contentRendered = (
+		<AnimateSkeletonLoader
+			isLoading={(!viewPageIsMounted || viewPageIsLoading)}
+			skeletonComponent={<CardsListSkeleton />}
+			componentAfterLoading={content}
+			noDelay={cards.length > 0}
+		// commonWrapper={false}
+		// classNameForCommonWrapper={cls.cardsWrapper}
+		// borderTest
+		/>
 	)
 
 	return (
 		<>
-			<div style={{ position: 'relative' }}>
-				{contentLoading}
-				{contentReady}
+			<div className={cls.cardsWrapper}>
+				{contentRendered}
+				{
+					!(!viewPageIsMounted || viewPageIsLoading)
+					&& !content?.length
+					&& <p>Кажется, тут нет карточек</p>
+				}
 
 			</div>
 			<MultiSelectScreen

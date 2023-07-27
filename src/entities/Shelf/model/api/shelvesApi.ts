@@ -77,6 +77,24 @@ export const memoboxApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Shelves']
 		}),
+		removeShelf: build.mutation<void, string>({
+			query: (arg) => ({
+				url: '/shelves',
+				// params: { id: arg.id },
+				method: 'DELETE',
+				// headers: {
+				// 	'Content-Type': 'application/json'
+				// },
+				body: {
+					shelfId: arg
+					// обновленные данные объекта
+					// isCollapsed: arg.isCollapsed
+					// ...arg,
+				}
+				// body: { isCollapsed: arg.isCollapsed }
+			}),
+			invalidatesTags: ['Shelves']
+		}),
 	}),
 })
 export const memoboxGetShelves = memoboxApi.endpoints.getShelves.initiate
@@ -84,3 +102,4 @@ export const { useGetShelvesQuery } = memoboxApi
 export const { useUpdateShelfMutation } = memoboxApi
 export const { useUpdateShelfWithTagMutation } = memoboxApi
 export const { useUpdateCommonShelfMutation } = memoboxApi
+export const { useRemoveShelfMutation } = memoboxApi

@@ -26,6 +26,7 @@ export interface ShelfProps {
 	boxesBlock?: ReactNode
 	className?: string
 	moveShelf: (atIndex: number, shelfIndex: number) => void
+	isFirstRender: boolean
 }
 
 export const Shelf = memo((props: ShelfProps) => {
@@ -34,6 +35,7 @@ export const Shelf = memo((props: ShelfProps) => {
 		completeSmallDataLabelsBlock,
 		shelfButtonsBlock,
 		boxesBlock,
+		isFirstRender,
 		moveShelf,
 		shelf: {
 			title,
@@ -48,7 +50,7 @@ export const Shelf = memo((props: ShelfProps) => {
 	const { t } = useTranslation()
 	const controls = useDragControls()
 
-	console.log('SHELF   ', props.shelf.isLoading)
+	// console.log('SHELF   ', props.shelf.isLoading)
 	const handleDragStart = () => {
 		setIsDragging(true);
 		document.body.classList.add('dragging');
@@ -61,6 +63,12 @@ export const Shelf = memo((props: ShelfProps) => {
 		}, 300)
 		document.body.classList.remove('dragging');
 	}
+
+	useEffect(() => {
+		console.log(`${title}  `, isCollapsed)
+
+	}, [isCollapsed, title])
+
 
 	// useEffect(() => {
 	// 	if (isCollapsed) return
@@ -145,7 +153,7 @@ export const Shelf = memo((props: ShelfProps) => {
 				<Collapsible
 					isOpen={!isCollapsed}
 					// initial={false}
-					initial={props.shelf.isLoading}
+					initial={isFirstRender}
 					animationDuration={DURATION_SHELF_COLLAPSING_SEC}
 				// animationDuration={DURATION_SHELF_COLLAPSING_SEC}
 				>

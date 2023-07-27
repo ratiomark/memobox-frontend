@@ -1,5 +1,26 @@
 .shelvesListViewWidget {
+  // display: flex;
+  // gap: 20px;
+  // align-items: center;
+  min-height: 32px;
+  position: relative;
+}
+
+.wrapper {
   display: flex;
   gap: 20px;
-	align-items: center;
+  align-items: center;
+
+  // width: max-content;
+
+  position: relative;
+}
+
+.listIcon {
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.shelfItems {
+  left: 0;
 }

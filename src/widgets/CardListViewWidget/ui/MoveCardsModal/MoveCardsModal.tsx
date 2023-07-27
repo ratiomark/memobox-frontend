@@ -103,6 +103,7 @@ export const MoveCardsModal = memo(() => {
 				onChange={setCurrentShelfId}
 				defaultValue={t('choose shelf from list')}
 				max
+				sameWidth
 			/>
 		</div>)
 	const boxes = (
@@ -113,6 +114,7 @@ export const MoveCardsModal = memo(() => {
 				items={boxItems}
 				onChange={setCurrentBoxIndex}
 				max
+				sameWidth
 			/>
 		</div>)
 

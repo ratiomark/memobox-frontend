@@ -44,7 +44,7 @@ export const Page = memo((props: PageProps) => {
 		children,
 		onScrollEnd,
 		isLoading,
-		saveScroll = true,
+		saveScroll = false,
 	} = props
 
 	const dispatch = useAppDispatch()

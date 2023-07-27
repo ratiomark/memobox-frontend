@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { Skeleton } from '../Skeleton'
 import { MyText } from '../Typography'
 import { HStack } from '../Stack'
+import { AnimateSkeletonLoader } from '../Animations'
 
 interface HorizontalScrollerListItem {
 	value: string
@@ -16,64 +17,28 @@ interface HorizontalScrollerListItem {
 }
 
 interface HorizontalScrollerListProps {
-	className?: string
 	items?: HorizontalScrollerListItem[]
 	value?: string
 	lockFirstItem?: boolean
 	// onChange: (shelfId: string) => void
 }
+
 interface DragControllerState {
 	startX: undefined | number
 	startScrollLeft: undefined | number
 	isDragging: undefined | boolean
 }
+
 export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 	const {
-		className,
 		items,
 		value,
 		lockFirstItem = true,
 	} = props
-	// const [selectedItem, setSelectedItem] = useState<HorizontalScrollerListItem>()
-	// const [{
-	// 	startX,
-	// 	startScrollLeft,
-	// 	isDragging
-	// }, setDragStart] = useState<DragControllerState>({
-	// 	startX: undefined,
-	// 	startScrollLeft: undefined,
-	// 	isDragging: false
-	// })
+
 	const containerRef = useRef<HTMLUListElement>(null)
 	const itemRefs = useRef<HTMLLIElement[]>([])
-	const mounted = useRef(false)
 
-	// useEffect(() => {
-	// 	if (!mounted.current && items?.length && value) {
-	// 		const initialItem = items!.find(item => item.value === value)
-	// 		if (initialItem) setSelectedItem(initialItem)
-	// 		mounted.current = true
-	// 	}
-	// }, [items, value])
-
-	// const handleMouseDown = (e: MouseEvent) => {
-	// 	setDragStart({
-	// 		startX: e.pageX - containerRef.current!.offsetLeft,
-	// 		startScrollLeft: containerRef.current!.scrollLeft,
-	// 		isDragging: true
-	// 	})
-	// }
-
-
-	// const selectItem = (item: HorizontalScrollerListItem, indexPlus1: number) => {
-	// 	setSelectedItem(item)
-	// 	itemRefs.current[indexPlus1 - 1].scrollIntoView({
-	// 		behavior: 'smooth',
-	// 		block: 'nearest',
-	// 		inline: 'center'
-	// 	})
-	// 	// }
-	// }
 
 	const handleSelectItem = (e: MouseEvent, item: HorizontalScrollerListItem, indexPlus1: number) => {
 		itemRefs.current[indexPlus1 - 1].scrollIntoView({
@@ -103,14 +68,27 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 		))
 	}, [items, value])
 
-	if (!itemsRendered) {
-		return (<HStack gap='gap_14'>
-			<Skeleton width={120} borderRadius='12px' height={24} />
-			<Skeleton width={70} borderRadius='12px' height={24} />
-			<Skeleton width={100} borderRadius='12px' height={24} />
-			<Skeleton width={90} borderRadius='12px' height={24} />
-		</HStack>)
-	}
+	// const content = (
+	// 	<AnimateSkeletonLoader
+	// 		isLoading={!itemsRendered}
+	// 		skeletonComponent={<HStack gap='gap_14'>
+	// 			<Skeleton width={120} borderRadius='12px' height={24} />
+	// 			<Skeleton width={70} borderRadius='12px' height={24} />
+	// 			<Skeleton width={100} borderRadius='12px' height={24} />
+	// 			<Skeleton width={90} borderRadius='12px' height={24} />
+	// 		</HStack>}
+	// 		componentAfterLoading={itemsRendered}
+	// 		animateSkeletonFadeOutTime={200}
+	// 	/>)
+
+	// if (!itemsRendered) {
+	// 	return (<HStack gap='gap_14'>
+	// 		<Skeleton width={120} borderRadius='12px' height={24} />
+	// 		<Skeleton width={70} borderRadius='12px' height={24} />
+	// 		<Skeleton width={100} borderRadius='12px' height={24} />
+	// 		<Skeleton width={90} borderRadius='12px' height={24} />
+	// 	</HStack>)
+	// }
 
 	return (
 		<div
@@ -121,6 +99,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 				className={cls.HorizontalScrollerList__container}
 				ref={containerRef}
 			>
+				{/* {content} */}
 				{itemsRendered}
 				{/* {items.map((item, index) => (
 

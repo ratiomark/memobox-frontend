@@ -12,7 +12,9 @@ import {
 	getCupboardIsLoading,
 	getCupboardError,
 	getCupboardShelves,
-	getCupboardCommonShelfCollapsed
+	getCupboardCommonShelfCollapsed,
+	getCupboardIsDataAlreadyInStore,
+	getCupboardIsFirstRender
 } from '../model/selectors/getCupboardShelfList';
 import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
 import { Skeleton } from '@/shared/ui/Skeleton';
@@ -55,9 +57,12 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 	const [updateShelvesMutation] = useUpdateShelvesOrderMutation()
+	const isFirstRender = useSelector(getCupboardIsFirstRender)
 	// const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
 	useEffect(() => {
+		// if (cupboardShelves.length) {
 		localDataService.setShelves(cupboardShelves)
+		// }
 	}, [cupboardShelves])
 
 
@@ -174,6 +179,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 
 			return (
 				<ShelfItem
+					isFirstRender={isFirstRender}
 					key={shelf.id}
 					shelf={shelf}
 					boxesBlock={boxesBlock}
@@ -186,7 +192,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			)
 		})
 
-	}, [cupboardIsLoading, cupboardShelves, onAddNewCardClick, onCollapseClick, moveShelf])
+	}, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick, moveShelf])
 
 	// if (cupboardIsLoading) {
 	// 	return <>

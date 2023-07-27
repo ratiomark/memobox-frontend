@@ -7,6 +7,10 @@ import { EntityState } from '@reduxjs/toolkit'
 
 
 export interface CupboardPageSchema extends EntityState<ShelfSchema> {
+	isDataAlreadyInStore: boolean
+	isFirstRender: boolean
+	isNeedRefetch: boolean
+	isNeedStop: boolean
 	isLoading: boolean
 	error: string
 	commonShelf?: CommonShelfBackendResponse

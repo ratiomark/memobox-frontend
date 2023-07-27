@@ -3,6 +3,10 @@ import { createSelector } from '@reduxjs/toolkit';
 import { getCupboardState } from '../slice/cupboardShelfListSlice';
 
 export const getCupboard = (state: StateSchema) => state.cupboard
+export const getCupboardIsDataAlreadyInStore = (state: StateSchema) => state.cupboard.isDataAlreadyInStore
+export const getCupboardIsNeedRefetch = (state: StateSchema) => state.cupboard.isNeedRefetch
+export const getCupboardIsNeedStop = (state: StateSchema) => state.cupboard.isNeedStop
+export const getCupboardIsFirstRender = (state: StateSchema) => state.cupboard.isFirstRender
 export const getCupboardCommonShelfCollapsed = (state: StateSchema) => state.cupboard.commonShelf?.isCollapsed
 export const getCupboardCommonShelf = (state: StateSchema) => state.cupboard.commonShelf
 export const getCupboardData = (state: StateSchema) => state.cupboard.cupboardData

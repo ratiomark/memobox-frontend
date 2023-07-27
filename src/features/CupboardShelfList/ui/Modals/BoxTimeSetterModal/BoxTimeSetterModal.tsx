@@ -24,7 +24,7 @@ interface MissedTrainingSettingsProps {
 	className?: string
 }
 const headerHeight = document.querySelector('header')
-console.log(headerHeight)
+// console.log(headerHeight)
 export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 	const {
 		className,
@@ -53,7 +53,7 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 			const timeSetterRect = timeSetter.getBoundingClientRect()
 			timeSetterSizes.current.height = timeSetterRect.height
 			timeSetterSizes.current.width = timeSetterRect.width
-			console.log(timeSetterSizes)
+			// console.log(timeSetterSizes)
 			const cupboardShelfList = document.querySelector('#cupboardShelfList') as HTMLDivElement
 			const cupboardShelfListSizes = cupboardShelfList.getBoundingClientRect()
 			cupboardShelfListRects.current.x = cupboardShelfListSizes.x

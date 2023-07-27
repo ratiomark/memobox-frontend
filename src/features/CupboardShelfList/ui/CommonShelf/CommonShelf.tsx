@@ -6,7 +6,7 @@ import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getCupboardCommonShelf, getCupboardCommonShelfCollapsed } from '../../model/selectors/getCupboardShelfList';
+import { getCupboardCommonShelf, getCupboardCommonShelfCollapsed, getCupboardIsFirstRender } from '../../model/selectors/getCupboardShelfList';
 import { Box, BoxesBlockSkeleton } from '@/entities/Box';
 import { CommonShelfBoxes } from '../CommonShelfBoxes/CommonShelfBoxes';
 import { Skeleton } from '@/shared/ui/Skeleton';
@@ -41,13 +41,17 @@ export const CommonShelf = memo((props: ShelfProps) => {
 		// collapsed
 	} = props
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
-
+	const isFirstRender = useSelector(getCupboardIsFirstRender)
 	useEffect(() => {
 		localDataService.setCommonShelfCollapsed(commonShelfCollapsed)
 	}, [commonShelfCollapsed])
 	// const commonShelf = useSelector(getCupboardCommonShelf)
 	// const { isSuccess, isLoading, data } = useGetCupboardDataQuery()
 	const { t } = useTranslation()
+
+	useEffect(() => {
+		console.log('Common shelf ', isLoading)
+	}, [isLoading])
 
 	const boxesBlock = (
 		<AnimateSkeletonLoader
@@ -92,7 +96,7 @@ export const CommonShelf = memo((props: ShelfProps) => {
 				// mode='sync'
 				// delay={2}
 				animationDuration={DURATION_SHELF_COLLAPSING_SEC}
-				// initial={false}
+				initial={isFirstRender}
 				isOpen={isLoading ?
 					!localDataService.getCommonShelfCollapsed()
 					// ? false

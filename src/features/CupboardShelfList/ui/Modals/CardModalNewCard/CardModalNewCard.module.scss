@@ -31,6 +31,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
   width: 100%;
 }
 
@@ -52,7 +53,12 @@
 .emptySpace {
   width: 120%;
   height: 15px;
-  background-color: red;
+
+  // background-color: red;
+}
+
+.listBoxWrapper {
+  width: 70%;
 }
 
 .actions {

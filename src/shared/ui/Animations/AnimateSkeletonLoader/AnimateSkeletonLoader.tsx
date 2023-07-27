@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 interface AnimateSkeletonLoaderProps {
 	skeletonComponent: ReactNode
 	componentAfterLoading: ReactNode
-	isLoading: boolean
+	isLoading: boolean | undefined
 	commonWrapper?: boolean
 	noDelay?: boolean
 	animateSkeletonFadeOutTime?: number

@@ -1,14 +1,16 @@
 .BoxesSettingsList {
   display: flex;
   align-items: center;
-  // max-width: 1200px;
+  justify-content: center;
+  width: 1200px;
+  overflow-y: scroll;
+  padding: 20px;
 
-  // overflow-y: hidden;
   // width: 100%;
   // overflow-x: auto;
 
   // justify-content: center;
-  border: 2px solid red;
+  // border: 2px solid red;
   position: relative;
 
   // width: 100%;

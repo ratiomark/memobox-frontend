@@ -74,7 +74,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 			const singleSettersWidthList: number[] = []
 			singleSetters.forEach(button => singleSettersWidthList.push(button.clientWidth))
 			singleSetterMaxWidth = Math.ceil(Math.max(...singleSettersWidthList))
-			console.log('Установленна одинаковая ширина столбцов')
+			// console.log('Установленна одинаковая ширина столбцов')
 		}
 		singleSetters.forEach(div => div.style.minWidth = `${singleSetterMaxWidth + 2}px`)
 	}, [])
