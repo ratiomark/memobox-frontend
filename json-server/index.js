@@ -28,12 +28,12 @@ server.use(jsonServer.defaults({}));
 server.use(jsonServer.bodyParser);
 
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
-server.use(async (req, res, next) => {
-	await new Promise((res) => {
-		setTimeout(res, 1000);
-	});
-	next();
-});
+// server.use(async (req, res, next) => {
+// 	await new Promise((res) => {
+// 		setTimeout(res, 1000);
+// 	});
+// 	next();
+// });
 
 // server.get('/cards', async (req, res) => {
 // 	const shelf = req.originalUrl.split('?')[1].split('=')[1]
@@ -94,7 +94,7 @@ server.get('/cupboard', async (req, res) => {
 
 		setTimeout(() => {
 			res.send(responseData)
-		}, 2000);
+		}, 500);
 		// res.send(responseData);
 	})
 	// const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
@@ -193,7 +193,7 @@ server.get('/cards', async (req, res) => {
 			acc[curr.id] = curr.isDeleted
 			return acc
 		}, {})
-		
+
 		const shelves = db.shelves
 			.forEach(shelf => {
 
