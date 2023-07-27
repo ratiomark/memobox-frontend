@@ -45,7 +45,7 @@ export const BoxesListViewWidget = memo(() => {
 
 
 	if (!tabs) {
-		return <Skeleton width={500} height={40} />
+		return <Skeleton width={700} height={40} borderRadius='8px' />
 	}
 	const hasActive = tabs.find((item) => item.value === boxId)
 
