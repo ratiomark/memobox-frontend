@@ -7,6 +7,10 @@ import { useMemo } from 'react';
 import { getTrashPageActiveEntity, trashPageActions } from '@/features/TrashPageInitializer';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { TrashPageEntityType } from '@/features/TrashPageInitializer';
+import { useGetTrashQuery } from '@/entities/Trash';
+import { t } from 'i18next';
+import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
+import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface EntitySwitcherTrashPageWidgetProps {
 	className?: string
@@ -19,27 +23,28 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 	const activeEntityValue = useSelector(getTrashPageActiveEntity)
 	const dispatch = useAppDispatch()
 	const { t } = useTranslation('trash-page')
-
+	const { isLoading, data, isError } = useGetTrashQuery()
 	const onTabClick = (tab: TabItem) => {
 		dispatch(trashPageActions.setActiveEntity(tab.value as TrashPageEntityType))
 	}
 
 	const items: TabItem[] = useMemo(() => {
+		if (!data) return []
 		return [
 			{
-				content: t('shelves'),
+				content: t('shelves') + (data?.shelves.length ? ` (${data?.shelves.length})` : ' (0)'),
 				value: 'shelves'
 			},
 			{
-				content: t('boxes'),
+				content: t('boxes') + (data?.boxes.length ? ` (${data?.boxes.length})` : ' (0)'), 
 				value: 'boxes'
 			},
 			{
-				content: t('cards'),
+				content: t('cards') + (data?.cards.length ? ` (${data?.cards.length})` : ' (0)'),
 				value: 'cards'
 			},
 		]
-	}, [t])
+	}, [t, data])
 
 
 
@@ -48,12 +53,22 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 			cls.entitySwitcherTrashPageWidget,
 			className)}
 		>
-			<Tabs
-				tabs={items}
-				value={activeEntityValue}
-				onTabClick={onTabClick}
-				classNameForTab={cls.tab}
+			<AnimateSkeletonLoader
+				isLoading={isLoading}
+				noDelay={!isLoading}
+				skeletonComponent={<Skeleton width={420} height={38} borderRadius='8px' />}
+				classNameAbsoluteParts={cls.absolute}
+				classNameForCommonWrapper={cls.commonWrapper}
+				componentAfterLoading={
+					<Tabs
+						tabs={items}
+						value={activeEntityValue}
+						onTabClick={onTabClick}
+						classNameForTab={cls.tab}
+					/>
+				}
 			/>
+
 		</div>
 	)
 }

@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import IconEye from '@/shared/assets/icons/eye-20-20.svg'
 import cls from './Icon.module.scss';
 import { MouseEvent } from 'react';
+import { fill } from 'lodash';
 
 type SvgProps = Omit<React.SVGProps<SVGSVGElement>, 'onClick'>
 
@@ -10,7 +11,7 @@ interface IconBaseProps extends SvgProps {
 	className?: string
 	Svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 	type?: 'main' | 'hint' | 'cancel' | 'disabled'
-	fill?: boolean
+	withFill?: boolean
 }
 
 interface UnClickableProps extends IconBaseProps {
@@ -34,12 +35,12 @@ export const Icon = (props: IconProps) => {
 		height = 32,
 		type = 'main',
 		clickable = false,
-		fill = true,
+		withFill = true,
 		...otherProps
 	} = props
 
 	if (props.clickable) {
-		const { buttonSameSize = false } = props
+		const { buttonSameSize = false, ...restProps } = { ...otherProps }
 		return (
 			<button
 				style={buttonSameSize ? { width, height } : undefined}
@@ -51,12 +52,12 @@ export const Icon = (props: IconProps) => {
 					className={clsx(
 						cls.Icon,
 						cls[type],
-						{ [cls[type + '_fill']]: fill },
+						{ [cls[type + '_fill']]: withFill },
 					)}
 					// style={!fill ? { fill: '' } : {}}
 					width={width}
 					height={height}
-					{...otherProps}
+					{...restProps}
 					onClick={undefined}
 				/>
 			</button>

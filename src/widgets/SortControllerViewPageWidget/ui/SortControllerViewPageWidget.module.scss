@@ -3,6 +3,7 @@
   align-items: center;
   gap: 40px;
   padding: 0 14px;
+  padding: 0 calc(14px + var(--view-page-icon-button-size)) 0 14px;
 
   // max-width: fit-content;
   // min-width: calc(100% - 32px);

@@ -106,7 +106,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 
 	const timerIcon = (<Icon
 		Svg={TimeIcon}
-		fill={false}
+		withFill={false}
 		clickable
 		onClick={onOpenTimeSetter}
 		width={20}
@@ -133,7 +133,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 			Svg={TrashIcon}
 			type='cancel'
 			clickable
-			fill={false}
+			withFill={false}
 			width={22}
 			height={22}
 			onClick={onRemoveClick}

@@ -1,16 +1,4 @@
 {
-  "posts": [
-    {
-      "id": "1",
-      "title": "json-server",
-      "userId": "1"
-    },
-    {
-      "id": "2",
-      "title": "json-server",
-      "userId": "2"
-    }
-  ],
   "cards": [
     {
       "_id": "6495b7a7f020e4bd7077882a",
@@ -214,7 +202,8 @@
       "question": "Incididunt fugiat minim commodo quis do adipisicing voluptate enim aliqua veniam exercitation incididunt voluptate. Irure ea incididunt minim dolor.",
       "createdAt": "2022-01-31T08:36:08.269Z",
       "specialType": "new",
-      "lastTraining": "2022-03-27T08:36:08.269Z"
+      "lastTraining": "2022-03-27T08:36:08.269Z",
+      "isDeleted": true
     },
     {
       "_id": "6495b7a78e1f137c37d9ba6e",
@@ -226,7 +215,8 @@
       "question": "Voluptate minim duis adipisicing quis dolore fugiat. Nisi dolore voluptate ex ea nisi id est.",
       "createdAt": "2022-02-14T06:28:37.209Z",
       "specialType": "learnt",
-      "lastTraining": "2022-04-07T06:28:37.209Z"
+      "lastTraining": "2022-04-07T06:28:37.209Z",
+      "isDeleted": true
     },
     {
       "_id": "6495b7a7020702a3718f8a93",
@@ -1996,7 +1986,7 @@
     {
       "id": "648c920baa3edb04cec38442",
       "index": 0,
-      "isCollapsed": false,
+      "isCollapsed": true,
       "title": "math",
       "boxesData": [
         {

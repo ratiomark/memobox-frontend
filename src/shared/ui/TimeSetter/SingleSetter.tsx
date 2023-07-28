@@ -7,6 +7,10 @@ import { MyText } from '../Typography';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Button } from '../Button';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
+
+
+type OnWheelScrollGlobal = (e: globalThis.WheelEvent) => void
+type OnWheelScrollEvent = (e: WheelEvent<HTMLElement>) => void
 interface TimeSetterProps {
 	className?: string
 	time: number | string
@@ -14,7 +18,7 @@ interface TimeSetterProps {
 	title?: string
 	onUpClick: () => void
 	onDownClick: () => void
-	onWheelScroll: (e: WheelEvent<HTMLElement> | globalThis.WheelEvent) => void
+	onWheelScroll: OnWheelScrollGlobal | OnWheelScrollEvent
 	disabled?: boolean
 }
 
@@ -38,6 +42,7 @@ export const SingleSetter = (props: TimeSetterProps) => {
 
 		const onWheelHandler = (e: globalThis.WheelEvent) => {
 			e.preventDefault();
+			// @ts-ignore
 			onWheelScroll(e);
 		};
 

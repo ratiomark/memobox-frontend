@@ -81,9 +81,11 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 				className={clsx(
 					cls.statsAndActionsCupboardWidget,
 					className)}
-			>
-				<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
-				{/* <ThemeSwitcher /> */}
+			><div>
+					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
+
+					<ThemeSwitcher />
+				</div>
 				{buttons}
 				{/* <HStack gap='gap_14' className={cls.actions} > */}
 				{/* <Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>

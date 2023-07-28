@@ -224,6 +224,31 @@ server.get('/cards', async (req, res) => {
 		res.send(responseData);
 	})
 });
+server.get('/trash', async (req, res) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', async (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const shelvesAndBoxesData = {}
+		const shelvesDeleted = db.shelves.filter(shelf => shelf.isDeleted)
+		const cardsDeleted = db.cards.filter(card => card.isDeleted)
+
+		const responseData = {
+			shelves: shelvesDeleted,
+			cards: cardsDeleted,
+			boxes: [],
+		};
+
+		// setTimeout(() => {
+		// 	res.send(responseData)
+		// }, 4000);
+		res.send(responseData);
+	})
+});
 
 // server.put('/shelves', (req, res) => {
 // 	const newShelves = req.body;

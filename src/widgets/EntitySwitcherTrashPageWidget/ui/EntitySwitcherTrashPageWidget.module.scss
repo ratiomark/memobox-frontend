@@ -1,8 +1,16 @@
 .entitySwitcherTrashPageWidget {
-
+  position: relative;
 }
 
 .tab {
   min-width: 140px;
   text-align: center;
+}
+
+.commonWrapper {
+  height: 38px;
+}
+
+.absolute {
+  left: 0;
 }
