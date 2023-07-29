@@ -58,14 +58,24 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 					onChangeString={onChangeShelfName}
 					inputErrors={inputErrors}
 					className={cls.input}
+					classNameInputError={cls.inputError}
 				/>
 
-				<HStack justify='between' max>
-					<Button onClick={onCloseHandle}>{t('cancel')}</Button>
+				<HStack
+					justify='end'
+					// justify='between'
+					gap='gap_14'
+					max>
+					<Button
+						variant='back'
+						onClick={onCloseHandle}
+					>
+						{t('back button')}
+					</Button>
 					<Button
 						onClick={onSubmit}
 						disabled={shelfName.length === 0 || inputErrors.length > 0}
-						variant='filled'>{t('save')}</Button>
+						variant='filled'>{t('create shelf')}</Button>
 				</HStack>
 			</div>
 		</HDialog>

@@ -18,8 +18,8 @@
   "stats": "Статистика",
   "trash": "Корзина",
   "settings": "Настройки",
-  "Add card with hot key": "Добавить карточку",
-  "New shelf": "Новая полка",
+  "add card with hot key": "Добавить карточку",
+  "new shelf": "Новая полка",
   "train": "Тренировать",
   "inputs": {
     "MANDATORY_INPUT": "Это обязательное поле",
@@ -28,8 +28,8 @@
     "SHELF_NAME_ALREADY_EXISTS": "Полка с таким именем уже существует"
   },
   "write shelf name": "Укажите название новой полки",
-  "Close button": "Закрыть",
-  "back button": "Назад",
+  "Close button": "Закрыть (esc)",
+  "back button": "Назад (esc)",
   "move cards": "Переместить карточки",
   "common shelf name": "Общая полка",
   "settingsItems": {
@@ -52,8 +52,8 @@
   "days": "Дни",
   "weeks": "Недели",
   "months": "Месяцы",
-  "cancel": "Отмена",
-  "save": "Сохранить",
+  "cancel": "Отмена (esc)",
+  "save": "Сохранить (shift + enter)",
   "missedTrainingSettings": {
     "none": "Ничего не делать",
     "additional": "Оставить на дополнительный круг",
@@ -67,5 +67,6 @@
   "question": "Вопрос",
   "table settings": "Настройки таблицы",
   "rows count in cards": "Кол-во строк в карточке",
-  "choose shelf from list": "Пожалуйста, выберите полку из списка"
+  "choose shelf from list": "Пожалуйста, выберите полку из списка",
+  "create shelf": "Создать (shift + enter)"
 }

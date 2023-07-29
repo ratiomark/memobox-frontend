@@ -111,7 +111,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 					onClick={onAddNewCardHandle}
 					data-button-type="shelf-add-card"
 				>
-					{t('Add card with hot key') + ` (${positionTextCard})`}
+					{t('add card with hot key') + ` (${positionTextCard})`}
 				</Button>
 
 				<SettingButton shelfId={shelfId} />
@@ -146,7 +146,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		</div>
 	)
 })
-ShelfButtons.displayName = 'ShelfButtons '
+ShelfButtons.displayName = 'ShelfButtons'
 // import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 // import { Button } from '@/shared/ui/Button';
 // import { Icon } from '@/shared/ui/Icon';

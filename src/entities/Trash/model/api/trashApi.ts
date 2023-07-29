@@ -1,14 +1,6 @@
 import { BoxSchema } from '@/entities/Box'
-import { CardSchema, CardSchemaExtended } from '@/entities/Card'
-import { ShelfSchema } from '@/entities/Shelf'
 import { rtkApi } from '@/shared/api/rtkApi'
-
-interface CardSchemaDeleted extends CardSchemaExtended {
-	isDeleted: true
-}
-interface ShelfSchemaDeleted extends ShelfSchema {
-	isDeleted: true
-}
+import { CardSchemaDeleted, ShelfSchemaDeleted } from '../types/EntitySchemasDeleted'
 
 interface TrashResponse {
 	cards: CardSchemaDeleted[]

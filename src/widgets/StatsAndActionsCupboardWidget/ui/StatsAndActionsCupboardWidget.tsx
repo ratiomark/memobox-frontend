@@ -50,8 +50,8 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 			// animateComponentAfterLoadingFadeInTime={DURA}
 			componentAfterLoading={
 				<HStack gap='gap_14' className={cls.actions}>
-					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
-					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
+					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('new shelf')}</Button>
+					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
 					<Icon
 						Svg={InfoIcon}
 						width={26}
@@ -89,7 +89,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 				{buttons}
 				{/* <HStack gap='gap_14' className={cls.actions} > */}
 				{/* <Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
-					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
+					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
 					<Icon
 						Svg={InfoIcon}
 						width={26}
@@ -147,7 +147,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 // 			<CompleteBigDataLabels data={data ?? } />
 // 			<HStack gap='gap_14' className={cls.actions} >
 // 				<Button borderRadius='borderRadius_4'>{t('New shelf')}</Button>
-// 				<Button borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
+// 				<Button borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
 // 				<Icon
 // 					Svg={InfoIcon}
 // 					width={26}

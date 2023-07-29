@@ -1,21 +1,20 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CardListItem.module.scss';
-import { CardSchema, CardSchemaExtended } from '@/entities/Card';
-import { Card } from '@/shared/ui/Card';
+import { CardSchemaExtended } from '@/entities/Card';
 import { MyText } from '@/shared/ui/Typography';
 // import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
 import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
-import { getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelfId, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
+import { getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
-import { ChangeEvent, MouseEvent, SyntheticEvent, useMemo, useState } from 'react';
+import { ChangeEvent, MouseEvent, useMemo, } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { Button } from '@/shared/ui/Button';
 import { AnimateSkeletonLoader, Collapsible } from '@/shared/ui/Animations';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
+import { formatDate } from '@/shared/lib/helpers/common/formaters';
 
 const animations = {
 	selected: {
@@ -43,15 +42,6 @@ const liAnimations = {
 	}
 }
 
-const formatDate = (ISODate: string) => {
-	const date = new Date(ISODate)
-	const day = date.getUTCDate()
-	const month = date.getMonth() + 1
-	const year = date.getFullYear()
-	const minutes = date.getUTCMinutes()
-	const hours = date.getUTCHours()
-	return `${day}.${month}.${year}\n${hours}:${minutes < 10 ? '0' + minutes : minutes}`
-}
 
 interface CardListItemProps {
 	className?: string

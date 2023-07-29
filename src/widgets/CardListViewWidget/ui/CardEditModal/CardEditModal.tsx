@@ -98,8 +98,8 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 	}, [dispatch])
 	const showOriginal = () => setShowCurrentData(false)
 	const showCurrent = () => setShowCurrentData(true)
-	const toggleData = () => setShowCurrentData(prev=>!prev)
-	
+	const toggleData = () => setShowCurrentData(prev => !prev)
+
 
 	// const onChangeBox = useCallback((boxIndex: number) => {
 	// 	dispatch(viewPageActions.setBoxIndexCardModal(boxIndex))
@@ -162,7 +162,7 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 						{shelvesAndBoxes}
 					</HStack>
 					<div>
-						<MyText text={'question'} />
+						<MyText text={t('question')} />
 						<TextArea
 							// ref={refTextArea}
 							rows={5}
@@ -173,7 +173,7 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 						/>
 					</div>
 					<div>
-						<MyText text={'answer'} />
+						<MyText text={t('answer')} />
 						<TextArea
 							rows={5}
 							value={showCurrentData ? answerText : answerTextOriginal}
@@ -183,9 +183,9 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 
 				</VStack>
 				<div className={cls.actions} >
-					<Button>{t('Назад')}</Button>
-					{/* <Button onClick={toggleData}>{t('Сравнить')}</Button> */}
-					<Button>{t('Сохранить')}</Button>
+					<Button>{t('back button')}</Button>
+					<Button onClick={toggleData}>{t('Сравнить')}</Button>
+					<Button>{t('save')}</Button>
 				</div>
 			</div>
 		</HDialog>

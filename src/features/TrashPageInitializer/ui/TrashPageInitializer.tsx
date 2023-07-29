@@ -8,7 +8,7 @@ import { useGetTrashQuery } from '@/entities/Trash';
 interface TrashPageInitializerProps {
 	className?: string;
 	entitySwitcherWidget: ReactNode
-	contentShowerWidget?: ReactNode
+	contentPresenterWidget?: ReactNode
 }
 
 const reducers: ReducersList = {
@@ -19,7 +19,7 @@ export const TrashPageInitializer = (props: TrashPageInitializerProps) => {
 	const {
 		className,
 		entitySwitcherWidget,
-		contentShowerWidget,
+		contentPresenterWidget,
 	} = props
 	const { isLoading, data, isError } = useGetTrashQuery()
 
@@ -36,7 +36,7 @@ export const TrashPageInitializer = (props: TrashPageInitializerProps) => {
 	return (
 		<div className={clsx(cls.TrashPageInitializer, [className])} >
 			{entitySwitcherWidget}
-			{contentShowerWidget}
+			{contentPresenterWidget}
 		</div>
 	)
 }

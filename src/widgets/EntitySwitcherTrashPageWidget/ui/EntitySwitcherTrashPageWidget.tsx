@@ -36,7 +36,7 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 				value: 'shelves'
 			},
 			{
-				content: t('boxes') + (data?.boxes.length ? ` (${data?.boxes.length})` : ' (0)'), 
+				content: t('boxes') + (data?.boxes.length ? ` (${data?.boxes.length})` : ' (0)'),
 				value: 'boxes'
 			},
 			{

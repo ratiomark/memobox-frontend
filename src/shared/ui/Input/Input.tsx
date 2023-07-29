@@ -13,6 +13,7 @@ type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onC
 // Расширяю стандартные пропсы которые принимает инпут, тут использую результат Omit с выпилиенными value, onChange
 interface InputProps extends HTMLInputProps {
 	className?: string;
+	classNameInputError?: string;
 	value?: string;
 	autoFocus?: boolean;
 	readonly?: boolean;
@@ -45,6 +46,7 @@ export const Input = memo((props: InputProps) => {
 		addonLeft,
 		addonRight,
 		label,
+		classNameInputError,
 		...otherProps
 		// autoFocus,
 	} = props
@@ -83,7 +85,7 @@ export const Input = memo((props: InputProps) => {
 				align='left'
 				key={i}
 				variant='error'
-				className={clsx(cls.inputError, cls.inputErrorActive)}
+				className={clsx(cls.inputError, cls.inputErrorActive, classNameInputError)}
 			/>
 		))
 	}

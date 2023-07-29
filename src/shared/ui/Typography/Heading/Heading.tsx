@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import { ComponentProps, ElementType, ReactNode, memo } from 'react';
 import cls from './Heading.module.scss'
-
+import { FontWeight } from '@/shared/types/StyleTypes';
+import { mapFontWeightToClass } from '@/shared/lib/helpers/mappers/mapFontWeightToClass';
 
 export type TextVariant = 'primary' | 'error' | 'accent';
 
@@ -24,6 +25,7 @@ export type TextOwnProps<E extends ElementType = ElementType> = {
 	align?: TextAlign;
 	size?: TextSize;
 	saveOriginal?: boolean;
+	fontWeight?: FontWeight
 	'data-testid'?: string;
 	bold?: boolean;
 	as?: E
@@ -44,6 +46,7 @@ export const Heading = memo(
 			align = 'left',
 			size = 'm',
 			bold = false,
+			fontWeight,
 			saveOriginal,
 			as: TagName = defaultElement,
 			'data-testid': dataTestId = 'Text',
@@ -58,6 +61,7 @@ export const Heading = memo(
 			<TagName
 				className={clsx(
 					additionalClasses ?? '',
+					fontWeight ? mapFontWeightToClass[fontWeight] : '',
 					{
 						[cls.saveOriginal]: saveOriginal,
 						[cls.bold]: bold,

@@ -1,9 +1,8 @@
 import { TrashPageInitializer } from '@/features/TrashPageInitializer';
+import { ContentPresenterTrashPageWidget } from '@/widgets/ContentPresenterTrashPageWidget';
 import { EntitySwitcherTrashPageWidget } from '@/widgets/EntitySwitcherTrashPageWidget';
 import { Page } from '@/widgets/Page';
-import { motion } from 'framer-motion';
 import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const TrashPage = memo(() => {
 
@@ -11,6 +10,7 @@ const TrashPage = memo(() => {
 		<Page>
 			<TrashPageInitializer
 				entitySwitcherWidget={<EntitySwitcherTrashPageWidget />}
+				contentPresenterWidget={<ContentPresenterTrashPageWidget />}
 			/>
 			{/* <motion.div
 				animate={{ x: ['20%', '0%', '40%', '0%'] }}

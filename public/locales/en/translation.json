@@ -19,8 +19,8 @@
   "stats": "Stats",
   "settings": "Settings",
   "trash": "Trash",
-  "Add card with hot key": "Add card",
-  "New shelf": "New shelf",
+  "add card with hot key": "Add card",
+  "new shelf": "New shelf",
   "train": "Train",
   "inputs": {
     "MANDATORY_INPUT": "This field is required",
@@ -29,8 +29,8 @@
     "SHELF_NAME_ALREADY_EXISTS": "Shelf already exists"
   },
   "write shelf name": "Specify a name for the new shelf",
-  "Close button": "Close",
-  "back button": "Back",
+  "Close button": "Close (esc)",
+  "back button": "Back (esc)",
   "move cards": "Move cards",
   "common shelf name": "Common shelf",
   "settingsItems": {
@@ -53,8 +53,8 @@
   "days": "Days",
   "weeks": "Weeks",
   "months": "Months",
-  "cancel": "Cancel",
-  "save": "Save",
+  "cancel": "Cancel (esc)",
+  "save": "Save (shift + enter)",
   "missedTrainingSettings": {
     "none": "Do nothing",
     "additional": "Additional training",
@@ -68,5 +68,6 @@
   "question": "Question",
   "table settings": "Table setting",
   "rows count in cards": "Lines in the card",
-  "choose shelf from list": "Please, choose shelf from list"
+  "choose shelf from list": "Please, choose shelf from list",
+  "create shelf": "Create (shift + enter)"
 }
