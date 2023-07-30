@@ -38,7 +38,7 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 	} = props
 	const dispatch = useAppDispatch()
 	const columns = useSelector(getUserSavedDataViewPageColumns)
-	const rowsCount = useSelector(getUserSavedDataViewPageRowsCount) ?? '2'
+	const rowsCount = useSelector(getUserSavedDataViewPageRowsCount)
 	const { t } = useTranslation()
 
 	useEffect(() => {

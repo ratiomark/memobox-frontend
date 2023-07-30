@@ -4,6 +4,6 @@ export const getJsonSavedData = (state: StateSchema) => state.user.authData?.jso
 export const getUserShelfNamesList = (state: StateSchema) => state.user.authData?.jsonSavedData?.shelfNamesList
 export const getUserSavedDataCommonShelfCollapsed = (state: StateSchema) => state.user.authData?.jsonSavedData?.commonShelfCollapsed
 export const getUserSavedDataViewPageColumns = (state: StateSchema) => state.user.jsonSavedData?.viewPageColumns
-export const getUserSavedDataViewPageRowsCount = (state: StateSchema) => state.user.jsonSavedData?.viewPageCardRowsCount
+export const getUserSavedDataViewPageRowsCount = (state: StateSchema) => state.user.jsonSavedData?.viewPageCardRowsCount ?? '2'
 // export const getUserSavedDataViewPageColumns = (state: StateSchema) => state.user.authData?.jsonSavedData?.viewPageColumns
 // export const getUserSavedDataViewPageSort = (state: StateSchema) => state.user.authData?.jsonSavedData?.viewPageColumns

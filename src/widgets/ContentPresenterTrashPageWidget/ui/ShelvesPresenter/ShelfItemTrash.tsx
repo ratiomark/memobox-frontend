@@ -23,56 +23,68 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 		shelf,
 	} = props
 	const { t } = useTranslation('trash-page')
+	const boxesCount = shelf.boxesData.length
 	const [isCollapsed, setIsCollapsed] = useState(true)
 	const onCollapse = () => setIsCollapsed(prev => !prev)
+	const buttons = (
+		<div className={cls.buttons} >
+			<Icon
+				className={
+					clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
+				clickable
+				type='hint'
+				Svg={ArrowBottomIcon}
+				onClick={onCollapse}
+			/>
+			<Button>{t('restore')}</Button>
+			<Icon
+				Svg={TrashIcon}
+				type='cancel'
+				clickable
+				withFill={false}
+				width={22}
+				height={22}
+				onClick={() => { }}
+				buttonSameSize={false}
+				className={clsx(cls.icon, cls.removeIcon)}
+			/>
+		</div>)
+
+	const boxes = (
+		<>
+			<div>new cards</div>
+			{Array.from({ length: boxesCount - 2 }, (_, i) => <div>{i}</div>)}
+			<div>learnt</div>
+		</>
+	)
 
 	return (
-		<HStack
-			max
-			className={clsx(cls.ShelfItem, [className])}
-		>
-			<Heading className={cls.title}
-				as={'h3'}
-				// size='s'
-				// fontWeight='500'
-				title={shelf.title} />
-			<MyText
-				size='s'
-				text={shelf.boxesData.length}
-			// title={shelf.title}
-			/>
-			<MyText
-				size='s'
-				text={'?'}
-			/>
-			<MyText
-				saveOriginal
-				size='s'
-				text={shelf.dateTimeDeletion ?? formatDate('2022-03-27T08:36:08.269Z')}
-			/>
-			<div className={cls.buttons} >
-				<Icon
-					className={
-						clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
-					clickable
-					type='hint'
-					Svg={ArrowBottomIcon}
-					onClick={onCollapse}
+		<div>
 
+			<HStack
+				max
+				className={clsx(cls.ShelfItem, [className])}
+			>
+				<Heading className={cls.title}
+					as={'h3'}
+					title={shelf.title} />
+				<MyText
+					size='s'
+					text={boxesCount}
+				// title={shelf.title}
 				/>
-				<Button>{t('restore')}</Button>
-				<Icon
-					Svg={TrashIcon}
-					type='cancel'
-					clickable
-					withFill={false}
-					width={22}
-					height={22}
-					onClick={() => { }}
-					buttonSameSize={false}
-					className={clsx(cls.icon, cls.removeIcon)}
+				<MyText
+					size='s'
+					text={'?'}
 				/>
-			</div>
-		</HStack>
+				<MyText
+					saveOriginal
+					size='s'
+					text={shelf.dateTimeDeletion ?? formatDate('2022-03-27T08:36:08.269Z')}
+				/>
+				{buttons}
+			</HStack>
+			{boxes}
+		</div>
 	)
 }
