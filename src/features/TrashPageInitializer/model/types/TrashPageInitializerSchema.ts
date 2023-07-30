@@ -1,7 +1,4 @@
-import { ShelfRepresentedByBoxes } from '@/entities/Box'
-import { CardSchema, CardSchemaExtended } from '@/entities/Card'
-import { SortColumnValue } from '@/entities/User'
-import { SortOrderType } from '@/shared/types/SortOrderType'
+
 
 
 // export interface CardSchemaExtended extends CardSchema {
@@ -18,15 +15,17 @@ import { SortOrderType } from '@/shared/types/SortOrderType'
 // type Sort
 
 export type TrashPageEntityType = 'shelves' | 'boxes' | 'cards'
+
 export interface TrashPageInitializerSchema {
-	activeEntity: TrashPageEntityType
 	_trashPageMounted: boolean
-	// 
 	isLoading: boolean
 	error: string
-	// 
-	// cards: CardSchemaExtended[]
-	// shelvesData: ShelvesDataTrashPage
 	//
+	activeEntity: TrashPageEntityType
+	// 
+	isMultiSelectActive: boolean
+	isCardEditModalOpen: boolean
+	isMoveCardsModalOpen: boolean
+	selectedCardIds: string[]
 
 }

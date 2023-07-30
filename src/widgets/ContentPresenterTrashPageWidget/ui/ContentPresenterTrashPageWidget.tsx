@@ -9,6 +9,7 @@ import { BoxesPresenter } from './BoxesPresenter/BoxesPresenter';
 
 interface ContentPresenterTrashPageWidgetProps {
 	className?: string
+	
 }
 
 export const ContentPresenterTrashPageWidget = (props: ContentPresenterTrashPageWidgetProps) => {

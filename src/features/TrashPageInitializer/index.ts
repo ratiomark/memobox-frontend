@@ -1,9 +1,19 @@
+export {
+	getTrashPageIsCardEditModalOpen,
+	getTrashPageIsMoveCardsModalOpen,
+} from './model/selectors/getTrashPageModals';
+
+export {
+	getTrashPageIsMultiSelectActive,
+	getTrashPageSelectedCardIds
+} from './model/selectors/getTrashPageMultiSelect';
 
 export {
 	getTrashPageActiveEntity,
 	getTrashPageIsMounted,
 	getTrashPageIsLoading,
 } from './model/selectors/getTrashPage';
+
 
 export type {
 	TrashPageInitializerSchema,

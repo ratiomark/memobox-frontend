@@ -38,7 +38,7 @@
   --font-xxl-header: var(--font-size-xxl) / var(--font-line-xxl) var(--font-family-header);
 
   // Sizes
-  --navbar-height: 50px;
+  --header-height: 50px;
   --sidebar-collapsed: 80px;
   --sidebar-width: 300px;
   --checkbox-size: 15px;
@@ -54,6 +54,7 @@
   // --button-m: 40px;
 
   // z-index
+  --header-index: 100;
   --modal-index: 100000;
 
   // colors

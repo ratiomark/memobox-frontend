@@ -4,12 +4,25 @@
   background: linear-gradient(to right, #243b55, #141e30);  /* Chrome 10-25, Safari 5.1-6 */
   position: sticky;
   top: 0;
+  z-index: var(--header-index);
+}
+
+.navigation {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .items {
   display: flex;
-  width: min(100%, 1200px);
-  margin: 0 auto;
+
+  // width: min(100%, 1200px);
+}
+
+.additional {
+  display: flex;
+  align-items: center;
 }
 
 // .collapsed {

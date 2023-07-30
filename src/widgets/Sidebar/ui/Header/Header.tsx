@@ -9,6 +9,8 @@ import { LangSwitcher } from '../LangSwitcher/LangSwitcher'
 
 import cls from './Header.module.scss'
 import { useLocation } from 'react-router-dom'
+import { Button } from '@/shared/ui/Button'
+import { HeaderAdditionalBlock } from '../HeaderAdditionalBlock/HeaderAdditionalBlock'
 
 interface SidebarProps {
 	className?: string
@@ -25,7 +27,7 @@ export const Header = memo(({ className }: SidebarProps) => {
 			/>
 		))
 	}, [headerItemsList])
-	
+
 	if (location.pathname.split('/')[1] === 'training') return null
 
 	return (
@@ -38,8 +40,12 @@ export const Header = memo(({ className }: SidebarProps) => {
 				className)}
 		>
 			{/* <HStack as={'nav'} gap="gap_8" align='start' max className={cls.items}> */}
-			<nav className={cls.items}>
-				{HeaderItemsListRendered}
+			<nav className={cls.navigation} >
+				<ul className={cls.items}>
+					{HeaderItemsListRendered}
+				</ul>
+				<HeaderAdditionalBlock />
+
 			</nav>
 
 		</header>

@@ -68,5 +68,8 @@
   "table settings": "Настройки таблицы",
   "rows count in cards": "Кол-во строк в карточке",
   "choose shelf from list": "Пожалуйста, выберите полку из списка",
-  "create shelf": "Создать (shift + enter)"
+  "create shelf": "Создать (shift + enter)",
+  "header": {
+    "additional": "Еще"
+  }
 }

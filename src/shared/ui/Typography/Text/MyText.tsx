@@ -6,7 +6,7 @@ import cls from './Text.module.scss'
 
 
 
-export type TextVariant = 'primary' | 'error' | 'accent' | 'hint';
+export type TextVariant = 'primary' | 'error' | 'accent' | 'hint' | 'header';
 
 export type TextAlign = 'right' | 'left' | 'center';
 

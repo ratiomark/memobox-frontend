@@ -127,7 +127,7 @@ body.dragging * {
   flex-grow: 1;
   flex-shrink: 1;
   padding: 20px;
-  height: calc(100vh - var(--navbar-height));
+  height: calc(100vh - var(--header-height));
   overflow: auto;
   scrollbar-gutter: stable;
 }

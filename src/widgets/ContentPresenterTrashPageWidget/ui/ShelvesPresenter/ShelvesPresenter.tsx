@@ -4,7 +4,7 @@ import cls from './ShelvesPresenter.module.scss';
 import { useGetTrashQuery } from '@/entities/Trash';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
-import { ShelfItemTrash } from './ShelfItemTrash';
+import { ShelfItemTrash } from './ShelfItemTrash/ShelfItemTrash';
 
 interface ShelvesPresenterProps {
 	className?: string

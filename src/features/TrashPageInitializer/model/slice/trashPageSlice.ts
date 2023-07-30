@@ -11,6 +11,10 @@ const initialState: TrashPageInitializerSchema = {
 	_trashPageMounted: false,
 	isLoading: true,
 	error: '',
+	isMultiSelectActive: false,
+	isCardEditModalOpen: false,
+	isMoveCardsModalOpen: false,
+	selectedCardIds: [],
 	// 
 	// cards: [],
 	// shelvesData: {},
@@ -28,6 +32,32 @@ const trashPageSlice = createSlice({
 	reducers: {
 		setActiveEntity: (state, action: PayloadAction<TrashPageEntityType>) => {
 			state.activeEntity = action.payload
+		},
+		
+		setIsMultiSelectActive: (state, action: PayloadAction<boolean>) => {
+			state.isMultiSelectActive= action.payload
+		},
+		addOrRemoveCardFromSelectedCardIds: (state, action: PayloadAction<string>) => {
+			if (state.selectedCardIds.includes(action.payload)) {
+				state.selectedCardIds = state.selectedCardIds.filter(cardId => cardId !== action.payload)
+			} else {
+				state.selectedCardIds.push(action.payload)
+			}
+			if (!state.selectedCardIds.length) {
+				state.isMultiSelectActive = false
+			} else {
+				state.isMultiSelectActive = true
+			}
+		},
+		selectAllCards: (state, action: PayloadAction<string[]>) => {
+			state.selectedCardIds = action.payload
+		},
+		cancelMultiSelect: (state) => {
+			state.selectedCardIds = []
+			state.isMultiSelectActive = false
+		},
+		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
+			state.isMultiSelectActive = action.payload
 		},
 		// setActiveShelfId: (state, action: PayloadAction<string>) => {
 		// 	const shelfId = action.payload

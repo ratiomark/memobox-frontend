@@ -1,0 +1,16 @@
+.HeaderAdditionalBlock {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.dropDownTrigger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  // padding-right: 23px;
+  padding: 6px 23px 6px 0;
+
+  // min-height: 100%;
+}
