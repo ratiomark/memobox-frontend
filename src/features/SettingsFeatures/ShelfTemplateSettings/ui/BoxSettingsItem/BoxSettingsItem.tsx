@@ -6,40 +6,30 @@ import { Heading } from '@/shared/ui/Typography';
 import TimeIcon2 from '@/shared/assets/icons/timeIcon.svg'
 import TimeIcon from '@/shared/assets/icons/timeIcon2.svg'
 import { Icon } from '@/shared/ui/Icon';
-import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react';
-import { TimeSetter } from '@/shared/ui/TimeSetter';
-import { Button } from '@/shared/ui/Button';
-import { TimingBlock } from '@/shared/types/DataBlock';
+import { Dispatch, MouseEvent, useCallback, useMemo, useState } from 'react';
+import { ExtendedTimingBlock, TimingBlock } from '@/shared/types/DataBlock';
 import { Overlay } from '@/shared/ui/Overlay/Overlay';
 import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion'
-import { ExtendedTimingBlock } from '../../../model/types/SettingsShelfTemplate';
 import { useSelector } from 'react-redux';
-import { getBoxIsTimeSetterOpen, getSettingsShelfTemplateMode } from '../../../model/selectors/settingsShelfTemplate';
+import { getSettingsShelfTemplateMode } from '../../model/selectors/settingsShelfTemplate';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { settingsShelfTemplateActions } from '../../../model/slice/shelfTemplateSlice';
-import { AddBoxIcon } from './AddBoxIcon';
+import { settingsShelfTemplateActions } from '../../model/slice/shelfTemplateSlice';
+import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { DURATION_MILLISEC, DURATION_SEC, } from '@/shared/const/animation';
 import TrashIcon2 from '@/shared/assets/icons/trashIcon.svg'
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { HStack } from '@/shared/ui/Stack';
+import { timingDataDefault } from '@/shared/const/timingBlock';
+import { getTiming } from '@/shared/lib/helpers/common/formaters';
 
 interface BoxSettingsItemProps {
 	className?: string
 	boxItem: ExtendedTimingBlock
 	onRemoveBox: (boxId: number) => void
 	onAddBoxClick: (index: number) => void
-}
-
-const getTiming = (box: ExtendedTimingBlock) => {
-	const { months, weeks, days, hours, minutes } = box
-	const monthsStr = months === 0 ? '' : `${months}m. `
-	const weeksStr = weeks === 0 ? '' : `${weeks}w. `
-	const daysStr = days === 0 ? '' : `${days}d. `
-	const hoursStr = hours === 0 ? '' : `${hours}h. `
-	const minutesStr = minutes === 0 ? '' : `${minutes}min. `
-	return monthsStr + weeksStr + daysStr + hoursStr + minutesStr
+	isLastBox: boolean
 }
 
 
@@ -56,13 +46,12 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		boxItem,
 		onRemoveBox,
 		onAddBoxClick,
+		isLastBox = false,
 		// isAddBoxModeActive,
 	} = props
 	const dispatch = useAppDispatch()
-	// const [isTimeSetterOpen, setIsTimeSetterOpen] = useState(false)
 	const { isSaved: isBoxSaved, minutes, hours, days, weeks, months, id, index: boxIndex } = boxItem
-	const isTimeSetterOpen = useSelector((state: StateSchema) => getBoxIsTimeSetterOpen(state, id))
-	// console.log('time setter open: ', isTimeSetterOpen)
+	// const isTimeSetterOpen = useSelector((state: StateSchema) => getBoxIsTimeSetterOpen(state, id))
 	const mode = useSelector(getSettingsShelfTemplateMode)
 	const isAddBoxModeActive = mode === 'choosingBoxPlace'
 	const [isRemoved, setIsRemoved] = useState(false)
@@ -80,13 +69,33 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		}, 500)
 	}, [isBoxSaved, id, dispatch])
 
-	const onAddNewBoxClickHandle = () => {
+	const onAddNewBoxClickHandle = (e: MouseEvent) => {
 		onAddBoxClick(boxIndex! + 1)
+		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+		const coordinates = {
+			x: x + width / 2,
+			y: y + height / 2
+		}
+		// console.log('Add ICON ', coordinates)
+		dispatch(settingsShelfTemplateActions.setTimingSetterBoxCoordinates(coordinates))
+		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(true))
+		dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId(boxItem.id.toString()))
+		dispatch(settingsShelfTemplateActions.setTimingSetterBoxTimingData(timingDataDefault))
 	}
 
-	const onOpenTimeSetter = () => {
-		dispatch(settingsShelfTemplateActions.openTimeSetter(id))
+	const onOpenTimeSetterHandle = (e: MouseEvent) => {
+		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+		const coordinates = {
+			x: x + width / 2,
+			y: y + height / 2
+		}
+		// console.log('Add Button coordinates ', coordinates)
+		dispatch(settingsShelfTemplateActions.setTimingSetterBoxCoordinates(coordinates))
+		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(true))
+		dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId(boxItem.id.toString()))
+		dispatch(settingsShelfTemplateActions.setTimingSetterBoxTimingData({ minutes, hours, days, weeks, months }))
 	}
+
 
 	const onSetNewBoxTime = useCallback((timeObject: TimingBlock) => {
 		dispatch(settingsShelfTemplateActions.setTimeToBoxById({ boxId: id, timeObject }))
@@ -99,16 +108,22 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		}, DURATION_MILLISEC)
 	}
 
-	const title = (<Heading as='h5'
-		className={cls.title}
-		title={`${t('box text')} ${boxIndex! + 1}`} />
-	)
+	const title = isLastBox ?
+		(<Heading as='h5'
+			className={cls.title}
+			title={t('learnt cards')} />
+		)
+
+		: (<Heading as='h5'
+			className={cls.title}
+			title={`${t('box text')} ${boxIndex! + 1}`} />
+		)
 
 	const timerIcon = (<Icon
 		Svg={TimeIcon}
 		withFill={false}
 		clickable
-		onClick={onOpenTimeSetter}
+		onClick={onOpenTimeSetterHandle}
 		width={20}
 		height={20}
 		buttonSameSize={false}
@@ -155,23 +170,23 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		}
 	</AnimatePresence>)
 
-	const timeSetterJSX = useMemo(() => (<>
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0, transition: { delay: 0, duration: 0.4 } }}
-			transition={{ delay: isBoxSaved ? 0 : 0.6, duration: DURATION_SEC }}
-			className={cls.timeSetter}
-		>
-			<TimeSetter
-				overlay={false}
-				onClose={onCloseTimeSetter}
-				onSaveTime={onSetNewBoxTime}
-				lockSelector='[data-testid="Page"]'
-			/>
-		</motion.div>
-		<Overlay onClick={onCloseTimeSetter} transparent />
-	</>), [ isBoxSaved, onSetNewBoxTime, onCloseTimeSetter])
+	// const timeSetterJSX = useMemo(() => (<>
+	// 	<motion.div
+	// 		initial={{ opacity: 0 }}
+	// 		animate={{ opacity: 1 }}
+	// 		exit={{ opacity: 0, transition: { delay: 0, duration: 0.4 } }}
+	// 		transition={{ delay: isBoxSaved ? 0 : 0.6, duration: DURATION_SEC }}
+	// 		className={cls.timeSetter}
+	// 	>
+	// 		<TimeSetter
+	// 			overlay={false}
+	// 			onClose={onCloseTimeSetter}
+	// 			onSaveTime={onSetNewBoxTime}
+	// 			lockSelector='[data-testid="Page"]'
+	// 		/>
+	// 	</motion.div>
+	// 	<Overlay onClick={onCloseTimeSetter} transparent />
+	// </>), [isBoxSaved, onSetNewBoxTime, onCloseTimeSetter])
 
 	return (
 		<AnimatePresence>
@@ -185,32 +200,38 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 						animate={{ width: 'auto', scale: 1, marginRight: 20 }}
 						exit={{ width: 0, scale: 0, opacity: 0, marginRight: 0, }}
 						transition={{ duration: DURATION_SEC }}
+						style={{ flexShrink: 0 }}
+						className={cls.boxItem}
 					// style={{ width: 'maxContent', display: 'flex'}}
 					>
 						<div className={clsx(
 							cls.BoxSettingsItem,
+							{ [cls.marginRight]: isLastBox },
 							className)}
 						>
 							{title}
 							<HStack max justify='center' gap='gap_4'>
 								{timerIconAnimated}
-								{removeButtonAnimated}
+								{!isLastBox && removeButtonAnimated}
 
 							</HStack>
-							<p>{getTiming(boxItem)}</p>
+							<div style={{ height: 24 }}>
+								<p>{getTiming(boxItem)}</p>
 
-							<AnimatePresence mode='wait'>
+							</div>
+
+							{/* <AnimatePresence mode='wait'>
 								{isTimeSetterOpen && timeSetterJSX}
-							</AnimatePresence>
+							</AnimatePresence> */}
 						</div>
 
 					</motion.div>
 					<AnimatePresence mode='wait'>
-						{isAddBoxModeActive && <AddBoxIcon onClick={onAddNewBoxClickHandle} />}
+						{isAddBoxModeActive && !isLastBox && <AddBoxIcon onClick={onAddNewBoxClickHandle} />}
 					</AnimatePresence >
 				</>
 			}
-		</AnimatePresence>
+		</AnimatePresence >
 	)
 }
 // {

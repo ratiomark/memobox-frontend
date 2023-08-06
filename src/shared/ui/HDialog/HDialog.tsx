@@ -62,6 +62,7 @@ export const HDialog = (props: HDialogProps) => {
 						cls.panel,
 						{ [cls.panelPaddingMain]: panelWithMainPadding },
 						{ [cls.panelMax]: max },
+						// { [cls.panel]: max },
 						{ [cls.panelBg]: panelWithBackground },
 						{ [cls.panelAbsolute]: panelAbsolute },
 						className

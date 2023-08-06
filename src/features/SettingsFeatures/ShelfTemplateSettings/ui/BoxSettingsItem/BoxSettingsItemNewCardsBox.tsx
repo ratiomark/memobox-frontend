@@ -14,6 +14,7 @@ export const BoxSettingsSpecialBox = ({ type }: BoxSettingSpecialBoxProps) => {
 	return (
 		<motion.div
 			// layout
+			style={{flexShrink: 0}}
 			initial={{ width: 0, opacity: 0, marginRight: 0 }}
 			// initial={{ width: 0 }}
 			animate={{ width: 'auto', opacity: 1, marginRight: 20 }}

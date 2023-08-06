@@ -4,7 +4,7 @@ import cls from './ShelfTemplateSettings.module.scss';
 import { HDialog } from '@/shared/ui/HDialog';
 import { getUserShelfTemplateSettings } from '@/entities/User';
 import { useSelector } from 'react-redux';
-import { BoxesSettingsContent } from './BoxesSettingsModal/BoxesSettingsContent/BoxesSettingsContent';
+import { BoxesSettingsContent } from './BoxesSettingsContent/BoxesSettingsContent';
 import { Overlay } from '@/shared/ui/Overlay/Overlay';
 import { useEffect, useState } from 'react';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
@@ -57,6 +57,8 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 			isOpen={isOpen}
 			onClose={onCloseHandle}
 			lazy
+			max
+			panelWithMainPadding={false}
 		>
 			<AnimatePresence initial={false} mode='wait'>
 				<motion.div
@@ -70,13 +72,15 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 				>
 					{/* {isAnyTimeSetterOpen && <div className={cls.overlay} />} */}
 					<BoxesSettingsContent />
-
+					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 					<HStack max justify='between'>
 						<Button variant='empty'>{t('cancel')}</Button>
-						<Button disabled={!isTemplateChanged} variant='filled'>Save</Button>
+						<Button disabled={!isTemplateChanged} variant='filled'>{t('save')}</Button>
 					</HStack>
+					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 				</motion.div>
 			</AnimatePresence>
+			{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 		</HDialog>
 
 	)

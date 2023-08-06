@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { ShelfSchema } from '@/entities/Shelf';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsContent.module.scss';
 import { BoxesSettingsList } from '../BoxesSettingsList/BoxesSettingsList';
@@ -9,11 +9,10 @@ import { Button } from '@/shared/ui/Button';
 import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { TimingBlock } from '@/shared/types/DataBlock';
-import { Overlay } from '@/shared/ui/Overlay/Overlay';
 import { useSelector } from 'react-redux';
-import { getSettingsInitialShelfTemplate, getSettingsShelfTemplateMode, getSettingsShelfTemplateChanged } from '../../../model/selectors/settingsShelfTemplate';
-import { settingsShelfTemplateActions } from '../../../model/slice/shelfTemplateSlice';
-import { AnimatePresence, motion } from 'framer-motion';
+import { getSettingsInitialShelfTemplate, getSettingsShelfTemplateMode, getSettingsShelfTemplateChanged } from '../../model/selectors/settingsShelfTemplate';
+import { settingsShelfTemplateActions } from '../../model/slice/shelfTemplateSlice';
+import { BoxTimeSetterSettingsPageModal } from '../BoxTimeSetterModal/BoxTimeSetterModal';
 
 interface BoxesSettingsContentProps {
 	className?: string
@@ -29,6 +28,28 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 	// 	shelfTemplate,
 	// 	setIsAnyTimeSetterOpen,
 	// } = props
+	// const isTimeSetterOpen = useSelector((state: StateSchema) => getBoxIsTimeSetterOpen(state, id))
+
+	// const timeSetterJSX = useMemo(() => (<>
+	// 	<motion.div
+	// 		initial={{ opacity: 0 }}
+	// 		animate={{ opacity: 1 }}
+	// 		exit={{ opacity: 0, transition: { delay: 0, duration: 0.4 } }}
+	// 		transition={{ delay: isBoxSaved ? 0 : 0.6, duration: DURATION_SEC }}
+	// 		className={cls.timeSetter}
+	// 	>
+	// 		<TimeSetter
+	// 			overlay={false}
+	// 			onClose={onCloseTimeSetter}
+	// 			onSaveTime={onSetNewBoxTime}
+	// 			lockSelector='[data-testid="Page"]'
+	// 		/>
+	// 	</motion.div>
+	// </>), [isBoxSaved, onSetNewBoxTime, onCloseTimeSetter])
+	// 		< AnimatePresence mode = 'wait' >
+	// 			{ isTimeSetterOpen && timeSetterJSX
+	// }
+	// 							</ AnimatePresence>
 	const dispatch = useAppDispatch()
 	const initialShelfTemplate = useSelector(getSettingsInitialShelfTemplate)
 	const mode = useSelector(getSettingsShelfTemplateMode)
@@ -68,6 +89,8 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 				? <Button variant='cancel' onClick={onCancelAddNewBox}>Cancel</Button>
 				: <Button variant='filled' onClick={onAddNewBoxClick}>Add</Button>
 			}
+			{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
+			<BoxTimeSetterSettingsPageModal />
 		</VStack>
 	)
 	// const timeSetter = (
@@ -89,7 +112,6 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 	// )
 	// return <p>sfjldf</p>
 })
-BoxesSettingsContent.displayName = 'BoxesSettingsContent'
 
 // <AnimatePresence mode = 'wait' >
 // 	{ mode === 'choosingBoxPlace' &&

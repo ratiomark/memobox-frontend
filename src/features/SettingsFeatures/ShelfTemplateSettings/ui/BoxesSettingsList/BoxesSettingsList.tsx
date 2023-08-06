@@ -2,18 +2,18 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsList.module.scss';
 import { BoxSchema } from '@/entities/Box';
-import { BoxSettingsItem } from '../BoxSettingsItem/BoxSettingsItem';
-import { BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
 import { useCallback, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion'
 import { Icon } from '@/shared/ui/Icon';
 import PlusIcon from '@/shared/assets/icons/plusIcon2.svg'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { settingsShelfTemplateActions } from '../../../model/slice/shelfTemplateSlice';
-import { getSettingsCurrentShelfTemplate, getSettingsShelfTemplateMode } from '../../../model/selectors/settingsShelfTemplate';
+import { settingsShelfTemplateActions } from '../../model/slice/shelfTemplateSlice';
+import { getSettingsCurrentShelfTemplate, getSettingsShelfTemplateMode } from '../../model/selectors/settingsShelfTemplate';
 import { useSelector } from 'react-redux';
-import { ExtendedTimingBlock } from '../../../model/types/SettingsShelfTemplate';
-import { AddBoxIcon } from '../BoxSettingsItem/AddBoxIcon';
+import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
+import { ExtendedTimingBlock } from '@/shared/types/DataBlock';
+import { BoxSettingsItem } from '../BoxSettingsItem/BoxSettingsItem';
+import { BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
 
 const createBox = (index: number): ExtendedTimingBlock => {
 	return {
@@ -115,17 +115,25 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 
 
 	const boxesRendered = useMemo(() => {
-		if (!currentShelfTemplate?.length) return []
-		return currentShelfTemplate.map(boxItem => {
-			console.log('REG  :  ', boxItem.index, boxItem.isSaved, boxItem.keyId)
+		const boxesCount = currentShelfTemplate?.length
+		if (!boxesCount) return []
+
+		return currentShelfTemplate.map((boxItem, index) => {
+			// const onOpenTimeSetter = (e: MouseEvent) => {
+
+			// dispatch(settingsShelfTemplateActions.openTimeSetter(boxItem.id))
+			// }
+			// console.log('REG  :  ', boxItem.index, boxItem.isSaved, boxItem.keyId)
 			return (
 				<BoxSettingsItem
 					onRemoveBox={onRemoveBox}
 					onAddBoxClick={onAddBoxClick}
 					boxItem={boxItem}
 					key={boxItem.id}
+					isLastBox={index === boxesCount - 1}
 				/>)
 		})
+		// const learntCardBox = <BoxSettingsItem onRemoveBox={onRemoveBox} onAddBoxClick={onAddBoxClick} boxItem={boxItem}
 	}, [onRemoveBox, currentShelfTemplate, onAddBoxClick])
 
 	const firstIcon = (
@@ -137,9 +145,9 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 	)
 
 	return (
-		<motion.div
-			layout
-		>
+
+		<div className={cls.wrapper} >
+
 			<motion.div
 				layout
 				// layoutRoot
@@ -150,14 +158,37 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 			>
 				<BoxSettingsSpecialBox type={'new'} />
 				{firstIcon}
-
 				{boxesRendered}
 				{/* <BoxSettingsSpecialBox type={'learnt'} /> */}
 				{/* </AnimatePresence> */}
 			</motion.div>
-		</motion.div>
+		</div>
 	)
 }
+// 	return (
+// 		<motion.div
+// 			layout
+// 		>
+// 			<div className={cls.wrapper} >
+
+// 				<motion.div
+// 					layout
+// 					// layoutRoot
+// 					className={clsx(
+// 						cls.BoxesSettingsList,
+// 						className
+// 					)}
+// 				>
+// 					<BoxSettingsSpecialBox type={'new'} />
+// 					{firstIcon}
+// 					{boxesRendered}
+// 					{/* <BoxSettingsSpecialBox type={'learnt'} /> */}
+// 					{/* </AnimatePresence> */}
+// 				</motion.div>
+// 			</div>
+// 		</motion.div>
+// 	)
+// }
 // import clsx from 'clsx';
 // import { useTranslation } from 'react-i18next';
 // import cls from './BoxesSettingsList.module.scss';

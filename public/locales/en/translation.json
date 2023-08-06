@@ -54,7 +54,9 @@
   "weeks": "Weeks",
   "months": "Months",
   "cancel": "Cancel (esc)",
+  "cancel no keys": "Cancel",
   "save": "Save (shift + enter)",
+  "save no keys": "Save",
   "missedTrainingSettings": {
     "none": "Do nothing",
     "additional": "Additional training",

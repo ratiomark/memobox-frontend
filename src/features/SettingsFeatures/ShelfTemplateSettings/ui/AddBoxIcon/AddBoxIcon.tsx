@@ -1,10 +1,11 @@
-import clsx from 'clsx'
 import { motion } from 'framer-motion';
-import cls from './BoxSettingsItem.module.scss';
-
+import cls from './AddBoxIcon.module.scss';
+import { MouseEvent } from 'react';
+import { Icon } from '@/shared/ui/Icon';
+import AddIcon from '@/shared/assets/icons/addIcon.svg'
 interface AddBoxIconProps {
 	className?: string;
-	onClick?: () => void
+	onClick?: (e: MouseEvent) => void
 }
 
 export const AddBoxIcon = (props: AddBoxIconProps) => {
@@ -35,8 +36,11 @@ export const AddBoxIcon = (props: AddBoxIconProps) => {
 			className={cls.circle}
 			onClick={onClick}
 		>
-			<motion.div className={cls.lineX} />
-			<motion.div className={cls.lineY} />
+			<Icon
+				Svg={AddIcon}
+			/>
+			{/* <motion.div className={cls.lineX} /> */}
+			{/* <motion.div className={cls.lineY} /> */}
 		</motion.div>
 	)
 }

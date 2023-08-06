@@ -9,7 +9,6 @@ import { useGetAllCardsQuery } from '@/entities/Card';
 import cls from './ViewPageInitializer.module.scss';
 
 interface ViewPageInitializerProps {
-	className?: string
 	shelvesListViewPageBlock: ReactNode
 	boxListViewPageBlock: ReactNode
 	statsAndActionsViewPageBlock: ReactNode
@@ -23,7 +22,6 @@ const reducers: ReducersList = {
 
 export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	const {
-		className,
 		shelvesListViewPageBlock,
 		statsAndActionsViewPageBlock,
 		cardListViewPageBlock,
@@ -32,7 +30,6 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	} = props
 	const navigate = useNavigate()
 	const { isLoading, data } = useGetAllCardsQuery()
-
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { shelfId, boxId } = useParams<{ shelfId: string, boxId: string }>()
 	const viewPageIsMounter = useSelector(getViewPageIsMounted)
@@ -65,14 +62,6 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 		}
 	}, [isLoading, data, dispatch, viewPageIsMounter])
 
-
-	// dispatch(saveUserJsonData({ viewPageBoxId: boxIdChecked, viewPageShelfId: shelfId }))
-	// useEffect(() => {
-	// 	if (boxId) {
-	// 		dispatch(viewPageActions.setBoxId(boxId))
-	// 	}
-	// }, [boxId, dispatch])
-
 	return (
 		<div className={cls.viewPageInitializer}>
 			{statsAndActionsViewPageBlock}
@@ -85,3 +74,12 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 })
 
 ViewPageInitializer.displayName = 'ViewPageInitializer'
+
+
+
+// dispatch(saveUserJsonData({ viewPageBoxId: boxIdChecked, viewPageShelfId: shelfId }))
+// useEffect(() => {
+// 	if (boxId) {
+// 		dispatch(viewPageActions.setBoxId(boxId))
+// 	}
+// }, [boxId, dispatch])

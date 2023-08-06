@@ -6,7 +6,6 @@ import { TimeSleepDataObject } from '@/entities/User';
 import { WheelEvent, memo } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { DayType, TimeControllerFunction } from '../../model/types/TimeSleepTypes';
-import { MyText } from '@/shared/ui/Typography';
 
 interface HoursMinutesWrapperProps {
 	className?: string
@@ -130,8 +129,8 @@ export const HoursMinutesWrapper = memo((props: HoursMinutesWrapperProps) => {
 	/>)
 
 	return (
-		<div className={cls.wrapper} >
-			{/* <MyText text={'timer'} className={cls.dayType} /> */}
+		// <div className={cls.wrapper} >
+		<>
 			<div className={cls.hoursAndMinutesBlock} >
 				{hoursDownComponent}
 				{minutesDownComponent}
@@ -140,7 +139,7 @@ export const HoursMinutesWrapper = memo((props: HoursMinutesWrapperProps) => {
 				{hoursUpComponent}
 				{minutesUpComponent}
 			</div>
-		</div>
+		</>
 	)
 })
 HoursMinutesWrapper.displayName = 'HoursMinutesWrapper'

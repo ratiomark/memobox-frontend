@@ -26,6 +26,7 @@ interface TimeSetterProps {
 	overlay?: boolean
 	onSaveTime: (timeObject: TimingBlock) => void
 	styles?: CSSProperties
+	// startCallback?: ({ width, height }: { width: number, height: number }) => void
 }
 
 let singleSetterMaxWidth: number;
@@ -42,9 +43,10 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		// lockSelector = '[data-testid="MainPage"]',
 		overlay = true,
 		onSaveTime,
+		// startCallback,
 	} = props
 	// const [locked, setLocked] = useLockedBody(false, lockSelector)
-	// const timeSetterRef = useRef<HTMLDivElement>()
+	const timeSetterRef = useRef<HTMLDivElement>(null)
 	const [minutes, setMinutes] = useState(timingData.minutes)
 	const [hours, setHours] = useState(timingData.hours)
 	const [days, setDays] = useState(timingData.days)
@@ -57,6 +59,17 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	// const [months, setMonths] = useState(monthsProps)
 	const [disabled, setDisabled] = useState(false)
 
+	// useEffect(() => {
+	// 	if (timeSetterRef.current && startCallback) {
+	// 		const sizes = { width: timeSetterRef.current.offsetWidth, height: timeSetterRef.current.offsetHeight }
+	// 		// const sizes = timeSetterRef.current.getBoundingClientRect()
+	// 		// const sizes = timeSetterRef.current.rect()
+	// 		console.log(sizes)
+	// 		startCallback(sizes)
+	// 		// startCallback({ width: sizes.width, height: sizes.height })
+	// 		// startCallback({ width: sizes.width, height: sizes.height })
+	// 	}
+	// }, [startCallback])
 
 	const onSaveTimeHandle = () => {
 		onSaveTime({ minutes, hours, days, weeks, months })
@@ -205,9 +218,9 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					title={t('months')}
 				/>
 			</HStack>
-			<HStack justify='between' className={cls.buttonsWrapper}  >
+			<HStack justify='between' max className={cls.buttonsWrapper}  >
 				<Button fontWeight='300' onClick={onClose}>
-					{t('cancel')}
+					{t('cancel no keys')}
 				</Button>
 				<Button
 					fontWeight='300'
@@ -215,7 +228,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					disabled={disabled}
 					onClick={onSaveTimeHandle}
 				>
-					{t('save')}
+					{t('save no keys')}
 				</Button>
 			</HStack>
 			{/* {overlay &&

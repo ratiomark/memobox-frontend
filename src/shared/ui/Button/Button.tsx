@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, forwardRef, memo, ReactNode } from 'react'
+import { ButtonHTMLAttributes, DetailedHTMLProps, forwardRef, memo, ReactNode } from 'react'
 import clsx from 'clsx'
 import { FontWeight } from '@/shared/types/StyleTypes'
 import { mapFontWeightToClass } from '@/shared/lib/helpers/mappers/mapFontWeightToClass'
@@ -48,6 +48,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	fontWeight?: FontWeight
 	flex?: boolean
 }
+// interface ButtonProps2 extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+// 	children?: ReactNode
+// 	className?: string
+// 	variant?: ButtonVariant
+// 	borderRadius?: ButtonBorderRadius
+// 	color?: ButtonColor
+// 	size?: ButtonSize
+// 	disabled?: boolean
+// 	addonLeft?: ReactNode
+// 	addonRight?: ReactNode
+// 	fontWeight?: FontWeight
+// 	flex?: boolean
+// }
 
 // VAR: переделал кнопку, сейчас она не обернута в мемо, потому что не ясно как использоваь memo в данном случае
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, forwardedRef) => {
@@ -84,10 +97,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, forward
 				cls.Button,
 				mods,
 				disabled ? '' : cls[variant],
+				fontWeight ? mapFontWeightToClass[fontWeight] : '',
 				cls[size],
 				cls[borderRadius],
 				cls[color],
-				fontWeight ? mapFontWeightToClass[fontWeight] : '',
 				className
 			)}
 			disabled={disabled}

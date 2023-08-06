@@ -221,11 +221,6 @@ const cupboardShelfList = createSlice({
 			shelvesAdapter.removeOne(state, action.payload)
 		},
 		updateShelf: shelvesAdapter.updateOne,
-		// updateShelvesInLocalData: (state) => {
-		// 	// const shelvesEnteties = shelvesAdapter.
-
-		// },
-
 	},
 
 	extraReducers: (builder) => {

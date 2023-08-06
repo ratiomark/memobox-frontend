@@ -26,12 +26,19 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 15px 15px 15px 10px;
+  min-height: 110px;
 }
 
+// .height {
+//   height: 1px;
+// }
+
 .inner {
-  max-height: 300px;
+  max-height: 320px;
   overflow: auto;
   padding-right: 40px;
+
+  // transform: translateY(50px);
 }
 
 .dayByDayActivator {

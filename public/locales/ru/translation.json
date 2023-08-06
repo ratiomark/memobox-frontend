@@ -54,6 +54,8 @@
   "months": "Месяцы",
   "cancel": "Отмена (esc)",
   "save": "Сохранить (shift + enter)",
+  "cancel no keys": "Отмена",
+  "save no keys": "Сохранить",
   "missedTrainingSettings": {
     "none": "Ничего не делать",
     "additional": "Оставить на дополнительный круг",

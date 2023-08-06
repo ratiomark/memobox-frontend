@@ -1,17 +1,54 @@
-.titles {
-  padding-left: 50px;
-  display: flex;
-  gap: 30px;
-  padding-bottom: 10px;
+.DayByDayHoursMinutesComponent {
+  display: grid;
+  grid-template-columns: 30px 100px 100px;
+  column-gap: 30px;
+  justify-items: center;
+  align-items: center;
+  min-height: 110px;
 }
+
+// .titles {
+//   padding-left: 50px;
+//   display: flex;
+//   gap: 30px;
+//   padding-bottom: 10px;
+// }
 
 .title {
   font-size: 15px;
+  align-self: baseline;
+  padding-bottom: 10px;
 }
 
-.dayWrapper {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  padding-bottom: 20px;
-}
+// .dayWrapper {
+//   display: flex;
+//   align-items: center;
+//   gap: 40px;
+//   padding-bottom: 20px;
+// }
+
+// .DayByDayHoursMinutesComponent {
+//   display: grid;
+//   grid-template-columns: 100px 100px;
+//   column-gap: 27px;
+//   justify-items: center;
+//   min-height: 110px;
+// }
+
+// .titles {
+//   padding-left: 50px;
+//   display: flex;
+//   gap: 30px;
+//   padding-bottom: 10px;
+// }
+
+// .title {
+//   font-size: 15px;
+// }
+
+// .dayWrapper {
+//   display: flex;
+//   align-items: center;
+//   gap: 40px;
+//   padding-bottom: 20px;
+// }

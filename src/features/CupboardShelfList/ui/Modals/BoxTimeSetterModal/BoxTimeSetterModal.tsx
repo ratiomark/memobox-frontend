@@ -23,25 +23,26 @@ import { AnimatePresence, motion } from 'framer-motion';
 interface MissedTrainingSettingsProps {
 	className?: string
 }
-const headerHeight = document.querySelector('header')
-// console.log(headerHeight)
+
+
 export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 	const {
 		className,
-		// onClose,
-		// missedTrainingSetting,
 	} = props
+	
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const isOpen = useSelector(getTimingSetterModalIsOpen)
 	const coordinates = useSelector(getBoxCoordinates)
 	const timingData = useSelector(getBoxTimingData)
 	const boxId = useSelector(getTimingSetterBoxId)
+	// const checked = useRef(false)
 	// const currentMissedTrainingValueOfBox = useSelector((state: StateSchema) => getMissedTrainingBoxValue(state, shelfId, boxId))
 	const headerHeight = useRef(0)
 	const cupboardShelfListRects = useRef({ x: 0, y: 0, width: 0 })
 	const timeSetterSizes = useRef({ height: 0, width: 0 })
 	const [coordinatesChecked, setCoordinatesChecked] = useState({ x: 0, y: 0 })
+	const [checked, setChecked] = useState(false)
 	// const coordinatesChecked = useRef({ x: 0, y: 0 })
 
 	// VAR: Тут нужно рефакторить в кастомные хуки
@@ -59,6 +60,7 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 			cupboardShelfListRects.current.x = cupboardShelfListSizes.x
 			cupboardShelfListRects.current.y = cupboardShelfListSizes.y
 			cupboardShelfListRects.current.width = cupboardShelfListSizes.width
+			// checked.current = true
 		}, 200)
 	}, [])
 
@@ -81,6 +83,12 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 			actualY = viewPortHeight - timeSetterSizes.current.height
 		}
 		setCoordinatesChecked({ y: actualY, x: actualX })
+		// setChecked(true)
+
+		// checked.current = true
+		// return () => {
+		// 	setChecked(false)
+		// }
 	}, [coordinates])
 
 
@@ -100,8 +108,10 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 
 	return (
 		<HDialog
-			isOpen={isOpen}
+			isOpen={(isOpen)}
+			// isOpen={(isOpen && checked)}
 			onClose={onCloseHandle}
+			// lazy
 			panelAbsolute
 			panelWithMainPadding={false}
 			styles={{ left: coordinatesChecked.x, top: coordinatesChecked.y }}

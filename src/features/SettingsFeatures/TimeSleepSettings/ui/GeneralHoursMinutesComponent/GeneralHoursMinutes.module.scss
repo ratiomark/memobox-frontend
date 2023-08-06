@@ -1,0 +1,17 @@
+.GeneralHoursMinutes {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  column-gap: 27px;
+  justify-items: center;
+  min-height: 110px;
+}
+
+.titles {
+  display: flex;
+  gap: 30px;
+  padding-bottom: 10px;
+}
+
+.title {
+  font-size: 15px;
+}

@@ -8,6 +8,7 @@ import './SettingsPageWidget.css';
 import { Icon } from '@/shared/ui/Icon';
 import { MissedTrainingSettings } from '@/features/SettingsFeatures';
 import { NotificationSettings } from '@/features/SettingsFeatures'
+import { BoxTimeSetterSettingsPageModal } from '@/features/SettingsFeatures';
 
 
 interface SettingsPageWidgetProps {
@@ -137,6 +138,7 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 				isOpen={settingModalStates.timeSleepModal}
 				onClose={toggleTimeSleepModal}
 			/>
+			{/* <BoxTimeSetterSettingsPageModal /> */}
 		</div>
 	)
 }

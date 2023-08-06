@@ -85,23 +85,26 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 						/>
 					</Card>
 					<div className={cls.content} >
-						<motion.div layout>
+						<motion.div
+							layout
+
+						>
 							<AnimatePresence mode='wait'>
 								{isTimeSleepEnabled
 									&& isDayByDayTimeSleepEnabled
 									&& (
 										<motion.div
-											// layout
 											initial={{ height: 0, opacity: 0 }}
 											animate={{ height: 'auto', opacity: 1 }}
 											exit={{ height: 0, opacity: 0 }}
-											// transition={{ duration: 6 }}
-											className={cls.inner}
 										>
-											<DayByDayHoursMinutesComponent />
+											<div className={cls.inner}>
+												<DayByDayHoursMinutesComponent />
+											</div>
 										</motion.div>)
 
 								}
+
 							</AnimatePresence>
 							<AnimatePresence mode='wait'>
 								{isTimeSleepEnabled && !isDayByDayTimeSleepEnabled

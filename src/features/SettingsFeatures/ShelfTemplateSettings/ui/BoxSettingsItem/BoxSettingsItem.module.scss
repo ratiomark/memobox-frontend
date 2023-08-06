@@ -4,6 +4,8 @@
   align-items: center;
   min-height: 170px;
   min-width: 125px;
+
+  // flex-shrink: 0;
   justify-content: space-between;
   padding: 5px 10px;
   border-radius: 4px;
@@ -13,8 +15,16 @@
   // margin-right: 20px;
 }
 
+.marginRight {
+  margin-right: 20px;
+}
+
 .BoxSettingsItem:last-of-type {
+  // margin-right: 10px;
+  // margin-left: 10px;
+
   // margin-right: 0;
+  // margin-right: 150px;
 }
 
 .title {
@@ -63,39 +73,4 @@
   position: absolute;
   z-index: 101;
   top: -30px;
-}
-
-.circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 9999px;
-  cursor: pointer;
-
-  // background-color: var(--accent);
-  // border: 3px solid var(--accent);
-  position: relative;
-}
-
-.lineX,
-.lineY {
-  position: absolute;
-  inset: 0;
-}
-
-.lineX {
-  // background-color: white;
-  background-color: var(--accent);
-
-  // border: 1px solid green;
-  top: 13px;
-  height: 4px;
-  width: 30px;
-}
-
-.lineY {
-  // background-color: white;
-  background-color: var(--accent);
-  height: 30px;
-  left: 13px;
-  width: 4px;
 }

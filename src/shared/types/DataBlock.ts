@@ -12,4 +12,12 @@ export interface TimingBlock {
 	months: number
 }
 
+export type ExtendedTimingBlock = TimingBlock & {
+	index?: number
+	isSaved?: boolean
+	keyId?: string
+	id: number | string
+	isOpen: boolean
+}
+
 export type MissedTrainingValues = 'none' | 'additional' | 'backwards'

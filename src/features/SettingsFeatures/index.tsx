@@ -1,3 +1,5 @@
+export { BoxTimeSetterSettingsPageModal } from './ShelfTemplateSettings'
+
 export { TimeSleepSettings } from './TimeSleepSettings/ui/TimeSleepSettings'
 
 export { NotificationSettings } from './NotificationSettings/NotificationSettings'
