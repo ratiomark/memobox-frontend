@@ -20,6 +20,7 @@ import cls from './CardModalNewCard.module.scss';
 import { getCupboardIsLoading, getCupboardError } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 import { useWindowHeight } from '@/shared/lib/helpers/hooks/useWindowHeight';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
 
 
 interface CardModalNewCardProps {
@@ -158,6 +159,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 			isOpen={isOpen}
 			onClose={onCloseCardModal}
 			className={cls.cardModalPanel}
+			onSubmit={() => alert('Создаю новую карточку')}
 			// max
 			// pane
 			panelWithMainPadding={false}
@@ -203,10 +205,15 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 
 				</VStack>
 				<div className={cls.emptySpace} />
-				<div className={cls.actions} >
-					<Button>{t('Назад')}</Button>
-					<Button>{t('Сохранить')}</Button>
-				</div>
+				<ModalButtons
+					className={cls.actions}
+					onClose={onCloseCardModal}
+					onSubmit={() => alert('Создаю новую карточку')}
+				/>
+				{/* <div className={cls.actions} >
+				<Button>{t('Назад')}</Button>
+				<Button>{t('Сохранить')}</Button>
+			</div> */}
 			</div>
 		</HDialog>
 	)

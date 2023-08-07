@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import cls from './ColumnSettingModal.module.scss';
+import cls from './TableSettingModal.module.scss';
 import { HDialog } from '@/shared/ui/HDialog';
 import { useSelector } from 'react-redux';
 import { getViewPageColumnSettingsIsOpen, getViewPageColumns, viewPageActions } from '@/features/ViewPageInitializer';
@@ -20,8 +20,9 @@ import { Reorder, motion } from 'framer-motion';
 import { ReducersList } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { Card } from '@/shared/ui/Card';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
 
-interface ColumnSettingModalProps {
+interface TableSettingModalProps {
 	className?: string
 }
 
@@ -32,7 +33,7 @@ const rowItems: TabItem[] = [
 	{ content: '4', value: '4' },
 ]
 
-export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
+export const TableSettingModal = (props: TableSettingModalProps) => {
 	const {
 		className
 	} = props
@@ -77,10 +78,11 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 		<HDialog
 			isOpen={isOpen}
 			onClose={onClose}
+			onSubmit={() => alert('Сохраняю новые настройки таблицы')}
 			panelWithMainPadding={false}
 		>
 			<div className={clsx(
-				cls.ColumnSettingModal,
+				cls.TableSettingModal,
 				className)}
 			>
 
@@ -101,17 +103,21 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 					</Card>
 
 				</motion.div>
-				<HStack justify='between' max>
+				<ModalButtons
+					onClose={onClose}
+					onSubmit={() => alert('Сохраняю новые настройки таблицы')}
+				/>
+				{/* <HStack justify='between' max>
 					<Button onClick={onClose}>{t('cancel')}</Button>
 					<Button variant='filled'>{t('save')}</Button>
-				</HStack>
+				</HStack> */}
 			</div>
 		</HDialog>
 	)
 }
 // import clsx from 'clsx';
 // import { useTranslation } from 'react-i18next';
-// import cls from './ColumnSettingModal.module.scss';
+// import cls from './TableSettingModal.module.scss';
 // import { HDialog } from '@/shared/ui/HDialog';
 // import { useSelector } from 'react-redux';
 // import { getViewPageColumnSettingsIsOpen, getViewPageColumns, viewPageActions } from '@/features/ViewPageInitializer';
@@ -125,11 +131,11 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 // import { Reorder } from 'framer-motion';
 // import { ReducersList } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 
-// interface ColumnSettingModalProps {
+// interface TableSettingModalProps {
 // 	className?: string
 // }
 
-// export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
+// export const TableSettingModal = (props: TableSettingModalProps) => {
 // 	const {
 // 		className
 // 	} = props
@@ -167,7 +173,7 @@ export const ColumnSettingModal = (props: ColumnSettingModalProps) => {
 // 			onClose={onClose}
 // 		>
 // 			<div className={clsx(
-// 				cls.ColumnSettingModal,
+// 				cls.TableSettingModal,
 // 				className)}
 // 			>
 // 				<Heading title={t('Columns settings')} />

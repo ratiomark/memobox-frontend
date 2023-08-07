@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './Switcher.module.scss';
 import { Switch } from '@headlessui/react';
+import { KeyboardEvent } from 'react';
 
 interface SwitcherProps {
 	className?: string
@@ -21,7 +22,9 @@ export const Switcher = (props: SwitcherProps) => {
 	} = props
 
 	const { t } = useTranslation()
-
+	const onEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === 'Enter') onClickSwitcher()
+	}
 	return (
 
 		<div
@@ -30,6 +33,8 @@ export const Switcher = (props: SwitcherProps) => {
 				className
 			)}
 			onClick={disabled ? undefined : onClickSwitcher}
+			onKeyDown={onEnterDown}
+			tabIndex={0}
 		>
 			{title && <p className={cls.label}>{title}</p>}
 			<div

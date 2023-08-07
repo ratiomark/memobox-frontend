@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './HDialog.module.scss';
-import { CSSProperties, MutableRefObject, ReactNode } from 'react';
+import { CSSProperties, MutableRefObject, ReactNode, lazy, useCallback, useEffect, useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Overlay } from '../Overlay/Overlay';
 import { useTheme } from '@/shared/context/useTheme';
@@ -11,6 +11,7 @@ interface HDialogProps {
 	className?: string
 	isOpen: boolean
 	onClose: () => void
+	onSubmit: () => void
 	children: ReactNode
 	// initialFocus?: MutableRefObject<HTMLElement | null>
 	max?: boolean
@@ -26,6 +27,7 @@ export const HDialog = (props: HDialogProps) => {
 	const {
 		className,
 		isOpen,
+		onSubmit,
 		lazy,
 		onClose,
 		// initialFocus,
@@ -38,6 +40,22 @@ export const HDialog = (props: HDialogProps) => {
 		panelAbsolute,
 	} = props
 	const { theme } = useTheme()
+
+
+	const onKeyDown = useCallback((e: KeyboardEvent) => {
+		if (e.key === 'Enter' && e.shiftKey) {
+			onSubmit()
+		}
+	}, [onSubmit])
+
+	useEffect(() => {
+		if (isOpen) {
+			window.addEventListener('keydown', onKeyDown)
+		}
+		return () => {
+			window.removeEventListener('keydown', onKeyDown)
+		}
+	}, [isOpen, onKeyDown])
 
 	if (lazy && !isOpen) return null
 
@@ -53,9 +71,7 @@ export const HDialog = (props: HDialogProps) => {
 			open={isOpen}
 			onClose={onClose}
 		>
-
 			<div className={cls.overlay} />
-
 			<div className={cls.content}>
 				<Dialog.Panel
 					className={clsx(

@@ -34,6 +34,8 @@ export const Tabs = memo((props: TabsProps) => {
 		onTabClick(tab)
 	}, [onTabClick])
 
+
+
 	const tabsRendered = useMemo(() => {
 		{
 			return tabs.map(item => {

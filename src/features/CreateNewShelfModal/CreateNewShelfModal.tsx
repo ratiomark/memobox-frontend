@@ -9,6 +9,8 @@ import { HStack } from '@/shared/ui/Stack';
 import { HDialog } from '@/shared/ui/HDialog';
 import { getUserShelfNamesList } from '@/entities/User';
 import { useSelector } from 'react-redux';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 interface CreateNewShelfModalProps {
 	className?: string
@@ -47,6 +49,7 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseHandle}
+			onSubmit={() => alert('Создаю новую полку')}
 		>
 			<div className={clsx(
 				cls.CreateNewShelfModal,
@@ -61,11 +64,19 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 					classNameInputError={cls.inputError}
 				/>
 
-				<HStack
+				<ModalButtons
+					onClose={onCloseHandle}
+					onSubmit={() => alert('Создаю новую полку')}
+					isSubmitDisabled={shelfName.length === 0 || inputErrors.length > 0}
+					justify='end'
+					gap='gap_14'
+				/>
+				{/* <HStack
 					justify='end'
 					// justify='between'
 					gap='gap_14'
-					max>
+					max
+				>
 					<Button
 						variant='back'
 						onClick={onCloseHandle}
@@ -76,7 +87,7 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 						onClick={onSubmit}
 						disabled={shelfName.length === 0 || inputErrors.length > 0}
 						variant='filled'>{t('create shelf')}</Button>
-				</HStack>
+				</HStack> */}
 			</div>
 		</HDialog>
 	)

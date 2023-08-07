@@ -29,7 +29,6 @@ export const CheckBox = (props: CheckBoxProps) => {
 			onChange={handleChange}
 			className={clsx(cls.checkBox, className)}
 		/>
-
 	)
 }
 

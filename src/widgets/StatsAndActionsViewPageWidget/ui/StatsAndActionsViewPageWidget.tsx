@@ -9,15 +9,14 @@ import {
 	getViewPageCardsFiltered,
 	getViewPageIsLoading,
 	getViewPageIsMounted,
-	getViewPageShelfId,
 	viewPageActions
 } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { ShelfRepresentedByBoxes } from '@/entities/Box';
 import cls from './StatsAndActionsViewPageWidget.module.scss';
 import { Button } from '@/shared/ui/Button';
-import { ColumnSettingModal } from './ColumnSettingModal/ColumnSettingModal';
 import { motion } from 'framer-motion'
+import { TableSettingModal } from './TableSettingModal/TableSettingModal';
 
 interface StatsData {
 	all: number
@@ -132,7 +131,7 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 					</HStack>
 				</HStack>
 			</motion.div>
-			<ColumnSettingModal />
+			<TableSettingModal />
 		</>
 	)
 }
