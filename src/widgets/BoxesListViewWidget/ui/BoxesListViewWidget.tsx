@@ -1,8 +1,12 @@
-import { getViewPageIsLoading, getViewPageShelfId, viewPageActions } from '@/features/ViewPageInitializer';
+import {
+	getViewPageIsLoading,
+	getViewPageShelfId,
+	viewPageActions
+} from '@/features/ViewPageInitializer';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
@@ -16,7 +20,6 @@ export const BoxesListViewWidget = memo(() => {
 	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
 	const boxId = useSelector(getViewPageBoxIdChecked)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
-
 
 	const tabs = useMemo(() => {
 		if (viewPageIsLoading || isShelvesLoading) return
@@ -47,10 +50,13 @@ export const BoxesListViewWidget = memo(() => {
 	if (!tabs) {
 		return <Skeleton width={700} height={40} borderRadius='8px' />
 	}
+
 	const hasActive = tabs.find((item) => item.value === boxId)
 
 	return (
-		<div className={cls.boxesListViewWidgetWrapper}>
+		<div
+			className={cls.boxesListViewWidgetWrapper}
+		>
 			<Tabs
 				tabs={tabs}
 				onTabClick={onBoxClick}

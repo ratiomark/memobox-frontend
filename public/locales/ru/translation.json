@@ -73,5 +73,7 @@
   "create shelf": "Создать (shift + enter)",
   "header": {
     "additional": "Еще"
-  }
+  },
+  "return to default": "Вернуть по умолчанию",
+  "add box": "Добавить коробку"
 }

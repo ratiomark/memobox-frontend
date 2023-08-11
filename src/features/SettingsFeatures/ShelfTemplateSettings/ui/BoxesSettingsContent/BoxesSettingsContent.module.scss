@@ -18,6 +18,30 @@
   // max-width: 1200px;
 }
 
+.gradientEdgeLeft {
+  position: absolute;
+  width: 60px;
+  height: 180px;
+  left: 0;
+  top: 79px;
+  z-index: 9999999;
+  background: red;
+
+  // background-image: linear-gradient(to right, white 70%, rgb(255 255 255 / 47%));
+}
+
+.gradientEdgeRight {
+  position: absolute;
+  width: 60px;
+  height: 180px;
+  right: 0;
+  top: 79px;
+  z-index: 9999999;
+  background: red;
+
+  // background-image: linear-gradient(to right, white 70%, rgb(255 255 255 / 47%));
+}
+
 .title {
   font-size: 15px;
   color: rebeccapurple;

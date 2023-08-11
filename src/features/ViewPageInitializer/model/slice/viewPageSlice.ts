@@ -31,7 +31,7 @@ const initialState: ViewPageInitializerSchema = {
 	isMultiSelectActive: false,
 	isTableSettingsModalOpen: false,
 	// 
-	shelvesDataSaved: {}
+	shelvesDataSaved: {},
 }
 
 export interface InitiateShelfPayload {
@@ -177,7 +177,8 @@ const viewPageSlice = createSlice({
 			state.shelvesData = action.payload.shelvesAndBoxesData
 			state.isLoading = false
 			state.error = ''
-		}
+		},
+
 	},
 
 	extraReducers: (builder) => {

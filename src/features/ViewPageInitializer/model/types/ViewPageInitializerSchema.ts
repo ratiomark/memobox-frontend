@@ -58,4 +58,13 @@ export interface ViewPageInitializerSchema {
 			error?: string
 		}
 	}
+	//
+	// boxesListEdges: {
+	// 	leftSide: boolean
+	// 	rightSide: boolean
+	// },
+	// shelvesListEdges: {
+	// 	leftSide: boolean
+	// 	rightSide: boolean
+	// },
 }

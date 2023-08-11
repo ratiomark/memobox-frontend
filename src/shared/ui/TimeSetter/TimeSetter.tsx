@@ -72,6 +72,8 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	// }, [startCallback])
 
 	const onSaveTimeHandle = () => {
+		console.log('Внутри тайм сеттера')
+		console.log({ minutes, hours, days, weeks, months })
 		onSaveTime({ minutes, hours, days, weeks, months })
 	}
 

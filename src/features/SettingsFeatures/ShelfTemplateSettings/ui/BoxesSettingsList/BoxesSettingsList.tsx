@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsList.module.scss';
 import { BoxSchema } from '@/entities/Box';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion'
 import { Icon } from '@/shared/ui/Icon';
 import PlusIcon from '@/shared/assets/icons/plusIcon2.svg'
@@ -25,7 +25,7 @@ const createBox = (index: number): ExtendedTimingBlock => {
 		minutes: 0,
 		keyId: 'unsaved',
 		isSaved: false,
-		id: Math.random() * Math.random(),
+		id: (Math.random() * Math.random()).toString(),
 		isOpen: true,
 	}
 }
@@ -56,6 +56,7 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 	const dispatch = useAppDispatch()
 	const mode = useSelector(getSettingsShelfTemplateMode)
 	const currentShelfTemplate = useSelector(getSettingsCurrentShelfTemplate)
+	const containerRef = useRef<HTMLDivElement>(null)
 
 	const onRemoveBox = useCallback((boxIndex: number) => {
 		if (!currentShelfTemplate) return
@@ -69,31 +70,32 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 
 	const onAddBoxClick = useCallback((index: number) => {
 		if (!currentShelfTemplate?.length) return
-		// dispatch(settingsShelfTemplateActions.setMode('settingTimeToNewBox'))
-		const box = createBox(index)
+		const newBox = createBox(index)
+		console.log(newBox)
+		dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId(newBox.id.toString()))
 		const updatedBoxesList: ExtendedTimingBlock[] = [];
 		const boxListRelevant = currentShelfTemplate.slice(0, currentShelfTemplate.length)
 
 		console.log(' INDEX   INDEX   ', index)
 		if (index === 0) {
-			// updatedBoxesList.push({ ...box, index })
-			updatedBoxesList.push(box)
+			// updatedBoxesList.push({ ...newBox, index })
+			updatedBoxesList.push(newBox)
 			console.log(updatedBoxesList)
 			boxListRelevant.forEach(boxItem => {
 				updatedBoxesList.push({ ...boxItem, index: boxItem.index! + 1 })
 			})
-			console.log(updatedBoxesList)
-			console.log('КОНЕЦЦЦЦЦЦЦ')
+			// console.log(updatedBoxesList)
+			// console.log('КОНЕЦЦЦЦЦЦЦ')
 		} else if (index === boxListRelevant.length) {
-			console.log('LAST LAST LAST LAST LAST LAST LAST LAST')
+			// console.log('LAST LAST LAST LAST LAST LAST LAST LAST')
 			boxListRelevant.forEach(boxItem => updatedBoxesList.push(boxItem))
-			updatedBoxesList.push(box)
+			updatedBoxesList.push(newBox)
 		} else {
 			boxListRelevant.slice(0, index).forEach(boxItem => {
 				updatedBoxesList.push(boxItem)
 			})
 			// console.log(updatedBoxesList)
-			updatedBoxesList.push({ ...box })
+			updatedBoxesList.push(newBox)
 			// console.log(updatedBoxesList)
 			currentShelfTemplate.slice(index,).forEach(boxItem => {
 				updatedBoxesList.push({ ...boxItem, index: boxItem.index! + 1 })
@@ -105,14 +107,42 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 		// вот тут нужно изменить isOpen у только что добавленнной коробки, через таймаут
 		// dispatch(settingsShelfTemplateActions.setChanged(true))
 		dispatch(settingsShelfTemplateActions.setMode('settingTimeToNewBox'))
-
 		setTimeout(() => {
 			dispatch(settingsShelfTemplateActions.setCurrentTemplate(updatedBoxesList))
 		}, 500)
-		// dispatch(settingsShelfTemplateActions.setCurrentTemplate(updatedBoxesList))
-		// dispatch(settingsShelfTemplateActions.setMode('settingTimeToNewBox'))
 	}, [currentShelfTemplate, dispatch])
 
+	useEffect(() => {
+		if (containerRef.current) {
+			if (containerRef.current.scrollWidth > containerRef.current.clientWidth) {
+				dispatch(settingsShelfTemplateActions.setIsRightSideActive(true))
+			}
+		}
+	}, [dispatch])
+
+
+	const handleScroll = () => {
+		if (containerRef.current) {
+			const container = containerRef.current
+			const scrollLeft = container.scrollLeft
+			const scrollWidth = container.scrollWidth
+			const clientWidth = container.clientWidth
+			const percentScrolledLeft = Math.ceil((scrollLeft / (scrollWidth - clientWidth)) * 100)
+			const percentScrolledRight = Math.ceil(100 - percentScrolledLeft)
+			if (percentScrolledLeft > 0) {
+				dispatch(settingsShelfTemplateActions.setIsLeftSideActive(true))
+			} else {
+				dispatch(settingsShelfTemplateActions.setIsLeftSideActive(false))
+			}
+			if (percentScrolledRight <= 0) {
+				dispatch(settingsShelfTemplateActions.setIsRightSideActive(false))
+			} else {
+				dispatch(settingsShelfTemplateActions.setIsRightSideActive(true))
+			}
+			// console.log(`Scrolled Left: ${percentScrolledLeft}%`)
+			// console.log(`Scrolled Right: ${percentScrolledRight}%`)
+		}
+	};
 
 	const boxesRendered = useMemo(() => {
 		const boxesCount = currentShelfTemplate?.length
@@ -146,7 +176,7 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 
 	return (
 
-		<div className={cls.wrapper} >
+		<div className={cls.wrapper} onScroll={handleScroll} ref={containerRef}>
 
 			<motion.div
 				layout

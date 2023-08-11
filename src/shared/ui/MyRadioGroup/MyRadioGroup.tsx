@@ -13,6 +13,7 @@ interface MyRadioGroupProps {
 	value: RadioItem
 	onChange: (value: any) => void
 	items: RadioItem[]
+	label?: string
 }
 
 export const MyRadioGroup = forwardRef<any, MyRadioGroupProps>((props, forwardedRef) => {
@@ -21,7 +22,7 @@ export const MyRadioGroup = forwardRef<any, MyRadioGroupProps>((props, forwarded
 		value,
 		onChange,
 		items,
-
+		label,
 	} = props
 	// const [plan, setPlan] = useState(plans[0])
 	const rootRef = useRef<HTMLDivElement>(null)
@@ -52,7 +53,7 @@ export const MyRadioGroup = forwardRef<any, MyRadioGroupProps>((props, forwarded
 			onChange={onChange}
 			ref={rootRef}
 		>
-			<RadioGroup.Label>Missed Training</RadioGroup.Label>
+			{label && <RadioGroup.Label>{label}</RadioGroup.Label>}
 			{items.map((item) => (
 				/* Use the `active` state to conditionally style the active option. */
 				/* Use the `checked` state to conditionally style the checked option. */

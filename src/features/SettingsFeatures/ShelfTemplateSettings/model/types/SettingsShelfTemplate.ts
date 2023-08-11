@@ -10,13 +10,17 @@ import { ExtendedTimingBlock, TimingBlock } from '@/shared/types/DataBlock'
 // 	isOpen: boolean
 // }
 
-export type SettingsShelfTemplateMods = 'initial' | 'choosingBoxPlace' | 'settingTimeToNewBox'
+export type SettingsShelfTemplateMods = 'initial' | 'choosingBoxPlace' | 'settingTimeToNewBox' | 'waitingForSaving'
 
 export interface SettingsShelfTemplate {
 	mode: SettingsShelfTemplateMods
 	changed: boolean
 	initialTemplate: TimingBlock[]
 	currentShelfTemplate: ExtendedTimingBlock[]
+	boxesSettingsListEdges: {
+		leftSide: boolean
+		rightSide: boolean
+	}
 	boxTimeSetterModal: {
 		isOpen: boolean
 		boxCoordinates: BoxCoordinates

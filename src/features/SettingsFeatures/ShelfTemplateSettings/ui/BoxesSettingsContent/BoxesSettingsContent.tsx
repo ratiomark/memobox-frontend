@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { ShelfSchema } from '@/entities/Shelf';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { Dispatch, SetStateAction, memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +9,12 @@ import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { TimingBlock } from '@/shared/types/DataBlock';
 import { useSelector } from 'react-redux';
-import { getSettingsInitialShelfTemplate, getSettingsShelfTemplateMode, getSettingsShelfTemplateChanged } from '../../model/selectors/settingsShelfTemplate';
+import {
+	getSettingsInitialShelfTemplate,
+	getSettingsShelfTemplateMode,
+	getSettingsShelfTemplateChanged,
+	getSettingsShelfTemplateBoxesSettingsListEdges,
+} from '../../model/selectors/settingsShelfTemplate';
 import { settingsShelfTemplateActions } from '../../model/slice/shelfTemplateSlice';
 import { BoxTimeSetterSettingsPageModal } from '../BoxTimeSetterModal/BoxTimeSetterModal';
 
@@ -24,36 +28,12 @@ interface BoxesSettingsContentProps {
 
 
 export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
-	// const {
-	// 	shelfTemplate,
-	// 	setIsAnyTimeSetterOpen,
-	// } = props
-	// const isTimeSetterOpen = useSelector((state: StateSchema) => getBoxIsTimeSetterOpen(state, id))
 
-	// const timeSetterJSX = useMemo(() => (<>
-	// 	<motion.div
-	// 		initial={{ opacity: 0 }}
-	// 		animate={{ opacity: 1 }}
-	// 		exit={{ opacity: 0, transition: { delay: 0, duration: 0.4 } }}
-	// 		transition={{ delay: isBoxSaved ? 0 : 0.6, duration: DURATION_SEC }}
-	// 		className={cls.timeSetter}
-	// 	>
-	// 		<TimeSetter
-	// 			overlay={false}
-	// 			onClose={onCloseTimeSetter}
-	// 			onSaveTime={onSetNewBoxTime}
-	// 			lockSelector='[data-testid="Page"]'
-	// 		/>
-	// 	</motion.div>
-	// </>), [isBoxSaved, onSetNewBoxTime, onCloseTimeSetter])
-	// 		< AnimatePresence mode = 'wait' >
-	// 			{ isTimeSetterOpen && timeSetterJSX
-	// }
-	// 							</ AnimatePresence>
 	const dispatch = useAppDispatch()
 	const initialShelfTemplate = useSelector(getSettingsInitialShelfTemplate)
 	const mode = useSelector(getSettingsShelfTemplateMode)
 	const isTemplateChanged = useSelector(getSettingsShelfTemplateChanged)
+	const { leftSide, rightSide } = useSelector(getSettingsShelfTemplateBoxesSettingsListEdges)
 
 	const onAddNewBoxClick = () => {
 		dispatch(settingsShelfTemplateActions.setMode('choosingBoxPlace'))
@@ -76,41 +56,30 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 		? <Heading as='h3' className={cls.title} title={t('Нажмите + чтобы добавить коробку на указанную позицию')} />
 		: <Heading as='h3' className={cls.title} title={t('Настройки создания новых полок')} />
 
+
+
 	return (
-		<VStack align='center' max gap='gap_12' className={cls.mainWrapper} >
+		<VStack
+			align='center'
+			max
+			gap='gap_12'
+			className={cls.mainWrapper}
+		>
+			{rightSide && <div className={cls.gradientEdgeRight} />}
+			{leftSide && <div className={cls.gradientEdgeLeft} />}
 			{/* {isAnyTimeSetterOpen && <Overlay /> &} */}
-			{/* <Heading as='h2' title={shelf.title} /> */}
 			{blockTitle}
-			{/* <div className={cls.wrapper} > */}
 			<BoxesSettingsList />
 
 			{/* </div> */}
 			{mode === 'choosingBoxPlace'
-				? <Button variant='cancel' onClick={onCancelAddNewBox}>Cancel</Button>
-				: <Button variant='filled' onClick={onAddNewBoxClick}>Add</Button>
+				? <Button variant='cancel' onClick={onCancelAddNewBox}>{t('cancel no keys')}</Button>
+				: <Button variant='filled' onClick={onAddNewBoxClick}>{t('add box')}</Button>
 			}
 			{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 			<BoxTimeSetterSettingsPageModal />
 		</VStack>
 	)
-	// const timeSetter = (
-	// 	<div className={clsx(cls.Box,)} >
-	// 		{isTimeSetterOpen &&
-	// 			<div className={cls.timeSetter} >
-	// 				<TimeSetter
-	// 					minutes={minutes}
-	// 					hours={hours}
-	// 					days={days}
-	// 					weeks={weeks}
-	// 					months={months}
-	// 					onClose={onClose}
-	// 				/>
-	// 			</div>
-	// 		}
-	// 		<MyText className={cls.timing} text={timing} />
-	// 	</div>
-	// )
-	// return <p>sfjldf</p>
 })
 
 // <AnimatePresence mode = 'wait' >

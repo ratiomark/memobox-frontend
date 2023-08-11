@@ -71,5 +71,7 @@
   "table settings": "Table setting",
   "rows count in cards": "Lines in the card",
   "choose shelf from list": "Please, choose shelf from list",
-  "create shelf": "Create (shift + enter)"
+  "create shelf": "Create (shift + enter)",
+  "return to default": "Return to default",
+  "add box": "Add box"
 }

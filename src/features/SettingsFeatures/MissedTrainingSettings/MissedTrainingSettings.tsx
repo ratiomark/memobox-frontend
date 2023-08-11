@@ -8,6 +8,7 @@ import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
 import { useMemo, useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 import { HStack } from '@/shared/ui/Stack';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
 
 interface MissedTrainingSettingsProps {
 	className?: string
@@ -47,6 +48,7 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseHandle}
+			onSubmit={() => alert('Сохраняю настройки')}
 		>
 			<div className={clsx(
 				cls.MissedTrainingSettings,
@@ -57,11 +59,13 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 					onChange={setValue}
 					value={value}
 					className={cls.radioGroup}
+					label={t('settingsItems.missed training')}
 				/>
-				<HStack justify='between' max>
-					<Button onClick={onCloseHandle}>{t('cancel')}</Button>
-					<Button variant='filled'>{t('save')}</Button>
-				</HStack>
+				<ModalButtons
+					onClose={onCloseHandle}
+					onSubmit={() => alert('Сохраняю настройки')}
+				/>
+
 			</div>
 		</HDialog>
 	)

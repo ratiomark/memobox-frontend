@@ -1,15 +1,6 @@
 .boxesListViewWidgetWrapper {
   min-height: 40px;
-
-  // max-width: 100%;
-  // overflow: auto;
-  // margin-left: 5px;
-  // padding-bottom: 10px;
-  // position: relative;
-  // display: flex;
-  // justify-content: end;
-  // min-height: 35px;
-  // height: 1px; /* Требуется, чтобы дочерний блок взял высоту 100% */
+  position: relative;
 }
 
 .boxesListViewWidget {

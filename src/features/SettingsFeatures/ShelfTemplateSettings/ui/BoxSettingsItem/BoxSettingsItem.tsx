@@ -79,7 +79,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		// console.log('Add ICON ', coordinates)
 		dispatch(settingsShelfTemplateActions.setTimingSetterBoxCoordinates(coordinates))
 		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(true))
-		dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId(boxItem.id.toString()))
+		// dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId((Math.random() * Math.random()).toString()))
 		dispatch(settingsShelfTemplateActions.setTimingSetterBoxTimingData(timingDataDefault))
 	}
 
@@ -217,6 +217,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 							</HStack>
 							<div style={{ height: 24 }}>
 								<p>{getTiming(boxItem)}</p>
+								{/* <p>{boxItem.id}</p> */}
 
 							</div>
 

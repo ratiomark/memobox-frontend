@@ -7,5 +7,11 @@ export const getSettingsShelfTemplateMode = (state: StateSchema) => state.settin
 export const getSettingsShelfTemplateChanged = (state: StateSchema) => state.settingsShelfTemplate?.changed
 
 
+export const getSettingsShelfTemplateBoxesSettingsListEdges = (state: StateSchema) => state.settingsShelfTemplate?.boxesSettingsListEdges ?? {
+	leftSide: true,
+	rightSide: false,
+}
+
+
 // export const getBoxIsTimeSetterOpen = (state: StateSchema, id: number | string) => state.settingsShelfTemplate?.boxTimeSetterModal.isOpen
 // export const getBoxIsTimeSetterOpen = (state: StateSchema, id: number | string) => state.settingsShelfTemplate?.currentShelfTemplate.find(item => item.id === id)?.isOpen

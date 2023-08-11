@@ -19,6 +19,7 @@ import { HoursMinutesWrapper } from './HoursMinutesWrapper/HoursMinutesWrapper';
 import { GeneralHoursMinutesComponent } from './GeneralHoursMinutesComponent/GeneralHoursMinutesComponent copy';
 import { DayByDayHoursMinutesComponent } from './DayByDayHoursMinutesComponent/DayByDayHoursMinutesComponent';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
 
 
 
@@ -62,12 +63,11 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 	</div>)
 
 
-
 	return (
-
 		<HDialog
 			isOpen={isOpen}
 			onClose={onClose}
+			onSubmit={() => alert('Сохраняю настройки')}
 		>
 			<div className={clsx(
 				cls.TimeSleepSettings,
@@ -137,11 +137,14 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 
 					</div>
 				</motion.div>
-
-				<HStack justify='between' max>
+				<ModalButtons
+					onClose={onCloseHandle}
+					onSubmit={() => alert('Сохраняю настройки')}
+				/>
+				{/* <HStack justify='between' max>
 					<Button onClick={onCloseHandle}>{t('cancel')}</Button>
 					<Button variant='filled'>{t('save')}</Button>
-				</HStack>
+				</HStack> */}
 			</div>
 		</HDialog>
 

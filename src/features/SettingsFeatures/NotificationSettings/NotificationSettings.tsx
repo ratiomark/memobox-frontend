@@ -12,6 +12,7 @@ import { SingleSetter } from '@/shared/ui/TimeSetter/SingleSetter';
 import { WheelEvent, useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 import { HStack } from '@/shared/ui/Stack';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
 
 interface NotificationSettingsProps {
 	className?: string
@@ -84,6 +85,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseHandle}
+			onSubmit={() => alert('Сохраняю настройки')}
 		>
 			<div className={clsx(
 				cls.NotificationSettings,
@@ -136,10 +138,10 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 						/>
 					</div>
 				</div>
-				<HStack justify='between' max>
-					<Button onClick={onCloseHandle}>{t('cancel')}</Button>
-					<Button variant='filled'>{t('save')}</Button>
-				</HStack>
+					<ModalButtons
+						onClose={onCloseHandle}
+						onSubmit={() => alert('Сохраняю настройки')}
+					/>
 			</div>
 		</HDialog>
 

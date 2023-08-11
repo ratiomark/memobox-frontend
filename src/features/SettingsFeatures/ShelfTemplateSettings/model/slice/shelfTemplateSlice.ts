@@ -11,6 +11,10 @@ const initialState: SettingsShelfTemplate = {
 	changed: false,
 	initialTemplate: [],
 	currentShelfTemplate: [],
+	boxesSettingsListEdges: {
+		leftSide: false,
+		rightSide: false,
+	},
 	boxTimeSetterModal: {
 		isOpen: false,
 		boxTimingData: timingDataDefault,
@@ -20,11 +24,6 @@ const initialState: SettingsShelfTemplate = {
 			y: 0,
 		},
 	},
-	// 	dispatch(settingsShelfTemplateActions.setTimingSetterBoxCoordinates(coordinates))
-	// 	dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(true))
-	// 	dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId(boxId))
-	// 	dispatch(settingsShelfTemplateActions.setTimingSetterBoxTimingData(timingData))
-	// currentShelfTemplate: [],
 }
 
 
@@ -40,14 +39,24 @@ const settingsShelfTemplate = createSlice({
 					index,
 					isSaved: true,
 					keyId: 'initial',
-					id: Math.random() * Math.random(),
+					id: (Math.random() * Math.random()).toString(),
 					isOpen: false,
 				}))
 			}
 		},
+
+		// 
+		setIsLeftSideActive: (state, action: PayloadAction<boolean>) => {
+			state.boxesSettingsListEdges.leftSide = action.payload
+		},
+		setIsRightSideActive: (state, action: PayloadAction<boolean>) => {
+			state.boxesSettingsListEdges.rightSide = action.payload
+		},
+
 		// time setter modal
 		setTimingSetterModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.boxTimeSetterModal.isOpen = action.payload
+			state.mode = 'waitingForSaving'
 		},
 		setTimingSetterModalBoxId: (state, action: PayloadAction<string>) => {
 			state.boxTimeSetterModal.boxId = action.payload
@@ -83,6 +92,7 @@ const settingsShelfTemplate = createSlice({
 				}
 				return box
 			})
+			state.mode = 'waitingForSaving'
 			state.changed = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 		},
 		closeTimeSetter: (state, action: PayloadAction<number | string>) => {
@@ -92,6 +102,7 @@ const settingsShelfTemplate = createSlice({
 				}
 				return box
 			})
+			state.mode = 'waitingForSaving'
 			state.changed = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 			// state.currentShelfTemplate = action.payload.map((box, index) => ({ ...box, index }))
 		},
@@ -101,19 +112,21 @@ const settingsShelfTemplate = createSlice({
 				.filter(box => box.isSaved)
 				.map((box, index) => ({ ...box, index }))
 			state.changed = !isEqual(state.initialTemplate, state.currentShelfTemplate)
+			state.mode = 'waitingForSaving'
 		},
 		reset: (state) => {
 			state.mode = 'initial'
-			state.changed = false
 			state.currentShelfTemplate = state.initialTemplate.map((timingBlock, index) => ({
 				...timingBlock,
 				index,
 				isSaved: true,
 				keyId: 'initial',
-				id: Math.random() * Math.random(),
+				id: (Math.random() * Math.random()).toString(),
 				isOpen: false,
 			}))
 			state.changed = false
+			state.boxesSettingsListEdges.leftSide = false
+			state.boxesSettingsListEdges.rightSide = false
 		},
 		setChanged: (state, action: PayloadAction<boolean>) => {
 			state.changed = action.payload

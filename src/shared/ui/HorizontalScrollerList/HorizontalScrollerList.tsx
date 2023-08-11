@@ -59,6 +59,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 					cls.item,
 					value === item.value ? cls.activeShelf : ''
 				)}
+				// tabIndex={0}
 				key={item.value}
 				ref={el => itemRefs.current.push(el!)}
 				onClick={e => handleSelectItem(e, item, index + 1)}

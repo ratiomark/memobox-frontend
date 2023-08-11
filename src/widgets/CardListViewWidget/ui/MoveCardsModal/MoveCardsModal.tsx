@@ -16,6 +16,7 @@ import { CardEditModal } from '../CardEditModal/CardEditModal';
 import { Dropdown, ListBox } from '@/shared/ui/Popup';
 import { ListBoxItems } from '@/shared/ui/Popup/ui/ListBox/ListBox';
 import { useUpdateCardsMutation } from '@/entities/Card';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
 
 
 export const MoveCardsModal = memo(() => {
@@ -75,7 +76,7 @@ export const MoveCardsModal = memo(() => {
 		}
 	}, [t, shelvesData, currentShelfId])
 
-	const onCloseEditModal = () => {
+	const onCloseMoveCards = () => {
 		dispatch(viewPageActions.setMoveCardsModalIsOpen(false))
 		document.body.blur()
 	}
@@ -121,7 +122,8 @@ export const MoveCardsModal = memo(() => {
 	return (
 		<HDialog
 			isOpen={isOpen}
-			onClose={onCloseEditModal}
+			onSubmit={onMoveCards}
+			onClose={onCloseMoveCards}
 			max
 			className={cls.MoveCardsModal}
 		// lazy
@@ -130,12 +132,18 @@ export const MoveCardsModal = memo(() => {
 				{shelves}
 				{boxes}
 
+
 			</div>
-			<div className={cls.actions} >
-				<Button onClick={onCloseEditModal}>{t('back button')}</Button>
-				{/* <Button onClick={toggleData}>{t('Сравнить')}</Button> */}
+			<ModalButtons
+				onClose={onCloseMoveCards}
+				onSubmit={onMoveCards}
+				textSubmitButton='move cards'
+				className={cls.actions} />
+			
+			{/* <div className={cls.actions} >
+				<Button onClick={onCloseMoveCards}>{t('back button')}</Button>
 				<Button variant='filled' onClick={onMoveCards}>{t('move cards')}</Button>
-			</div>
+			</div> */}
 		</HDialog>
 	)
 })

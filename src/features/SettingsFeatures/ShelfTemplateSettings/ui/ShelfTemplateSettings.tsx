@@ -13,6 +13,7 @@ import { getSettingsShelfTemplateChanged } from '../model/selectors/settingsShel
 import { Button } from '@/shared/ui/Button';
 import { AnimatePresence, motion, } from 'framer-motion';
 import { HStack } from '@/shared/ui/Stack';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
 
 interface ShelfTemplateSettingsProps {
 	className?: string
@@ -56,6 +57,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseHandle}
+			onSubmit={() => alert('Сохраняю настройки')}
 			lazy
 			max
 			panelWithMainPadding={false}
@@ -63,8 +65,6 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 			<AnimatePresence initial={false} mode='wait'>
 				<motion.div
 					layout
-					// layoutRoot
-					// data-testid='SettingsShelfTemplate'
 					className={clsx(
 						cls.ShelfTemplateSettings,
 						className)}
@@ -72,10 +72,17 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 				>
 					{/* {isAnyTimeSetterOpen && <div className={cls.overlay} />} */}
 					<BoxesSettingsContent />
+					
 					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 					<HStack max justify='between'>
-						<Button variant='empty'>{t('cancel')}</Button>
-						<Button disabled={!isTemplateChanged} variant='filled'>{t('save')}</Button>
+						<Button variant='empty'>{t('return to default')}</Button>
+						<ModalButtons
+							justify='end'
+							max={false}
+							isSubmitDisabled={!isTemplateChanged}
+							onClose={onCloseHandle}
+							onSubmit={() => alert('Сохраняю настройки')}
+						/>
 					</HStack>
 					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 				</motion.div>

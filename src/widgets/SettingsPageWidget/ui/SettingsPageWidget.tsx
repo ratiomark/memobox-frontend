@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { ShelfTemplateSettings, TimeSleepSettings } from '@/features/SettingsFeatures';
 import { Heading } from '@/shared/ui/Typography';
-import { MouseEvent, useState } from 'react';
+import { KeyboardEvent, MouseEvent, useState } from 'react';
 import { Card } from '@/shared/ui/Card';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import './SettingsPageWidget.css';
@@ -37,8 +37,32 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 	const toggleNotificationModal = () => {
 		setSettingModalStates(prev => ({ ...prev, notificationModal: !prev.notificationModal }))
 	}
+	const onEnterToggleShelfTemplateModal = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === 'Enter') toggleShelfTemplateModal()
+	}
+	const onEnterToggleTimeSleepModal = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === 'Enter') toggleTimeSleepModal()
+	}
+	const onEnterToggleNotificationModal = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === 'Enter') toggleNotificationModal()
+	}
+	const onEnterToggleMissedTrainingModal = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === 'Enter') toggleMissedTrainingModal()
+	}
 
 	const onMissedTrainingInfoClick = (e: MouseEvent<HTMLElement>) => {
+		e.stopPropagation()
+		// show info
+	}
+	const onNotificationInfoClick = (e: MouseEvent<HTMLElement>) => {
+		e.stopPropagation()
+		// show info
+	}
+	const onTimeSleepInfoClick = (e: MouseEvent<HTMLElement>) => {
+		e.stopPropagation()
+		// show info
+	}
+	const onShelfTemplateInfoClick = (e: MouseEvent<HTMLElement>) => {
 		e.stopPropagation()
 		// show info
 	}
@@ -47,6 +71,7 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 		<Card
 			tabIndex={0}
 			className={'card'}
+			onKeyDown={onEnterToggleShelfTemplateModal}
 			onClick={toggleShelfTemplateModal}>
 			<Heading
 				className={'settingTitle'}
@@ -55,6 +80,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			/>
 			<Icon
 				Svg={InfoIcon}
+				clickable
+				onClick={onShelfTemplateInfoClick}
 				width={28}
 				height={28}
 				className={'info'}
@@ -64,6 +91,7 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 		<Card
 			tabIndex={0}
 			className={'card'}
+			onKeyDown={onEnterToggleTimeSleepModal}
 			onClick={toggleTimeSleepModal}>
 			<Heading
 				className={'settingTitle'}
@@ -72,6 +100,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			/>
 			<Icon
 				Svg={InfoIcon}
+				clickable
+				onClick={onTimeSleepInfoClick}
 				width={28}
 				height={28}
 				className={'info'}
@@ -81,6 +111,7 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 		<Card
 			tabIndex={0}
 			className={'card'}
+			onKeyDown={onEnterToggleNotificationModal}
 			onClick={toggleNotificationModal}>
 			<Heading
 				className={'settingTitle'}
@@ -89,6 +120,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			/>
 			<Icon
 				Svg={InfoIcon}
+				clickable
+				onClick={onNotificationInfoClick}
 				width={28}
 				height={28}
 				className={'info'}
@@ -98,6 +131,7 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 		<Card
 			tabIndex={0}
 			className={'card'}
+			onKeyDown={onEnterToggleMissedTrainingModal}
 			onClick={toggleMissedTrainingModal}>
 			{/* onClick={openMissedTraining}> */}
 			<Heading

@@ -1,3 +1,5 @@
+
+
 export { getViewPageShelvesDataDictionary } from './model/selectors/getViewPageShelvesDataDictionary';
 
 export {
@@ -5,7 +7,6 @@ export {
 	getViewPageSort,
 	getViewPageSortOrder
 } from './model/selectors/getViewPageSorting';
-
 
 export {
 	getViewPageMoveCardsModalIsOpen

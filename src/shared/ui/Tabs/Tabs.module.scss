@@ -1,9 +1,5 @@
-.Tabs {
-  display: flex;
-  align-items: center;
-
+.tabs__container {
   // height: 100%;
-
   width: 100%;
 
   // display: grid;
@@ -11,23 +7,38 @@
   color: var(--accent);
   font-size: 15px;
   font-weight: 300;
-
-  // overflow: hidden;
-  // padding-left: 5px;
-  // padding-right: 5px;
-
-  // margin-right: 10px;
-  // margin-left: 10px;
+  position: relative;
 }
 
-.Tabs__container {
+.gradientEdgeLeft,
+.gradientEdgeRight {
+  position: absolute;
+  width: 60px;
+  height: 100%;
+  top: 0;
+  z-index: 1;
+  background: red;
+
+  // background-image: linear-gradient(to right, white 70%, rgb(255 255 255 / 47%));
+}
+
+.gradientEdgeLeft {
+  left: 0;
+}
+
+.gradientEdgeRight {
+  right: 0;
+}
+
+.tabs {
   max-width: 100%;
   white-space: nowrap;
 
   // border: 1px solid var(--accent);
   // border-radius: 8px;
   overflow-x: scroll;
-  perspective: 150px;
+
+  // perspective: 150px;
   -ms-overflow-style: none;
   scrollbar-width: none;
 
@@ -69,14 +80,15 @@
   border-left: 1px solid var(--accent);
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-
-  // margin-right: 15rem;
 }
 
 .tabItem:last-of-type {
   border-right: 1px solid var(--accent);
   border-bottom-right-radius: 8px;
   border-top-right-radius: 8px;
+}
+
+.shouldBeScrollable:last-of-type {
   margin-right: 15rem;
 }
 

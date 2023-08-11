@@ -2,17 +2,11 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './BoxTimeSetterModal.module.scss';
-import { HDialog } from '@/shared/ui/HDialog';
 import { useSelector } from 'react-redux';
-import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
-import { Button } from '@/shared/ui/Button';
-import { HStack } from '@/shared/ui/Stack';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { MissedTrainingValues } from '@/shared/types/DataBlock';
 
 import { TimeSetter } from '@/shared/ui/TimeSetter';
-import { useEffect, useRef, useState } from 'react';
-import { Modal } from '@/shared/ui/Modal/Modal';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { settingsShelfTemplateActions } from '../../model/slice/shelfTemplateSlice';
@@ -20,6 +14,7 @@ import { getTimingSetterModalIsOpen, getBoxCoordinates, getBoxTimingData, getTim
 import { Overlay } from '@/shared/ui/Overlay/Overlay';
 import { DURATION_SEC } from '@/shared/const/animation';
 import { getSettingsShelfTemplateMode } from '../../model/selectors/settingsShelfTemplate';
+import { TimingBlock } from '@/shared/types/DataBlock';
 
 interface MissedTrainingSettingsProps {
 	className?: string
@@ -112,19 +107,18 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 		dispatch(settingsShelfTemplateActions.removeAddedBox())
 	}
 
-	const onSaveTime = () => {
+	const onSaveTime = useCallback((timingBlock: TimingBlock) => {
+		if (boxId) {
+			dispatch(settingsShelfTemplateActions.setTimeToBoxById({ boxId, timeObject: timingBlock }))
+		}
 		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(false))
-		// if (!boxId) {
-		// 	// console.log(value.value)
-		// 	updateShelfMutation({ id: shelfId, missedTrainingAction: value.value as MissedTrainingValues })
-		// 	onCloseHandle()
-		// }
-	}
+	}, [boxId, dispatch])
+
 	const timeSetterJSX = (<motion.div
 		initial={{ opacity: 0 }}
 		animate={{ opacity: 1 }}
 		exit={{ opacity: 0, transition: { delay: 0, duration: 0.4 } }}
-		transition={{ delay: mode === 'settingTimeToNewBox' ? 0.6 : 0, duration: DURATION_SEC }}
+		transition={{ delay: mode === 'settingTimeToNewBox' ? 1 : 0, duration: DURATION_SEC }}
 	>
 		<TimeSetter
 			timingData={timingData}
