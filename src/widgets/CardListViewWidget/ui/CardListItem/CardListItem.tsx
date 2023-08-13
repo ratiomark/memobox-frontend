@@ -139,7 +139,7 @@ export const CardListItem = (props: CardListItemProps) => {
 				className={clsx(cls.item)}
 				onClick={isMultiSelectActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
 			>
-				<CheckBox className={cls.checkBox} isChecked={isCardSelected} onClick={onSelectCardHandle} />
+				<CheckBox blurOnChange className={cls.checkBox} isChecked={isCardSelected} onClick={onSelectCardHandle} />
 
 				<div
 					className={cls.CardListItem}

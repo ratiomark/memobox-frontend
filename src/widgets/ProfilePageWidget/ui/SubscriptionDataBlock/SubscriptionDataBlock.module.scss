@@ -1,0 +1,18 @@
+.SubscriptionDataBlock {
+  background-color: white;
+  border-radius: var(--border-radius-main);
+}
+
+.iconCheck {
+  width: 20px;
+  height: 20px;
+}
+
+.button {
+  max-height: 32px;
+
+  // padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

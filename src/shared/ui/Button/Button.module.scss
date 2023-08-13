@@ -24,6 +24,19 @@
   color: grey;
   background-color: transparent;
   border: 1px solid transparent;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    // border-bottom: 1px solid gray;
+    // box-shadow: none;
+
+    box-shadow: 0 0 1px 1px rgb(128 128 128 / 40%);
+  }
 }
 
 // .listBox {
@@ -210,6 +223,13 @@
   border: var(--border-cancel);
   background: none;
   color: var(--cancel);
+
+  // &:focus-visible {
+  //   outline: none;
+  //   box-shadow: 0 0 5px 3px var(--cancel), 0 0 1px 1px var(--cancel);
+
+  //   //   border: 1px solid var(--accent);
+  // }
 
   // &.attention {
   //   color: var(--cancel);

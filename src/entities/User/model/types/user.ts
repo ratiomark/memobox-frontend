@@ -57,6 +57,11 @@ export interface TimeSleepSettings {
 export interface User {
 	id: string
 	username: string
+	name: string
+	email: string
+	emailVerified: boolean
+	subscriptionType: 'none' | 'trial' | 'paid' | 'canceled'
+	subscriptionExpiresAt: string | number
 	// avatar?: string
 	userSettings: {
 		notifications: NotificationSettings

@@ -11,5 +11,5 @@ export const useCustomTranslate = (nameSpaceTranslation?: string) => {
 	const { t, i18n } = useTranslation(nameSpaceTranslation)
 	const setLang = (lang: Langs) => i18n.changeLanguage(lang)
 	const currentLang = i18n.language
-	return { setLang, t, currentLang }
+	return { setLang, t, currentLang, i18n }
 }

@@ -24,6 +24,7 @@
   "train": "Train",
   "inputs": {
     "MANDATORY_INPUT": "This field is required",
+    "INPUT_CANNOT_BE_EMPTY": "This field can't be empty",
     "HAS_TO_BE_MORE_THAN_3": "Minimum 4 symbols",
     "STOP_LYING_ABOUT_AGE": "Please, write your actual age",
     "SHELF_NAME_ALREADY_EXISTS": "Shelf already exists"

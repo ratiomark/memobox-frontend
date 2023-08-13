@@ -23,6 +23,7 @@
   "train": "Тренировать",
   "inputs": {
     "MANDATORY_INPUT": "Это обязательное поле",
+    "INPUT_CANNOT_BE_EMPTY": "Поле не может быть пустым",
     "HAS_TO_BE_MORE_THAN_3": "Не менее трех символов",
     "STOP_LYING_ABOUT_AGE": "Пожалуйста, укажи настоящий возраст",
     "SHELF_NAME_ALREADY_EXISTS": "Полка с таким именем уже существует"

@@ -1,7 +1,18 @@
 {
   "profile": "Profile",
+  "name": "Name",
   "edit": "Edit",
-  "Шапка профиля": "Шапка профиля",
+  "email": "Email",
+  "confirm email": "Confirm email",
+  "waiting for confirmation": "(waiting for confirmation)",
+  "subscribe": "Subscribe",
+  "more details": "More details",
+  "subscription expires at": "ends at",
+  "subscription": "Subscription",
+  "no subscription": "Regular version",
+  "trial subscription": "Trial subscription",
+  "paid subscription": "Premium",
+  "canceled subscription": "Subscription canceled",
   "save profile": "Save",
   "cancel changes in profile": "Cancel",
   "input label first name": "First name",
@@ -9,5 +20,22 @@
   "input label age": "Age",
   "input label city": "City",
   "input label user": "User name",
-  "input label avatar": "Avatar"
+  "input label avatar": "Avatar",
+  "inputs": {
+    "MANDATORY_INPUT": "This field is required",
+    "INPUT_CANNOT_BE_EMPTY": "This field can't be empty",
+    "ENTER_NEW_EMAIL": "Please, enter new email",
+    "HAS_TO_BE_MORE_THAN_3": "Minimum 4 symbols",
+    "STOP_LYING_ABOUT_AGE": "Please, write your actual age",
+    "SHELF_NAME_ALREADY_EXISTS": "Shelf already exists"
+  },
+  "write your name": "Enter your name",
+  "write your new email": "Enter your new email",
+  "email changed title": "Email успешно изменен",
+  "write password to change email": "Enter the password for your account to change the current email address",
+  "forget password": "Forget password?",
+  "show password": "Show password",
+  "write password placeholder": "Утеу new email",
+  "continue": "Continue (shift+enter)",
+  "close modal": "Close window (esc)"
 }

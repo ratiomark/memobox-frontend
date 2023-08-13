@@ -1,7 +1,13 @@
+export {
+	getUserEmail,
+	getUserEmailVerified,
+	getUserName,
+	getUserSubscriptionType,
+	getUserSubscriptionExpiresAt,
+} from './model/selectors/getUserProfileData';
+
 export type { TimeSleepSettings, DaysOfWeek, TimeSleepDataObject, } from './model/types/user';
 // export { DaysOfWeek, TimeSleepDataObject } from '@/features/SettingsFeatures/TimeSleepSettings/TimeSleepSettings';
-
-
 export type { SortColumnObject, SortColumnValue } from './model/types/JsonSavedData';
 
 export {

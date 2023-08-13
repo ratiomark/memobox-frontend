@@ -1,0 +1,25 @@
+.UserDataBlock {
+  background-color: white;
+  border-radius: var(--border-radius-main);
+
+  // display: flex;
+  // flex-direction: column;
+  // gap: 4px;
+
+  // display: grid;
+  // grid-template-columns: 300px 1fr 1fr;
+}
+
+.iconCheck {
+  width: 20px;
+  height: 20px;
+}
+
+.button {
+  max-height: 32px;
+
+  // padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

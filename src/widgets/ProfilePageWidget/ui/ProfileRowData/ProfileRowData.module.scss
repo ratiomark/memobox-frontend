@@ -1,0 +1,29 @@
+.profileRowData {
+  // display: flex;
+  // justify-content: space-between;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 300px 1fr auto;
+  padding: 10px;
+  position: relative;
+}
+
+.profileRowData::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 1px; /* Высота бордера */
+  background-color: rgb(0 0 0 / 8.6%); /* Цвет бордера */
+}
+
+.profileRowData:last-of-type::after {
+  width: 0;
+  height: 0;
+}
+
+.title {
+  font-size: 14px;
+}

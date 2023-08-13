@@ -3,10 +3,13 @@ import cls from './HeaderAdditionalBlock.module.scss'
 import { useTranslation } from 'react-i18next';
 import { Dropdown, DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { MyText } from '@/shared/ui/Typography';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { Icon } from '@/shared/ui/Icon';
 import { Button } from '@/shared/ui/Button';
+import { useNavigate } from 'react-router-dom';
+import { obtainRouteProfile, obtainRouteSubscription } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { t } from 'i18next';
 
 interface HeaderAdditionalBlockProps {
 	className?: string;
@@ -17,13 +20,30 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 		className,
 	} = props
 	const [isAdditionalOpen, setIsAdditionalOpen] = useState(false)
-
 	const { t } = useTranslation('header')
-	const onProfileClick = () => { }
-	const onHelpClick = () => { }
-	const onWriteToUsClick = () => { }
-	const onLogoutClick = () => { }
+	const navigate = useNavigate()
+
+
 	const toggleIsAdditionalOpen = () => setIsAdditionalOpen(prev => !prev)
+
+	const onProfileClick = useCallback(() => {
+		navigate(obtainRouteProfile())
+	}, [navigate])
+
+	const onHelpClick = useCallback(() => {
+		null
+	}, [])
+
+	const onWriteToUsClick = useCallback(() => {
+		null
+	}, [])
+
+	const onLogoutClick = useCallback(() => {
+		null
+	}, [])
+	
+	const onSubscriptionClick = () => navigate(obtainRouteSubscription())
+
 
 	const additionalItems: DropdownItem[] = useMemo(() => {
 		return [
@@ -47,22 +67,10 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 		]
 	}, [t, onProfileClick, onHelpClick, onWriteToUsClick, onLogoutClick])
 
-	// return (
-	// 	<Dropdown
-	// 		items={additionalItems}
-	// 		trigger={
-	// 			<Button
-	// 				fontWeight='300'
-	// 			// className={cls.button}
-	// 			>
-	// 				{t('settingsItems.settings')}
-	// 			</Button>
-	// 		}
-	// 	/>
-	// )
+
 	return (
 		<div className={clsx(cls.HeaderAdditionalBlock, [className])} >
-			<Button>Подписка</Button>
+			<Button onClick={onSubscriptionClick}>{t('subscription button')}</Button>
 			<Dropdown
 				listDirection='bottom_left'
 				items={additionalItems}
