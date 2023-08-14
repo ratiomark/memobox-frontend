@@ -144,6 +144,7 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 			isOpen={isOpen}
 			onClose={onCloseEditModal}
 			max
+			onSubmit={()=>alert('Сохраняю изменения в карточке')}
 		// lazy
 		>
 			<div

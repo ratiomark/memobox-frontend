@@ -7,6 +7,7 @@ import { uiReducer } from '@/features/ScrollSave';
 import { rtkApi } from '@/shared/api/rtkApi';
 // import { cardModalReducer } from '@/features/CardModal';
 import { cupboardShelfListReducer } from '@/features/CupboardShelfList';
+import { headerReducer } from '@/widgets/Header';
 
 export function createReduxStore(
 	initialState?: StateSchema,
@@ -15,6 +16,7 @@ export function createReduxStore(
 	const rootReducers: ReducersMapObject<StateSchema> = {
 		...asyncReducers,
 		user: userReducer,
+		header: headerReducer,
 		ui: uiReducer,
 		// cardModal: cardModalReducer,
 		cupboard: cupboardShelfListReducer,

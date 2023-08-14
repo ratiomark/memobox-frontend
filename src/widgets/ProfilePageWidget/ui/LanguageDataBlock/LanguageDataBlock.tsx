@@ -18,8 +18,6 @@ import CheckIcon from '@/shared/assets/icons/checkIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
 import { capitalizeFirstLetter } from '@/shared/lib/helpers/common/capitalizeFirstLetter';
-import i18n from '@/shared/config/i18n/i18n';
-import { LangSwitcher } from '@/widgets/Sidebar/ui/LangSwitcher/LangSwitcher';
 
 interface LanguageDataBlockProps {
 	className?: string

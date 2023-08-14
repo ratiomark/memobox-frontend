@@ -10,6 +10,8 @@ import { Button } from '@/shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteProfile, obtainRouteSubscription } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { t } from 'i18next';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { headerActions } from '../../model/slice/headerSlice';
 
 interface HeaderAdditionalBlockProps {
 	className?: string;
@@ -19,6 +21,7 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 	const {
 		className,
 	} = props
+	const dispatch = useAppDispatch()
 	const [isAdditionalOpen, setIsAdditionalOpen] = useState(false)
 	const { t } = useTranslation('header')
 	const navigate = useNavigate()
@@ -31,12 +34,12 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 	}, [navigate])
 
 	const onHelpClick = useCallback(() => {
-		null
-	}, [])
+		dispatch(headerActions.setIsHelpModalOpen(true))
+	}, [dispatch])
 
 	const onWriteToUsClick = useCallback(() => {
-		null
-	}, [])
+		dispatch(headerActions.setIsWriteToUsModalOpen(true))
+	}, [dispatch])
 
 	const onLogoutClick = useCallback(() => {
 		null

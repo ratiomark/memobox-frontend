@@ -33,41 +33,18 @@ export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
 	const { currentLang, setLang, t, allLangs } = useCustomTranslate('profile')
 	const initialLang = useRef(null) as MutableRefObject<string | null>
 	const [initLang, setInitLang] = useState<string | null>(null)
-	useEffect(() => {
 
-		if (initLang === null) {
-			console.log('Зашел')
-			// console.log(initialLang.current)
+	useEffect(() => {
+		if (initLang === null && isOpen) {
 			setInitLang(currentLang)
-			// initialLang.current = currentLang
-			// console.log(initialLang.current)
+		} else if (!isOpen) {
+			setInitLang(null)
 		}
-	}, [currentLang])
-	// useEffect(() => {
-
-	// 	if (initialLang.current === null) {
-	// 		console.log('Зашел')
-	// 		console.log(initialLang.current)
-	// 		initialLang.current = currentLang
-	// 		console.log(initialLang.current)
-	// 	}
-	// }, [currentLang])
-
-	useEffect(() => {
-		console.log('Первый')
-
-		return () => {
-			initialLang.current = null
-		}
-	}, [])
-
+	}, [currentLang, isOpen, initLang])
 
 	const onCloseHandle = () => {
-		console.log(initialLang.current)
-		console.log(currentLang)
 		setLang(initLang as Langs)
 		setValue(langItems.find(item => item.value === initLang)!)
-		setInitLang(null)
 		dispatch(profilePageWidgetActions.setIsChangeLanguageModalOpen(false))
 	}
 
@@ -107,30 +84,24 @@ export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
 
 	return (
 		<HDialog
-	
+
 			isOpen={isOpen}
 			onClose={onCloseHandle}
-			onSubmit={() => {
-				onSubmit()
-				alert('Сохраняю новый язык')
-			}
-			}
+			onSubmit={onSubmit}
 		>
 			<div className={clsx(
 				cls.changeNameModal,
 				className)}
 			>
-				<Heading as='h2' className={cls.title} title={t('write your name')} />
-
-				{content}
+				<Heading as='h2' className={cls.title} title='Select language' />
+				
+				<div className={cls.content} >
+					{content}
+				</div>
+				
 				<ModalButtons
 					onClose={onCloseHandle}
-					onSubmit={() => {
-						onSubmit()
-						alert('Сохраняю новый язык')
-					}
-					}
-					// isSubmitDisabled={userNameLocal === '' || inputErrors.length > 0}
+					onSubmit={onSubmit}
 					justify='end'
 					gap='gap_14'
 				/>
