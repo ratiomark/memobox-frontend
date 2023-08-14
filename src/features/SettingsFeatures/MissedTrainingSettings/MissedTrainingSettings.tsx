@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux';
 import { getUserMissedTrainingSettings } from '@/entities/User';
 import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
 import { useMemo, useState } from 'react';
-import { Button } from '@/shared/ui/Button';
-import { HStack } from '@/shared/ui/Stack';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 
 interface MissedTrainingSettingsProps {

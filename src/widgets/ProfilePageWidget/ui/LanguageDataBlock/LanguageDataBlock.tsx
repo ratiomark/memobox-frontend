@@ -18,6 +18,7 @@ import CheckIcon from '@/shared/assets/icons/checkIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
 import { capitalizeFirstLetter } from '@/shared/lib/helpers/common/capitalizeFirstLetter';
+import i18n from '@/shared/config/i18n/i18n';
 import { LangSwitcher } from '@/widgets/Sidebar/ui/LangSwitcher/LangSwitcher';
 
 interface LanguageDataBlockProps {
@@ -31,9 +32,10 @@ export const LanguageDataBlock = (props: LanguageDataBlockProps) => {
 		className
 	} = props
 
-	const { currentLang, setLang, t, i18n } = useCustomTranslate()
-	let content;
+	const { currentLang } = useCustomTranslate()/*  */
+	const dispatch = useAppDispatch()
 
+	let content;
 	if (currentLang === 'en') {
 		content = <MyText text={LanguageNameEngInstance.of(currentLang)} />
 	} else {
@@ -47,19 +49,7 @@ export const LanguageDataBlock = (props: LanguageDataBlockProps) => {
 		)
 	}
 
-	useEffect(() => {
-		// 	const languageNameEng = new Intl.DisplayNames(['en'], { type: 'language' });
-		// 	const languageNameCurrent = new Intl.DisplayNames([currentLang], { type: 'language' });
-		// 	// languageNames.of(currentLang); // "French"
-		// 	console.log(languageNameEng.of(currentLang))
-		// 	const currLang = capitalizeFirstLetter(languageNameCurrent.of(currentLang)!)
-		// 	console.log(currLang)
-		const allLangs = i18n.options.supportedLngs
-		// console.log(i18n.options.supportedLngs.slice(0, i18n.options.supportedLngs.lenght- 1))
-		// 	// console.log(i18n.)
-		// }, [currentLang])
-	}, [i18n, currentLang])
-
+	const onLanguageChangeClick = () => dispatch(profilePageWidgetActions.setIsChangeLanguageModalOpen(true))
 
 	return (
 		<>
@@ -67,10 +57,10 @@ export const LanguageDataBlock = (props: LanguageDataBlockProps) => {
 				<ProfileRowData
 					title='Language'
 					content={content}
-					buttons={<Button className={cls.button} onClick={() => { }}>Change</Button>}
+					buttons={<Button className={cls.button} onClick={onLanguageChangeClick}>Change</Button>}
 				/>
 			</div>
-			<LangSwitcher />
+			{/* <LangSwitcher /> */}
 		</>
 	)
 }

@@ -4,7 +4,7 @@ import { Fragment, ReactNode, forwardRef, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import cls from './MyRadioGroup.module.scss';
 
-interface RadioItem {
+export interface RadioItem {
 	value: string
 	content: ReactNode | string
 }

@@ -5,6 +5,7 @@ const initialState: ProfilePageWidgetSchema = {
 	isChangeNameModalOpen: false,
 	isChangeEmailModalOpen: false,
 	isChangePasswordModalOpen: false,
+	isChangeLanguageModalOpen: false,
 }
 
 const profilePageWidgetSlice = createSlice({
@@ -19,6 +20,9 @@ const profilePageWidgetSlice = createSlice({
 		},
 		setIsChangePasswordModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.isChangePasswordModalOpen = action.payload
+		},
+		setIsChangeLanguageModalOpen: (state, action: PayloadAction<boolean>) => {
+			state.isChangeLanguageModalOpen = action.payload
 		},
 	},
 })

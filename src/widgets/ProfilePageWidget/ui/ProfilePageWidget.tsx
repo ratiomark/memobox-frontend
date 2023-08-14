@@ -9,6 +9,7 @@ import { ChangePasswordModal } from './Modals/ChangePasswordModal/ChangePassword
 import { ChangeEmailModal } from './Modals/ChangeEmailModal/ChangeEmailModal';
 import { SubscriptionDataBlock } from './SubscriptionDataBlock/SubscriptionDataBlock';
 import { LanguageDataBlock } from './LanguageDataBlock/LanguageDataBlock';
+import { ChangeLanguageModal } from './Modals/ChangeLanguageModal/ChangeLanguageModal';
 
 interface ProfilePageWidgetProps {
 	className?: string
@@ -37,6 +38,7 @@ export const ProfilePageWidget = (props: ProfilePageWidgetProps) => {
 			<ChangeNameModal />
 			<ChangeEmailModal />
 			<ChangePasswordModal />
+			<ChangeLanguageModal />
 		</>
 	)
 }
