@@ -4,9 +4,18 @@ import cls from './WriteToUsModal.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { HDialog } from '@/shared/ui/HDialog';
 import { getIsWriteToUsOpen } from '../../../model/selectors/getHeaderModals';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { headerActions } from '../../../model/slice/headerSlice';
+import { Input } from '@/shared/ui/Input/Input';
+import { getUserEmail, getUserName } from '@/entities/User';
+import { ListBox } from '@/shared/ui/Popup';
+import { topicItems, topicsList } from '../../../model/selectors/getTopicsWriteToUs';
+import { MyText, TextArea } from '@/shared/ui/Typography';
+import { AppLink } from '@/shared/ui/AppLink/AppLink';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { Button } from '@/shared/ui/Button';
+import { FileUploader, useFileUploader } from '@/features/FileUploader/FileUploader';
 
 interface WriteToUsModalProps {
 	className?: string
@@ -17,18 +26,59 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 		className
 	} = props
 	const isOpen = useSelector(getIsWriteToUsOpen)
-	// const [userNameLocal, setUserNameLocal] = useState(userName)
-	const [inputErrors, setInputErrors] = useState([])
+	const userName = useSelector(getUserName)
+	const [userNameLocal, setUserNameLocal] = useState(userName)
+	const [nameInputErrors, setNameInputErrors] = useState([])
+	const email = useSelector(getUserEmail)
+	const [emailLocal, setEmailLocal] = useState(email)
+	const [emailInputErrors, setEmailInputErrors] = useState([])
+	const [currentTopic, setCurrentTopic] = useState(topicsList[0])
+	const [textAreaValue, setTextAreaValue] = useState('')
 	const dispatch = useAppDispatch()
-	const { t } = useTranslation()
-	
+	const { files, fileUploader } = useFileUploader()
+	// VAR: использую profile потому что там уже есть нужные переводы, чтобы не будлировать в header
+	const { t } = useTranslation('profile')
+	const { t: t2 } = useTranslation('topics')
+
 	const onCloseHandle = () => {
+		setNameInputErrors([])
+		setUserNameLocal(userName)
 		dispatch(headerActions.setIsWriteToUsModalOpen(false))
 	}
 
+	const onChangeUserLocalName = (value: string) => {
+		setUserNameLocal(value)
+		if (!value) setNameInputErrors([t('inputs.INPUT_CANNOT_BE_EMPTY')])
+		else setNameInputErrors([])
+	}
+
+
+	const onChangeEmailLocal = (value: string) => {
+		// VAR: валидация мейла
+		setEmailLocal(value)
+		if (!value) setEmailInputErrors([t('inputs.INPUT_CANNOT_BE_EMPTY')])
+		else setEmailInputErrors([])
+	}
+
+	const onAddFileClick = () => {
+
+	}
+
+	const onChangeTopic = (topicValue: string) => {
+		setCurrentTopic(topicValue)
+	}
+	// console.log(topicItems)
+	const topicItems = useMemo(() => {
+		return topicsList.map(topic => {
+			return { value: topic, content: t2(topic) }
+		})
+	}, [t2])
+	// const onClose = () => dispatch(profilePageWidgetActions.setIsChangeNameModalOpen(false))
+
 	return (
 		<HDialog
-			isOpen={isOpen}
+			isOpen={true}
+			// isOpen={isOpen}
 			onClose={onCloseHandle}
 			onSubmit={() => alert('Сохраняю имя пользователя')}
 		>
@@ -36,23 +86,68 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 				cls.writeToUsModal,
 				className)}
 			>
-				Написать нам!
-				{/* <Heading as='h2' className={cls.title} title={t('write your name')} />
-				<Input
-					value={userNameLocal}
-					onChangeString={onChangeUserLocalName}
-					inputErrors={inputErrors}
-					className={cls.input}
-					classNameInputError={cls.inputError}
-				/>
+				<div className={cls.nameAndEmailBlock} >
+					<div>
+						<Input
+							label={t('name')}
+							value={userNameLocal}
+							onChangeString={onChangeUserLocalName}
+							inputErrors={nameInputErrors}
+							className={cls.input}
+							classNameInputError={cls.inputError}
+						/>
+						<div className={cls.additionalHeight} />
+					</div>
+					<div>
+						<Input
+							label='Email'
+							value={emailLocal}
+							onChangeString={onChangeEmailLocal}
+							inputErrors={emailInputErrors}
+							className={cls.input}
+							classNameInputError={cls.inputError}
+						/>
+					</div>
+				</div>
+				<div className={cls.topicPickerBlock} >
+					<ListBox
+						label={t2('topic')}
+						value={currentTopic}
+						items={topicItems}
+						onChange={onChangeTopic}
+						max
+						sameWidth
+					/>
+					<div className={cls.warning} >
+						<MyText className={cls.warningText} saveOriginal text={'Перед тем как задать вопрос, пожалуйста, внимательно ознакомьтесь с разделом '} />
+						<AppLink className={cls.warningText} variant='accent' to='/'>помощь</AppLink>
+						<MyText className={cls.warningText} saveOriginal text=' в нем собраны самые частые вопросы и ответы' />
+					</div>
+				</div>
+				<div className={cls.textAreaBlock} >
+					<TextArea
+						rows={8}
+						value={textAreaValue}
+						onChangeString={setTextAreaValue}
+						focus
+						className={cls.textArea}
+
+					/>
+				</div>
+				<div className={cls.attachmentBlock} >
+					{fileUploader}
+					{/* <FileUploader/> */}
+					{/* <Button onClick={onAddFileClick}>{t('add file button')}</Button> */}
+				</div>
+
 
 				<ModalButtons
 					onClose={onCloseHandle}
-					onSubmit={() => alert('Сохраняю нвоое имя')}
-					isSubmitDisabled={userNameLocal === '' || inputErrors.length > 0}
+					onSubmit={() => alert('Отправляю сообщение')}
+					isSubmitDisabled={emailInputErrors.length > 0 || nameInputErrors.length > 0 || textAreaValue.length < 5}
 					justify='end'
 					gap='gap_14'
-				/> */}
+				/>
 			</div>
 
 		</HDialog>

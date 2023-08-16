@@ -13,3 +13,11 @@
     opacity: 0.8;
   }
 }
+
+.accent {
+  color: var(--accent);
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

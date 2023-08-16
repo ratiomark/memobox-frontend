@@ -1,3 +1,55 @@
 .writeToUsModal {
+  max-width: 1200px;
 
+  // height: 800px;
+  // overflow: auto;
+  // padding: 5px;
+
+  // display: grid;
 }
+
+.nameAndEmailBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+// .additionalHeight {
+//   height: 32px;
+// }
+.input {
+  margin-bottom: 40px;
+}
+
+.inputError {
+  margin-bottom: 11px;
+}
+
+.topicPickerBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding-bottom: 30px;
+  gap: 30px;
+}
+
+.warning {
+  // display: flex;
+  align-self: flex-end;
+}
+
+.warningText {
+  display: inline;
+}
+
+.textAreaBlock {
+  // border: 1px solid red;
+  padding: 2px 5px 2px 2px;
+  max-height: 350px;
+  overflow: auto;
+  margin-bottom: 15px;
+}
+
+// .textArea {
+//   // padding: 0;
+// }

@@ -129,7 +129,6 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 		shelvesAndBoxes = (
 			<div className={cls.grid} key='shelvesAndBoxes' >
 				<div className={cls.listBoxWrapper}>
-
 					<ListBox
 						label={t('shelf')}
 						value={shelfIdCardModal}
