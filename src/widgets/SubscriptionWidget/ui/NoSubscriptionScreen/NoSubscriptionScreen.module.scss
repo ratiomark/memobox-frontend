@@ -1,0 +1,46 @@
+.NoSubscriptionScreen {
+
+}
+
+.subscriptionContent {
+  font-size: 14px;
+}
+
+.noSubscriptionContent {
+  font-size: 14px;
+}
+
+.title {
+  // font-size: 14px;
+}
+
+.headingPremium {
+  color: #3bbedb;
+  font-size: 18px;
+}
+
+.headingStandard {
+  color: #4a47a3;
+  font-size: 18px;
+}
+
+.subscriptionGrid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  row-gap: 30px;
+  padding-bottom: 30px;
+}
+
+.buttonsGrid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  row-gap: 15px;
+}
+
+.subscriptionPrice {
+  // padding-left: 20px;
+}
+
+.button {
+  max-width: fit-content;
+}

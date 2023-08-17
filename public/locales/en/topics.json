@@ -1,6 +1,8 @@
 {
   "bag": "Bag\\error",
-  "proposal":"Proposal",
+  "proposal": "Proposal",
   "partnership": "Collaboration\\partnership",
-  "topic": "Choose topic"
+  "topic": "Choose topic",
+  "send message": "Send message",
+  "your message": "Your message"
 }

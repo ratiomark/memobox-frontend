@@ -1,0 +1,46 @@
+.paidSubscriptionScreen {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+
+  --heading-block-height: 60px;
+
+  // padding-top: var(--padding-top);
+}
+
+.headingBlock {
+  width: 100%;
+  height: var(--heading-block-height);
+  background-color: #3bbedb;
+  position: fixed;
+  // z-index: 9999;
+  top: calc(var(--header-height));
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headingTitle {
+  color: whitesmoke;
+}
+
+.advantagesBlockWrapper {
+  padding-top: var(--heading-block-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.advantagesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.advantageRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

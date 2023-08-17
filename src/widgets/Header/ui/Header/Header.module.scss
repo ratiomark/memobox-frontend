@@ -5,6 +5,9 @@
   position: sticky;
   top: 0;
   z-index: var(--header-index);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
 }
 
 .navigation {

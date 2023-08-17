@@ -10,12 +10,12 @@ import { headerActions } from '../../../model/slice/headerSlice';
 import { Input } from '@/shared/ui/Input/Input';
 import { getUserEmail, getUserName } from '@/entities/User';
 import { ListBox } from '@/shared/ui/Popup';
-import { topicItems, topicsList } from '../../../model/selectors/getTopicsWriteToUs';
-import { MyText, TextArea } from '@/shared/ui/Typography';
+import { topicsList } from '../../../model/selectors/getTopicsWriteToUs';
+import { Heading, MyText, TextArea } from '@/shared/ui/Typography';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { Button } from '@/shared/ui/Button';
-import { FileUploader, useFileUploader } from '@/features/FileUploader/FileUploader';
+import { useFileUploader } from '@/features/FileUploader';
 
 interface WriteToUsModalProps {
 	className?: string
@@ -60,25 +60,21 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 		else setEmailInputErrors([])
 	}
 
-	const onAddFileClick = () => {
-
-	}
-
 	const onChangeTopic = (topicValue: string) => {
 		setCurrentTopic(topicValue)
 	}
-	// console.log(topicItems)
+
+
 	const topicItems = useMemo(() => {
 		return topicsList.map(topic => {
 			return { value: topic, content: t2(topic) }
 		})
 	}, [t2])
-	// const onClose = () => dispatch(profilePageWidgetActions.setIsChangeNameModalOpen(false))
+
 
 	return (
 		<HDialog
-			isOpen={true}
-			// isOpen={isOpen}
+			isOpen={isOpen}
 			onClose={onCloseHandle}
 			onSubmit={() => alert('Сохраняю имя пользователя')}
 		>
@@ -86,6 +82,7 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 				cls.writeToUsModal,
 				className)}
 			>
+
 				<div className={cls.nameAndEmailBlock} >
 					<div>
 						<Input
@@ -109,6 +106,7 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 						/>
 					</div>
 				</div>
+
 				<div className={cls.topicPickerBlock} >
 					<ListBox
 						label={t2('topic')}
@@ -124,32 +122,32 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 						<MyText className={cls.warningText} saveOriginal text=' в нем собраны самые частые вопросы и ответы' />
 					</div>
 				</div>
+
 				<div className={cls.textAreaBlock} >
+					<MyText text={t2('your message')} className={cls.topicLabel} />
 					<TextArea
 						rows={8}
 						value={textAreaValue}
 						onChangeString={setTextAreaValue}
 						focus
 						className={cls.textArea}
-
+						autoFocus
 					/>
 				</div>
+
 				<div className={cls.attachmentBlock} >
 					{fileUploader}
-					{/* <FileUploader/> */}
-					{/* <Button onClick={onAddFileClick}>{t('add file button')}</Button> */}
 				</div>
-
 
 				<ModalButtons
 					onClose={onCloseHandle}
+					textSubmitButton={t2('send message')}
 					onSubmit={() => alert('Отправляю сообщение')}
 					isSubmitDisabled={emailInputErrors.length > 0 || nameInputErrors.length > 0 || textAreaValue.length < 5}
 					justify='end'
 					gap='gap_14'
 				/>
 			</div>
-
 		</HDialog>
 
 	)

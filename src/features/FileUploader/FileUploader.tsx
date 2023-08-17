@@ -4,74 +4,92 @@ import { Button } from '@/shared/ui/Button';
 import cls from './FileUploader.module.scss';
 import { VStack } from '@/shared/ui/Stack';
 import { t } from 'i18next';
+import RemoveIconCircle from '@/shared/assets/icons/removeIconCircle.svg'
+import { Icon } from '@/shared/ui/Icon';
+import { Portal } from '@/shared/ui/Portal/Portal';
 
 export const useFileUploader = () => {
 	const { t } = useTranslation()
-	const [fileList, setFileList] = useState<FileList | null>(null);
-	const [ff, setFf] = useState<File[]>([]);
+	// const [fileList, setFileList] = useState<FileList | null>(null);
+	const [files, setFiles] = useState<File[]>([]);
+	const [isWarningOpen, setIsWarningOpen] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
+	// const needRender = useRef(true)
 
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setFileList(e.target.files);
-		const files = e.target.files
-		setFf(files ? [...files] : [])
+		// VAR: Тут можно добавить окно в котором будет показано, что файлы более 40МБ не были прекреплены
+		const filesFromUser = e.target.files
+		if (files && filesFromUser) {
+			const maxFileSizeMB = 1024 * 1024 * 40 // 40МВ
+			const fileNamesInState = files.map(file => file.name)
+			let filesFromUserChecked = [...filesFromUser].filter(file => !fileNamesInState.includes(file.name))
+			filesFromUserChecked = [...filesFromUserChecked].filter(file => {
+				if (file.size > maxFileSizeMB) {
+					// setIsWarningOpen(true)
+					return false
+				}
+				return true
+			})
+			setFiles(prev => [...prev, ...filesFromUserChecked])
+		} else if (!filesFromUser) {
+			return
+		} else {
+			setFiles([...filesFromUser])
+		}
 	};
+
+	useEffect(() => {
+		console.log(files)
+
+
+	}, [files])
+
 
 	const handleInputClick = () => {
 		// @ts-ignore
 		inputRef.current.click()
 	}
 
-	const files = fileList ? [...fileList] : [];
-
-	// const fn = () => {
-	// 	document.getElementById('videoUpload').onchange = function (event) {
-	// 		const file = event.target.files[0];
-	// 		const blobURL = URL.createObjectURL(file);
-	// 		document.querySelector('video').src = blobURL
-	// 	}
-	// }
-	useEffect(() => {
-		console.log('FF :', ff)
-		console.log('FileList  ', fileList)
-	}, [ff, fileList])
-
 
 	const filesRendered = useMemo(() => {
-		return ff.map((file, i) => {
+		// if (!needRender.current) return filesRendered
+		return files.map((file, i) => {
+			const blobURL = URL.createObjectURL(file)
 			const onRemove = () => {
 				if (i === 0) {
-					setFf(prev => prev.slice(1,))
+					setFiles(prev => prev.slice(1,))
 					return
 				}
-				if (i === ff.length) {
-					setFf(prev => prev.slice(0, ff.length - 2))
+				if (i === files.length) {
+					setFiles(prev => prev.slice(0, files.length - 2))
 					return
 				}
-				const start = ff.slice(0, i)
-				const end = ff.slice(i + 1,)
-				setFf([...start, ...end])
+				const start = files.slice(0, i)
+				const end = files.slice(i + 1,)
+				setFiles([...start, ...end])
 			}
+			const removeIcon = (<Icon
+				Svg={RemoveIconCircle}
+				className={cls.removeButton}
+				onClick={onRemove}
+				clickable
+				width={20}
+				height={20}
+			/>)
+			let content;
 			if (file.type.split('/')[0] === 'video') {
-				const blobURL = URL.createObjectURL(file)
-				const video = <video width={320} height={240} controls src={blobURL}>Your browser does not support the video tag.</video>
-				return (
-					<VStack>
-						{video}
-						<Button onClick={onRemove}>x</Button>
-					</VStack>)
+				content = <video width={160} height={120} controls src={blobURL}>Your browser does not support the video tag.</video>
+			} else if (file.type.split('/')[0] === 'image') {
+				content = <img width={160} height={120} src={blobURL} />
 			}
-			if (file.type.split('/')[0] === 'image') {
-				const blobURL = URL.createObjectURL(file)
-				const image = <img width={320} height={240} src={blobURL} />
-				return (
-					<VStack>
-						{image}
-						<Button onClick={onRemove}>x</Button>
-					</VStack>)
-			}
+			return (
+				<li key={i} className={cls.fileContainer} >
+					{content}
+					{removeIcon}
+				</li>)
+
 		})
-	}, [ff])
+	}, [files])
 
 	const fileUploaderComponent = (
 		<div className={cls.FileUploader} >
@@ -83,17 +101,20 @@ export const useFileUploader = () => {
 				multiple
 				hidden
 			/>
-
-			<ul>
-				{filesRendered}
-				{/* {files.map((file, i) => (
-					<li key={i}>
-						{file.name} - {file.type}
-					</li>
-				))} */}
-			</ul>
-
-			<Button onClick={handleInputClick}>{t('Добавить')}</Button>
+			{
+				files.length > 0 && (
+					<div className={cls.fileListWrapper} >
+						<ul className={cls.filesList} >
+							{filesRendered}
+						</ul>
+					</div>
+				)}
+			<Button onClick={handleInputClick}>{t('add files')}</Button>
+			{/* {isWarningOpen && <Portal>
+				<div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+				
+				</div>
+			</Portal>} */}
 		</div>
 	)
 

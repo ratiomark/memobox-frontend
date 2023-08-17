@@ -16,7 +16,7 @@ i18n
 
 		supportedLngs: ['ru', 'en',],
 		// supportedLngs: ['ru', 'en', 'zk','it', 'uk', 'de'],
-		fallbackLng: ['ru', 'en'],
+		fallbackLng: ['en', 'ru'],
 		// дебаг будет спамить в консоль подрузку переводов, отсутсвующие ключи
 		debug: false,
 		// debug: __IS_DEV__,
