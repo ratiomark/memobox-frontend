@@ -42,7 +42,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
 	const boxIdCardModal = useSelector(getBoxIndexCardModal)
 	const [height, setHeight] = useState('500px')
-	const refTextArea = useRef() as MutableRefObject<HTMLTextAreaElement>
+	// const refTextArea = useRef() as MutableRefObject<HTMLTextAreaElement>
 	const windowHeight = useWindowHeight()
 
 	useEffect(() => {

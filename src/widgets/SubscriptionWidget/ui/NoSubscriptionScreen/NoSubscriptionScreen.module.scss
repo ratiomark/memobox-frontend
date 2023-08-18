@@ -35,6 +35,7 @@
   display: grid;
   grid-template-columns: 1.3fr 1fr 1fr;
   row-gap: 15px;
+  padding-bottom: 30px;
 }
 
 .subscriptionPrice {
@@ -43,4 +44,19 @@
 
 .button {
   max-width: fit-content;
+}
+
+.noteTitle {
+  padding-top: 10px;
+  font-size: 18px;
+}
+
+.warning {
+  // display: flex;
+  align-self: flex-end;
+  padding-top: 10px;
+}
+
+.warningText {
+  display: inline;
 }

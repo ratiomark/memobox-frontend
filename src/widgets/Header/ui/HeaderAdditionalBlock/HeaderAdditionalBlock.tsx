@@ -44,7 +44,7 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 	const onLogoutClick = useCallback(() => {
 		null
 	}, [])
-	
+
 	const onSubscriptionClick = () => navigate(obtainRouteSubscription())
 
 
@@ -73,7 +73,7 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 
 	return (
 		<div className={clsx(cls.HeaderAdditionalBlock, [className])} >
-			<Button onClick={onSubscriptionClick}>{t('subscription button')}</Button>
+			<Button className={cls.subscribeButton} onClick={onSubscriptionClick}>{t('subscription button')}</Button>
 			<Dropdown
 				listDirection='bottom_left'
 				items={additionalItems}

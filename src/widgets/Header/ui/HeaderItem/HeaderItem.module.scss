@@ -1,7 +1,8 @@
 .item {
   display: flex;
   align-items: center;
-  padding: 6px 16px;
+  padding: 0 16px;
+  height: 100%;
 }
 
 .linkText {
@@ -12,18 +13,6 @@
 
 .active {
   border-bottom: 2px solid var(--accent);
-
-  // background: linear-gradient(89.97deg, rgb(29 89 255 / 30%) 1.15%, rgb(94 211 243 / 0%) 99.97%);
-  // position: relative;
-
-  // &::before {
-  //   content: "";
-  //   position: absolute;
-  //   width: 2px;
-  //   left: 0;
-  //   background: var(--accent);
-  //   height: 100%;
-  // }
 }
 
 .activeWhenCollapsed {

@@ -1,5 +1,5 @@
   {
-    "max cards in cupboard": "Максимум карточек в шкафу",
+    "max cards in cupboard": "Максимум карточек",
     "max training per day": "Максимум тренировок в день",
     "no limits": "Нет ограничений",
     "max new cards per week": "Максимум новых карточек в неделю",
@@ -18,5 +18,6 @@
     "max new cards no limits": "Никаких ограничений на количество новых карточек",
     "stats extended include": "Расширенная статистика",
     "speed increased": "Повышенная скорость работы",
-    "subscription paid": "Memobox Premium - подписка успешно оформлена!"
+    "subscription paid": "Memobox Premium - подписка успешно оформлена!",
+    "your have trial": "* Бесплатный пробный премиум активен"
   }

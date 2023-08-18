@@ -4,7 +4,6 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ProfilePage = memo(() => {
-	const { t, i18n } = useTranslation()
 
 	return (
 		<Page>
@@ -12,5 +11,6 @@ const ProfilePage = memo(() => {
 		</Page>
 	)
 })
+
 ProfilePage.displayName = 'ProfilePage'
 export default ProfilePage;

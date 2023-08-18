@@ -6,6 +6,9 @@ import { Icon } from '@/shared/ui/Icon';
 import { getAdvantages } from '../../model/selectors/getSubscriptionWidget';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { ReactNode } from 'react';
+import { getUserSubscriptionType, getUserSubscriptionExpiresAt } from '@/entities/User';
+import { useSelector } from 'react-redux';
+import { AppLink } from '@/shared/ui/AppLink/AppLink';
 
 interface PaidSubscriptionScreenProps {
 	className?: string
@@ -31,6 +34,8 @@ export const PaidSubscriptionScreen = (props: PaidSubscriptionScreenProps) => {
 		className
 	} = props
 	const advantageTextList = getAdvantages()
+	// const subscriptionType = useSelector(getUserSubscriptionType)
+	// const subscriptionExpiresAt = useSelector(getUserSubscriptionExpiresAt)
 	const { t } = useTranslation('subscription')
 
 	const headingBlock = (
@@ -49,11 +54,12 @@ export const PaidSubscriptionScreen = (props: PaidSubscriptionScreenProps) => {
 		</div>
 	)
 
+
+
 	return (
 		<div className={cls.paidSubscriptionScreen}>
 			{headingBlock}
 			{advantagesRendered}
-
 		</div>
 	)
 }

@@ -4,6 +4,13 @@
   gap: 30px;
 }
 
+.subscribeButton {
+  max-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .dropDownTrigger {
   cursor: pointer;
   display: flex;
