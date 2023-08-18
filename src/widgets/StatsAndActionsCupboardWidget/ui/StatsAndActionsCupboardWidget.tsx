@@ -81,23 +81,13 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 				className={clsx(
 					cls.statsAndActionsCupboardWidget,
 					className)}
-			><div>
+			>
+				<div>
 					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
 
-					<ThemeSwitcher />
+					{/* <ThemeSwitcher /> */}
 				</div>
 				{buttons}
-				{/* <HStack gap='gap_14' className={cls.actions} > */}
-				{/* <Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('New shelf')}</Button>
-					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
-					<Icon
-						Svg={InfoIcon}
-						width={26}
-						height={26}
-						className={cls.info}
-					/> */}
-
-				{/* </HStack> */}
 				<CreateNewShelfModal
 					isOpen={newShelfModalIsOpen}
 					onClose={onCloseNewShelfModal}

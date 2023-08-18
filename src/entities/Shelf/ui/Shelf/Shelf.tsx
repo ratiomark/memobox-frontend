@@ -64,10 +64,10 @@ export const Shelf = memo((props: ShelfProps) => {
 		document.body.classList.remove('dragging');
 	}
 
-	useEffect(() => {
-		console.log(`${title}  `, isCollapsed)
+	// useEffect(() => {
+		// console.log(`${title}  `, isCollapsed)
 
-	}, [isCollapsed, title])
+	// }, [isCollapsed, title])
 
 
 	// useEffect(() => {

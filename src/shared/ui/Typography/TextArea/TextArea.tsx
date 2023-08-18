@@ -44,7 +44,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, f
 		...otherProps
 		// autoFocus,
 	} = props
-
+	// VAR: расчет высоты = ряды * на высоту строки + паддиниги сверху\снизу + бордеры. Итого, если 5 рядов, высота строки 24, падинги по 8 + 2px на бордеры = 5 * 24 + 16 + 2 = 138
 
 	useEffect(() => {
 		const area = textAreaRef.current
@@ -55,7 +55,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, f
 		return (() => {
 			area.style.height = 'auto'
 		})
-	}, [value, autoHeight, focus])
+	}, [value, autoHeight, focus, rows])
 
 	const isBlurHappened = useRef<boolean>(false)
 	const textAreaRef = useRef() as MutableRefObject<HTMLTextAreaElement>

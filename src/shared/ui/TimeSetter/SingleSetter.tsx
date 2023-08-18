@@ -108,8 +108,8 @@ export const SingleSetter = (props: TimeSetterProps) => {
 			data-time-setter="time-setter-single-setter-component"
 		>
 			{title && <MyText variant={disabled ? 'hint' : 'primary'} className={cls.title} text={title} />}
-			{arrowUp}
 
+			{arrowUp}
 			<MyText align='center' text={time} variant={disabled ? 'hint' : 'accent'} />
 			{arrowDown}
 
