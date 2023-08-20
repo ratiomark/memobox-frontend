@@ -33,7 +33,7 @@ export interface ViewPageInitializerSchema {
 	sortOrder: SortOrderType
 	isMultiSelectActive: boolean
 	// 
-	cardsDataCurrent: {
+	cardsDataOriginal: {
 		[key: string]: CardSchemaExtended
 	}
 	cardsDataEdited: {
@@ -44,9 +44,18 @@ export interface ViewPageInitializerSchema {
 			box: number
 		}
 	}
-	currentCardId: string
-	isCardEditModalOpen: boolean
 	selectedCardIds: string[]
+	isCardEditModalOpen: boolean
+	currentCardId: string
+	cardEditedListIds: string[]
+	cardModalHeights: {
+		[key: string]: {
+			minHeightQuestion?: number
+			currentHeightQuestion?: number
+			minHeightAnswer?: number
+			currentHeightAnswer?: number
+		}
+	},
 	// 
 	isMoveCardsModalOpen: boolean
 	// 

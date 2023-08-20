@@ -31,7 +31,7 @@ interface ListBoxProps<T extends number | string> {
 	labelPadding?: FlexGap
 	sameWidth?: boolean
 	max?: boolean,
-	useIndexInsteadId?: boolean
+
 	// ref?: MutableRefObject<HTMLElement | null>
 }
 
@@ -51,7 +51,7 @@ export const ListBox = <T extends number | string>(props: ListBoxProps<T>) => {
 		labelPadding = 'gap_4',
 		sameWidth = false,
 		max = false,
-		useIndexInsteadId
+
 	} = props
 
 	const listBoxOptionsRef = useRef() as MutableRefObject<HTMLDivElement>
@@ -102,7 +102,9 @@ export const ListBox = <T extends number | string>(props: ListBoxProps<T>) => {
 								tabIndex={0}
 								className={clsx(
 									cls.listBoxItemWrapper,
-									isOnlyOneItemInList ? '' : cls.pointer,
+									(isOnlyOneItemInList || readonly)
+										? ''
+										: cls.pointer,
 								)}
 								ref={listBoxRef}
 							>
@@ -115,6 +117,7 @@ export const ListBox = <T extends number | string>(props: ListBoxProps<T>) => {
 												cls.arrow,
 												open ? cls.rotateArrow : '')}
 											// color='main'
+											type={readonly ? 'hint' : 'main'}
 											Svg={ArrowBottomIcon}
 										/>)
 								}

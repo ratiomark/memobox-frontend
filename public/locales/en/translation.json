@@ -75,5 +75,6 @@
   "choose shelf from list": "Please, choose shelf from list",
   "create shelf": "Create (shift + enter)",
   "return to default": "Return to default",
-  "add box": "Add box"
+  "add box": "Add box",
+  "compare data": "Compare (alt + c)"
 }

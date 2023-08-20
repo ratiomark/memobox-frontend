@@ -58,10 +58,10 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	// }, [selectedCardIds, dispatch, isMultiSelectActive])
 
 	const onOpenEditCardModal = useCallback((card: CardSchemaExtended) => {
-		dispatch(viewPageActions.setCurrentCardData(card))
+		dispatch(viewPageActions.setCardDataOriginal(card))
 		dispatch(viewPageActions.setCurrentCardId(card._id))
 		dispatch(viewPageActions.setIsCardEditModalOpen(true))
-		dispatch(viewPageActions.setEditCardData(card))
+		dispatch(viewPageActions.setCardDataEdited(card))
 	}, [dispatch])
 
 	const onSelectAllCards = () => {

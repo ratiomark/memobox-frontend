@@ -6,9 +6,13 @@ import { createSelector } from '@reduxjs/toolkit';
 
 export const getViewPageEditModalIsOpen = (state: StateSchema) => state.viewPage?.isCardEditModalOpen
 export const getViewPageEditModalCardId = (state: StateSchema) => state.viewPage?.currentCardId
-export const getViewPageCardsDataEdited = (state: StateSchema) => state.viewPage?.cardsDataEdited
+export const getViewPageCardEditedListIds = (state: StateSchema) => state.viewPage?.cardEditedListIds
+const getViewPageCardModalHeightsAll = (state: StateSchema) => state.viewPage?.cardModalHeights
+// export const getCardModalHeights = (state: StateSchema) => state.viewPage?.cardModalHeights
 
-export const getViewPageEditedData = createSelector(
+
+const getViewPageCardsDataEdited = (state: StateSchema) => state.viewPage?.cardsDataEdited
+export const getViewPageCardDataEdited = createSelector(
 	[
 		getViewPageEditModalCardId,
 		getViewPageCardsDataEdited,
@@ -17,14 +21,34 @@ export const getViewPageEditedData = createSelector(
 		if (data && cardId) return data[cardId]
 	}
 )
-export const getViewPageCardsDataCurrent = (state: StateSchema) => state.viewPage?.cardsDataCurrent
 
-export const getViewPageCurrentData = createSelector(
+const getViewPageCardsDataOriginal = (state: StateSchema) => state.viewPage?.cardsDataOriginal
+export const getViewPageCardDataOriginal = createSelector(
 	[
 		getViewPageEditModalCardId,
-		getViewPageCardsDataCurrent,
+		getViewPageCardsDataOriginal,
 	],
 	(cardId, data) => {
 		if (data && cardId) return data[cardId]
+	}
+)
+
+export const getViewPageIsCardInModalEdited = createSelector(
+	[
+		getViewPageEditModalCardId,
+		getViewPageCardEditedListIds,
+	],
+	(cardId, listIds) => {
+		return listIds?.includes(cardId!)
+	}
+)
+
+export const getCardModalHeights = createSelector(
+	[
+		getViewPageEditModalCardId,
+		getViewPageCardModalHeightsAll,
+	],
+	(cardId, cardModalHeights) => {
+		if (cardModalHeights && cardId) return cardModalHeights[cardId]
 	}
 )

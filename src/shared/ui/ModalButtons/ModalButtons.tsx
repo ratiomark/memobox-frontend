@@ -24,7 +24,7 @@ export const ModalButtons = (props: ModalButtonsProps) => {
 		max = true,
 		justify = 'between',
 		onClose,
-		gap,
+		gap = 'gap_14',
 		isSubmitDisabled,
 		onSubmit = () => { alert('Отработал') },
 		textCloseButton = 'cancel',

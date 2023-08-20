@@ -6,11 +6,11 @@ import { MyText } from '@/shared/ui/Typography';
 // import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
 import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
-import { getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
+import { getViewPageCardEditedListIds, getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { ChangeEvent, MouseEvent, useMemo, } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, color, motion } from 'framer-motion'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { AnimateSkeletonLoader, Collapsible } from '@/shared/ui/Animations';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
@@ -63,6 +63,8 @@ export const CardListItem = (props: CardListItemProps) => {
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
 	const shelvesDataDictionary = useSelector(getViewPageShelvesDataDictionary)
+	const cardsEditedListIds = useSelector(getViewPageCardEditedListIds)
+	const isCardEdited = cardsEditedListIds?.includes(card._id)
 	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
 	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
 	const dispatch = useAppDispatch()
@@ -139,8 +141,16 @@ export const CardListItem = (props: CardListItemProps) => {
 				className={clsx(cls.item)}
 				onClick={isMultiSelectActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
 			>
-				<CheckBox blurOnChange className={cls.checkBox} isChecked={isCardSelected} onClick={onSelectCardHandle} />
-
+				<CheckBox
+					blurOnChange
+					className={cls.checkBox}
+					isChecked={isCardSelected}
+					onClick={onSelectCardHandle}
+				/>
+				{isCardEdited && <div className={cls.cardEditedLabel} >
+					<p style={{ color: 'white' }}>Edited</p>
+				</div>}
+				{/* {isCardEdited && <div className={cls.cardEditedLabel} />} */}
 				<div
 					className={cls.CardListItem}
 				>

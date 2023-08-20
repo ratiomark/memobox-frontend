@@ -20,8 +20,12 @@ export {
 
 export {
 	getViewPageEditModalIsOpen,
-	getViewPageEditedData,
-	getViewPageCurrentData,
+	getViewPageCardDataEdited,
+	getViewPageCardDataOriginal,
+	getViewPageCardEditedListIds,
+	getViewPageEditModalCardId,
+	getViewPageIsCardInModalEdited,
+	getCardModalHeights,
 } from './model/selectors/getViewPageEditModal';
 
 export {

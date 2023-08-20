@@ -15,8 +15,21 @@
   position: absolute;
   left: -30px;
   top: calc(50% - var(--checkbox-size) / 2);
+}
 
-  // z-index: 5;
+.cardEditedLabel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 6px 12px;
+
+  // left: 0px;
+  // top: 0px;
+
+  // width: 16px;
+  // height: 16px;
+
+  background-color: var(--accent);
 }
 
 .CardListItem {

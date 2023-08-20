@@ -1,33 +1,4 @@
 /* stylelint-disable declaration-block-no-redundant-longhand-properties */
-.cardModalPanel {
-  // background: white;
-  // padding: 20px 15px;
-  // padding-bottom: 40px;
-  // padding-left: 20px;
-  // padding-top: 15px;
-  padding-right: 5px;
-  max-height: 90%;
-  width: min(1200px, 80%);
-  overflow: hidden;
-
-  // max-height: 80%;
-  // position: relative;
-}
-
-.cardModal {
-  --padding-right: 20px;
-
-  // background: white;
-  // padding: 20px 15px;
-  // padding-bottom: 40px;
-  height: min(800px, 100%);
-
-  // max-height: fit-content;
-
-  // max-height: 80%;
-  // position: relative;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -40,18 +11,25 @@
   }
 }
 
+.cardModalPanel {
+  max-height: 90%;
+  width: min(1200px, 80%);
+  overflow: hidden;
+}
+
+.cardModal {
+  --padding-right: 20px;
+  --padding-for-scroll: 5px;
+}
+
+.mainContentWrapper {
+  padding-right: var(--padding-for-scroll);
+}
+
 .mainContent {
+  max-height: 100%;
   padding-right: var(--padding-right);
   padding-left: var(--padding-right);
-
-  // margin-bottom: 100px;
-
-  // padding-top: var(--padding-right);
-
-  // height: 80%;
-  max-height: 100%;
-
-  // height: 500px;
   overflow: auto;
 }
 
@@ -61,13 +39,14 @@
 }
 
 .emptySpace {
-  // width: 120%;
+  // width: 1200%;
   height: 15px;
 
-  // background-color: red;
+  // background-color: blue;
 }
 
 .listBoxWrapper {
+  // width: calc(100% - var(--padding-for-scroll));
   width: 80%;
 
   @media (max-width: 1100px) {
@@ -78,11 +57,6 @@
 }
 
 .actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  // break
   width: 100%;
   padding-right: calc(var(--padding-right) + var(--scroll-bar-main-width));
   border-bottom-left-radius: var(--border-radius-main);
@@ -90,8 +64,5 @@
   padding-left: var(--padding-right);
   padding-top: 10px;
   padding-bottom: 10px;
-
-  // padding-bottom: 15px;
-  // padding-right: 50px;
-  background-color: white;
+  background-color: rgb(211 209 255);
 }

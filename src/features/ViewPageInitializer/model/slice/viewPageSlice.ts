@@ -17,10 +17,12 @@ const initialState: ViewPageInitializerSchema = {
 	// 
 	cards: [],
 	shelvesData: {},
-	cardsDataCurrent: {},
+	cardsDataOriginal: {},
 	cardsDataEdited: {},
 	isCardEditModalOpen: false,
 	currentCardId: '',
+	cardEditedListIds: [],
+	cardModalHeights: {},
 	// 
 	isMoveCardsModalOpen: false,
 	// 
@@ -116,18 +118,16 @@ const viewPageSlice = createSlice({
 		setMoveCardsModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.isMoveCardsModalOpen = action.payload
 		},
-		// setViewPageIsMounted: (state) => {
-		// 	state._viewPageMounted = true
-		// },
+
 		// edit cards
 		setIsCardEditModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.isCardEditModalOpen = action.payload
 		},
-		setCurrentCardData: (state, action: PayloadAction<CardSchemaExtended>) => {
-			if (action.payload._id in state.cardsDataCurrent) null
-			else state.cardsDataCurrent[action.payload._id] = action.payload
+		setCardDataOriginal: (state, action: PayloadAction<CardSchemaExtended>) => {
+			if (action.payload._id in state.cardsDataOriginal) null
+			else state.cardsDataOriginal[action.payload._id] = action.payload
 		},
-		setEditCardData: (state, action: PayloadAction<CardSchemaExtended>) => {
+		setCardDataEdited: (state, action: PayloadAction<CardSchemaExtended>) => {
 			const cardId = action.payload._id
 			if (cardId in state.cardsDataEdited) null
 			else {
@@ -144,19 +144,47 @@ const viewPageSlice = createSlice({
 		},
 		setCurrentCardId: (state, action: PayloadAction<string>) => {
 			state.currentCardId = action.payload
+			if (!(action.payload in state.cardModalHeights)) {
+				state.cardModalHeights[action.payload] = {}
+			}
 		},
 		setCardQuestionText: (state, action: PayloadAction<string>) => {
+			if (!state.cardEditedListIds.includes(state.currentCardId)) {
+				state.cardEditedListIds.push(state.currentCardId)
+			}
 			state.cardsDataEdited[state.currentCardId].question = action.payload
 		},
 		setCardAnswerText: (state, action: PayloadAction<string>) => {
+			if (!state.cardEditedListIds.includes(state.currentCardId)) {
+				state.cardEditedListIds.push(state.currentCardId)
+			}
 			state.cardsDataEdited[state.currentCardId].answer = action.payload
 		},
 		setCardShelfId: (state, action: PayloadAction<string>) => {
+			if (!state.cardEditedListIds.includes(state.currentCardId)) {
+				state.cardEditedListIds.push(state.currentCardId)
+			}
 			state.cardsDataEdited[state.currentCardId].shelf = action.payload
 		},
 		setCardBoxId: (state, action: PayloadAction<number>) => {
+			if (!state.cardEditedListIds.includes(state.currentCardId)) {
+				state.cardEditedListIds.push(state.currentCardId)
+			}
 			state.cardsDataEdited[state.currentCardId].box = action.payload
 		},
+		setMinHeighQuestion: (state, action: PayloadAction<number>) => {
+			state.cardModalHeights[state.currentCardId].minHeightQuestion = action.payload
+		},
+		setCurrentHeightQuestion: (state, action: PayloadAction<number>) => {
+			state.cardModalHeights[state.currentCardId].currentHeightQuestion = action.payload
+		},
+		setMinHeighAnswer: (state, action: PayloadAction<number>) => {
+			state.cardModalHeights[state.currentCardId].minHeightAnswer = action.payload
+		},
+		setCurrentHeightAnswer: (state, action: PayloadAction<number>) => {
+			state.cardModalHeights[state.currentCardId].currentHeightAnswer = action.payload
+		},
+
 		// 
 		initiateShelf: (state, action: PayloadAction<InitiateShelfPayload>) => {
 			// if (action.payload.shelfId in state.shelvesDataSaved) {

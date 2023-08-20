@@ -10,8 +10,10 @@ import { useSelector } from 'react-redux';
 import {
 	getAnswerCardModal,
 	getBoxIndexCardModal,
-	// getBoxIdCardModal,
-	getIsOpenCardModal, getQuestionCardModal, getShelfIdCardModal
+	getIsOpenCardModal,
+	getQuestionCardModal,
+
+	getShelfIdCardModal
 } from '../../../model/selectors/getCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
@@ -19,19 +21,14 @@ import { Skeleton } from '@/shared/ui/Skeleton';
 import cls from './CardModalNewCard.module.scss';
 import { getCupboardIsLoading, getCupboardError } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
-// import { useWindowHeight } from '@/shared/lib/helpers/hooks/useWindowHeight';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { useWindowSize } from '@/shared/lib/helpers/hooks/useWindowHeight';
 
 const mainContentVerticalGap = 32
-interface CardModalNewCardProps {
-	className?: string
-}
 
-export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
-	const {
-		className,
-	} = props
+
+
+export const CardModalNewCard = memo(() => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
@@ -45,7 +42,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	const [height, setHeight] = useState('500px')
 	const [textAreaRows, setTextAreaRows] = useState(0)
 	const [shelvesAndBoxesWrapperHeight, setShelvesAndBoxesWrapperHeight] = useState(0)
-	// const refTextArea = useRef() as MutableRefObject<HTMLTextAreaElement>
+
 	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)
 	const { windowHeight } = useWindowSize()
 	// const windowHeight = useWindowHeight()
@@ -63,7 +60,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 			// 	console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 			// }
 			// element.getBoundingClientRect().height
-			setShelvesAndBoxesWrapperHeight(shelvesAndBoxesHeight)
+			// setShelvesAndBoxesWrapperHeight(shelvesAndBoxesHeight)
 			// console.log(shelvesAndBoxesWrapper)
 			const mainContentHeight = windowHeight * 0.8 - 55
 			// сейчас не учитывается высота лейбла у textArea 
@@ -125,9 +122,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	}, [cupboardIsLoading, shelfIdCardModal, cupboardShelves, t])
 
 
-
 	const onChangeQuestion = useCallback((text: string) => {
-
 		isOpen && dispatch(cupboardShelfListActions.setQuestionText(text))
 	}, [dispatch, isOpen])
 
@@ -146,10 +141,7 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 	const onChangeBox = useCallback((boxIndex: number) => {
 		dispatch(cupboardShelfListActions.setBoxIndexCardModal(boxIndex))
 	}, [dispatch])
-	// const onChangeBox = useCallback((boxId: string) => {
-	// 	dispatch(cupboardShelfListActions.setBoxIdCardModal(boxId))
-	// }, [dispatch])
-	// console.log(shelfIdCardModal)
+
 	let shelvesAndBoxes;
 	if (cupboardIsLoading) {
 		shelvesAndBoxes = (
@@ -208,14 +200,16 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 				>
 
 				</div> */}
-				<VStack
-					className={cls.mainContent}
-					max
-					align='left'
-					gap={`gap_${mainContentVerticalGap}`}
-					style={{ height }}
-				>
-					{/* <HStack
+				<div className={cls.mainContentWrapper} >
+					<VStack
+						className={cls.mainContent}
+						max
+						align='left'
+						gap={`gap_${mainContentVerticalGap}`}
+						// style={{ height }}
+						style={{ maxHeight: height }}
+					>
+						{/* <HStack
 						className={cls.shelvesAndBoxesWrapper}
 						// @ts-ignore
 						id='shelvesAndBoxesWrapper'
@@ -224,43 +218,44 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 						{shelvesAndBoxes}
 
 					</HStack> */}
-					<div
-						ref={shelvesAndBoxesRef}
-						className={cls.shelvesAndBoxesWrapper}
-					>
-						{shelvesAndBoxes}
+						<div
+							ref={shelvesAndBoxesRef}
+						// className={cls.shelvesAndBoxesWrapper}
+						>
+							{shelvesAndBoxes}
 
-					</div>
-					<div>
-						{/* <VStack align='left'>
+						</div>
+						<div>
+							{/* <VStack align='left'>
 							<MyText text={`Это списки:  ${shelvesAndBoxesWrapperHeight}`} />
 							<MyText text={`Окно:  ${windowHeight}`} />
 							<MyText text={`Высота контента:  ${windowHeight * 0.8 - 55}`} />
 						</VStack> */}
-						<MyText text={'question'} />
-						<TextArea
-							// ref={refTextArea}
-							rows={textAreaRows}
-							value={questionTextCardModal}
-							onChangeString={onChangeQuestion}
-							focus
-						// autoFocus
-						/>
-					</div>
-					<div>
-						<MyText text={'answer'} />
-						<TextArea
-							rows={textAreaRows}
-							value={answerTextCardModal}
-							onChangeString={onChangeAnswer}
-						/>
-					</div>
+							<MyText text={'question'} />
+							<TextArea
+								// ref={refTextArea}
+								rows={textAreaRows}
+								value={questionTextCardModal}
+								onChangeString={onChangeQuestion}
+								focus
+							// autoFocus
+							/>
+						</div>
+						<div>
+							<MyText text={'answer'} />
+							<TextArea
+								rows={textAreaRows}
+								value={answerTextCardModal}
+								onChangeString={onChangeAnswer}
+							/>
+						</div>
 
-				</VStack>
-
+					</VStack>
+				</div>
 				<div className={cls.emptySpace} />
 
 				<ModalButtons
+					justify='end'
 					className={cls.actions}
 					onClose={onCloseCardModal}
 					onSubmit={() => alert('Создаю новую карточку')}
@@ -269,50 +264,54 @@ export const CardModalNewCard = memo((props: CardModalNewCardProps) => {
 			</div>
 		</HDialog>
 	)
-	// return (
-	// 	<Modal
-	// 		lazy
-	// 		isOpen={isOpen}
-	// 		onClose={onCloseCardModal}
-	// 	>
-	// 		<div
-	// 			className={cls.cardModal}
-	// 		>
-	// 			<VStack
-	// 				className={cls.mainContent}
-	// 				max
-	// 				align='left'
-	// 				gap='gap_32'
-	// 			>
-	// 				<HStack
-	// 					className={cls.shelvesAndBoxesWrapper}
-	// 					max
-	// 				>
-	// 					{shelvesAndBoxes}
-	// 				</HStack>
-	// 				<div>
-	// 					<MyText text={'question'} />
-	// 					<TextArea
-	// 						rows={5}
-	// 						value={questionTextCardModal}
-	// 						onChangeString={onChangeQuestion}
-	// 					/>
-	// 				</div>
-	// 				<div>
-	// 					<MyText text={'answer'} />
-	// 					<TextArea
-	// 						rows={5}
-	// 						value={answerTextCardModal}
-	// 						onChangeString={onChangeAnswer}
-	// 					/>
-	// 				</div>
-
-	// 			</VStack>
-	// 			<div className={cls.actions} >
-	// 				<Button>{t('Назад')}</Button>
-	// 				<Button>{t('Сохранить')}</Button>
-	// 			</div>
-	// 		</div>
-	// 	</Modal>
-	// )
 })
+
+
+
+
+// return (
+// 	<Modal
+// 		lazy
+// 		isOpen={isOpen}
+// 		onClose={onCloseCardModal}
+// 	>
+// 		<div
+// 			className={cls.cardModal}
+// 		>
+// 			<VStack
+// 				className={cls.mainContent}
+// 				max
+// 				align='left'
+// 				gap='gap_32'
+// 			>
+// 				<HStack
+// 					className={cls.shelvesAndBoxesWrapper}
+// 					max
+// 				>
+// 					{shelvesAndBoxes}
+// 				</HStack>
+// 				<div>
+// 					<MyText text={'question'} />
+// 					<TextArea
+// 						rows={5}
+// 						value={questionTextCardModal}
+// 						onChangeString={onChangeQuestion}
+// 					/>
+// 				</div>
+// 				<div>
+// 					<MyText text={'answer'} />
+// 					<TextArea
+// 						rows={5}
+// 						value={answerTextCardModal}
+// 						onChangeString={onChangeAnswer}
+// 					/>
+// 				</div>
+
+// 			</VStack>
+// 			<div className={cls.actions} >
+// 				<Button>{t('Назад')}</Button>
+// 				<Button>{t('Сохранить')}</Button>
+// 			</div>
+// 		</div>
+// 	</Modal>
+// )
