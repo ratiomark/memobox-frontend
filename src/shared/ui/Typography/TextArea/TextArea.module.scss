@@ -1,21 +1,33 @@
-.Input {
+.textArea {
   // font: var(--font-family-main);
   outline: none;
   width: 100%;
   color: var(--text);
   background: none;
-  padding: var(--padding-main);
+  padding: var(--padding-textarea-top-and-bottom) var(--padding-textarea-left-and-right);
   border: 1px solid var(--accent);
   border-radius: 4px;
   resize: none;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   // overflow: hidden;
   // ;overflow-y:hidden
   // resize: vertical;
-  height: fit-content;
+  // height: 100%;
 }
 
-.hasErrors {
-  margin-bottom: 5px;
-  margin-top: 10px;
+.shadowTextArea {
+  height: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
+
+// .hasErrors {
+//   margin-bottom: 5px;
+//   margin-top: 10px;
+// }

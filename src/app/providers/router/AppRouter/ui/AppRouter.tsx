@@ -4,7 +4,7 @@ import { AppRouteProps, routeConfig } from '../../config/routeConfig/routeConfig
 import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { ProtectedRoute } from './ProtectedRoute'
 import { AnimatePresence } from 'framer-motion'
-import { Header } from '@/widgets/Sidebar'
+// import { Header } from '@/widgets/Sidebar'
 {/* <Suspense fallback={<LoaderWidget />}> */ }
 
 export const AppRouter = () => {
@@ -38,7 +38,7 @@ export const AppRouter = () => {
 	}, [])
 
 	const routes = Object.values(routeConfig).map(renderWithWrapper)
-	
+
 	return (
 		<Suspense fallback={<LoaderWidget />}>
 			<Routes >

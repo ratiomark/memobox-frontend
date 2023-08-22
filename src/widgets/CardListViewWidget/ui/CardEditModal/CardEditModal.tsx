@@ -15,9 +15,10 @@ import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { getCardModalHeights, getViewPageCardEditedListIds, getViewPageCardDataOriginal, getViewPageEditModalIsOpen, getViewPageCardDataEdited, getViewPageIsCardInModalEdited, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { cupboardShelfListActions } from '@/features/CupboardShelfList';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { useWindowSize } from '@/shared/lib/helpers/hooks/useWindowHeight';
+import { ShadowTextArea } from '@/shared/ui/Typography/TextArea/ShadowTextArea';
+import { useMainContentMaxHeightAndAreaRows } from '@/shared/lib/helpers/hooks/useMainContentMaxHeightAndAreaRows';
 
 
 interface CardEditModalProps {
@@ -32,14 +33,24 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 	// const cupboardError = useSelector(getCupboardError)
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	const [showOriginalData, setShowOriginalData] = useState(false)
-	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)
-	const [mainContentHeight, setMainContentHeight] = useState('500px')
-	const { windowHeight } = useWindowSize()
+	const [shadowAreaQuestionHeight, setShadowAreaQuestionHeight] = useState(0)
+	const [shadowAreaAnswerHeight, setShadowAreaAnswerHeight] = useState(0)
+	
 
 	const isOpen = useSelector(getViewPageEditModalIsOpen) ?? false
 	const isCardEdited = useSelector(getViewPageIsCardInModalEdited)
 	const cardHeightsData = useSelector(getCardModalHeights)
 	const dispatch = useAppDispatch()
+
+	const mainContentRef = useRef<HTMLDivElement>(null)
+	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)
+	const modalButtonsRef = useRef<HTMLDivElement>(null)
+
+	const { textAreaRows, mainContentMaxHeight } = useMainContentMaxHeightAndAreaRows({
+		isOpen,
+		modalButtonsRef: modalButtonsRef.current,
+		shelvesAndBoxesRef: shelvesAndBoxesRef.current,
+	})
 
 	// Edited data
 	const cardEditedData = useSelector(getViewPageCardDataEdited)
@@ -61,7 +72,16 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 
 	useEffect(() => {
 		const onToggleShowDataByHotKey = (e: globalThis.KeyboardEvent) => {
-			console.log('Обработка горячки')
+			// console.log('Обработка горячки')
+			// const container = mainContentRef.current;
+			// if (container) {
+			// 	const scrollTop = container.scrollTop; // Сохраняем текущую позицию прокрутки
+
+			// 	// Восстанавливаем позицию прокрутки после того, как браузер обработает ввод
+			// 	requestAnimationFrame(() => {
+			// 		container.scrollBy(0, scrollTop) 
+			// 	});
+			// }
 			if (e.altKey && e.code === 'KeyC') {
 				onToggleShowData()
 			}
@@ -72,13 +92,6 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 			window.removeEventListener('keydown', onToggleShowDataByHotKey)
 		}
 	}, [])
-
-	useEffect(() => {
-		if (isOpen) {
-			const mainContentHeight = windowHeight * 0.8 - 55
-			setMainContentHeight(`${mainContentHeight}px`)
-		}
-	}, [windowHeight, isOpen])
 
 	useEffect(() => {
 		if (!isOpen) {
@@ -137,6 +150,9 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 		dispatch(viewPageActions.setCardAnswerText(text))
 	}, [dispatch])
 
+
+	// if (!isOpen) return null
+
 	const onSaveQuestionHeight = (height: number) => {
 		dispatch(viewPageActions.setCurrentHeightQuestion(height))
 	}
@@ -163,7 +179,7 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 	const areaQuestionOriginal = (
 		<TextArea
 			comparerData={`Вопрос оригинал  ${cardId?.slice(7,)}`}
-			rows={5}
+			rows={textAreaRows}
 			disabled
 			heightValue={cardHeightsData?.currentHeightQuestion}
 			value={questionTextOriginal}
@@ -174,21 +190,34 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 	const areaQuestionEdited = (
 		<TextArea
 			comparerData={`Вопрос текущий  ${cardId?.slice(7,)}`}
-			rows={5}
+			rows={textAreaRows}
 			useInitialHeightAsMinimal
 			getCurrentHeight={onSaveQuestionHeight}
 			getInitialHeight={onSaveQuestionMinHeight}
 			minHeightValue={cardHeightsData?.minHeightQuestion}
+			heightValue={shadowAreaQuestionHeight}
 			value={questionTextEdited}
 			onChangeString={onChangeQuestion}
 			focus
 		/>
 	)
 
+	const shadowAreaQuestionEdited = (
+		<div className={cls.shadowAreaWrapper} >
+			<ShadowTextArea
+				className={cls.shadowArea} 
+				getCurrentHeight={setShadowAreaQuestionHeight}
+				comparerData={`Вопрос текущий  ${cardId?.slice(7,)}`}
+				rows={textAreaRows}
+				value={questionTextEdited}
+			/>
+		</div>
+	)
+
 	const areaAnswerOriginal = (
 		<TextArea
 			comparerData={`Ответ оригинал  ${cardId?.slice(7,)}`}
-			rows={5}
+			rows={textAreaRows}
 			disabled
 			heightValue={cardHeightsData?.currentHeightAnswer}
 			value={answerTextOriginal}
@@ -199,14 +228,27 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 	const areaAnswerEdited = (
 		<TextArea
 			comparerData={`Ответ текущий  ${cardId?.slice(7,)}`}
-			rows={5}
+			rows={textAreaRows}
 			useInitialHeightAsMinimal
 			getInitialHeight={onSaveAnswerMinHeight}
 			getCurrentHeight={onSaveAnswerHeight}
 			minHeightValue={cardHeightsData?.minHeightAnswer}
+			heightValue={shadowAreaAnswerHeight}
 			value={answerTextEdited}
 			onChangeString={onChangeAnswer}
 		/>
+	)
+	
+	const shadowAreaAnswerEdited = (
+		<div className={cls.shadowAreaWrapper} >
+			<ShadowTextArea
+				className={cls.shadowArea}
+				getCurrentHeight={setShadowAreaAnswerHeight}
+				comparerData={`Ответ текущий  ${cardId?.slice(7,)}`}
+				rows={textAreaRows}
+				value={answerTextEdited}
+			/>
+		</div>
 	)
 
 	let shelvesAndBoxes;
@@ -287,39 +329,39 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 			<div
 				className={cls.cardModal}
 			>
-				<div className={cls.emptySpace} />
+				<div className={cls.emptySpace_top} />
 				<div
 					className={cls.mainContentWrapper}
 				>
-					<VStack
+					<div
 						className={cls.mainContent}
-						max
-						align='left'
-						gap='gap_32'
-						style={{ maxHeight: mainContentHeight }}
-						// style={{ height: mainContentHeight }}
+						ref={mainContentRef}
+						style={{ maxHeight: mainContentMaxHeight }}
 					>
 						{showOriginalData
 							? <MyText variant='accent' text='Оригинальнал' />
 							: <MyText variant='accent' text='Редактируемая часть' />
 						}
-						<div
-							ref={shelvesAndBoxesRef}
-							// className={cls.shelvesAndBoxesWrapper}
-						>
+						<div ref={shelvesAndBoxesRef}	>
 							{showOriginalData
 								? shelvesAndBoxesOriginal
 								: shelvesAndBoxes
 							}
 						</div>
-						<div>
-							<MyText text={t('question')} />
-							{showOriginalData
-								? areaQuestionOriginal
-								: areaQuestionEdited
-							}
+
+						<div >
+							{shadowAreaQuestionEdited}
+							{shadowAreaAnswerEdited}
+							<div className={cls.areaAndLabelWrapper} >
+								<MyText text={t('question')} />
+								{showOriginalData
+									? areaQuestionOriginal
+									: areaQuestionEdited
+								}
+							</div>
 						</div>
-						<div>
+
+						<div className={cls.areaAndLabelWrapper} >
 							<MyText text={t('answer')} />
 							{showOriginalData
 								? areaAnswerOriginal
@@ -327,10 +369,10 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 							}
 						</div>
 
-					</VStack>
+					</div>
 				</div>
-				<div className={cls.emptySpace} />
-				<div className={cls.actions} >
+				<div className={cls.emptySpace_bottom} />
+				<div className={cls.actions} ref={modalButtonsRef}>
 					{compareButton}
 					<ModalButtons
 						justify='end'

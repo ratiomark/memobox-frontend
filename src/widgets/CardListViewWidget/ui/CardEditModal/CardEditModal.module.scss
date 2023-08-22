@@ -4,6 +4,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 50px;
   width: 100%;
+  position: relative;
 
   @media (max-width: 1100px) {
     grid-template-columns: 1fr;
@@ -37,11 +38,14 @@
   background-color: red;
 }
 
-.emptySpace {
-  height: 15px;
+.emptySpace_top {
+  height: var(--empty-space-top-height);
+  background-color: rgb(168 168 248);
+}
 
-  // width: 1200%;
-  // background-color: blue;
+.emptySpace_bottom {
+  height: var(--empty-space-bottom-height);
+  background-color: rgb(168 168 248);
 }
 
 .cardModalPanel {
@@ -57,13 +61,35 @@
 
 .mainContentWrapper {
   padding-right: var(--padding-for-scroll);
+
+  // position: relative;
 }
 
 .mainContent {
-  // max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--main-content-vertical-gap);
+  min-width: 100%;
   padding-right: var(--padding-right);
   padding-left: var(--padding-right);
   overflow: auto;
+  scroll-padding-bottom: 20px;
+}
+
+.areaAndLabelWrapper {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 2px;
+}
+
+.shadowAreaWrapper {
+  position: relative;
+  width: 100%;
+  visibility: hidden;
+}
+
+.shadowArea {
+  position: absolute;
 }
 
 .actions {

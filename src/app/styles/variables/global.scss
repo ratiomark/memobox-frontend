@@ -84,10 +84,20 @@
   --padding-3-top-8-left-16-right: 3px 16px 3px 8px;
   --padding-5-top-16-side: 5px 16px;
   --padding-page: 20px;
+  --padding-textarea-top-and-bottom: 8px;
+  --padding-textarea-left-and-right: 16px;
 
   // training
   --training-top-part: 100px;
   --training-bottom-part: 300px;
+
+  // modals
+  --empty-space-top-height: 10px;
+  --empty-space-bottom-height: 10px;
+  --gap-between-label-and-textarea: 4px;
+  --area-and-label-wrapper-padding-bottom: 2px;
+  --main-content-vertical-gap: 32px;
+  --max-percent-of-screen-for-main-content: 0.9;
 
   // scroll
   --scroll-bar-main-width: 5px;

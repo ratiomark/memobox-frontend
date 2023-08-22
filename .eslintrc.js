@@ -54,9 +54,9 @@ module.exports = {
 		// npm i -D eslint-plugin-custom-fsd-checker-plugin@latest
 		// "prettier/prettier": [2], // Means error
 		// 'code': [1, 80],
+		indent: [1, 'tab', { SwitchCase: 1 }],
 		'react/jsx-indent': [1, 'tab'],
 		'react/jsx-indent-props': [1, 'tab'],
-		indent: [1, 'tab', { SwitchCase: 1 }],
 		'no-mixed-spaces-and-tabs': [1, 'smart-tabs'],
 		'react/jsx-filename-extension': [
 			2,
