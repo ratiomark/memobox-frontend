@@ -14,7 +14,7 @@ export type SmallDataLabelType =
 interface SmallDataLabelProps {
 	className?: string;
 	type: SmallDataLabelType
-	cardsCount?: number
+	cardsCount?: number | string
 	isLoading: boolean
 }
 

@@ -1,0 +1,89 @@
+.StatsKnowledgeLevelItem {
+
+}
+
+.statsKnowledgeLevelItem {
+  // margin-left: 40px;
+  display: grid;
+  grid-template-columns: min-content auto;
+  background-color: var(--bg);
+  width: 160px;
+  border-radius: 5px;
+
+  // box-shadow: 0 1px 4px rgb(0 0 0 / 15%);
+  box-shadow: var(--entities-box-shadow-main);
+}
+
+.new {
+  background: var(--data-label-all);
+}
+
+.beginning {
+  background: var(--data-label-train);
+}
+
+.middle {
+  background: var(--data-label-wait);
+}
+
+.good {
+  background: var(--data-label-all);
+}
+
+.learnt {
+  background: var(--data-label-all);
+}
+
+.new_spinner {
+  fill: var(--data-label-all);
+}
+
+.beginning_spinner {
+  fill: var(--data-label-train);
+}
+
+.middle_spinner {
+  fill: var(--data-label-wait);
+}
+
+.good_spinner {
+  fill: var(--data-label-all);
+}
+
+.learnt_spinner {
+  fill: var(--data-label-all);
+}
+
+.coloredLeftSide {
+  width: 6px;
+  border-radius: 5px 0 0 5px;
+}
+
+.dataHolder {
+  // display: flex;
+  // flex-direction: column;
+  padding: 15px;
+
+  // padding: 5px 0 3px 15px;
+}
+
+.cardsCounter {
+  // font-size: 16px;
+  font-weight: 600;
+  color: rgb(22 22 22 / 85.3%);
+
+  // color: var(--data-label-text-color);
+}
+
+.labelName {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--data-label-text-color);
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+
+.statsWrapper {
+  display: flex;
+  gap: 12px;
+}
