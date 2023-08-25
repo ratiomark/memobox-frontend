@@ -37,7 +37,7 @@ export const useMainContentMaxHeightAndAreaRows = (props: useMainContentMaxHeigh
 			const shelvesAndBoxesHeight = shelvesAndBoxesRef.scrollHeight
 			// console.log('shelvesAndBoxesHeight:  ', shelvesAndBoxesHeight)
 			const buttonsHeight = modalButtonsRef.scrollHeight
-			// console.log('buttonsHeight:  ', buttonsHeight)
+			console.log('buttonsHeight:  ', buttonsHeight)
 			const mainContentMaxHeightCalculated = getMainContentMaxHeight({
 				windowHeight,
 				maxPercentOfScreenForMainContent,
@@ -88,7 +88,6 @@ const getMainContentMaxHeight: GetMainContentMaxHeightFn = (arg) => {
 	} = arg
 	return windowHeight * maxPercentOfScreenForMainContent - emptySpaceTopHeight - emptySpaceBottomHeight - buttonsHeight
 }
-
 
 type GetAreaAndLabelsHeightArg = {
 	mainContentMaxHeight: number

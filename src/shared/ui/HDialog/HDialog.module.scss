@@ -1,6 +1,6 @@
 .HDialog {
   position: relative;
-  z-index: 50;
+  z-index: var(--dialog-index);
   isolation: isolate;
   inset: 0;
 
@@ -23,7 +23,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 10;
+  z-index: var(--dialog-overlay-index);
   background-color: rgb(81 81 81 / 50.7%);
   isolation: isolate;
 }
@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 11;
+  z-index: var(--dialog-content-index);
   isolation: isolate;
 
   // padding: 20px 4px 20px 20px;
@@ -57,7 +57,7 @@
 
 .panelAbsolute {
   position: fixed;
-  z-index: 11;
+  z-index: var(--dialog-content-index);
   isolation: isolate;
 }
 

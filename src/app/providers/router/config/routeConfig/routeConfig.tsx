@@ -13,6 +13,7 @@ import { SettingsPageWidgetSkeleton } from '@/widgets/SettingsPageWidget';
 import { StatsAndActionsCupboardWidgetSkeleton } from '@/widgets/StatsAndActionsCupboardWidget';
 import { SubscriptionPage } from '@/pages/SubscriptionPage';
 import { ProfilePage } from '@/pages/ProfilePage';
+import { StatsPage } from '@/pages/StatsPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -97,7 +98,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	},
 	stats: {
 		path: obtainRouteStats(),
-		element: <MainPage />
+		element: <StatsPage />
 	},
 	trash: {
 		path: obtainRouteTrash(),

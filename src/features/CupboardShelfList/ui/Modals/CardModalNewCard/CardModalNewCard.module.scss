@@ -48,19 +48,21 @@
   scroll-padding-bottom: 20px;
 }
 
-.shelfAndBoxesWrapper {
-  display: flex;
-  min-width: 100%;
-}
+// .shelfAndBoxesWrapper {
+//   display: flex;
+//   min-width: 100%;
+// }
 
 .emptySpace_top {
   height: var(--empty-space-top-height);
-  background-color: rgb(168 168 248);
+
+  // background-color: rgb(168 168 248);
 }
 
 .emptySpace_bottom {
   height: var(--empty-space-bottom-height);
-  background-color: rgb(168 168 248);
+
+  // background-color: rgb(168 168 248);
 }
 
 .areaAndLabelWrapper {

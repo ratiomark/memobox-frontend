@@ -48,50 +48,7 @@ export const CardModalNewCard = memo(() => {
 		modalButtonsRef: modalButtonsRef.current,
 		shelvesAndBoxesRef: shelvesAndBoxesRef.current,
 	})
-	// useEffect(() => {
-	// 	if (isOpen) {
-	// 		const sdfasdf = shelvesAndBoxesRef.current
-	// 		const shelvesAndBoxesHeight = shelvesAndBoxesRef.current!.scrollHeight
-	// 		console.log('shelvesAndBoxesHeight:  ', shelvesAndBoxesHeight)
-	// 		const buttonsHeight = modalButtonsRef.current!.scrollHeight
-	// 		console.log('buttonsHeight:  ', buttonsHeight)
-	// 		const mainContentMaxHeightCalculated = getMainContentMaxHeight(windowHeight, buttonsHeight)
-	// 		const areasAndLabelsHeight = getAreaAndLabelsHeight(mainContentMaxHeightCalculated, shelvesAndBoxesHeight)
-	// 		const areaAndLabelHeight = areasAndLabelsHeight / 2
-	// 		const maxHeightForTextArea = getMaxHeightForTextArea(areaAndLabelHeight)
-	// 		const rows = Math.floor(maxHeightForTextArea / lineHeight)
-	// 		setTextAreaRows(rows)
-	// 		setMainContentMaxHeight(`${mainContentMaxHeightCalculated}px`)
-	// 	}
-	// }, [windowHeight, isOpen])
-	// useEffect(() => {
-	// 	if (isOpen) {
-	// 		const shelvesAndBoxesHeight = shelvesAndBoxesRef.current!.getBoundingClientRect().height
-	// 		const mainContentHeight = windowHeight * 0.9 - emptySpaceHeight * 2 - buttonsHeight
-	// 		console.log('mainContentHeight:  ', mainContentHeight)
-	// 		// console.log('mainContentRefHeight:  ', mainContentRefHeight)
-	// 		// console.log('getBoundingClientRect:  ', mainContentRef.current?.getBoundingClientRect().height)
-	// 		// console.log('shelvesAndBoxesHeight:  ', shelvesAndBoxesHeight)
-	// 		// console.log('mainContentRefHeight', mainContentRefHeight)
-	// 		// сейчас не учитывается высота лейбла у textArea 
-	// 		const areasAndLabelsHeight = mainContentHeight - shelvesAndBoxesHeight - mainContentVerticalGap * 3
-	// 		console.log('areasAndLabelsHeight:  ', areasAndLabelsHeight)
-	// 		const areaAndLabelHeight = areasAndLabelsHeight / 2
-	// 		const additional = lineHeight * 2 + areaAndLabelWrapperPaddingBottom + areaPaddings + areaBorders
-	// 		console.log('areaAndLabelHeight:  ', areaAndLabelHeight)
-	// 		const oneArea = areaAndLabelHeight - additional
-	// 		// const oneArea = areaAndLabelHeight - lineHeight - areaAndLabelWrapperPaddingBottom - gapBetweenLabelAndArea * 2 - areaPaddings - areaBorders
-	// 		console.log('oneArea:  ', oneArea)
-	// 		// const areaAndLabelHeight = areasAndLabelsHeight - mainContentVerticalGap - lineHeight - gapBetweenLabelAndArea - areaAndLabelWrapperPaddingBottom
-	// 		// const diff = mainContentHeight - shelvesAndBoxesHeight - mainContentVerticalGap * 3
-	// 		const rows = Math.floor(oneArea / 24)
-	// 		setTextAreaRows(rows)
-	// 		// console.log('DiFFFFFFFFFFFFFFFFFFF  ', diff)
-	// 		setMainContentMaxHeight(`${mainContentHeight}px`)
-	// 	}
-	// }, [windowHeight, isOpen])
-
-
+	
 	const shelfItems = useMemo(() => {
 		if (cupboardIsLoading) return []
 		return cupboardShelves.map(shelf => {
@@ -101,7 +58,6 @@ export const CardModalNewCard = memo(() => {
 			}
 		})
 	}, [cupboardIsLoading, cupboardShelves])
-
 
 	const boxItems = useMemo(() => {
 		if (cupboardIsLoading) return []
@@ -208,15 +164,6 @@ export const CardModalNewCard = memo(() => {
 			</div>)
 	}
 
-	// useEffect(() => {
-	// 	const container = mainContentRef.current;
-	// 	if (container) {
-	// 		// const scrollTop = container.scrollTop; // Сохраняем текущую позицию прокрутки
-	// 		console.log('РАботатет ', container.scrollTop)
-	// 	}
-	// 	// console.log(mainContentRef?.current?.scrollTop)
-
-	// }, [questionTextCardModal])
 
 
 	return (
@@ -236,20 +183,12 @@ export const CardModalNewCard = memo(() => {
 				<div className={cls.mainContentWrapper}>
 					<div
 						className={cls.mainContent}
-						// onScroll={onScrollMainContent}
-						// ref={mainContentRef}
-						// style={{ height: mainContentMaxHeight }}
 						style={{ maxHeight: mainContentMaxHeight }}
 					>
-						<div
-							ref={shelvesAndBoxesRef}
-						// className={cls.shelvesAndBoxesWrapper}
-						>
+						<div ref={shelvesAndBoxesRef}>
 							{shelvesAndBoxes}
-
 						</div>
 						<div>
-
 							{shadowAreaQuestion}
 							{shadowAreaAnswer}
 							<div className={cls.areaAndLabelWrapper} >

@@ -23,29 +23,16 @@
   }
 }
 
-.shelfTitleWrapper {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-}
-
-.originalMarker {
-  // position: absolute;
-  // right: 0;
-  // top: 0;
-  width: 10px;
-  height: 10px;
-  background-color: red;
-}
-
 .emptySpace_top {
   height: var(--empty-space-top-height);
-  background-color: rgb(168 168 248);
+
+  // background-color: rgb(168 168 248);
 }
 
 .emptySpace_bottom {
   height: var(--empty-space-bottom-height);
-  background-color: rgb(168 168 248);
+
+  // background-color: rgb(168 168 248);
 }
 
 .cardModalPanel {
