@@ -56,8 +56,6 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 		? <Heading as='h3' className={cls.title} title={t('Нажмите + чтобы добавить коробку на указанную позицию')} />
 		: <Heading as='h3' className={cls.title} title={t('Настройки создания новых полок')} />
 
-
-
 	return (
 		<VStack
 			align='center'

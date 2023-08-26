@@ -51,7 +51,7 @@ export const LanguageDataBlock = (props: LanguageDataBlockProps) => {
 
 	return (
 		<>
-			<div className={cls.UserDataBlock}>
+			<div className={cls.languageDataBlock}>
 				<ProfileRowData
 					title='Language'
 					content={content}

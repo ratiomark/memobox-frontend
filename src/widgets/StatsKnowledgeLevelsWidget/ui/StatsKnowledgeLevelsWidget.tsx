@@ -20,10 +20,7 @@ export const StatsKnowledgeLevelsWidget = (props: StatsKnowledgeLevelsWidgetProp
 			cls.statsKnowledgeLevelsWidget,
 			className)}
 		>
-			<StatsKnowledgeList/>
-			{/* <StatsKnowledgeLevelItem isLoading={false} type='new' cardsCount={25} percentValue={100} /> */}
-			{/* <StatsKnowledgeLevelItem isLoading={false} type='new' cardsCount={999} percentValue={100} /> */}
-			{/* <StatsKnowledgeLevelItem isLoading={true} type='new' cardsCount={25} percentValue={33} /> */}
+			<StatsKnowledgeList />
 		</div>
 	)
 }

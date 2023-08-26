@@ -1,0 +1,76 @@
+.MainDataLabelItem {
+  position: relative;
+
+  // margin-left: 40px;
+  display: grid;
+  grid-template-columns: min-content auto;
+  background-color: var(--bg);
+  min-width: 160px;
+  border-radius: 5px;
+
+  // box-shadow: 0 1px 4px rgb(0 0 0 / 15%);
+  box-shadow: var(--entities-box-shadow-main);
+}
+
+.all {
+  background: var(--data-label-all);
+
+  // fill: var(--data-label-all);
+}
+
+.train {
+  background: var(--data-label-train);
+
+  // fill: var(--data-label-train);
+}
+
+.wait {
+  background: var(--data-label-wait);
+
+  // fill: var(--data-label-wait);
+}
+
+.all_spinner {
+  fill: var(--data-label-all);
+}
+
+.train_spinner {
+  fill: var(--data-label-train);
+}
+
+.wait_spinner {
+  fill: var(--data-label-wait);
+}
+
+.coloredLeftSide {
+  width: 6px;
+  border-radius: 5px 0 0 5px;
+}
+
+.dataHolder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0 3px 15px;
+}
+
+.cardsCounter {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(22 22 22 / 85.3%);
+
+  // color: var(--data-label-text-color);
+}
+
+.labelName {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--data-label-text-color);
+  white-space: nowrap;
+}
+
+.percentValueWrapper {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

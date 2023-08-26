@@ -7,10 +7,10 @@
   display: grid;
   grid-template-columns: min-content auto;
   background-color: var(--bg);
-  width: 160px;
+  min-width: 160px;
   border-radius: 5px;
 
-  // box-shadow: 0 1px 4px rgb(0 0 0 / 15%);
+  // box-shadow: 0 1px 4px rgb(0 0 0   / 15%);
   box-shadow: var(--entities-box-shadow-main);
 }
 
@@ -62,14 +62,14 @@
 .dataHolder {
   // display: flex;
   // flex-direction: column;
-  padding: 15px;
+  padding: 12px 15px;
 
   // padding: 5px 0 3px 15px;
 }
 
 .cardsCounter {
   // font-size: 16px;
-  font-weight: 600;
+  // font-weight: 500;
   color: rgb(22 22 22 / 85.3%);
 
   // color: var(--data-label-text-color);

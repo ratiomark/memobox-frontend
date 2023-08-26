@@ -6,7 +6,7 @@ import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLab
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions } from '@/features/CupboardShelfList';
 import { useSelector } from 'react-redux';
@@ -17,8 +17,22 @@ import { motion } from 'framer-motion'
 import { getUserShelfNamesList } from '@/entities/User';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
+import { DataBlock } from '@/shared/types/DataBlock';
+import { MainDataLabelList, StatsDataBlockWithPercent } from './MainDataLabelList/MainDataLabelList';
 
 
+const data: StatsDataBlockWithPercent = {
+	all: 125,
+	train: {
+		cardsCount: 34,
+		percentValue: 28
+	},
+	wait: {
+		cardsCount: 88,
+		percentValue: 72
+	}
+
+}
 interface StatsMainDataWidgetProps {
 	className?: string
 }
@@ -27,17 +41,23 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 	const {
 		className
 	} = props
-	const [newShelfModalIsOpen, setNewShelfModalIsOpen] = useState(false)
+	const [isLoading, setIsLoading] = useState(true)
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
+	useEffect(() => {
+		setTimeout(() => {
+			setIsLoading(false)
+		}, 3000)
+	}, [])
 
 
 	return (
 		<motion.div
+			className={cls.wrapper}
 		// initial={{ y: -100 }}
 		// animate={{ y: 0 }}
 		// transition={{ type: 'spring', }}
@@ -48,9 +68,15 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 					cls.statsMainDataWidget,
 					className)}
 			>
-				<div>
-					<CompleteBigDataLabels className={cls.mainData} data={cupboardData} isLoading={cupboardIsLoading} />
-				</div>
+				{/* <div> */}
+				<MainDataLabelList
+					className={cls.mainData}
+					data={data}
+					isLoading={isLoading}
+
+				/>
+
+				{/* </div> */}
 			</HStack>
 		</motion.div>
 	)

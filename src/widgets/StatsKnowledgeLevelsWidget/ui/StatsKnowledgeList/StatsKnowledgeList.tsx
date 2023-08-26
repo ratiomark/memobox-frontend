@@ -6,24 +6,24 @@ import { StatsKnowledgeLevelItem, StatsKnowledgeLevelItemType } from '../StatsKn
 
 const data = {
 	'new': {
-		cardsCount: 33,
-		percentValue: 9
+		cardsCount: 55,
+		percentValue: 38
 	},
 	'beginning': {
-		cardsCount: 33,
-		percentValue: 9
+		cardsCount: 17,
+		percentValue: 24
 	},
 	'middle': {
 		cardsCount: 33,
-		percentValue: 9
+		percentValue: 13
 	},
 	'good': {
-		cardsCount: 33,
-		percentValue: 9
+		cardsCount: 15,
+		percentValue: 7
 	},
 	'learnt': {
-		cardsCount: 33,
-		percentValue: 9
+		cardsCount: 24,
+		percentValue: 12
 	},
 
 }

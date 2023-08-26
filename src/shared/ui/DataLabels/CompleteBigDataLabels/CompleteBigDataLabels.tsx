@@ -7,6 +7,7 @@ import { useCustomTranslate } from '@/features/LanguageSwitcher';
 
 
 
+
 interface CompleteBigDataLabelsProps {
 	className?: string
 	isLoading: boolean
