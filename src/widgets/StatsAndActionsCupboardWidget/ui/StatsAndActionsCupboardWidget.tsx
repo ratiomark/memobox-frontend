@@ -51,7 +51,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 			componentAfterLoading={
 				<HStack gap='gap_14' className={cls.actions}>
 					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('new shelf')}</Button>
-					<Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
+					<Button onClick={onAddNewCardClick} data-button-type='shelf-add-card-general' borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
 					<Icon
 						Svg={InfoIcon}
 						width={26}
@@ -84,8 +84,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 			>
 				<div>
 					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
-
-					{/* <ThemeSwitcher /> */}
+					<ThemeSwitcher />
 				</div>
 				{buttons}
 				<CreateNewShelfModal

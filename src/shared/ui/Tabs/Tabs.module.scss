@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-block-no-shorthand-property-overrides */
 .tabs__container {
   // height: 100%;
   width: 100%;
@@ -13,27 +14,32 @@
 .gradientEdgeLeft,
 .gradientEdgeRight {
   position: absolute;
-  width: 60px;
+  width: 180px;
   height: 100%;
   top: 0;
   z-index: 1;
-  background: red;
-
-  // background-image: linear-gradient(to right, white 70%, rgb(255 255 255 / 47%));
+  pointer-events: none;
 }
 
 .gradientEdgeLeft {
   left: 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background: linear-gradient(-90deg, transparent 15%, var(--body-bg-color));
 }
 
 .gradientEdgeRight {
   right: 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background: linear-gradient(90deg, transparent 15%, var(--body-bg-color));
 }
 
 .tabs {
   max-width: 100%;
   white-space: nowrap;
 
+  // scroll-behavior: smooth;
   // border: 1px solid var(--accent);
   // border-radius: 8px;
   overflow-x: scroll;

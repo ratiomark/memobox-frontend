@@ -109,7 +109,6 @@ export const CupboardShelfListWrapper = (props: CupboardShelfListWrapperProps) =
 
 
 	return (
-
 		<CupboardShelfList />
 	)
 

@@ -35,21 +35,27 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	const viewPageIsMounter = useSelector(getViewPageIsMounted)
 
 	useEffect(() => {
-		// console.log('Эффект')
+		console.log('Эффект')
 		if (!viewPageIsMounter && !isLoading && data) {
+			console.log('Эффект Зашел')
 			const boxIdChecked = boxId ?? 'new'
 			const shelfIdChecked = shelfId ?? 'all'
+			console.log(boxIdChecked)
+			console.log(shelfIdChecked)
+			console.log(data)
 			dispatch(viewPageActions.setViewPageIsMounted())
+			dispatch(viewPageActions.setFetchedData(data))
 			dispatch(viewPageActions.setActiveShelfId(shelfIdChecked))
 			dispatch(viewPageActions.setActiveBoxId(boxIdChecked))
-			dispatch(viewPageActions.setFetchedData(data))
 			// dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked, data }))
 			navigate('/view', { replace: true })
 		}
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter, isLoading, data])
 
 	useEffect(() => {
+		console.log('2 Эффект')
 		if (viewPageIsMounter && shelfId && boxId) {
+			console.log('2 Эффект Зашел')
 			dispatch(viewPageActions.setActiveShelfId(shelfId))
 			dispatch(viewPageActions.setActiveBoxId(boxId))
 			navigate('/view', { replace: true })

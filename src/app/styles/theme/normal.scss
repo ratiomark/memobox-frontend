@@ -40,7 +40,9 @@ $colors: (
   --bg: #fbfbfb;
   --light-bg: #e2eef1;
   --shelf-bg: #fcfcfc;
-  --delimiter-color: rgba(121, 115, 115, 0.1);
+  --delimiter-color: rgb(121 115 115 / 10%);
+
+  // --body-bg-color: #f5f6fa;
 
   // --bg: #eff5f6;
 

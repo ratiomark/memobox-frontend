@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
 import { DndProvider, useDrop } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { fetchCupboardData } from '../model/services/fetchCupboardData';
@@ -80,23 +80,44 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	// }, [cupboardShelves, updateShelvesMutation])
 
 	// console.log(cupboardShelves)
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (!cupboardIsLoading) {
-			timerId = setTimeout(() => {
-				const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
-				const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
-				const buttonsWidthList: number[] = []
-				const addCardsButtonsWidthList: number[] = []
-				trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
-				addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
-				const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
-				const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
-				trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
-				addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
-				clearTimeout(timerId)
-			}, 10)
+			const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
+			const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
+			const addCardButtonGeneral = document.querySelector('[data-button-type="shelf-add-card-general"]') as HTMLButtonElement
+			const buttonsWidthList: number[] = []
+			const addCardsButtonsWidthList: number[] = []
+			buttonsWidthList.push(addCardButtonGeneral.clientWidth)
+			trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
+			addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
+			const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
+			const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
+			trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
+			addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
+			addCardButtonGeneral.style.minWidth = `${maxButtonWidth + 2}px`
+			clearTimeout(timerId)
 		}
 	}, [cupboardIsLoading])
+	// useEffect(() => {
+	// 	if (!cupboardIsLoading) {
+	// 		timerId = setTimeout(() => {
+	// 			const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
+	// 			const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
+	// 			const addCardButtonGeneral = document.querySelector('[data-button-type="shelf-add-card-general"]') as HTMLButtonElement
+	// 			const buttonsWidthList: number[] = []
+	// 			const addCardsButtonsWidthList: number[] = []
+	// 			buttonsWidthList.push(addCardButtonGeneral.clientWidth)
+	// 			trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
+	// 			addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
+	// 			const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
+	// 			const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
+	// 			trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
+	// 			addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
+	// 			addCardButtonGeneral.style.minWidth = `${maxButtonWidth + 2}px`
+	// 			clearTimeout(timerId)
+	// 		}, 2000)
+	// 	}
+	// }, [cupboardIsLoading])
 
 	const onAddNewCardClick = useCallback((shelfId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
