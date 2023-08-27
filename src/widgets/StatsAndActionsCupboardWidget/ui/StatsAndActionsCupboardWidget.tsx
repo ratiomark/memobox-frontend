@@ -27,7 +27,8 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const {
 		className
 	} = props
-	const [newShelfModalIsOpen, setNewShelfModalIsOpen] = useState(false)
+	const [newIsShelfModalOpen, setIsNewShelfModalOpen] = useState(false)
+	const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
 	// const shelfNames = useSelector(getUserShelfNamesList)?.map(shelf => shelf.title)
 	// const { data, isLoading } = useGetCupboardDataQuery()
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
@@ -36,8 +37,10 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
-	const onAddNewShelfClick = () => setNewShelfModalIsOpen(true)
-	const onCloseNewShelfModal = () => setNewShelfModalIsOpen(false)
+	const onAddNewShelfClick = () => setIsNewShelfModalOpen(true)
+	const onCloseNewShelfModal = () => setIsNewShelfModalOpen(false)
+	const onOpenInfoModal = () => setIsInfoModalOpen(true)
+	const onCloseInfoModal = () => setIsInfoModalOpen(false)
 
 	const onAddNewCardClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.setCardModalIsOpen(true))
@@ -57,6 +60,8 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 						width={26}
 						height={26}
 						className={cls.info}
+						clickable
+						onClick={onOpenInfoModal}
 					/>
 				</HStack>
 			}
@@ -88,7 +93,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 				</div>
 				{buttons}
 				<CreateNewShelfModal
-					isOpen={newShelfModalIsOpen}
+					isOpen={newIsShelfModalOpen}
 					onClose={onCloseNewShelfModal}
 					onSubmit={() => console.log('Создаю новую полку с названием  ')}
 				// shelfNames={shelfNames}

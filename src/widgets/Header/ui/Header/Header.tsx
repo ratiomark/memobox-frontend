@@ -3,13 +3,8 @@ import { HeaderItem } from '../HeaderItem/HeaderItem'
 import { useSelector } from 'react-redux'
 import { getHeaderItems } from '../../model/selectors/getHeaderItems'
 import clsx from 'clsx'
-import { HStack, VStack } from '@/shared/ui/Stack'
-import { ThemeSwitcher } from '@/features/ThemeSwitcher'
-import { LangSwitcher } from '../LangSwitcher/LangSwitcher'
-
 import cls from './Header.module.scss'
 import { useLocation } from 'react-router-dom'
-import { Button } from '@/shared/ui/Button'
 import { HeaderAdditionalBlock } from '../HeaderAdditionalBlock/HeaderAdditionalBlock'
 import { WriteToUsModal } from '../Modals/WriteToUsModal/WriteToUsModal'
 
@@ -37,7 +32,7 @@ export const Header = memo(({ className }: SidebarProps) => {
 				data-testid='header'
 				className={clsx(
 					cls.header,
-					// { [cls.collapsed]: collapsed },
+
 					className)}
 			>
 				<nav className={cls.navigation} >

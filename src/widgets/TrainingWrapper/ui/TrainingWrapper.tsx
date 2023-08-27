@@ -22,6 +22,7 @@ export const TrainingWrapper = (props: TrainingWrapperProps) => {
 			className)}
 		>
 			<Training
+				boxId={boxId}
 				shelfId={shelfId}
 			/>
 		</div>

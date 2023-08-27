@@ -8,6 +8,7 @@ const TrainingPage = memo(() => {
 	// const { t, i18n } = useTranslation()
 
 	return (
+		
 		<TrainingWrapper />
 	)
 })

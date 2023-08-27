@@ -9,10 +9,8 @@ import { getUserAuthData, getUserMounted, initAuthData } from '@/entities/User'
 // import { MainLayout } from '@/shared/layouts'
 import { useTheme } from '@/shared/context/useTheme'
 import clsx from 'clsx'
-import { Header } from '@/widgets/Header'
+import { Header, HeaderSkeleton } from '@/widgets/Header'
 import './styles/regularStyles.css'
-// import { useLocation } from 'react-router-dom'
-// import { AnimatePresence } from 'framer-motion'
 
 
 export const App = () => {
@@ -28,7 +26,9 @@ export const App = () => {
 
 	return (
 		<div className={clsx('app', theme)}>
-			<Header />
+			<Suspense fallback={<HeaderSkeleton />}>
+				<Header />
+			</Suspense>
 			<Suspense fallback={<LoaderWidget />}>
 				<AppRouter />
 			</Suspense>

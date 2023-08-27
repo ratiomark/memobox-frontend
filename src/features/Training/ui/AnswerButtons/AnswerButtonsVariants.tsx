@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/shared/ui/Button';
-import { MouseEvent } from 'react';
+import { MouseEvent, useLayoutEffect } from 'react';
 
 import cls from './AnswerButtons.module.scss';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -19,6 +19,14 @@ export const AnswerButtonsVariants = (props: AnswerButtonsProps) => {
 		onAnswerHotKeyHandle,
 		onAnswerClick,
 	} = props
+	
+	useLayoutEffect(() => {
+		const buttons = document.querySelectorAll('[data-button-type="training-answer-button"]') as NodeListOf<HTMLButtonElement>
+		const buttonsWidthList: number[] = [150]
+		buttons.forEach(button => buttonsWidthList.push(button.clientWidth))
+		const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
+		buttons.forEach(button => button.style.minWidth = `${maxButtonWidth + 10}px`)
+	}, [])
 
 	useHotkeys('z', () => onAnswerHotKeyHandle('bad'), { keyup: true, enabled: showAnswer })
 	useHotkeys('x', () => onAnswerHotKeyHandle('middle'), { keyup: true, enabled: showAnswer })
@@ -33,6 +41,7 @@ export const AnswerButtonsVariants = (props: AnswerButtonsProps) => {
 				onClick={onAnswerClick}
 				variant='filled'
 				color='attention'
+				data-button-type="training-answer-button"
 			>
 				{t('bad')}
 			</Button>
@@ -41,6 +50,7 @@ export const AnswerButtonsVariants = (props: AnswerButtonsProps) => {
 				onClick={onAnswerClick}
 				variant='filled'
 				color='wait'
+				data-button-type="training-answer-button"
 			>
 				{t('middle')}
 			</Button>
@@ -48,6 +58,7 @@ export const AnswerButtonsVariants = (props: AnswerButtonsProps) => {
 				data-answer-type="good"
 				onClick={onAnswerClick}
 				variant='filled'
+				data-button-type="training-answer-button"
 			>
 				{t('good')}
 			</Button>

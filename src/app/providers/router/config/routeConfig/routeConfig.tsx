@@ -57,6 +57,7 @@ export const obtainRouteView = (shelfId?: string, boxId?: string | number) => {
 	if (!boxId) return `/view/${shelfId}/all`
 	return `/view/${shelfId}/${boxId}`
 }
+export const obtainRouteViewEmpty = () =>'/view'
 
 export const obtainRouteTraining = (shelfId?: string, boxId?: string) => {
 	return `/training/${shelfId}/${boxId}`

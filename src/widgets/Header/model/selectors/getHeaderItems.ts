@@ -10,7 +10,7 @@ import {
 	obtainRouteSettings,
 	obtainRouteStats,
 	obtainRouteTrash,
-	obtainRouteView,
+	obtainRouteViewEmpty,
 } from '@/app/providers/router/config/routeConfig/routeConfig'
 
 import MainIcon from '@/shared/assets/icons/home.svg';
@@ -20,6 +20,15 @@ import AboutIcon from '@/shared/assets/icons/InfoBook.svg';
 export const getHeaderItems = createSelector(
 	[getUserAuthData],
 	(userData) => {
+		// if (!userData) {
+		// 	return [
+		// 		{
+		// 			path: obtainRouteMain(),
+		// 			text: 'cupboard',
+		// 			Icon: MainIcon,
+		// 		}
+		// 	]
+		// }
 		const sidebarItemsList: HeaderItemType[] = [
 			{
 				path: obtainRouteMain(),
@@ -27,7 +36,7 @@ export const getHeaderItems = createSelector(
 				Icon: MainIcon,
 			},
 			{
-				path: '/view',
+				path: obtainRouteViewEmpty(),
 				text: 'view',
 				Icon: AboutIcon,
 			},

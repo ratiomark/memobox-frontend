@@ -1,11 +1,6 @@
 .statsMainDataWidget {
   position: relative;
   padding-bottom: 30px;
-
-  // padding-bottom: 30px;
-  padding-top: 30px;
-
-  // padding-bottom: 10px; /* Отступ, чтобы учесть высоту границы */
   background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
   background-repeat: no-repeat;
   background-size: 100% 1px; /* Ширина и высота границы */
@@ -13,18 +8,6 @@
 
   // border-bottom: 1px solid  linear-gradient(90deg, rgb(255 255 255), rgb(86 181 184) 50%, rgb(255 255 255) 100%);
 }
-
-// .statsMainDataWidget::after {
-//   content: "";
-//   position: absolute;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   height: 2px; /* Высота границы */
-//   background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
-
-//   // background: linear-gradient(90deg, rgb(255 255 255), rgb(128 128 128 / 25.8%) 50%, rgb(255 255 255) 100%);
-// }
 
 .mainData {
   gap: 20px;

@@ -15,17 +15,17 @@ interface TrainingProps {
 export const Training = (props: TrainingProps) => {
 	const {
 		className,
-		shelfId,
+		shelfId = 'all',
 		boxId = 'all'
 	} = props
 	// const { isLoading, data, isError } = useGetCardsByShelfIdQuery(shelfId)
 	const { isLoading, data, isError } = useGetAllCardsQuery()
-	// console.log(data)
+	console.log(data)
 	const { t } = useTranslation()
 
 	if (isLoading) return <TrainingContentSkeleton />
 	if (isError) return <p> Some error in training</p>
-	if (data) return <TrainingContent data={data} />
+	if (data) return <TrainingContent data={data.cards} />
 
 	return (
 		<div className={clsx(

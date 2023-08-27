@@ -1,17 +1,17 @@
 import clsx from 'clsx'
 import cls from './HeaderAdditionalBlock.module.scss'
-import { useTranslation } from 'react-i18next';
-import { Dropdown, DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
-import { MyText } from '@/shared/ui/Typography';
-import { useCallback, useMemo, useState } from 'react';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
-import { Icon } from '@/shared/ui/Icon';
-import { Button } from '@/shared/ui/Button';
-import { useNavigate } from 'react-router-dom';
 import { obtainRouteProfile, obtainRouteSubscription } from '@/app/providers/router/config/routeConfig/routeConfig';
-import { t } from 'i18next';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { Button } from '@/shared/ui/Button';
+import { Icon } from '@/shared/ui/Icon';
+import { Dropdown } from '@/shared/ui/Popup';
+import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
+import { MyText } from '@/shared/ui/Typography';
+import { useState, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { headerActions } from '../../model/slice/headerSlice';
+import { useTranslation } from 'react-i18next';
 
 interface HeaderAdditionalBlockProps {
 	className?: string;
@@ -21,11 +21,10 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 	const {
 		className,
 	} = props
-	const dispatch = useAppDispatch()
 	const [isAdditionalOpen, setIsAdditionalOpen] = useState(false)
-	const { t } = useTranslation('header')
+	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
-
+	const { t } = useTranslation('header')
 
 	const toggleIsAdditionalOpen = () => setIsAdditionalOpen(prev => !prev)
 
@@ -73,7 +72,12 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 
 	return (
 		<div className={clsx(cls.HeaderAdditionalBlock, [className])} >
-			<Button className={cls.subscribeButton} onClick={onSubscriptionClick}>{t('subscription button')}</Button>
+			<Button
+				className={cls.subscribeButton}
+				onClick={onSubscriptionClick}
+			>
+				{t('subscription button')}
+			</Button>
 			<Dropdown
 				listDirection='bottom_left'
 				items={additionalItems}

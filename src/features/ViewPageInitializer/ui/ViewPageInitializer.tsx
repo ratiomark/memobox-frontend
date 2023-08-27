@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { getViewPageIsMounted } from '../model/selectors/getViewPageInitializer';
 import { useGetAllCardsQuery } from '@/entities/Card';
 import cls from './ViewPageInitializer.module.scss';
+import { obtainRouteViewEmpty } from '@/app/providers/router/config/routeConfig/routeConfig';
 
 interface ViewPageInitializerProps {
 	shelvesListViewPageBlock: ReactNode
@@ -35,9 +36,9 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	const viewPageIsMounter = useSelector(getViewPageIsMounted)
 
 	useEffect(() => {
-		console.log('Эффект')
+		// console.log('Эффект')
 		if (!viewPageIsMounter && !isLoading && data) {
-			console.log('Эффект Зашел')
+			// console.log('Эффект Зашел')
 			const boxIdChecked = boxId ?? 'new'
 			const shelfIdChecked = shelfId ?? 'all'
 			console.log(boxIdChecked)
@@ -48,17 +49,17 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 			dispatch(viewPageActions.setActiveShelfId(shelfIdChecked))
 			dispatch(viewPageActions.setActiveBoxId(boxIdChecked))
 			// dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked, data }))
-			navigate('/view', { replace: true })
+			navigate(obtainRouteViewEmpty(), { replace: true })
 		}
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter, isLoading, data])
 
 	useEffect(() => {
-		console.log('2 Эффект')
+		// console.log('2 Эффект')
 		if (viewPageIsMounter && shelfId && boxId) {
-			console.log('2 Эффект Зашел')
+			// console.log('2 Эффект Зашел')
 			dispatch(viewPageActions.setActiveShelfId(shelfId))
 			dispatch(viewPageActions.setActiveBoxId(boxId))
-			navigate('/view', { replace: true })
+			navigate(obtainRouteViewEmpty(), { replace: true })
 		}
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])
 

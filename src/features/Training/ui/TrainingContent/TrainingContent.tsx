@@ -1,14 +1,11 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { CardSchema } from '@/entities/Card';
-
 import cls from './TrainingContent.module.scss';
 import { Heading, MyText } from '@/shared/ui/Typography';
-import { HStack } from '@/shared/ui/Stack';
-import { Button } from '@/shared/ui/Button';
 import { MouseEvent, useState } from 'react';
 import { AnswerButtons } from '../AnswerButtons/AnswerButtons';
-import { ActionsButtons } from '../ActionsButtons/ActionsButtons';
+import { ActionButtons } from '../ActionButtons/ActionButtons';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteMain } from '@/app/providers/router/config/routeConfig/routeConfig';
 
@@ -37,7 +34,7 @@ export const TrainingContent = (props: TrainingContentProps) => {
 	const navigate = useNavigate()
 	const onShowAnswerClick = () => setShowAnswer(true)
 
-	const onAnswerClick = (e: MouseEvent<HTMLButtonElement>, answerProp?: AnswerType) => {
+	const onAnswerClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const answer = e && e.currentTarget.getAttribute('data-answer-type') as AnswerType
 		const cardId = dataObj[String(currIndex)]._id
 		setAnswerObj(prev => ({ ...prev, [cardId]: answer! }))
@@ -51,14 +48,18 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		setCurrIndex(prev => prev + 1)
 		setShowAnswer(false)
 	}
+
 	const onEndTraining = () => {
+		// navigate('/view')
 		navigate(obtainRouteMain())
 	}
+
 	const onNextCardClick = () => {
 		if (currIndex === cardsLength) onEndTraining()
 		setCurrIndex(prev => prev + 1)
 		setShowAnswer(false)
 	}
+
 	const onPreviousCardClick = () => {
 		if (currIndex === 0) return
 		setShowAnswer(false)
@@ -119,7 +120,7 @@ export const TrainingContent = (props: TrainingContentProps) => {
 					/>
 				</div>
 
-				<ActionsButtons
+				<ActionButtons
 					onNextCardClick={onNextCardClick}
 					onPreviousCardClick={onPreviousCardClick}
 					onCloseTraining={onEndTraining }
