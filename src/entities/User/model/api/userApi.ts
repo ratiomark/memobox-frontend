@@ -25,7 +25,7 @@ const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
-		setJsonSavedData: build.mutation<User, SetJsonSavedData>({
+		setJsonSavedData: build.mutation<JsonSavedData, SetJsonSavedData>({
 			query: ({ userId, jsonSavedData }) => ({
 				url: `/users/${userId}`,
 				method: 'PATCH',

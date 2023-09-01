@@ -20,6 +20,7 @@
 // .profileRowData:not(:last-of-type),
 .profileRowData:not(:last-child), {
   background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
+
   // background: linear-gradient(90deg, transparent 3%, white);
   background-repeat: no-repeat;
   background-size: 100% 1px; /* Ширина и высота границы */
@@ -37,10 +38,10 @@
 //   background-color: rgb(0 0 0 / 8.6%); /* Цвет бордера */
 // }
 
-.profileRowData:last-of-type::after {
-  width: 0;
-  height: 0;
-}
+// .profileRowData:last-of-type::after {
+//   width: 0;
+//   height: 0;
+// }
 
 .title {
   font-size: 14px;

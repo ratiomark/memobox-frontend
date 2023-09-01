@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
+// import './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal.css'
+// import clsBoxSettings from './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal.module.scss'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
 import { DndProvider, useDrop } from 'react-dnd'
@@ -17,12 +19,10 @@ import {
 	getCupboardIsFirstRender
 } from '../model/selectors/getCupboardShelfList';
 import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
-import { Skeleton } from '@/shared/ui/Skeleton';
 import { ShelfItem } from './ShelfItem/ShelfItem';
 import { ShelfButtons } from './ShelfButtons/ShelfButtons';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
-import { ShelfSchema, ShelfSkeleton } from '@/entities/Shelf';
-import { getUserShelfNamesList } from '@/entities/User';
+import { ShelfSchema } from '@/entities/Shelf';
 import { CommonShelf } from './CommonShelf/CommonShelf';
 import { BoxesSettingsModal } from './BoxesSettingsModal/BoxesSettingsModal/BoxesSettingsModal';
 import { BoxesBlockWrapper } from './BoxesBlock/BoxesBlockWrapper';
@@ -31,20 +31,22 @@ import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/No
 import { DndShelfListWrapper } from './DndShelfListWrapper';
 import { AnimatePresence, Reorder } from 'framer-motion';
 import { BoxTimeSetterModal } from './Modals/BoxTimeSetterModal/BoxTimeSetterModal';
-import { CardModalNewCard } from './Modals/CardModalNewCard/CardModalNewCard';
-import { TimeSetter } from '@/shared/ui/TimeSetter';
+import { CreateNewCardModal } from './Modals/CreateNewCardModal/CreateNewCardModal';
 import { useUpdateShelvesOrderMutation } from '@/entities/Cupboard';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 // import { storage } from '@/shared/lib/helpers/common/localStorage';
 import { ShelfButtonsSkeleton } from './ShelfButtons/ShelfButtonsSkeleton';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
+import { BoxSettingsDropdownModal } from './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal';
+import { HiddenTemplates } from './HiddenTemplates/HiddenTemplates';
+import { idCupboardShelfList } from '@/shared/const/ids';
+import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
 
 interface CupboardShelfListProps {
 	className?: string
 }
 let timerId: number;
 let reorderTimerId: number;
-const tepmt = 0;
 
 export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	const {
@@ -65,21 +67,6 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 		// }
 	}, [cupboardShelves])
 
-
-	// useEffect(() => {
-	// 	if (cupboardShelves.length > 0) {
-	// 		if (tepmt === 0) {
-	// 			tepmt = 1
-	// 			return
-	// 		}
-	// 		reorderTimerId = setTimeout(() => {
-	// 			updateShelvesMutation(cupboardShelves)
-	// 		}, 1500)
-	// 	}
-	// 	return () => clearTimeout(reorderTimerId)
-	// }, [cupboardShelves, updateShelvesMutation])
-
-	// console.log(cupboardShelves)
 	useLayoutEffect(() => {
 		if (!cupboardIsLoading) {
 			const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
@@ -98,30 +85,10 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			clearTimeout(timerId)
 		}
 	}, [cupboardIsLoading])
-	// useEffect(() => {
-	// 	if (!cupboardIsLoading) {
-	// 		timerId = setTimeout(() => {
-	// 			const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
-	// 			const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
-	// 			const addCardButtonGeneral = document.querySelector('[data-button-type="shelf-add-card-general"]') as HTMLButtonElement
-	// 			const buttonsWidthList: number[] = []
-	// 			const addCardsButtonsWidthList: number[] = []
-	// 			buttonsWidthList.push(addCardButtonGeneral.clientWidth)
-	// 			trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
-	// 			addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
-	// 			const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
-	// 			const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
-	// 			trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
-	// 			addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
-	// 			addCardButtonGeneral.style.minWidth = `${maxButtonWidth + 2}px`
-	// 			clearTimeout(timerId)
-	// 		}, 2000)
-	// 	}
-	// }, [cupboardIsLoading])
 
 	const onAddNewCardClick = useCallback((shelfId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
-		dispatch(cupboardShelfListActions.setCardModalIsOpen(true))
+		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
 	}, [dispatch])
 
 	const onCollapseClick = useCallback((shelfId: string, isCollapsed: boolean) => {
@@ -176,9 +143,6 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 				/>
 			const buttons = (
 				<AnimateSkeletonLoader
-					// animateSkeletonFadeOutTime={1}
-					// animateComponentAfterLoadingFadeInTime={1}
-					// commonWrapper
 					classNameForCommonWrapper={cls.commonWrapper}
 					skeletonComponent={<ShelfButtonsSkeleton />}
 					componentAfterLoading={<ShelfButtons
@@ -190,12 +154,6 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 					isLoading={cupboardIsLoading}
 				/>
 			)
-			// const buttons =
-			// 	<ShelfButtons
-			// 		shelf={shelf}
-			// 		onAddNewCardClick={onAddNewCardClick}
-			// 		onCollapseClick={onCollapseClick}
-			// 	/>
 			const boxesBlock = <BoxesBlockWrapper isLoading={cupboardIsLoading} shelf={shelf} />
 
 			return (
@@ -229,7 +187,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	return (
 		<div
 			className={cls.cupboardShelfList}
-			id='cupboardShelfList'
+			id={idCupboardShelfList}
 		>
 			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
 			{/* <AnimatePresence> */}
@@ -254,14 +212,20 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			<BoxesSettingsModal />
 			<MissedTrainingSettingsModal />
 			<NotificationSettingsModal />
-			<CardModalNewCard />
+			<CreateNewCardModal />
 			<BoxTimeSetterModal />
-			<div className={cls.timeSetterTemplateHidden} >
+			<BoxSettingsDropdownModal />
+			<CupboardInfoModal/>
+			<HiddenTemplates />
+			{/* <TimeSetterHiddenTemplate /> */}
+			{/* <DropdownLocalHiddenTemplate /> */}
+			{/* <div className={cls.timeSetterTemplateHidden} >
 				<TimeSetter
 					onClose={() => { }}
 					onSaveTime={() => { }}
 				/>
-			</div>
+			</div> */}
+
 		</div>
 	)
 }

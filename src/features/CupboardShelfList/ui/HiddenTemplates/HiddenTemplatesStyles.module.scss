@@ -1,0 +1,8 @@
+.timeSetterTemplateHidden,
+.dropDownLocalTemplateHidden {
+  position: absolute;
+  z-index: -1;
+  left: -99999px;
+
+  // visibility: hidden;
+}

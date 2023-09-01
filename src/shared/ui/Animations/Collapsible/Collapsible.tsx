@@ -43,6 +43,7 @@ export const Collapsible = (props: CollapsibleProps) => {
 			layout={layout}
 			initial={'collapsed'}
 			animate={isOpen ? 'open' : 'collapsed'}
+			style={{ position: 'relative' }}
 			exit="collapsed"
 			transition={{
 				delay: delay,

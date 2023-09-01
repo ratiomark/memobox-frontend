@@ -39,9 +39,7 @@ export const useFileUploader = () => {
 	};
 
 	useEffect(() => {
-		console.log(files)
-
-
+		// console.log(files)
 	}, [files])
 
 

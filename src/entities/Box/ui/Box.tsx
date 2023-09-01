@@ -21,6 +21,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/shared/ui/Button';
 import { obtainRouteTraining } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
+import { Dropdown } from '@/shared/ui/Popup';
+import { boxIconSize } from '@/shared/const/iconSizes';
 
 // interface BoxPropsBase {
 // 	className?: string
@@ -42,6 +44,7 @@ interface BoxPropsBase {
 	onAddNewCard: (shelfId: string, boxIndex: number) => void
 	onBoxViewClick: (shelfId: string, boxIndex: number | string) => void
 	onOpenTimeSetter: (coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string) => void
+	onOpenBoxSettings: (coordinates: BoxCoordinates, shelfId: string, boxId: string) => void
 }
 
 
@@ -89,13 +92,9 @@ export const Box = (props: BoxPropsBase) => {
 		onAddNewCard,
 		onBoxViewClick,
 		onOpenTimeSetter,
-		// onTimerClick,
-		// allCards,
-		// waitCards,
-		// trainCards,
+		onOpenBoxSettings,
 	} = props
 	const { data, specialType } = boxItem
-	const [isTimeSetterOpen, setIsTimeSetterOpen] = useState(false)
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 
@@ -137,7 +136,7 @@ export const Box = (props: BoxPropsBase) => {
 			data={data}
 		/>
 
-		const onClose = () => setIsTimeSetterOpen(false)
+		// const onClose = () => setIsTimeSetterOpen(false)
 		const onOpenTimeSetterHandle = (e: MouseEvent) => {
 			const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
 			// передаю координаты центра элемента по которому призошел клик
@@ -148,25 +147,36 @@ export const Box = (props: BoxPropsBase) => {
 			onOpenTimeSetter(coordinates, boxItem.timing, boxItem._id)
 		}
 
+		const onOpenBoxSettingsHandle = (e: MouseEvent) => {
+			const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+			const coordinates = {
+				x: x + width / 2,
+				y: y + height
+			}
+			onOpenBoxSettings(coordinates, shelfId, boxItem._id)
+		}
+
 		const buttons = (
 			<HStack
 				className={cls.buttonsBlock}
-				gap='gap_10'>
+				gap='gap_10'
+				align='center'
+			>
 				<Icon
 					className={cls.icon}
 					Svg={PlusIcon}
 					clickable
 					onClick={onAddNewCardHandle}
-					width={20}
-					height={20}
+					width={boxIconSize}
+					height={boxIconSize}
 				/>
 				<Icon
 					className={cls.icon}
 					Svg={EyeIcon}
 					clickable
 					onClick={onBoxViewClickHandle}
-					width={20}
-					height={20}
+					width={boxIconSize}
+					height={boxIconSize}
 				/>
 				<Icon
 					className={cls.icon}
@@ -174,17 +184,40 @@ export const Box = (props: BoxPropsBase) => {
 					clickable
 					onClick={onOpenTimeSetterHandle}
 					// onClick={onTimerClick}
-					width={20}
-					height={20}
+					width={boxIconSize}
+					height={boxIconSize}
 				/>
 				<Icon
 					className={cls.icon}
 					Svg={SettingsIcon}
 					clickable
-					onClick={() => { }}
-					width={20}
-					height={20}
+					onClick={onOpenBoxSettingsHandle}
+					width={boxIconSize}
+					height={boxIconSize}
 				/>
+				{/* <div className={cls.boxSettingsDropdown} style={{ width: boxIconSize, height: boxIconSize }}>
+
+					<Dropdown
+						// style
+						// style={{}}
+						items={[
+							{ content: 'пропущенные тренировки', onClick: () => alert('настрокйки коробки') },
+							{ content: 'remove', onClick: () => alert('удаляю коробку') },
+						]}
+						// className={cls.boxSettingsDropdown}
+						trigger={
+							<Icon
+								className={cls.icon}
+								Svg={SettingsIcon}
+								// clickable
+								// onClick={() => { }}
+								width={boxIconSize}
+								height={boxIconSize}
+							/>
+						}
+					/>
+
+				</div> */}
 			</HStack>
 		)
 

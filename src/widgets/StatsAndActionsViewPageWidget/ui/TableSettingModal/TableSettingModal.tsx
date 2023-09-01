@@ -21,6 +21,7 @@ import { ReducersList } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { Card } from '@/shared/ui/Card';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { updateJsonSavedData } from '@/entities/User';
 
 interface TableSettingModalProps {
 	className?: string
@@ -54,16 +55,19 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 
 	const onRowValueClick = (tab: TabItem) => {
 		dispatch(userActions.setViewPageCardRowsCount(tab.value))
+		dispatch(updateJsonSavedData())
 	}
 
 	const onClickSwitchColumn = (column: SortColumnObject) => {
 		const columnCopy = { ...column }
 		columnCopy.enabled = !columnCopy.enabled
 		dispatch(userActions.setColumn(columnCopy))
+		dispatch(updateJsonSavedData())
 	}
 
 	const onSetColumns = (order: SortColumnObject[]) => {
 		dispatch(userActions.reorderColumns(order))
+		dispatch(updateJsonSavedData())
 	}
 
 
@@ -107,89 +111,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 					onClose={onClose}
 					onSubmit={() => alert('Сохраняю новые настройки таблицы')}
 				/>
-				{/* <HStack justify='between' max>
-					<Button onClick={onClose}>{t('cancel')}</Button>
-					<Button variant='filled'>{t('save')}</Button>
-				</HStack> */}
 			</div>
 		</HDialog>
 	)
 }
-// import clsx from 'clsx';
-// import { useTranslation } from 'react-i18next';
-// import cls from './TableSettingModal.module.scss';
-// import { HDialog } from '@/shared/ui/HDialog';
-// import { useSelector } from 'react-redux';
-// import { getViewPageColumnSettingsIsOpen, getViewPageColumns, viewPageActions } from '@/features/ViewPageInitializer';
-// import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-// import { Button } from '@/shared/ui/Button';
-// import { HStack } from '@/shared/ui/Stack';
-// import { Heading } from '@/shared/ui/Typography';
-// import { ColumnItem } from '../ColumnItem/ColumnItem';
-// import { SortColumnObject, getUserSavedDataViewPageColumns, userActions } from '@/entities/User';
-// import { useState } from 'react';
-// import { Reorder } from 'framer-motion';
-// import { ReducersList } from '@/shared/lib/helpers/hooks/useAsyncReducer';
-
-// interface TableSettingModalProps {
-// 	className?: string
-// }
-
-// export const TableSettingModal = (props: TableSettingModalProps) => {
-// 	const {
-// 		className
-// 	} = props
-// 	const dispatch = useAppDispatch()
-// 	const columns = useSelector(getUserSavedDataViewPageColumns)
-// 	// const columns = useSelector(getViewPageColumns)
-// 	const [localColumns, setLocalColumns] = useState(columns)
-// 	const { t } = useTranslation()
-
-// 	const isOpen = useSelector(getViewPageColumnSettingsIsOpen) ?? false
-// 	const onClose = () => {
-// 		dispatch(viewPageActions.setColumnSettingsIsOpen(false))
-// 	}
-// 	// userActions.setColumn
-// 	const onClickSwitchColumn = (column: SortColumnObject) => {
-// 		const columnCopy = { ...column }
-// 		columnCopy.enabled = !columnCopy.enabled
-// 		dispatch(userActions.setColumn(columnCopy))
-// 	}
-
-// 	const onSetColumns = () => {
-// 		dispatch(userActions.setColumns)
-// 	}
-
-// 	const columnsRendered = columns?.map(column => (
-// 		<ColumnItem
-// 			key={column.value}
-// 			column={column}
-// 			onSwitchClick={onClickSwitchColumn}
-// 		/>))
-
-// 	return (
-// 		<HDialog
-// 			isOpen={isOpen}
-// 			onClose={onClose}
-// 		>
-// 			<div className={clsx(
-// 				cls.TableSettingModal,
-// 				className)}
-// 			>
-// 				<Heading title={t('Columns settings')} />
-// 				{/* {columns?.map(column => <ColumnItem key={column.value} column={column} />)} */}
-// 				<Reorder.Group
-// 					axis='y'
-// 					values={columns!}
-// 					onReorder={(order) => { console.log(order) }}
-// 				>
-// 					{columnsRendered}
-// 				</Reorder.Group>
-// 				<HStack justify='between' max>
-// 					<Button onClick={onClose}>{t('cancel')}</Button>
-// 					<Button variant='filled'>{t('save')}</Button>
-// 				</HStack>
-// 			</div>
-// 		</HDialog>
-// 	)
-// }

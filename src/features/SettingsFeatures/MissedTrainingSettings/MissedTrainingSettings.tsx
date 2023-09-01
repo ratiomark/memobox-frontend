@@ -7,6 +7,7 @@ import { getUserMissedTrainingSettings } from '@/entities/User';
 import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
 import { useMemo, useState } from 'react';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { Heading } from '@/shared/ui/Typography';
 
 interface MissedTrainingSettingsProps {
 	className?: string
@@ -52,18 +53,21 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 				cls.MissedTrainingSettings,
 				className)}
 			>
+				<Heading
+					align='center'
+					size='s'
+					title={t('missedTrainingSettings.title')}
+				/>
 				<MyRadioGroup
 					items={items}
 					onChange={setValue}
 					value={value}
 					className={cls.radioGroup}
-					label={t('settingsItems.missed training')}
 				/>
 				<ModalButtons
 					onClose={onCloseHandle}
 					onSubmit={() => alert('Сохраняю настройки')}
 				/>
-
 			</div>
 		</HDialog>
 	)

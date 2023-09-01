@@ -15,7 +15,7 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	error: string
 	commonShelf?: CommonShelfBackendResponse
 	// commonShelfCollapsed?: boolean
-	newCardModal: {
+	createNewCardModal: {
 		shelfId: string
 		boxIndex: number
 		// boxId: string
@@ -43,6 +43,12 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 		boxTimingData: TimingBlock
 		boxId: string
 	},
+	boxSettingsDropdownModal: {
+		isOpen: boolean,
+		boxId: string,
+		boxCoordinates: BoxCoordinates
+	},
+	isCupboardInfoModalOpen: boolean,
 	// boxCoordinates: {
 	// 	x: number
 	// 	y: number

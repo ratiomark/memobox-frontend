@@ -1,3 +1,5 @@
+export  { updateJsonSavedData } from './model/services/updateJsonSavedData';
+
 export {
 	getUserEmail,
 	getUserEmailVerified,
@@ -9,7 +11,6 @@ export {
 export type { TimeSleepSettings, DaysOfWeek, TimeSleepDataObject, } from './model/types/user';
 // export { DaysOfWeek, TimeSleepDataObject } from '@/features/SettingsFeatures/TimeSleepSettings/TimeSleepSettings';
 export type { SortColumnObject, SortColumnValue } from './model/types/JsonSavedData';
-
 export {
 	getUserSettings,
 	getUserMissedTrainingSettings,

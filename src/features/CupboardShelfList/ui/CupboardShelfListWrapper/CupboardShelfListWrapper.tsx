@@ -12,28 +12,9 @@ import { useEffect, useRef, useState } from 'react';
 import { fetchCupboardData } from '../../model/services/fetchCupboardData';
 import { useGetCupboardDataQuery } from '@/entities/Cupboard';
 import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice';
-import { AnimatePresence, motion } from 'framer-motion'
 
-interface CupboardShelfListWrapperProps {
-	className?: string
-}
-const skeletonItemsAnimation = {
-	visible: (i: number) => ({
-		opacity: 1,
-		transition: {
-			delay: i * 0.1
-		}
-	}),
-	hidden: { opacity: 0 },
-	exit: {
-		opacity: 0.4,
-		transition: { duration: 0.4 }
-	}
-}
-export const CupboardShelfListWrapper = (props: CupboardShelfListWrapperProps) => {
-	const {
-		className
-	} = props
+
+export const CupboardShelfListWrapper = () => {
 	// const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	// const shelfNamesList = useSelector(getUserShelfNamesList)
 	const { data, isLoading, error, refetch, isFetching, currentData } = useGetCupboardDataQuery()
@@ -107,13 +88,7 @@ export const CupboardShelfListWrapper = (props: CupboardShelfListWrapperProps) =
 
 	// }, [dispatch, data, isLoading, error,])
 
-
-	return (
-		<CupboardShelfList />
-	)
-
-
-	// return <CupboardShelfList />
+	return <CupboardShelfList />
 }
 
 

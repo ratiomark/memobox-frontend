@@ -10,8 +10,9 @@ interface AnimateSkeletonLoaderProps {
 	noDelay?: boolean
 	animateSkeletonFadeOutTime?: number
 	animateComponentAfterLoadingFadeInTime?: number
-	classNameForSkeletonWrapper?: string
+	// classNameForSkeletonWrapper?: string
 	classNameForCommonWrapper?: string
+	idForCommonWrapper?: string
 	classNameAbsoluteParts?: string
 	borderTest?: boolean
 }
@@ -26,9 +27,10 @@ export const AnimateSkeletonLoader = (props: AnimateSkeletonLoaderProps) => {
 		isLoading,
 		commonWrapper = true,
 		borderTest = false,
-		classNameForSkeletonWrapper,
+		// classNameForSkeletonWrapper,
 		classNameAbsoluteParts,
 		classNameForCommonWrapper,
+		idForCommonWrapper,
 	} = props
 
 	const skeleton = (
@@ -92,6 +94,10 @@ export const AnimateSkeletonLoader = (props: AnimateSkeletonLoaderProps) => {
 	return (
 		<div
 			className={classNameForCommonWrapper}
+			id={idForCommonWrapper}
+			// onScroll={(e) => {
+			// 	console.log(e.currentTarget.scrollLeft)
+			// }}
 			style={{
 				// position: 'relative', border: '1px solid red', padding: 2, display: 'grid',
 				// alignSelf: 'baseline',

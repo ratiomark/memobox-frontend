@@ -17,6 +17,34 @@
   // }
 }
 
+.gradientEdgeLeft,
+.gradientEdgeRight {
+  position: absolute;
+  width: 180px;
+  height: 100%;
+  top: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gradientEdgeLeft {
+  left: 0;
+  background: linear-gradient(-90deg, transparent 15%, red);
+
+  // background: linear-gradient(-90deg, transparent 15%, var(--body-bg-color));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.gradientEdgeRight {
+  right: 0;
+  background: linear-gradient(90deg, transparent 15%, red);
+
+  // background: linear-gradient(90deg, transparent 15%, var(--body-bg-color));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 .commonWrapper {
   display: flex;
   align-items: center;
@@ -37,6 +65,7 @@
   // padding-bottom: 50px;
   overflow-x: scroll;
   overflow-y: hidden;
+
   // margin-left: 100px;
 
   &::-webkit-scrollbar-thumb {

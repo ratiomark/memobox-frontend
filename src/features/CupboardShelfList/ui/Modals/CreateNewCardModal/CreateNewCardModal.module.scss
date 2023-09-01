@@ -42,10 +42,11 @@
   flex-direction: column;
   gap: var(--main-content-vertical-gap);
   min-width: 100%;
-  padding-right: var(--padding-right);
+  padding-right: calc(var(--padding-right) - var(--padding-for-scroll));
   padding-left: var(--padding-right);
   overflow: auto;
   scroll-padding-bottom: 20px;
+  scrollbar-gutter: stable;
 }
 
 // .shelfAndBoxesWrapper {

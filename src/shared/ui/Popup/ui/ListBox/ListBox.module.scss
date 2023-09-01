@@ -104,7 +104,8 @@
 // .ListBoxOption_active ,
 .ListBoxOption {
   display: flex;
-  padding: 8px 16px;
+
+  // padding: 8px 16px;
   padding: 8px 16px 8px 14px;
   white-space: nowrap;
   cursor: pointer;
@@ -112,6 +113,13 @@
   flex-direction: row-reverse;
   justify-content: flex-end;
 }
+
+// .ListBoxOption:not(:last-child), {
+//   background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
+//   background-repeat: no-repeat;
+//   background-size: 100% 1px; /* Ширина и высота границы */
+//   background-position: bottom;
+// }
 
 // .ListBoxOption:last-of-type {
 //   border-bottom-right-radius: 4px;

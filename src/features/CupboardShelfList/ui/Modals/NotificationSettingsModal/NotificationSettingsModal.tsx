@@ -46,6 +46,7 @@ export const NotificationSettingsModal = (props: MissedTrainingSettingsProps) =>
 		<HDialog
 			isOpen={isOpen}
 			onClose={onClose}
+			onSubmit={() => alert('Сохраняю уведомления')}
 		>
 			<Card className={cls.notificationCard} >
 				<Switcher

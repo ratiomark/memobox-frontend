@@ -27,6 +27,8 @@ export const getShelfById = createSelector(
 	(shelf) => shelf
 )
 
+
+export const getIsCupboardInfoOpen = (state: StateSchema) => state.cupboard.isCupboardInfoModalOpen
 // export const getShelfByID = (shelfId: string) => {
 // 	return createSelector(get, (state) =>
 // 		selectById(state, entityId)

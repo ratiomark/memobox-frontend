@@ -1,0 +1,50 @@
+.menu {
+  background-color: var(--dark-bg);
+  min-width: fit-content;
+  border-radius: var(--border-radius-main);
+  box-shadow: rgb(0 0 0 / 10%) 0 10px 20px, rgb(0 0 0 / 10%) 0 6px 6px;
+}
+
+.menuItem {
+  padding: 10px 16px;
+  border: none;
+  background-color: none;
+  outline: none;
+  width: 100%;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: var(--border-radius-main);
+}
+
+.menuItem:not(:last-child), {
+  background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
+  background-repeat: no-repeat;
+  background-size: 100% 1px; /* Ширина и высота границы */
+  background-position: bottom;
+}
+
+.menuItem:hover {
+  opacity: 0.6;
+
+  // background-color: red;
+}
+
+.menuItem:first-of-type {
+  padding-top: 15px;
+}
+
+.menuItem:last-of-type {
+  padding-bottom: 15px;
+}
+
+// .active {
+//   // background-color: var(--active-list-item-popover);
+//   opacity: 0.6;
+// }
+
+// .disabled {
+//   opacity: 0.4;
+// }

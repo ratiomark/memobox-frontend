@@ -4,6 +4,7 @@ import { BoxesBlock } from './BoxesBlock';
 import { BoxesBlockSkeleton } from './BoxesBlockSkeleton';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
+import { idBoxesBlockCommonWrapper } from '@/shared/const/ids';
 
 interface BoxesBlockProps {
 	shelf: ShelfSchema
@@ -26,6 +27,7 @@ export const BoxesBlockWrapper = (props: BoxesBlockProps) => {
 			classNameForCommonWrapper={cls.substitute}
 			classNameAbsoluteParts={cls.setBoxesLeft}
 			isLoading={isLoading}
+			idForCommonWrapper={`${idBoxesBlockCommonWrapper}-${shelf.id}`}
 		/>)
 
 	return boxesBlock

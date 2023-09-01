@@ -1,0 +1,1 @@
+export { FAQItem } from './FAQItem';

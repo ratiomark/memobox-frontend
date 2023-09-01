@@ -5,10 +5,25 @@ import { setFeatureFlag } from '@/shared/lib/features'
 import { saveJsonSettings } from '../services/saveJsonSettings'
 import { JsonSettings } from '../types/JsonSettings'
 import { initAuthData } from '../services/initAuthData'
-import { SortColumnObject } from '../types/JsonSavedData'
+import { JsonSavedData, SortColumnObject } from '../types/JsonSavedData'
+import { updateJsonSavedData } from '../..'
+import { jsonSavedDataColumnsMock } from '../mockData/jsonSavedDataMock'
 
 const initialState: UserSchema = {
-	_mounted: false
+	_mounted: false,
+	jsonSavedData: {
+		viewPageCardRowsCount: 2,
+		commonShelfCollapsed: true,
+		shelfNamesList: [],
+		viewPageColumns: jsonSavedDataColumnsMock,
+	},
+	help: `jsonCommonSettings - общие данные, например была ли посещена страница Х, видел ли окно Y
+userSettings - настройки системы, время сна, уведомления и т.д. В общем, все что живет на странице "настройки"
+jsonSavedData - данные по UI:
+- Развернута ли общая полка
+- массив полок в формате [{title: 'название полки', isCollapsed: true/false}]
+- количество строк на странице обзора в таблице карточек
+- и т.д.`
 }
 
 const userSlice = createSlice({
@@ -66,14 +81,28 @@ const userSlice = createSlice({
 					}
 
 				})
+			// .addCase(
+			// 	updateJsonSavedData.fulfilled,
+			// 	(state, action: PayloadAction<JsonSavedData>) => {
+			// 		// if(action.payload)
+			// 			state.jsonSavedData = action.payload.jsonSavedData 
+			// 	})
+
 			.addCase(
 				initAuthData.fulfilled,
 				(state, action: PayloadAction<User>) => {
-					state.authData = action.payload
+					const {
+						jsonSavedData,
+						userSettings,
+						...otherData
+					} = action.payload
+					state.authData = { ...otherData }
 					setFeatureFlag(action.payload.features)
 					state._mounted = true
-					// VAR: тестирую jsonSavedData как отедльное поле
-					state.jsonSavedData = action.payload.jsonSavedData
+					if (jsonSavedData) {
+						state.jsonSavedData = jsonSavedData
+					}
+					state.userSettings = userSettings
 				})
 			.addCase(
 				initAuthData.rejected,

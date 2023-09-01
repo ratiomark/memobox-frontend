@@ -39,7 +39,15 @@ const initialState: CupboardPageSchema = {
 			y: 0,
 		},
 	},
-	newCardModal: {
+	boxSettingsDropdownModal: {
+		isOpen: false,
+		boxId: '',
+		boxCoordinates: {
+			x: 0,
+			y: 0,
+		},
+	},
+	createNewCardModal: {
 		shelfId: '',
 		boxIndex: 0,
 		questionText: '',
@@ -50,7 +58,8 @@ const initialState: CupboardPageSchema = {
 		train: 0,
 		all: 0,
 		wait: 0
-	}
+	},
+	isCupboardInfoModalOpen: false
 }
 
 const shelvesAdapter = createEntityAdapter<ShelfSchema>({
@@ -67,28 +76,29 @@ const cupboardShelfList = createSlice({
 	name: 'cupboardShelfList',
 	initialState,
 	reducers: {
-		setCardModalIsOpen: (state, action: PayloadAction<boolean>) => {
-			state.newCardModal.isOpen = action.payload
-		},
-		setQuestionText: (state, action: PayloadAction<string>) => {
-			state.newCardModal.questionText = action.payload
-		},
 		setCommonShelfCollapsed: (state, action: PayloadAction<boolean>) => {
 			state.commonShelf!.isCollapsed = action.payload
 		},
+		// create new card
+		setIsCreateNewCardModalOpen: (state, action: PayloadAction<boolean>) => {
+			state.createNewCardModal.isOpen = action.payload
+		},
+		setQuestionText: (state, action: PayloadAction<string>) => {
+			state.createNewCardModal.questionText = action.payload
+		},
 		setAnswerText: (state, action: PayloadAction<string>) => {
-			state.newCardModal.answerText = action.payload
+			state.createNewCardModal.answerText = action.payload
 		},
 		setShelfIdCardModal: (state, action: PayloadAction<string>) => {
-			state.newCardModal.shelfId = action.payload
+			state.createNewCardModal.shelfId = action.payload
 			// если индекс прошлой коробки превышает максимальный индекс текущей полки, то ставлю коробку с новыми карточками.
 			const currentShelfBoxes = state.entities[action.payload]?.boxesData
-			if (currentShelfBoxes && currentShelfBoxes.length <= state.newCardModal.boxIndex) {
-				state.newCardModal.boxIndex = 0
+			if (currentShelfBoxes && currentShelfBoxes.length <= state.createNewCardModal.boxIndex) {
+				state.createNewCardModal.boxIndex = 0
 			}
 		},
 		setBoxIndexCardModal: (state, action: PayloadAction<number>) => {
-			state.newCardModal.boxIndex = action.payload
+			state.createNewCardModal.boxIndex = action.payload
 		},
 		// boxes settings
 		setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
@@ -96,7 +106,6 @@ const cupboardShelfList = createSlice({
 			// state.isBoxesSettingsModalOpen = true
 		},
 		// TimeSetterModal
-
 		setTimingSetterModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.boxTimeSetterModal.isOpen = action.payload
 		},
@@ -112,8 +121,21 @@ const cupboardShelfList = createSlice({
 				y: action.payload.y
 			}
 		},
+		// box Settings DropDown modal
+		setBoxSettingsModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.boxSettingsDropdownModal.isOpen = action.payload
+		},
+		setBoxSettingsModalBoxId: (state, action: PayloadAction<string>) => {
+			state.boxSettingsDropdownModal.boxId = action.payload
+		},
+		setBoxSettingsBoxCoordinates: (state, action: PayloadAction<BoxCoordinates>) => {
+			state.boxSettingsDropdownModal.boxCoordinates = {
+				x: action.payload.x,
+				y: action.payload.y
+			}
+		},
 
-		// 
+		// boxes settings modal 
 		setBoxesSettingsModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.isBoxesSettingsModalOpen = action.payload
 		},
@@ -141,6 +163,11 @@ const cupboardShelfList = createSlice({
 		setNotificationModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.notificationShelfModal.isOpen = action.payload
 		},
+		// cupboard info modal
+		setIsCupboardInfoModalOpen: (state, action: PayloadAction<boolean>) => {
+			state.isCupboardInfoModalOpen = action.payload
+		},
+		// 
 		setFetchedCupboardDataIsLoading: (state, action: PayloadAction<boolean>) => {
 			state.isLoading = action.payload
 		},
@@ -168,7 +195,7 @@ const cupboardShelfList = createSlice({
 			const commonShelf = cupboard.commonShelf
 			state.isLoading = false
 			state.commonShelf = commonShelf
-			state.newCardModal.shelfId = cupboard.shelves[0].id
+			state.createNewCardModal.shelfId = cupboard.shelves[0].id
 			if (state.isDataAlreadyInStore) {
 				state.isFirstRender = false
 				// const shelves = cupboard.shelves.map(shelf => ({ ...shelf, isLoading: false }))
@@ -190,7 +217,7 @@ const cupboardShelfList = createSlice({
 			const commonShelf = cupboard.commonShelf
 			state.isLoading = false
 			state.commonShelf = commonShelf
-			state.newCardModal.shelfId = cupboard.shelves[0].id
+			state.createNewCardModal.shelfId = cupboard.shelves[0].id
 			shelvesAdapter.setAll(state, cupboard.shelves)
 			state.cupboardData = {
 				all: commonShelf.data.all,
@@ -233,7 +260,7 @@ const cupboardShelfList = createSlice({
 					// state.isDataAlreadyInStore = true
 					state.isLoading = false
 					state.commonShelf = commonShelf
-					state.newCardModal.shelfId = cupboard.shelves[0].id
+					state.createNewCardModal.shelfId = cupboard.shelves[0].id
 					shelvesAdapter.setAll(state, cupboard.shelves)
 					state.cupboardData = {
 						all: commonShelf.data.all,

@@ -17,8 +17,9 @@ export const CardItemTrash = (props: CardItemTrashProps) => {
 		className,
 		card,
 	} = props
-
+	const isMultiSelectActive = false
 	const { t } = useTranslation()
+	const onDeleteCard = () => { }
 
 	return (
 		<div className={clsx(cls.CardItemTrash)} >

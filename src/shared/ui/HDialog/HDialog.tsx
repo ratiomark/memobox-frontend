@@ -11,7 +11,7 @@ interface HDialogProps {
 	className?: string
 	isOpen: boolean
 	onClose: () => void
-	onSubmit: () => void
+	onSubmit?: () => void
 	children: ReactNode
 	// initialFocus?: MutableRefObject<HTMLElement | null>
 	max?: boolean
@@ -21,6 +21,7 @@ interface HDialogProps {
 	panelWithMainPadding?: boolean
 	panelWithBackground?: boolean
 	panelAbsolute?: boolean
+	overlay?: boolean
 }
 
 export const HDialog = (props: HDialogProps) => {
@@ -38,24 +39,30 @@ export const HDialog = (props: HDialogProps) => {
 		panelWithBackground = true,
 		panelWithMainPadding = true,
 		panelAbsolute,
+		overlay = true,
 	} = props
 	const { theme } = useTheme()
 
 
-	const onKeyDown = useCallback((e: KeyboardEvent) => {
-		if (e.key === 'Enter' && e.shiftKey) {
-			onSubmit()
-		}
-	}, [onSubmit])
+	// const onKeyDown = useCallback((e: KeyboardEvent) => {
+	// 	if (e.key === 'Enter' && e.shiftKey) {
+	// 		onSubmit()
+	// 	}
+	// }, [onSubmit])
 
 	useEffect(() => {
-		if (isOpen) {
-			window.addEventListener('keydown', onKeyDown)
+		if (!isOpen) return
+
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Enter' && e.shiftKey) {
+				onSubmit ? onSubmit() : null
+			}
 		}
+		window.addEventListener('keydown', onKeyDown)
 		return () => {
 			window.removeEventListener('keydown', onKeyDown)
 		}
-	}, [isOpen, onKeyDown])
+	}, [isOpen, onSubmit])
 
 	if (lazy && !isOpen) return null
 
@@ -71,7 +78,7 @@ export const HDialog = (props: HDialogProps) => {
 			open={isOpen}
 			onClose={onClose}
 		>
-			<div className={cls.overlay} />
+			{overlay && <div className={cls.overlay} />}
 			<div className={cls.content}>
 				<Dialog.Panel
 					className={clsx(

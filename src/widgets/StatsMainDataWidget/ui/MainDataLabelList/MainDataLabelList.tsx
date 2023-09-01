@@ -37,7 +37,8 @@ export const MainDataLabelList = (props: MainDataLabelListProps) => {
 	return (
 		<div className={clsx(
 			cls.MainDataLabelList,
-			[className])}
+			className
+		)}
 		>
 			<MainDataLabel isLoading={isLoading} cardsCount={data?.all} type='all' />
 			<MainDataLabel

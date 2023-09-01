@@ -60,9 +60,10 @@
   "save": "Save (shift + enter)",
   "save no keys": "Save",
   "missedTrainingSettings": {
+    "title": "What should you do with the card if you skipped its training?",
     "none": "Do nothing",
-    "additional": "Additional training",
-    "backwards": "Move to previous box"
+    "additional": "Leave it for an additional round",
+    "backwards": "Move it back to the previous box"
   },
   "shelf": "Shelf",
   "creation": "Creation",
@@ -76,5 +77,6 @@
   "create shelf": "Create (shift + enter)",
   "return to default": "Return to default",
   "add box": "Add box",
-  "compare data": "Compare (alt + c)"
+  "compare data": "Compare (alt + c)",
+  "remove box": "Remove box"
 }

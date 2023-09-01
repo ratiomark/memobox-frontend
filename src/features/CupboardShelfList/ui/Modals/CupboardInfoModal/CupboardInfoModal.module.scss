@@ -1,0 +1,64 @@
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
+.cardModalPanel {
+  max-height: 90%;
+  min-height: 420px;
+  width: min(800px, 80%);
+  overflow: hidden;
+}
+
+.cardModal {
+  --padding-right: 20px;
+  --padding-for-scroll: 5px;
+}
+
+.mainContentWrapper {
+  padding-right: var(--padding-for-scroll);
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 400px;
+  min-width: 100%;
+  padding-right: calc(var(--padding-right) - var(--padding-for-scroll));
+  padding-left: calc(var(--padding-right) + var(--padding-for-scroll));
+  padding-top: 4px;
+  padding-bottom: 4px;
+  overflow: auto;
+  scroll-padding-bottom: 20px;
+  scrollbar-gutter: stable;
+}
+
+// .shelfAndBoxesWrapper {
+//   display: flex;
+//   min-width: 100%;
+// }
+
+.emptySpace_top {
+  height: 20px;
+}
+
+.emptySpace_bottom {
+  height: 10px;
+}
+
+.closeButtonWrapper {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+// .actions {
+//   width: 100%;
+
+//   // height: 55.6px;
+//   padding-right: calc(var(--padding-right) + var(--scroll-bar-main-width));
+//   border-bottom-left-radius: var(--border-radius-main);
+//   border-bottom-right-radius: var(--border-radius-main);
+//   padding-left: var(--padding-right);
+//   padding-top: 10px;
+//   padding-bottom: 10px;
+//   background-color: rgb(211 209 255);
+// }

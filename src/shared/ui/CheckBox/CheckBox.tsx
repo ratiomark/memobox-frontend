@@ -1,7 +1,5 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './CheckBox.module.scss';
-import { Switch } from '@headlessui/react';
 import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 
 interface CheckBoxProps {

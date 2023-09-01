@@ -1,5 +1,7 @@
 .CompleteBigDataLabels {
   display: flex;
-  width: 520px;
-  justify-content: space-between;
+  gap: var(--gap-between-data-labels);
+
+  // width: 520px;
+  // justify-content: space-between;
 }

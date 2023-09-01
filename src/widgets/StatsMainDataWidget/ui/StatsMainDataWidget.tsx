@@ -5,7 +5,6 @@ import { HStack } from '@/shared/ui/Stack';
 import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLabels/CompleteBigDataLabels';
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
-import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions } from '@/features/CupboardShelfList';
@@ -19,7 +18,8 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { DataBlock } from '@/shared/types/DataBlock';
 import { MainDataLabelList, StatsDataBlockWithPercent } from './MainDataLabelList/MainDataLabelList';
-
+import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
+import { infoIconSize } from '@/shared/const/iconSizes';
 
 const data: StatsDataBlockWithPercent = {
 	all: 125,
@@ -62,22 +62,24 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 		// animate={{ y: 0 }}
 		// transition={{ type: 'spring', }}
 		>
-			<HStack
-				max
+			<div
 				className={clsx(
 					cls.statsMainDataWidget,
-					className)}
+					'blockWithDivider')}
 			>
-				{/* <div> */}
 				<MainDataLabelList
-					className={cls.mainData}
 					data={data}
 					isLoading={isLoading}
 
 				/>
-
-				{/* </div> */}
-			</HStack>
+				<Icon
+					Svg={InfoIcon}
+					width={infoIconSize}
+					height={infoIconSize}
+					clickable
+					onClick={() => { }}
+				/>
+			</div>
 		</motion.div>
 	)
 }

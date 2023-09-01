@@ -1,19 +1,19 @@
 import { RouteProps } from 'react-router-dom';
 import { UserRole } from '@/entities/User';
-import { Page } from '@/widgets/Page';
 import { AboutPage } from '@/pages/AboutPage';
 import { SettingsPage } from '@/pages/SettingsPage';
 import { MainPage } from '@/pages/MainPage';
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { ViewPage } from '@/pages/ViewPage';
 import { TrainingPage } from '@/pages/TrainingPage';
-import { ReactNode } from 'react';
 import { TrashPage } from '@/pages/TrashPage';
 import { SettingsPageWidgetSkeleton } from '@/widgets/SettingsPageWidget';
 import { StatsAndActionsCupboardWidgetSkeleton } from '@/widgets/StatsAndActionsCupboardWidget';
 import { SubscriptionPage } from '@/pages/SubscriptionPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { StatsPage } from '@/pages/StatsPage';
+import { Suspense } from 'react';
+import { StatsPageSkeleton } from '@/pages/StatsPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -99,7 +99,8 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	},
 	stats: {
 		path: obtainRouteStats(),
-		element: <StatsPage />
+		element: <StatsPage />,
+		suspense: <StatsPageSkeleton/>
 	},
 	trash: {
 		path: obtainRouteTrash(),

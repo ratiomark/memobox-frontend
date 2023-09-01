@@ -113,22 +113,14 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 						className)}
 				>
 					<CompleteBigDataLabels data={viewPageIsLoading ? undefined : data} isLoading={viewPageIsLoading ?? true} />
-					<HStack gap='gap_14' className={cls.actions} >
+					<div className={cls.actions} >
 						<Button
 							onClick={onOpenColumnSettingsModal}
 							borderRadius='borderRadius_4'
 						>
 							{t('table settings')}
 						</Button>
-						{/* <Button onClick={onAddNewCardClick} borderRadius='borderRadius_4'>{t('Add card with hot key')}</Button>
-				<Icon
-					Svg={InfoIcon}
-					width={26}
-					height={26}
-					className={cls.info}
-				/> */}
-
-					</HStack>
+					</div>
 				</HStack>
 			</motion.div>
 			<TableSettingModal />

@@ -3,11 +3,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { setJsonSavedDataMutation, setJsonSettingsMutation } from '../api/userApi'
 import { getUserAuthData } from '../selectors/getUserAuthData'
 import { JsonSavedData } from '../types/JsonSavedData'
-import { getJsonSavedData } from '../..'
+import { getJsonSavedData } from '../selectors/getJsonSavedData'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const saveUserJsonData = createAsyncThunk<JsonSavedData, JsonSavedData, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
-	'user/saveUserJsonData',
+export const saveJsonSavedData = createAsyncThunk<JsonSavedData, JsonSavedData, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+	'user/saveJsonSavedData',
 	async (newJsonSavedData, thunkAPI) => {
 
 		const { dispatch, getState, } = thunkAPI
@@ -26,7 +26,7 @@ export const saveUserJsonData = createAsyncThunk<JsonSavedData, JsonSavedData, {
 			}))
 				.unwrap() //разворачиваю в реальный результат
 
-			const jsonSavedDataFromResponse = response.jsonSavedData
+			const jsonSavedDataFromResponse = response
 
 			if (!jsonSavedDataFromResponse) return thunkAPI.rejectWithValue('Нет userData')
 

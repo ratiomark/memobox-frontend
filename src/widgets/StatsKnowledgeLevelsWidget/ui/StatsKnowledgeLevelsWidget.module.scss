@@ -1,3 +1,8 @@
 .statsKnowledgeLevelsWidget {
-
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--empty-space-after-and-before-divider);
+  padding-top: var(--empty-space-after-and-before-divider);
+  padding-right: var(--padding-right-correction-info-icon);
 }

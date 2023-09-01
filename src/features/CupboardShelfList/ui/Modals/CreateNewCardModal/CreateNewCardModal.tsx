@@ -13,11 +13,11 @@ import {
 	getIsOpenCardModal,
 	getQuestionCardModal,
 	getShelfIdCardModal
-} from '../../../model/selectors/getCardModal';
+} from '../../../model/selectors/getCreateNewCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
 import { Skeleton } from '@/shared/ui/Skeleton';
-import cls from './CardModalNewCard.module.scss';
+import cls from './CreateNewCardModal.module.scss';
 import { getCupboardIsLoading, getCupboardError } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
@@ -26,7 +26,7 @@ import { ShadowTextArea } from '@/shared/ui/Typography/TextArea/ShadowTextArea';
 import { useMainContentMaxHeightAndAreaRows } from '@/shared/lib/helpers/hooks/useMainContentMaxHeightAndAreaRows';
 
 
-export const CardModalNewCard = memo(() => {
+export const CreateNewCardModal = memo(() => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
@@ -48,7 +48,7 @@ export const CardModalNewCard = memo(() => {
 		modalButtonsRef: modalButtonsRef.current,
 		shelvesAndBoxesRef: shelvesAndBoxesRef.current,
 	})
-	
+
 	const shelfItems = useMemo(() => {
 		if (cupboardIsLoading) return []
 		return cupboardShelves.map(shelf => {
@@ -89,7 +89,7 @@ export const CardModalNewCard = memo(() => {
 	}, [dispatch, isOpen])
 
 	const onCloseCardModal = useCallback(() => {
-		dispatch(cupboardShelfListActions.setCardModalIsOpen(false))
+		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(false))
 	}, [dispatch])
 
 	const onChangeAnswer = useCallback((text: string) => {

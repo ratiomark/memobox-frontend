@@ -15,8 +15,11 @@ export const initAuthData = createAsyncThunk<User, void, { rejectValue: string, 
 		if (!userId) return rejectWithValue('Нет userId в локал сторедж')
 
 		try {
-			const response = await dispatch(getUserDataByIdQuery(userId)).unwrap() //разворачиваю в реальный результат
 
+			const response = await dispatch(getUserDataByIdQuery(userId)).unwrap() //разворачиваю в реальный результат
+			// console.log('ssssssssssssssssssssssssss')
+			// console.log(response)
+			// console.log('ssssssssssssssssssssssssss')
 			return response
 
 		} catch (err) {

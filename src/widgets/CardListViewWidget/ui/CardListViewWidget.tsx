@@ -91,10 +91,6 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 		onCancelMultiSelect()
 	}, [cards, onCancelMultiSelect])
 
-
-
-
-
 	const content = useMemo(() => {
 		if (!viewPageIsMounted || viewPageIsLoading) return
 		return cards?.map(item => (
@@ -114,9 +110,9 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 			skeletonComponent={<CardsListSkeleton />}
 			componentAfterLoading={content}
 			noDelay={cards.length > 0}
-		// commonWrapper={false}
-		// classNameForCommonWrapper={cls.cardsWrapper}
-		// borderTest
+			// commonWrapper={false}
+			// classNameForCommonWrapper={cls.cardsWrapper}
+			// borderTest
 		/>
 	)
 

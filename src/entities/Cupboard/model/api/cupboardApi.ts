@@ -22,7 +22,7 @@ export const cupboardApi = rtkApi.injectEndpoints({
 		}),
 		getShelves: build.query<ShelfSchema[], void>({
 			query: () => ({
-				url: '/shelves',
+				url: '/activeShelves',
 				method: 'GET'
 			}),
 			// transformResponse: (response: MovieList, meta, arg) => {
@@ -33,6 +33,19 @@ export const cupboardApi = rtkApi.injectEndpoints({
 			// 	return data
 			// },
 		}),
+		// getShelves: build.query<ShelfSchema[], void>({
+		// 	query: () => ({
+		// 		url: '/shelves',
+		// 		method: 'GET'
+		// 	}),
+		// 	// transformResponse: (response: MovieList, meta, arg) => {
+		// 	// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
+		// 	// 		acc[current.id.toString()] = current
+		// 	// 		return acc
+		// 	// 	}, {})
+		// 	// 	return data
+		// 	// },
+		// }),
 		getShelvesViewPage: build.query<ShelfSchema[], void>({
 			query: () => ({
 				url: '/shelves',

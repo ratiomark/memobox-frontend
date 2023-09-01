@@ -17,6 +17,12 @@ export const getMissedTrainingBoxValue = createSelector(
 	[
 		(state: StateSchema, shelfId: string, boxId: string) => getCupboardState.selectById(state, shelfId)?.boxesData.find(box => box._id === boxId)
 	],
-	(box) => box?.specialType !== 'new' ? box?.missedTrainingAction ?? 'none' : 'none'
+	(box) => {
+		console.log(box)
+		if (!box) return 'none'
+		if (box.specialType !== 'new') {
+			return box.missedTrainingAction ?? 'none'
+		}
+	}
 )
 // export const getDeletionIds = (state: StateSchema) => state.cupboard.shelvesDeletionIds 

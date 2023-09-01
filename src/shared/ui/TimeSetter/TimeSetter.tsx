@@ -26,6 +26,7 @@ interface TimeSetterProps {
 	overlay?: boolean
 	onSaveTime: (timeObject: TimingBlock) => void
 	styles?: CSSProperties
+	id?: string
 	// startCallback?: ({ width, height }: { width: number, height: number }) => void
 }
 
@@ -43,6 +44,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		// lockSelector = '[data-testid="MainPage"]',
 		overlay = true,
 		onSaveTime,
+		id,
 		// startCallback,
 	} = props
 	// const [locked, setLocked] = useLockedBody(false, lockSelector)
@@ -174,7 +176,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 				cls.TimeSetter,
 				className
 			)}
-			id='timeSetter'
+			id={id}
 		// ref={timeSetterRef}
 		>
 			<HStack gap='gap_16' className={cls.setterWrapper} align='center'>

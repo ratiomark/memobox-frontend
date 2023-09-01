@@ -21,7 +21,7 @@ export const SortControllerViewPageWidget = (props: SortControllerWrapperProps) 
 	const columns = useSelector(getViewPageColumns)
 	// const activeSort = useSelector(getViewPageSort)
 	const activeSort = useSelector(getViewPageSortChecked)
-	const sortOrder = useSelector(getViewPageSortOrder)
+	// const sortOrder = useSelector(getViewPageSortOrder)
 
 	const { t } = useTranslation()
 

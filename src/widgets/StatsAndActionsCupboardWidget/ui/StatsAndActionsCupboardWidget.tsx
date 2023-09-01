@@ -5,7 +5,7 @@ import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLab
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-import { useCallback, useState } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import cls from './StatsAndActionsCupboardWidget.module.scss';
 import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions } from '@/features/CupboardShelfList';
@@ -18,6 +18,7 @@ import { getUserShelfNamesList } from '@/entities/User';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { ButtonsSkeleton } from './ButtonsSkeleton';
+import { infoIconSize } from '@/shared/const/iconSizes';
 
 interface StatsAndActionsCupboardWidgetProps {
 	className?: string
@@ -39,11 +40,13 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 
 	const onAddNewShelfClick = () => setIsNewShelfModalOpen(true)
 	const onCloseNewShelfModal = () => setIsNewShelfModalOpen(false)
-	const onOpenInfoModal = () => setIsInfoModalOpen(true)
-	const onCloseInfoModal = () => setIsInfoModalOpen(false)
+
+	const onOpenInfoModal = () => {
+		dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
+	}
 
 	const onAddNewCardClick = useCallback(() => {
-		dispatch(cupboardShelfListActions.setCardModalIsOpen(true))
+		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
 	}, [dispatch])
 
 	const buttons = (
@@ -57,8 +60,8 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 					<Button onClick={onAddNewCardClick} data-button-type='shelf-add-card-general' borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
 					<Icon
 						Svg={InfoIcon}
-						width={26}
-						height={26}
+						width={infoIconSize}
+						height={infoIconSize}
 						className={cls.info}
 						clickable
 						onClick={onOpenInfoModal}

@@ -61,10 +61,7 @@ export const StatsKnowledgeList = (props: StatsKnowledgeListProps) => {
 
 
 	return (
-		<div className={clsx(
-			cls.StatsKnowledgeList,
-			className)}
-		>
+		<div className={cls.StatsKnowledgeList}>
 			{listRendered}
 		</div>
 	)

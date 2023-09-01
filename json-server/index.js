@@ -30,7 +30,7 @@ server.use(jsonServer.bodyParser);
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
 // server.use(async (req, res, next) => {
 // 	await new Promise((res) => {
-// 		setTimeout(res, 1000);
+// 		setTimeout(res, 2000);
 // 	});
 // 	next();
 // });
@@ -329,6 +329,74 @@ server.delete('/shelves', (req, res) => {
 			// Отправляем обновленные данные обратно клиенту
 			// res.send(newShelves);
 			res.json({ message: 'полка удалена' })
+		});
+	});
+});
+
+server.get('/activeShelves', (req, res) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const shelves = db.shelves.filter(shelf => shelf.isDeleted !== true)
+		res.send(shelves)
+
+	});
+});
+server.get('/deletedShelves', (req, res) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const shelves = db.shelves.filter(shelf => shelf.isDeleted === true)
+		res.send(shelves)
+
+	});
+});
+
+server.patch('/updateBox', (req, res) => {
+	// console.log('updateBox START')
+	const { shelfId, box } = req.body;
+	// console.log('Значение shelfId  ', shelfId)
+	// console.log('Значение box  ', box)
+
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const shelfTargeted = db.shelves.find(shelf => shelf.id === shelfId)
+		const shelfTargetedIndex = db.shelves.findIndex(shelf => shelf.id === shelfId)
+		const boxTargeted = shelfTargeted.boxesData.find(boxFromDb => boxFromDb._id === box._id)
+		const boxTargetedIndex = shelfTargeted.boxesData.findIndex(boxFromDb => boxFromDb._id === box._id)
+		const boxUpdated = { ...boxTargeted, ...box }
+		shelfTargeted.boxesData[boxTargetedIndex] = boxUpdated
+		db.shelves[shelfTargetedIndex] = shelfTargeted
+
+		const responseData = {
+			commonShelf: db.commonShelf,
+			shelves: db.shelves
+		};
+
+
+		fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
+			if (err) {
+				console.error(err);
+				res.status(500).send({ message: 'Server error' });
+				return;
+			}
+			res.send(responseData);
 		});
 	});
 });

@@ -119,6 +119,7 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 		animate={{ opacity: 1 }}
 		exit={{ opacity: 0, transition: { delay: 0, duration: 0.4 } }}
 		transition={{ delay: mode === 'settingTimeToNewBox' ? 1 : 0, duration: DURATION_SEC }}
+		
 	>
 		<TimeSetter
 			timingData={timingData}
@@ -130,8 +131,9 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 
 	return (
 		<div
+			className={cls.BoxTimeSetter} 
 			ref={wrapperRef}
-			style={{ position: 'fixed', left: coordinatesChecked.x, top: coordinatesChecked.y }}
+			style={{ left: coordinatesChecked.x, top: coordinatesChecked.y }}
 		>
 			<AnimatePresence>
 				{isOpen &&

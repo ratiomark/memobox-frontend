@@ -50,7 +50,7 @@ export const CommonShelf = memo((props: ShelfProps) => {
 	const { t } = useTranslation()
 
 	useEffect(() => {
-		console.log('Common shelf ', isLoading)
+		// console.log('Common shelf ', isLoading)
 	}, [isLoading])
 
 	const boxesBlock = (

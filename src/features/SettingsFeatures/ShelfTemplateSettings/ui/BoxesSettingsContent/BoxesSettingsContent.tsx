@@ -63,8 +63,8 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 			gap='gap_12'
 			className={cls.mainWrapper}
 		>
-			{rightSide && <div className={cls.gradientEdgeRight} />}
-			{leftSide && <div className={cls.gradientEdgeLeft} />}
+			{rightSide && <div className={clsx(cls.gradientEdge,cls.gradientEdgeRight)} />}
+			{leftSide && <div className={clsx(cls.gradientEdge, cls.gradientEdgeLeft)} />}
 			{/* {isAnyTimeSetterOpen && <Overlay /> &} */}
 			{blockTitle}
 			<BoxesSettingsList />

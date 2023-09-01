@@ -1,0 +1,19 @@
+.FAQItem {
+  border-radius: var(--border-radius-main);
+  background-color: var(--bg);
+  box-shadow: var(--entities-box-shadow-main);
+  padding: 10px 10px 10px 20px;
+  cursor: pointer;
+}
+
+.arrow {
+  transition: all 0.4s;
+}
+
+.rotateArrow {
+  transform: rotate(180deg);
+}
+
+.answerWrapper {
+  padding-top: 10px;
+}

@@ -58,7 +58,7 @@ export const MyText = memo(
 		}
 
 		const sizeClass = mapSizeToClass[size];
-		const additionalClasses = [className, cls[variant], cls[align], cls[sizeClass]];
+		const additionalClasses = [cls[variant], cls[align], cls[sizeClass], className];
 
 
 		return (

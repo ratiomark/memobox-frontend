@@ -40,6 +40,13 @@
   font-weight: 300;
 }
 
+// .menuItem:last-child {
+//   background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
+//   background-repeat: no-repeat;
+//   background-size: 100% 1px; /* Ширина и высота границы */
+//   background-position: top;
+// }
+
 .menuItem:first-of-type {
   padding-top: 20px;
 }

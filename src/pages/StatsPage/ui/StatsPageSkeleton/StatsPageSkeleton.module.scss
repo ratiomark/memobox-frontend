@@ -1,0 +1,37 @@
+.StatsPageSkeleton {
+
+}
+
+.statsAndActionsCupboardWidget {
+  justify-content: space-between;
+  padding-top: 10px;
+  position: relative;
+  padding-bottom: var(--empty-space-after-and-before-divider);
+  padding-right: var(--padding-right-correction-info-icon);
+
+  // background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
+  // background-repeat: no-repeat;
+  // background-size: 100% 1px;
+  // background-position: bottom;
+}
+
+.wrapper {
+  display: flex;
+  gap: var(--gap-between-data-labels);
+  justify-content: space-between;
+}
+
+.dataLabel {
+  border-radius: var(--border-radius-main);
+}
+
+.knowledgeLevels {
+  gap: var(--gap-between-data-labels);
+  padding-bottom: var(--empty-space-after-and-before-divider);
+  padding-top: var(--empty-space-after-and-before-divider);
+
+  // background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
+  // background-repeat: no-repeat;
+  // background-size: 100% 1px;
+  // background-position: bottom;
+}

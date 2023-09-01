@@ -1,6 +1,7 @@
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { VStack } from '@/shared/ui/Stack';
 import cls from './CardListViewWidget.module.scss';
+import { useWindowSize } from '@/shared/lib/helpers/hooks/useWindowHeight';
 
 export const CardsListSkeleton = () => {
 	return (

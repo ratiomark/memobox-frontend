@@ -143,6 +143,15 @@ body.dragging * {
   margin: 0 auto;
 }
 
+.blockWithDivider {
+  // padding-bottom: var(--empty-space-after-and-before-divider);
+  // padding-top: var(--empty-space-after-and-before-divider);
+  background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: bottom;
+}
+
 // *::-webkit-scrollbar {
 //   width: 12px;               /* ширина scrollbar */
 //   height: 8px;

@@ -5,8 +5,8 @@
   display: grid;
   grid-template-columns: min-content auto;
   background-color: var(--bg);
-  min-width: 160px;
-  border-radius: 5px;
+  min-width: var(--data-label-min-width);
+  border-radius: var(--border-radius-main);
 
   // box-shadow: 0 1px 4px rgb(0 0 0 / 15%);
   box-shadow: var(--entities-box-shadow-main);
@@ -44,7 +44,7 @@
 
 .coloredLeftSide {
   width: 6px;
-  border-radius: 5px 0 0 5px;
+  border-radius: var(--border-radius-main) 0 0 var(--border-radius-main);
 }
 
 .dataHolder {

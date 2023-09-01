@@ -1,20 +1,7 @@
 .MainDataLabelList {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
+  gap: var(--gap-between-data-labels);
 
-  // padding: 0 0 10px;
-  // border-bottom: 1px solid var(--delimiter-color);
+  // padding-top: var(--additional-padding-top-data-labels);
 }
-
-// .MainDataLabelList::after {
-//   content: "";
-//   position: absolute;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   height: 1px; /* Высота границы */
-//   background: linear-gradient(90deg, transparent 3%, rgb(128 128 128 / 15.8%), transparent 97%);
-
-//   // background: linear-gradient(90deg, rgb(255 255 255), rgb(128 128 128 / 25.8%) 50%, rgb(255 255 255) 100%);
-// }
