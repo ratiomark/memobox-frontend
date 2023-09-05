@@ -50,19 +50,19 @@ export const HDialog = (props: HDialogProps) => {
 	// 	}
 	// }, [onSubmit])
 
-	useEffect(() => {
-		if (!isOpen) return
+	// useEffect(() => {
+	// 	if (!isOpen) return
 
-		const onKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Enter' && e.shiftKey) {
-				onSubmit ? onSubmit() : null
-			}
-		}
-		window.addEventListener('keydown', onKeyDown)
-		return () => {
-			window.removeEventListener('keydown', onKeyDown)
-		}
-	}, [isOpen, onSubmit])
+	// 	const onKeyDown = (e: KeyboardEvent) => {
+	// 		if (e.key === 'Enter' && e.shiftKey) {
+	// 			onSubmit ? onSubmit() : null
+	// 		}
+	// 	}
+	// 	window.addEventListener('keydown', onKeyDown)
+	// 	return () => {
+	// 		window.removeEventListener('keydown', onKeyDown)
+	// 	}
+	// }, [isOpen, onSubmit])
 
 	if (lazy && !isOpen) return null
 

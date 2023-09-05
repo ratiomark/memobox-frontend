@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
+import { $generateHtmlFromNodes } from '@lexical/html';
 // import './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal.css'
 // import clsBoxSettings from './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal.module.scss'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
@@ -41,6 +42,8 @@ import { BoxSettingsDropdownModal } from './Modals/BoxSettingsDropdownModal/BoxS
 import { HiddenTemplates } from './HiddenTemplates/HiddenTemplates';
 import { idCupboardShelfList } from '@/shared/const/ids';
 import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
+import { Editor } from '@/shared/ui/Editor/EditorSE';
+import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -184,11 +187,16 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 	// 		skeletonComponent={<>{shelfNamesList!.map(title => <ShelfSkeleton key={title} title={title} />)}</>}
 	// 	/>
 	// )
+
+
 	return (
 		<div
 			className={cls.cupboardShelfList}
 			id={idCupboardShelfList}
 		>
+			{/* {html} */}
+			<ContentLooker />
+			{/* <Editor autoFocus/> */}
 			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
 			{/* <AnimatePresence> */}
 
@@ -215,7 +223,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			<CreateNewCardModal />
 			<BoxTimeSetterModal />
 			<BoxSettingsDropdownModal />
-			<CupboardInfoModal/>
+			<CupboardInfoModal />
 			<HiddenTemplates />
 			{/* <TimeSetterHiddenTemplate /> */}
 			{/* <DropdownLocalHiddenTemplate /> */}

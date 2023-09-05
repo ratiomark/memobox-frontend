@@ -1,7 +1,7 @@
 .statsAndActionsCupboardWidget {
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0 40px;
+  padding: var(--additional-padding-top-data-labels) 0 40px;
   position: relative;
 }
 
