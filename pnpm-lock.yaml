@@ -10,6 +10,9 @@ dependencies:
   '@lexical/code':
     specifier: ^0.12.0
     version: 0.12.0(lexical@0.12.0)
+  '@lexical/file':
+    specifier: ^0.12.0
+    version: 0.12.0(lexical@0.12.0)
   '@lexical/html':
     specifier: ^0.12.0
     version: 0.12.0(lexical@0.12.0)
@@ -93,6 +96,9 @@ devDependencies:
   '@types/lodash':
     specifier: ^4.14.195
     version: 4.14.195
+  '@types/prettier':
+    specifier: ^3.0.0
+    version: 3.0.0
   '@types/react':
     specifier: ^18.0.37
     version: 18.0.37
@@ -147,6 +153,9 @@ devDependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
+  prettier:
+    specifier: ^2.3.2
+    version: 2.3.2
   sass:
     specifier: ^1.49.9
     version: 1.49.9
@@ -797,6 +806,14 @@ packages:
       lexical: 0.12.0
     dev: false
 
+  /@lexical/file@0.12.0(lexical@0.12.0):
+    resolution: {integrity: sha512-E00Q59gEe8kz966R9WM9BwdGRmeqZ73HBGUeu16WLmbx/yy69EAq36fBD2lmWRR3+A3jlKsem3UpxMTAOfakSA==}
+    peerDependencies:
+      lexical: 0.12.0
+    dependencies:
+      lexical: 0.12.0
+    dev: false
+
   /@lexical/hashtag@0.12.0(lexical@0.12.0):
     resolution: {integrity: sha512-qkryF9nCNCrJy2SjDAPxOfJl+SsvWLb8axrxMC9To3uC7RwJ1HsbaJ5oFK/6NCtkB+MjtYy7o6jGCfvdXDqi9g==}
     peerDependencies:
@@ -1241,6 +1258,13 @@ packages:
 
   /@types/parse-json@4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
+    dev: true
+
+  /@types/prettier@3.0.0:
+    resolution: {integrity: sha512-mFMBfMOz8QxhYVbuINtswBp9VL2b4Y0QqYHwqLz3YbgtfAcat2Dl6Y1o4e22S/OVE6Ebl9m7wWiMT2lSbAs1wA==}
+    deprecated: This is a stub types definition. prettier provides its own type definitions, so you do not need this installed.
+    dependencies:
+      prettier: 2.3.2
     dev: true
 
   /@types/prop-types@15.7.5:
@@ -4032,6 +4056,12 @@ packages:
   /prepend-http@2.0.0:
     resolution: {integrity: sha512-ravE6m9Atw9Z/jjttRUZ+clIXogdghyZAuWJ3qEzjT+jI/dL1ifAqhZeC5VHzQp1MSt1+jxKkFNemj/iO7tVUA==}
     engines: {node: '>=4'}
+    dev: true
+
+  /prettier@2.3.2:
+    resolution: {integrity: sha512-lnJzDfJ66zkMy58OL5/NY5zp70S7Nz6KqcKkXYzn2tMVrNxvbqaBpg7H3qHaLxCJ5lNMsGuM8+ohS7cZrthdLQ==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /prismjs@1.29.0:

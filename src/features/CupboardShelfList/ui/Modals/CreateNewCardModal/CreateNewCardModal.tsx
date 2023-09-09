@@ -26,6 +26,7 @@ import { ShadowTextArea } from '@/shared/ui/Typography/TextArea/ShadowTextArea';
 import { useMainContentMaxHeightAndAreaRows } from '@/shared/lib/helpers/hooks/useMainContentMaxHeightAndAreaRows';
 import { Editor } from '@/shared/ui/Editor';
 import { EditorState } from 'lexical';
+import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 const emptyEditorState = '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}'
 
 export const CreateNewCardModal = memo(() => {
@@ -39,8 +40,8 @@ export const CreateNewCardModal = memo(() => {
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
 	const boxIdCardModal = useSelector(getBoxIndexCardModal)
-	const [shadowAreaQuestionHeight, setShadowAreaQuestionHeight] = useState(0)
-	const [shadowAreaAnswerHeight, setShadowAreaAnswerHeight] = useState(0)
+	const [shadowAreaQuestionHeight, setShadowAreaQuestionHeight] = useState(96)
+	const [shadowAreaAnswerHeight, setShadowAreaAnswerHeight] = useState(96)
 
 	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)
 	const modalButtonsRef = useRef<HTMLDivElement>(null)
@@ -175,8 +176,21 @@ export const CreateNewCardModal = memo(() => {
 	}
 
 
-	const questionEditor = <Editor onChange={onChangeQuestion} id={'QQQQQQQQQQQQ'} initialState={questionTextCardModal} />
-	const answerEditor = <Editor onChange={onChangeAnswer} id={'skafjwieo2222'} initialState={answerTextCardModal} />
+	const questionEditor = <EditorV2
+		heightValue={textAreaRows * 24}
+		// heightValue={shadowAreaQuestionHeight}
+		onChange={onChangeQuestion}
+		initialState={questionTextCardModal}
+		autoFocus
+	/>
+	const answerEditor = <EditorV2
+		heightValue={textAreaRows * 24}
+		// heightValue={shadowAreaAnswerHeight}
+		onChange={onChangeAnswer}
+		initialState={answerTextCardModal}
+	/>
+	// const questionEditor = <Editor onChange={onChangeQuestion} id={'QQQQQQQQQQQQ'} initialState={questionTextCardModal} />
+	// const answerEditor = <Editor onChange={onChangeAnswer} id={'skafjwieo2222'} initialState={answerTextCardModal} />
 
 	return (
 		<HDialog
@@ -249,50 +263,3 @@ export const CreateNewCardModal = memo(() => {
 
 
 
-
-// return (
-// 	<Modal
-// 		lazy
-// 		isOpen={isOpen}
-// 		onClose={onCloseCardModal}
-// 	>
-// 		<div
-// 			className={cls.cardModal}
-// 		>
-// 			<VStack
-// 				className={cls.mainContent}
-// 				max
-// 				align='left'
-// 				gap='gap_32'
-// 			>
-// 				<HStack
-// 					className={cls.shelvesAndBoxesWrapper}
-// 					max
-// 				>
-// 					{shelvesAndBoxes}
-// 				</HStack>
-// 				<div>
-// 					<MyText text={'question'} />
-// 					<TextArea
-// 						rows={5}
-// 						value={questionTextCardModal}
-// 						onChangeString={onChangeQuestion}
-// 					/>
-// 				</div>
-// 				<div>
-// 					<MyText text={'answer'} />
-// 					<TextArea
-// 						rows={5}
-// 						value={answerTextCardModal}
-// 						onChangeString={onChangeAnswer}
-// 					/>
-// 				</div>
-
-// 			</VStack>
-// 			<div className={cls.actions} >
-// 				<Button>{t('Назад')}</Button>
-// 				<Button>{t('Сохранить')}</Button>
-// 			</div>
-// 		</div>
-// 	</Modal>
-// )

@@ -102,6 +102,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, f
 			// console.log('currentMinHeight   : ', currentMinHeight)
 			area.style.minHeight = `${maxMinHeight}px`
 		}
+		
 	}, [useInitialHeightAsMinimal, comparerData, minHeightValue, rows])
 
 

@@ -44,6 +44,7 @@ import { idCupboardShelfList } from '@/shared/const/ids';
 import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
 import { Editor } from '@/shared/ui/Editor/EditorSE';
 import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
+import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -195,6 +196,9 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 			id={idCupboardShelfList}
 		>
 			{/* {html} */}
+			<div style={{ padding: 10, border: '1px solid red' }}>
+				<EditorV2 />
+			</div>
 			<ContentLooker />
 			{/* <Editor autoFocus/> */}
 			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />

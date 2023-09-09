@@ -4,17 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { memo, useCallback, useEffect, useMemo, } from 'react';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
-import { t } from 'i18next';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../..';
 import { MyText } from '@/shared/ui/Typography';
 import cls from './SettingsButton.module.scss';
-import { getUserShelfNamesList } from '@/entities/User';
 import { useSelector } from 'react-redux';
 import { useRemoveShelfMutation } from '@/entities/Shelf';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
 import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
 interface SettingButtonProps {
 	shelfId: string
@@ -23,7 +22,7 @@ interface SettingButtonProps {
 // function trainHotKey(event: KeyboardEvent) {
 // 	if (event.code === 'Digit1' && event.code === 'KeyN')
 // }
-let timerId: number;
+let timerId: number | TimeoutId;
 export const SettingButton = memo((props: SettingButtonProps) => {
 	const {
 		shelfId,
@@ -59,7 +58,7 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 			clearTimeout(timerId)
 		}, DURATION_SHELF_DELETION_MILLISEC)
 	}, [dispatch, isShelfDeleting, removeShelfMutation, shelfId])
-	
+
 
 	const onBoxesSettingsClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.setBoxesSettingsShelfId(shelfId))

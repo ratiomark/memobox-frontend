@@ -1,0 +1,24 @@
+{
+  "titles": {
+    "paragraph": "paragraph",
+    "image": "image",
+    "orderedList": "orderedList",
+    "unOrderedList": "unOrderedList",
+    "code": "code",
+    "math": "math",
+    "collapseBlock": "collapseBlock",
+    "bold": "bold",
+    "italic": "italic",
+    "underline": "underline",
+    "strike": "strike",
+    "subscript": "subscript",
+    "superscript": "superscript",
+    "clearFormatting": "clearFormatting",
+    "leftAlign": "leftAlign",
+    "centerAlign": "centerAlign",
+    "rightAlign": "rightAlign",
+    "middleAlign": "middleAlign",
+    "outdent": "outdent",
+    "indent": "indent"
+  }
+}

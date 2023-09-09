@@ -1,0 +1,36 @@
+/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *
+ */
+.ContentEditable__root {
+  border: 0;
+  font-size: 15px;
+  display: block;
+  position: relative;
+  outline: 0;
+  padding: var(--padding-textarea-top-and-bottom) var(--padding-textarea-left-and-right) var(--padding-textarea-top-and-bottom) 30px;
+
+  /* padding: 8px 28px 40px; */
+  min-height: 100%;
+}
+
+/* .ContentEditable__root:focus-visible {
+  outline: none;
+  box-shadow: 0 0 5px 3px rgba(#33d69f, 0.2), 0 0 1px 1px rgba(#33d69f, 0.8);
+}
+
+.ContentEditable__root:focus {
+  outline: none;
+  box-shadow: 0 0 5px 3px rgba(#33d69f, 0.2), 0 0 1px 1px rgba(#33d69f, 0.8);
+} */
+
+/* @media (max-width: 1025px) {
+  .ContentEditable__root {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+} */

@@ -53,13 +53,16 @@ import {
 	$isCodeNode,
 	getDefaultCodeLanguage,
 	getCodeLanguages,
-	CODE_LANGUAGE_MAP
+	CODE_LANGUAGE_MAP,
+	getLanguageFriendlyName
 } from '@lexical/code';
 import { InsertEquationDialog } from './EquationsPlugin';
 import { useEditorMiniModal } from '../hooks/useModal';
 import { KatexEquationAlterer } from '../ui/katex/KatexEquationAlterer';
 import { $isTableNode } from '@lexical/table';
 import { HStack } from '../../Stack';
+import { DropDown, DropDownItem } from '../ui/Dropdown/DropDown';
+import { InsertImageDialog } from './ImagesPlugin';
 
 const LowPriority = 1;
 
@@ -85,7 +88,10 @@ const blockTypeToBlockName = {
 	quote: 'Quote',
 	// ul: 'Bulleted List'
 };
-
+function dropDownActiveClass(active: boolean) {
+	if (active) return 'active dropdown-item-active';
+	else return '';
+}
 function Divider() {
 	return <div className="divider" />;
 }
@@ -530,9 +536,37 @@ function BlockOptionsDropdownList({ editor, blockType, toolbarRef, setShowBlockO
 		</div>
 	);
 }
+export const CODE_LANGUAGE_FRIENDLY_NAME_MAP: Record<string, string> = {
+	c: 'C',
+	clike: 'C-like',
+	cpp: 'C++',
+	css: 'CSS',
+	html: 'HTML',
+	java: 'Java',
+	js: 'JavaScript',
+	markdown: 'Markdown',
+	objc: 'Objective-C',
+	plain: 'Plain Text',
+	py: 'Python',
+	rust: 'Rust',
+	sql: 'SQL',
+	swift: 'Swift',
+	typescript: 'TypeScript',
+	xml: 'XML',
+};
 
+function getCodeLanguageOptions(): [string, string][] {
+	const options: [string, string][] = [];
 
+	for (const [lang, friendlyName] of Object.entries(
+		CODE_LANGUAGE_FRIENDLY_NAME_MAP,
+	)) {
+		options.push([lang, friendlyName]);
+	}
 
+	return options;
+}
+const CODE_LANGUAGE_OPTIONS = getCodeLanguageOptions();
 
 
 export function ToolbarPlugin() {
@@ -803,39 +837,22 @@ export function ToolbarPlugin() {
 	);
 
 
-	// const blockTypesListRendered = (
-	// 	supportedBlockTypes.has(blockType) && (
-	// 		<>
-	// 			<button
-	// 				className="toolbar-item block-controls"
-	// 				onClick={() =>
-	// 					setShowBlockOptionsDropDown(!showBlockOptionsDropDown)
-	// 				}
-	// 				aria-label="Formatting Options"
-	// 			>
-	// 				<span className={'icon block-type ' + blockType} />
-	// 				<span className="text">
-	// 					{blockTypeToBlockName[blockType as keyof typeof blockTypeToBlockName]}
-	// 				</span>
-	// 				<i className="chevron-down" />
-	// 			</button>
-	// 			{showBlockOptionsDropDown &&
-	// 				createPortal(
-	// 					<BlockOptionsDropdownList
-	// 						editor={editor}
-	// 						blockType={blockType}
-	// 						toolbarRef={toolbarRef}
-	// 						setShowBlockOptionsDropDown={setShowBlockOptionsDropDown}
-	// 					/>,
-	// 					document.body
-	// 				)}
-	// 			<Divider />
-	// 		</>
-	// 	)
-	// )
+
 	return (
 		<div className="toolbar" ref={toolbarRef}>
-
+			<button
+				onClick={() => {
+					showModal('Insert Image', (onClose) => (
+						<InsertImageDialog
+							activeEditor={activeEditor}
+							onClose={onClose}
+						/>
+					));
+				}}
+				className="toolbar-item"
+				aria-label="Redo">
+				image
+			</button>
 			<button
 				onClick={() => {
 					showModal('Insert Equation', (onClose) => {
@@ -854,16 +871,25 @@ export function ToolbarPlugin() {
 
 
 			{blockType === 'code' ? (
-				<>
-					{/* <Select
-						className="toolbar-item code-language"
-						onChange={onCodeLanguageSelect}
-						options={codeLanguages}
-						value={codeLanguage}
-					/>
-					<i className="chevron-down inside" /> */}
-					{/* <button onClick={() => setBlockType('paragraph')}>Exit</button> */}
-				</>
+				<DropDown
+					disabled={!isEditable}
+					buttonClassName="toolbar-item code-language"
+					buttonLabel={getLanguageFriendlyName(codeLanguage)}
+					buttonAriaLabel="Select language">
+					{CODE_LANGUAGE_OPTIONS.map(([value, name]) => {
+						return (
+							<DropDownItem
+								className={`item ${dropDownActiveClass(
+									value === codeLanguage,
+								)}`}
+								onClick={() => onCodeLanguageSelect(value)}
+								key={value}>
+								<span className="text">{name}</span>
+							</DropDownItem>
+						);
+					})}
+				</DropDown>
+
 			) : (
 				<>
 					<button

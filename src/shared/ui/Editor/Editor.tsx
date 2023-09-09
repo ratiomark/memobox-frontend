@@ -1,4 +1,4 @@
-import './styles.css';
+// import './styles.css';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import ExampleTheme from './themes/ExampleTheme';
 import { InitialConfigType, LexicalComposer } from '@lexical/react/LexicalComposer';
@@ -24,6 +24,10 @@ import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { EquationsPlugin } from './plugins/EquationsPlugin';
 import { EquationNode } from './nodes/EquationNode';
 import { CommandsPlugin } from './plugins/CommandPlugin';
+import { ImageNode } from './nodes/ImageNode/ImageNode';
+import { InlineImageNode } from './nodes/ImageNode/InlineImageNode';
+import { ImagesPlugin } from './plugins/ImagesPlugin';
+import { InlineImagePlugin } from './plugins/InlineImagePlugin';
 
 function Placeholder() {
 	return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -53,6 +57,8 @@ const editorConfig: InitialConfigType = {
 		AutoLinkNode,
 		LinkNode,
 		EquationNode,
+		ImageNode,
+		InlineImageNode,
 	]
 };
 
@@ -154,6 +160,8 @@ export function Editor(props: EditorProps) {
 				<ToolbarPlugin />
 				<CommandsPlugin />
 				{/* {isInputFocused && <ToolbarPlugin />} */}
+				{/* <ImagesPlugin captionsEnabled={false} /> */}
+
 				<OnChangePlugin onChange={onChange} />
 				<SelectionChecker />
 				<div className="editor-inner">
@@ -162,6 +170,8 @@ export function Editor(props: EditorProps) {
 						placeholder={<Placeholder />}
 						ErrorBoundary={LexicalErrorBoundary}
 					/>
+					<ImagesPlugin />
+					<InlineImagePlugin />
 					<HistoryPlugin />
 					<AutoFocusPlugin />
 					<CodeHighlightPlugin />

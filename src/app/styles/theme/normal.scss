@@ -74,6 +74,9 @@ $colors: (
   --small-data-label-color-train: #eb4b4b;
   --small-data-label-color-wait: #ff8b57;
 
+  // lexical-editor
+  --toolbar-item-hover-color: rgb(var(--accent-rgb) / 20%);
+
   // border
   --border-main: 1px solid var(--accent);
   --border-input: 1px solid var(--accent);

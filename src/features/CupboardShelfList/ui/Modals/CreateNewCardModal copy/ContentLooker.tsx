@@ -1,25 +1,30 @@
 import { getQuestionCardModal, getAnswerCardModal } from '../../../model/selectors/getCreateNewCardModal'
 import { Editor, EditorPresenter } from '@/shared/ui/Editor'
 import { HDialog } from '@/shared/ui/HDialog'
-import { memo } from 'react'
+import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor'
+import { EditorPresenterV2 } from '@/shared/ui/lexical-playground/src/EditorPresenter'
+import { memo, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 
 export const ContentLooker = memo(() => {
-
+	const [questionHeight, setQuestionHeight] = useState(0)
+	const [answerHeight, setAnswerHeight] = useState(0)
 	const questionTextCardModal = useSelector(getQuestionCardModal)
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 
 
-	const questionEditor = <EditorPresenter
+	const questionEditor = <EditorPresenterV2
 		// onChange={onChangeQuestion}
 		editable={false}
-		initialState={questionTextCardModal}
+		editorState={questionTextCardModal}
+		getCurrentHeight={setQuestionHeight}
 	/>
-	const answerEditor = <EditorPresenter
+	const answerEditor = <EditorPresenterV2
 		// onChange={onChangeAnswer}
 		editable={false}
-		initialState={answerTextCardModal}
+		editorState={answerTextCardModal}
+		getCurrentHeight={setAnswerHeight}
 	/>
 
 	return (

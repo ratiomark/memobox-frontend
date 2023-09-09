@@ -6,7 +6,7 @@
   background: none;
   padding: var(--padding-textarea-top-and-bottom) var(--padding-textarea-left-and-right);
   border: 1px solid var(--accent);
-  border-radius: 4px;
+  border-radius: var(--border-radius-main);
   resize: none;
 
   &::-webkit-scrollbar {

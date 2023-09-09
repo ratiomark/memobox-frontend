@@ -1,3 +1,4 @@
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
 import { useRef, useCallback } from 'react'
 
 // выполнение колбека не чаще чем 1 раз в delay
@@ -31,7 +32,7 @@ export const useThrottle = (callback: CallBack, delay = 500, option: Options) =>
 		trailing = true,
 	} = option
 
-	const timerId = useRef<null | number>(); // track the timer
+	const timerId = useRef<null | TimeoutId>(); // track the timer
 	const lastArgs = useRef<any>(); // track the args
 
 	// create a memoized debounce
