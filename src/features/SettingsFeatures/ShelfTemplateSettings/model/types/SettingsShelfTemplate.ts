@@ -14,7 +14,7 @@ export type SettingsShelfTemplateMods = 'initial' | 'choosingBoxPlace' | 'settin
 
 export interface SettingsShelfTemplate {
 	mode: SettingsShelfTemplateMods
-	changed: boolean
+	isCurrentTemplateEqualToInitial: boolean
 	initialTemplate: TimingBlock[]
 	currentShelfTemplate: ExtendedTimingBlock[]
 	boxesSettingsListEdges: {

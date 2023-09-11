@@ -14,6 +14,7 @@ import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
 import { ExtendedTimingBlock } from '@/shared/types/DataBlock';
 import { BoxSettingsItem } from '../BoxSettingsItem/BoxSettingsItem';
 import { BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
+import { DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS } from '@/shared/const/animation';
 
 const createBox = (index: number): ExtendedTimingBlock => {
 	return {
@@ -104,9 +105,12 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 		// setTimeout(() => {
 		// 	dispatch(settingsShelfTemplateActions.setCurrentTemplate(updatedBoxesList))
 		// }, 700)
-		// вот тут нужно изменить isOpen у только что добавленнной коробки, через таймаут
 		// dispatch(settingsShelfTemplateActions.setChanged(true))
 		dispatch(settingsShelfTemplateActions.setMode('settingTimeToNewBox'))
+		setTimeout(() => {
+			dispatch(settingsShelfTemplateActions.setMode('waitingForSaving'))
+		}, DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS)
+		// вот тут нужно изменить isOpen у только что добавленнной коробки, через таймаут
 		setTimeout(() => {
 			dispatch(settingsShelfTemplateActions.setCurrentTemplate(updatedBoxesList))
 		}, 500)

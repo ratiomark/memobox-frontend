@@ -1,18 +1,15 @@
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CupboardInfoModal.module.scss';
 import { getIsCupboardInfoOpen } from '../../../model/selectors/getCupboardShelfList';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfListSlice';
-import { HDialog } from '@/shared/ui/HDialog';
 import { FAQItem } from '@/shared/ui/FAQItem';
 import { MyText } from '@/shared/ui/Typography';
-import { useMainContentMaxHeightAndAreaRows } from '@/shared/lib/helpers/hooks/useMainContentMaxHeightAndAreaRows';
 import { useEffect, useMemo, useState } from 'react';
 import { useWindowSize } from '@/shared/lib/helpers/hooks/useWindowHeight';
-import { t } from 'i18next';
 import { Button } from '@/shared/ui/Button';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface CupboardInfoModalProps {
 	className?: string
@@ -59,7 +56,7 @@ export const CupboardInfoModal = (props: CupboardInfoModalProps) => {
 	}
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			// isOpen={true}
 			isOpen={isOpen}
 			onClose={onCloseModal}
@@ -90,6 +87,6 @@ export const CupboardInfoModal = (props: CupboardInfoModalProps) => {
 				</div>
 			</div>
 
-		</HDialog>
+		</HDialogHeadless>
 	)
 }

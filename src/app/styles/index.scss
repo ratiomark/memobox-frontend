@@ -33,6 +33,7 @@ body {
 // prevent text selection while DnD
 body.dragging * {
   user-select: none;
+  cursor: grabbing;
 }
 
 #root {

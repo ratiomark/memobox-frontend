@@ -30,6 +30,7 @@ import { dropDownLocalTextSize } from '@/shared/const/fontSizes';
 import { missedTrainingDropdownLocalKey, removeBoxDropdownLocalKey } from '@/shared/const/translationKeys';
 import { DropdownLocalList } from './DropdownLocalList';
 import { idCupboardShelfList, idDropDownLocalTemplateHidden } from '@/shared/const/ids';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 
 interface MissedTrainingSettingsProps {
@@ -147,18 +148,17 @@ export const BoxSettingsDropdownModal = (props: MissedTrainingSettingsProps) => 
 
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={(isOpen && checked)}
 			onSubmit={() => alert('Сохраняю настройки для коробки')}
 			onClose={onCloseHandle}
 			panelAbsolute
 			panelWithMainPadding={false}
+			transparent
 			styles={{ left: coordinatesChecked.x, top: coordinatesChecked.y }}
-			overlay={false}
-		// lazy
 		>
 			{dropDownLocal}
-		</HDialog >
+		</HDialogHeadless >
 	)
 }
 

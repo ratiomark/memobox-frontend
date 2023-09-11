@@ -14,6 +14,7 @@ import { Button } from '@/shared/ui/Button';
 import { AnimatePresence, motion, } from 'framer-motion';
 import { HStack } from '@/shared/ui/Stack';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface ShelfTemplateSettingsProps {
 	className?: string
@@ -49,17 +50,17 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 
 	const [isAnyTimeSetterOpen, setIsAnyTimeSetterOpen] = useState(false)
 	const { t } = useTranslation()
-	const isTemplateChanged = useSelector(getSettingsShelfTemplateChanged)
+	const isCurrentTemplateEqualToInitial = useSelector(getSettingsShelfTemplateChanged)
 
 	if (!shelfTemplateSettingsFromUser) return <p>Загрузка</p>
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseHandle}
 			onSubmit={() => alert('Сохраняю настройки')}
 			lazy
-			max
+			// max
 			panelWithMainPadding={false}
 		>
 			<AnimatePresence initial={false} mode='wait'>
@@ -72,14 +73,14 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 				>
 					{/* {isAnyTimeSetterOpen && <div className={cls.overlay} />} */}
 					<BoxesSettingsContent />
-					
+
 					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 					<HStack max justify='between'>
 						<Button variant='empty'>{t('return to default')}</Button>
 						<ModalButtons
 							justify='end'
 							max={false}
-							isSubmitDisabled={!isTemplateChanged}
+							isSubmitDisabled={isCurrentTemplateEqualToInitial}
 							onClose={onCloseHandle}
 							onSubmit={() => alert('Сохраняю настройки')}
 						/>
@@ -88,7 +89,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 				</motion.div>
 			</AnimatePresence>
 			{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
-		</HDialog>
+		</HDialogHeadless>
 
 	)
 }

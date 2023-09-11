@@ -72,10 +72,12 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 	const onAddNewBoxClickHandle = (e: MouseEvent) => {
 		onAddBoxClick(boxIndex! + 1)
 		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+		// console.log(x, y)
 		const coordinates = {
 			x: x + width / 2,
 			y: y + height / 2
 		}
+		// console.log('coordinates:  ', coordinates)
 		// console.log('Add ICON ', coordinates)
 		dispatch(settingsShelfTemplateActions.setTimingSetterBoxCoordinates(coordinates))
 		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(true))
@@ -85,10 +87,12 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 
 	const onOpenTimeSetterHandle = (e: MouseEvent) => {
 		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+		console.log(x, y)
 		const coordinates = {
 			x: x + width / 2,
 			y: y + height / 2
 		}
+		console.log('coordinates:  ', coordinates)
 		// console.log('Add Button coordinates ', coordinates)
 		dispatch(settingsShelfTemplateActions.setTimingSetterBoxCoordinates(coordinates))
 		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(true))

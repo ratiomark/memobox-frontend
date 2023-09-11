@@ -1,0 +1,63 @@
+.HDialogHeadless {
+  position: relative;
+  z-index: var(--dialog-index);
+  isolation: isolate;
+  inset: 0;
+}
+
+.overlayTransparent,
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--dialog-overlay-index);
+  isolation: isolate;
+}
+
+.overlayTransparent {
+  cursor: url("../../../shared/assets/icons/cursorCloseIconBlack.svg") 12 12, auto;
+}
+
+.overlay {
+  background-color: rgb(81 81 81 / 50.7%);
+  cursor: url("../../../shared/assets/icons/cursorCloseIconWhite.svg") 12 12, auto;
+}
+
+.fixed {
+  position: fixed;
+  z-index: var(--dialog-content-index);
+}
+
+.content {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--dialog-content-index);
+  isolation: isolate;
+}
+
+.panel {
+  border-radius: var(--border-radius-main);
+  z-index: var(--dialog-content-index);
+}
+
+.panelAbsolute {
+  position: fixed;
+  isolation: isolate;
+}
+
+.panelBg {
+  background-color: var(--bg);
+}
+
+.panelPaddingMain {
+  padding: 20px;
+}
+
+.panelMax {
+  width: min(1200px, 80%);
+
+  // background-color: var(--bg);
+  // border-radius: 12px;
+}

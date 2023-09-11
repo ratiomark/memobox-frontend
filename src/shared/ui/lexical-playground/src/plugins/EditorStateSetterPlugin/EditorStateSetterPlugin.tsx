@@ -8,9 +8,10 @@ type EditorStateSetterProps = {
 export function EditorStateSetterPlugin({ editorState }: EditorStateSetterProps) {
 	const [editor] = useLexicalComposerContext();
 	useEffect(() => {
-		return editor.update(() => {
-			editor.setEditorState(editor.parseEditorState(editorState))
-		})
+		// тут нужен setTimeout, чтобы реакт в начале изменил все свои внутренние приколы, а стейт редактора изменился в последнюю очередь.
+		setTimeout(() => {
+			editor.setEditorState(editor.parseEditorState(editorState));
+		}, 0);
 	}, [editor, editorState]);
 
 	return null

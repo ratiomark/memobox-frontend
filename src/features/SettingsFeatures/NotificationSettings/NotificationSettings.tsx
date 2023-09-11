@@ -1,18 +1,16 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { HDialog } from '@/shared/ui/HDialog';
 import cls from './NotificationSettings.module.scss';
 import { useSelector } from 'react-redux';
 import { getUserNotificationSettings } from '@/entities/User';
 import { Card } from '@/shared/ui/Card';
 import { Heading } from '@/shared/ui/Typography';
 import { Switcher } from '@/shared/ui/Switcher';
-import { TimeSetter } from '@/shared/ui/TimeSetter';
 import { SingleSetter } from '@/shared/ui/TimeSetter/SingleSetter';
 import { WheelEvent, useState } from 'react';
 import { Button } from '@/shared/ui/Button';
-import { HStack } from '@/shared/ui/Stack';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface NotificationSettingsProps {
 	className?: string
@@ -82,7 +80,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 
 	// console.log(notificationsSettings)
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseHandle}
 			onSubmit={() => alert('Сохраняю настройки')}
@@ -138,12 +136,12 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 						/>
 					</div>
 				</div>
-					<ModalButtons
-						onClose={onCloseHandle}
-						onSubmit={() => alert('Сохраняю настройки')}
-					/>
+				<ModalButtons
+					onClose={onCloseHandle}
+					onSubmit={() => alert('Сохраняю настройки')}
+				/>
 			</div>
-		</HDialog>
+		</HDialogHeadless>
 
 	)
 }

@@ -1,19 +1,9 @@
-.Switcher {
-
-}
-
 .switcherWrapper {
-  // display: flex;
-  // align-items: center;
-  // justify-content: end;
-  // gap: 16px;
-
-  //   width: 200px;
-  // height: 100px;
-  // background: grey;
-  // display: block;
-  // border-radius: 100px;
-  // position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 16px;
+  border: 1px solid transparent;
 }
 
 .label {
@@ -21,52 +11,62 @@
 }
 
 .switcher {
-  // display: flex;
-  // align-items: center;
-  outline: none;
-  border: none;
+  all: unset;
 
-  // cursor: pointer;
-  background-color: rgb(128 128 128 / 45.2%);
-  height: 20px;
+  // border: 1px solid transparent;
+  display: block;
   width: 36px;
+  height: 20px;
+
+  //   width: 36px;
+  //   height: 20px;
   position: relative;
-  border-radius: 999px;
+
+  // box-shadow: rgb(0 0 0 / 17%) 0 2px 10px;
+  // -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+  border-radius: 9999px;
+  background-color: rgb(128 128 128 / 45.2%);
+}
+
+.switcher[data-state="checked"] {
+  background-color: var(--accent);
+}
+
+.switcher[disabled] {
+  cursor: not-allowed;
 }
 
 .pointer {
   cursor: pointer;
 }
 
-.switcher_active {
-  background-color: var(--accent);
-}
-
 .switcherCircle {
-  position: absolute;
-  top: 2px;
-  height: 16px;
+  display: block;
   width: 16px;
-  border-radius: 999px;
-  background: var(--bg);
-  transform: translateX(2px);
+  height: 16px;
+
+  // background-color: white;
+  border-radius: 9999px;
+
+  // box-shadow: rgb(0 0 0 / 17%) 0 2px 2px;
   transition: transform 0.3s;
+  transform: translateX(2px);
+  will-change: transform;
+  background: var(--bg);
 }
 
-.switcherCircle_active {
-  transition: transform 0.3s;
+.switcherCircle[data-state="checked"] {
   transform: translateX(18px);
 }
 
-// .Switcher {
-
-// }
+// ------------------------
 
 // .switcherWrapper {
 //   display: flex;
 //   align-items: center;
 //   justify-content: end;
 //   gap: 16px;
+
 // }
 
 // .label {
@@ -77,8 +77,6 @@
 //   display: flex;
 //   align-items: center;
 //   outline: none;
-
-//   // cursor: pointer;
 //   background-color: rgb(128 128 128 / 45.2%);
 //   height: 20px;
 //   width: 36px;

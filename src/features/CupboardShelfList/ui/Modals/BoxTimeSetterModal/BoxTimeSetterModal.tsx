@@ -17,9 +17,9 @@ import {
 } from '../../../model/selectors/getBoxTimingSetterModal';
 import { TimeSetter } from '@/shared/ui/TimeSetter';
 import { useEffect, useRef, useState } from 'react';
-import { Modal } from '@/shared/ui/Modal/Modal';
 import { AnimatePresence, motion } from 'framer-motion';
 import { idCupboardShelfList, idTimeSetterHidden } from '@/shared/const/ids';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface MissedTrainingSettingsProps {
 	className?: string
@@ -45,27 +45,27 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 	const [coordinatesChecked, setCoordinatesChecked] = useState({ x: 0, y: 0 })
 	const [checked, setChecked] = useState(false)
 	// const coordinatesChecked = useRef({ x: 0, y: 0 })
-
 	// VAR: Тут нужно рефакторить в кастомные хуки
 	useEffect(() => {
-		setTimeout(() => {
-			const header = document.querySelector('header') as HTMLDivElement
-			headerHeight.current = header.clientHeight
-			const timeSetter = document.querySelector(`#${idTimeSetterHidden}`) as HTMLDivElement
-			const timeSetterRect = timeSetter.getBoundingClientRect()
-			timeSetterSizes.current.height = timeSetterRect.height
-			timeSetterSizes.current.width = timeSetterRect.width
-			// console.log(timeSetterSizes)
-			const cupboardShelfList = document.querySelector(`#${idCupboardShelfList}`) as HTMLDivElement
-			const cupboardShelfListSizes = cupboardShelfList.getBoundingClientRect()
-			cupboardShelfListRects.current.x = cupboardShelfListSizes.x
-			cupboardShelfListRects.current.y = cupboardShelfListSizes.y
-			cupboardShelfListRects.current.width = cupboardShelfListSizes.width
-			// checked.current = true
-		}, 200)
+		// setTimeout(() => {
+		const header = document.querySelector('header') as HTMLDivElement
+		headerHeight.current = header.clientHeight
+		const timeSetter = document.querySelector(`#${idTimeSetterHidden}`) as HTMLDivElement
+		const timeSetterRect = timeSetter.getBoundingClientRect()
+		timeSetterSizes.current.height = timeSetterRect.height
+		timeSetterSizes.current.width = timeSetterRect.width
+		// console.log(timeSetterSizes)
+		const cupboardShelfList = document.querySelector(`#${idCupboardShelfList}`) as HTMLDivElement
+		const cupboardShelfListSizes = cupboardShelfList.getBoundingClientRect()
+		cupboardShelfListRects.current.x = cupboardShelfListSizes.x
+		cupboardShelfListRects.current.y = cupboardShelfListSizes.y
+		cupboardShelfListRects.current.width = cupboardShelfListSizes.width
+		// checked.current = true
+		// }, 200)
 	}, [])
 
 	useEffect(() => {
+		if (timeSetterSizes.current.height === 0) return
 		const coordinatesHeightCorrection = timeSetterSizes.current.height / 2
 		const coordinatesWidthCorrection = timeSetterSizes.current.width / 2
 		const viewPortHeight = window.innerHeight
@@ -76,7 +76,6 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 		} else if (actualX < cupboardShelfListRects.current.x) {
 			actualX = cupboardShelfListRects.current.x
 		}
-
 		let actualY = coordinates.y - coordinatesHeightCorrection
 		if (actualY < headerHeight.current) {
 			actualY = headerHeight.current
@@ -84,21 +83,16 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 			actualY = viewPortHeight - timeSetterSizes.current.height
 		}
 		setCoordinatesChecked({ y: actualY, x: actualX })
-		setTimeout(() => {
-			setChecked(true)
-		}, 10)
 	}, [coordinates])
 
 
 	const onCloseHandle = () => {
 		dispatch(cupboardShelfListActions.setTimingSetterModalIsOpen(false))
-		setChecked(false)
 		// dispatch(cupboardShelfListActions.dropMissedTrainingShelfAndBoxId())
 	}
 
 	const onSaveTime = () => {
 		dispatch(cupboardShelfListActions.setTimingSetterModalIsOpen(false))
-		setChecked(false)
 		// if (!boxId) {
 		// 	// console.log(value.value)
 		// 	updateShelfMutation({ id: shelfId, missedTrainingAction: value.value as MissedTrainingValues })
@@ -106,21 +100,45 @@ export const BoxTimeSetterModal = (props: MissedTrainingSettingsProps) => {
 		// }
 	}
 
+	// const onCloseHandle = () => {
+	// 	dispatch(cupboardShelfListActions.setTimingSetterModalIsOpen(false))
+	// 	setChecked(false)
+	// 	// dispatch(cupboardShelfListActions.dropMissedTrainingShelfAndBoxId())
+	// }
+
+	// const onSaveTime = () => {
+	// 	dispatch(cupboardShelfListActions.setTimingSetterModalIsOpen(false))
+	// 	setChecked(false)
+	// 	// if (!boxId) {
+	// 	// 	// console.log(value.value)
+	// 	// 	updateShelfMutation({ id: shelfId, missedTrainingAction: value.value as MissedTrainingValues })
+	// 	// 	onCloseHandle()
+	// 	// }
+	// }
+
 	return (
-		<HDialog
-			isOpen={(isOpen && checked)}
+		<HDialogHeadless
+			isOpen={(isOpen)}
 			onSubmit={() => alert('Сохраняю настройки для коробки')}
 			onClose={onCloseHandle}
+			transparent
 			panelAbsolute
 			panelWithMainPadding={false}
+			panelWithBackground={false}
 			styles={{ left: coordinatesChecked.x, top: coordinatesChecked.y }}
 		>
-			<TimeSetter
-				timingData={timingData}
-				onClose={onCloseHandle}
-				onSaveTime={onSaveTime}
-			/>
-		</HDialog >
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ delay: 0.05 }}
+			>
+				<TimeSetter
+					timingData={timingData}
+					onClose={onCloseHandle}
+					onSaveTime={onSaveTime}
+				/>
+			</motion.div>
+		</HDialogHeadless >
 	)
 }
 

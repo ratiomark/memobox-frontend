@@ -1,10 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './NotificationSettingsModal.module.scss';
-import { HDialog } from '@/shared/ui/HDialog';
 import { useSelector } from 'react-redux';
-import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
-import { useMemo, useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 import { HStack } from '@/shared/ui/Stack';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
@@ -14,6 +11,8 @@ import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfList
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { Card } from '@/shared/ui/Card';
 import { MyText } from '@/shared/ui/Typography';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
+import { useState } from 'react';
 
 interface MissedTrainingSettingsProps {
 	className?: string
@@ -43,7 +42,7 @@ export const NotificationSettingsModal = (props: MissedTrainingSettingsProps) =>
 
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onClose}
 			onSubmit={() => alert('Сохраняю уведомления')}
@@ -61,6 +60,6 @@ export const NotificationSettingsModal = (props: MissedTrainingSettingsProps) =>
 				<Button onClick={onClose}>{t('cancel')}</Button>
 				<Button variant='filled'>{t('save')}</Button>
 			</HStack>
-		</HDialog>
+		</HDialogHeadless>
 	)
 }

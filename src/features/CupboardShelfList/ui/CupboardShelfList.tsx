@@ -5,7 +5,7 @@ import { $generateHtmlFromNodes } from '@lexical/html';
 // import './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal.css'
 // import clsBoxSettings from './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal.module.scss'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
+import { Suspense, useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
 import { DndProvider, useDrop } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { fetchCupboardData } from '../model/services/fetchCupboardData';
@@ -42,9 +42,11 @@ import { BoxSettingsDropdownModal } from './Modals/BoxSettingsDropdownModal/BoxS
 import { HiddenTemplates } from './HiddenTemplates/HiddenTemplates';
 import { idCupboardShelfList } from '@/shared/const/ids';
 import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
-import { Editor } from '@/shared/ui/Editor/EditorSE';
-import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
-import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
+import { CreateNewCardModalHeadless } from './Modals/CreateNewCardModal/CreateNewCardModalHeadless';
+import { CardModalSkeleton } from '@/shared/ui/Skeleton';
+import { Portal } from '@radix-ui/react-dialog';
+// import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
+// import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 
 interface CupboardShelfListProps {
 	className?: string
@@ -191,53 +193,53 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 
 
 	return (
-		<div
-			className={cls.cupboardShelfList}
-			id={idCupboardShelfList}
-		>
-			{/* {html} */}
-			<div style={{ padding: 10, border: '1px solid red' }}>
-				<EditorV2 />
-			</div>
-			<ContentLooker />
-			{/* <Editor autoFocus/> */}
-			<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
-			{/* <AnimatePresence> */}
-
-			{/* <DndProvider backend={HTML5Backend}> */}
-			{/* <DndShelfListWrapper> */}
-			<Reorder.Group
-				values={cupboardIsLoading ? localDataService.getShelves() : cupboardShelves}
-				// onDragEnd={(event, info) => {
-				// 	console.log(info.point.x, info.point.y)
-				// 	console.log(event)
-				// 	console.log(info)
-				// }
-				// }
-				onReorder={reorderShelves}
+		<>
+			<div
+				className={cls.cupboardShelfList}
+				id={idCupboardShelfList}
 			>
-				{shelvesList}
-			</Reorder.Group>
-			{/* </DndShelfListWrapper> */}
-			{/* </DndProvider> */}
-			{/* </AnimatePresence> */}
-			<BoxesSettingsModal />
-			<MissedTrainingSettingsModal />
-			<NotificationSettingsModal />
-			<CreateNewCardModal />
-			<BoxTimeSetterModal />
-			<BoxSettingsDropdownModal />
-			<CupboardInfoModal />
-			<HiddenTemplates />
-			{/* <TimeSetterHiddenTemplate /> */}
-			{/* <DropdownLocalHiddenTemplate /> */}
-			{/* <div className={cls.timeSetterTemplateHidden} >
-				<TimeSetter
-					onClose={() => { }}
-					onSaveTime={() => { }}
-				/>
+				{/* {html} */}
+				{/* <div style={{ padding: 10, border: '1px solid red' }}>
+				<EditorV2 />
 			</div> */}
+				{/* <ContentLooker /> */}
+				{/* <Editor autoFocus/> */}
+				<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
+				{/* <AnimatePresence> */}
 
-		</div>
+				{/* <DndProvider backend={HTML5Backend}> */}
+				{/* <DndShelfListWrapper> */}
+				<Reorder.Group
+					values={cupboardIsLoading ? localDataService.getShelves() : cupboardShelves}
+					// onDragEnd={(event, info) => {
+					// 	console.log(info.point.x, info.point.y)
+					// 	console.log(event)
+					// 	console.log(info)
+					// }
+					// }
+					onReorder={reorderShelves}
+				>
+					{shelvesList}
+				</Reorder.Group>
+				{/* </DndShelfListWrapper> */}
+				{/* </DndProvider> */}
+				{/* </AnimatePresence> */}
+				<BoxesSettingsModal />
+				<MissedTrainingSettingsModal />
+				<NotificationSettingsModal />
+
+				<BoxTimeSetterModal />
+				<BoxSettingsDropdownModal />
+				<CupboardInfoModal />
+				<HiddenTemplates />
+
+			</div>
+
+			<Suspense fallback={<CardModalSkeleton />}>
+				{/* <CreateNewCardModalHeadless /> */}
+				<CreateNewCardModal />
+				{/* <CardModalSkeleton /> */}
+			</Suspense>
+		</>
 	)
 }

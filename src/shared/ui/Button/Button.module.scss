@@ -292,7 +292,9 @@
   // background: grey;
   border: 1px solid transparent;
   background-color: #8080801f;
-  cursor: auto;
+
+  // cursor: auto;
+  cursor: not-allowed;
 }
 
 .size_s {

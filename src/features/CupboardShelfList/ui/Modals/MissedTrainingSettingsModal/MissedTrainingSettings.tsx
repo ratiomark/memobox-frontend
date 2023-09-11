@@ -17,6 +17,7 @@ import { MissedTrainingValues } from '@/shared/types/DataBlock';
 import { useUpdateBoxWithTagMutation } from '@/entities/Box';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface MissedTrainingSettingsProps {
 	className?: string
@@ -111,7 +112,7 @@ export const MissedTrainingSettingsModal = (props: MissedTrainingSettingsProps) 
 	}
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseHandle}
 			onSubmit={() => alert('Сохраняю пропущенные тренировки')}
@@ -139,6 +140,6 @@ export const MissedTrainingSettingsModal = (props: MissedTrainingSettingsProps) 
 					onClose={onCloseHandle}
 				/>
 			</div>
-		</HDialog>
+		</HDialogHeadless>
 	)
 }

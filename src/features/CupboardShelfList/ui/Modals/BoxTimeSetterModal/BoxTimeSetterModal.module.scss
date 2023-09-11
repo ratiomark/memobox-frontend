@@ -1,3 +1,15 @@
 .BoxTimeSetter {
   // position: absolute;
 }
+
+// .tooltip {
+//   transition: top 1s ease, left 1s ease;
+// }
+.tooltip {
+  opacity: 0;
+  transition: all 10s ease 5s;
+}
+
+.tooltip.visible {
+  opacity: 1;
+}

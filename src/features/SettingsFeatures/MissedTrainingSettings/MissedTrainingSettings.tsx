@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './MissedTrainingSettings.module.scss';
-import { HDialog } from '@/shared/ui/HDialog';
 import { useSelector } from 'react-redux';
 import { getUserMissedTrainingSettings } from '@/entities/User';
 import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
 import { useMemo, useState } from 'react';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { Heading } from '@/shared/ui/Typography';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface MissedTrainingSettingsProps {
 	className?: string
@@ -44,7 +44,7 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 	}
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseHandle}
 			onSubmit={() => alert('Сохраняю настройки')}
@@ -69,6 +69,6 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 					onSubmit={() => alert('Сохраняю настройки')}
 				/>
 			</div>
-		</HDialog>
+		</HDialogHeadless>
 	)
 }

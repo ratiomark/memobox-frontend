@@ -82,8 +82,8 @@ import {
 	SELECTION_CHANGE_COMMAND,
 	UNDO_COMMAND,
 } from 'lexical';
-import { useCallback, useEffect, useState } from 'react';
-import * as React from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
+// import * as React from 'react';
 
 
 import useModal from '../../hooks/useModal';
@@ -297,10 +297,14 @@ function ElementFormatDropdown({
 
 interface ToolbarPluginProps {
 	setIsListNode?: React.Dispatch<React.SetStateAction<boolean>>
+	setToolbarHeight?: React.Dispatch<React.SetStateAction<number>>
 }
+
 export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
+	const { setToolbarHeight, setIsListNode } = props
 	const [editor] = useLexicalComposerContext();
 	const [activeEditor, setActiveEditor] = useState(editor);
+	const toolbarWrapperRef = useRef<HTMLDivElement>(null)
 	const [blockType, setBlockType] =
 		useState<keyof typeof blockTypeToBlockName>('paragraph');
 	const [rootType, setRootType] =
@@ -308,11 +312,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 	const [selectedElementKey, setSelectedElementKey] = useState<NodeKey | null>(
 		null,
 	);
-	// const [fontSize, setFontSize] = useState<string>('15px');
-	// const [fontColor, setFontColor] = useState<string>('#000');
-	// const [bgColor, setBgColor] = useState<string>('#fff');
-	// const [fontFamily, setFontFamily] = useState<string>('Arial');
-	const [isEquation, setIsEquation] = useState(false)
+	// const [isEquation, setIsEquation] = useState(false)
 	const [elementFormat, setElementFormat] = useState<ElementFormatType>('left');
 	const [isLink, setIsLink] = useState(false);
 	const [isBold, setIsBold] = useState(false);
@@ -328,6 +328,12 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 	const [isRTL, setIsRTL] = useState(false);
 	const [codeLanguage, setCodeLanguage] = useState<string>('');
 	const [isEditable, setIsEditable] = useState(() => editor.isEditable());
+
+	useEffect(() => {
+		if (setToolbarHeight && toolbarWrapperRef.current) {
+			setToolbarHeight(toolbarWrapperRef.current.getBoundingClientRect().height)
+		}
+	}, [setToolbarHeight])
 
 	const $updateToolbar = useCallback(() => {
 		const selection = $getSelection();
@@ -382,8 +388,8 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 			if (elementDOM !== null) {
 				setSelectedElementKey(elementKey);
 				if ($isListNode(element)) {
-					if (props.setIsListNode) {
-						props.setIsListNode(true)
+					if (setIsListNode) {
+						setIsListNode(true)
 					}
 					const parentList = $getNearestNodeOfType<ListNode>(
 						anchorNode,
@@ -394,8 +400,8 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 						: element.getListType();
 					setBlockType(type);
 				} else {
-					if (props.setIsListNode) {
-						props.setIsListNode(false)
+					if (setIsListNode) {
+						setIsListNode(false)
 					}
 					const type = $isHeadingNode(element)
 						? element.getTag()
@@ -413,30 +419,13 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 					}
 				}
 			}
-			// Handle buttons
-			// setFontSize(
-			// 	$getSelectionStyleValueForProperty(selection, 'font-size', '15px'),
-			// );
-			// setFontColor(
-			// 	$getSelectionStyleValueForProperty(selection, 'color', '#000'),
-			// );
-			// setBgColor(
-			// 	$getSelectionStyleValueForProperty(
-			// 		selection,
-			// 		'background-color',
-			// 		'#fff',
-			// 	),
-			// );
-			// setFontFamily(
-			// 	$getSelectionStyleValueForProperty(selection, 'font-family', 'Arial'),
-			// );
 			setElementFormat(
 				($isElementNode(node)
 					? node.getFormatType()
 					: parent?.getFormatType()) || 'left',
 			);
 		}
-	}, [activeEditor, props]);
+	}, [activeEditor, setIsListNode]);
 
 	useEffect(() => {
 		return editor.registerCommand(
@@ -558,7 +547,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 
 
 	return (
-		<div className='toolbarWrapper'>
+		<div className='toolbarWrapper' ref={toolbarWrapperRef}>
 			<div className="toolbar" style={{ display: 'flex', flexWrap: 'wrap' }}>
 				<button
 					tabIndex={-1}

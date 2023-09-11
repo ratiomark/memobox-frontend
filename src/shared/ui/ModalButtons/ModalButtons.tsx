@@ -5,6 +5,7 @@ import { Button } from '../Button';
 import { HStack } from '../Stack';
 import { FlexGap, FlexJustify } from '../Stack/Flex/Flex';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { memo } from 'react';
 
 interface ModalButtonsProps {
 	className?: string
@@ -58,3 +59,4 @@ export const ModalButtons = (props: ModalButtonsProps) => {
 		</HStack>
 	)
 }
+// ModalButtons.displayName = 'ModalButtons'

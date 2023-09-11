@@ -30,7 +30,6 @@ import ToolbarPlugin from './plugins/ToolbarPlugin/index2';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import ContentEditable from './ui/ContentEditable';
 import Placeholder from './ui/Placeholder';
-import { CAN_USE_DOM } from '../../Editor/shared/canUseDOM';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import Settings from './Settings';
 import PlaygroundNodes from './nodes/PlaygroundNodes';
@@ -40,6 +39,7 @@ import { EditorState } from 'lexical';
 import { ChangePlugin } from './plugins/ChangePlugin/ChangePlugin';
 import { CommandsPlugin } from './plugins/CommandPlugin/CommandPlugin';
 import { EditorStateSetterPlugin } from './plugins/EditorStateSetterPlugin/EditorStateSetterPlugin';
+import { CAN_USE_DOM } from '../shared/src/canUseDOM';
 
 
 const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> }) => {
@@ -129,7 +129,7 @@ function Editor(props: EditorProps) {
 		if (getCurrentHeight) {
 			getCurrentHeight(areaHeightByScroll)
 		}
-		console.log('!!!!!!!!!!!!!!   ', areaHeightByScroll)
+		// console.log('!!!!!!!!!!!!!!   ', areaHeightByScroll)
 		// return () => {
 		// 	counter.current = counter.current + 1
 		// }

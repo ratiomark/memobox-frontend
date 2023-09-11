@@ -30,7 +30,6 @@ import ToolbarPlugin from './plugins/ToolbarPlugin/index2';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import ContentEditable from './ui/ContentEditable';
 import Placeholder from './ui/Placeholder';
-import { CAN_USE_DOM } from '../../Editor/shared/canUseDOM';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import Settings from './Settings';
 import PlaygroundNodes from './nodes/PlaygroundNodes';
@@ -39,6 +38,7 @@ import { useActiveElement } from '@/shared/lib/helpers/hooks/useActiveElement';
 import { EditorState } from 'lexical';
 import { ChangePlugin } from './plugins/ChangePlugin/ChangePlugin';
 import { CommandsPlugin } from './plugins/CommandPlugin/CommandPlugin';
+import { CAN_USE_DOM } from '../shared/src/canUseDOM';
 
 
 const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> }) => {
@@ -70,6 +70,7 @@ function Editor(props: EditorProps) {
 	const renderCounter = useRef(0)
 	const [isListNode, setIsListNode] = useState(false)
 	const [isFirstRender, setIsFirstRender] = useState(true)
+	const [toolbarHeight, setToolbarHeight] = useState(0)
 	const {
 		settings: {
 			isMaxLength,
@@ -117,22 +118,38 @@ function Editor(props: EditorProps) {
 	useEffect(() => {
 		// тут можно сделать проверку на количество рендеров, так как нужная высота прилетает только на третий раз. 
 		console.log('renderCounter  ', renderCounter.current)
-		if (renderCounter.current === -1) {
-			return
-		} else if (renderCounter.current !== 2) {
-			renderCounter.current = renderCounter.current + 1
-			return
-		} else if (isFirstRender && editorScrollerRef.current && heightValue && renderCounter.current === 2) {
-			renderCounter.current = -1
+
+		if (editorScrollerRef.current && heightValue && toolbarHeight > 0) {
+			// const toolbar = document.querySelector('.toolbarWrapper') as HTMLDivElement
+			// console.log('toolbar.scrollHeight toolbar.scrollHeight toolbar.scrollHeight ', toolbar.scrollHeight)
+			// renderCounter.current = -1
+			// setIsFirstRender(false)
+			editorScrollerRef.current.style.minHeight = `${heightValue - toolbarHeight}px`
+			// editorScrollerRef.current.style.minHeight = `${heightValue - toolbar.scrollHeight}px`
 			setIsFirstRender(false)
-			editorScrollerRef.current.style.minHeight = `${heightValue - 44}px`
 		}
-		// setIsFirstRender(false)
-	}, [heightValue, isFirstRender])
+	}, [heightValue, toolbarHeight])
+	// useEffect(() => {
+	// 	// тут можно сделать проверку на количество рендеров, так как нужная высота прилетает только на третий раз. 
+	// 	console.log('renderCounter  ', renderCounter.current)
+	// 	if (renderCounter.current === -1) {
+	// 		return
+	// 	} else if (renderCounter.current !== 2) {
+	// 		renderCounter.current = renderCounter.current + 1
+	// 		return
+	// 	} else if (isFirstRender && editorScrollerRef.current && heightValue && renderCounter.current === 2) {
+	// 		const toolbar = document.querySelector('.toolbarWrapper') as HTMLDivElement
+	// 		console.log('toolbar.scrollHeight toolbar.scrollHeight toolbar.scrollHeight ', toolbar.scrollHeight)
+	// 		renderCounter.current = -1
+	// 		setIsFirstRender(false)
+	// 		editorScrollerRef.current.style.minHeight = `${heightValue - toolbar.scrollHeight}px`
+	// 	}
+	// 	// setIsFirstRender(false)
+	// }, [heightValue, isFirstRender])
 
 	return (
 		<div ref={editorRef} className="editor-shell">
-			{isEditable && <ToolbarPlugin setIsListNode={setIsListNode} />}
+			{isEditable && <ToolbarPlugin setToolbarHeight={setToolbarHeight} setIsListNode={setIsListNode} />}
 			{/* {showToolBar && <ToolbarPlugin />} */}
 			<div
 				className={`editor-container ${showTreeView ? 'tree-view' : ''}`}
@@ -152,7 +169,7 @@ function Editor(props: EditorProps) {
 								ref={editorScrollerRef}
 								style={
 									(isFirstRender && heightValue)
-										? { minHeight: heightValue - 44 }
+										? { minHeight: heightValue - (toolbarHeight > 0 ? toolbarHeight : 37.6) }
 										: { minHeight: editorScrollerRef.current?.style.minHeight }}
 							>
 								<div className="editor" ref={onRef}>

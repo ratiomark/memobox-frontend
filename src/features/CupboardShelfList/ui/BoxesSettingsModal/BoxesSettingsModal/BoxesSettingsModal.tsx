@@ -14,6 +14,7 @@ import cls from './BoxesSettingsModal.module.scss';
 import { HStack } from '@/shared/ui/Stack';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 
 interface BoxesSettingsModalProps {
@@ -43,7 +44,7 @@ export const BoxesSettingsModal = memo((props: BoxesSettingsModalProps) => {
 
 	console.log(shelf.boxesData, isOpen)
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseBoxesSettings}
 		>
@@ -72,7 +73,7 @@ export const BoxesSettingsModal = memo((props: BoxesSettingsModalProps) => {
 					<Button>{t('save')}</Button>
 				</div>
 			</div> */}
-		</HDialog>
+		</HDialogHeadless>
 	)
 	// return (
 	// 	<Modal

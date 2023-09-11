@@ -60,8 +60,8 @@ export const ShadowTextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
 		const areaHeightByScroll = area.scrollHeight + borderTopPlusBottom + lineHeight
 		// const areaHeightByScroll = area.scrollHeight + borderTopPlusBottom + lineHeight
 
-		console.log('SHADOW AREA финальное значение: ', areaHeightByScroll)
-		console.log('Рендер ', counter.current, ' --- конец')
+		// console.log('SHADOW AREA финальное значение: ', areaHeightByScroll)
+		// console.log('Рендер ', counter.current, ' --- конец')
 		// console.log('')
 		// area.style.height = `${currentHeight}px`
 		if (getCurrentHeight) {

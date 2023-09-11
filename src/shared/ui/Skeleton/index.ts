@@ -1,1 +1,2 @@
-export { Skeleton } from "./Skeleton";
+export { CardModalSkeleton } from './CardModalSkeleton/CardModalSkeleton';
+export { Skeleton } from './Skeleton';

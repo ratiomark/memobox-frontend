@@ -8,7 +8,7 @@ import { BoxCoordinates } from '@/entities/Box'
 
 const initialState: SettingsShelfTemplate = {
 	mode: 'initial',
-	changed: false,
+	isCurrentTemplateEqualToInitial: true,
 	initialTemplate: [],
 	currentShelfTemplate: [],
 	boxesSettingsListEdges: {
@@ -26,6 +26,16 @@ const initialState: SettingsShelfTemplate = {
 	},
 }
 
+const isCurrentTemplateEqualToInitial = (initialState: TimingBlock[], currentState: ExtendedTimingBlock[]) => {
+	if (initialState.length !== currentState.length) return false
+	if (currentState.some(box => box.keyId === 'unsaved')) return false
+	return true
+	// currentState.forEach(box => {
+	// 	if (box.keyId === 'unsaved') {
+	// 		return false
+	// 	}
+	// })
+}
 
 const settingsShelfTemplate = createSlice({
 	name: 'settingsShelfTemplate',
@@ -56,7 +66,6 @@ const settingsShelfTemplate = createSlice({
 		// time setter modal
 		setTimingSetterModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.boxTimeSetterModal.isOpen = action.payload
-			state.mode = 'waitingForSaving'
 		},
 		setTimingSetterModalBoxId: (state, action: PayloadAction<string>) => {
 			state.boxTimeSetterModal.boxId = action.payload
@@ -72,7 +81,8 @@ const settingsShelfTemplate = createSlice({
 		},
 		setCurrentTemplate: (state, action: PayloadAction<ExtendedTimingBlock[]>) => {
 			state.currentShelfTemplate = action.payload.map((box, index) => ({ ...box, index }))
-			state.changed = !isEqual(state.initialTemplate, state.currentShelfTemplate)
+			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
+			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 		},
 		setMode: (state, action: PayloadAction<SettingsShelfTemplateMods>) => {
 			state.mode = action.payload
@@ -88,12 +98,13 @@ const settingsShelfTemplate = createSlice({
 		setTimeToBoxById: (state, action: PayloadAction<{ boxId: number | string, timeObject: TimingBlock }>) => {
 			state.currentShelfTemplate = state.currentShelfTemplate.map(box => {
 				if (box.id === action.payload.boxId) {
-					return { ...box, isOpen: false, isSaved: true, ...action.payload.timeObject }
+					return { ...box, isOpen: false, isSaved: true, keyId: 'unsaved', ...action.payload.timeObject }
 				}
 				return box
 			})
 			state.mode = 'waitingForSaving'
-			state.changed = !isEqual(state.initialTemplate, state.currentShelfTemplate)
+			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
+			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 		},
 		closeTimeSetter: (state, action: PayloadAction<number | string>) => {
 			state.currentShelfTemplate = state.currentShelfTemplate.map(box => {
@@ -103,16 +114,23 @@ const settingsShelfTemplate = createSlice({
 				return box
 			})
 			state.mode = 'waitingForSaving'
-			state.changed = !isEqual(state.initialTemplate, state.currentShelfTemplate)
+			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
+			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
 			// state.currentShelfTemplate = action.payload.map((box, index) => ({ ...box, index }))
 		},
 		removeAddedBox: (state) => {
 			if (state.mode === 'initial') return
-			state.currentShelfTemplate = state.currentShelfTemplate
+			const newCurrentShelfTemplate = state.currentShelfTemplate
 				.filter(box => box.isSaved)
 				.map((box, index) => ({ ...box, index }))
-			state.changed = !isEqual(state.initialTemplate, state.currentShelfTemplate)
+			state.currentShelfTemplate = newCurrentShelfTemplate
+			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, newCurrentShelfTemplate)
 			state.mode = 'waitingForSaving'
+			// state.currentShelfTemplate = state.currentShelfTemplate
+			// 	.filter(box => box.isSaved)
+			// 	.map((box, index) => ({ ...box, index }))
+			// state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
+			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 		},
 		reset: (state) => {
 			state.mode = 'initial'
@@ -124,12 +142,12 @@ const settingsShelfTemplate = createSlice({
 				id: (Math.random() * Math.random()).toString(),
 				isOpen: false,
 			}))
-			state.changed = false
+			state.isCurrentTemplateEqualToInitial = true
 			state.boxesSettingsListEdges.leftSide = false
 			state.boxesSettingsListEdges.rightSide = false
 		},
-		setChanged: (state, action: PayloadAction<boolean>) => {
-			state.changed = action.payload
+		setIsCurrentTemplateEqualToInitial: (state, action: PayloadAction<boolean>) => {
+			state.isCurrentTemplateEqualToInitial = action.payload
 		},
 	}
 })

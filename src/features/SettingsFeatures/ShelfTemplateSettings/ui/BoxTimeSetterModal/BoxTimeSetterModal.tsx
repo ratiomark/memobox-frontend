@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { settingsShelfTemplateActions } from '../../model/slice/shelfTemplateSlice';
 import { getTimingSetterModalIsOpen, getBoxCoordinates, getBoxTimingData, getTimingSetterBoxId } from '../../model/selectors/timeSetterModal';
 import { Overlay } from '@/shared/ui/Overlay/Overlay';
-import { DURATION_SEC } from '@/shared/const/animation';
+import { DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS, DURATION_SEC } from '@/shared/const/animation';
 import { getSettingsShelfTemplateMode } from '../../model/selectors/settingsShelfTemplate';
 import { TimingBlock } from '@/shared/types/DataBlock';
 
@@ -34,14 +34,13 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 	const timingData = useSelector(getBoxTimingData)
 	const boxId = useSelector(getTimingSetterBoxId)
 	const mode = useSelector(getSettingsShelfTemplateMode)
-
 	const wrapperRef = useRef<HTMLDivElement>(null)
 
-	const cupboardShelfListRects = useRef({ x: 0, y: 0, width: 0 })
-	const timeSetterSizes = useRef({ height: 0, width: 0 })
+	// const cupboardShelfListRects = useRef({ x: 0, y: 0, width: 0 })
+	// const timeSetterSizes = useRef({ height: 0, width: 0 })
 	const [timeSetterSizeData, setTimeSetterSizeData] = useState({ height: 0, width: 0 })
 	const [coordinatesChecked, setCoordinatesChecked] = useState({ x: 0, y: 0 })
-	const [checked, setChecked] = useState(false)
+	// const [checked, setChecked] = useState(false)
 
 	useEffect(() => {
 		if (coordinates) {
@@ -56,7 +55,7 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 	useEffect(() => {
 		if (isOpen && wrapperRef.current) {
 			const sizes = wrapperRef.current.getBoundingClientRect()
-			console.log({ width: sizes.width, height: sizes.height })
+			// console.log({ width: sizes.width, height: sizes.height })
 			// console.log(sizes)
 			setTimeSetterSizeData({ width: sizes.width, height: sizes.height })
 		}
@@ -85,6 +84,7 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 		const coordinatesWidthCorrection = timeSetterSizeData.width / 2
 		const viewPortHeight = window.innerHeight
 		let actualX = coordinates.x - coordinatesWidthCorrection
+		// let actualX = coordinates.x - coordinatesWidthCorrection
 		// const containerEdge = cupboardShelfListRects.current.x + cupboardShelfListRects.current.width
 		// if (actualX + timeSetterSizes.current.width > containerEdge) {
 		// 	actualX = (containerEdge - timeSetterSizes.current.width)
@@ -93,11 +93,13 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 		// }
 
 		let actualY = coordinates.y - coordinatesHeightCorrection
+		// let actualY = coordinates.y - coordinatesHeightCorrection
 		// if (actualY < headerHeight.current) {
 		// 	actualY = headerHeight.current
 		// } else if (actualY + timeSetterSizes.current.height > viewPortHeight) {
 		// 	actualY = viewPortHeight - timeSetterSizes.current.height
 		// }
+		// console.log('actualX  actualY ', actualX, actualY)
 		setCoordinatesChecked({ y: actualY, x: actualX })
 	}, [coordinates, timeSetterSizeData.height, timeSetterSizeData.width])
 
@@ -105,6 +107,7 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 	const onCloseHandle = () => {
 		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(false))
 		dispatch(settingsShelfTemplateActions.removeAddedBox())
+		// 
 	}
 
 	const onSaveTime = useCallback((timingBlock: TimingBlock) => {
@@ -114,12 +117,27 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(false))
 	}, [boxId, dispatch])
 
+	useEffect(() => {
+		console.log('MODE :  ', mode)
+		if (mode === 'choosingBoxPlace' || mode === 'settingTimeToNewBox') {
+			console.log('DELAY :   ', 1)
+			return
+		}
+		console.log('DELAY :  ', 0)
+	}, [mode])
+
 	const timeSetterJSX = (<motion.div
 		initial={{ opacity: 0 }}
 		animate={{ opacity: 1 }}
 		exit={{ opacity: 0, transition: { delay: 0, duration: 0.4 } }}
-		transition={{ delay: mode === 'settingTimeToNewBox' ? 1 : 0, duration: DURATION_SEC }}
-		
+		transition={{
+			delay:
+				(mode === 'choosingBoxPlace' || mode === 'settingTimeToNewBox')
+					? DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS
+					: 0,
+			duration: DURATION_SEC
+		}}
+
 	>
 		<TimeSetter
 			timingData={timingData}
@@ -131,7 +149,7 @@ export const BoxTimeSetterSettingsPageModal = (props: MissedTrainingSettingsProp
 
 	return (
 		<div
-			className={cls.BoxTimeSetter} 
+			className={cls.BoxTimeSetter}
 			ref={wrapperRef}
 			style={{ left: coordinatesChecked.x, top: coordinatesChecked.y }}
 		>

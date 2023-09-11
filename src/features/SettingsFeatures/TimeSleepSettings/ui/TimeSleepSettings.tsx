@@ -1,11 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './TimeSleepSettings.module.scss';
-import { HDialog } from '@/shared/ui/HDialog';
-import { Button } from '@/shared/ui/Button';
-import { HStack } from '@/shared/ui/Stack';
 import { Switcher } from '@/shared/ui/Switcher';
-import { SingleSetter } from '@/shared/ui/TimeSetter/SingleSetter';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { Card } from '@/shared/ui/Card';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
@@ -14,12 +10,11 @@ import { WheelEvent, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserTimeSleepSettings } from '@/entities/User';
 import { getTimeSleepEnabled, getDayByDayOptionEnabled, getGeneralTimeSleepData, getDayByDayTimeSleepData } from '../model/selectors/settingsTimeSleep';
-import { TimeControllerFunction } from '../model/types/TimeSleepTypes';
-import { HoursMinutesWrapper } from './HoursMinutesWrapper/HoursMinutesWrapper';
 import { GeneralHoursMinutesComponent } from './GeneralHoursMinutesComponent/GeneralHoursMinutesComponent copy';
 import { DayByDayHoursMinutesComponent } from './DayByDayHoursMinutesComponent/DayByDayHoursMinutesComponent';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 
 
@@ -64,7 +59,7 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onClose}
 			onSubmit={() => alert('Сохраняю настройки')}
@@ -146,7 +141,7 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 					<Button variant='filled'>{t('save')}</Button>
 				</HStack> */}
 			</div>
-		</HDialog>
+		</HDialogHeadless>
 
 	)
 }

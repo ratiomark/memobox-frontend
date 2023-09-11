@@ -22,6 +22,7 @@ import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { Card } from '@/shared/ui/Card';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { updateJsonSavedData } from '@/entities/User';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface TableSettingModalProps {
 	className?: string
@@ -79,7 +80,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 		/>))
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onClose}
 			onSubmit={() => alert('Сохраняю новые настройки таблицы')}
@@ -112,6 +113,6 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 					onSubmit={() => alert('Сохраняю новые настройки таблицы')}
 				/>
 			</div>
-		</HDialog>
+		</HDialogHeadless>
 	)
 }
