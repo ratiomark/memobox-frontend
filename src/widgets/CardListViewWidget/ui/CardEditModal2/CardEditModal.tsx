@@ -57,15 +57,16 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 
 	// Edited data
 	const cardEditedData = useSelector(getViewPageCardDataEdited)
-	const questionTextEdited = cardEditedData?.question.replaceAll('\'', '"')
-	const answerTextEdited = cardEditedData?.answer.replaceAll('\'', '"')
+	const questionTextEdited = cardEditedData?.question
+	const answerTextEdited = cardEditedData?.answer
 	const editedShelf = cardEditedData?.shelf
 	const editedBox = cardEditedData?.box
 
 	// Original data
 	const cardOriginalData = useSelector(getViewPageCardDataOriginal)
-	const questionTextOriginal = cardOriginalData?.question.replaceAll('\'', '"')
-	const answerTextOriginal = cardOriginalData?.answer.replaceAll('\'', '"')
+	const questionTextOriginal = cardOriginalData?.question
+	// const questionTextOriginal = cardOriginalData?.question
+	const answerTextOriginal = cardOriginalData?.answer
 	const cardId = cardOriginalData?._id
 	const originalShelf = cardOriginalData?.shelf
 	const originalBox = cardOriginalData?.box
@@ -402,15 +403,15 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 
 // 	// Edited data
 // 	const cardEditedData = useSelector(getViewPageCardDataEdited)
-// 	const questionTextEdited = cardEditedData?.question.replaceAll('\'', '"')
-// 	const answerTextEdited = cardEditedData?.answer.replaceAll('\'', '"')
+// 	const questionTextEdited = cardEditedData?.question
+// 	const answerTextEdited = cardEditedData?.answer
 // 	const editedShelf = cardEditedData?.shelf
 // 	const editedBox = cardEditedData?.box
 
 // 	// Original data
 // 	const cardOriginalData = useSelector(getViewPageCardDataOriginal)
-// 	const questionTextOriginal = cardOriginalData?.question.replaceAll('\'', '"')
-// 	const answerTextOriginal = cardOriginalData?.answer.replaceAll('\'', '"')
+// 	const questionTextOriginal = cardOriginalData?.question
+// 	const answerTextOriginal = cardOriginalData?.answer
 // 	const cardId = cardOriginalData?._id
 // 	const originalShelf = cardOriginalData?.shelf
 // 	const originalBox = cardOriginalData?.box

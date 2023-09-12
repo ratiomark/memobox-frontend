@@ -92,7 +92,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 			>
 				<div>
 					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
-					<ThemeSwitcher />
+					{/* <ThemeSwitcher /> */}
 				</div>
 				{buttons}
 				<CreateNewShelfModal
