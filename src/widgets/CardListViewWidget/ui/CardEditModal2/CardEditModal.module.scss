@@ -4,6 +4,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 50px;
   width: 100%;
+  position: relative;
 
   @media (max-width: 1100px) {
     grid-template-columns: 1fr;
@@ -50,10 +51,22 @@
   scrollbar-gutter: stable;
 }
 
-// .shelfAndBoxesWrapper {
+// .mainContent {
 //   display: flex;
+//   flex-direction: column;
+//   gap: var(--main-content-vertical-gap);
 //   min-width: 100%;
+//   padding-right: var(--padding-right);
+//   padding-left: var(--padding-right);
+//   overflow: auto;
+//   scroll-padding-bottom: 20px;
 // }
+
+.areaAndLabelWrapper {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 2px;
+}
 
 .emptySpace_top {
   height: var(--empty-space-top-height);
@@ -68,31 +81,20 @@
   // background-color: rgb(168 168 248);
 }
 
-.areaAndLabelWrapper {
-  display: grid;
-  gap: 4px;
-  padding-bottom: 2px;
-}
-
-.shadowAreaWrapper {
-  position: relative;
-  width: 100%;
-  visibility: hidden;
-}
-
-.shadowArea {
-  position: absolute;
-}
-
 .actions {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-
-  // height: 55.6px;
   padding-right: calc(var(--padding-right) + var(--scroll-bar-main-width));
   border-bottom-left-radius: var(--border-radius-main);
   border-bottom-right-radius: var(--border-radius-main);
   padding-left: var(--padding-right);
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: rgb(211 209 255);
+  background-color: rgb(237 236 255);
+}
+
+.modalButtons {
+  max-width: 100%;
+  min-width: fit-content;
 }

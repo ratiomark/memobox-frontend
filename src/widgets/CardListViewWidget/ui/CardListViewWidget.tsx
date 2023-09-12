@@ -17,7 +17,7 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { MultiSelectScreen } from './MultiSelectScreen/MultiSelectScreen';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useHotkeys } from 'react-hotkeys-hook';
-import { CardEditModal } from './CardEditModal/CardEditModal';
+import { CardEditModal } from './CardEditModal2/CardEditModal';
 import { MoveCardsModal } from './MoveCardsModal/MoveCardsModal';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 

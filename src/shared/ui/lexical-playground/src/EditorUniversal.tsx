@@ -41,6 +41,7 @@ import { CommandsPlugin } from './plugins/CommandPlugin/CommandPlugin';
 import { CAN_USE_DOM } from '../shared/src/canUseDOM';
 import { EditorStateSetterPlugin } from './plugins/EditorStateSetterPlugin/EditorStateSetterPlugin';
 import { lexicalEmptyEditorState } from '@/shared/const/lexical';
+import { LockEditorPlugin } from './plugins/LockEditor/ChangePlugin';
 
 
 const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> }) => {
@@ -59,18 +60,19 @@ const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> })
 
 interface EditorProps {
 	onChange?: (editorState: EditorState) => void
-	initialState?: string
+	// initialState?: string
 	editorState?: string
 	editable?: boolean
 	id?: string
 	heightValue: number
 	autoFocus?: boolean
 	isStateSetterPlugin?: boolean
+	namespace?: string
 }
 
 function Editor(props: EditorProps) {
 	const {
-		initialState,
+		// initialState,
 		onChange,
 		isStateSetterPlugin = false,
 		editorState = lexicalEmptyEditorState,
@@ -162,8 +164,8 @@ function Editor(props: EditorProps) {
 
 	return (
 		<div ref={editorRef} className="editor-shell">
-			{isEditable && <ToolbarPlugin setToolbarHeight={setToolbarHeight} setIsListNode={setIsListNode} />}
-			{/* {showToolBar && <ToolbarPlugin />} */}
+			{/* {editable && <ToolbarPlugin setToolbarHeight={setToolbarHeight} setIsListNode={setIsListNode} />} */}
+			<ToolbarPlugin />
 			<div
 				className={`editor-container ${showTreeView ? 'tree-view' : ''}`}
 			>
@@ -171,10 +173,11 @@ function Editor(props: EditorProps) {
 				<DragDropPaste />
 				{autoFocus && <AutoFocusPlugin />}
 				{/* <ClearEditorPlugin /> */}
-				<ChangePlugin onChange={onChange} />
+				<LockEditorPlugin editable={editable} />
+				{onChange && <ChangePlugin onChange={onChange} />}
 				<CommandsPlugin />
 				<>
-					<HistoryPlugin externalHistoryState={historyState} />
+					{/* <HistoryPlugin externalHistoryState={historyState} /> */}
 					<RichTextPlugin
 						contentEditable={
 							<div
@@ -247,8 +250,8 @@ function Editor(props: EditorProps) {
 export const EditorUniversal = (props: EditorProps) => {
 	const initialConfig = {
 		editable: props.editable,
-		editorState: props.initialState,
-		namespace: 'Playground',
+		editorState: props.editorState,
+		namespace: props.namespace ? props.namespace : 'Playground',
 		nodes: [...PlaygroundNodes],
 		onError: (error: Error) => {
 			throw error;

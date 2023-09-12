@@ -78,17 +78,18 @@ export const CreateNewCardModal = memo(() => {
 	}, [cupboardIsLoading, shelfIdCardModal, cupboardShelves, t])
 
 	const onChangeQuestion = useCallback((editorState: EditorState) => {
+		// console.log(editorState.toJSON())
+		// console.log(JSON.stringify(editorState.toJSON()))
 		dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
-	}, [dispatch])
-
-	const onCloseCardModal = useCallback((isOpen: boolean) => {
-		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(isOpen))
 	}, [dispatch])
 
 	const onChangeAnswer = useCallback((editorState: EditorState) => {
 		dispatch(cupboardShelfListActions.setAnswerText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
 
+	const onCloseCardModal = useCallback((isOpen: boolean) => {
+		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(isOpen))
+	}, [dispatch])
 
 	const onChangeShelf = useCallback((shelfId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
@@ -163,12 +164,11 @@ export const CreateNewCardModal = memo(() => {
 
 	return (
 		<HDialog
-			isOpen={isOpen}
-			stayInDom
-			onOpenChange={onCloseCardModal}
 			className={cls.cardModalPanel}
-			onSubmit={() => alert('Создаю новую карточку')}
 			panelWithMainPadding={false}
+			isOpen={isOpen}
+			onOpenChange={onCloseCardModal}
+			onSubmit={() => alert('Создаю новую карточку')}
 		>
 			<div
 				className={cls.cardModal}

@@ -40,11 +40,30 @@ export const cardApi = rtkApi.injectEndpoints({
 				method: 'GET',
 			}),
 			transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
-				response.cards.forEach(card => ({ ...card, deleted: false }))
+				response.cards.forEach(card => (
+					{
+						...card,
+						deleted: false,
+					}
+				))
 				return response
 			},
 			providesTags: ['Cards']
 		}),
+		// 	transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
+		// 		const newCards = response.cards.map(card => {
+		// 			return ({
+		// 				...card,
+		// 				question: `{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":${card.question},"type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}`,
+		// 				answer: `{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":${card.answer},"type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}`,
+		// 				deleted: false,
+		// 			})
+		// 		})
+		// 		response.cards = newCards
+		// 		return response
+		// 	},
+		// 	providesTags: ['Cards']
+		// }),
 		updateCards: build.mutation<CardSchema[], UpdateCardsRequest>({
 			query: (arg) => ({
 

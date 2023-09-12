@@ -547,7 +547,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 
 
 	return (
-		<div className='toolbarWrapper' ref={toolbarWrapperRef}>
+		<div className={`toolbarWrapper ${!isEditable ? 'toolbarBlocked' : ''}`} ref={toolbarWrapperRef}>
 			<div className="toolbar" style={{ display: 'flex', flexWrap: 'wrap' }}>
 				<button
 					tabIndex={-1}
