@@ -39,6 +39,8 @@ import { EditorState } from 'lexical';
 import { ChangePlugin } from './plugins/ChangePlugin/ChangePlugin';
 import { CommandsPlugin } from './plugins/CommandPlugin/CommandPlugin';
 import { CAN_USE_DOM } from '../shared/src/canUseDOM';
+import { EditorStateSetterPlugin } from './plugins/EditorStateSetterPlugin/EditorStateSetterPlugin';
+import { lexicalEmptyEditorState } from '@/shared/const/lexical';
 
 
 const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> }) => {
@@ -58,14 +60,25 @@ const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> })
 interface EditorProps {
 	onChange?: (editorState: EditorState) => void
 	initialState?: string
+	editorState?: string
 	editable?: boolean
 	id?: string
 	heightValue: number
 	autoFocus?: boolean
+	isStateSetterPlugin?: boolean
 }
 
 function Editor(props: EditorProps) {
-	const { onChange, id, initialState, editable = true, heightValue, autoFocus } = props
+	const {
+		initialState,
+		onChange,
+		isStateSetterPlugin = false,
+		editorState = lexicalEmptyEditorState,
+		editable = true,
+		heightValue,
+		autoFocus,
+		id,
+	} = props
 	const { historyState } = useSharedHistoryContext();
 	const renderCounter = useRef(0)
 	const [isListNode, setIsListNode] = useState(false)
@@ -196,7 +209,7 @@ function Editor(props: EditorProps) {
 
 					{/* <HorizontalRulePlugin /> */}
 					{/* <TabFocusPlugin /> */}
-
+					{isStateSetterPlugin && <EditorStateSetterPlugin editorState={editorState} />}
 					<CollapsiblePlugin />
 					{/* <LayoutPlugin /> */}
 					{floatingAnchorElem && !isSmallWidthViewport && (
@@ -231,7 +244,7 @@ function Editor(props: EditorProps) {
 	);
 }
 
-export const EditorV2 = (props: EditorProps) => {
+export const EditorUniversal = (props: EditorProps) => {
 	const initialConfig = {
 		editable: props.editable,
 		editorState: props.initialState,

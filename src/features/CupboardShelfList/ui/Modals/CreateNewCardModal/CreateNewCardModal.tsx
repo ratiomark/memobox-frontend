@@ -1,11 +1,6 @@
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { Modal } from '@/shared/ui/Modal/Modal';
 import { ListBox } from '@/shared/ui/Popup';
-import { HStack, VStack } from '@/shared/ui/Stack';
-import { MyText, TextArea } from '@/shared/ui/Typography';
-import { Button } from '@/shared/ui/Button';
-import { MutableRefObject, UIEvent, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { MyText } from '@/shared/ui/Typography';
 import { useSelector } from 'react-redux';
 import {
 	getAnswerCardModal,
@@ -17,18 +12,14 @@ import {
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
 import { Skeleton } from '@/shared/ui/Skeleton';
-import cls from './CreateNewCardModal.module.scss';
 import { getCupboardIsLoading, getCupboardError } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
-import { useWindowSize } from '@/shared/lib/helpers/hooks/useWindowHeight';
-import { ShadowTextArea } from '@/shared/ui/Typography/TextArea/ShadowTextArea';
-// import { useMainContentMaxHeightAndAreaRows } from '@/shared/lib/helpers/hooks/useMainContentMaxHeightAndAreaRows';
-// import { Editor } from '@/shared/ui/Editor';
 import { EditorState } from 'lexical';
 import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
-import { t } from 'i18next';
+import { memo, useRef, useMemo, useCallback } from 'react';
+import cls from './CreateNewCardModal.module.scss';
 
 export const CreateNewCardModal = memo(() => {
 	const { t } = useTranslation()
@@ -41,23 +32,15 @@ export const CreateNewCardModal = memo(() => {
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
 	const boxIdCardModal = useSelector(getBoxIndexCardModal)
-	const [shadowAreaQuestionHeight, setShadowAreaQuestionHeight] = useState(96)
-	const [shadowAreaAnswerHeight, setShadowAreaAnswerHeight] = useState(96)
 
 	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)
 	const modalButtonsRef = useRef<HTMLDivElement>(null)
 
-	const { textAreaRows, mainContentMaxHeight, editorMinHeight } = useEditorMinHeight({
+	const { mainContentMaxHeight, editorMinHeight } = useEditorMinHeight({
 		isOpen,
 		modalButtonsRef: modalButtonsRef.current,
 		shelvesAndBoxesRef: shelvesAndBoxesRef.current,
 	})
-
-	// const { textAreaRows, mainContentMaxHeight } = useMainContentMaxHeightAndAreaRows({
-	// 	isOpen,
-	// 	modalButtonsRef: modalButtonsRef.current,
-	// 	shelvesAndBoxesRef: shelvesAndBoxesRef.current,
-	// })
 
 	const shelfItems = useMemo(() => {
 		if (cupboardIsLoading) return []
@@ -96,26 +79,16 @@ export const CreateNewCardModal = memo(() => {
 
 	const onChangeQuestion = useCallback((editorState: EditorState) => {
 		dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
-		// isOpen && dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
-	// const onChangeQuestion = useCallback((text: string) => {
-	// 	editorState
-	// 	isOpen && dispatch(cupboardShelfListActions.setQuestionText(text))
-	// }, [dispatch, isOpen])
 
 	const onCloseCardModal = useCallback((isOpen: boolean) => {
 		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(isOpen))
 	}, [dispatch])
-	// const onCloseCardModal2 = useCallback(() => {
-	// 	dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(false))
-	// }, [dispatch])
+
 	const onChangeAnswer = useCallback((editorState: EditorState) => {
 		dispatch(cupboardShelfListActions.setAnswerText(JSON.stringify(editorState.toJSON())))
-		// isOpen && dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
-	// const onChangeAnswer = useCallback((text: string) => {
-	// 	dispatch(cupboardShelfListActions.setAnswerText(text))
-	// }, [dispatch])
+
 
 	const onChangeShelf = useCallback((shelfId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
@@ -124,29 +97,6 @@ export const CreateNewCardModal = memo(() => {
 	const onChangeBox = useCallback((boxIndex: number) => {
 		dispatch(cupboardShelfListActions.setBoxIndexCardModal(boxIndex))
 	}, [dispatch])
-
-
-	// const shadowAreaQuestion = (
-	// 	<div className={cls.shadowAreaWrapper} >
-	// 		<ShadowTextArea
-	// 			getCurrentHeight={setShadowAreaQuestionHeight}
-	// 			value={questionTextCardModal}
-	// 			className={cls.shadowArea}
-	// 			rows={textAreaRows}
-	// 		/>
-	// 	</div>
-	// )
-
-	// const shadowAreaAnswer = (
-	// 	<div className={cls.shadowAreaWrapper} >
-	// 		<ShadowTextArea
-	// 			getCurrentHeight={setShadowAreaAnswerHeight}
-	// 			value={answerTextCardModal}
-	// 			className={cls.shadowArea}
-	// 			rows={textAreaRows}
-	// 		/>
-	// 	</div>
-	// )
 
 	const shelvesAndBoxes = useMemo(() => {
 		if (cupboardIsLoading) {
@@ -181,7 +131,6 @@ export const CreateNewCardModal = memo(() => {
 				</div>
 			</div>)
 	}, [cupboardIsLoading, t, boxIdCardModal, boxItems, onChangeBox, onChangeShelf, shelfIdCardModal, shelfItems])
-
 
 	const editorBlockQuestion = useMemo(() => {
 		return (

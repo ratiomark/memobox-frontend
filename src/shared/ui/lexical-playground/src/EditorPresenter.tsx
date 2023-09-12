@@ -66,6 +66,7 @@ interface EditorProps {
 	// heightValue: number
 }
 const paddingTopPlusPaddingBottom = 8 + 8
+
 const borderTopPlusBottom = 0.8 + 0.8
 const lineHeight = 24
 
@@ -144,10 +145,9 @@ function Editor(props: EditorProps) {
 				ref={editorContainerRef}
 				className={`editor-container ${showTreeView ? 'tree-view' : ''}`}
 			>
-				{isMaxLength && <MaxLengthPlugin maxLength={30} />}
+				{/* {isMaxLength && <MaxLengthPlugin maxLength={30} />} */}
 				<DragDropPaste />
 				<AutoFocusPlugin />
-				{/* <ClearEditorPlugin /> */}
 				<ChangePlugin onChange={onChange} />
 				<CommandsPlugin />
 				<>
@@ -170,51 +170,20 @@ function Editor(props: EditorProps) {
 					<CodeHighlightPlugin />
 					<ListPlugin />
 					{isListNode && <TabIndentationPlugin />}
-					{/* <CheckListPlugin /> */}
 					<ListMaxIndentLevelPlugin maxDepth={7} />
-					{/* <TablePlugin
-							hasCellMerge={tableCellMerge}
-							hasCellBackgroundColor={tableCellBackgroundColor}
-						/>
-						<TableCellResizer /> */}
 					<ImagesPlugin captionsEnabled={false} />
 					{/* <InlineImagePlugin /> */}
 					<EquationsPlugin />
-
-					{/* <HorizontalRulePlugin /> */}
-					{/* <TabFocusPlugin /> */}
-
 					<CollapsiblePlugin />
 					<EditorStateSetterPlugin editorState={editorState} />
-					{/* <LayoutPlugin /> */}
 					{floatingAnchorElem && !isSmallWidthViewport && (
 						<>
 							<DraggableBlockPlugin anchorElem={floatingAnchorElem} />
 							<CodeActionMenuPlugin anchorElem={floatingAnchorElem} />
-							{/* <FloatingLinkEditorPlugin anchorElem={floatingAnchorElem} /> */}
-							{/* <TableCellActionMenuPlugin
-									anchorElem={floatingAnchorElem}
-									cellMerge={true}
-								/> */}
-							{/* <FloatingTextFormatToolbarPlugin
-									anchorElem={floatingAnchorElem}
-								/> */}
 						</>
 					)}
 				</>
-
-
-				{/* 		{(isCharLimit || isCharLimitUtf8) && (
-					<CharacterLimitPlugin
-						charset={isCharLimit ? 'UTF-16' : 'UTF-8'}
-						maxLength={5}
-					/>
-				)} */}
-
-				{/* {shouldUseLexicalContextMenu && <ContextMenuPlugin />} */}
-				{/* <ActionsPlugin isRichText={isRichText} /> */}
 			</div>
-			{/* <TreeViewPlugin /> */}
 		</div>
 	);
 }

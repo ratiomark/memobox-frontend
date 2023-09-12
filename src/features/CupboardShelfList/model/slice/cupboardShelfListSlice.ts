@@ -8,7 +8,8 @@ import { createEntityAdapter, createSlice, EntityId, PayloadAction, SerializedEr
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import { fetchCupboardData } from '../services/fetchCupboardData'
 import { CupboardPageSchema } from '../types/CupboardPageSchema'
-const emptyEditorState = '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}'
+import { lexicalEmptyEditorState } from '@/shared/const/lexical'
+
 const initialState: CupboardPageSchema = {
 	isDataAlreadyInStore: false,
 	isNeedRefetch: false,
@@ -50,8 +51,8 @@ const initialState: CupboardPageSchema = {
 	createNewCardModal: {
 		shelfId: '',
 		boxIndex: 0,
-		questionText: emptyEditorState,
-		answerText: emptyEditorState,
+		questionText: lexicalEmptyEditorState,
+		answerText: lexicalEmptyEditorState,
 		// answerText: '',
 		isOpen: false,
 	},
