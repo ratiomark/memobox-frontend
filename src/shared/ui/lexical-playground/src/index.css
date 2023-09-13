@@ -8,6 +8,16 @@
 
 @import "https://fonts.googleapis.com/css?family=Reenie+Beanie";
 
+.editor-scroller-card-presenter {
+  height: 140px;
+}
+
+.editor-scroller-card-presenter *:focus-visible,
+.editor-scroller-card-presenter *:focus-within {
+  box-shadow: none;
+  border: none;
+}
+
 .toolbarBlocked * {
   color: var(--hint);
   fill: var(--hint);

@@ -13,6 +13,9 @@ dependencies:
   '@lexical/file':
     specifier: ^0.12.0
     version: 0.12.0(lexical@0.12.0)
+  '@lexical/headless':
+    specifier: ^0.12.2
+    version: 0.12.2(lexical@0.12.0)
   '@lexical/html':
     specifier: ^0.12.0
     version: 0.12.0(lexical@0.12.0)
@@ -22,6 +25,9 @@ dependencies:
   '@lexical/list':
     specifier: ^0.12.0
     version: 0.12.0(lexical@0.12.0)
+  '@lexical/plain-text':
+    specifier: ^0.12.2
+    version: 0.12.2(@lexical/clipboard@0.12.0)(@lexical/selection@0.12.0)(@lexical/utils@0.12.0)(lexical@0.12.0)
   '@lexical/react':
     specifier: ^0.12.0
     version: 0.12.0(lexical@0.12.0)(react-dom@18.2.0)(react@18.2.0)(yjs@13.6.7)
@@ -832,6 +838,14 @@ packages:
       lexical: 0.12.0
     dev: false
 
+  /@lexical/headless@0.12.2(lexical@0.12.0):
+    resolution: {integrity: sha512-fgAPcNG8z/uL++eplR5u5RZQU62n/aOf/znEnMn0toM73yzZQm3+V9Jx/Q5U/QfFuWVwQddVLZ32DGqMCW1/8w==}
+    peerDependencies:
+      lexical: 0.12.2
+    dependencies:
+      lexical: 0.12.0
+    dev: false
+
   /@lexical/history@0.12.0(lexical@0.12.0):
     resolution: {integrity: sha512-dK8jDnqF66BdEg1hrfLI1z4CGOIXmx7MBr1x8aC1u2pUaz+GsWV56UOvahAPmTwP6K1ZyMSYy8NM9BLxjRiEVg==}
     peerDependencies:
@@ -917,6 +931,20 @@ packages:
       '@lexical/selection': 0.12.0
       '@lexical/utils': 0.12.0
       lexical: 0.12.0
+    dependencies:
+      '@lexical/clipboard': 0.12.0(lexical@0.12.0)
+      '@lexical/selection': 0.12.0(lexical@0.12.0)
+      '@lexical/utils': 0.12.0(lexical@0.12.0)
+      lexical: 0.12.0
+    dev: false
+
+  /@lexical/plain-text@0.12.2(@lexical/clipboard@0.12.0)(@lexical/selection@0.12.0)(@lexical/utils@0.12.0)(lexical@0.12.0):
+    resolution: {integrity: sha512-Lcg6+ngRnX70//kz34azYhID3bvW66HSHCfu5UPhCXT+vQ/Jkd/InhRKajBwWXpaJxMM1huoi3sjzVDb3luNtw==}
+    peerDependencies:
+      '@lexical/clipboard': 0.12.2
+      '@lexical/selection': 0.12.2
+      '@lexical/utils': 0.12.2
+      lexical: 0.12.2
     dependencies:
       '@lexical/clipboard': 0.12.0(lexical@0.12.0)
       '@lexical/selection': 0.12.0(lexical@0.12.0)

@@ -23,54 +23,8 @@
   }
 }
 
-.cardModalPanel {
-  max-height: 90%;
-  overflow: hidden;
-}
-
-.cardModal {
-  min-width: 100%;
-
-  --padding-right: 20px;
-  --padding-for-scroll: 5px;
-}
-
-.mainContentWrapper {
-  padding-right: var(--padding-for-scroll);
-}
-
-.mainContent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--main-content-vertical-gap);
-  min-width: 100%;
-  padding-right: calc(var(--padding-right) - var(--padding-for-scroll));
-  padding-left: var(--padding-right);
-  overflow: auto;
-  scroll-padding-bottom: 20px;
-  scrollbar-gutter: stable;
-}
-
-// .mainContent {
-//   display: flex;
-//   flex-direction: column;
-//   gap: var(--main-content-vertical-gap);
-//   min-width: 100%;
-//   padding-right: var(--padding-right);
-//   padding-left: var(--padding-right);
-//   overflow: auto;
-//   scroll-padding-bottom: 20px;
-// }
-
-.areaAndLabelWrapper {
-  display: grid;
-  gap: 4px;
-  padding-bottom: 2px;
-}
-
 .emptySpace_top {
   height: var(--empty-space-top-height);
-  width: 1200px;
 
   // background-color: rgb(168 168 248);
 }
@@ -79,6 +33,50 @@
   height: var(--empty-space-bottom-height);
 
   // background-color: rgb(168 168 248);
+}
+
+.cardModalPanel {
+  max-height: 90%;
+  width: min(1200px, 80%);
+  overflow: hidden;
+}
+
+.cardModal {
+  --padding-right: 20px;
+  --padding-for-scroll: 5px;
+}
+
+.mainContentWrapper {
+  padding-right: var(--padding-for-scroll);
+
+  // position: relative;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--main-content-vertical-gap);
+  min-width: 100%;
+  padding-right: var(--padding-right);
+  padding-left: var(--padding-right);
+  overflow: auto;
+  scroll-padding-bottom: 20px;
+}
+
+.areaAndLabelWrapper {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 2px;
+}
+
+.shadowAreaWrapper {
+  position: relative;
+  width: 100%;
+  visibility: hidden;
+}
+
+.shadowArea {
+  position: absolute;
 }
 
 .actions {

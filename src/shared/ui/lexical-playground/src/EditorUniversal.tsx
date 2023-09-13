@@ -42,6 +42,7 @@ import { CAN_USE_DOM } from '../shared/src/canUseDOM';
 import { EditorStateSetterPlugin } from './plugins/EditorStateSetterPlugin/EditorStateSetterPlugin';
 import { lexicalEmptyEditorState } from '@/shared/const/lexical';
 import { LockEditorPlugin } from './plugins/LockEditor/ChangePlugin';
+import { HTMLExporterPlugin } from './plugins/HTMLExporterPlugin/HTMLExporterPlugin';
 
 
 const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> }) => {
@@ -54,7 +55,6 @@ const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> })
 			setShowToolbar(false)
 		}
 	}, [editorRef, activeElement])
-
 	return showToolbar
 }
 
@@ -66,6 +66,7 @@ interface EditorProps {
 	id?: string
 	heightValue: number
 	autoFocus?: boolean
+	htmlExporter?: boolean
 	isStateSetterPlugin?: boolean
 	namespace?: string
 }
@@ -79,24 +80,24 @@ function Editor(props: EditorProps) {
 		editable = true,
 		heightValue,
 		autoFocus,
-		id,
+		htmlExporter = false,
 	} = props
 	const { historyState } = useSharedHistoryContext();
 	const renderCounter = useRef(0)
 	const [isListNode, setIsListNode] = useState(false)
 	const [isFirstRender, setIsFirstRender] = useState(true)
 	const [toolbarHeight, setToolbarHeight] = useState(0)
-	const {
-		settings: {
-			isMaxLength,
-			isRichText,
-			showTreeView,
-		},
-	} = useSettings();
+	// const {
+	// 	settings: {
+	// 		isMaxLength,
+	// 		isRichText,
+	// 		showTreeView,
+	// 	},
+	// } = useSettings();
 	const editorRef = useRef<HTMLDivElement>(null)
 	const editorScrollerRef = useRef<HTMLDivElement>(null)
-	const showToolBar = useShowToolBar({ editorRef })
-	const isEditable = useLexicalEditable();
+	// const showToolBar = useShowToolBar({ editorRef })
+	// const isEditable = useLexicalEditable();
 	const text = 'Enter some rich text...'
 	const placeholder = <Placeholder>{text}</Placeholder>;
 	const [floatingAnchorElem, setFloatingAnchorElem] =
@@ -127,57 +128,34 @@ function Editor(props: EditorProps) {
 		};
 	}, [isSmallWidthViewport]);
 
-	// useEffect(() => {
-	// 	console.log('Прилетела высота   ', heightValue)
-	// }, [heightValue])
+
 	useEffect(() => {
-		// тут можно сделать проверку на количество рендеров, так как нужная высота прилетает только на третий раз. 
-		console.log('renderCounter  ', renderCounter.current)
+		// console.log('renderCounter  ', renderCounter.current)
 
 		if (editorScrollerRef.current && heightValue && toolbarHeight > 0) {
 			// const toolbar = document.querySelector('.toolbarWrapper') as HTMLDivElement
 			// console.log('toolbar.scrollHeight toolbar.scrollHeight toolbar.scrollHeight ', toolbar.scrollHeight)
-			// renderCounter.current = -1
-			// setIsFirstRender(false)
 			editorScrollerRef.current.style.minHeight = `${heightValue - toolbarHeight}px`
 			// editorScrollerRef.current.style.minHeight = `${heightValue - toolbar.scrollHeight}px`
 			setIsFirstRender(false)
 		}
 	}, [heightValue, toolbarHeight])
-	// useEffect(() => {
-	// 	// тут можно сделать проверку на количество рендеров, так как нужная высота прилетает только на третий раз. 
-	// 	console.log('renderCounter  ', renderCounter.current)
-	// 	if (renderCounter.current === -1) {
-	// 		return
-	// 	} else if (renderCounter.current !== 2) {
-	// 		renderCounter.current = renderCounter.current + 1
-	// 		return
-	// 	} else if (isFirstRender && editorScrollerRef.current && heightValue && renderCounter.current === 2) {
-	// 		const toolbar = document.querySelector('.toolbarWrapper') as HTMLDivElement
-	// 		console.log('toolbar.scrollHeight toolbar.scrollHeight toolbar.scrollHeight ', toolbar.scrollHeight)
-	// 		renderCounter.current = -1
-	// 		setIsFirstRender(false)
-	// 		editorScrollerRef.current.style.minHeight = `${heightValue - toolbar.scrollHeight}px`
-	// 	}
-	// 	// setIsFirstRender(false)
-	// }, [heightValue, isFirstRender])
 
 	return (
 		<div ref={editorRef} className="editor-shell">
 			{/* {editable && <ToolbarPlugin setToolbarHeight={setToolbarHeight} setIsListNode={setIsListNode} />} */}
 			<ToolbarPlugin />
 			<div
-				className={`editor-container ${showTreeView ? 'tree-view' : ''}`}
+				className='editor-container'
+			// className={`editor-container ${showTreeView ? 'tree-view' : ''}`}
 			>
-				{/* {isMaxLength && <MaxLengthPlugin maxLength={30} />} */}
 				<DragDropPaste />
 				{autoFocus && <AutoFocusPlugin />}
-				{/* <ClearEditorPlugin /> */}
 				<LockEditorPlugin editable={editable} />
 				{onChange && <ChangePlugin onChange={onChange} />}
 				<CommandsPlugin />
 				<>
-					{/* <HistoryPlugin externalHistoryState={historyState} /> */}
+					<HistoryPlugin externalHistoryState={historyState} />
 					<RichTextPlugin
 						contentEditable={
 							<div
@@ -199,22 +177,10 @@ function Editor(props: EditorProps) {
 					<CodeHighlightPlugin />
 					<ListPlugin />
 					{isListNode && <TabIndentationPlugin />}
-					{/* <CheckListPlugin /> */}
 					<ListMaxIndentLevelPlugin maxDepth={7} />
-					{/* <TablePlugin
-							hasCellMerge={tableCellMerge}
-							hasCellBackgroundColor={tableCellBackgroundColor}
-						/>
-						<TableCellResizer /> */}
 					<ImagesPlugin captionsEnabled={false} />
-					{/* <InlineImagePlugin /> */}
 					<EquationsPlugin />
-
-					{/* <HorizontalRulePlugin /> */}
-					{/* <TabFocusPlugin /> */}
-					{isStateSetterPlugin && <EditorStateSetterPlugin editorState={editorState} />}
 					<CollapsiblePlugin />
-					{/* <LayoutPlugin /> */}
 					{floatingAnchorElem && !isSmallWidthViewport && (
 						<>
 							<DraggableBlockPlugin anchorElem={floatingAnchorElem} />
@@ -229,16 +195,25 @@ function Editor(props: EditorProps) {
 								/> */}
 						</>
 					)}
+					{/* {isStateSetterPlugin && <EditorStateSetterPlugin editorState={editorState} />} */}
+					{/* <CheckListPlugin /> */}
+					{/* <TablePlugin
+							hasCellMerge={tableCellMerge}
+							hasCellBackgroundColor={tableCellBackgroundColor}
+						/>*/}
+					{/* 	<TableCellResizer /> */}
+					{/* <InlineImagePlugin /> */}
+					{/* <ClearEditorPlugin /> */}
+					{/* <HorizontalRulePlugin /> */}
+					{/* <TabFocusPlugin /> */}
+					{/* <LayoutPlugin /> */}
 				</>
-
-
 				{/* 		{(isCharLimit || isCharLimitUtf8) && (
 					<CharacterLimitPlugin
 						charset={isCharLimit ? 'UTF-16' : 'UTF-8'}
 						maxLength={5}
 					/>
 				)} */}
-
 				{/* {shouldUseLexicalContextMenu && <ContextMenuPlugin />} */}
 				{/* <ActionsPlugin isRichText={isRichText} /> */}
 			</div>

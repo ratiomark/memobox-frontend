@@ -30,6 +30,16 @@ body {
   //   border: 1px solid var(--accent);
 }
 
+#my-gif {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100px; /* Установите ширину по вашему усмотрению */
+  height: auto; /* Это сохранит пропорции гифки */
+  margin: 10px; /* Добавьте немного отступа, чтобы гифка не прилипала к краю */
+  z-index: 1000; /* Это убедится, что гифка всегда будет поверх других элементов */
+}
+
 // prevent text selection while DnD
 body.dragging * {
   user-select: none;

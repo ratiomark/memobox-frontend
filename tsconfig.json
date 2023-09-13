@@ -36,7 +36,8 @@
   "include": [
     "src",
     "vite-env.d.ts",
-    "src/features/SettingsFeatures/TimeSleepSettings/ui/GeneralHoursMinutesComponent/.tsx"
+    "src/features/SettingsFeatures/TimeSleepSettings/ui/GeneralHoursMinutesComponent/.tsx",
+    "parser.mjs"
   ],
   "exclude": [
     "./.fttemplates"

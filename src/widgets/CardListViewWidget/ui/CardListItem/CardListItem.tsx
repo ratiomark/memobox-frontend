@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './CardListItem.module.scss';
+import { useTranslation } from 'react-i18next';
 import { CardSchemaExtended } from '@/entities/Card';
 import { MyText } from '@/shared/ui/Typography';
 // import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
@@ -8,13 +8,14 @@ import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { getViewPageCardEditedListIds, getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
-import { ChangeEvent, MouseEvent, useMemo, } from 'react';
+import { ChangeEvent, MouseEvent, useMemo, useState, } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
-import { AnimatePresence, color, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { AnimateSkeletonLoader, Collapsible } from '@/shared/ui/Animations';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { formatDate } from '@/shared/lib/helpers/common/formaters';
+import { EditorCardPresenter } from '@/shared/ui/lexical-playground/src/EditorCardPresenter';
 
 const animations = {
 	selected: {
@@ -56,7 +57,6 @@ export const CardListItem = (props: CardListItemProps) => {
 		className,
 		card,
 		onSelectCard,
-		// selectedCardIds,
 		onOpenEditCardModal,
 	} = props
 	const { t } = useTranslation()
@@ -68,6 +68,9 @@ export const CardListItem = (props: CardListItemProps) => {
 	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
 	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
 	const dispatch = useAppDispatch()
+
+	const [showEditor, setShowEditor] = useState(false)
+	const toogleEditor = () => setShowEditor(prev => !prev)
 
 	const onDeleteCard = (e: MouseEvent) => {
 		e.stopPropagation()
@@ -131,60 +134,55 @@ export const CardListItem = (props: CardListItemProps) => {
 
 	}, [card, columns, shelvesDataDictionary])
 
+	// VAR: Тут нужно следить за изменениями которые юзер вносит в карточку. Например, если пользвоатеьль изменит текст вопроса, а потом сохранит карточку, то это нужно будет отобразить
+	const question = useMemo(() => {
+		return <EditorCardPresenter
+			editorState={prepareEditorStateOnlyFirstFourNodes(card.question)}
+		/>
+	}, [card.question])
+
+	const answer = useMemo(() => {
+		return <EditorCardPresenter
+			editorState={prepareEditorStateOnlyFirstFourNodes(card.answer)}
+		/>
+	}, [card.answer])
+
 	return (
 		<Collapsible
-			layout={false}
+			// layout={false}
 			initial={false}
 			isOpen={!card.deleted}
 		>
-			<motion.li
-				className={clsx(cls.item)}
-				onClick={isMultiSelectActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
-			>
-				<CheckBox
-					blurOnChange
-					className={cls.checkBox}
-					isChecked={isCardSelected}
-					onClick={onSelectCardHandle}
-				/>
-				{isCardEdited && <div className={cls.cardEditedLabel} >
-					<p style={{ color: 'white' }}>Edited</p>
-				</div>}
-				{/* {isCardEdited && <div className={cls.cardEditedLabel} />} */}
-				<div
-					className={cls.CardListItem}
+			{!card.deleted && (
+				<motion.li
+					// initial={{ opacity: 0 }}
+					// animate={{ opacity: 1 }}
+					// exit={{ opacity: 0, translateY: -64, transition: { delay: 0, duration: 4 } }}
+					className={clsx(cls.item)}
+					onClick={isMultiSelectActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
 				>
-					<div className={cls.content} >
-
-						<div className={cls.mainContentWrapper} >
-							<MyText text={card.question} className={cls.mainContent} />
-							<MyText text={card.answer} className={cls.mainContent} />
+					<CheckBox
+						blurOnChange
+						className={cls.checkBox}
+						isChecked={isCardSelected}
+						onClick={onSelectCardHandle}
+					/>
+					{isCardEdited && <div className={cls.cardEditedLabel} >
+						<p style={{ color: 'white' }}>Edited</p>
+					</div>}
+					<div
+						className={cls.CardListItem}
+					>
+						<div className={cls.content} >
+							<div className={cls.mainContentWrapper} >
+								{question}
+								{answer}
+							</div>
+							{columnsRendered}
 						</div>
-						{/* <div className={cls.columns} > */}
-
-						{/* </div> */}
-						{columnsRendered}
-					</div>
-
-					{/* <AnimatePresence>
 						{isMultiSelectActive
-							&& <motion.div
-								// initial={{ opacity: 0 }}
-								// exit={{ opacity: 0 }}
-								// animate={{ opacity: 1 }}
-								transition={{ delay: 2 }}
-								className={cls.icon}
-							/>}
-					</AnimatePresence>
-					<AnimatePresence>
-						{!isMultiSelectActive
-							&& (
-								<motion.div
-									initial={{ opacity: 0 }}
-									exit={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									transition={{ duration: 2 }}
-								>
+							? <div className={cls.icon} />
+							: (
 								<Icon
 									Svg={TrashIcon}
 									type='cancel'
@@ -195,28 +193,18 @@ export const CardListItem = (props: CardListItemProps) => {
 									onClick={onDeleteCard}
 									buttonSameSize={false}
 									className={clsx(cls.icon, cls.removeIcon)} />
-							</motion.div>
 							)}
-					</AnimatePresence> */}
-					{isMultiSelectActive
-						? <div className={cls.icon} />
-						: (
-							<Icon
-								Svg={TrashIcon}
-								type='cancel'
-								clickable
-								withFill={false}
-								width={22}
-								height={22}
-								onClick={onDeleteCard}
-								buttonSameSize={false}
-								className={clsx(cls.icon, cls.removeIcon)} />
-						)}
-				</div>
-
-				{/* </div> */}
-			</motion.li>
-
+					</div>
+				</motion.li>
+			)}
 		</Collapsible>
 	)
+}
+
+function prepareEditorStateOnlyFirstFourNodes(editorStateStr: string) {
+	const editorStateParsed = JSON.parse(editorStateStr)
+	editorStateParsed.root.children = editorStateParsed.root.children.slice(0, 4)
+	return JSON.stringify(editorStateParsed)
+		.replace(/"format":"center"/g, '"format":""')
+		.replace(/"format":"right"/g, '"format":""')
 }

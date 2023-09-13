@@ -1,8 +1,6 @@
-import type { EditorThemeClasses } from 'lexical';
 
-import './PlaygroundEditorTheme.css';
 
-const theme: EditorThemeClasses = {
+export const PlaygroundEditorTheme = {
 	blockCursor: 'PlaygroundEditorTheme__blockCursor',
 	characterLimit: 'PlaygroundEditorTheme__characterLimit',
 	code: 'PlaygroundEditorTheme__code',
@@ -107,4 +105,3 @@ const theme: EditorThemeClasses = {
 	},
 };
 
-export default theme;

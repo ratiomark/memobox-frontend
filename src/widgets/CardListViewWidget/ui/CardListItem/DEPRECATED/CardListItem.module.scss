@@ -21,6 +21,7 @@
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 9999;
   padding: 6px 12px;
 
   // left: 0px;
@@ -45,11 +46,22 @@
 }
 
 .content {
-  width: 100%;
+  // width: 100%;
   align-items: center;
-  display: flex;
+  display: grid;
+
+  // grid-template-columns: 300px 300px 100px 100px 100px;
+  grid-template-columns: repeat(4, auto);
+
+  // grid-template-columns: auto max-content max-content max-content;
   gap: 40px;
 }
+
+// .content {
+//   align-items: center;
+//   display: flex;
+//   gap: 40px;
+// }
 
 .columns {
   padding: 8px 14px;
@@ -101,12 +113,6 @@
   height: calc(var(--view-rows) * var(--font-line-m));
   overflow: hidden;
 }
-
-// .mainContentWrapper {
-//   width: 100%;
-//   display: flex;
-//   gap: 40px;
-// }
 
 .mainContent {
   width: 100%;

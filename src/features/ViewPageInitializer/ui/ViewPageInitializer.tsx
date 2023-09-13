@@ -2,7 +2,6 @@ import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsy
 import { ReactNode, memo, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { viewPageActions, viewPageReducer } from '../model/slice/viewPageSlice';
-import { fetchCards } from '../model/services/fetchCards';
 import { useSelector } from 'react-redux';
 import { getViewPageIsMounted } from '../model/selectors/getViewPageInitializer';
 import { useGetAllCardsQuery } from '@/entities/Card';
@@ -41,9 +40,9 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 			// console.log('Эффект Зашел')
 			const boxIdChecked = boxId ?? 'new'
 			const shelfIdChecked = shelfId ?? 'all'
-			console.log(boxIdChecked)
-			console.log(shelfIdChecked)
-			console.log(data)
+			// console.log(boxIdChecked)
+			// console.log(shelfIdChecked)
+			// console.log(data)
 			dispatch(viewPageActions.setViewPageIsMounted())
 			dispatch(viewPageActions.setFetchedData(data))
 			dispatch(viewPageActions.setActiveShelfId(shelfIdChecked))
