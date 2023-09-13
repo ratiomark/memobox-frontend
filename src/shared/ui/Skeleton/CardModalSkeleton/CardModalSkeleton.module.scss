@@ -1,7 +1,8 @@
 .CardModalSkeleton {
   height: 90%;
-  background-color: red;
-  max-width: 1200px;
+
+  // background-color: red;
+  width: min(1200px, 80%);
   overflow: hidden;
-  padding: 10px 20px;
+  padding: 10px 0;
 }

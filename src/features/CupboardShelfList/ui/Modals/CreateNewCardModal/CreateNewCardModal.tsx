@@ -18,7 +18,7 @@ import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { EditorState } from 'lexical';
 import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
-import { memo, useRef, useMemo, useCallback } from 'react';
+import { memo, useRef, useMemo, useCallback, Suspense } from 'react';
 import cls from './CreateNewCardModal.module.scss';
 
 export const CreateNewCardModal = memo(() => {
@@ -138,12 +138,14 @@ export const CreateNewCardModal = memo(() => {
 			<div key='editorBlockQuestion'>
 				<div className={cls.areaAndLabelWrapper} >
 					<MyText text={t('question')} />
-					<EditorV2
-						heightValue={editorMinHeight}
-						onChange={onChangeQuestion}
-						initialState={questionTextCardModal}
-						autoFocus
-					/>
+					<Suspense fallback={<Skeleton width={1200} borderRadius='4px' height={editorMinHeight} />}>
+						<EditorV2
+							heightValue={editorMinHeight}
+							onChange={onChangeQuestion}
+							initialState={questionTextCardModal}
+							autoFocus
+						/>
+					</Suspense>
 				</div>
 			</div>)
 	}, [onChangeQuestion, questionTextCardModal, editorMinHeight, t])
@@ -152,11 +154,13 @@ export const CreateNewCardModal = memo(() => {
 		return (
 			<div key='editorBlockAnswer' className={cls.areaAndLabelWrapper} >
 				<MyText text={t('answer')} />
-				<EditorV2
-					heightValue={editorMinHeight}
-					onChange={onChangeAnswer}
-					initialState={answerTextCardModal}
-				/>
+				<Suspense fallback={<Skeleton width={1200} borderRadius='4px' height={editorMinHeight} />}>
+					<EditorV2
+						heightValue={editorMinHeight}
+						onChange={onChangeAnswer}
+						initialState={answerTextCardModal}
+					/>
+				</Suspense>
 			</div>
 		)
 	}, [onChangeAnswer, answerTextCardModal, editorMinHeight, t])

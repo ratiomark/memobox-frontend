@@ -3,6 +3,7 @@
   align-items: center;
   gap: 40px;
   padding: 0 calc(var(--card-list-item-padding-left-and-right) + var(--view-page-icon-button-size)) 0 var(--card-list-item-padding-left-and-right);
+  user-select: none;
 
   // max-width: fit-content;
   // min-width: calc(100% - 32px);

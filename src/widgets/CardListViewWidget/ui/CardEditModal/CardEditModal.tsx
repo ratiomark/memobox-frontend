@@ -5,7 +5,7 @@ import { ListBox } from '@/shared/ui/Popup';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { MyText, TextArea } from '@/shared/ui/Typography';
 import { Button, } from '@/shared/ui/Button';
-import { KeyboardEvent, MutableRefObject, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { KeyboardEvent, MutableRefObject, Suspense, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 // import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import cls from './CardEditModal.module.scss';
@@ -184,8 +184,6 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 		/>
 	), [onChangeQuestion, questionTextEdited, editorMinHeight,])
 
-
-
 	const editorBlockAnswerOriginal = useMemo(() => (
 		<EditorUniversal
 			editorState={answerTextOriginal}
@@ -305,14 +303,18 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 
 						<div className={cls.areaAndLabelWrapper} >
 							<MyText text={t('question')} />
-							{showOriginalData && editorBlockQuestionOriginal}
-							{!showOriginalData && editorBlockQuestionEdited}
+							<Suspense fallback={<Skeleton width={1200} borderRadius='4px' height={editorMinHeight} />}>
+								{showOriginalData && editorBlockQuestionOriginal}
+								{!showOriginalData && editorBlockQuestionEdited}
+							</Suspense>
 						</div>
 
 						<div className={cls.areaAndLabelWrapper} >
 							<MyText text={t('answer')} />
-							{showOriginalData && editorBlockAnswerOriginal}
-							{!showOriginalData && editorBlockAnswerEdited}
+							<Suspense fallback={<Skeleton width={1200} borderRadius='4px' height={editorMinHeight} />}>
+								{showOriginalData && editorBlockAnswerOriginal}
+								{!showOriginalData && editorBlockAnswerEdited}
+							</Suspense>
 						</div>
 
 					</div>

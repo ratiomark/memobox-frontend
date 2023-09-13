@@ -189,7 +189,7 @@
 // }
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import cls from './CardListItem2.module.scss';
+import cls from './CardListItemCopy.module.scss';
 import { CardSchemaExtended } from '@/entities/Card';
 import { MyText } from '@/shared/ui/Typography';
 // import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
@@ -356,50 +356,11 @@ export const CardListItem = (props: CardListItemProps) => {
 					<div className={cls.content} >
 
 						<div className={cls.mainContentWrapper} >
-							<p className="PlaygroundEditorTheme__paragraph" dir="ltr"><span>Minim aliqua voluptate Lorem deserunt aute non labore anim in in consequat. Aliыва</span></p><p className="PlaygroundEditorTheme__paragraph" dir="ltr"><span>цу</span></p><p className="PlaygroundEditorTheme__paragraph" dir="ltr"><span>ацуацу</span></p><p className="PlaygroundEditorTheme__paragraph" dir="ltr"><br/></p><p className="PlaygroundEditorTheme__paragraph" dir="ltr"><span>qua voluptate nulla eu in.</span></p>
 							<MyText text={card.question} className={cls.mainContent} />
-							{/* <MyText text={card.answer} className={cls.mainContent} /> */}
-							{/* <MyText text={'sfsdfsd'} className={cls.mainContent} /> */}
-							{/* <MyText text={'sfsdfsdsfsdfsdsfsdf sdsfsdfsdsfsdfsdsfsd fsdsfsdfs dsfsdfsdsfsdfsds fsdfsdsfsdfsdsfsdfsdsfsdfsdsfsdfsdsfsdfsdsfsdfsds fsdfsdsfsdfsdsfsdfsdsfsdfsdsfsdfsds sdfsdsfs dfsdsfsdfsd'} className={cls.mainContent} /> */}
+							<MyText text={card.answer} className={cls.mainContent} />
 						</div>
-						{/* <div className={cls.columns} > */}
-
-						{/* </div> */}
 						{columnsRendered}
 					</div>
-
-					{/* <AnimatePresence>
-						{isMultiSelectActive
-							&& <motion.div
-								// initial={{ opacity: 0 }}
-								// exit={{ opacity: 0 }}
-								// animate={{ opacity: 1 }}
-								transition={{ delay: 2 }}
-								className={cls.icon}
-							/>}
-					</AnimatePresence>
-					<AnimatePresence>
-						{!isMultiSelectActive
-							&& (
-								<motion.div
-									initial={{ opacity: 0 }}
-									exit={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									transition={{ duration: 2 }}
-								>
-								<Icon
-									Svg={TrashIcon}
-									type='cancel'
-									clickable
-									withFill={false}
-									width={22}
-									height={22}
-									onClick={onDeleteCard}
-									buttonSameSize={false}
-									className={clsx(cls.icon, cls.removeIcon)} />
-							</motion.div>
-							)}
-					</AnimatePresence> */}
 					<button onClick={() => toogleEditor()}>qsiofjofiwejwoif</button>
 					{showEditor && editor}
 					{isMultiSelectActive

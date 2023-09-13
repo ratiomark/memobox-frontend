@@ -149,7 +149,7 @@ export const CardListItem = (props: CardListItemProps) => {
 
 	return (
 		<Collapsible
-			// layout={false}
+			layout={false}
 			initial={false}
 			isOpen={!card.deleted}
 		>

@@ -235,11 +235,11 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 
 			</div>
 
-			<Suspense fallback={<CardModalSkeleton />}>
-				{/* <CreateNewCardModalHeadless /> */}
-				<CreateNewCardModal />
-				{/* <CardModalSkeleton /> */}
-			</Suspense>
+			<CreateNewCardModal />
+			{/* <Suspense fallback={<CardModalSkeleton />}> */}
+			{/* <CreateNewCardModalHeadless /> */}
+			{/* <CardModalSkeleton /> */}
+			{/* </Suspense> */}
 		</>
 	)
 }
