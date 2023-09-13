@@ -133,10 +133,8 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 				onMoveCardsClick={onMoveCardsClick}
 				onRemoveCards={onRemoveCards}
 			/>
+
 			<CardEditModal />
-			{/* <Suspense fallback={<CardModalSkeleton />}>
-				<CardModalSkeleton />
-			</Suspense> */}
 			{/* <Suspense fallback={<CardModalSkeleton />}>
 				<CardEditModal />
 			</Suspense> */}

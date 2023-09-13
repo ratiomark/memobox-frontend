@@ -192,6 +192,8 @@ export const CreateNewCardModal = memo(() => {
 					</div>
 				</div>
 				<div className={cls.emptySpace_bottom} />
+
+
 				<div ref={modalButtonsRef}>
 					<ModalButtons
 						justify='end'

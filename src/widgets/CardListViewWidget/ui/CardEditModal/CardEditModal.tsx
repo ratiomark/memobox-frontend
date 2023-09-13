@@ -320,6 +320,7 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 					</div>
 				</div>
 				<div className={cls.emptySpace_bottom} />
+
 				<div className={cls.actions} ref={modalButtonsRef}>
 					{compareButton}
 					<ModalButtons
