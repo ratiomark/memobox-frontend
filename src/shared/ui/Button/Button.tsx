@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, forwardRef, memo, ReactNode } from 'react'
+import { ButtonHTMLAttributes, forwardRef, memo, ReactNode } from 'react'
 import clsx from 'clsx'
 import { FontWeight } from '@/shared/types/StyleTypes'
 import { mapFontWeightToClass } from '@/shared/lib/helpers/mappers/mapFontWeightToClass'

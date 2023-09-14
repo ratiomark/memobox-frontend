@@ -1,0 +1,6 @@
+/* stylelint-disable max-line-length */
+.tabsSkeleton {
+  max-width: 80%;
+  height: calc(var(--font-line-m) + var(--tab-item-padding-top-and-bottom) * 2 + var(--tabs-border-top-and-bottom-size) * 2);
+  border-radius: var(--tabs-border-radius);
+}

@@ -1,5 +1,4 @@
-import { infoIconSize } from '@/shared/const/iconSizes';
-import cls from './StatsAndActionsCupboardWidget.module.scss';
+import cls from '../StatsAndActionsCupboardWidget.module.scss';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { InfoButtonSkeleton } from '@/shared/ui/Skeleton/InfoButtonSkeleton/InfoButtonSkeleton';
 

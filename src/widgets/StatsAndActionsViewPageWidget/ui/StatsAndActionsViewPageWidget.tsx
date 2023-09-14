@@ -17,6 +17,7 @@ import cls from './StatsAndActionsViewPageWidget.module.scss';
 import { Button } from '@/shared/ui/Button';
 import { motion } from 'framer-motion'
 import { TableSettingModal } from './TableSettingModal/TableSettingModal';
+import { BigDataLabelsSkeleton, Skeleton } from '@/shared/ui/Skeleton';
 
 interface StatsData {
 	all: number
@@ -116,12 +117,21 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 					<div className={cls.actions} >
 						<Button
 							onClick={onOpenColumnSettingsModal}
-							borderRadius='borderRadius_4'
 						>
 							{t('table settings')}
 						</Button>
 					</div>
 				</HStack>
+				{/* <div style={{ position: 'fixed' }}>
+
+					<HStack
+						max
+						className={cls.statsAndActionsViewPageWidget}
+					>
+						<BigDataLabelsSkeleton />
+						<Skeleton width={140} className={cls.tableSettingButton} />
+					</HStack>
+				</div> */}
 			</motion.div>
 			<TableSettingModal />
 		</>

@@ -1,9 +1,5 @@
 .viewPageInitializer {
   display: grid;
-  gap: 20px;
-  // border: 1px solid red;
-  width: min(100%, 1200px);
-  grid-template-columns: 100%;
-
-  // min-height: 100vh;
+  gap: var(--gap-between-widgets-view-page);
+  width: var(--width-view-page-initializer);
 }

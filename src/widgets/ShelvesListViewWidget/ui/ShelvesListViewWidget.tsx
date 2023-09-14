@@ -15,7 +15,7 @@ import { HorizontalScrollerList } from '@/shared/ui/HorizontalScrollerList';
 import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
 import cls from './ShelvesListViewWidget.module.scss';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
-import { Skeleton } from '@/shared/ui/Skeleton';
+import { ShelvesListViewWidgetSkeleton, Skeleton } from '@/shared/ui/Skeleton';
 import { HStack } from '@/shared/ui/Stack';
 
 
@@ -99,15 +99,7 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 		<AnimateSkeletonLoader
 			isLoading={isShelvesLoading}
 			noDelay={(items && items?.length > 1)}
-			skeletonComponent={(
-				<HStack gap='gap_14' >
-					<Skeleton width={32} height={32} borderRadius='4px' />
-					<Skeleton width={120} borderRadius='12px' height={24} />
-					<Skeleton width={70} borderRadius='12px' height={24} />
-					<Skeleton width={100} borderRadius='12px' height={24} />
-					<Skeleton width={90} borderRadius='12px' height={24} />
-				</HStack >
-			)}
+			skeletonComponent={<ShelvesListViewWidgetSkeleton />}
 			commonWrapper={false}
 			classNameAbsoluteParts={cls.shelfItems}
 			componentAfterLoading={(

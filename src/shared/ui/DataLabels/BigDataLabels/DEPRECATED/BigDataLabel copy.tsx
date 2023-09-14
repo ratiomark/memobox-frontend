@@ -1,34 +1,29 @@
 import clsx from 'clsx'
-import cls from '@/shared/ui/DataLabels/BigDataLabels/BigDataLabel.module.scss'
+import cls from './BigDataLabel.module.scss'
 import Spinner from '@/shared/assets/icons/spinner.svg'
 import { useTranslation } from 'react-i18next'
-import { MyText } from '@/shared/ui/Typography'
+import { MyText } from '../../../Typography'
 import { motion } from 'framer-motion'
-import { SmallDataLabel } from '@/shared/ui/DataLabels'
-
-export type MainDataLabelType =
+export type BigDataLabelType =
 	| 'all'
 	| 'train'
 	| 'wait'
 
-interface MainDataLabelProps {
+
+interface BigDataLabelProps {
 	cardsCount?: number
 	className?: string
-	type: MainDataLabelType
+	type: BigDataLabelType
 	isLoading: boolean
-	percentValue?: number
-	withPercentValue?: boolean
 }
 
-export const MainDataLabel = (props: MainDataLabelProps) => {
+export const BigDataLabel = (props: BigDataLabelProps) => {
 	const { t } = useTranslation()
 	const {
 		className,
 		type,
 		cardsCount,
-		isLoading,
-		percentValue,
-		withPercentValue,
+		isLoading
 	} = props
 
 	let DataLabelName;
@@ -45,18 +40,9 @@ export const MainDataLabel = (props: MainDataLabelProps) => {
 	}
 
 	let content;
-	let percentValueComponent;
 	if (isLoading) {
 		content = <Spinner width={24} height={24} className={cls[`${type}_spinner`]} />
-		percentValueComponent = withPercentValue
-			&& (<div className={cls.percentValueWrapper} >
-				<SmallDataLabel type={type} isLoading={isLoading} cardsCount={`${percentValue}%`} />
-			</div>)
 	} else {
-		percentValueComponent = withPercentValue
-			&& (<div className={cls.percentValueWrapper} >
-				<SmallDataLabel type={type} isLoading={isLoading} cardsCount={`${percentValue}%`} />
-			</div>)
 		content = <MyText
 			drop
 			className={cls.cardsCounter}
@@ -70,9 +56,8 @@ export const MainDataLabel = (props: MainDataLabelProps) => {
 				animate={{ x: 0, opacity: 1 }}
 				// viewport={{ once: true }}
 				transition={{ type: 'just', duration: 0.5 }}
-				className={clsx(cls.MainDataLabelItem, [className])}
+				className={clsx(cls.BigDataLabel, [className])}
 			>
-				{percentValueComponent}
 				<div className={clsx(cls.coloredLeftSide, cls[type])}>
 					<div className={clsx(cls.dataHolder)}>
 						{content}
@@ -85,4 +70,13 @@ export const MainDataLabel = (props: MainDataLabelProps) => {
 			</motion.div>
 		</>
 	)
+}
+
+{
+	/* <div className='colorLabeReadyCards coloredLeftSide'>
+</div>
+<div className='dataHolder'>
+	<p className="cardsCounter">{children}</p>
+	<p className="labelName">Train</p>
+</div> */
 }

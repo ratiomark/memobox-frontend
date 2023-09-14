@@ -17,7 +17,6 @@ interface TabsProps {
 	align?: FlexAlign
 	classNameForTab?: string
 }
-let main;
 export const Tabs = memo((props: TabsProps) => {
 	const {
 		className,

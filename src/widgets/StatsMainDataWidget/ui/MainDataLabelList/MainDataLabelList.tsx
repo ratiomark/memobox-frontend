@@ -1,9 +1,6 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './MainDataLabelList.module.scss';
-import { DataBlock } from '@/shared/types/DataBlock';
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
-import { MainDataLabel } from '../MainDataLabelItem/MainDataLabelItem';
 import { Icon } from '@/shared/ui/Icon';
 import langIcon from '@/shared/assets/icons/langIcon.svg'
 import { BigDataLabel } from '@/shared/ui/DataLabels';

@@ -1,11 +1,13 @@
-.statsAndActionsViewPageWidget {
+.viewPageInitializer {
+  display: grid;
+  gap: var(--gap-between-widgets-view-page);
+  width: var(--width-view-page-initializer);
+}
+
+.statsAndActions {
   justify-content: space-between;
   align-items: center;
   padding: var(--additional-padding-top-data-labels) 0;
-}
-
-.actions {
-  padding-right: var(--padding-right-correction-info-icon);
 }
 
 .tableSettingButton {

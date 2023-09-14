@@ -4,7 +4,7 @@ import {
 	viewPageActions
 } from '@/features/ViewPageInitializer';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { Skeleton } from '@/shared/ui/Skeleton';
+import { Skeleton, TabsSkeleton } from '@/shared/ui/Skeleton';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -64,11 +64,12 @@ export const BoxesListViewWidget = memo(() => {
 		<AnimateSkeletonLoader
 			isLoading={isShelvesLoading || viewPageIsLoading}
 			noDelay={(tabs && tabs?.length > 1)}
-			skeletonComponent={<Skeleton width={700} height={40} borderRadius='8px' />}
+			skeletonComponent={<TabsSkeleton />}
 			// commonWrapper={false}
 			classNameAbsoluteParts={cls.tabsItems}
 			componentAfterLoading={tabsRendered}
 		/>)
+
 
 	return (
 		<div
