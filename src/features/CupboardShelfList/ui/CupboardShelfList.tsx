@@ -29,8 +29,6 @@ import { BoxesSettingsModal } from './BoxesSettingsModal/BoxesSettingsModal/Boxe
 import { BoxesBlockWrapper } from './BoxesBlock/BoxesBlockWrapper';
 import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModal/MissedTrainingSettings';
 import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
-import { DndShelfListWrapper } from './DndShelfListWrapper';
-import { AnimatePresence, Reorder } from 'framer-motion';
 import { BoxTimeSetterModal } from './Modals/BoxTimeSetterModal/BoxTimeSetterModal';
 import { CreateNewCardModal } from './Modals/CreateNewCardModal/CreateNewCardModal';
 import { useUpdateShelvesOrderMutation } from '@/entities/Cupboard';
@@ -42,9 +40,7 @@ import { BoxSettingsDropdownModal } from './Modals/BoxSettingsDropdownModal/BoxS
 import { HiddenTemplates } from './HiddenTemplates/HiddenTemplates';
 import { idCupboardShelfList } from '@/shared/const/ids';
 import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
-import { CreateNewCardModalHeadless } from './Modals/CreateNewCardModal/CreateNewCardModalHeadless';
-import { CardModalSkeleton } from '@/shared/ui/Skeleton';
-import { Portal } from '@radix-ui/react-dialog';
+import { Reorder } from 'framer-motion';
 // import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
 // import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 

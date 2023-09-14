@@ -134,9 +134,6 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 			/>
 
 			<CardEditModal />
-			{/* <Suspense fallback={<CardModalSkeleton />}>
-				<CardEditModal />
-			</Suspense> */}
 			<MoveCardsModal />
 		</>
 	)

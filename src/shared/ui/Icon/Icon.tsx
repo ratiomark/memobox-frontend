@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import IconEye from '@/shared/assets/icons/eye-20-20.svg'
 import cls from './Icon.module.scss';
 import { ButtonHTMLAttributes, MouseEvent } from 'react';
+import { ICON_SIZE_DEFAULT } from '@/shared/const/iconSizes';
 
 type SvgProps = Omit<React.SVGProps<SVGSVGElement>, 'onClick'>
 
@@ -30,8 +31,8 @@ export const Icon = (props: IconProps) => {
 	const {
 		className,
 		Svg = IconEye,
-		width = 32,
-		height = 32,
+		width = ICON_SIZE_DEFAULT,
+		height = ICON_SIZE_DEFAULT,
 		type = 'main',
 		clickable = false,
 		withFill = true,
