@@ -11,7 +11,9 @@
 }
 
 .tableSettingButton {
-  height: calc(var(--font-line-m-button) + var(--padding-main-top-and-bottom) * 2 + 1px);
   margin-right: var(--padding-right-correction-info-icon);
-  border-radius: var(--border-radius-main);
+}
+
+.sortingSkeleton {
+  min-width: 100%;
 }

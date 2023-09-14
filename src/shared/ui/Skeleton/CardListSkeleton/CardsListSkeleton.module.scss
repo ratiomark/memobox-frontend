@@ -1,0 +1,6 @@
+.cardListItemSkeleton {
+  min-width: 100%;
+  height: calc(var(--font-line-m) * 2 + var(--card-list-item-padding-top-and-bottom) * 2);
+  margin-bottom: var(--card-list-item-li-margin-bottom);
+  border-radius: var(--border-radius-main);
+}

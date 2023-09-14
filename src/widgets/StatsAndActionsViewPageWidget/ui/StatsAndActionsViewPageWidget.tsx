@@ -122,16 +122,6 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 						</Button>
 					</div>
 				</HStack>
-				{/* <div style={{ position: 'fixed' }}>
-
-					<HStack
-						max
-						className={cls.statsAndActionsViewPageWidget}
-					>
-						<BigDataLabelsSkeleton />
-						<Skeleton width={140} className={cls.tableSettingButton} />
-					</HStack>
-				</div> */}
 			</motion.div>
 			<TableSettingModal />
 		</>

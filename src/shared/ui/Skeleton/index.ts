@@ -1,3 +1,5 @@
+export { CardsListSkeleton } from './CardListSkeleton/CardListSkeleton';
+export { DefaultButtonSkeleton } from './DefaultButtonSkeleton/DefaultButtonSkeleton';
 export { TabsSkeleton } from './TabsSkeleton/TabsSkeleton';
 export { ShelvesListViewWidgetSkeleton } from './ShelvesListViewWidget/ShelvesListViewWidget';
 export { BigDataLabelsSkeleton } from './BigDataLabelsSkeleton/BigDataLabelsSkeleton';

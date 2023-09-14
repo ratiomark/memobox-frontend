@@ -12,8 +12,8 @@ import { StatsAndActionsCupboardWidgetSkeleton } from '@/widgets/StatsAndActions
 import { SubscriptionPage } from '@/pages/SubscriptionPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { StatsPage } from '@/pages/StatsPage';
-import { Suspense } from 'react';
 import { StatsPageSkeleton } from '@/pages/StatsPage';
+import { ViewPageSkeleton } from '@/pages/ViewPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -57,7 +57,7 @@ export const obtainRouteView = (shelfId?: string, boxId?: string | number) => {
 	if (!boxId) return `/view/${shelfId}/all`
 	return `/view/${shelfId}/${boxId}`
 }
-export const obtainRouteViewEmpty = () =>'/view'
+export const obtainRouteViewEmpty = () => '/view'
 
 export const obtainRouteTraining = (shelfId?: string, boxId?: string) => {
 	return `/training/${shelfId}/${boxId}`
@@ -87,10 +87,12 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	view: {
 		path: obtainRouteView(':shelfId', ':boxId'),
 		element: <ViewPage />,
+		suspense: <ViewPageSkeleton />
 	},
 	viewEmpty: {
 		path: '/view',
 		element: <ViewPage />,
+		suspense: <ViewPageSkeleton />	
 	},
 	settings: {
 		path: obtainRouteSettings(),
@@ -100,7 +102,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	stats: {
 		path: obtainRouteStats(),
 		element: <StatsPage />,
-		suspense: <StatsPageSkeleton/>
+		suspense: <StatsPageSkeleton />
 	},
 	trash: {
 		path: obtainRouteTrash(),

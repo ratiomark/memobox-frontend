@@ -4,7 +4,7 @@
   gap: 20px;
   cursor: pointer;
   position: relative;
-  margin-bottom: 8px;
+  margin-bottom: var(--card-list-item-li-margin-bottom);
 
   // z-index: 1;
 

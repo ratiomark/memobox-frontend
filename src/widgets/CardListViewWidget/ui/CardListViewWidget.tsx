@@ -8,7 +8,6 @@ import {
 import { useSelector } from 'react-redux';
 import { CardSchemaExtended, useUpdateCardsMutation } from '@/entities/Card';
 import { Suspense, useCallback, useEffect, useMemo, } from 'react';
-import { CardsListSkeleton } from './CardsListSkeleton';
 import { getViewPageIsLoading } from '@/features/ViewPageInitializer';
 import { CardListItem } from './CardListItem/CardListItem';
 import { getViewPageCardsSorted } from '@/features/ViewPageInitializer'
@@ -18,7 +17,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { CardEditModal } from './CardEditModal/CardEditModal';
 import { MoveCardsModal } from './MoveCardsModal/MoveCardsModal';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
-import { CardModalSkeleton } from '@/shared/ui/Skeleton';
+import { CardModalSkeleton, CardsListSkeleton } from '@/shared/ui/Skeleton';
 
 interface CardListViewWidgetProps {
 	className?: string
