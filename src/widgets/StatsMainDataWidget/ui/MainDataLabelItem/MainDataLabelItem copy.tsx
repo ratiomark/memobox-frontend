@@ -17,7 +17,6 @@ interface MainDataLabelProps {
 	type: MainDataLabelType
 	isLoading: boolean
 	percentValue?: number
-	withPercentValue?: boolean
 }
 
 export const MainDataLabel = (props: MainDataLabelProps) => {
@@ -28,10 +27,10 @@ export const MainDataLabel = (props: MainDataLabelProps) => {
 		cardsCount,
 		isLoading,
 		percentValue,
-		withPercentValue,
 	} = props
 
 	let DataLabelName;
+
 	switch (type) {
 		case 'all':
 			DataLabelName = t('all big data label name')
@@ -48,15 +47,8 @@ export const MainDataLabel = (props: MainDataLabelProps) => {
 	let percentValueComponent;
 	if (isLoading) {
 		content = <Spinner width={24} height={24} className={cls[`${type}_spinner`]} />
-		percentValueComponent = withPercentValue
-			&& (<div className={cls.percentValueWrapper} >
-				<SmallDataLabel type={type} isLoading={isLoading} cardsCount={`${percentValue}%`} />
-			</div>)
 	} else {
-		percentValueComponent = withPercentValue
-			&& (<div className={cls.percentValueWrapper} >
-				<SmallDataLabel type={type} isLoading={isLoading} cardsCount={`${percentValue}%`} />
-			</div>)
+		percentValueComponent = percentValue ? <SmallDataLabel type={type} isLoading={isLoading} cardsCount={`${percentValue}%`} /> : undefined
 		content = <MyText
 			drop
 			className={cls.cardsCounter}
@@ -72,7 +64,9 @@ export const MainDataLabel = (props: MainDataLabelProps) => {
 				transition={{ type: 'just', duration: 0.5 }}
 				className={clsx(cls.MainDataLabelItem, [className])}
 			>
-				{percentValueComponent}
+				<div className={cls.percentValueWrapper} >
+					{percentValueComponent}
+				</div>
 				<div className={clsx(cls.coloredLeftSide, cls[type])}>
 					<div className={clsx(cls.dataHolder)}>
 						{content}

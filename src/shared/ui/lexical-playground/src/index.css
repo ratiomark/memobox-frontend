@@ -36,7 +36,7 @@
   position: relative;
 }
 
-.editor-shell button:hover::after {
+/* .editor-shell button:hover::after {
   content: "";
   position: absolute;
   top: 2px;
@@ -46,6 +46,31 @@
   height: 2px;
   background-color: var(--accent);
   border-radius: 99px;
+} */
+.editor-shell button.code-language:hover::after,
+.editor-shell button:not(:disabled):hover::after,
+.editor-shell button:not([datatype="code-copy"]):hover::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 99px;
+}
+
+.editor-shell button[datatype="code-copy"]:hover::after {
+  background-color: transparent;
+}
+/* 
+.editor-shell button[datatype="code-copy"] {
+  border: 1px solid var(--accent);
+} */
+
+.editor-shell button.code-language:hover::after {
+  width: 50%;
 }
 
 .editor-shell .editor-container {

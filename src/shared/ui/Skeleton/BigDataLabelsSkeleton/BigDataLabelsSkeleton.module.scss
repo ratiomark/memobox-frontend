@@ -1,0 +1,19 @@
+/* stylelint-disable max-line-length */
+.wrapper {
+  display: flex;
+  gap: var(--gap-between-data-labels);
+}
+
+.BigDataLabelSkeleton {
+  width: var(--data-label-min-width);
+  border-radius: var(--border-radius-main);
+  height:
+    calc(
+      var(--big-data-labels-data-holder-padding-top) + var(--big-data-labels-data-holder-padding-bottom) + var(--font-line-m) * 2
+    );
+
+  // height:
+  //   calc(
+  //     var(--big-data-labels-data-holder-padding-left) + var(--big-data-labels-cards-counter-font-size) + var(--big-data-labels-label-name-font-size) + var(--big-data-labels-data-holder-padding-right)
+  //   );
+}

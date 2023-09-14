@@ -1,22 +1,12 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './StatsMainDataWidget.module.scss';
-import { HStack } from '@/shared/ui/Stack';
-import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLabels/CompleteBigDataLabels';
-import { Button } from '@/shared/ui/Button';
+import { useTranslation } from 'react-i18next';
 import { Icon } from '@/shared/ui/Icon';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions } from '@/features/CupboardShelfList';
+import { getCupboardIsLoading, getCupboardError, getCupboardData } from '@/features/CupboardShelfList';
 import { useSelector } from 'react-redux';
-import { ThemeSwitcher } from '@/features/ThemeSwitcher';
-import { useHotkeys } from 'react-hotkeys-hook';
-import { CreateNewShelfModal } from '@/features/CreateNewShelfModal';
 import { motion } from 'framer-motion'
-import { getUserShelfNamesList } from '@/entities/User';
-import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
-import { Skeleton } from '@/shared/ui/Skeleton';
-import { DataBlock } from '@/shared/types/DataBlock';
 import { MainDataLabelList, StatsDataBlockWithPercent } from './MainDataLabelList/MainDataLabelList';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import { infoIconSize } from '@/shared/const/iconSizes';
@@ -51,6 +41,7 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 	useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
+			// }, 30000000)
 		}, 3000)
 	}, [])
 
@@ -62,6 +53,7 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 		// animate={{ y: 0 }}
 		// transition={{ type: 'spring', }}
 		>
+			{/* <button style={{ position: 'absolute', top: 50, left: 50 }} onClick={() => setIsLoading(false)}>OFF</button> */}
 			<div
 				className={clsx(
 					cls.statsMainDataWidget,
@@ -70,12 +62,12 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 				<MainDataLabelList
 					data={data}
 					isLoading={isLoading}
-
 				/>
 				<Icon
 					Svg={InfoIcon}
 					width={infoIconSize}
 					height={infoIconSize}
+					buttonSameSize
 					clickable
 					onClick={() => { }}
 				/>

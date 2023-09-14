@@ -1,10 +1,10 @@
 .statsMainDataWidget {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
+  justify-content: space-between;
   min-width: 100%;
   position: relative;
   padding-top: var(--additional-padding-top-data-labels);
   padding-bottom: var(--empty-space-after-and-before-divider);
   padding-right: var(--padding-right-correction-info-icon);
-  justify-content: space-between;
 }

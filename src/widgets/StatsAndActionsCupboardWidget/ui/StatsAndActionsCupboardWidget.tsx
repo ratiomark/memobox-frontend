@@ -17,7 +17,7 @@ import { motion } from 'framer-motion'
 import { getUserShelfNamesList } from '@/entities/User';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
-import { ButtonsSkeleton } from './ButtonsSkeleton';
+import { CupboardMainButtonsSkeleton } from './CupboardMainButtonsSkeleton';
 import { infoIconSize } from '@/shared/const/iconSizes';
 
 interface StatsAndActionsCupboardWidgetProps {
@@ -52,7 +52,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const buttons = (
 		<AnimateSkeletonLoader
 			classNameForCommonWrapper={cls.commonWrapper}
-			skeletonComponent={<ButtonsSkeleton />}
+			skeletonComponent={<CupboardMainButtonsSkeleton />}
 			// animateComponentAfterLoadingFadeInTime={DURA}
 			componentAfterLoading={
 				<HStack gap='gap_14' className={cls.actions}>
