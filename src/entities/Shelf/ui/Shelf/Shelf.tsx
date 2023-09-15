@@ -93,7 +93,7 @@ export const Shelf = memo((props: ShelfProps) => {
 			>
 				<div className={cls.topShelfPart}>
 					<VStack align='start' gap='gap_8'>
-						<Heading as='h3' size='s' title={title} />
+						<Heading as='h3' noSelect size='s' title={title} />
 						{completeSmallDataLabelsBlock}
 					</VStack>
 					{shelfButtonsBlock}

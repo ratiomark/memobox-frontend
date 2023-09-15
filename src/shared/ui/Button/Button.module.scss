@@ -9,6 +9,7 @@
   outline: none;
   transition: all 0.4s;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     // color: var(--accent);

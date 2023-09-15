@@ -1,19 +1,12 @@
-import React, { FC } from 'react'
-
 import clsx from 'clsx'
 import { MyText } from '../../Typography'
-import { Skeleton } from '../../Skeleton'
 import cls from './SmallDataLabel.module.scss'
 import Spinner from '@/shared/assets/icons/spinner.svg'
-
-export type SmallDataLabelType =
-	| 'all'
-	| 'train'
-	| 'wait'
+import { DataLabelType } from '../types/DataLabelType';
 
 interface SmallDataLabelProps {
 	className?: string;
-	type: SmallDataLabelType
+	type: DataLabelType
 	cardsCount?: number | string
 	isLoading: boolean
 }

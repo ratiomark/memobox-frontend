@@ -11,7 +11,7 @@ import {
 } from '../../../model/selectors/getCreateNewCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
-import { Skeleton } from '@/shared/ui/Skeleton';
+import { Skeleton, TextEditorSkeleton } from '@/shared/ui/Skeleton';
 import { getCupboardIsLoading, getCupboardError } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
@@ -19,7 +19,9 @@ import { EditorState } from 'lexical';
 import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
 import { memo, useRef, useMemo, useCallback, Suspense } from 'react';
-import cls from './CreateNewCardModal.module.scss';
+import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
+// import cls from './CreateNewCardModal.module.scss';
+import { EditorUniversal } from '@/shared/ui/lexical-playground/src/EditorUniversal';
 
 export const CreateNewCardModal = memo(() => {
 	const { t } = useTranslation()
@@ -135,33 +137,38 @@ export const CreateNewCardModal = memo(() => {
 
 	const editorBlockQuestion = useMemo(() => {
 		return (
-			<div key='editorBlockQuestion'>
-				<div className={cls.areaAndLabelWrapper} >
-					<MyText text={t('question')} />
-					<Suspense fallback={<Skeleton width={1200} borderRadius='4px' height={editorMinHeight} />}>
-						<EditorV2
-							heightValue={editorMinHeight}
-							onChange={onChangeQuestion}
-							initialState={questionTextCardModal}
-							autoFocus
-						/>
-					</Suspense>
-				</div>
-			</div>)
+			<div className={cls.areaAndLabelWrapper} >
+				<MyText text={t('question')} />
+				<Suspense fallback={
+					<TextEditorSkeleton editorMinHeight={editorMinHeight} />
+				}>
+					<EditorUniversal
+						heightValue={editorMinHeight}
+						onChange={onChangeQuestion}
+						editorState={questionTextCardModal}
+						autoFocus
+					/>
+				</Suspense>
+			</div>
+		)
 	}, [onChangeQuestion, questionTextCardModal, editorMinHeight, t])
 
 	const editorBlockAnswer = useMemo(() => {
 		return (
-			<div key='editorBlockAnswer' className={cls.areaAndLabelWrapper} >
+			// <div key='editorBlockAnswer' >
+			<div className={cls.areaAndLabelWrapper}>
 				<MyText text={t('answer')} />
-				<Suspense fallback={<Skeleton width={1200} borderRadius='4px' height={editorMinHeight} />}>
-					<EditorV2
+				<Suspense fallback={
+					<TextEditorSkeleton editorMinHeight={editorMinHeight} />
+				}>
+					<EditorUniversal
 						heightValue={editorMinHeight}
 						onChange={onChangeAnswer}
-						initialState={answerTextCardModal}
+						editorState={answerTextCardModal}
 					/>
 				</Suspense>
 			</div>
+			// </div>
 		)
 	}, [onChangeAnswer, answerTextCardModal, editorMinHeight, t])
 
@@ -178,8 +185,8 @@ export const CreateNewCardModal = memo(() => {
 				className={cls.cardModal}
 			>
 				<div className={cls.emptySpace_top} />
-
 				<div className={cls.mainContentWrapper}>
+
 					<div
 						className={cls.mainContent}
 						style={{ maxHeight: mainContentMaxHeight }}
@@ -191,9 +198,8 @@ export const CreateNewCardModal = memo(() => {
 						{editorBlockAnswer}
 					</div>
 				</div>
+
 				<div className={cls.emptySpace_bottom} />
-
-
 				<div ref={modalButtonsRef}>
 					<ModalButtons
 						justify='end'

@@ -26,6 +26,7 @@ interface TextOwnProps<E extends ElementType = ElementType> {
 	align?: TextAlign;
 	size?: TextSize;
 	saveOriginal?: boolean;
+	noSelect?: boolean;
 	'data-testid'?: string;
 	fontWeight?: FontWeight
 	as?: E
@@ -46,6 +47,7 @@ export const MyText = memo(
 			align = 'left',
 			size = 'm',
 			fontWeight,
+			noSelect = false,
 			saveOriginal,
 			as: TagName = defaultElement,
 			'data-testid': dataTestId = 'Text',
@@ -64,8 +66,9 @@ export const MyText = memo(
 		return (
 			<TagName
 				className={clsx(
-					additionalClasses ?? '',
-					fontWeight ? mapFontWeightToClass[fontWeight] : '',
+					additionalClasses,
+					fontWeight && mapFontWeightToClass[fontWeight],
+					noSelect && 'disallowUserSelect',
 					{
 						[cls.saveOriginal]: saveOriginal,
 						// [cls.bold]: bold,

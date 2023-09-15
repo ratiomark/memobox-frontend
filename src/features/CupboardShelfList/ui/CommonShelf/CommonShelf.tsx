@@ -85,7 +85,7 @@ export const CommonShelf = memo((props: ShelfProps) => {
 		>
 			<div className={cls.topShelfPart}>
 				<VStack align='start' gap='gap_8'>
-					<Heading as='h3' size='s' title={t('common shelf name')} />
+					<Heading as='h3' size='s' title={t('common shelf name')} noSelect />
 					<CompleteSmallDataLabels data={data} isLoading={isLoading} />
 				</VStack>
 				<div>

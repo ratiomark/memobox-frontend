@@ -29,9 +29,9 @@ export const App = () => {
 			<Suspense fallback={<HeaderSkeleton />}>
 				<Header />
 			</Suspense>
-			<Suspense fallback={<LoaderWidget />}>
-				<AppRouter />
-			</Suspense>
+			{/* <Suspense fallback={<LoaderWidget />}> */}
+			<AppRouter />
+			{/* </Suspense> */}
 			{/* <img src="https://i.pinimg.com/originals/e5/e8/30/e5e830f89f89f0259e1d705e14a5de93.gif" alt="Your GIF" id="my-gif" /> */}
 		</div>
 	)

@@ -1410,7 +1410,7 @@
           {
             "value": "lastTraining",
             "content": "last training",
-            "enabled": false,
+            "enabled": true,
             "index": 2
           }
         ],

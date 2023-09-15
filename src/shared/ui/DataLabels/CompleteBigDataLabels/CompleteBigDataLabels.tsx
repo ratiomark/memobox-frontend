@@ -23,7 +23,7 @@ export const CompleteBigDataLabels = (props: CompleteBigDataLabelsProps) => {
 		isLoading
 	} = props
 
-	const { t, currentLang, setLang } = useCustomTranslate()
+	const { currentLang, setLang } = useCustomTranslate()
 
 	return (
 		<div className={clsx(
@@ -38,7 +38,6 @@ export const CompleteBigDataLabels = (props: CompleteBigDataLabelsProps) => {
 				onClick={() => setLang(currentLang === 'ru' ? 'en' : 'ru')}
 				Svg={langIcon}
 			/>
-			{/* <button onClick={() => setLang(currentLang === 'ru' ? 'en' : 'ru')}>{currentLang}</button> */}
 		</div>
 	)
 }

@@ -23,7 +23,7 @@ export const ModalButtons = (props: ModalButtonsProps) => {
 	const {
 		className,
 		max = true,
-		justify = 'between',
+		justify = 'end',
 		onClose,
 		gap = 'gap_14',
 		isSubmitDisabled,

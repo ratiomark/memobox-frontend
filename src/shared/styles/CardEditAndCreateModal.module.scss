@@ -13,13 +13,10 @@
 }
 
 .listBoxWrapper {
-  // width: calc(100% - var(--padding-for-scroll));
   width: 80%;
 
   @media (max-width: 1100px) {
     width: 100%;
-
-    // width: calc(100% - 20px);
   }
 }
 
@@ -42,25 +39,14 @@
 .mainContent {
   display: flex;
   flex-direction: column;
-  gap: var(--main-content-vertical-gap);
   min-width: 100%;
+  gap: var(--main-content-vertical-gap);
   padding-right: calc(var(--padding-right) - var(--padding-for-scroll));
   padding-left: var(--padding-right);
   overflow: auto;
   scroll-padding-bottom: 20px;
   scrollbar-gutter: stable;
 }
-
-// .mainContent {
-//   display: flex;
-//   flex-direction: column;
-//   gap: var(--main-content-vertical-gap);
-//   min-width: 100%;
-//   padding-right: var(--padding-right);
-//   padding-left: var(--padding-right);
-//   overflow: auto;
-//   scroll-padding-bottom: 20px;
-// }
 
 .areaAndLabelWrapper {
   display: grid;
@@ -72,18 +58,14 @@
   height: var(--empty-space-top-height);
   width: 1200px;
 
-  // background-color: rgb(168 168 248);
+  // нужно чтобы растянуть окно на 1200px
 }
 
 .emptySpace_bottom {
   height: var(--empty-space-bottom-height);
-
-  // background-color: rgb(168 168 248);
 }
 
 .actions {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
   padding-right: calc(var(--padding-right) + var(--scroll-bar-main-width));
   border-bottom-left-radius: var(--border-radius-main);
@@ -91,7 +73,12 @@
   padding-left: var(--padding-right);
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: rgb(237 236 255);
+  background-color: var(--create-edit-modals-bottom-buttons-bg);
+}
+
+.actionsCardEditModal {
+  display: flex;
+  justify-content: space-between;
 }
 
 .modalButtons {

@@ -51,17 +51,6 @@
   scrollbar-gutter: stable;
 }
 
-// .mainContent {
-//   display: flex;
-//   flex-direction: column;
-//   gap: var(--main-content-vertical-gap);
-//   min-width: 100%;
-//   padding-right: var(--padding-right);
-//   padding-left: var(--padding-right);
-//   overflow: auto;
-//   scroll-padding-bottom: 20px;
-// }
-
 .areaAndLabelWrapper {
   display: grid;
   gap: 4px;
@@ -71,19 +60,23 @@
 .emptySpace_top {
   height: var(--empty-space-top-height);
   width: 1200px;
-
-  // background-color: rgb(168 168 248);
 }
 
 .emptySpace_bottom {
   height: var(--empty-space-bottom-height);
+}
 
-  // background-color: rgb(168 168 248);
+.shadowAreaWrapper {
+  position: relative;
+  width: 100%;
+  visibility: hidden;
+}
+
+.shadowArea {
+  position: absolute;
 }
 
 .actions {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
   padding-right: calc(var(--padding-right) + var(--scroll-bar-main-width));
   border-bottom-left-radius: var(--border-radius-main);
@@ -91,10 +84,5 @@
   padding-left: var(--padding-right);
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: rgb(237 236 255);
-}
-
-.modalButtons {
-  max-width: 100%;
-  min-width: fit-content;
+  background-color: rgb(211 209 255);
 }

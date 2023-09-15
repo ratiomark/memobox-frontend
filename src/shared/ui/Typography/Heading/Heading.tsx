@@ -29,6 +29,7 @@ export type TextOwnProps<E extends ElementType = ElementType> = {
 	'data-testid'?: string;
 	bold?: boolean;
 	as?: E
+	noSelect?: boolean
 }
 
 export type TextProps<E extends ElementType> = TextOwnProps<E> &
@@ -46,6 +47,7 @@ export const Heading = memo(
 			align = 'left',
 			size = 'm',
 			bold = false,
+			noSelect = false,
 			fontWeight,
 			saveOriginal,
 			as: TagName = defaultElement,
@@ -60,8 +62,9 @@ export const Heading = memo(
 		return (
 			<TagName
 				className={clsx(
-					additionalClasses ?? '',
-					fontWeight ? mapFontWeightToClass[fontWeight] : '',
+					additionalClasses,
+					fontWeight && mapFontWeightToClass[fontWeight],
+					noSelect && 'disallowUserSelect',
 					{
 						[cls.saveOriginal]: saveOriginal,
 						[cls.bold]: bold,

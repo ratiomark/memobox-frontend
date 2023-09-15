@@ -3,30 +3,11 @@
   justify-content: center;
   align-items: center;
   font-size: 12px;
-
-  // flex-basis: 40px;
   max-width: 40px;
   border-radius: 12px 0;
   padding: 0 12px;
-
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // font-size: 12px;
-  // padding: 5px 0px;
-  // flex-basis: 40px;
-  // min-width: 40px;
-  // border-radius: 12px 0 12px 0;
+  user-select: none;
 }
-
-// .spinner_I8Q1 { animation: spinner_qhi1 0.75s linear infinite; }
-// .spinner_vrS7 { animation-delay: -0.375s; }
-
-// @keyframes spinner_qhi1 {
-//   0%,
-//   100% { r: 1.5px; }
-//   50% { r: 3px; }
-// }
 
 .train {
   background-color: var(--small-data-label-background-train);
@@ -45,50 +26,3 @@
   color: var(--small-data-label-color-all);
   fill: var(--small-data-label-color-all);
 }
-
-// .SmallDataLabel {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 12px;
-
-//   // flex-basis: 40px;
-//   max-width: 40px;
-//   border-radius: 12px 0;
-//   padding: 0 12px;
-
-//   // display: flex;
-//   // justify-content: center;
-//   // align-items: center;
-//   // font-size: 12px;
-//   // padding: 5px 0px;
-//   // flex-basis: 40px;
-//   // min-width: 40px;
-//   // border-radius: 12px 0 12px 0;
-
-//   .train {
-//     background-color: var(--small-data-label-background-train);
-//   }
-
-//   .wait {
-//     background-color: var(--small-data-label-background-wait);
-//   }
-
-//   .all {
-//     background-color: var(--small-data-label-background-all);
-//   }
-// }
-
-// .smallDataLabelText {
-//   .train {
-//     color: var(--small-data-label-color-train);
-//   }
-
-//   .wait {
-//     color: var(--small-data-label-color-wait);
-//   }
-
-//   .all {
-//     color: var(--small-data-label-color-all);
-//   }
-// }

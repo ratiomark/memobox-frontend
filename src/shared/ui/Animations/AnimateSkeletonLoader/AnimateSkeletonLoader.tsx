@@ -37,7 +37,12 @@ export const AnimateSkeletonLoader = (props: AnimateSkeletonLoaderProps) => {
 		<AnimatePresence>
 			{isLoading &&
 				<motion.div
-					style={{ position: 'absolute', right: classNameAbsoluteParts ? '' : 0, border: borderTest ? '1px solid blue' : '' }}
+					style={{
+						position: 'absolute',
+						// zIndex: 10,
+						right: classNameAbsoluteParts ? '' : 0,
+						border: borderTest ? '1px solid blue' : ''
+					}}
 					// style={{ position: 'absolute', inset: 0, zIndex: 4, width: 'max-content', height: 'fit-content', border: '1px solid blue' }}
 					// можно менять код тут
 					// style={{ position: 'relative', }}
@@ -63,7 +68,12 @@ export const AnimateSkeletonLoader = (props: AnimateSkeletonLoaderProps) => {
 		<AnimatePresence>
 			{!isLoading &&
 				<motion.div
-					style={{ position: 'absolute', right: classNameAbsoluteParts ? '' : 0, border: borderTest ? '1px solid blue' : '' }}
+					style={{
+						position: 'absolute',
+						// zIndex: 20,
+						right: classNameAbsoluteParts ? '' : 0,
+						border: borderTest ? '1px solid blue' : ''
+					}}
 					// style={{ position: 'absolute', inset: 0, zIndex: 5, width: 'max-content', height: 'fit-content', border: '1px solid blue' }}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}

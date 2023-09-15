@@ -8,6 +8,10 @@
   margin: 0 auto;
 }
 
+.disallowUserSelect {
+  user-select: none;
+}
+
 .bottom_right {
   top: 100%;
   left: 0;

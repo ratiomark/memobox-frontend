@@ -5,11 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { MyText } from '../../Typography'
 import { motion } from 'framer-motion'
 import { SmallDataLabel } from '@/shared/ui/DataLabels'
-
-export type DataLabelType =
-	| 'all'
-	| 'train'
-	| 'wait'
+import { DataLabelType } from '../types/DataLabelType'
 
 interface BigDataLabelProps<T extends boolean, K extends boolean | undefined> {
 	type: DataLabelType
@@ -62,6 +58,7 @@ export const BigDataLabel = <
 			</div>)
 		content = <MyText
 			drop
+			// noSelect
 			className={cls.cardsCounter}
 			text={cardsCount} />
 	}
@@ -80,6 +77,7 @@ export const BigDataLabel = <
 					{content}
 					<MyText
 						drop
+						noSelect
 						className={cls.labelName}
 						text={DataLabelName} />
 				</div>

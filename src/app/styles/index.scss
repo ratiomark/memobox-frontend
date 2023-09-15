@@ -16,8 +16,6 @@ body {
 
   background: var(--body-bg-color);
 
-  // background: var(--body-bg-color);
-
   // cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/heart.svg), auto;
   // scrollbar-width: thin;
   // scrollbar-gutter: stable both-edges;
@@ -25,7 +23,7 @@ body {
 
 *:focus-visible {
   outline: none;
-  box-shadow: 0 0 5px 3px rgba(#33d69f, 0.2), 0 0 1px 1px rgba(#33d69f, 0.8);
+  box-shadow: 0 0 5px 3px var(--accent-rgb-2), 0 0 1px 1px var(--accent-rgb-8);
 
   //   border: 1px solid var(--accent);
 }
