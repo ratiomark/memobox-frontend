@@ -12,6 +12,7 @@ import { SettingsShelfTemplate } from '@/features/SettingsFeatures'
 import { TrashPageInitializerSchema } from '@/features/TrashPageInitializer';
 import { ProfilePageWidgetSchema } from '@/widgets/ProfilePageWidget';
 import { HeaderSchema } from '@/widgets/Header';
+import { ShelfBoxesTemplateSchema } from '@/features/CupboardShelfList';
 
 // loginForm делаю не обязательным, таким образом я могу подружать его позже с помощью асинхронна и ТС не будет ругаться на то что я не объявил его в rootReducers
 export interface StateSchema {
@@ -26,6 +27,7 @@ export interface StateSchema {
 	viewPage?: ViewPageInitializerSchema
 	trashPage?: TrashPageInitializerSchema
 	settingsShelfTemplate?: SettingsShelfTemplate
+	shelfBoxesTemplateSettings?: ShelfBoxesTemplateSchema
 	settingsTimeSleep?: Partial<TimeSleepSettings>
 	profilePage?: ProfilePageWidgetSchema
 	// sortColumns

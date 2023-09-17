@@ -1,8 +1,6 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './Shelf.module.scss';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
-import { ShelfButtons } from '../../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { Skeleton } from '@/shared/ui/Skeleton';

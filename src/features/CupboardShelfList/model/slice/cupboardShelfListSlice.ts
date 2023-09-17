@@ -19,9 +19,10 @@ const initialState: CupboardPageSchema = {
 	error: '',
 	entities: {},
 	ids: [],
-	// commonShelfCollapsed: false,
-	boxesSettingsShelfId: '',
-	isBoxesSettingsModalOpen: false,
+	shelfBoxesTemplateModal: {
+		isOpen: false,
+		shelfId: ''
+	},
 	missedTrainingModal: {
 		shelfId: '',
 		boxId: '',
@@ -51,7 +52,8 @@ const initialState: CupboardPageSchema = {
 	createNewCardModal: {
 		shelfId: '',
 		boxIndex: 0,
-		questionText: lexicalEmptyEditorState,
+		questionText: localStorage.getItem('questionData') ?? lexicalEmptyEditorState,
+		// questionText: lexicalEmptyEditorState,
 		answerText: lexicalEmptyEditorState,
 		// answerText: '',
 		isOpen: false,
@@ -87,6 +89,7 @@ const cupboardShelfList = createSlice({
 		},
 		setQuestionText: (state, action: PayloadAction<string>) => {
 			state.createNewCardModal.questionText = action.payload
+			localStorage.setItem('questionData', action.payload)
 		},
 		setAnswerText: (state, action: PayloadAction<string>) => {
 			state.createNewCardModal.answerText = action.payload
@@ -103,10 +106,10 @@ const cupboardShelfList = createSlice({
 			state.createNewCardModal.boxIndex = action.payload
 		},
 		// boxes settings
-		setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
-			state.boxesSettingsShelfId = action.payload
-			// state.isBoxesSettingsModalOpen = true
-		},
+		// setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
+		// 	state.boxesSettingsShelfId = action.payload
+		// 	// state.isBoxesSettingsModalOpen = true
+		// },
 		// TimeSetterModal
 		setTimingSetterModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.boxTimeSetterModal.isOpen = action.payload
@@ -138,11 +141,11 @@ const cupboardShelfList = createSlice({
 		},
 
 		// boxes settings modal 
-		setBoxesSettingsModalIsOpen: (state, action: PayloadAction<boolean>) => {
-			state.isBoxesSettingsModalOpen = action.payload
+		setShelfBoxesTemplateModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.shelfBoxesTemplateModal.isOpen = action.payload
 		},
-		closeBoxesSettingsModal: (state) => {
-			state.isBoxesSettingsModalOpen = false
+		setShelfBoxesTemplateModalShelfId: (state, action: PayloadAction<string>) => {
+			state.shelfBoxesTemplateModal.shelfId = action.payload
 		},
 		// missed training
 		setMissedTrainingShelfId: (state, action: PayloadAction<string>) => {

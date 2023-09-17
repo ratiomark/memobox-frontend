@@ -1,13 +1,14 @@
-import { BoxCoordinates } from '@/entities/Box'
+import { BoxCoordinates, RegularAndLearntCardsBox } from '@/entities/Box'
 import { ExtendedTimingBlock, TimingBlock } from '@/shared/types/DataBlock'
 import { SettingsShelfTemplateMod } from '@/shared/types/SettingsShelfTemplateMod'
 
 
-
-export interface SettingsShelfTemplate {
+export interface ShelfBoxesTemplateSchema {
 	mode: SettingsShelfTemplateMod
+	isOpen: boolean
 	isCurrentTemplateEqualToInitial: boolean
-	initialTemplate: TimingBlock[]
+	shelfId: string
+	initialTemplate: RegularAndLearntCardsBox[]
 	currentShelfTemplate: ExtendedTimingBlock[]
 	boxesSettingsListEdges: {
 		leftSide: boolean

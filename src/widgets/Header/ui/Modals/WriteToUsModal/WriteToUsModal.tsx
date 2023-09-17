@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './WriteToUsModal.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { HDialog } from '@/shared/ui/HDialog';
 import { getIsWriteToUsOpen } from '../../../model/selectors/getHeaderModals';
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -14,8 +13,8 @@ import { topicsList } from '../../../model/selectors/getTopicsWriteToUs';
 import { Heading, MyText, TextArea } from '@/shared/ui/Typography';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
-import { Button } from '@/shared/ui/Button';
 import { useFileUploader } from '@/features/FileUploader';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface WriteToUsModalProps {
 	className?: string
@@ -73,7 +72,7 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseHandle}
 			onSubmit={() => alert('Сохраняю имя пользователя')}
@@ -148,7 +147,7 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 					gap='gap_14'
 				/>
 			</div>
-		</HDialog>
+		</HDialogHeadless>
 
 	)
 }

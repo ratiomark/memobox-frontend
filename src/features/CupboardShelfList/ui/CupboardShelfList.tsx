@@ -25,7 +25,6 @@ import { ShelfButtons } from './ShelfButtons/ShelfButtons';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
 import { ShelfSchema } from '@/entities/Shelf';
 import { CommonShelf } from './CommonShelf/CommonShelf';
-import { BoxesSettingsModal } from './BoxesSettingsModal/BoxesSettingsModal/BoxesSettingsModal';
 import { BoxesBlockWrapper } from './BoxesBlock/BoxesBlockWrapper';
 import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModal/MissedTrainingSettings';
 import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
@@ -41,6 +40,7 @@ import { HiddenTemplates } from './HiddenTemplates/HiddenTemplates';
 import { idCupboardShelfList } from '@/shared/const/ids';
 import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
 import { Reorder } from 'framer-motion';
+import { ShelfBoxesTemplateModal } from './BoxesSettingsModal/ShelfTemplateSettings';
 // import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
 // import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 
@@ -220,7 +220,8 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 				{/* </DndShelfListWrapper> */}
 				{/* </DndProvider> */}
 				{/* </AnimatePresence> */}
-				<BoxesSettingsModal />
+				{/* <BoxesSettingsModal /> */}
+				<ShelfBoxesTemplateModal />
 				<MissedTrainingSettingsModal />
 				<NotificationSettingsModal />
 

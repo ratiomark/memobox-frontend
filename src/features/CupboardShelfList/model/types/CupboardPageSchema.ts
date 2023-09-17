@@ -23,8 +23,10 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 		answerText: string
 		isOpen: boolean
 	}
-	boxesSettingsShelfId: string
-	isBoxesSettingsModalOpen: boolean
+	shelfBoxesTemplateModal: {
+		isOpen: boolean
+		shelfId: string
+	}
 	missedTrainingModal: {
 		shelfId: string
 		boxId: string

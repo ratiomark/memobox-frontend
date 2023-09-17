@@ -1,57 +1,52 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './ShelfTemplateSettings.module.scss';
-import { HDialog } from '@/shared/ui/HDialog';
-import { getUserShelfTemplateSettings } from '@/entities/User';
 import { useSelector } from 'react-redux';
 import { BoxesSettingsContent } from './BoxesSettingsContent/BoxesSettingsContent';
-import { Overlay } from '@/shared/ui/Overlay/Overlay';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
-import { settingsShelfTemplateActions, settingsShelfTemplateReducer } from '../model/slice/shelfTemplateSlice';
-import { getSettingsShelfTemplateChanged } from '../model/selectors/settingsShelfTemplate';
 import { Button } from '@/shared/ui/Button';
 import { AnimatePresence, motion, } from 'framer-motion';
 import { HStack } from '@/shared/ui/Stack';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
-
-interface ShelfTemplateSettingsProps {
-	className?: string
-	isOpen: boolean
-	onClose: () => void
-}
+import { shelfBoxesTemplateSettingsReducer, shelfBoxesTemplateSettingsActions } from '../../model/slice/shelfBoxesTemplateSlice';
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { RegularAndLearntCardsBox } from '@/entities/Box';
+import { getShelfById } from '../../model/selectors/getCupboardShelfList'
+import {
+	getBoxesTemplateModalIsOpen,
+	getBoxesTemplateModalShelfId
+} from '../../model/selectors/getShelfBoxesTemplateModal'
+import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice'
 
 const reducers: ReducersList = {
-	settingsShelfTemplate: settingsShelfTemplateReducer
+	shelfBoxesTemplateSettings: shelfBoxesTemplateSettingsReducer
 }
 
-
-export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
-	const {
-		className,
-		isOpen,
-		onClose
-	} = props
-	const shelfTemplateSettingsFromUser = useSelector(getUserShelfTemplateSettings)
+export const ShelfBoxesTemplateModal = () => {
+	const shelfId = useSelector(getBoxesTemplateModalShelfId)
+	const isOpen = useSelector(getBoxesTemplateModalIsOpen)
+	const shelf = useSelector((state: StateSchema) => getShelfById(state, shelfId))
+	// const shelfTemplateSettingsFromUser = useSelector(getUserShelfTemplateSettings)
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { t } = useTranslation()
-	
+
 	useEffect(() => {
-		if (shelfTemplateSettingsFromUser) {
-			// dispatch(settingsShelfTemplateActions.setInitialTemplate(shelfTemplateSettingsFromUser.slice(0, 1)))
-			dispatch(settingsShelfTemplateActions.setInitialTemplate(shelfTemplateSettingsFromUser))
+		if (shelf) {
+			console.log(shelf?.boxesData.slice(1,))
+			dispatch(shelfBoxesTemplateSettingsActions.setInitialTemplate(shelf?.boxesData.slice(1,) as RegularAndLearntCardsBox[]))
 		}
-	}, [shelfTemplateSettingsFromUser, dispatch])
+	}, [shelf, dispatch])
 
 	const onCloseHandle = () => {
-		dispatch(settingsShelfTemplateActions.reset())
-		onClose()
+		dispatch(cupboardShelfListActions.setShelfBoxesTemplateModalIsOpen(false))
+		dispatch(shelfBoxesTemplateSettingsActions.reset())
 	}
 
-	const isCurrentTemplateEqualToInitial = useSelector(getSettingsShelfTemplateChanged)
+	// const isCurrentTemplateEqualToInitial = useSelector(getSettingsShelfTemplateChanged)
 
-	if (!shelfTemplateSettingsFromUser) return <p>Загрузка</p>
+	if (!shelf) return <p>Загрузка</p>
 
 	return (
 		<HDialogHeadless
@@ -66,8 +61,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 				<motion.div
 					layout
 					className={clsx(
-						cls.ShelfTemplateSettings,
-						className)}
+						cls.ShelfTemplateSettings)}
 				// animate={{ width: 'auto' }}
 				>
 					{/* {isAnyTimeSetterOpen && <div className={cls.overlay} />} */}
@@ -79,7 +73,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 						<ModalButtons
 							justify='end'
 							max={false}
-							isSubmitDisabled={isCurrentTemplateEqualToInitial}
+							// isSubmitDisabled={isCurrentTemplateEqualToInitial}
 							onClose={onCloseHandle}
 							onSubmit={() => alert('Сохраняю настройки')}
 						/>
@@ -92,3 +86,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 
 	)
 }
+// export const ShelfBoxesTemplateModal = () => {
+// 	const isOpen = useSelector(getBoxesTemplateModalIsOpen)
+// 	isOpen
+// }

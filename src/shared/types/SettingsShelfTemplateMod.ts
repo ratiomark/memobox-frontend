@@ -1,0 +1,1 @@
+export type SettingsShelfTemplateMod = 'initial' | 'choosingBoxPlace' | 'settingTimeToNewBox' | 'waitingForSaving'

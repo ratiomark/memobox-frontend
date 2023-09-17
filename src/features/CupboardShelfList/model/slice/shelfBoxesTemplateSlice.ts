@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction, } from '@reduxjs/toolkit'
-import { SettingsShelfTemplate } from '../types/SettingsShelfTemplate'
 import { ExtendedTimingBlock, TimingBlock } from '@/shared/types/DataBlock'
-import { isEqual } from 'lodash'
 import { timingDataDefault } from '@/shared/const/timingBlock'
-import { BoxCoordinates } from '@/entities/Box'
+import { BoxCoordinates, RegularAndLearntCardsBox } from '@/entities/Box'
+import { ShelfBoxesTemplateSchema } from '../types/shelfBoxesTemplateSchema'
 import { SettingsShelfTemplateMod } from '@/shared/types/SettingsShelfTemplateMod'
 
 
-const initialState: SettingsShelfTemplate = {
+const initialState: ShelfBoxesTemplateSchema = {
 	mode: 'initial',
+	isOpen: false,
+	shelfId: '',
 	isCurrentTemplateEqualToInitial: true,
 	initialTemplate: [],
 	currentShelfTemplate: [],
@@ -26,34 +27,36 @@ const initialState: SettingsShelfTemplate = {
 		},
 	},
 }
-
-const isCurrentTemplateEqualToInitial = (initialState: TimingBlock[], currentState: ExtendedTimingBlock[]) => {
+// _id: string
+// specialType: 'none' | 'learnt',
+// index: number
+// data: DataBlock
+// timing: TimingBlock
+// missedTrainingAction ?: MissedTrainingValues
+const isCurrentTemplateEqualToInitial = (initialState: RegularAndLearntCardsBox[], currentState: ExtendedTimingBlock[]) => {
 	if (initialState.length !== currentState.length) return false
 	if (currentState.some(box => box.keyId === 'unsaved')) return false
 	return true
-	// currentState.forEach(box => {
-	// 	if (box.keyId === 'unsaved') {
-	// 		return false
-	// 	}
-	// })
 }
 
-const settingsShelfTemplate = createSlice({
-	name: 'settingsShelfTemplate',
+const ShelfBoxesTemplateSettings = createSlice({
+	name: 'shelfBoxesTemplateModal',
 	initialState,
 	reducers: {
-		setInitialTemplate: (state, action: PayloadAction<TimingBlock[]>) => {
+		setInitialTemplate: (state, action: PayloadAction<RegularAndLearntCardsBox[]>) => {
 			state.initialTemplate = action.payload
-			if (state.currentShelfTemplate.length === 0) {
-				state.currentShelfTemplate = action.payload.map((timingBlock, index) => ({
-					...timingBlock,
-					index,
+			// if (state.currentShelfTemplate.length === 0) {
+			state.currentShelfTemplate = action.payload.map((box) => {
+				return ({
 					isSaved: true,
 					keyId: 'initial',
-					id: (Math.random() * Math.random()).toString(),
-					isOpen: false,
-				}))
-			}
+					id: box._id,
+					isOpen: false, 
+					index: box.index,
+					...box.timing
+				})
+			})
+			// }
 		},
 
 		// 
@@ -82,8 +85,7 @@ const settingsShelfTemplate = createSlice({
 		},
 		setCurrentTemplate: (state, action: PayloadAction<ExtendedTimingBlock[]>) => {
 			state.currentShelfTemplate = action.payload.map((box, index) => ({ ...box, index }))
-			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
-			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
+			// state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
 		},
 		setMode: (state, action: PayloadAction<SettingsShelfTemplateMod>) => {
 			state.mode = action.payload
@@ -104,8 +106,7 @@ const settingsShelfTemplate = createSlice({
 				return box
 			})
 			state.mode = 'waitingForSaving'
-			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
-			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
+			// state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
 		},
 		closeTimeSetter: (state, action: PayloadAction<number | string>) => {
 			state.currentShelfTemplate = state.currentShelfTemplate.map(box => {
@@ -115,8 +116,7 @@ const settingsShelfTemplate = createSlice({
 				return box
 			})
 			state.mode = 'waitingForSaving'
-			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
-			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
+			// state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
 			// state.currentShelfTemplate = action.payload.map((box, index) => ({ ...box, index }))
 		},
 		removeAddedBox: (state) => {
@@ -125,24 +125,24 @@ const settingsShelfTemplate = createSlice({
 				.filter(box => box.isSaved)
 				.map((box, index) => ({ ...box, index }))
 			state.currentShelfTemplate = newCurrentShelfTemplate
-			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, newCurrentShelfTemplate)
+			// state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, newCurrentShelfTemplate)
 			state.mode = 'waitingForSaving'
 			// state.currentShelfTemplate = state.currentShelfTemplate
 			// 	.filter(box => box.isSaved)
 			// 	.map((box, index) => ({ ...box, index }))
 			// state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
-			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 		},
 		reset: (state) => {
 			state.mode = 'initial'
-			state.currentShelfTemplate = state.initialTemplate.map((timingBlock, index) => ({
-				...timingBlock,
-				index,
-				isSaved: true,
-				keyId: 'initial',
-				id: (Math.random() * Math.random()).toString(),
-				isOpen: false,
-			}))
+			state.currentShelfTemplate = state.initialTemplate.map((box) => {
+				return ({
+					isSaved: true,
+					keyId: 'initial',
+					id: box._id,
+					isOpen: false,
+					...box.timing
+				})
+			})
 			state.isCurrentTemplateEqualToInitial = true
 			state.boxesSettingsListEdges.leftSide = false
 			state.boxesSettingsListEdges.rightSide = false
@@ -153,5 +153,5 @@ const settingsShelfTemplate = createSlice({
 	}
 })
 
-export const { actions: settingsShelfTemplateActions } = settingsShelfTemplate
-export const { reducer: settingsShelfTemplateReducer } = settingsShelfTemplate
+export const { actions: shelfBoxesTemplateSettingsActions } = ShelfBoxesTemplateSettings
+export const { reducer: shelfBoxesTemplateSettingsReducer } = ShelfBoxesTemplateSettings

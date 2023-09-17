@@ -21,6 +21,7 @@ import EquationsPlugin from './plugins/EquationsPlugin';
 // import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';
 // import FloatingTextFormatToolbarPlugin from './plugins/FloatingTextFormatToolbarPlugin';
 import ImagesPlugin from './plugins/ImagesPlugin';
+import InlineImagePlugin from './plugins/InlineImagePlugin';
 import { LayoutPlugin } from './plugins/LayoutPlugin/LayoutPlugin';
 import ListMaxIndentLevelPlugin from './plugins/ListMaxIndentLevelPlugin';
 import { MaxLengthPlugin } from './plugins/MaxLengthPlugin';
@@ -45,18 +46,18 @@ import { LockEditorPlugin } from './plugins/LockEditor/ChangePlugin';
 import { HTMLExporterPlugin } from './plugins/HTMLExporterPlugin/HTMLExporterPlugin';
 
 
-const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> }) => {
-	const activeElement = useActiveElement()
-	const [showToolbar, setShowToolbar] = useState(false)
-	useEffect(() => {
-		if (editorRef.current && editorRef.current.contains(activeElement)) {
-			setShowToolbar(true)
-		} else {
-			setShowToolbar(false)
-		}
-	}, [editorRef, activeElement])
-	return showToolbar
-}
+// const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> }) => {
+// 	const activeElement = useActiveElement()
+// 	const [showToolbar, setShowToolbar] = useState(false)
+// 	useEffect(() => {
+// 		if (editorRef.current && editorRef.current.contains(activeElement)) {
+// 			setShowToolbar(true)
+// 		} else {
+// 			setShowToolbar(false)
+// 		}
+// 	}, [editorRef, activeElement])
+// 	return showToolbar
+// }
 
 interface EditorProps {
 	onChange?: (editorState: EditorState) => void
@@ -202,7 +203,7 @@ function Editor(props: EditorProps) {
 							hasCellBackgroundColor={tableCellBackgroundColor}
 						/>*/}
 					{/* 	<TableCellResizer /> */}
-					{/* <InlineImagePlugin /> */}
+					<InlineImagePlugin />
 					{/* <ClearEditorPlugin /> */}
 					{/* <HorizontalRulePlugin /> */}
 					{/* <TabFocusPlugin /> */}

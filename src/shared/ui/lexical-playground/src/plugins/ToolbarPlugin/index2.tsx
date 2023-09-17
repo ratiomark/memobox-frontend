@@ -208,6 +208,7 @@ function ElementFormatDropdown({
 			<Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.leftAlign),
 					tabIndex: -1,
 				}}
@@ -222,6 +223,7 @@ function ElementFormatDropdown({
 			<Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.centerAlign),
 					tabIndex: -1,
 				}}
@@ -236,6 +238,7 @@ function ElementFormatDropdown({
 			<Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.rightAlign),
 					tabIndex: -1,
 				}}
@@ -250,6 +253,7 @@ function ElementFormatDropdown({
 			<Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.middleAlign),
 					tabIndex: -1,
 				}}
@@ -266,6 +270,7 @@ function ElementFormatDropdown({
 			<Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.outdent),
 					tabIndex: -1,
 				}}
@@ -280,6 +285,7 @@ function ElementFormatDropdown({
 			<Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.outdent),
 					tabIndex: -1,
 				}}
@@ -442,6 +448,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 	useEffect(() => {
 		return mergeRegister(
 			editor.registerEditableListener((editable) => {
+				console.log('Ставлю editable = ', editable)
 				setIsEditable(editable);
 			}),
 			activeEditor.registerUpdateListener(({ editorState }) => {

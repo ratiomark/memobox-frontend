@@ -21,21 +21,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/shared/ui/Button';
 import { obtainRouteTraining } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
-import { Dropdown } from '@/shared/ui/Popup';
 import { boxIconSize } from '@/shared/const/iconSizes';
-
-// interface BoxPropsBase {
-// 	className?: string
-// 	// boxId: string
-// 	boxItem: BoxSchema
-// 	// index: number
-// 	shelfId: string
-// 	onAddNewCard: (shelfId: string, boxIndex: number) => void
-// 	onBoxViewClick: (boxIndex: number) => void
-// 	onTimerClick?: () => void
-// 	specialType: 'new' | 'none' | 'learnt'
-// 	data: DataBlock | { all: number }
-// }
+import getBoxTimingStringRepresentation from '../utils/getTiming';
 
 interface BoxPropsBase {
 	className?: string
@@ -45,21 +32,6 @@ interface BoxPropsBase {
 	onBoxViewClick: (shelfId: string, boxIndex: number | string) => void
 	onOpenTimeSetter: (coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string) => void
 	onOpenBoxSettings: (coordinates: BoxCoordinates, shelfId: string, boxId: string) => void
-}
-
-
-interface BoxPropsNewBox extends BoxPropsBase {
-	specialType: 'new',
-	data: {
-		all: number,
-	},
-}
-
-interface BoxPropsNoneAndLearntBox extends BoxPropsBase {
-	// onTimerClick?: () => void
-	specialType: 'none' | 'learnt'
-	data: DataBlock
-	// timing: TimingBlock
 }
 
 const timeSetterAnimation = {
@@ -80,13 +52,11 @@ const timeSetterAnimation = {
 		scale: 0.5,
 		transition: { duration: 0.2 }
 	}
-
 }
+
 export const Box = (props: BoxPropsBase) => {
-	// export const Box = (props: BoxPropsNewBox | BoxPropsLearntBox | BoxPropsLearningBox) => {
 	const {
 		className,
-		// specialType,
 		boxItem,
 		shelfId,
 		onAddNewCard,
@@ -99,6 +69,7 @@ export const Box = (props: BoxPropsBase) => {
 	const navigate = useNavigate()
 
 	const onBoxViewClickHandle = useCallback(() => {
+		// VAR: Это нужно переделать!!! boxId должен быть id бокса, а тут нунжо использвать specti
 		let boxId: string | number;
 		if (boxItem.specialType === 'none') {
 			boxId = boxItem.index
@@ -117,13 +88,6 @@ export const Box = (props: BoxPropsBase) => {
 	const startTraining = () => {
 		navigate(obtainRouteTraining(shelfId, boxItem._id))
 	}
-
-	const timing = '1ч 20м'
-	// const minutes = 4
-	// const hours = 2
-	// const days = 0
-	// const weeks = 0
-	// const months = 0
 
 	if (specialType === 'none' || specialType === 'learnt') {
 		const title = specialType === 'none'
@@ -195,29 +159,6 @@ export const Box = (props: BoxPropsBase) => {
 					width={boxIconSize}
 					height={boxIconSize}
 				/>
-				{/* <div className={cls.boxSettingsDropdown} style={{ width: boxIconSize, height: boxIconSize }}>
-
-					<Dropdown
-						// style
-						// style={{}}
-						items={[
-							{ content: 'пропущенные тренировки', onClick: () => alert('настрокйки коробки') },
-							{ content: 'remove', onClick: () => alert('удаляю коробку') },
-						]}
-						// className={cls.boxSettingsDropdown}
-						trigger={
-							<Icon
-								className={cls.icon}
-								Svg={SettingsIcon}
-								// clickable
-								// onClick={() => { }}
-								width={boxIconSize}
-								height={boxIconSize}
-							/>
-						}
-					/>
-
-				</div> */}
 			</HStack>
 		)
 
@@ -227,8 +168,8 @@ export const Box = (props: BoxPropsBase) => {
 					{title}
 					{completeSmallDataLabels}
 					{buttons}
-
-					<MyText className={cls.timing} text={timing} />
+					
+					<MyText className={cls.timing} text={getBoxTimingStringRepresentation(boxItem) ?? 'ERROR'} />
 				</div>
 				<Button onClick={startTraining} variant='filledBox' disabled={data.train < 1} className={cls.trainButton} >{t('train')}</Button>
 			</li>

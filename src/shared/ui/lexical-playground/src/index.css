@@ -24,7 +24,7 @@
 }
 
 .toolbarWrapper.toolbarBlocked {
-  background: none;
+  background: var(--bg);
 }
 
 .editor-shell {
@@ -49,6 +49,7 @@
 } */
 .editor-shell button.code-language:hover::after,
 .editor-shell button:not(:disabled):hover::after,
+/* .editor-shell *:not(.toolbarBlocked) button:hover::after, */
 .editor-shell button:not([datatype="code-copy"]):hover::after {
   content: "";
   position: absolute;
@@ -61,10 +62,16 @@
   border-radius: 99px;
 }
 
+.editor-shell .toolbarBlocked button:hover::after,
 .editor-shell button[datatype="code-copy"]:hover::after {
   background-color: transparent;
 }
-/* 
+
+.editor-shell .toolbarBlocked button:hover {
+  cursor: not-allowed;
+}
+
+/*
 .editor-shell button[datatype="code-copy"] {
   border: 1px solid var(--accent);
 } */
@@ -109,14 +116,10 @@
 .editor {
   flex: auto;
   position: relative;
-
-  /* border: 1px solid var(--accent); */
   border-left: 1px solid var(--accent);
   border-right: 1px solid var(--accent);
   border-bottom: 1px solid var(--accent);
   border-radius: 0 0 var(--border-radius-main) var(--border-radius-main);
-
-  /* border-radius: var(--border-radius-main); */
   z-index: -1;
 }
 
@@ -308,6 +311,7 @@ pre::-webkit-scrollbar-thumb {
   width: 200px;
 }
 
+/*
 i.palette {
   background-image: url(images/icons/palette.svg);
 }
@@ -378,20 +382,20 @@ i.horizontal-rule {
 
 .icon.bg-color {
   background-image: url(images/icons/bg-color.svg);
-}
+} */
 
-.icon.table {
+/* .icon.table {
   background-color: #6c757d;
   mask-image: url(images/icons/table.svg);
   mask-repeat: no-repeat;
   mask-size: contain;
-}
+} */
 
 /* i.image {
   background-image: url(images/icons/file-image.svg);
 } */
 
-i.table {
+/* i.table {
   background-image: url(images/icons/table.svg);
 }
 
@@ -449,7 +453,7 @@ i.markdown {
 
 i.outdent {
   background-image: url(images/icons/outdent.svg);
-}
+} */
 
 i.undo {
   background-image: url(images/icons/arrow-counterclockwise.svg);
@@ -459,6 +463,7 @@ i.redo {
   background-image: url(images/icons/arrow-clockwise.svg);
 }
 
+/*
 i.image {
   background-image: url(images/icons/imageIcon2.svg);
 }
@@ -514,7 +519,7 @@ i.prettier-error {
 i.page-break,
 .icon.page-break {
   background-image: url(images/icons/scissors.svg);
-}
+} */
 
 .link-editor .button.active,
 .toolbar .button.active {
@@ -756,6 +761,7 @@ i.page-break,
   }
 }
 
+/*
 .icon.paragraph {
   background-image: url(images/icons/text-paragraph.svg);
 }
@@ -805,7 +811,7 @@ i.page-break,
 
 .icon.code {
   background-image: url(images/icons/code.svg);
-}
+} */
 
 .switches {
   z-index: 6;

@@ -7,7 +7,7 @@
  */
 import type { Position } from '../../nodes/InlineImageNode';
 
-import '../../ui/Checkbox.css';
+// import '../../ui/Checkbox.css';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $wrapNodeInElement, mergeRegister } from '@lexical/utils';

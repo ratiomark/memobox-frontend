@@ -11,7 +11,7 @@ export const formatDate = (ISODate: string) => {
 }
 
 
-export const getTiming = (box: ExtendedTimingBlock) => {
+export const getTiming = (box: ExtendedTimingBlock ) => {
 	const { months, weeks, days, hours, minutes } = box
 	const monthsStr = months === 0 ? '' : `${months}m. `
 	const weeksStr = weeks === 0 ? '' : `${weeks}w. `

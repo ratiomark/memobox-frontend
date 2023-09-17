@@ -138,6 +138,7 @@ export const HDialog = (props: HDialogProps) => {
 						forceMount
 						className={styles ? cls.fixed : cls.content}
 						style={styles}
+						data-modal-type='content'
 					// onInteractOutside={() => {
 					// 	console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!')
 					// 	onClose

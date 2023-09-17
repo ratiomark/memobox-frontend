@@ -56,7 +56,7 @@ export function InsertImageUriDialogBody({
 	onClick: (payload: InsertImagePayload) => void;
 }) {
 	const [src, setSrc] = useState('');
-	const [altText, setAltText] = useState('');
+	const [altText, setAltText] = useState('[IMAGE]');
 
 	const isDisabled = src === '';
 
@@ -94,14 +94,49 @@ export function InsertImageUploadedDialogBody({
 	onClick: (payload: InsertImagePayload) => void;
 }) {
 	const [src, setSrc] = useState('');
-	const [altText, setAltText] = useState('');
+	const [altText, setAltText] = useState('[IMAGE]');
 
 	const isDisabled = src === '';
 
+	// VAR: Тут нужно переделать загрузку изображения, потому что вкладывать 25кв в стейт это плохо
+	const loadImage2 = (files: FileList | null) => {
+		const url = URL.createObjectURL(files[0])
+		setSrc(url)
+		fetch(url)
+			.then(response => response.blob())
+			.then(blob => {
+				const size = blob.size
+				console.log(size)
+				return blob.arrayBuffer()
+			})
+			// .then(blob => blob.arrayBuffer())
+			.then(arrayBuffer => {
+				const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+				console.log(base64)
+				// localStorage.setItem('image', base64);
+			});
+		// fetch(url)
+		// 	.then(response => response.blob())
+		// 	.then(blob => {
+		// 		// Создайте новый объект File из blob
+		// 		const file = new File([blob], 'filename.ext', { type: blob.type });
+		// 		console.log(file)
+		// 	})
+	};
+
 	const loadImage = (files: FileList | null) => {
+		// const url = URL.createObjectURL(files[0])
+		// setSrc(url)
 		const reader = new FileReader();
 		reader.onload = function () {
 			if (typeof reader.result === 'string') {
+				const stringLength = reader.result.length;
+				const byteSize = 4 * Math.ceil((stringLength / 3)) * 0.75; // 0.75 - это коэффициент коррекции для символов '=' в конце строки base64
+
+				// Переводим размер в килобайты
+				const sizeInKilobytes = byteSize / 1024;
+
+				console.log(`Размер строки: ${sizeInKilobytes.toFixed(2)} KB`);
 				setSrc(reader.result);
 			}
 			return '';
@@ -123,7 +158,8 @@ export function InsertImageUploadedDialogBody({
 				label="Alt Text"
 				placeholder="Descriptive alternative text"
 				onChange={setAltText}
-				value={altText}
+				value='[IMAGE]'
+				// value={altText}
 				data-test-id="image-modal-alt-text-input"
 			/>
 			<DialogActions>
@@ -261,6 +297,7 @@ const TRANSPARENT_IMAGE =
 	'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 const img = document.createElement('img');
 img.src = TRANSPARENT_IMAGE;
+img.alt = '[IMAGE]'
 
 function onDragStart(event: DragEvent): boolean {
 	const node = getImageNodeInSelection();

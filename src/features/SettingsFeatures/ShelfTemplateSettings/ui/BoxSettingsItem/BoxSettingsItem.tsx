@@ -16,9 +16,7 @@ import { getSettingsShelfTemplateMode } from '../../model/selectors/settingsShel
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { settingsShelfTemplateActions } from '../../model/slice/shelfTemplateSlice';
 import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
-import { StateSchema } from '@/app/providers/StoreProvider';
 import { DURATION_MILLISEC, DURATION_SEC, } from '@/shared/const/animation';
-import TrashIcon2 from '@/shared/assets/icons/trashIcon.svg'
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { HStack } from '@/shared/ui/Stack';
 import { timingDataDefault } from '@/shared/const/timingBlock';

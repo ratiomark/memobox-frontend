@@ -1,9 +1,55 @@
+/* stylelint-disable declaration-block-no-shorthand-property-overrides */
 .cardModal {
   // background: white;
   // padding: 20px 15px;
   padding-bottom: 40px;
   height: min(800px, 100%);
   position: relative;
+}
+
+.mainWrapper {
+  //   overflow-x: scroll;
+  //   width: max-content;
+  max-width: 100%;
+}
+
+.wrapper {
+  // overflow-x: scroll;
+  // width: max-content;
+  // max-width: 1200px;
+}
+
+.gradientEdge {
+  position: absolute;
+  width: 200px;
+  height: 180px;
+  top: 79px;
+  pointer-events: none;
+  z-index: var(--gradient-edge-shelf-template-index);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.gradientEdgeLeft {
+  left: 0;
+  background: linear-gradient(-90deg, transparent 15%, var(--bg));
+
+  // background: red;
+  // background-image: linear-gradient(to right, white 70%, rgb(255 255 255 / 47%));
+}
+
+.gradientEdgeRight {
+  right: 0;
+  background: linear-gradient(90deg, transparent 15%, var(--bg));
+
+  // background: red;
+
+  // background-image: linear-gradient(to right, white 70%, rgb(255 255 255 / 47%));
+}
+
+.title {
+  font-size: 15px;
+  color: rebeccapurple;
 }
 
 .grid {

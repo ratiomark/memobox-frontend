@@ -1,5 +1,4 @@
 import { Skeleton } from '@/shared/ui/Skeleton';
-import { VStack } from '@/shared/ui/Stack';
 import cls from './CardsListSkeleton.module.scss';
 
 export const CardsListSkeleton = () => {

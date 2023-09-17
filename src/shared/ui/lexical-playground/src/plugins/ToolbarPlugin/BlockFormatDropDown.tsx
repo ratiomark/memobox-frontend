@@ -5,8 +5,10 @@ import orderedListIcon from '../../images/icons/text-number-list-ltr-svgrepo-com
 // import orderedListIcon from '../../images/icons/orderedListIcon3.svg'
 import codeIcon from '../../images/icons/codeIcon.svg'
 // import codeIcon from '../../images/icons/codeIcon.svg'
-import imageIcon from '../../images/icons/imageIcon.svg'
+import imageIcon from '../../images/icons/image-1-svgrepo-com.svg'
+// import imageIcon from '../../images/icons/imageIcon.svg'
 import mathIcon from '../../images/icons/mathIcon2.svg'
+import collapseIcon from '../../images/icons/triangle-right-svgrepo-com.svg'
 import { editorIconSize } from '@/shared/const/iconSizes';
 import { Icon } from '@/shared/ui/Icon';
 import { $createCodeNode } from '@lexical/code';
@@ -19,6 +21,7 @@ import { blockTypeToBlockName, rootTypeToRootName } from './const';
 import { INSERT_COLLAPSIBLE_COMMAND } from '../CollapsiblePlugin';
 import { InsertEquationDialog } from '../EquationsPlugin';
 import { InsertImageDialog } from '../ImagesPlugin';
+import { InsertInlineImageDialog } from '../InlineImagePlugin'
 import { memo } from 'react'
 
 interface BlockFormatDropDownProps {
@@ -146,6 +149,7 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 					key={button.blockType}
 					clickable
 					buttonProps={{
+						disabled: disabled,
 						title: t(button.title),
 						tabIndex: -1,
 					}}
@@ -159,6 +163,7 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 			<Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.image),
 					tabIndex: -1,
 				}}
@@ -170,15 +175,37 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 						/>
 					));
 				}}
+				withFill={false}
 				type={'hint'}
 				width={editorIconSize}
 				height={editorIconSize}
 				Svg={imageIcon}
-			// className="toolbar-item"
 			/>
+			{/* <Icon
+				clickable
+				buttonProps={{
+					disabled: disabled,
+					title: t(buttonTitles.image),
+					tabIndex: -1,
+				}}
+				onClick={() => {
+					showModal('Insert Image', (onClose) => (
+						<InsertInlineImageDialog
+							activeEditor={activeEditor}
+							onClose={onClose}
+						/>
+					));
+				}}
+				withFill={false}
+				type={'hint'}
+				width={editorIconSize}
+				height={editorIconSize}
+				Svg={imageIcon}
+			/> */}
 			<Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.math),
 					tabIndex: -1,
 				}}
@@ -195,14 +222,21 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 				height={editorIconSize}
 				Svg={mathIcon}
 			/>
-			<button
-				tabIndex={-1}
+			<Icon
+				clickable
+				buttonProps={{
+					disabled: disabled,
+					title: t(buttonTitles.collapseBlock),
+					tabIndex: -1,
+				}}
 				onClick={() => {
 					editor.dispatchCommand(INSERT_COLLAPSIBLE_COMMAND, undefined);
 				}}
-				className="toolbar-item">
-				<i className="icon caret-right" />
-			</button>
+				type={'hint'}
+				width={editorIconSize}
+				height={editorIconSize}
+				Svg={collapseIcon}
+			/>
 		</div>
 	);
 })
@@ -210,6 +244,7 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 {/* <Icon
 				clickable
 				buttonProps={{
+					disabled: disabled,
 					title: t(buttonTitles.paragraph),
 					tabIndex: -1,
 				}}

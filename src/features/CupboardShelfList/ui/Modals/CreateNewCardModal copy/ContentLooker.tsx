@@ -1,7 +1,4 @@
 import { getQuestionCardModal, getAnswerCardModal } from '../../../model/selectors/getCreateNewCardModal'
-import { Editor, EditorPresenter } from '@/shared/ui/Editor'
-import { HDialog } from '@/shared/ui/HDialog'
-import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor'
 import { EditorPresenterV2 } from '@/shared/ui/lexical-playground/src/EditorPresenter'
 import { memo, useState } from 'react'
 import { useSelector } from 'react-redux'

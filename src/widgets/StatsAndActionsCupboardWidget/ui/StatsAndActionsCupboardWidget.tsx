@@ -35,7 +35,18 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
-	const onAddNewShelfClick = () => setIsNewShelfModalOpen(true)
+	const onAddNewShelfClick = () => {
+		// async function getFile() {
+		// 	const handle = await window.showOpenFilePicker();
+		// 	const file = await handle[0].getFile();
+		// 	console.log(file)
+		// 	const contents = await file.text();
+		// 	console.log(contents);
+		// }
+		// getFile()
+		setIsNewShelfModalOpen(true)
+	}
+
 	const onCloseNewShelfModal = () => setIsNewShelfModalOpen(false)
 
 	const onOpenInfoModal = () => {

@@ -80,6 +80,17 @@ class LocalDataService implements ILocalDataService {
 	}
 }
 
+let isInBrowser: boolean;
 
-const storage = new LocalStorageService();
-export const localDataService = new LocalDataService(storage)
+try {
+	isInBrowser = typeof window !== 'undefined';
+} catch (e) {
+	isInBrowser = false;
+}
+let localDataService: LocalDataService;
+if (isInBrowser) {
+	const storage = new LocalStorageService();
+	localDataService = new LocalDataService(storage)
+}
+
+export { localDataService }

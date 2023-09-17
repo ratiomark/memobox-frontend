@@ -17,7 +17,7 @@
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background-color: rgba(40, 40, 40, 0.6);
+  /* background-color: rgba(40, 40, 40, 0.6); */
   flex-grow: 0px;
   flex-shrink: 1px;
   z-index: 100;

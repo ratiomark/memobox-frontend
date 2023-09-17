@@ -1439,6 +1439,567 @@
       }
     }
   ],
+  "cupboard": {
+    "shelves": [
+      {
+        "id": "648c920baa3edb04cec38442",
+        "index": 0,
+        "isCollapsed": true,
+        "title": "math",
+        "boxesData": [
+          {
+            "_id": "648c920b72600d6e8a083121",
+            "index": 0,
+            "specialType": "new",
+            "data": {
+              "all": 2,
+              "train": null
+            }
+          },
+          {
+            "_id": "648c920b658987f904c91de8",
+            "index": 1,
+            "specialType": "none",
+            "data": {
+              "all": 1,
+              "train": 0,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b4e92c440326da23b",
+            "index": 2,
+            "specialType": "none",
+            "data": {
+              "all": 2,
+              "train": 2,
+              "wait": 0
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b3a0af0c593c0089e",
+            "index": 3,
+            "specialType": "none",
+            "data": {
+              "all": 4,
+              "train": 2,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b42ff6a183c9537e2",
+            "index": 4,
+            "specialType": "none",
+            "data": {
+              "all": 2,
+              "train": 1,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bb89bead4305761a6",
+            "index": 5,
+            "specialType": "learnt",
+            "data": {
+              "all": 5,
+              "train": 2,
+              "wait": 3
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          }
+        ],
+        "data": {
+          "all": 16,
+          "train": 9,
+          "wait": 7
+        }
+      },
+      {
+        "id": "648c920b3e40b5930a6e1603",
+        "index": 1,
+        "isCollapsed": true,
+        "title": "books",
+        "boxesData": [
+          {
+            "_id": "648c920bc3e7e23e046d84d4",
+            "index": 0,
+            "specialType": "new",
+            "data": {
+              "all": 2,
+              "train": null
+            }
+          },
+          {
+            "_id": "648c920b1e98e062cccbddd0",
+            "index": 1,
+            "specialType": "none",
+            "data": {
+              "all": 2,
+              "train": 1,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920beed2f369ce36956b",
+            "index": 2,
+            "specialType": "none",
+            "data": {
+              "all": 4,
+              "train": 1,
+              "wait": 3
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b0d275a1c78856870",
+            "index": 3,
+            "specialType": "none",
+            "data": {
+              "all": 7,
+              "train": 3,
+              "wait": 4
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b8d625846cc72c887",
+            "index": 4,
+            "specialType": "none",
+            "data": {
+              "all": 3,
+              "train": 1,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bb47b52fcdc46b742",
+            "index": 5,
+            "specialType": "learnt",
+            "data": {
+              "all": 3,
+              "train": 1,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          }
+        ],
+        "data": {
+          "all": 21,
+          "train": 9,
+          "wait": 12
+        }
+      },
+      {
+        "id": "648c920b6adf96517748f3c1",
+        "index": 2,
+        "isCollapsed": true,
+        "title": "английский",
+        "boxesData": [
+          {
+            "_id": "648c920bb9f34563e51dc7c2",
+            "index": 0,
+            "specialType": "new",
+            "data": {
+              "all": 2,
+              "train": null
+            }
+          },
+          {
+            "_id": "648c920b1ab0db449c60fa6c",
+            "index": 1,
+            "specialType": "none",
+            "data": {
+              "all": 5,
+              "train": 4,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bf46cf9b533a32075",
+            "index": 2,
+            "specialType": "none",
+            "data": {
+              "all": 3,
+              "train": 0,
+              "wait": 3
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bf5f065d98a38788b",
+            "index": 3,
+            "specialType": "none",
+            "data": {
+              "all": 5,
+              "train": 3,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920baf3426c25284a0a1",
+            "index": 4,
+            "specialType": "none",
+            "data": {
+              "all": 7,
+              "train": 5,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920baf3426c2528sdaf0a1",
+            "index": 5,
+            "specialType": "learnt",
+            "data": {
+              "all": 5,
+              "train": 2,
+              "wait": 3
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          }
+        ],
+        "data": {
+          "all": 27,
+          "train": 16,
+          "wait": 11
+        }
+      },
+      {
+        "id": "648c920b07d1f8f9ed46604e",
+        "index": 3,
+        "isCollapsed": true,
+        "title": "facts",
+        "boxesData": [
+          {
+            "_id": "648c920bb26ca5ad01d95fc4",
+            "index": 0,
+            "specialType": "new",
+            "data": {
+              "all": 3,
+              "train": null
+            }
+          },
+          {
+            "_id": "648c920be2995e8d1c585be5",
+            "index": 1,
+            "specialType": "none",
+            "missedTrainingAction": "additional",
+            "data": {
+              "all": 3,
+              "train": 1,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bddc77c636d511d81",
+            "index": 2,
+            "specialType": "none",
+            "data": {
+              "all": 8,
+              "train": 4,
+              "wait": 4
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b609485fe207e7da6",
+            "index": 3,
+            "specialType": "none",
+            "data": {
+              "all": 3,
+              "train": 0,
+              "wait": 3
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b609485fe207easf6",
+            "index": 4,
+            "specialType": "none",
+            "data": {
+              "all": 1,
+              "train": 0,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b609485fe207easfia23f6",
+            "index": 5,
+            "specialType": "learnt",
+            "data": {
+              "all": 2,
+              "train": 1,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          }
+        ],
+        "data": {
+          "all": 20,
+          "train": 9,
+          "wait": 11
+        }
+      },
+      {
+        "id": "648c920beba56ba6cd7db7bb",
+        "index": 4,
+        "isCollapsed": true,
+        "title": "biology",
+        "boxesData": [
+          {
+            "_id": "648c920b2b1955290236f2b0",
+            "index": 0,
+            "specialType": "new",
+            "data": {
+              "all": 2,
+              "train": null
+            }
+          },
+          {
+            "_id": "648c920b695caf7cf2f9ea31",
+            "index": 1,
+            "specialType": "none",
+            "data": {
+              "all": 2,
+              "train": 1,
+              "wait": 1
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b62fc2a35ca871cbd",
+            "index": 2,
+            "specialType": "none",
+            "data": {
+              "all": 2,
+              "train": 0,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920b7212942e717eb194",
+            "index": 3,
+            "specialType": "none",
+            "data": {
+              "all": 1,
+              "train": 1,
+              "wait": 0
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bf67015fa3e6de0f1",
+            "index": 4,
+            "specialType": "none",
+            "data": {
+              "all": 5,
+              "train": 3,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          },
+          {
+            "_id": "648c920bfcd36e426938b758",
+            "index": 5,
+            "specialType": "learnt",
+            "data": {
+              "all": 4,
+              "train": 2,
+              "wait": 2
+            },
+            "timing": {
+              "minutes": 0,
+              "hours": 0,
+              "days": 0,
+              "weeks": 0,
+              "months": 0
+            }
+          }
+        ],
+        "data": {
+          "all": 16,
+          "train": 9,
+          "wait": 7
+        }
+      }
+    ],
+    "commonShelf": {
+      "new": {
+        "all": 11
+      },
+      "learning": {
+        "all": 70,
+        "train": 33,
+        "wait": 37
+      },
+      "learnt": {
+        "all": 19,
+        "train": 8,
+        "wait": 11
+      },
+      "data": {
+        "all": 100,
+        "train": 52,
+        "wait": 48
+      },
+      "isCollapsed": false
+    }
+  },
   "commonShelf": {
     "new": {
       "all": 11
@@ -1486,7 +2047,7 @@
             "wait": 1
           },
           "timing": {
-            "minutes": 5,
+            "minutes": 0,
             "hours": 0,
             "days": 0,
             "weeks": 0,
@@ -1504,7 +2065,7 @@
           },
           "timing": {
             "minutes": 0,
-            "hours": 8,
+            "hours": 0,
             "days": 0,
             "weeks": 0,
             "months": 0
@@ -1522,7 +2083,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 1,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1539,7 +2100,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 3,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1556,7 +2117,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 6,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1573,8 +2134,8 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 2,
-            "weeks": 1,
+            "days": 0,
+            "weeks": 0,
             "months": 0
           }
         },
@@ -1591,7 +2152,7 @@
             "minutes": 0,
             "hours": 0,
             "days": 0,
-            "weeks": 2,
+            "weeks": 0,
             "months": 0
           }
         },
@@ -1608,7 +2169,7 @@
             "minutes": 0,
             "hours": 0,
             "days": 0,
-            "weeks": 3,
+            "weeks": 0,
             "months": 0
           }
         },
@@ -1626,7 +2187,7 @@
             "hours": 0,
             "days": 0,
             "weeks": 0,
-            "months": 1
+            "months": 0
           }
         },
         {
@@ -1643,7 +2204,7 @@
             "hours": 0,
             "days": 0,
             "weeks": 0,
-            "months": 2
+            "months": 0
           }
         },
         {
@@ -1660,7 +2221,7 @@
             "hours": 0,
             "days": 0,
             "weeks": 0,
-            "months": 3
+            "months": 0
           }
         }
       ],
@@ -1699,7 +2260,7 @@
             "wait": 2
           },
           "timing": {
-            "minutes": 5,
+            "minutes": 0,
             "hours": 0,
             "days": 0,
             "weeks": 0,
@@ -1717,7 +2278,7 @@
           },
           "timing": {
             "minutes": 0,
-            "hours": 2,
+            "hours": 0,
             "days": 0,
             "weeks": 0,
             "months": 0
@@ -1735,7 +2296,7 @@
           },
           "timing": {
             "minutes": 0,
-            "hours": 12,
+            "hours": 0,
             "days": 0,
             "weeks": 0,
             "months": 0
@@ -1754,7 +2315,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 5,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1794,7 +2355,7 @@
             "wait": 1
           },
           "timing": {
-            "minutes": 5,
+            "minutes": 0,
             "hours": 0,
             "days": 0,
             "weeks": 0,
@@ -1812,7 +2373,7 @@
           },
           "timing": {
             "minutes": 0,
-            "hours": 8,
+            "hours": 0,
             "days": 0,
             "weeks": 0,
             "months": 0
@@ -1830,7 +2391,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 1,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1847,7 +2408,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 3,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1864,7 +2425,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 14,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1904,7 +2465,7 @@
             "wait": 1
           },
           "timing": {
-            "minutes": 5,
+            "minutes": 0,
             "hours": 0,
             "days": 0,
             "weeks": 0,
@@ -1922,7 +2483,7 @@
           },
           "timing": {
             "minutes": 0,
-            "hours": 8,
+            "hours": 0,
             "days": 0,
             "weeks": 0,
             "months": 0
@@ -1940,7 +2501,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 1,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1957,7 +2518,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 3,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -1974,7 +2535,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 14,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -2015,7 +2576,7 @@
           },
           "timing": {
             "minutes": 0,
-            "hours": 12,
+            "hours": 0,
             "days": 0,
             "weeks": 0,
             "months": 0
@@ -2033,7 +2594,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 3,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -2050,7 +2611,7 @@
           "timing": {
             "minutes": 0,
             "hours": 0,
-            "days": 6,
+            "days": 0,
             "weeks": 0,
             "months": 0
           }
@@ -2068,7 +2629,7 @@
             "minutes": 0,
             "hours": 0,
             "days": 0,
-            "weeks": 3,
+            "weeks": 0,
             "months": 0
           }
         }

@@ -61,8 +61,8 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 
 
 	const onBoxesSettingsClick = useCallback(() => {
-		dispatch(cupboardShelfListActions.setBoxesSettingsShelfId(shelfId))
-		dispatch(cupboardShelfListActions.setBoxesSettingsModalIsOpen(true))
+		dispatch(cupboardShelfListActions.setShelfBoxesTemplateModalShelfId(shelfId))
+		dispatch(cupboardShelfListActions.setShelfBoxesTemplateModalIsOpen(true))
 	}, [dispatch, shelfId])
 
 	const onMissedTrainingClick = useCallback(() => {
