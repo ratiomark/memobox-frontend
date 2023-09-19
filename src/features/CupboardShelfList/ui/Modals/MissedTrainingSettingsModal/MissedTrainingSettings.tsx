@@ -10,7 +10,6 @@ import {
 	getMissedTrainingBoxValue,
 	getMissedTrainingShelfValue
 } from '../../../model/selectors/getMissedTrainingModal';
-import { StateSchema } from '@/app/providers/StoreProvider';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfListSlice';
 import { useUpdateShelfWithTagMutation } from '@/entities/Shelf';
@@ -26,8 +25,8 @@ export const MissedTrainingSettingsModal = () => {
 	const isOpen = useSelector(getMissedTrainingModalIsOpen)
 	const shelfId = useSelector(getMissedTrainingModalShelfId)
 	const boxId = useSelector(getMissedTrainingModalBoxId)
-	const currentMissedTrainingValue = useSelector((state: StateSchema) => getMissedTrainingShelfValue(state, shelfId))
-	const currentMissedTrainingValueOfBox = useSelector((state: StateSchema) => getMissedTrainingBoxValue(state, shelfId, boxId))
+	const currentMissedTrainingValue = useSelector(getMissedTrainingShelfValue)
+	const currentMissedTrainingValueOfBox = useSelector(getMissedTrainingBoxValue)
 	// console.log(currentMissedTrainingValueOfBox)
 	const [updateShelfMutation,] = useUpdateShelfWithTagMutation()
 	const [updateBoxMutation,] = useUpdateBoxWithTagMutation()

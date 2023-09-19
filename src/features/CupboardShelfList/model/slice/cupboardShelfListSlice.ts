@@ -1,4 +1,4 @@
-import { StateSchema } from '@/app/providers/StoreProvider'
+import { StateSchema, store } from '@/app/providers/StoreProvider'
 import { BoxCoordinates } from '@/entities/Box'
 import { CupboardSchema } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
@@ -77,7 +77,10 @@ const shelvesAdapter = createEntityAdapter<ShelfSchema>({
 export const getCupboardState = shelvesAdapter.getSelectors<StateSchema>(
 	(state) => state.cupboard
 )
-
+export const getAllShelvesIds = () => getCupboardState.selectIds(store.getState())
+export const getAllShelves = () => getCupboardState.selectAll(store.getState())
+export const getAllShelvesEntities = () => getCupboardState.selectEntities(store.getState())
+// export const getOneShelfById = (id: string) => getCupboardState.selectById(store.getState(), id)
 // const booksSelectors = booksAdapter.getSelectors<RootState>(
 // 	(state) => state.books
 // )
@@ -123,7 +126,7 @@ const cupboardShelfList = createSlice({
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			state.createNewCardModal.boxId = state.entities[state.createNewCardModal.shelfId]!.boxesData[action.payload]._id
 		},
-		
+
 		// boxes settings
 		// setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
 		// 	state.boxesSettingsShelfId = action.payload

@@ -8,8 +8,9 @@ export const getNotificationModalShelfId = (state: StateSchema) => state.cupboar
 
 export const getShelfNotificationSetting = createSelector(
 	[
-		(state: StateSchema, shelfId: string) => getCupboardState.selectById(state, shelfId)
+		(state: StateSchema) => state,
+		getNotificationModalShelfId,
 	],
-	(shelf) => shelf?.notificationEnabled ?? true
+	(state, shelfId) => getCupboardState.selectById(state, shelfId)?.notificationEnabled ?? true
 )
 // export const getDeletionIds = (state: StateSchema) => state.cupboard.shelvesDeletionIds 

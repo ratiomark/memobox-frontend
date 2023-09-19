@@ -1,6 +1,6 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
-import { getCupboardState } from '../slice/cupboardShelfListSlice';
+import { getAllShelves, getCupboardState } from '../slice/cupboardShelfListSlice';
 import { store } from '@/app/providers/StoreProvider'
 
 export const getCupboard = (state: StateSchema) => state.cupboard
@@ -15,22 +15,38 @@ export const getCupboardIsLoading = (state: StateSchema) => state.cupboard.isLoa
 export const getCupboardError = (state: StateSchema) => state.cupboard.error
 export const getCupboardShelves = (state: StateSchema) => state.cupboard
 // export const getCupboardShelves = (state: StateSchema) => state.cupboard.shelves
-export const getShelfIsDeleting = createSelector(
-	[
-		(state: StateSchema, shelfId: string) => getCupboardState.selectById(state, shelfId)
-	],
-	(shelf) => shelf?.isDeleting
-)
-export const getShelfById = createSelector(
-	[
-		(state: StateSchema, shelfId: string) => getCupboardState.selectById(state, shelfId)
-	],
-	(shelf) => shelf
-)
+// export const getShelfIsDeleting = createSelector(
+// 	[
+// 		(state: StateSchema, shelfId: string) => getCupboardState.selectById(state, shelfId)
+// 	],
+// 	(shelf) => shelf?.isDeleting
+// )
+export const getShelfIsDeleting = (shelfId: string) => {
+	return createSelector(
+		[
+			(state: StateSchema) => state
+		],
+		(state) => getCupboardState.selectById(state, shelfId)?.isDeleting
+	)
+}
+export const getShelfById = (shelfId: string) => {
+	return createSelector(
+		[
+			(state: StateSchema) => state
+		],
+		(state) => getCupboardState.selectById(state, shelfId)
+	)
+}
+// export const getShelfById = createSelector(
+// 	[
+// 		(state: StateSchema, shelfId: string) => getCupboardState.selectById(state, shelfId)
+// 	],
+// 	(shelf) => shelf
+// )
 
 export const getShelfItems = createSelector(
 	[
-		() => getCupboardState.selectAll(store.getState()),
+		getAllShelves,
 		getCupboardIsLoading,
 	],
 	(shelves, isLoading) => {
@@ -41,20 +57,5 @@ export const getShelfItems = createSelector(
 		}))
 	}
 )
-// const shelfItems = useMemo(() => {
-// 	if (cupboardIsLoading) return []
-// 	return cupboardShelves.map(shelf => {
-// 		return {
-// 			content: shelf.title,
-// 			value: shelf.id
-// 		}
-// 	})
-// }, [cupboardIsLoading, cupboardShelves])
 
 export const getIsCupboardInfoOpen = (state: StateSchema) => state.cupboard.isCupboardInfoModalOpen
-// export const getShelfByID = (shelfId: string) => {
-// 	return createSelector(get, (state) =>
-// 		selectById(state, entityId)
-// 	);
-// };
-// export const getDeletionIds = (state: StateSchema) => state.cupboard.shelvesDeletionIds 

@@ -34,7 +34,7 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 	// 	navigate(obtainRouteView(shelfPosition.toString()))
 	// }
 	// const shelfNamesList = useSelector(getUserShelfNamesList)
-	const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
+	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
 	const [removeShelfMutation] = useRemoveShelfMutation()
 	// const [updateShelfMutation] = useUpdateShelfMutation()
 	const dispatch = useAppDispatch()

@@ -30,10 +30,8 @@ export const ShelfItem = (props: ShelfProps) => {
 		}
 	} = props
 
-	const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
-
-	const { t } = useTranslation()
-
+	const isShelfDeleting = useSelector(getShelfIsDeleting(id))
+	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
 	if (isShelfDeleting) {
 		return <ShelfDeleting title={title} id={id} />
 	}

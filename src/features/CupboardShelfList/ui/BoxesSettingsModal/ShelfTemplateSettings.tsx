@@ -29,13 +29,14 @@ const reducers: ReducersList = {
 export const ShelfBoxesTemplateModal = () => {
 	const shelfId = useSelector(getBoxesTemplateModalShelfId)
 	const isOpen = useSelector(getBoxesTemplateModalIsOpen)
-	const shelf = useSelector((state: StateSchema) => getShelfById(state, shelfId))
+	const shelf = useSelector(getShelfById(shelfId))
+	// const shelf = useSelector((state: StateSchema) => getShelfById(state, shelfId))
 	const isCurrentTemplateEqualToInitial = useSelector(getBoxesTemplateModalChanged)
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 
 	useEffect(() => {
 		if (shelf) {
-			console.log(shelf?.boxesData.slice(1,))
+			// console.log(shelf?.boxesData.slice(1,))
 			dispatch(shelfBoxesTemplateSettingsActions.setInitialTemplate(shelf?.boxesData.slice(1,) as RegularAndLearntCardsBox[]))
 		}
 	}, [shelf, dispatch])
@@ -61,11 +62,8 @@ export const ShelfBoxesTemplateModal = () => {
 			<AnimatePresence initial={false} mode='wait'>
 				<motion.div
 					layout
-					className={clsx(
-						cls.ShelfTemplateSettings)}
-				// animate={{ width: 'auto' }}
+					className={cls.ShelfTemplateSettings}
 				>
-					{/* {isAnyTimeSetterOpen && <div className={cls.overlay} />} */}
 					{!shelf
 						? <Skeleton width={1200} height={150} />
 						: <BoxesSettingsContent />

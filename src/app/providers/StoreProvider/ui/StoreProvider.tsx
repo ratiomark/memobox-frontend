@@ -11,7 +11,6 @@ interface StoreProviderProps {
 	asyncReducers?: ReducersMapObject<StateSchema>
 }
 
-// export const store = createReduxStore()
 export const StoreProvider = (props: StoreProviderProps) => {
 	const {
 		store = defaultStore,
@@ -24,7 +23,7 @@ export const StoreProvider = (props: StoreProviderProps) => {
 		? createStoreInstance(initialState, asyncReducers)
 		: store
 	// const store = createReduxStore(initialState, asyncReducers)
-	console.log('Render Store')
+	// console.log('Render Store')
 	return (
 		<Provider store={customStore}>
 			{children}

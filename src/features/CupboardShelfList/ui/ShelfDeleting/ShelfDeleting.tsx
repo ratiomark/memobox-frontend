@@ -26,7 +26,8 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 	const dispatch = useAppDispatch()
 	const [removeShelfMutation] = useRemoveShelfMutation()
-	const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
+	const isShelfDeleting = useSelector(getShelfIsDeleting(id))
+	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
 	// timerId = setTimeout(() => {
 	// 	if (isShelfDeleting) {
 	// 		dispatch(cupboardShelfListActions.deleteShelf(shelfId))

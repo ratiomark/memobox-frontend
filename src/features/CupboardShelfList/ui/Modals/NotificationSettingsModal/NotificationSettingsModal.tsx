@@ -14,23 +14,14 @@ import { MyText } from '@/shared/ui/Typography';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { useState } from 'react';
 
-interface MissedTrainingSettingsProps {
-	className?: string
-}
 
 
-
-export const NotificationSettingsModal = (props: MissedTrainingSettingsProps) => {
-	const {
-		className,
-		// onClose,
-		// missedTrainingSetting,
-	} = props
+export const NotificationSettingsModal = () => {
 
 	const dispatch = useAppDispatch()
 	const isOpen = useSelector(getNotificationModalIsOpen)
 	const shelfId = useSelector(getNotificationModalShelfId)
-	const shelfNotificationsEnabledStore = useSelector((state: StateSchema) => getShelfNotificationSetting(state, shelfId))
+	const shelfNotificationsEnabledStore = useSelector(getShelfNotificationSetting)
 	const [notificationEnabled, setNotificationEnabled] = useState(shelfNotificationsEnabledStore)
 
 	const onClose = () => {
