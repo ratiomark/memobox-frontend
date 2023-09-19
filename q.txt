@@ -1,0 +1,168 @@
+У меня есть проект. Сейчас покажу тебе файлы. Это главный main.tsx:
+
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { StoreProvider } from './app/providers/StoreProvider'
+import { App } from './app/App'
+import '@/shared/config/i18n/i18n'
+const container = document.getElementById('root')
+
+if (!container) throw new Error('Root container is not Found! Check main.tsx file')
+
+const root = ReactDOM.createRoot(container)
+root.render(
+	<BrowserRouter>
+		<StoreProvider>
+			<App />
+		</StoreProvider>
+	</BrowserRouter>
+)
+
+Далее, у меня есть StateSchema:
+import {  UserSchema } from '@/entities/User';
+import { rtkApi } from '@/shared/api/rtkApi';
+import { LoginSchema } from '@/features/AuthByUsername';
+
+export interface StateSchema {
+	[rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
+	user: UserSchema
+	loginForm?: LoginSchema
+}
+export type StateSchemaReducersKeys = keyof StateSchema
+
+Далее у меня есть ReducerManager:
+import { AnyAction, CombinedState, combineReducers, Reducer, ReducersMapObject } from '@reduxjs/toolkit'
+import { StateSchema, StateSchemaReducersKeys } from './StateSchema'
+
+
+
+type MountedReducers = OptionalRecord<StateSchemaReducersKeys, boolean>
+
+export interface IReducerManager {
+	getReducerMap: () => ReducersMapObject<StateSchema>
+	reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>
+	add: (key: StateSchemaReducersKeys, reducer: Reducer) => void
+	remove: (key: StateSchemaReducersKeys) => void
+	// свое поле для определения вмонитрованных редьюсеров, true - вмонтирован
+	getMountedReducers: () => MountedReducers
+
+}
+
+
+export function createReducerManager(initialReducers: ReducersMapObject<StateSchema>): IReducerManager {
+	const reducers = { ...initialReducers }
+	let combinedReducer = combineReducers(reducers)
+
+	let keysToRemove: StateSchemaReducersKeys[] = []
+
+	const mountedReducers: MountedReducers = {}
+
+	return {
+		getReducerMap: () => reducers,
+
+		getMountedReducers: () => mountedReducers,
+
+		// возвращает стейт
+		reduce: (state: StateSchema, action: AnyAction) => {
+			if (keysToRemove.length > 0) {
+				state = { ...state }
+				for (const key of keysToRemove) {
+					delete state[key]
+				}
+				keysToRemove = []
+			}
+			return combinedReducer(state, action)
+		},
+
+		add: (key: StateSchemaReducersKeys, reducer: Reducer) => {
+			if (!key || reducers[key]) {
+				return
+			}
+			reducers[key] = reducer
+			mountedReducers[key] = true
+
+			combinedReducer = combineReducers(reducers)
+		},
+
+		remove: (key: StateSchemaReducersKeys) => {
+			if (!key || !reducers[key]) {
+				return
+			}
+			delete reducers[key]
+			keysToRemove.push(key)
+			mountedReducers[key] = false
+
+			combinedReducer = combineReducers(reducers)
+		}
+	}
+}
+
+Далее store.ts:
+import { CombinedState, configureStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
+import { createReducerManager } from './reducerManager';
+import { StateSchema } from './StateSchema';
+import { userReducer } from '@/entities/User';
+import { rtkApi } from '@/shared/api/rtkApi';
+
+export function createReduxStore(
+	initialState?: StateSchema,
+	asyncReducers?: ReducersMapObject<StateSchema>) {
+	// передавая схему стейта в ReducersMapObject я сообщаю TS какие редьюсеры должны быть.
+	const rootReducers: ReducersMapObject<StateSchema> = {
+		...asyncReducers,
+		user: userReducer,
+
+		[rtkApi.reducerPath]: rtkApi.reducer
+	}
+
+	const reducerManager = createReducerManager(rootReducers)
+
+	const store = configureStore({
+		reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
+		devTools: __IS_DEV__,
+		preloadedState: initialState,
+		middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+			thunk: {
+				extraArgument: {
+					
+				}
+			}
+		})
+			.concat(rtkApi.middleware)
+	})
+
+	//@ts-ignore
+	store.reducerManager = reducerManager
+	return store
+}
+
+И наконец StoreProvider(тот который я использую в главном файле):
+import { ReducersMapObject } from '@reduxjs/toolkit';
+import { ReactNode } from 'react';
+import { Provider } from 'react-redux';
+import { StateSchema } from '../config/StateSchema';
+import { createReduxStore } from '../config/store';
+
+interface StoreProviderProps {
+	children?: ReactNode;
+	initialState?: StateSchema;
+	asyncReducers?: ReducersMapObject<StateSchema>
+}
+
+
+export const StoreProvider = (props: StoreProviderProps) => {
+	const {
+		children,
+		initialState,
+		asyncReducers
+	} = props
+
+	const store = createReduxStore(initialState, asyncReducers)
+	return (
+		<Provider store={store}>
+			{children}
+		</Provider>
+	)
+}
+
+

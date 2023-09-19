@@ -36,7 +36,7 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 
 	const onAddNewCardClick = useCallback((shelfId: string, boxIndex: number) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
-		dispatch(cupboardShelfListActions.setBoxIndexCardModal(boxIndex))
+		dispatch(cupboardShelfListActions.setBoxIndexAndBoxIdCardModal(boxIndex))
 		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
 	}, [dispatch])
 
@@ -158,19 +158,14 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 
 
 	// VAR: сделать градиенты по бокам
-	
 	return (
-		<>
-			{/* {rightSide && <div style={{right: 0}} className={cls.gradientEdgeRight} />} */}
-			{/* {leftSide && <div style={{left}} className={cls.gradientEdgeLeft} />} */}
-			<ul
-				className={cls.BoxesBlock} 
-				ref={boxesBlockRef}
+		<ul
+			className={cls.BoxesBlock} 
+			ref={boxesBlockRef}
 				
-			>
-				{boxList}
-			</ul>
-		</>
+		>
+			{boxList}
+		</ul>
 	)
 }
 // import clsx from 'clsx';

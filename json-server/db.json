@@ -1463,7 +1463,7 @@
   "shelves": [
     {
       "id": "648c920baa3edb04cec38442",
-      "index": 1,
+      "index": 0,
       "isCollapsed": true,
       "title": "math",
       "boxesData": [
@@ -1881,7 +1881,7 @@
     },
     {
       "id": "648c920beba56ba6cd7db7bb",
-      "index": 0,
+      "index": 2,
       "isCollapsed": true,
       "title": "biology",
       "boxesData": [

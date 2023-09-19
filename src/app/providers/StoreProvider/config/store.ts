@@ -50,5 +50,13 @@ export function createReduxStore(
 // type store = typeof createReduxStore
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch']
+
+export const createStoreInstance = (initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) => {
+	return createReduxStore(initialState, asyncReducers);
+};
+
+export const store = createStoreInstance();
+// export const store = createReduxStore()
 // type rootState = ReturnType<typeof createReduxStore>['dispatch']
+export type rootState = ReturnType<typeof createReduxStore>['getState']
 // export const useAppSelector: TypedUseSelectorHook<StateSchema> = useSelector

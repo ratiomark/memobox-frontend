@@ -9,6 +9,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import { fetchCupboardData } from '../services/fetchCupboardData'
 import { CupboardPageSchema } from '../types/CupboardPageSchema'
 import { lexicalEmptyEditorState } from '@/shared/const/lexical'
+// import { store } from '@/app/providers/StoreProvider/ui/StoreProvider'
 
 const initialState: CupboardPageSchema = {
 	isDataAlreadyInStore: false,
@@ -51,6 +52,7 @@ const initialState: CupboardPageSchema = {
 	},
 	createNewCardModal: {
 		shelfId: '',
+		boxId: '',
 		boxIndex: 0,
 		questionText: localStorage.getItem('questionData') ?? lexicalEmptyEditorState,
 		// questionText: lexicalEmptyEditorState,
@@ -75,6 +77,17 @@ const shelvesAdapter = createEntityAdapter<ShelfSchema>({
 export const getCupboardState = shelvesAdapter.getSelectors<StateSchema>(
 	(state) => state.cupboard
 )
+
+// const booksSelectors = booksAdapter.getSelectors<RootState>(
+// 	(state) => state.books
+// )
+
+// And then use the selectors to retrieve values
+// const allBooks = getCupboardState.selectAll(store.getState())
+// export const { selectEntities: getAllShelves, selectIds: getAllShelvesIds } = shelvesAdapter.getSelectors()
+// export const getCupboardEntities = shelvesAdapter.getSelectors<StateSchema>(
+// 	(state) => state.cupboard.entities
+// )
 
 const cupboardShelfList = createSlice({
 	name: 'cupboardShelfList',
@@ -105,6 +118,12 @@ const cupboardShelfList = createSlice({
 		setBoxIndexCardModal: (state, action: PayloadAction<number>) => {
 			state.createNewCardModal.boxIndex = action.payload
 		},
+		setBoxIndexAndBoxIdCardModal: (state, action: PayloadAction<number>) => {
+			state.createNewCardModal.boxIndex = action.payload
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			state.createNewCardModal.boxId = state.entities[state.createNewCardModal.shelfId]!.boxesData[action.payload]._id
+		},
+		
 		// boxes settings
 		// setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
 		// 	state.boxesSettingsShelfId = action.payload

@@ -7,32 +7,37 @@ import {
 	getBoxIndexCardModal,
 	getIsOpenCardModal,
 	getQuestionCardModal,
-	getShelfIdCardModal
+	getShelfIdCardModal,
+	getShelfBoxesItems,
+	getBoxIdCheckedCardModal,
 } from '../../../model/selectors/getCreateNewCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
 import { Skeleton, TextEditorSkeleton } from '@/shared/ui/Skeleton';
-import { getCupboardIsLoading, getCupboardError } from '../../../model/selectors/getCupboardShelfList';
+import { getCupboardIsLoading, getShelfItems } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
-import { memo, useRef, useMemo, useCallback, Suspense } from 'react';
+import { memo, useRef, useMemo, useCallback, Suspense, useEffect } from 'react';
+// import { EditorUniversal } from '@/shared/ui/lexical-playground/src/EditorUniversal';
+import { StateSchema } from '@/app/providers/StoreProvider';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
-import { EditorUniversal } from '@/shared/ui/lexical-playground/src/EditorUniversal';
+import { EditorUniversal } from '@/shared/ui/lexical-playground';
 
 export const CreateNewCardModal = memo(() => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
-	// const cupboardError = useSelector(getCupboardError)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 	const isOpen = useSelector(getIsOpenCardModal)
 	const questionTextCardModal = useSelector(getQuestionCardModal)
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
-	const boxIdCardModal = useSelector(getBoxIndexCardModal)
-
+	const boxIndexCardModal = useSelector(getBoxIndexCardModal)
+	const boxIdCardModal = useSelector((state: StateSchema) => getBoxIdCheckedCardModal(state))
+	const shelfItems = useSelector((state: StateSchema) => getShelfItems(state))
+	const boxItems = useSelector((state: StateSchema) => getShelfBoxesItems(state))
 	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)
 	const modalButtonsRef = useRef<HTMLDivElement>(null)
 
@@ -42,44 +47,7 @@ export const CreateNewCardModal = memo(() => {
 		shelvesAndBoxesRef: shelvesAndBoxesRef.current,
 	})
 
-	const shelfItems = useMemo(() => {
-		if (cupboardIsLoading) return []
-		return cupboardShelves.map(shelf => {
-			return {
-				content: shelf.title,
-				value: shelf.id
-			}
-		})
-	}, [cupboardIsLoading, cupboardShelves])
-
-	const boxItems = useMemo(() => {
-		if (cupboardIsLoading) return []
-		const currentShelf = cupboardShelves.find(shelf => shelf.id === shelfIdCardModal)
-		const itemsList = currentShelf!.boxesData.map(box => {
-			let content;
-			switch (box.specialType) {
-				case 'none':
-					content = `${t('box text')} ${box.index}`
-					break;
-				case 'new':
-					content = t('new cards')
-					break
-				default:
-					content = t('learnt cards')
-					break;
-			}
-			return {
-				value: box.index,
-				// value: box._id,
-				content,
-			}
-		})
-		return itemsList
-	}, [cupboardIsLoading, shelfIdCardModal, cupboardShelves, t])
-
 	const onChangeQuestion = useCallback((editorState: EditorState) => {
-		// console.log(editorState.toJSON())
-		// console.log(JSON.stringify(editorState.toJSON()))
 		dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
 
@@ -96,8 +64,16 @@ export const CreateNewCardModal = memo(() => {
 	}, [dispatch])
 
 	const onChangeBox = useCallback((boxIndex: number) => {
-		dispatch(cupboardShelfListActions.setBoxIndexCardModal(boxIndex))
+		dispatch(cupboardShelfListActions.setBoxIndexAndBoxIdCardModal(boxIndex))
 	}, [dispatch])
+
+	const onSubmit = useCallback(() => {
+		// console.log(shelfIdCardModal)
+		console.log(`${boxIdCardModal}  -- ${boxIndexCardModal}`)
+		// console.log(shelfBoxes![boxIndexCardModal]._id)
+		// dispatch(cupboardShelfListActions.setBoxIndexCardModal())
+	}, [boxIndexCardModal, boxIdCardModal])
+	// }, [shelfIdCardModal, boxIndexCardModal, shelfBoxes])
 
 	const shelvesAndBoxes = useMemo(() => {
 		if (cupboardIsLoading) {
@@ -123,7 +99,7 @@ export const CreateNewCardModal = memo(() => {
 				<div className={cls.listBoxWrapper}>
 					<ListBox
 						label={t('box text')}
-						value={boxIdCardModal}
+						value={boxIndexCardModal}
 						items={boxItems}
 						onChange={onChangeBox}
 						max
@@ -131,7 +107,7 @@ export const CreateNewCardModal = memo(() => {
 					/>
 				</div>
 			</div>)
-	}, [cupboardIsLoading, t, boxIdCardModal, boxItems, onChangeBox, onChangeShelf, shelfIdCardModal, shelfItems])
+	}, [cupboardIsLoading, t, boxIndexCardModal, boxItems, onChangeBox, onChangeShelf, shelfIdCardModal, shelfItems])
 
 	const editorBlockQuestion = useMemo(() => {
 		return (
@@ -153,7 +129,6 @@ export const CreateNewCardModal = memo(() => {
 
 	const editorBlockAnswer = useMemo(() => {
 		return (
-			// <div key='editorBlockAnswer' >
 			<div className={cls.areaAndLabelWrapper}>
 				<MyText text={t('answer')} />
 				<Suspense fallback={
@@ -166,7 +141,6 @@ export const CreateNewCardModal = memo(() => {
 					/>
 				</Suspense>
 			</div>
-			// </div>
 		)
 	}, [onChangeAnswer, answerTextCardModal, editorMinHeight, t])
 
@@ -177,7 +151,8 @@ export const CreateNewCardModal = memo(() => {
 			panelWithMainPadding={false}
 			isOpen={isOpen}
 			onOpenChange={onCloseCardModal}
-			onSubmit={() => alert('Создаю новую карточку')}
+			onSubmit={onSubmit}
+		// onSubmit={() => alert('Создаю новую карточку')}
 		>
 			<div
 				className={cls.cardModal}
@@ -203,7 +178,8 @@ export const CreateNewCardModal = memo(() => {
 						justify='end'
 						className={cls.actions}
 						onClose={() => onCloseCardModal(false)}
-						onSubmit={() => alert('Создаю новую карточку')}
+						onSubmit={onSubmit}
+					// onSubmit={() => alert('Создаю новую карточку')}
 					/>
 				</div>
 			</div>

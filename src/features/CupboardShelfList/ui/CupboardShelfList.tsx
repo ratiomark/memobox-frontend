@@ -1,13 +1,7 @@
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
-import { $generateHtmlFromNodes } from '@lexical/html';
-// import './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal.css'
-// import clsBoxSettings from './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal.module.scss'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { Suspense, useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
-import { DndProvider, useDrop } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
 import { fetchCupboardData } from '../model/services/fetchCupboardData';
 import { useSelector } from 'react-redux';
 import {
@@ -121,19 +115,19 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 
 	const reorderShelves = useCallback((shelves: ShelfSchema[]) => {
 		dispatch(cupboardShelfListActions.reorderShelves(shelves))
+		// VAR: нужно показать плашку "новый порядок полок будет сохранен через 5 секунд". По прошествии 5-ти секунд отправить запрос на сервер
 	}, [dispatch])
 
 	const shelvesList = useMemo(() => {
 		let shelvesData;
 		if (cupboardIsLoading) {
-			const shelvesFromLocalData = localDataService.getShelves()
-			// return []
-			if (!shelvesFromLocalData) {
-				// тут нужно вернуть скелетон или вообще ничего не возвращать
-				return []
-			} else {
-				shelvesData = shelvesFromLocalData
-			}
+			shelvesData = localDataService.getShelves()
+			// const shelvesFromLocalData = localDataService.getShelves()
+			// if (!shelvesFromLocalData) {
+			// 	return []
+			// } else {
+			// 	shelvesData = shelvesFromLocalData
+			// }
 		} else {
 			shelvesData = cupboardShelves
 		}
@@ -194,17 +188,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 				className={cls.cupboardShelfList}
 				id={idCupboardShelfList}
 			>
-				{/* {html} */}
-				{/* <div style={{ padding: 10, border: '1px solid red' }}>
-				<EditorV2 />
-			</div> */}
-				{/* <ContentLooker /> */}
-				{/* <Editor autoFocus/> */}
 				<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
-				{/* <AnimatePresence> */}
-
-				{/* <DndProvider backend={HTML5Backend}> */}
-				{/* <DndShelfListWrapper> */}
 				<Reorder.Group
 					values={cupboardIsLoading ? localDataService.getShelves() : cupboardShelves}
 					// onDragEnd={(event, info) => {
@@ -225,12 +209,7 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 				<CupboardInfoModal />
 				<HiddenTemplates />
 			</div>
-
 			<CreateNewCardModal />
-			{/* <Suspense fallback={<CardModalSkeleton />}> */}
-			{/* <CreateNewCardModalHeadless /> */}
-			{/* <CardModalSkeleton /> */}
-			{/* </Suspense> */}
 		</>
 	)
 }

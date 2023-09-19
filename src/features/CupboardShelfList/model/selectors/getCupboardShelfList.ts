@@ -1,6 +1,7 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
 import { getCupboardState } from '../slice/cupboardShelfListSlice';
+import { store } from '@/app/providers/StoreProvider'
 
 export const getCupboard = (state: StateSchema) => state.cupboard
 export const getCupboardIsDataAlreadyInStore = (state: StateSchema) => state.cupboard.isDataAlreadyInStore
@@ -27,6 +28,28 @@ export const getShelfById = createSelector(
 	(shelf) => shelf
 )
 
+export const getShelfItems = createSelector(
+	[
+		() => getCupboardState.selectAll(store.getState()),
+		getCupboardIsLoading,
+	],
+	(shelves, isLoading) => {
+		if (isLoading) return []
+		return shelves.map(shelf => ({
+			content: shelf.title,
+			value: shelf.id
+		}))
+	}
+)
+// const shelfItems = useMemo(() => {
+// 	if (cupboardIsLoading) return []
+// 	return cupboardShelves.map(shelf => {
+// 		return {
+// 			content: shelf.title,
+// 			value: shelf.id
+// 		}
+// 	})
+// }, [cupboardIsLoading, cupboardShelves])
 
 export const getIsCupboardInfoOpen = (state: StateSchema) => state.cupboard.isCupboardInfoModalOpen
 // export const getShelfByID = (shelfId: string) => {

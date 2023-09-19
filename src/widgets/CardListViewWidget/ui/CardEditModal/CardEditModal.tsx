@@ -29,13 +29,9 @@ export const CardEditModal = memo((props: CardEditModalProps) => {
 	// const cupboardError = useSelector(getCupboardError)
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	const [showOriginalData, setShowOriginalData] = useState(false)
-	const [shadowAreaQuestionHeight, setShadowAreaQuestionHeight] = useState(0)
-	const [shadowAreaAnswerHeight, setShadowAreaAnswerHeight] = useState(0)
-
 
 	const isOpen = useSelector(getViewPageEditModalIsOpen) ?? false
 	const isCardEdited = useSelector(getViewPageIsCardInModalEdited)
-	const cardHeightsData = useSelector(getCardModalHeights)
 	const dispatch = useAppDispatch()
 
 	// const mainContentRef = useRef<HTMLDivElement>(null)

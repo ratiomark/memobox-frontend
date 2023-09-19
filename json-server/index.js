@@ -7,7 +7,7 @@ const http = require('http');
 // const { handleError } = require('./helpers');
 const cors = require('cors');
 
-
+const delayBeforeResponse = 500
 
 // Then use it before your routes are set up:
 const options = {
@@ -85,8 +85,10 @@ server.get('/cupboard', async (req, res) => {
 		}
 
 		const db = JSON.parse(data);
-		const shelves = db.shelves.filter(shelf => !shelf.isDeleted)
-		// console.log(db.shelves)
+		const shelves = db.shelves
+			.filter(shelf => !shelf.isDeleted)
+			.map((shelf, index) => ({ ...shelf, index }))
+			.sort((a, b) => a.index - b.index);
 		const responseData = {
 			commonShelf: db.commonShelf,
 			shelves
@@ -94,7 +96,7 @@ server.get('/cupboard', async (req, res) => {
 
 		setTimeout(() => {
 			res.send(responseData)
-		}, 500);
+		}, delayBeforeResponse);
 		// res.send(responseData);
 	})
 	// const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));

@@ -223,6 +223,36 @@ function Editor(props: EditorProps) {
 	);
 }
 
+// const EditorUniversal = (props: EditorProps) => {
+// 	const initialConfig = {
+// 		editable: props.editable,
+// 		editorState: props.editorState,
+// 		namespace: props.namespace ? props.namespace : 'Playground',
+// 		nodes: [...PlaygroundNodes],
+// 		onError: (error: Error) => {
+// 			throw error;
+// 		},
+// 		theme: PlaygroundEditorTheme,
+// 	};
+// 	return (
+// 		<SettingsContext>
+// 			<LexicalComposer initialConfig={initialConfig}>
+// 				<SharedHistoryContext>
+
+// 					{/* <div className="editor-shell"> */}
+// 					<Editor {...props} />
+// 					{/* </div> */}
+// 					{/* <Settings /> */}
+// 					{/* {isDevPlayground ? <DocsPlugin /> : null} */}
+// 					{/* {isDevPlayground ? <PasteLogPlugin /> : null} */}
+// 					{/* {isDevPlayground ? <TestRecorderPlugin /> : null} */}
+
+// 				</SharedHistoryContext>
+// 			</LexicalComposer>
+// 		</SettingsContext>
+// 	)
+// }
+// export default EditorUniversal
 export const EditorUniversal = (props: EditorProps) => {
 	const initialConfig = {
 		editable: props.editable,

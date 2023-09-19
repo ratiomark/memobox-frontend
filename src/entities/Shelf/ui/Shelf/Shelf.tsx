@@ -42,7 +42,7 @@ export const Shelf = memo((props: ShelfProps) => {
 
 	const [isDragging, setIsDragging] = useState(false)
 	// const [isCollapsing, setIsCollapsing] = useState(false)
-	const { t } = useTranslation()
+	// const { t } = useTranslation()
 	const controls = useDragControls()
 
 	const handleDragStart = () => {

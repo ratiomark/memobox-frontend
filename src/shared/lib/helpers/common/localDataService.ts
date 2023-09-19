@@ -70,6 +70,9 @@ class LocalDataService implements ILocalDataService {
 	}
 	getShelves(): ShelfSchema[] | [] {
 		return this.getData(SHELVES_KEY) ?? []
+		// const shelvesFromStorage = this.getData(SHELVES_KEY)
+		// if (!shelvesFromStorage) return []
+		// return shelvesFromStorage
 	}
 	setCommonShelfCollapsed(commonShelfCollapsed: boolean | undefined): void {
 		if (commonShelfCollapsed === undefined) return

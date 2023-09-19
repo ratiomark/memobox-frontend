@@ -18,7 +18,7 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	createNewCardModal: {
 		shelfId: string
 		boxIndex: number
-		// boxId: string
+		boxId: string
 		questionText: string
 		answerText: string
 		isOpen: boolean
