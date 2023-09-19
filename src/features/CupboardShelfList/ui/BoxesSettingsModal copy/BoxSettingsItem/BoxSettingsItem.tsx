@@ -17,7 +17,7 @@ import { timingDataDefault } from '@/shared/const/timingBlock';
 import { getTiming } from '@/shared/lib/helpers/common/formaters';
 import { getBoxesTemplateModalMode } from '../../../model/selectors/getShelfBoxesTemplateModal';
 import { shelfBoxesTemplateSettingsActions } from '../../../model/slice/shelfBoxesTemplateSlice';
-import { useState, useCallback, MouseEvent, useEffect } from 'react';
+import { useState, useCallback, MouseEvent } from 'react';
 
 interface BoxSettingsItemProps {
 	className?: string
@@ -42,40 +42,66 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		onRemoveBox,
 		onAddBoxClick,
 		isLastBox = false,
+		// isAddBoxModeActive,
 	} = props
 	const dispatch = useAppDispatch()
-	const { isSaved: isBoxSaved, minutes, hours, days, weeks, months, id, index: boxIndex, isRemoved } = boxItem
+	const { isSaved: isBoxSaved, minutes, hours, days, weeks, months, id, index: boxIndex } = boxItem
+	// const isTimeSetterOpen = useSelector((state: StateSchema) => getBoxIsTimeSetterOpen(state, id))
 	const mode = useSelector(getBoxesTemplateModalMode)
 	const isAddBoxModeActive = mode === 'choosingBoxPlace'
+	const [isRemoved, setIsRemoved] = useState(false)
 	const { t } = useTranslation()
 
+	const onCloseTimeSetter = useCallback(() => {
+		if (isBoxSaved) dispatch(shelfBoxesTemplateSettingsActions.closeTimeSetter(id))
+		else setIsRemoved(true)
+
+		setTimeout(() => {
+			if (!isBoxSaved) {
+				dispatch(shelfBoxesTemplateSettingsActions.closeTimeSetter(id))
+				dispatch(shelfBoxesTemplateSettingsActions.removeAddedBox())
+			}
+		}, 500)
+	}, [isBoxSaved, id, dispatch])
 
 	const onAddNewBoxClickHandle = (e: MouseEvent<HTMLDivElement>) => {
-		const addNewBoxToPosition = boxIndex + 1
-		onAddBoxClick(addNewBoxToPosition)
+		onAddBoxClick(boxIndex! + 1)
 		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+		console.log(x, y)
 		const coordinates = {
 			x: x + width / 2,
 			y: y + height / 2
 		}
+		// console.log('coordinates:  ', coordinates)
+		// console.log('Add ICON ', coordinates)
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxCoordinates(coordinates))
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalIsOpen(true))
+		// dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxId((Math.random() * Math.random()).toString()))
+		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxTimingData(timingDataDefault))
 	}
 
 	const onOpenTimeSetterHandle = (e: MouseEvent<HTMLDivElement>) => {
 		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+		console.log(x, y)
 		const coordinates = {
 			x: x + width / 2,
 			y: y + height / 2
 		}
+		console.log('coordinates:  ', coordinates)
+		// console.log('Add Button coordinates ', coordinates)
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxCoordinates(coordinates))
-		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxData(boxItem))
-		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxTimingData({ minutes, hours, days, weeks, months }))
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalIsOpen(true))
+		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxId(boxItem.id.toString()))
+		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxTimingData({ minutes, hours, days, weeks, months }))
 	}
 
+
+	const onSetNewBoxTime = useCallback((timeObject: TimingBlock) => {
+		dispatch(shelfBoxesTemplateSettingsActions.setTimeToBoxById({ boxId: id, timeObject }))
+	}, [id, dispatch])
+
 	const onRemoveClick = () => {
-		dispatch(shelfBoxesTemplateSettingsActions.switchBoxToRemovedState(boxIndex))
+		setIsRemoved(true)
 		setTimeout(() => {
 			onRemoveBox(boxIndex)
 		}, DURATION_MILLISEC)
@@ -90,7 +116,6 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		: (
 			<Heading as='h5'
 				className={cls.title}
-				// title={`${t('box text')} ${boxIndex}`}
 				title={`${t('box text')} ${boxIndex! + 1}`}
 			/>)
 
@@ -130,6 +155,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 			buttonSameSize={false}
 			className={clsx(cls.icon, cls.removeIcon)}
 		/>)
+	// const removeButton = <Button onClick={onRemoveClick}>remove</Button>
 
 	const removeButtonAnimated = (<AnimatePresence mode='wait'>
 		{!isAddBoxModeActive &&
@@ -147,46 +173,32 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 	return (
 		<AnimatePresence>
 			{!isRemoved &&
-				// {!isRemoved &&
 				<>
 					<motion.div
-						layout
-						// layoutScroll
-						layoutId={id}
+						// layout
+						layoutId={id.toString()}
 						key={id}
-						initial={isBoxSaved
-							? false
-							: {
-								width: 0,
-								marginRight: 0,
-								scaleX: 0,
-							}
-						}
-						animate={{
-							width: 'auto',
-							scaleX: 1,
-							marginRight: 20,
-							originX: 0.5,
-						}}
+						initial={isBoxSaved ? false : { width: 0, marginRight: 0 }}
+						animate={{ width: 'auto', scale: 1, marginRight: isLastBox ? 0 : 20 }}
 						exit={{
-							width: 0,
-							scale: 0,
-							opacity: 0,
-							marginRight: 0,
-							originX: 0.5,
-							// transition: { delay: isBoxSaved ? 0 : 2 }
+							width: 0, scale: 0, opacity: 0, marginRight: 0,
+							// transition: { delay: isBoxSaved ? 4 : 2 }
 						}}
-						transition={{ duration: DURATION_SEC }}
+						transition={{ duration: DURATION_SEC, }}
 						style={{ flexShrink: 0 }}
+					// className={cls.boxItem}
+					// style={{ width: 'maxContent', display: 'flex'}}
 					>
 						<div className={clsx(
 							cls.BoxSettingsItem,
+							// { [cls.marginRight]: isLastBox },
 							className)}
 						>
 							{title}
 							<HStack max justify='center' gap='gap_4'>
 								{timerIconAnimated}
 								{!isLastBox && removeButtonAnimated}
+
 							</HStack>
 							<div style={{ height: 24 }}>
 								<p>{getTiming(boxItem)}</p>

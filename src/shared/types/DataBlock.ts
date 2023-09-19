@@ -13,10 +13,11 @@ export interface TimingBlock {
 }
 
 export type ExtendedTimingBlock = TimingBlock & {
-	index?: number
-	isSaved?: boolean
-	keyId?: 'initial' | 'unsaved'
-	id: number | string
+	index: number
+	isSaved: boolean
+	isRemoved?: boolean
+	keyId: 'initial' | 'unsaved'
+	id: string
 	isOpen: boolean
 }
 

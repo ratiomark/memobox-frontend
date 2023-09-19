@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, } from '@reduxjs/toolkit'
 import { SettingsShelfTemplate } from '../types/SettingsShelfTemplate'
 import { ExtendedTimingBlock, TimingBlock } from '@/shared/types/DataBlock'
-import { isEqual } from 'lodash'
 import { timingDataDefault } from '@/shared/const/timingBlock'
 import { BoxCoordinates } from '@/entities/Box'
 import { SettingsShelfTemplateMod } from '@/shared/types/SettingsShelfTemplateMod'
@@ -27,7 +26,9 @@ const initialState: SettingsShelfTemplate = {
 	},
 }
 
-const isCurrentTemplateEqualToInitial = (initialState: TimingBlock[], currentState: ExtendedTimingBlock[]) => {
+const isCurrentTemplateEqualToInitial = (
+	initialState: TimingBlock[],
+	currentState: ExtendedTimingBlock[]) => {
 	if (initialState.length !== currentState.length) return false
 	if (currentState.some(box => box.keyId === 'unsaved')) return false
 	return true
@@ -83,7 +84,6 @@ const settingsShelfTemplate = createSlice({
 		setCurrentTemplate: (state, action: PayloadAction<ExtendedTimingBlock[]>) => {
 			state.currentShelfTemplate = action.payload.map((box, index) => ({ ...box, index }))
 			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
-			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 		},
 		setMode: (state, action: PayloadAction<SettingsShelfTemplateMod>) => {
 			state.mode = action.payload
@@ -105,7 +105,6 @@ const settingsShelfTemplate = createSlice({
 			})
 			state.mode = 'waitingForSaving'
 			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
-			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 		},
 		closeTimeSetter: (state, action: PayloadAction<number | string>) => {
 			state.currentShelfTemplate = state.currentShelfTemplate.map(box => {
@@ -115,9 +114,7 @@ const settingsShelfTemplate = createSlice({
 				return box
 			})
 			state.mode = 'waitingForSaving'
-			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 			state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
-			// state.currentShelfTemplate = action.payload.map((box, index) => ({ ...box, index }))
 		},
 		removeAddedBox: (state) => {
 			if (state.mode === 'initial') return
@@ -131,7 +128,6 @@ const settingsShelfTemplate = createSlice({
 			// 	.filter(box => box.isSaved)
 			// 	.map((box, index) => ({ ...box, index }))
 			// state.isCurrentTemplateEqualToInitial = isCurrentTemplateEqualToInitial(state.initialTemplate, state.currentShelfTemplate)
-			// state.isCurrentTemplateEqualToInitial = !isEqual(state.initialTemplate, state.currentShelfTemplate)
 		},
 		reset: (state) => {
 			state.mode = 'initial'

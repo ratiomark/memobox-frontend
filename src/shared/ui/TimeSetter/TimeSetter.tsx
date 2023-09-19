@@ -1,33 +1,24 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './TimeSetter.module.scss';
-import { CSSProperties, MouseEvent, WheelEvent, useEffect, useRef, useState } from 'react';
-import { Icon } from '../Icon';
+import { CSSProperties, WheelEvent, useEffect, useRef, useState } from 'react';
 import { MyText } from '../Typography';
-import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Button } from '../Button';
 import { SingleSetter } from './SingleSetter';
-import { Portal } from '../Portal/Portal';
 import { HStack } from '../Stack';
-import useLockedBody from '@/shared/lib/helpers/hooks/useLockedBody';
 import { TimingBlock } from '@/shared/types/DataBlock';
 import { timingDataDefault } from '@/shared/const/timingBlock';
 
 interface TimeSetterProps {
 	className?: string
 	timingData?: TimingBlock
-	// minutes: number
-	// hours: number
-	// days: number
-	// weeks: number
-	// months: number
+	title?: string
 	onClose: () => void
 	lockSelector?: string
 	overlay?: boolean
 	onSaveTime: (timeObject: TimingBlock) => void
 	styles?: CSSProperties
 	id?: string
-	// startCallback?: ({ width, height }: { width: number, height: number }) => void
 }
 
 let singleSetterMaxWidth: number;
@@ -35,30 +26,18 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	const {
 		className,
 		timingData = timingDataDefault,
-		// minutes: minutesProps = 0,
-		// hours: hoursProps = 0,
-		// days: daysProps = 0,
-		// weeks: weeksProps = 0,
-		// months: monthsProps = 0,
+		title,
 		onClose,
-		// lockSelector = '[data-testid="MainPage"]',
-		overlay = true,
 		onSaveTime,
 		id,
-		// startCallback,
 	} = props
-	// const [locked, setLocked] = useLockedBody(false, lockSelector)
-	const timeSetterRef = useRef<HTMLDivElement>(null)
+	const { t } = useTranslation()
+	// const timeSetterRef = useRef<HTMLDivElement>(null)
 	const [minutes, setMinutes] = useState(timingData.minutes)
 	const [hours, setHours] = useState(timingData.hours)
 	const [days, setDays] = useState(timingData.days)
 	const [weeks, setWeeks] = useState(timingData.weeks)
 	const [months, setMonths] = useState(timingData.months)
-	// const [minutes, setMinutes] = useState(minutesProps)
-	// const [hours, setHours] = useState(hoursProps)
-	// const [days, setDays] = useState(daysProps)
-	// const [weeks, setWeeks] = useState(weeksProps)
-	// const [months, setMonths] = useState(monthsProps)
 	const [disabled, setDisabled] = useState(false)
 
 	// useEffect(() => {
@@ -95,13 +74,6 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		}
 		singleSetters.forEach(div => div.style.minWidth = `${singleSetterMaxWidth + 2}px`)
 	}, [])
-
-
-
-	// useEffect(() => {
-	// 	setLocked(true)
-	// 	return () => setLocked(!locked)
-	// }, [setLocked, locked])
 
 	const onUpClickMinutes = () => {
 		if (minutes === 59) return //setMinutes(0);
@@ -168,19 +140,19 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		else onUpClickMonths()
 	}
 
-	const { t } = useTranslation()
-
 	return (
 		<div
 			className={clsx(
-				cls.TimeSetter,
+				title
+					? cls.TimeSetterWithTitle
+					: cls.TimeSetter,
 				className
 			)}
 			id={id}
 		// ref={timeSetterRef}
 		>
-			<HStack gap='gap_16' className={cls.setterWrapper} align='center'>
-				{/* <div className={cls.line} /> */}
+			{title && <MyText text={title} align='center' className={cls.timeSetterTitle} />}
+			<div className={cls.singleSettersColumnsWrapper} >
 				<SingleSetter
 					time={minutes}
 					onUpClick={onUpClickMinutes}
@@ -221,8 +193,8 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					maxTime={24}
 					title={t('months')}
 				/>
-			</HStack>
-			<HStack justify='between' max className={cls.buttonsWrapper}  >
+			</div>
+			<HStack justify='end' gap='gap_14' max className={cls.buttonsWrapper}  >
 				<Button fontWeight='300' onClick={onClose}>
 					{t('cancel no keys')}
 				</Button>
@@ -235,11 +207,6 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					{t('save no keys')}
 				</Button>
 			</HStack>
-			{/* {overlay &&
-				<Portal>
-					<div className={cls.overlay} onClick={onClose} />
-				</Portal>
-			} */}
 		</div>
 
 	)

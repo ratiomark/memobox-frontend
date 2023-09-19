@@ -15,7 +15,6 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 import { RegularAndLearntCardsBox } from '@/entities/Box';
 import { getShelfById } from '../../model/selectors/getCupboardShelfList'
 import {
-	getBoxesTemplateModalChanged,
 	getBoxesTemplateModalIsOpen,
 	getBoxesTemplateModalShelfId
 } from '../../model/selectors/getShelfBoxesTemplateModal'
@@ -30,8 +29,9 @@ export const ShelfBoxesTemplateModal = () => {
 	const shelfId = useSelector(getBoxesTemplateModalShelfId)
 	const isOpen = useSelector(getBoxesTemplateModalIsOpen)
 	const shelf = useSelector((state: StateSchema) => getShelfById(state, shelfId))
-	const isCurrentTemplateEqualToInitial = useSelector(getBoxesTemplateModalChanged)
+	// const shelfTemplateSettingsFromUser = useSelector(getUserShelfTemplateSettings)
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
+	const { t } = useTranslation()
 
 	useEffect(() => {
 		if (shelf) {
@@ -46,6 +46,7 @@ export const ShelfBoxesTemplateModal = () => {
 		dispatch(shelfBoxesTemplateSettingsActions.reset())
 	}
 
+	// const isCurrentTemplateEqualToInitial = useSelector(getSettingsShelfTemplateChanged)
 
 	// if (!shelf) return <p>Загрузка</p>
 
@@ -70,13 +71,20 @@ export const ShelfBoxesTemplateModal = () => {
 						? <Skeleton width={1200} height={150} />
 						: <BoxesSettingsContent />
 					}
-					<ModalButtons
-						justify='end'
-						// max={false}
-						isSubmitDisabled={isCurrentTemplateEqualToInitial}
-						onClose={onCloseHandle}
-						onSubmit={() => alert('Сохраняю настройки')}
-					/>
+
+
+					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
+					<HStack max justify='between'>
+						<Button variant='empty'>{t('return to default')}</Button>
+						<ModalButtons
+							justify='end'
+							max={false}
+							// isSubmitDisabled={isCurrentTemplateEqualToInitial}
+							onClose={onCloseHandle}
+							onSubmit={() => alert('Сохраняю настройки')}
+						/>
+					</HStack>
+					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 				</motion.div>
 			</AnimatePresence>
 			{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}

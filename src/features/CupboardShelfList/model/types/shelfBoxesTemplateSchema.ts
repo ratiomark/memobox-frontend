@@ -19,5 +19,6 @@ export interface ShelfBoxesTemplateSchema {
 		boxCoordinates: BoxCoordinates
 		boxTimingData: TimingBlock
 		boxId: string
+		boxData?: ExtendedTimingBlock
 	},
 }

@@ -4,11 +4,13 @@ import { MouseEvent } from 'react';
 import { Icon } from '@/shared/ui/Icon';
 import AddIcon from '@/shared/assets/icons/addIcon.svg'
 interface AddBoxIconProps {
+	className?: string;
 	onClick?: (e: MouseEvent<HTMLDivElement>) => void
 }
 
 export const AddBoxIcon = (props: AddBoxIconProps) => {
 	const {
+		className,
 		onClick,
 	} = props
 
@@ -20,26 +22,14 @@ export const AddBoxIcon = (props: AddBoxIconProps) => {
 			}}
 			animate={{
 				width: 30, height: 30, marginRight: 20, opacity: 1,
-				transition: {
-					opacity: {
-						delay: 0.3
-						// delay: 0.42
-					},
-					duration: 0.4
-				}
+				transition: { opacity: { delay: 0.42 }, duration: 0.4 }
 			}}
 			exit={{
 				width: 0, height: 0, opacity: 0, marginRight: 0, marginLeft: 0,
 				transition: {
 					opacity: { duration: 0.2, },
-					width: {
-						delay: 0.235,
-						duration: 0.4
-					},
-					height: {
-						delay: 0.235,
-						duration: 0.4
-					},
+					width: { delay: 0.235, duration: 0.4 },
+					height: { delay: 0.235, duration: 0.4 },
 					marginRight: { delay: 0.235, duration: 0.4 },
 				}
 			}}

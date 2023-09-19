@@ -217,19 +217,13 @@ export const CupboardShelfList = (props: CupboardShelfListProps) => {
 				>
 					{shelvesList}
 				</Reorder.Group>
-				{/* </DndShelfListWrapper> */}
-				{/* </DndProvider> */}
-				{/* </AnimatePresence> */}
-				{/* <BoxesSettingsModal /> */}
 				<ShelfBoxesTemplateModal />
 				<MissedTrainingSettingsModal />
 				<NotificationSettingsModal />
-
 				<BoxTimeSetterModal />
 				<BoxSettingsDropdownModal />
 				<CupboardInfoModal />
 				<HiddenTemplates />
-
 			</div>
 
 			<CreateNewCardModal />

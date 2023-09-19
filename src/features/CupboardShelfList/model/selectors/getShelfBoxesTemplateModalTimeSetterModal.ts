@@ -8,3 +8,4 @@ export const getBoxCoordinates = (state: StateSchema) => state.shelfBoxesTemplat
 export const getBoxTimingData = (state: StateSchema) => state.shelfBoxesTemplateSettings?.boxTimeSetterModal.boxTimingData ?? timingDataDefault
 
 export const getTimingSetterBoxId = (state: StateSchema) => state.shelfBoxesTemplateSettings?.boxTimeSetterModal.boxId
+export const getTimingSetterModalBoxData = (state: StateSchema) => state.shelfBoxesTemplateSettings?.boxTimeSetterModal.boxData

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsList.module.scss';
 import { BoxSchema } from '@/entities/Box';
-import { MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion'
 import { Icon } from '@/shared/ui/Icon';
 import PlusIcon from '@/shared/assets/icons/plusIcon2.svg'
@@ -15,7 +15,6 @@ import { BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCard
 import { DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS } from '@/shared/const/animation';
 import { getBoxesTemplateModalMode, getBoxesTemplateModalCurrentShelfTemplate } from '../../../model/selectors/getShelfBoxesTemplateModal';
 import { shelfBoxesTemplateSettingsActions } from '../../../model/slice/shelfBoxesTemplateSlice';
-import { timingDataDefault } from '@/shared/const/timingBlock';
 
 const createBox = (index: number): ExtendedTimingBlock => {
 	return {
@@ -27,7 +26,6 @@ const createBox = (index: number): ExtendedTimingBlock => {
 		index,
 		keyId: 'unsaved',
 		isSaved: false,
-		isRemoved: false,
 		id: (Math.random() * Math.random()).toString(),
 		isOpen: true,
 	}
@@ -53,19 +51,25 @@ export const BoxesSettingsList = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	const onRemoveBox = useCallback((boxIndex: number) => {
+		// if (!currentShelfTemplate) return
+		// const start = currentShelfTemplate.slice(0, boxIndex)
+		// const end = currentShelfTemplate.slice(boxIndex,)
+		// console.log('start', start)
+		// console.log('end', end)
+		// console.log(boxesList)
 		dispatch(shelfBoxesTemplateSettingsActions.removeBoxFromCurrentShelfTemplateByIndex(boxIndex))
+		// dispatch(shelfBoxesTemplateSettingsActions.setCurrentTemplate([...start, ...end]))
 	}, [dispatch])
 
 	const onAddBoxClick = useCallback((index: number) => {
-		console.log(' INDEX   INDEX   ', index)
 		if (!currentShelfTemplate?.length) return
 		const newBox = createBox(index)
-		// console.log(newBox)
-		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxId(newBox.id))
+		console.log(newBox)
+		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxId(newBox.id.toString()))
 		const updatedBoxesList: ExtendedTimingBlock[] = [];
 		const boxListRelevant = currentShelfTemplate.slice(0, currentShelfTemplate.length)
 
-		// console.log(' INDEX   INDEX   ', index)
+		console.log(' INDEX   INDEX   ', index)
 		if (index === 0) {
 			// updatedBoxesList.push({ ...newBox, index })
 			updatedBoxesList.push(newBox)
@@ -95,7 +99,6 @@ export const BoxesSettingsList = () => {
 		// }, 700)
 		// dispatch(shelfBoxesTemplateSettingsActions.setChanged(true))
 		dispatch(shelfBoxesTemplateSettingsActions.setMode('settingTimeToNewBox'))
-		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxData(newBox))
 		setTimeout(() => {
 			dispatch(shelfBoxesTemplateSettingsActions.setMode('waitingForSaving'))
 		}, DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS)
@@ -113,26 +116,6 @@ export const BoxesSettingsList = () => {
 		}
 	}, [dispatch])
 
-	useEffect(() => {
-		if (containerRef.current) {
-			const container = containerRef.current
-			const scrollLeft = container.scrollLeft
-			const scrollWidth = container.scrollWidth
-			const clientWidth = container.clientWidth
-			const percentScrolledLeft = Math.ceil((scrollLeft / (scrollWidth - clientWidth)) * 100)
-			const percentScrolledRight = Math.ceil(100 - percentScrolledLeft)
-			if (percentScrolledLeft > 0) {
-				dispatch(shelfBoxesTemplateSettingsActions.setIsLeftSideActive(true))
-			} else {
-				dispatch(shelfBoxesTemplateSettingsActions.setIsLeftSideActive(false))
-			}
-			if (percentScrolledRight <= 0) {
-				dispatch(shelfBoxesTemplateSettingsActions.setIsRightSideActive(false))
-			} else {
-				dispatch(shelfBoxesTemplateSettingsActions.setIsRightSideActive(true))
-			}
-		}
-	}, [dispatch])
 
 	const handleScroll = () => {
 		if (containerRef.current) {
@@ -158,7 +141,7 @@ export const BoxesSettingsList = () => {
 	};
 
 	const boxesRendered = useMemo(() => {
-		// console.log('currentShelfTemplate:  ', currentShelfTemplate)
+		console.log('currentShelfTemplate:  ', currentShelfTemplate)
 		const boxesCount = currentShelfTemplate?.length
 		if (!boxesCount) return []
 
@@ -180,46 +163,31 @@ export const BoxesSettingsList = () => {
 		// const learntCardBox = <BoxSettingsItem onRemoveBox={onRemoveBox} onAddBoxClick={onAddBoxClick} boxItem={boxItem}
 	}, [onRemoveBox, currentShelfTemplate, onAddBoxClick])
 
-	const onAddNewBoxClickFirstIconHandle = (e: MouseEvent<HTMLDivElement>) => {
-		onAddBoxClick(0)
-		// onAddBoxClick(boxIndex! + 1)
-		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
-		// console.log(x, y)
-		const coordinates = {
-			x: x + width / 2,
-			y: y + height / 2
-		}
-		// console.log('coordinates:  ', coordinates)
-		// console.log('Add ICON ', coordinates)
-		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxCoordinates(coordinates))
-		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalIsOpen(true))
-		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxTimingData(timingDataDefault))
-	}
 	const firstIcon = (
 		<AnimatePresence>
 			{mode === 'choosingBoxPlace' &&
-				<AddBoxIcon onClick={onAddNewBoxClickFirstIconHandle} />
+				<AddBoxIcon onClick={() => onAddBoxClick(0)} />
 			}
 		</AnimatePresence>
 	)
 
 	return (
+
+
 		<motion.div
-			style={{ width: 1200 }}
 			layout
-		// layoutScroll
+			// layoutRoot
+			onScroll={handleScroll}
+			ref={containerRef}
+			className={clsx(cls.BoxesSettingsList,
+				{ [cls.justifyCenter]: currentShelfTemplate &&  currentShelfTemplate?.length >= 3 }
+			)}
 		>
-			<motion.div
-				layout
-				onScroll={handleScroll}
-				ref={containerRef}
-				className={cls.BoxesSettingsList}
-			>
-				<BoxSettingsSpecialBox type={'new'} />
-				{firstIcon}
-				{boxesRendered}
-				{/* <div		style={{ width: 300, height: 100, flexShrink: 0 }}/> */}
-			</motion.div>
+			<BoxSettingsSpecialBox type={'new'} />
+			{firstIcon}
+			{boxesRendered}
+			{/* <BoxSettingsSpecialBox type={'learnt'} /> */}
+			{/* </AnimatePresence> */}
 		</motion.div>
 	)
 }
