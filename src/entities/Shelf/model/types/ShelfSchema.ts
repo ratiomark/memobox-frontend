@@ -16,3 +16,8 @@ export interface ShelfSchema {
 	notificationEnabled?: boolean
 	boxesData: BoxSchema[]
 }
+
+export interface ShelfDndRepresentation {
+	id: string
+	index: number
+}

@@ -42,7 +42,7 @@ export const CommonShelfButtons = (props: ShelfButtonsProps) => {
 	const dispatch = useAppDispatch()
 
 	const onCollapseClick = useCallback(() => {
-		console.log('commonShelfCollapsed   ', commonShelfCollapsed)
+		// console.log('commonShelfCollapsed   ', commonShelfCollapsed)
 		updateCommonShelfMutation(!commonShelfCollapsed)
 		dispatch(cupboardShelfListActions.setCommonShelfCollapsed(!commonShelfCollapsed))
 	}, [dispatch, updateCommonShelfMutation, commonShelfCollapsed,])

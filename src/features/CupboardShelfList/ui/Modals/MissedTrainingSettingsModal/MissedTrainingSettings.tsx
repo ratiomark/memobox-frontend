@@ -15,7 +15,7 @@ import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfList
 import { useUpdateShelfWithTagMutation } from '@/entities/Shelf';
 import { MissedTrainingValues } from '@/shared/types/DataBlock';
 import { useUpdateBoxWithTagMutation } from '@/entities/Box';
-import { Heading, MyText } from '@/shared/ui/Typography';
+import { Heading } from '@/shared/ui/Typography';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 

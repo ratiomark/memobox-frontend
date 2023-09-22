@@ -103,7 +103,7 @@ export default function Modal({
 			closeOnClickOutside={closeOnClickOutside}>
 			{children}
 		</PortalImpl>,
-		document.querySelector('[data-modal-type="content"]'),
+		document.querySelector('[data-modal-type="content"]')!,
 		// document.querySelector('.app_modal'),
 		// document.body,
 	);

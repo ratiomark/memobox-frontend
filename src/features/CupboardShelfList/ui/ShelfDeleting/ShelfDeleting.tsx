@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './ShelfDeleting.module.scss';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../..';
 import { Heading, MyText } from '@/shared/ui/Typography';
@@ -12,6 +12,8 @@ import { useRemoveShelfMutation } from '@/entities/Shelf';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { useSelector } from 'react-redux';
 import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
+import { useLocation } from 'react-router-dom';
 
 interface ShelfDeletingProps {
 	id: string
@@ -26,7 +28,21 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 	const dispatch = useAppDispatch()
 	const [removeShelfMutation] = useRemoveShelfMutation()
+	const [timer, setTimer] = useState<TimeoutId | null>(null);
+	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
 	const isShelfDeleting = useSelector(getShelfIsDeleting(id))
+	const location = useLocation();
+
+	useEffect(() => {
+		return () => {
+			if (isShelfDeleting) {
+				// удаляет полку, если перейти на новый роут и если полка находится в режими ожидания удаления
+				// dispatch(cupboardShelfListActions.deleteShelf(id))
+				// removeShelfMutation(id)
+			}
+		}
+	}, [location, isShelfDeleting, id, dispatch, removeShelfMutation]);
+
 	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
 	// timerId = setTimeout(() => {
 	// 	if (isShelfDeleting) {
@@ -36,24 +52,32 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 	// 	clearTimeout(timerId)
 	// }, DURATION_SHELF_DELETION_MILLISEC)
 	useEffect(() => {
-		console.log('Я в АААААААААААААА')
-		const timerId = setTimeout(() => {
-			console.log('ТАЙМАУТА')
-			if (isShelfDeleting) {
-				console.log('Я в ГЛВАВВЕЕЕА')
-				dispatch(cupboardShelfListActions.deleteShelf(id))
-				removeShelfMutation(id)
-			}
-			clearTimeout(timerId)
-		}, DURATION_SHELF_DELETION_MILLISEC)
-		// const timer = setTimeout(() => {
-		// 	// dispatch(cupboardShelfListActions.deleteShelf(id))
-		// }, DURATION_SHELF_DELETION_MILLISEC)
-
-		return () => clearTimeout(timerId)
+		// console.log('Я в АААААААААААААА')
+		if (isShelfDeleting) {
+			const timer = setTimeout(() => {
+				// console.log('ТАЙМАУТА')
+				if (isShelfDeleting) {
+					// console.log('Я в ГЛВАВВЕЕЕА')
+					dispatch(cupboardShelfListActions.deleteShelf(id))
+					removeShelfMutation(id)
+				}
+				// clearTimeout(timerId)
+			}, DURATION_SHELF_DELETION_MILLISEC)
+			setTimer(timer)
+		}
+		// return () => clearTimeout(timerId)
 	}, [id, dispatch, isShelfDeleting, removeShelfMutation])
 
-	const onCancelDeletion = () => dispatch(cupboardShelfListActions.updateShelf({ id, changes: { isDeleting: false } }))
+	useEffect(() => {
+		return () => {
+			if (timer) clearTimeout(timer)
+		}
+	}, [timer])
+
+	const onCancelDeletion = () => {
+		if (timer) clearTimeout(timer);
+		dispatch(cupboardShelfListActions.updateShelf({ id, changes: { isDeleting: false } }))
+	}
 
 	const { t } = useTranslation()
 

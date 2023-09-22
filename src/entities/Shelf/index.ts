@@ -1,5 +1,5 @@
 // export { shelfReducer, shelfActions } from './model/slice/shelfSlice';
-
+export type { ShelfDndRepresentation } from './model/types/ShelfSchema'
 export {
 	useUpdateShelfWithTagMutation,
 	useUpdateShelfMutation,

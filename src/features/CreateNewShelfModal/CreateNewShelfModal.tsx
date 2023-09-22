@@ -11,11 +11,14 @@ import { getUserShelfNamesList } from '@/entities/User';
 import { useSelector } from 'react-redux';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { createNewShelfThunk } from '../CupboardShelfList/model/services/createNewShelfThunk';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 interface CreateNewShelfModalProps {
 	className?: string
 	// shelfNames: string[]
-	onSubmit: () => void
+	// onSubmit: () => void
 	onClose: () => void
 	isOpen: boolean
 }
@@ -25,18 +28,24 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 		className,
 		// shelfNames,
 		onClose,
-		onSubmit,
+		// onSubmit,
 		isOpen
 	} = props
 	const [shelfName, setShelfName] = useState('')
 	const [inputErrors, setInputErrors] = useState([])
 	const { t } = useTranslation('translation')
 	const shelfNames = useSelector(getUserShelfNamesList)?.map(shelf => shelf.title)
+	const dispatch = useAppDispatch()
 
 	const onChangeShelfName = (value: string) => {
 		setShelfName(value)
 		if (shelfNames?.includes(value)) setInputErrors([t('inputs.SHELF_NAME_ALREADY_EXISTS')])
 		else setInputErrors([])
+	}
+
+	const onCreateNewShelf = () => {
+		dispatch(createNewShelfThunk(shelfName))
+		onClose()
 	}
 
 	const onCloseHandle = () => {
@@ -46,10 +55,11 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 	}
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseHandle}
-			onSubmit={() => alert('Создаю новую полку')}
+			onSubmit={onCreateNewShelf}
+		// onSubmit={() => alert('Создаю новую полку')}
 		>
 			<div className={clsx(
 				cls.CreateNewShelfModal,
@@ -66,12 +76,13 @@ export const CreateNewShelfModal = (props: CreateNewShelfModalProps) => {
 
 				<ModalButtons
 					onClose={onCloseHandle}
-					onSubmit={() => alert('Создаю новую полку')}
+					onSubmit={onCreateNewShelf}
+					// onSubmit={() => alert('Создаю новую полку')}
 					isSubmitDisabled={shelfName.length === 0 || inputErrors.length > 0}
 					justify='end'
 					gap='gap_14'
 				/>
 			</div>
-		</HDialog>
+		</HDialogHeadless>
 	)
 }

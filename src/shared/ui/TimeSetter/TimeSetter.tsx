@@ -8,6 +8,7 @@ import { SingleSetter } from './SingleSetter';
 import { HStack } from '../Stack';
 import { TimingBlock } from '@/shared/types/DataBlock';
 import { timingDataDefault } from '@/shared/const/timingBlock';
+import { ModalButtons } from '../ModalButtons';
 
 interface TimeSetterProps {
 	className?: string
@@ -53,6 +54,16 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	// }, [startCallback])
 
 	const onSaveTimeHandle = () => {
+		if (
+			minutes === timingData.minutes &&
+			hours === timingData.hours &&
+			days === timingData.days &&
+			weeks === timingData.weeks &&
+			months === timingData.months
+		) {
+			console.log('Время осталось без измененией!!')
+			return
+		}
 		console.log('Внутри тайм сеттера')
 		console.log({ minutes, hours, days, weeks, months })
 		onSaveTime({ minutes, hours, days, weeks, months })
@@ -194,7 +205,16 @@ export const TimeSetter = (props: TimeSetterProps) => {
 					title={t('months')}
 				/>
 			</div>
-			<HStack justify='end' gap='gap_14' max className={cls.buttonsWrapper}  >
+			<ModalButtons
+				justify='between'
+				isSubmitDisabled={disabled}
+				onClose={onClose}
+				onSubmit={onSaveTimeHandle}
+				textCloseButton={t('cancel no keys')}
+				textSubmitButton={t('save no keys')}
+
+			/>
+			{/* <HStack justify='between' gap='gap_14' max className={cls.buttonsWrapper}  >
 				<Button fontWeight='300' onClick={onClose}>
 					{t('cancel no keys')}
 				</Button>
@@ -206,7 +226,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 				>
 					{t('save no keys')}
 				</Button>
-			</HStack>
+			</HStack> */}
 		</div>
 
 	)

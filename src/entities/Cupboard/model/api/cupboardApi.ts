@@ -1,4 +1,4 @@
-import { ShelfSchema } from '@/entities/Shelf';
+import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { CupboardSchema } from '../types/CupboardSchema';
 
@@ -33,19 +33,20 @@ export const cupboardApi = rtkApi.injectEndpoints({
 			// 	return data
 			// },
 		}),
-		// getShelves: build.query<ShelfSchema[], void>({
-		// 	query: () => ({
-		// 		url: '/shelves',
-		// 		method: 'GET'
-		// 	}),
-		// 	// transformResponse: (response: MovieList, meta, arg) => {
-		// 	// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
-		// 	// 		acc[current.id.toString()] = current
-		// 	// 		return acc
-		// 	// 	}, {})
-		// 	// 	return data
-		// 	// },
-		// }),
+		updateShelfListOrder: build.mutation<ShelfSchema[], ShelfDndRepresentation[]>({
+			query: (arg) => ({
+				url: '/shelvesOrder',
+				method: 'PATCH',
+				body: arg
+			}),
+		}),
+		createNewShelf: build.mutation<ShelfSchema, string>({
+			query: (title) => ({
+				url: '/createNewShelf',
+				method: 'POST',
+				body: { title }
+			}),
+		}),
 		getShelvesViewPage: build.query<ShelfSchema[], void>({
 			query: () => ({
 				url: '/shelves',
@@ -59,20 +60,20 @@ export const cupboardApi = rtkApi.injectEndpoints({
 			// 	return data
 			// },
 		}),
-		updateShelvesOrder: build.mutation<ShelfSchema, ShelfSchema[]>({
-			query: (arg) => ({
-				url: '/shelves',
-				// params: { id: arg.id },
-				method: 'PUT',
-				// headers: {
+		// updateShelvesOrder: build.mutation<ShelfSchema, ShelfSchema[]>({
+		// 	query: (arg) => ({
+		// 		url: '/shelves',
+		// 		// params: { id: arg.id },
+		// 		method: 'PUT',
+		// 		// headers: {
 
-				// 	'Content-Type': 'application/json'
-				// },
-				body: arg
-				// body: { isCollapsed: arg.isCollapsed }
-			}),
-			invalidatesTags: ['Shelves']
-		}),
+		// 		// 	'Content-Type': 'application/json'
+		// 		// },
+		// 		body: arg
+		// 		// body: { isCollapsed: arg.isCollapsed }
+		// 	}),
+		// 	invalidatesTags: ['Shelves']
+		// }),
 		// getMovieByIdBeatFilm: build.query<MovieSchema | undefined, string>({
 		// 	query: (id) => ({
 		// 		url: 'https://api.nomoreparties.co/beatfilm-movies',
@@ -90,5 +91,7 @@ export const cupboardApi = rtkApi.injectEndpoints({
 export const cupboardGetData = cupboardApi.endpoints.getCupboardData.initiate
 export const { useGetCupboardDataQuery } = cupboardApi
 export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
+export const updateShelfListOrder = cupboardApi.endpoints.updateShelfListOrder.initiate
+export const createNewShelf = cupboardApi.endpoints.createNewShelf.initiate
 export const { useGetShelvesQuery } = cupboardApi
-export const { useUpdateShelvesOrderMutation } = cupboardApi
+// export const { useUpdateShelvesOrderMutation } = cupboardApi

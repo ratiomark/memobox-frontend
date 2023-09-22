@@ -2,6 +2,7 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
 import { getAllShelves, getCupboardState } from '../slice/cupboardShelfListSlice';
 import { store } from '@/app/providers/StoreProvider'
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 export const getCupboard = (state: StateSchema) => state.cupboard
 export const getCupboardIsDataAlreadyInStore = (state: StateSchema) => state.cupboard.isDataAlreadyInStore
@@ -37,12 +38,6 @@ export const getShelfById = (shelfId: string) => {
 		(state) => getCupboardState.selectById(state, shelfId)
 	)
 }
-// export const getShelfById = createSelector(
-// 	[
-// 		(state: StateSchema, shelfId: string) => getCupboardState.selectById(state, shelfId)
-// 	],
-// 	(shelf) => shelf
-// )
 
 export const getShelfItems = createSelector(
 	[
@@ -57,5 +52,18 @@ export const getShelfItems = createSelector(
 		}))
 	}
 )
+export const getShelvesFromStorOrLocalSaver = createSelector(
+	[
+		getAllShelves,
+	],
+	(shelves) => {
+		if (shelves.length < 1) {
+			return localDataService.getShelves() ?? []
+		}
+		return shelves
+	}
+)
+export const getShelfIdAndIndexesList = (state: StateSchema) => state.cupboard.shelvesIdsAndIndexes ?? []
+export const getShelfIdAndIndexesListInitial = (state: StateSchema) => state.cupboard.shelvesIdsAndIndexesInitial ?? []
 
 export const getIsCupboardInfoOpen = (state: StateSchema) => state.cupboard.isCupboardInfoModalOpen

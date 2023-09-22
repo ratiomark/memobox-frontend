@@ -29,12 +29,13 @@ export const ShelfItem = (props: ShelfProps) => {
 			id
 		}
 	} = props
-
 	const isShelfDeleting = useSelector(getShelfIsDeleting(id))
 	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
+	
 	if (isShelfDeleting) {
 		return <ShelfDeleting title={title} id={id} />
 	}
+	
 	return (
 		<Shelf {...props} />
 	)

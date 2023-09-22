@@ -16,8 +16,8 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 
 export const BoxesListViewWidget = memo(() => {
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
-	console.log('Я тут BoxesListViewWidget')
-	console.log(shelvesData)
+	// console.log('Я тут BoxesListViewWidget')
+	// console.log(shelvesData)
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const shelfId = useSelector(getViewPageShelfId) ?? 'all'

@@ -166,6 +166,7 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 					disabled: disabled,
 					title: t(buttonTitles.image),
 					tabIndex: -1,
+					id: 'toolbar_image_button'
 				}}
 				onClick={() => {
 					showModal('Insert Image', (onClose) => (

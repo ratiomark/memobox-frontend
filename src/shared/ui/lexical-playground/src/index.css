@@ -18,7 +18,12 @@
   border: none;
 }
 
-.toolbarBlocked * {
+.toolbarBlocked #toolbar_image_button svg {
+  /* color: none; */
+  fill: transparent;
+}
+
+.toolbarBlocked svg {
   color: var(--hint);
   fill: var(--hint);
 }

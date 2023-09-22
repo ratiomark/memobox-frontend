@@ -1770,6 +1770,116 @@
       "isDeleted": false
     },
     {
+      "id": "648c920b3e40b5930a6e1603",
+      "index": 2,
+      "isCollapsed": true,
+      "title": "books",
+      "boxesData": [
+        {
+          "_id": "648c920bc3e7e23e046d84d4",
+          "index": 0,
+          "specialType": "new",
+          "data": {
+            "all": 2,
+            "train": null
+          }
+        },
+        {
+          "_id": "648c920b1e98e062cccbddd0",
+          "index": 1,
+          "specialType": "none",
+          "data": {
+            "all": 2,
+            "train": 1,
+            "wait": 1
+          },
+          "timing": {
+            "minutes": 5,
+            "hours": 0,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920beed2f369ce36956b",
+          "index": 2,
+          "specialType": "none",
+          "data": {
+            "all": 4,
+            "train": 1,
+            "wait": 3
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 8,
+            "days": 0,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920b0d275a1c78856870",
+          "index": 3,
+          "specialType": "none",
+          "data": {
+            "all": 7,
+            "train": 3,
+            "wait": 4
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 1,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920b8d625846cc72c887",
+          "index": 4,
+          "specialType": "none",
+          "data": {
+            "all": 3,
+            "train": 1,
+            "wait": 2
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 3,
+            "weeks": 0,
+            "months": 0
+          }
+        },
+        {
+          "_id": "648c920bb47b52fcdc46b742",
+          "index": 5,
+          "specialType": "learnt",
+          "data": {
+            "all": 3,
+            "train": 1,
+            "wait": 2
+          },
+          "timing": {
+            "minutes": 0,
+            "hours": 0,
+            "days": 14,
+            "weeks": 0,
+            "months": 0
+          }
+        }
+      ],
+      "data": {
+        "all": 21,
+        "train": 9,
+        "wait": 12
+      },
+      "isDeleting": false,
+      "isLoading": true,
+      "isDeleted": true
+    },
+    {
       "id": "648c920beba56ba6cd7db7bb",
       "index": 2,
       "isCollapsed": true,
@@ -1881,7 +1991,7 @@
     },
     {
       "id": "648c920b6adf96517748f3c1",
-      "index": 3,
+      "index": 1,
       "isCollapsed": true,
       "title": "английский",
       "boxesData": [

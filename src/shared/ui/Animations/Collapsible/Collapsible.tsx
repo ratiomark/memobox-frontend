@@ -14,6 +14,9 @@ interface CollapsibleProps {
 	onExitComplete?: () => void
 	delay?: number
 	mode?: 'sync' | 'popLayout' | 'wait'
+	withOpacity?: boolean
+	opacityDelay?: number
+	animationOpacityDuration?: number
 }
 
 export const Collapsible = (props: CollapsibleProps) => {
@@ -29,6 +32,9 @@ export const Collapsible = (props: CollapsibleProps) => {
 		onAnimationComplete,
 		onExitComplete,
 		delay = 0,
+		opacityDelay = 0.1,
+		animationOpacityDuration,
+		withOpacity = false,
 		...otherProps
 	} = props;
 
@@ -53,11 +59,37 @@ export const Collapsible = (props: CollapsibleProps) => {
 				open: {
 					height: 'auto',
 					overflow: 'hidden',
-					// transitionEnd: { overflowY: 'hidden', overflowX: 'auto' }
-					transitionEnd: { overflow: 'visible' }
+					opacity:
+						withOpacity
+							? [0, 1]
+							: 1,
+					transition: {
+						opacity: {
+							delay:
+								withOpacity
+									? opacityDelay
+									: 0,
+							duration: animationOpacityDuration ?? animationDuration
+						},
+						transitionEnd: { overflow: 'visible' },
+					},
 				},
-				collapsed: { height: 0, overflow: 'hidden' }
+				collapsed: { height: 0, opacity: withOpacity ? 0 : 1, overflow: 'hidden' },
 			}}
+			// variants={{
+			// 	open: {
+			// 		height: 'auto',
+			// 		overflow: 'hidden',
+			// 		opacity: withOpacity ? 1 : 1,
+			// 		transitionEnd: { overflow: 'visible' }
+			// 		// transitionEnd: { overflowY: 'hidden', overflowX: 'auto' }
+			// 	},
+			// 	collapsed: {
+			// 		height: 0,
+			// 		opacity: withOpacity ? 0 : 1,
+			// 		overflow: 'hidden'
+			// 	}
+			// }}
 			onAnimationStart={onAnimationStart}
 			onAnimationComplete={onAnimationComplete}
 			{...otherProps}

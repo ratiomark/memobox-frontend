@@ -36,6 +36,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const dispatch = useAppDispatch()
 
 	const onAddNewShelfClick = () => {
+		// dispatch(createNewShelfThunk())
 		// async function getFile() {
 		// 	const handle = await window.showOpenFilePicker();
 		// 	const file = await handle[0].getFile();
@@ -81,9 +82,6 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 		/>
 	)
 
-
-
-
 	useHotkeys('n', onAddNewCardClick, { keyup: true })
 
 	return (
@@ -106,7 +104,7 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 				<CreateNewShelfModal
 					isOpen={newIsShelfModalOpen}
 					onClose={onCloseNewShelfModal}
-					onSubmit={() => console.log('Создаю новую полку с названием  ')}
+					// onSubmit={() => console.log('Создаю новую полку с названием  ')}
 				// shelfNames={shelfNames}
 				/>
 			</HStack>

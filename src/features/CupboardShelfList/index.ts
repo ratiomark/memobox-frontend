@@ -1,3 +1,5 @@
+import { createNewShelfThunk } from './model/services/createNewShelfThunk';
+
 export type { ShelfBoxesTemplateSchema } from './model/types/shelfBoxesTemplateSchema';
 // export { shelfBoxesTemplateSettingsReducer } from './model/slice/shelfBoxesTemplateSlice';
 export { CupboardShelfListWrapper } from './ui/CupboardShelfListWrapper/CupboardShelfListWrapper';

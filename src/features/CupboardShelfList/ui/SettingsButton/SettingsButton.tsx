@@ -35,6 +35,7 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 	// }
 	// const shelfNamesList = useSelector(getUserShelfNamesList)
 	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
+	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
 	const [removeShelfMutation] = useRemoveShelfMutation()
 	// const [updateShelfMutation] = useUpdateShelfMutation()
 	const dispatch = useAppDispatch()

@@ -2,10 +2,11 @@ import { ReducersMapObject, Store } from '@reduxjs/toolkit';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { StateSchema } from '../config/StateSchema';
-import { createReduxStore, createStoreInstance, store as defaultStore } from '../config/store';
+import { createStoreInstance, store as defaultStore } from '../config/createStoreInstance';
+// import { createReduxStore, createStoreInstance, store as defaultStore } from '../config/store';
 
 interface StoreProviderProps {
-	store: Store
+	store?: Store
 	children?: ReactNode;
 	initialState?: StateSchema;
 	asyncReducers?: ReducersMapObject<StateSchema>

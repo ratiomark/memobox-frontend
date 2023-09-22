@@ -69,8 +69,11 @@ class LocalDataService implements ILocalDataService {
 		this.saveData(SHELVES_KEY, shelves)
 	}
 	getShelves(): ShelfSchema[] | [] {
-		return this.getData(SHELVES_KEY) ?? []
-		// const shelvesFromStorage = this.getData(SHELVES_KEY)
+		const localShelves = this.getData(SHELVES_KEY)
+		if (Array.isArray(localShelves) && localShelves.length > 0) {
+			return localShelves.sort((a, b) => a.index - b.index)
+		}
+		return []
 		// if (!shelvesFromStorage) return []
 		// return shelvesFromStorage
 	}

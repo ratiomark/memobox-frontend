@@ -20,7 +20,7 @@ export interface ShelfProps {
 	shelfButtonsBlock: ReactNode
 	boxesBlock?: ReactNode
 	className?: string
-	moveShelf: (atIndex: number, shelfIndex: number) => void
+	// moveShelf?: (atIndex: number, shelfIndex: number) => void
 	isFirstRender: boolean
 }
 
@@ -46,6 +46,7 @@ export const Shelf = memo((props: ShelfProps) => {
 	const controls = useDragControls()
 
 	const handleDragStart = () => {
+		console.log(props.shelf.title)
 		setIsDragging(true);
 		document.body.classList.add('dragging');
 	}
@@ -100,8 +101,11 @@ export const Shelf = memo((props: ShelfProps) => {
 				</div>
 				<Collapsible
 					isOpen={!isCollapsed}
+					// withOpacity
 					// initial={false}
 					initial={isFirstRender}
+					// opacityDelay={3}
+					// animationOpacityDuration={2}
 					animationDuration={DURATION_SHELF_COLLAPSING_SEC}
 				// animationDuration={DURATION_SHELF_COLLAPSING_SEC}
 				>

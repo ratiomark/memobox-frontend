@@ -33,6 +33,7 @@ const initialState: ShelfBoxesTemplateSchema = {
 // data: DataBlock
 // timing: TimingBlock
 // missedTrainingAction ?: MissedTrainingValues
+
 const isCurrentTemplateEqualToInitial = (initialState: RegularAndLearntCardsBox[], currentState: ExtendedTimingBlock[]) => {
 	if (initialState.length !== currentState.length) return false
 	if (currentState.some(box => box.keyId === 'unsaved')) return false

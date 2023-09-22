@@ -1,7 +1,7 @@
 import { StateSchema, store } from '@/app/providers/StoreProvider'
 import { BoxCoordinates } from '@/entities/Box'
 import { CupboardSchema } from '@/entities/Cupboard'
-import { ShelfSchema } from '@/entities/Shelf'
+import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf'
 import { timingDataDefault } from '@/shared/const/timingBlock'
 import { TimingBlock } from '@/shared/types/DataBlock'
 import { createEntityAdapter, createSlice, EntityId, PayloadAction, SerializedError } from '@reduxjs/toolkit'
@@ -9,6 +9,9 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import { fetchCupboardData } from '../services/fetchCupboardData'
 import { CupboardPageSchema } from '../types/CupboardPageSchema'
 import { lexicalEmptyEditorState } from '@/shared/const/lexical'
+import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk'
+import { setLocalShelvesToStore } from '../services/setLocalShelvesToStore'
+import { createNewShelfThunk } from '../services/createNewShelfThunk'
 // import { store } from '@/app/providers/StoreProvider/ui/StoreProvider'
 
 const initialState: CupboardPageSchema = {
@@ -20,6 +23,8 @@ const initialState: CupboardPageSchema = {
 	error: '',
 	entities: {},
 	ids: [],
+	shelvesIdsAndIndexes: [],
+	shelvesIdsAndIndexesInitial: [],
 	shelfBoxesTemplateModal: {
 		isOpen: false,
 		shelfId: ''
@@ -84,7 +89,16 @@ export const getAllShelvesEntities = () => getCupboardState.selectEntities(store
 // const booksSelectors = booksAdapter.getSelectors<RootState>(
 // 	(state) => state.books
 // )
-
+export const isShelvesDndRepresentationEqual = (initialShelves: ShelfDndRepresentation[], currentShelves: ShelfDndRepresentation[]) => {
+	// console.log(initialShelves)
+	// console.log(currentShelves)
+	for (let index = 0; index < initialShelves.length; index++) {
+		if (initialShelves[index].id !== currentShelves[index].id) {
+			return false
+		}
+	}
+	return true
+}
 // And then use the selectors to retrieve values
 // const allBooks = getCupboardState.selectAll(store.getState())
 // export const { selectEntities: getAllShelves, selectIds: getAllShelvesIds } = shelvesAdapter.getSelectors()
@@ -231,6 +245,9 @@ const cupboardShelfList = createSlice({
 			// const shelves = cupboard.shelves.map(shelf => ({ ...shelf, isLoading: true }))
 			// shelvesAdapter.setAll(state, shelves)
 			shelvesAdapter.setAll(state, cupboard.shelves)
+			const shelvesDndRepresentation = cupboard.shelves.map((shelf, index) => ({ id: shelf.id, index }))
+			state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
+			state.shelvesIdsAndIndexes = shelvesDndRepresentation
 			state.isDataAlreadyInStore = true
 			state.isNeedRefetch = true
 			state.cupboardData = {
@@ -246,6 +263,9 @@ const cupboardShelfList = createSlice({
 			state.commonShelf = commonShelf
 			state.createNewCardModal.shelfId = cupboard.shelves[0].id
 			shelvesAdapter.setAll(state, cupboard.shelves)
+			const shelvesDndRepresentation = cupboard.shelves.map((shelf, index) => ({ id: shelf.id, index }))
+			state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
+			state.shelvesIdsAndIndexes = shelvesDndRepresentation
 			state.cupboardData = {
 				all: commonShelf.data.all,
 				train: commonShelf.data.train,
@@ -266,7 +286,10 @@ const cupboardShelfList = createSlice({
 				id: shelf.id,
 				changes: { index }
 			}))
+			state.shelvesIdsAndIndexes = updates.map((item, index) => ({ id: item.id, index }))
 			shelvesAdapter.updateMany(state, updates)
+			// shelvesAdapter.setAll(state, action.payload)
+			// isShelvesRepresentationEqual
 			// shelvesAdapter.updateMany(state, action.payload)
 			// const currentShelf = shelvesAdapter.selectAll
 		},
@@ -289,6 +312,9 @@ const cupboardShelfList = createSlice({
 					state.commonShelf = commonShelf
 					state.createNewCardModal.shelfId = cupboard.shelves[0].id
 					shelvesAdapter.setAll(state, cupboard.shelves)
+					const shelvesDndRepresentation = cupboard.shelves.map((shelf, index) => ({ id: shelf.id, index }))
+					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
+					state.shelvesIdsAndIndexes = shelvesDndRepresentation
 					state.cupboardData = {
 						all: commonShelf.data.all,
 						train: commonShelf.data.train,
@@ -306,6 +332,37 @@ const cupboardShelfList = createSlice({
 					state.isLoading = true
 				}
 			)
+			.addCase(
+				updateShelfListOrderThunk.fulfilled,
+				(state, action: PayloadAction<boolean>) => {
+					if (action.payload) {
+						state.shelvesIdsAndIndexesInitial = state.shelvesIdsAndIndexes
+					}
+				})
+			.addCase(
+				setLocalShelvesToStore.fulfilled,
+				(state, action: PayloadAction<ShelfSchema[]>) => {
+					if (action.payload.length > 0) {
+						shelvesAdapter.setAll(state, action.payload)
+						const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
+						state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
+						state.shelvesIdsAndIndexes = shelvesDndRepresentation
+					}
+				})
+			.addCase(
+				createNewShelfThunk.fulfilled,
+				(state, action: PayloadAction<ShelfSchema[]>) => {
+					shelvesAdapter.setAll(state, action.payload)
+					const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
+					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
+					state.shelvesIdsAndIndexes = shelvesDndRepresentation
+				})
+		// .addCase(
+		// 	sendShelvesOrder.rejected,
+		// 	(state) => {
+		// 		// VAR: тут должна быть логика, для обработки ситуации, если сервер не ответил и не обновил порядок полок
+		// 		// state.isLoading = false
+		// 	})
 	}
 })
 

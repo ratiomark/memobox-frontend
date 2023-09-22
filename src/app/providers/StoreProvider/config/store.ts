@@ -18,8 +18,8 @@ export function createReduxStore(
 		user: userReducer,
 		header: headerReducer,
 		ui: uiReducer,
-		// cardModal: cardModalReducer,
 		cupboard: cupboardShelfListReducer,
+		// cardModal: cardModalReducer,
 		// а это редьюсер, который создает RTKQuery с помощь createApi, чтобы ТС не ругался, но добавить в схему
 		// [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 		[rtkApi.reducerPath]: rtkApi.reducer
@@ -51,11 +51,11 @@ export function createReduxStore(
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch']
 
-export const createStoreInstance = (initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) => {
-	return createReduxStore(initialState, asyncReducers);
-};
+// export const createStoreInstance = (initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) => {
+// 	return createReduxStore(initialState, asyncReducers);
+// };
 
-export const store = createStoreInstance();
+// export const store = createStoreInstance();
 // export const store = createReduxStore()
 // type rootState = ReturnType<typeof createReduxStore>['dispatch']
 export type rootState = ReturnType<typeof createReduxStore>['getState']

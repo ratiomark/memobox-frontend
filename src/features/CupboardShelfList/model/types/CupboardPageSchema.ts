@@ -1,10 +1,9 @@
 import { BoxCoordinates } from '@/entities/Box'
 import { CupboardSchema } from '@/entities/Cupboard'
 import { CommonShelfBackendResponse } from '@/entities/Cupboard'
-import { ShelfSchema } from '@/entities/Shelf'
+import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf'
 import { DataBlock, TimingBlock } from '@/shared/types/DataBlock'
 import { EntityState } from '@reduxjs/toolkit'
-
 
 export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	isDataAlreadyInStore: boolean
@@ -14,6 +13,8 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	isLoading: boolean
 	error: string
 	commonShelf?: CommonShelfBackendResponse
+	shelvesIdsAndIndexes?: ShelfDndRepresentation[]
+	shelvesIdsAndIndexesInitial?: ShelfDndRepresentation[]
 	// commonShelfCollapsed?: boolean
 	createNewCardModal: {
 		shelfId: string

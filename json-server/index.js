@@ -189,7 +189,7 @@ server.get('/cards', async (req, res) => {
 			return;
 		}
 
-		const db = JSON.parse(data);
+		const db = await JSON.parse(data);
 		const shelvesAndBoxesData = {}
 		const shelvesDeleted = db.shelves.reduce((acc, curr) => {
 			acc[curr.id] = curr.isDeleted
@@ -269,6 +269,37 @@ server.get('/trash', async (req, res) => {
 // });
 
 
+server.post('/createNewShelf', (req, res) => {
+	const titleFromUser = req.body.title;
+	console.log(titleFromUser)
+
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+
+		// Обновляем поле shelves
+		const shelf = db.shelves[0]
+		shelf.title = titleFromUser
+		shelf.id = titleFromUser + Math.random().toString()
+
+		// Перезаписываем файл JSON с обновленными данными
+		// fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
+		// 	if (err) {
+		// 		console.error(err);
+		// 		res.status(500).send({ message: 'Server error' });
+		// 		return;
+		// 	}
+
+		// Отправляем обновленные данные обратно клиенту
+		res.send(shelf);
+		// });
+	});
+});
 server.put('/shelves', (req, res) => {
 	const newShelves = req.body;
 
@@ -282,6 +313,40 @@ server.put('/shelves', (req, res) => {
 
 		const db = JSON.parse(data);
 
+		// Обновляем поле shelves
+		db.shelves = newShelves;
+
+		// Перезаписываем файл JSON с обновленными данными
+		fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
+			if (err) {
+				console.error(err);
+				res.status(500).send({ message: 'Server error' });
+				return;
+			}
+
+			// Отправляем обновленные данные обратно клиенту
+			res.send(newShelves);
+		});
+	});
+});
+server.patch('/shelvesOrder', (req, res) => {
+	const newShelvesOrder = req.body;
+
+	// Читаем текущий файл JSON
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const newShelves = []
+		newShelvesOrder.forEach(shelfDndRepresentation => {
+			const newShelfItem = db.shelves.find(shelf => shelf.id === shelfDndRepresentation.id)
+			newShelfItem.index = shelfDndRepresentation.index
+			newShelves.push(newShelfItem)
+		})
 		// Обновляем поле shelves
 		db.shelves = newShelves;
 
@@ -336,28 +401,28 @@ server.delete('/shelves', (req, res) => {
 });
 
 server.get('/activeShelves', (req, res) => {
-	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', async (err, data) => {
 		if (err) {
 			console.error(err);
 			res.status(500).send({ message: 'Server error' });
 			return;
 		}
 
-		const db = JSON.parse(data);
+		const db = await JSON.parse(data);
 		const shelves = db.shelves.filter(shelf => shelf.isDeleted !== true)
 		res.send(shelves)
 
 	});
 });
 server.get('/deletedShelves', (req, res) => {
-	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', async (err, data) => {
 		if (err) {
 			console.error(err);
 			res.status(500).send({ message: 'Server error' });
 			return;
 		}
 
-		const db = JSON.parse(data);
+		const db = await JSON.parse(data);
 		const shelves = db.shelves.filter(shelf => shelf.isDeleted === true)
 		res.send(shelves)
 
