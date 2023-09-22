@@ -96,37 +96,12 @@ export const CupboardShelfList = () => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isCollapsed } }))
 	}, [dispatch])
 
-	const moveShelf = useCallback((dropAtIndex: number, shelfIndexDragged: number) => {
-		// console.log('функция ', 'ставлю на: ', dropAtIndex, '  индекс: ', shelfIndexDragged)
-		if (dropAtIndex === shelfIndexDragged) return
-		const updates = []
-		const currentShelf = { ...cupboardShelves.find(shelf => shelf.index === shelfIndexDragged) } as ShelfSchema
-		updates.push({ id: currentShelf.id, changes: { index: dropAtIndex } })
-		if (dropAtIndex > shelfIndexDragged) {
-			cupboardShelves.forEach(shelf => {
-				if (shelf.index <= dropAtIndex && shelf.index > shelfIndexDragged) {
-					updates.push({ id: shelf.id, changes: { index: shelf.index - 1 } })
-				}
-			})
-		} else {
-			cupboardShelves.forEach(shelf => {
-				if (shelf.index >= dropAtIndex && shelf.index < shelfIndexDragged) {
-					updates.push({ id: shelf.id, changes: { index: shelf.index + 1 } })
-				}
-			})
-		}
-		dispatch(cupboardShelfListActions.updateIndexes(updates))
-	}, [cupboardShelves, dispatch])
-
 	const reorderShelves = useCallback((shelves: ShelfSchema[]) => {
 		console.log('reorder ', shelves)
 		dispatch(cupboardShelfListActions.reorderShelves(shelves))
 		// VAR: нужно показать плашку "новый порядок полок будет сохранен через 5 секунд". По прошествии 5-ти секунд отправить запрос на сервер
 	}, [dispatch])
 
-	// const debouncedUpdateServer = useDebounce(() => {
-	// 	console.log('Отправка на сервер')
-	// }, 3000)
 
 	const shelvesList = useMemo(() => {
 		// let shelvesData;
@@ -143,9 +118,10 @@ export const CupboardShelfList = () => {
 		// } else {
 		// 	shelvesData = cupboardShelves
 		// }
-		console.log('cupboardShelvesLIST  :  ', cupboardShelves)
-		const shelvesData = cupboardShelves
-		return shelvesData.map(shelf => {
+		// console.log('cupboardShelvesLIST  :  ', cupboardShelves)
+		// const shelvesData = cupboardShelves
+		// return shelvesData.map(shelf => {
+		return cupboardShelves.map(shelf => {
 			const completeSmallDataLabels =
 				<CompleteSmallDataLabels
 					data={shelf.data}
@@ -208,18 +184,7 @@ export const CupboardShelfList = () => {
 					// layoutScroll
 					// layout
 					// layoutRoot
-					// values={cupboardShelves}
 					values={cupboardShelves}
-					// values={cupboardIsLoading ? localDataService.getShelves() : cupboardShelves}
-					// onDragEnd={() => {
-					// 	console.log('DRAG END')
-					// 	debouncedUpdateServer()
-					// }}
-					// onDragEnd={(event, info) => {
-					// 	console.log(info.point.x, info.point.y)
-					// 	console.log(event)
-					// 	console.log(info)
-					// }}
 					onReorder={reorderShelves}
 				>
 					{shelvesList}
@@ -260,3 +225,27 @@ export const CupboardShelfList = () => {
 		</>
 	)
 }
+
+
+
+// const moveShelf = useCallback((dropAtIndex: number, shelfIndexDragged: number) => {
+// 	// console.log('функция ', 'ставлю на: ', dropAtIndex, '  индекс: ', shelfIndexDragged)
+// 	if (dropAtIndex === shelfIndexDragged) return
+// 	const updates = []
+// 	const currentShelf = { ...cupboardShelves.find(shelf => shelf.index === shelfIndexDragged) } as ShelfSchema
+// 	updates.push({ id: currentShelf.id, changes: { index: dropAtIndex } })
+// 	if (dropAtIndex > shelfIndexDragged) {
+// 		cupboardShelves.forEach(shelf => {
+// 			if (shelf.index <= dropAtIndex && shelf.index > shelfIndexDragged) {
+// 				updates.push({ id: shelf.id, changes: { index: shelf.index - 1 } })
+// 			}
+// 		})
+// 	} else {
+// 		cupboardShelves.forEach(shelf => {
+// 			if (shelf.index >= dropAtIndex && shelf.index < shelfIndexDragged) {
+// 				updates.push({ id: shelf.id, changes: { index: shelf.index + 1 } })
+// 			}
+// 		})
+// 	}
+// 	dispatch(cupboardShelfListActions.updateIndexes(updates))
+// }, [cupboardShelves, dispatch])
