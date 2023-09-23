@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
-import { getCupboardState } from '../slice/cupboardShelfListSlice'
+import { cupboardShelfListActions, getCupboardState } from '../slice/cupboardShelfListSlice'
 import { createNewShelf } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
 
@@ -10,9 +10,11 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 
 		const { dispatch, getState } = thunkAPI
 		try {
+			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(true))
 			// console.log('shelfName   ', shelfName)
 			const response = await dispatch(createNewShelf(shelfName)).unwrap()
 			if (!response) {
+				dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
 				throw new Error()
 			}
 			// console.log('НОВАЯ ПОЛКА', response)
@@ -21,6 +23,7 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 				index: shelf.index + 1
 			}))
 			// console.log(shelves)
+			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(true))
 			return [response, ...shelves]
 
 		} catch (err) {

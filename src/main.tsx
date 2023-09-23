@@ -9,7 +9,7 @@ import '@/shared/config/i18n/i18n'
 import './app/styles/index.scss'
 // import './app/styles/regularStyles.css'
 const container = document.getElementById('root')
-
+import * as Toast from '@radix-ui/react-toast';
 if (!container) throw new Error('Root container is not Found! Check main.tsx file')
 
 const root = ReactDOM.createRoot(container)
@@ -17,13 +17,16 @@ root.render(
 	<BrowserRouter>
 		<StoreProvider>
 			<ErrorBoundary>
-				<ThemeProvider>
-					<LazyMotion features={domAnimation}>
-						<App />
-					</LazyMotion>
-				</ThemeProvider>
+				<Toast.Provider >
+					<ThemeProvider>
+						<LazyMotion features={domAnimation}>
+							<App />
+							{/* <Toast.Viewport className='viewport' /> */}
+						</LazyMotion>
+					</ThemeProvider>
+				</Toast.Provider>
 			</ErrorBoundary>
 		</StoreProvider>
-	</BrowserRouter>
+	</BrowserRouter >
 )
 

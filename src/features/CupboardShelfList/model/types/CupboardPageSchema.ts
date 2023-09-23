@@ -3,7 +3,9 @@ import { CupboardSchema } from '@/entities/Cupboard'
 import { CommonShelfBackendResponse } from '@/entities/Cupboard'
 import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf'
 import { DataBlock, TimingBlock } from '@/shared/types/DataBlock'
+import { RequestStatusType } from '@/shared/types/GeneralTypes'
 import { EntityState } from '@reduxjs/toolkit'
+
 
 export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	isDataAlreadyInStore: boolean
@@ -16,19 +18,10 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	shelvesTitles: string[]
 	shelvesIdsAndIndexes?: ShelfDndRepresentation[]
 	shelvesIdsAndIndexesInitial?: ShelfDndRepresentation[]
-	// commonShelfCollapsed?: boolean
-	createNewCardModal: {
-		shelfId: string
-		boxIndex: number
-		boxId: string
-		questionText: string
-		answerText: string
-		isOpen: boolean
-	}
-	createNewShelfModal: {
-		isOpen: boolean
-		shelfTitle: string
-	}
+	createNewCardModal: CreateNewCardModal
+	createNewShelfModal: CreateNewShelfModal
+	boxTimeSetterModal: BoxTimeSetterModal
+	boxSettingsDropdownModal: BoxSettingsDropdownModal
 	shelfBoxesTemplateModal: {
 		isOpen: boolean
 		shelfId: string
@@ -43,22 +36,36 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 		isOpen: boolean
 	},
 	// shelvesDeletionIds?: string[]
-	// shelves: ShelfSchema[]
 	cupboardData: DataBlock
-	boxTimeSetterModal: {
-		isOpen: boolean
-		boxCoordinates: BoxCoordinates
-		boxTimingData: TimingBlock
-		boxId: string
-	},
-	boxSettingsDropdownModal: {
-		isOpen: boolean,
-		boxId: string,
-		boxCoordinates: BoxCoordinates
-	},
-	isCupboardInfoModalOpen: boolean,
+	isCupboardInfoModalOpen: boolean
 	// boxCoordinates: {
 	// 	x: number
 	// 	y: number
 	// }
+}
+interface CreateNewShelfModal {
+	isOpen: boolean
+	shelfTitle: string
+	isAwaitingResponse: boolean
+	isResponseSuccessful?: boolean
+	requestStatus: RequestStatusType
+}
+interface BoxTimeSetterModal {
+	isOpen: boolean
+	boxCoordinates: BoxCoordinates
+	boxTimingData: TimingBlock
+	boxId: string
+}
+interface BoxSettingsDropdownModal {
+	isOpen: boolean
+	boxId: string
+	boxCoordinates: BoxCoordinates
+}
+interface CreateNewCardModal {
+	shelfId: string
+	boxIndex: number
+	boxId: string
+	questionText: string
+	answerText: string
+	isOpen: boolean
 }

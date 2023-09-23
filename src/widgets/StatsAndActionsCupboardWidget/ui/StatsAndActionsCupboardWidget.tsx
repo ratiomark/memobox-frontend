@@ -8,7 +8,7 @@ import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import { useCallback, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import cls from './StatsAndActionsCupboardWidget.module.scss';
-import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions } from '@/features/CupboardShelfList';
+import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions, getCreateNewShelfModalIsAwaitingResponse, getCreateNewShelfModalIsResponseSuccessful } from '@/features/CupboardShelfList';
 import { useSelector } from 'react-redux';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { motion } from 'framer-motion'
@@ -16,15 +16,29 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CupboardMainButtonsSkeleton } from './StatsAndActionsCupboardWidgetSkeleton/CupboardMainButtonsSkeleton';
 import { infoIconSize } from '@/shared/const/iconSizes';
 import { CreateNewShelfModal } from './CreateNewShelfModal/CreateNewShelfModal';
-
+import * as Toast from '@radix-ui/react-toast';
+import { MyToast } from '@/shared/ui/Toast/MyToast';
 
 export const StatsAndActionsCupboardWidget = () => {
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
+	const isAwaitingResponse = useSelector(getCreateNewShelfModalIsAwaitingResponse)
+	const isResponseSuccessful = useSelector(getCreateNewShelfModalIsResponseSuccessful)
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
+	const onOpenChange = (open: boolean) => {
+		if (!open) {
+			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(false))
+			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
+		}
+	}
+	const onTimeEnd = useCallback(() => {
+			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(false))
+			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus(false))
+			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
+	}, [dispatch])
 	const onAddNewShelfClick = () => {
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(true))
 	}
@@ -76,6 +90,22 @@ export const StatsAndActionsCupboardWidget = () => {
 				</div>
 				{buttons}
 				<CreateNewShelfModal />
+				<MyToast
+					onTimeEnd={onTimeEnd}
+					status={createNewShelfRequestStatus}
+				/>
+				{/* <Toast.Root
+				// onOpenChange={onOpenChange}
+				// open={isResponseSuccessful ? undefined : isAwaitingResponse}
+				// duration={5000}
+				>
+					<Toast.Title>Загрузка</Toast.Title>
+					<Toast.Description>{(isResponseSuccessful)?.toString()}</Toast.Description>
+
+	
+				</Toast.Root> */}
+				{/* import * as Toast from '@radix-ui/react-toast'; */}
+				{/* <Toast.Viewport /> */}
 			</HStack>
 		</motion.div>
 	)

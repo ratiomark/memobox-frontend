@@ -12,6 +12,7 @@ import { TestProps } from '@/shared/types/TestProps';
 import cls from './Page.module.scss';
 import { motion } from 'framer-motion'
 
+import * as Toast from '@radix-ui/react-toast';
 
 interface PageProps extends TestProps {
 	className?: string
@@ -90,6 +91,7 @@ export const Page = memo((props: PageProps) => {
 			<div className={cls.wrapper}>
 				{children}
 			</div>
+			<Toast.Viewport className={cls.viewport} />
 			{onScrollEnd ? <div className={cls.trigger} ref={triggerRef} /> : null}
 		</motion.main>
 	)

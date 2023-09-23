@@ -2,6 +2,9 @@
   flex-grow: 1;
   flex-shrink: 1;
   padding: var(--padding-page);
+
+  // height: 100vh;
+
   height: calc(100vh - var(--header-height));
   overflow: auto;
   scrollbar-gutter: stable;
@@ -20,6 +23,18 @@
   margin: 0 auto;
 
   // transition: all 2s;
+}
+
+.viewport {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 99999;
+
+  // display: flex;
+  padding: 25px;
+
+  // flex-direction: column;
 }
 
 .trigger {

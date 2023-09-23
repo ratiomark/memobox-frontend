@@ -14,7 +14,8 @@ import {
 	getCreateNewShelfModalShelfTitle,
 	getCreateNewShelfModalShelvesTitles,
 } from '@/features/CupboardShelfList'
-
+import { Button } from '@/shared/ui/Button';
+import * as Toast from '@radix-ui/react-toast';
 
 
 export const CreateNewShelfModal = () => {
@@ -24,6 +25,7 @@ export const CreateNewShelfModal = () => {
 	const shelfNames = useSelector(getCreateNewShelfModalShelvesTitles)
 	const [inputErrors, setInputErrors] = useState([])
 	const dispatch = useAppDispatch()
+	// const [open, setOpen] = useState(false);
 
 	const onChangeShelfName = (shelfTitle: string) => {
 		dispatch(cupboardShelfListActions.setCreateNewShelfModalTitle(shelfTitle))
@@ -32,6 +34,7 @@ export const CreateNewShelfModal = () => {
 	}
 
 	const onCreateNewShelf = () => {
+		// setOpen(true)
 		dispatch(createNewShelfThunk(shelfName))
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(false))
 	}
@@ -55,6 +58,16 @@ export const CreateNewShelfModal = () => {
 					className={cls.input}
 					classNameInputError={cls.inputError}
 				/>
+				<Button onClick={onCreateNewShelf}>
+					Create
+				</Button>
+				
+				{/* <Toast.Root open={open} duration={5000}>
+
+
+					<Toast.Title>Заголовок Тоста</Toast.Title>
+					<Toast.Description>Описание Тоста</Toast.Description>
+				</Toast.Root> */}
 				<ModalButtons
 					onClose={onClose}
 					onSubmit={onCreateNewShelf}

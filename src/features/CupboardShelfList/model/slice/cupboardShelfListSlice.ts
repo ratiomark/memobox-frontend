@@ -12,6 +12,7 @@ import { lexicalEmptyEditorState } from '@/shared/const/lexical'
 import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk'
 import { setLocalShelvesToStore } from '../services/setLocalShelvesToStore'
 import { createNewShelfThunk } from '../services/createNewShelfThunk'
+import { RequestStatusType } from '@/shared/types/GeneralTypes'
 // import { store } from '@/app/providers/StoreProvider/ui/StoreProvider'
 
 const initialState: CupboardPageSchema = {
@@ -69,6 +70,9 @@ const initialState: CupboardPageSchema = {
 	createNewShelfModal: {
 		shelfTitle: '',
 		isOpen: false,
+		isAwaitingResponse: false,
+		requestStatus: 'idle'
+		// isResponseSuccessful: boolean
 	},
 	cupboardData: {
 		train: 0,
@@ -124,6 +128,15 @@ const cupboardShelfList = createSlice({
 		},
 		setCreateNewShelfModalTitle: (state, action: PayloadAction<string>) => {
 			state.createNewShelfModal.shelfTitle = action.payload
+		},
+		setIsCreateNewShelfModalAwaitingResponse: (state, action: PayloadAction<boolean>) => {
+			state.createNewShelfModal.isAwaitingResponse= action.payload
+		},
+		setIsCreateNewShelfModalSuccessfulResponse: (state, action: PayloadAction<boolean>) => {
+			state.createNewShelfModal.isResponseSuccessful = action.payload
+		},
+		setIsCreateNewShelfModalRequestStatus: (state, action: PayloadAction<RequestStatusType>) => {
+			state.createNewShelfModal.requestStatus = action.payload
 		},
 		// create new card
 		setIsCreateNewCardModalOpen: (state, action: PayloadAction<boolean>) => {

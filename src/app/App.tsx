@@ -6,6 +6,7 @@ import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { useSelector } from 'react-redux'
 import { getUserAuthData, getUserMounted, initAuthData } from '@/entities/User'
+import * as Toast from '@radix-ui/react-toast';
 // import { MainLayout } from '@/shared/layouts'
 import { useTheme } from '@/shared/context/useTheme'
 import clsx from 'clsx'
@@ -26,13 +27,18 @@ export const App = () => {
 
 	return (
 		<div className={clsx('app', theme)}>
-			<Suspense fallback={<HeaderSkeleton />}>
-				<Header />
-			</Suspense>
-			{/* <Suspense fallback={<LoaderWidget />}> */}
-			<AppRouter />
-			{/* </Suspense> */}
-			{/* <img src="https://i.pinimg.com/originals/e5/e8/30/e5e830f89f89f0259e1d705e14a5de93.gif" alt="Your GIF" id="my-gif" /> */}
+			{/* <Toast.Provider> */}
+
+				<Suspense fallback={<HeaderSkeleton />}>
+					<Header />
+				</Suspense>
+				{/* <Suspense fallback={<LoaderWidget />}> */}
+				<AppRouter />
+				{/* </Suspense> */}
+				{/* <img src="https://i.pinimg.com/originals/e5/e8/30/e5e830f89f89f0259e1d705e14a5de93.gif" alt="Your GIF" id="my-gif" /> */}
+				{/* <Toast.Viewport /> */}
+			{/* </Toast.Provider> */}
+			{/* <Toast.Viewport className='viewport' /> */}
 		</div>
 	)
 }
