@@ -10,11 +10,13 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 
 		const { dispatch, getState } = thunkAPI
 		try {
-			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(true))
+			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('pending'))
+			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(true))
 			// console.log('shelfName   ', shelfName)
 			const response = await dispatch(createNewShelf(shelfName)).unwrap()
 			if (!response) {
-				dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
+				dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('error'))
+				// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
 				throw new Error()
 			}
 			// console.log('НОВАЯ ПОЛКА', response)
@@ -23,7 +25,8 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 				index: shelf.index + 1
 			}))
 			// console.log(shelves)
-			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(true))
+			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('error'))
+			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(true))
 			return [response, ...shelves]
 
 		} catch (err) {

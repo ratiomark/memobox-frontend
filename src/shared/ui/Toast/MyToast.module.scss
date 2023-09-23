@@ -1,3 +1,22 @@
-.Toast {
+.MyToast {
+  // background: red;
+  background-color: var(--bg);
+  padding: 10px 20px 10px 15px;
+  border-radius: var(--border-radius-main);
+  min-width: 200px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
 
+  // padding: 10px;
+}
+
+.pending {
+  // border: 1px solid blue;
+}
+
+.error {
+  // border: 1px solid var(--cancel);
+}
+
+.success {
+  // border: 1px solid var(--accent);
 }

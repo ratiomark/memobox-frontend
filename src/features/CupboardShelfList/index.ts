@@ -4,6 +4,7 @@ export {
 	getCreateNewShelfModalShelvesTitles,
 	getCreateNewShelfModalIsAwaitingResponse,
 	getCreateNewShelfModalIsResponseSuccessful,
+	getCreateNewShelfModalRequestStatus,
 } from './model/selectors/getCreateNewShelfModal';
 export { createNewShelfThunk } from './model/services/createNewShelfThunk';
 

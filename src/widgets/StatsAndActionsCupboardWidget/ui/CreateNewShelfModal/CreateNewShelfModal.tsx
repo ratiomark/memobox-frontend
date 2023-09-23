@@ -35,8 +35,12 @@ export const CreateNewShelfModal = () => {
 
 	const onCreateNewShelf = () => {
 		// setOpen(true)
-		dispatch(createNewShelfThunk(shelfName))
+		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('pending'))
+		setTimeout(() => {
+			dispatch(createNewShelfThunk(shelfName))
+		}, 4000)
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(false))
+		// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(false))
 	}
 
 	const onClose = () => {
@@ -61,7 +65,7 @@ export const CreateNewShelfModal = () => {
 				<Button onClick={onCreateNewShelf}>
 					Create
 				</Button>
-				
+
 				{/* <Toast.Root open={open} duration={5000}>
 
 

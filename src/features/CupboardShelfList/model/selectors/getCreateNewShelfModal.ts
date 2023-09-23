@@ -6,3 +6,4 @@ export const getCreateNewShelfModalShelvesTitles = (state: StateSchema) => state
 
 export const getCreateNewShelfModalIsAwaitingResponse = (state: StateSchema) => state.cupboard.createNewShelfModal.isAwaitingResponse
 export const getCreateNewShelfModalIsResponseSuccessful = (state: StateSchema) => state.cupboard.createNewShelfModal.isResponseSuccessful
+export const getCreateNewShelfModalRequestStatus = (state: StateSchema) => state.cupboard.createNewShelfModal.requestStatus

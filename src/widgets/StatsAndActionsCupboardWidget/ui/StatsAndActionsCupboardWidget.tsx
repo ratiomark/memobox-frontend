@@ -8,7 +8,15 @@ import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import { useCallback, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import cls from './StatsAndActionsCupboardWidget.module.scss';
-import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions, getCreateNewShelfModalIsAwaitingResponse, getCreateNewShelfModalIsResponseSuccessful } from '@/features/CupboardShelfList';
+import {
+	getCupboardIsLoading,
+	getCupboardError,
+	getCupboardData,
+	cupboardShelfListActions,
+	getCreateNewShelfModalIsAwaitingResponse,
+	getCreateNewShelfModalIsResponseSuccessful,
+	getCreateNewShelfModalRequestStatus
+} from '@/features/CupboardShelfList';
 import { useSelector } from 'react-redux';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { motion } from 'framer-motion'
@@ -24,6 +32,7 @@ export const StatsAndActionsCupboardWidget = () => {
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
 	const isAwaitingResponse = useSelector(getCreateNewShelfModalIsAwaitingResponse)
+	const createNewShelfRequestStatus = useSelector(getCreateNewShelfModalRequestStatus)
 	const isResponseSuccessful = useSelector(getCreateNewShelfModalIsResponseSuccessful)
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
@@ -35,10 +44,9 @@ export const StatsAndActionsCupboardWidget = () => {
 		}
 	}
 	const onTimeEnd = useCallback(() => {
-			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(false))
-			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus(false))
-			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
+		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('idle'))
 	}, [dispatch])
+
 	const onAddNewShelfClick = () => {
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(true))
 	}

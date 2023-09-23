@@ -130,7 +130,7 @@ const cupboardShelfList = createSlice({
 			state.createNewShelfModal.shelfTitle = action.payload
 		},
 		setIsCreateNewShelfModalAwaitingResponse: (state, action: PayloadAction<boolean>) => {
-			state.createNewShelfModal.isAwaitingResponse= action.payload
+			state.createNewShelfModal.isAwaitingResponse = action.payload
 		},
 		setIsCreateNewShelfModalSuccessfulResponse: (state, action: PayloadAction<boolean>) => {
 			state.createNewShelfModal.isResponseSuccessful = action.payload
@@ -379,6 +379,7 @@ const cupboardShelfList = createSlice({
 				createNewShelfThunk.fulfilled,
 				(state, action: PayloadAction<ShelfSchema[]>) => {
 					shelvesAdapter.setAll(state, action.payload)
+					state.createNewShelfModal.requestStatus = 'success'
 					const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
 					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
 					state.shelvesIdsAndIndexes = shelvesDndRepresentation

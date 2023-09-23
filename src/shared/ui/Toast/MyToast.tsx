@@ -4,6 +4,7 @@ import cls from './MyToast.module.scss';
 import * as ToastRadix from '@radix-ui/react-toast';
 import { useEffect } from 'react';
 import { RequestStatusType } from '@/shared/types/GeneralTypes';
+import { Loader } from '../Loader/Loader';
 
 interface ToastProps {
 	className?: string
@@ -51,21 +52,22 @@ export const MyToast = (props: ToastProps) => {
 	}
 
 	return (
-		<div className={clsx(
-			cls.MyToast,
-			className)}
+		<ToastRadix.Root
+			// onOpenChange={onOpenChange}
+			open={status !== 'idle'}
+			className={clsx(
+				cls.MyToast,
+				cls[status],
+				className
+			)}
+		// duration={5000}
 		>
-			<ToastRadix.Root
-				// onOpenChange={onOpenChange}
-				open={status !== 'idle'}
-			// duration={5000}
-			>
-				<ToastRadix.Title>{t(message)}</ToastRadix.Title>
-				{/* <ToastRadix.Description>{(isResponseSuccessful)?.toString()}</ToastRadix.Description> */}
+			<ToastRadix.Title>{t(message)}</ToastRadix.Title>
+			{status === 'pending' && <Loader />}
+			{/* <ToastRadix.Description>{(isResponseSuccessful)?.toString()}</ToastRadix.Description> */}
 
-				{/* <ToastRadix.Title>Заголовок Тоста</ToastRadix.Title> */}
-				{/* <ToastRadix.Description>Описание Тоста</ToastRadix.Description> */}
-			</ToastRadix.Root>
-		</div>
+			{/* <ToastRadix.Title>Заголовок Тоста</ToastRadix.Title> */}
+			{/* <ToastRadix.Description>Описание Тоста</ToastRadix.Description> */}
+		</ToastRadix.Root>
 	)
 }
