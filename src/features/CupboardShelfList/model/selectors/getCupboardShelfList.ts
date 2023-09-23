@@ -41,7 +41,7 @@ export const getShelfById = (shelfId: string) => {
 
 export const getShelfItems = createSelector(
 	[
-		getAllShelves,
+		(state: StateSchema) => getCupboardState.selectAll(state),
 		getCupboardIsLoading,
 	],
 	(shelves, isLoading) => {
@@ -52,17 +52,30 @@ export const getShelfItems = createSelector(
 		}))
 	}
 )
-export const getShelvesFromStorOrLocalSaver = createSelector(
-	[
-		getAllShelves,
-	],
-	(shelves) => {
-		if (shelves.length < 1) {
-			return localDataService.getShelves() ?? []
-		}
-		return shelves
-	}
-)
+// export const getShelfItems = createSelector(
+// 	[
+// 		getAllShelves,
+// 		getCupboardIsLoading,
+// 	],
+// 	(shelves, isLoading) => {
+// 		if (isLoading) return []
+// 		return shelves.map(shelf => ({
+// 			content: shelf.title,
+// 			value: shelf.id
+// 		}))
+// 	}
+// )
+// export const getShelvesFromStorOrLocalSaver = createSelector(
+// 	[
+// 		getAllShelves,
+// 	],
+// 	(shelves) => {
+// 		if (shelves.length < 1) {
+// 			return localDataService.getShelves() ?? []
+// 		}
+// 		return shelves
+// 	}
+// )
 export const getShelfIdAndIndexesList = (state: StateSchema) => state.cupboard.shelvesIdsAndIndexes ?? []
 export const getShelfIdAndIndexesListInitial = (state: StateSchema) => state.cupboard.shelvesIdsAndIndexesInitial ?? []
 

@@ -3,14 +3,13 @@ import cls from './ChangeEmailModal.module.scss'
 import { HDialog } from '@/shared/ui/HDialog';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { getIsChangeEmailModalOpen, getIsChangeNameModalOpen } from '../../../model/selectors/getProfilePageModals';
+import { getIsChangeEmailModalOpen } from '../../../model/selectors/getProfilePageModals';
 import { profilePageWidgetActions } from '../../../model/slice/profilePageWidgetSlice';
 import { Input } from '@/shared/ui/Input/Input';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
-import { t } from 'i18next';
-import { getUserEmail, getUserEmailVerified, getUserName, getUserShelfNamesList } from '@/entities/User';
-import { useEffect, useState } from 'react';
+import { getUserEmail, getUserEmailVerified } from '@/entities/User';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
 import { CheckBox } from '@/shared/ui/CheckBox';

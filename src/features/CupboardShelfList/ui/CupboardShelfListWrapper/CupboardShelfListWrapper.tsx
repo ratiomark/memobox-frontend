@@ -4,9 +4,6 @@ import cls from './CupboardShelfListWrapper.module.scss';
 import { useSelector } from 'react-redux';
 import { CupboardShelfList } from '../CupboardShelfList';
 import { getCupboardIsDataAlreadyInStore, getCupboardIsFirstRender, getCupboardIsLoading, getCupboardIsNeedRefetch, getCupboardIsNeedStop } from '../../model/selectors/getCupboardShelfList';
-import { ShelfSkeleton } from '@/entities/Shelf';
-import { CommonShelf } from '../CommonShelf/CommonShelf';
-import { getUserShelfNamesList } from '@/entities/User';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useEffect, useRef, useState } from 'react';
 import { fetchCupboardData } from '../../model/services/fetchCupboardData';
@@ -16,7 +13,6 @@ import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSli
 
 export const CupboardShelfListWrapper = () => {
 	// const cupboardIsLoading = useSelector(getCupboardIsLoading)
-	// const shelfNamesList = useSelector(getUserShelfNamesList)
 	const { data, isLoading, error, refetch, isFetching, currentData } = useGetCupboardDataQuery()
 	const isDataAlreadyInStore = useSelector(getCupboardIsDataAlreadyInStore)
 	const isFirstRender = useSelector(getCupboardIsFirstRender)

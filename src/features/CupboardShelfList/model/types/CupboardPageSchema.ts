@@ -13,6 +13,7 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	isLoading: boolean
 	error: string
 	commonShelf?: CommonShelfBackendResponse
+	shelvesTitles: string[]
 	shelvesIdsAndIndexes?: ShelfDndRepresentation[]
 	shelvesIdsAndIndexesInitial?: ShelfDndRepresentation[]
 	// commonShelfCollapsed?: boolean
@@ -23,6 +24,10 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 		questionText: string
 		answerText: string
 		isOpen: boolean
+	}
+	createNewShelfModal: {
+		isOpen: boolean
+		shelfTitle: string
 	}
 	shelfBoxesTemplateModal: {
 		isOpen: boolean

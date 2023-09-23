@@ -1,7 +1,7 @@
 import { Button } from '@/shared/ui/Button';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback, useEffect, useMemo, } from 'react';
+import { memo, useCallback,  useMemo, } from 'react';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
@@ -10,7 +10,6 @@ import { MyText } from '@/shared/ui/Typography';
 import cls from './SettingsButton.module.scss';
 import { useSelector } from 'react-redux';
 import { useRemoveShelfMutation } from '@/entities/Shelf';
-import { StateSchema } from '@/app/providers/StoreProvider';
 import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
 import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
@@ -28,12 +27,6 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 		shelfId,
 	} = props
 	const { t } = useTranslation()
-	// getDeletionIds
-	// const navigate = useNavigate()
-	// const onViewClick = () => {
-	// 	navigate(obtainRouteView(shelfPosition.toString()))
-	// }
-	// const shelfNamesList = useSelector(getUserShelfNamesList)
 	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
 	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
 	const [removeShelfMutation] = useRemoveShelfMutation()

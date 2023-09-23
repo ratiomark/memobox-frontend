@@ -5,30 +5,20 @@ import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLab
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-import { MouseEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import cls from './StatsAndActionsCupboardWidget.module.scss';
 import { getCupboardIsLoading, getCupboardError, getCupboardData, cupboardShelfListActions } from '@/features/CupboardShelfList';
 import { useSelector } from 'react-redux';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { CreateNewShelfModal } from '@/features/CreateNewShelfModal';
 import { motion } from 'framer-motion'
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CupboardMainButtonsSkeleton } from './StatsAndActionsCupboardWidgetSkeleton/CupboardMainButtonsSkeleton';
 import { infoIconSize } from '@/shared/const/iconSizes';
+import { CreateNewShelfModal } from './CreateNewShelfModal/CreateNewShelfModal';
 
-interface StatsAndActionsCupboardWidgetProps {
-	className?: string
-}
 
-export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidgetProps) => {
-	const {
-		className
-	} = props
-	const [newIsShelfModalOpen, setIsNewShelfModalOpen] = useState(false)
-	const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
-	// const shelfNames = useSelector(getUserShelfNamesList)?.map(shelf => shelf.title)
-	// const { data, isLoading } = useGetCupboardDataQuery()
+export const StatsAndActionsCupboardWidget = () => {
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
@@ -36,19 +26,8 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 	const dispatch = useAppDispatch()
 
 	const onAddNewShelfClick = () => {
-		// dispatch(createNewShelfThunk())
-		// async function getFile() {
-		// 	const handle = await window.showOpenFilePicker();
-		// 	const file = await handle[0].getFile();
-		// 	console.log(file)
-		// 	const contents = await file.text();
-		// 	console.log(contents);
-		// }
-		// getFile()
-		setIsNewShelfModalOpen(true)
+		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(true))
 	}
-
-	const onCloseNewShelfModal = () => setIsNewShelfModalOpen(false)
 
 	const onOpenInfoModal = () => {
 		dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
@@ -90,23 +69,13 @@ export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidg
 		// animate={{ y: 0 }}
 		// transition={{ type: 'spring', }}
 		>
-			<HStack
-				max
-				className={clsx(
-					cls.statsAndActionsCupboardWidget,
-					className)}
-			>
+			<HStack max className={cls.statsAndActionsCupboardWidget}>
 				<div>
 					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
 					{/* <ThemeSwitcher /> */}
 				</div>
 				{buttons}
-				<CreateNewShelfModal
-					isOpen={newIsShelfModalOpen}
-					onClose={onCloseNewShelfModal}
-					// onSubmit={() => console.log('Создаю новую полку с названием  ')}
-				// shelfNames={shelfNames}
-				/>
+				<CreateNewShelfModal />
 			</HStack>
 		</motion.div>
 	)

@@ -1,4 +1,9 @@
-import { createNewShelfThunk } from './model/services/createNewShelfThunk';
+export {
+	getCreateNewShelfModalIsOpen,
+	getCreateNewShelfModalShelfTitle,
+	getCreateNewShelfModalShelvesTitles,
+} from './model/selectors/getCreateNewShelfModal';
+export { createNewShelfThunk } from './model/services/createNewShelfThunk';
 
 export type { ShelfBoxesTemplateSchema } from './model/types/shelfBoxesTemplateSchema';
 // export { shelfBoxesTemplateSettingsReducer } from './model/slice/shelfBoxesTemplateSlice';

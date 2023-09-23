@@ -36,6 +36,7 @@ export const CreateNewCardModal = memo(() => {
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
 	const boxIndexCardModal = useSelector(getBoxIndexCardModal)
 	const boxIdCardModal = useSelector((state: StateSchema) => getBoxIdCheckedCardModal(state))
+	// const shelfItems = useSelector(getShelfItems)
 	const shelfItems = useSelector((state: StateSchema) => getShelfItems(state))
 	const boxItems = useSelector((state: StateSchema) => getShelfBoxesItems(state))
 	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)

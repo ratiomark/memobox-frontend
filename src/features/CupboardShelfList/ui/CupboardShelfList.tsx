@@ -12,7 +12,7 @@ import {
 	getCupboardCommonShelfCollapsed,
 	getCupboardIsDataAlreadyInStore,
 	getCupboardIsFirstRender,
-	getShelvesFromStorOrLocalSaver
+	// getShelvesFromStorOrLocalSaver,
 } from '../model/selectors/getCupboardShelfList';
 import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
 import { ShelfItem } from './ShelfItem/ShelfItem';

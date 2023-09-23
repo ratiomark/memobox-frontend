@@ -6,10 +6,7 @@ import { profilePageWidgetActions } from '../../../model/slice/profilePageWidget
 import { Input } from '@/shared/ui/Input/Input';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
-import { t } from 'i18next';
-import { getUserName, getUserShelfNamesList } from '@/entities/User';
-import { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { MutableRefObject, useEffect, useMemo,  useState } from 'react';
 import { Langs, useCustomTranslate } from '@/features/LanguageSwitcher';
 import { getIsChangeLanguageModalOpen } from '../../../model/selectors/getProfilePageModals';
 import { useSelector } from 'react-redux';
@@ -31,7 +28,7 @@ export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
 	const dispatch = useAppDispatch()
 
 	const { currentLang, setLang, t, allLangs } = useCustomTranslate('profile')
-	const initialLang = useRef(null) as MutableRefObject<string | null>
+	// const initialLang = useRef(null) as MutableRefObject<string | null>
 	const [initLang, setInitLang] = useState<string | null>(null)
 
 	useEffect(() => {
@@ -94,11 +91,11 @@ export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
 				className)}
 			>
 				<Heading as='h2' className={cls.title} title='Select language' />
-				
+
 				<div className={cls.content} >
 					{content}
 				</div>
-				
+
 				<ModalButtons
 					onClose={onCloseHandle}
 					onSubmit={onSubmit}

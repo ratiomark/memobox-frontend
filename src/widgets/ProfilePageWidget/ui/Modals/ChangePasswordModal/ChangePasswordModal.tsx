@@ -3,13 +3,12 @@ import cls from './ChangePasswordModal.module.scss'
 import { HDialog } from '@/shared/ui/HDialog';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { getIsChangeNameModalOpen, getIsChangePasswordModalOpen } from '../../../model/selectors/getProfilePageModals';
+import { getIsChangePasswordModalOpen } from '../../../model/selectors/getProfilePageModals';
 import { profilePageWidgetActions } from '../../../model/slice/profilePageWidgetSlice';
 import { Input } from '@/shared/ui/Input/Input';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { Heading } from '@/shared/ui/Typography';
-import { t } from 'i18next';
-import { getUserName, getUserShelfNamesList } from '@/entities/User';
+import { getUserName } from '@/entities/User';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 

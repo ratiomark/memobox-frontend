@@ -1,11 +1,10 @@
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
-import Spinner from '@/shared/assets/icons/spinner.svg'
 import cls from './StatsKnowledgeLevelItem.module.scss'
 import { motion } from 'framer-motion'
 import { MyText } from '@/shared/ui/Typography'
 import { SmallDataLabel } from '@/shared/ui/DataLabels'
-import { SmallDataLabelType } from '@/shared/ui/DataLabels/SmallDataLabels/SmallDataLabel'
+import { DataLabelType } from '@/shared/ui/DataLabels/types/DataLabelType'
 
 export type StatsKnowledgeLevelItemType =
 	| 'new'
@@ -33,7 +32,7 @@ export const StatsKnowledgeLevelItem = (props: StatsKnowledgeLevelItemProps) => 
 	} = props
 
 	let DataLabelName;
-	let typeForSmallDataLabel: SmallDataLabelType;
+	let typeForSmallDataLabel: DataLabelType;
 	switch (type) {
 		case 'new':
 			DataLabelName = t('new label')
@@ -84,13 +83,12 @@ export const StatsKnowledgeLevelItem = (props: StatsKnowledgeLevelItemProps) => 
 			>
 				{/* <div className={clsx(cls.coloredLeftSide, cls[type])}> */}
 				<div className={clsx(cls.dataHolder)}>
-
 					<MyText
 						drop
 						className={cls.labelName}
-						text={DataLabelName} />
-					<div className={cls.statsWrapper} >
-
+						text={DataLabelName}
+					/>
+					<div className={cls.statsWrapper}>
 						{cardCountComponent}
 						{percentValueComponent}
 					</div>
@@ -99,13 +97,4 @@ export const StatsKnowledgeLevelItem = (props: StatsKnowledgeLevelItemProps) => 
 			</motion.div>
 		</>
 	)
-}
-
-{
-	/* <div className='colorLabeReadyCards coloredLeftSide'>
-</div>
-<div className='dataHolder'>
-	<p className="cardsCounter">{children}</p>
-	<p className="labelName">Train</p>
-</div> */
 }

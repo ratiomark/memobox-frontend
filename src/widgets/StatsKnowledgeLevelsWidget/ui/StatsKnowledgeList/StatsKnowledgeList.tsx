@@ -28,16 +28,10 @@ const data = {
 
 }
 const levelsList: StatsKnowledgeLevelItemType[] = ['new', 'beginning', 'middle', 'good', 'learnt']
-const isLoading = true
-interface StatsKnowledgeListProps {
-	className?: string
-}
 
-export const StatsKnowledgeList = (props: StatsKnowledgeListProps) => {
-	const {
-		className
-	} = props
+export const StatsKnowledgeList = () => {
 	const [isLoading, setIsLoading] = useState(true)
+	const { t } = useTranslation()
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -45,7 +39,6 @@ export const StatsKnowledgeList = (props: StatsKnowledgeListProps) => {
 		}, 3000)
 	}, [])
 
-	const { t } = useTranslation()
 	const listRendered = useMemo(() => {
 		if (isLoading) {
 			return levelsList.map(type => <StatsKnowledgeLevelItem key={type} isLoading={true} type={type} />)
@@ -58,7 +51,6 @@ export const StatsKnowledgeList = (props: StatsKnowledgeListProps) => {
 			percentValue={data[type].percentValue}
 		/>)
 	}, [isLoading])
-
 
 	return (
 		<div className={cls.StatsKnowledgeList}>
