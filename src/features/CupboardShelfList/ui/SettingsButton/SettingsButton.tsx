@@ -1,7 +1,7 @@
 import { Button } from '@/shared/ui/Button';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback,  useMemo, } from 'react';
+import { memo, useCallback, useMemo, } from 'react';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
@@ -13,6 +13,7 @@ import { useRemoveShelfMutation } from '@/entities/Shelf';
 import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
 import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
+import { deleteShelfThunk } from '../../model/services/deleteShelfThunk';
 
 interface SettingButtonProps {
 	shelfId: string
@@ -29,29 +30,25 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 	const { t } = useTranslation()
 	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
 	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
-	const [removeShelfMutation] = useRemoveShelfMutation()
+	// const [removeShelfMutation] = useRemoveShelfMutation()
 	// const [updateShelfMutation] = useUpdateShelfMutation()
 	const dispatch = useAppDispatch()
 
-	// useEffect(() => {
-	// 	const timer = setTimeout(() => {
-	// 		// dispatch(cupboardShelfListActions.deleteShelf(id))
-	// 	}, 9000)
-
-	// 	return () => clearTimeout(timer)
-	// }, [id, dispatch])
 
 
 	const onDeleteClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
-		timerId = setTimeout(() => {
-			if (isShelfDeleting) {
-				dispatch(cupboardShelfListActions.deleteShelf(shelfId))
-				removeShelfMutation(shelfId)
-			}
-			clearTimeout(timerId)
-		}, DURATION_SHELF_DELETION_MILLISEC)
-	}, [dispatch, isShelfDeleting, removeShelfMutation, shelfId])
+		// timerId = setTimeout(() => {
+		// 	if (isShelfDeleting) {
+		// 		dispatch(deleteShelfThunk(shelfId))
+		// 		// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
+		// 		// removeShelfMutation(shelfId)
+		// 	}
+		// 	clearTimeout(timerId)
+		// }, DURATION_SHELF_DELETION_MILLISEC)
+	}, [dispatch, shelfId])
+	// }, [dispatch, isShelfDeleting, shelfId])
+	// }, [dispatch, isShelfDeleting, removeShelfMutation, shelfId])
 
 
 	const onBoxesSettingsClick = useCallback(() => {

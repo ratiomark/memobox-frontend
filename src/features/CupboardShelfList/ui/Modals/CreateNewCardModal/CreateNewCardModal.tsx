@@ -19,11 +19,11 @@ import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
-import { memo, useRef, useMemo, useCallback, Suspense, useEffect } from 'react';
-// import { EditorUniversal } from '@/shared/ui/lexical-playground/src/EditorUniversal';
+import { memo, useRef, useMemo, useCallback, Suspense } from 'react';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
 import { EditorUniversal } from '@/shared/ui/lexical-playground';
+import { createNewCardThunk } from '../../../model/services/createNewCardThunk';
 
 export const CreateNewCardModal = memo(() => {
 	const { t } = useTranslation()
@@ -73,7 +73,10 @@ export const CreateNewCardModal = memo(() => {
 		console.log(`${boxIdCardModal}  -- ${boxIndexCardModal}`)
 		// console.log(shelfBoxes![boxIndexCardModal]._id)
 		// dispatch(cupboardShelfListActions.setBoxIndexCardModal())
-	}, [boxIndexCardModal, boxIdCardModal])
+		// dispatch(cupboardShelfListActions.setBoxIndexCardModal())
+		dispatch(createNewCardThunk())
+	// }, [ dispatch])
+	}, [boxIndexCardModal, boxIdCardModal, dispatch])
 	// }, [shelfIdCardModal, boxIndexCardModal, shelfBoxes])
 
 	const shelvesAndBoxes = useMemo(() => {
@@ -179,7 +182,9 @@ export const CreateNewCardModal = memo(() => {
 						justify='end'
 						className={cls.actions}
 						onClose={() => onCloseCardModal(false)}
+						isSubmitDisabled={(!questionTextCardModal && !answerTextCardModal)}
 						onSubmit={onSubmit}
+						textSubmitButton={t('add new card')}
 					// onSubmit={() => alert('Создаю новую карточку')}
 					/>
 				</div>

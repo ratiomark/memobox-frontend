@@ -16,12 +16,17 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	error: string
 	commonShelf?: CommonShelfBackendResponse
 	shelvesTitles: string[]
-	shelvesIdsAndIndexes?: ShelfDndRepresentation[]
+	shelvesIdsAndIndexesCurrent?: ShelfDndRepresentation[]
 	shelvesIdsAndIndexesInitial?: ShelfDndRepresentation[]
 	createNewCardModal: CreateNewCardModal
 	createNewShelfModal: CreateNewShelfModal
 	boxTimeSetterModal: BoxTimeSetterModal
 	boxSettingsDropdownModal: BoxSettingsDropdownModal
+	shelfDeletionProcess: {
+		requestStatus: RequestStatusType
+		shelfId: string
+		// isShelf
+	}
 	shelfBoxesTemplateModal: {
 		isOpen: boolean
 		shelfId: string
@@ -35,14 +40,11 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 		shelfId: string
 		isOpen: boolean
 	},
-	// shelvesDeletionIds?: string[]
 	cupboardData: DataBlock
 	isCupboardInfoModalOpen: boolean
-	// boxCoordinates: {
-	// 	x: number
-	// 	y: number
-	// }
 }
+
+
 interface CreateNewShelfModal {
 	isOpen: boolean
 	shelfTitle: string
@@ -52,20 +54,23 @@ interface CreateNewShelfModal {
 }
 interface BoxTimeSetterModal {
 	isOpen: boolean
+	requestStatus: RequestStatusType
 	boxCoordinates: BoxCoordinates
 	boxTimingData: TimingBlock
 	boxId: string
 }
 interface BoxSettingsDropdownModal {
 	isOpen: boolean
+	requestStatus: RequestStatusType
 	boxId: string
 	boxCoordinates: BoxCoordinates
 }
 interface CreateNewCardModal {
-	shelfId: string
-	boxIndex: number
-	boxId: string
-	questionText: string
-	answerText: string
 	isOpen: boolean
+	requestStatus: RequestStatusType
+	questionText: string | null
+	answerText: string | null
+	shelfId: string
+	boxId: string
+	boxIndex: number
 }

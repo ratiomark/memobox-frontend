@@ -14,36 +14,37 @@ import { useSelector } from 'react-redux';
 import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 import { useLocation } from 'react-router-dom';
+import { deleteShelfThunk } from '../../model/services/deleteShelfThunk';
 
 interface ShelfDeletingProps {
-	id: string
+	shelfId: string
 	title: string
 }
 
 export const ShelfDeleting = (props: ShelfDeletingProps) => {
 	const {
-		id,
+		shelfId,
 		title
 	} = props
 
 	const dispatch = useAppDispatch()
 	const [removeShelfMutation] = useRemoveShelfMutation()
 	const [timer, setTimer] = useState<TimeoutId | null>(null);
-	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
-	const isShelfDeleting = useSelector(getShelfIsDeleting(id))
+	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
+	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
 	const location = useLocation();
 
 	useEffect(() => {
 		return () => {
 			if (isShelfDeleting) {
 				// удаляет полку, если перейти на новый роут и если полка находится в режими ожидания удаления
-				// dispatch(cupboardShelfListActions.deleteShelf(id))
-				// removeShelfMutation(id)
+				// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
+				// removeShelfMutation(shelfId)
 			}
 		}
-	}, [location, isShelfDeleting, id, dispatch, removeShelfMutation]);
+	}, [location, isShelfDeleting, shelfId, dispatch, removeShelfMutation]);
 
-	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
+	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
 	// timerId = setTimeout(() => {
 	// 	if (isShelfDeleting) {
 	// 		dispatch(cupboardShelfListActions.deleteShelf(shelfId))
@@ -54,19 +55,21 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 	useEffect(() => {
 		// console.log('Я в АААААААААААААА')
 		if (isShelfDeleting) {
+
 			const timer = setTimeout(() => {
 				// console.log('ТАЙМАУТА')
 				if (isShelfDeleting) {
+					dispatch(deleteShelfThunk(shelfId))
 					// console.log('Я в ГЛВАВВЕЕЕА')
-					dispatch(cupboardShelfListActions.deleteShelf(id))
-					removeShelfMutation(id)
+					// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
+					// removeShelfMutation(shelfId)
 				}
 				// clearTimeout(timerId)
 			}, DURATION_SHELF_DELETION_MILLISEC)
 			setTimer(timer)
 		}
 		// return () => clearTimeout(timerId)
-	}, [id, dispatch, isShelfDeleting, removeShelfMutation])
+	}, [shelfId, dispatch, isShelfDeleting, removeShelfMutation])
 
 	useEffect(() => {
 		return () => {
@@ -76,7 +79,7 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 	const onCancelDeletion = () => {
 		if (timer) clearTimeout(timer);
-		dispatch(cupboardShelfListActions.updateShelf({ id, changes: { isDeleting: false } }))
+		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false } }))
 	}
 
 	const { t } = useTranslation()

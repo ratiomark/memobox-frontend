@@ -6,6 +6,7 @@ import { getCupboardIsLoading } from './getCupboardShelfList';
 import { t } from 'i18next';
 
 export const getQuestionCardModal = (state: StateSchema) => state.cupboard.createNewCardModal.questionText
+export const getCreateNewCardRequestStatus = (state: StateSchema) => state.cupboard.createNewCardModal.requestStatus
 export const getAnswerCardModal = (state: StateSchema) => state.cupboard.createNewCardModal.answerText
 export const getShelfIdCardModal = (state: StateSchema) => state.cupboard.createNewCardModal.shelfId
 const getBoxIdCardModal = (state: StateSchema) => state.cupboard.createNewCardModal.boxId

@@ -19,7 +19,6 @@
   "stats": "Статистика",
   "trash": "Корзина",
   "settings": "Настройки",
-  "add card with hot key": "Добавить карточку",
   "new shelf": "Новая полка",
   "train": "Тренировать",
   "inputs": {
@@ -56,6 +55,8 @@
   "months": "Месяцы",
   "cancel": "Отмена (esc)",
   "save": "Сохранить (shift + enter)",
+  "add new card": "Создать карточку",
+  "add card with hot key": "Добавить карточку",
   "cancel no keys": "Отмена",
   "save no keys": "Сохранить",
   "missedTrainingSettings": {

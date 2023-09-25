@@ -40,6 +40,7 @@ import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce';
 import { useShelvesDndHandler } from '../model/hooks/useShelvesDndHandler';
 import { useShelvesLocalSaver } from '../model/hooks/useShelvesLocalSaver';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
+import { ToastShelfDeletion } from './ToastShelfDeletion/ToastShelfDeletion';
 // import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
 // import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 
@@ -222,6 +223,7 @@ export const CupboardShelfList = () => {
 				<HiddenTemplates />
 			</div>
 			<CreateNewCardModal />
+			<ToastShelfDeletion />
 		</>
 	)
 }

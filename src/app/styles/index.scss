@@ -132,6 +132,16 @@ body.dragging * {
 .spinner_I8Q1 { animation: spinner-qhi1 0.75s linear infinite; }
 .spinner_vrS7 { animation-delay: -0.375s; }
 
+.spinner-request {
+  transform-origin: center;
+  animation: spinner-xv 1s cubic-bezier(0.36, 0.6, 0.31, 1) infinite;
+}
+
+@keyframes spinner-xv {
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
 @keyframes spinner-qhi1 {
   0%,
   100% { r: 1.5px; }

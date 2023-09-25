@@ -26,25 +26,24 @@ import { infoIconSize } from '@/shared/const/iconSizes';
 import { CreateNewShelfModal } from './CreateNewShelfModal/CreateNewShelfModal';
 import * as Toast from '@radix-ui/react-toast';
 import { MyToast } from '@/shared/ui/Toast/MyToast';
+import { MyText } from '@/shared/ui/Typography';
+import { getCreateNewCardRequestStatus } from '@/features/CupboardShelfList'
 
 export const StatsAndActionsCupboardWidget = () => {
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
-	const isAwaitingResponse = useSelector(getCreateNewShelfModalIsAwaitingResponse)
 	const createNewShelfRequestStatus = useSelector(getCreateNewShelfModalRequestStatus)
-	const isResponseSuccessful = useSelector(getCreateNewShelfModalIsResponseSuccessful)
+	const createNewCardRequestStatus = useSelector(getCreateNewCardRequestStatus)
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
-	const onOpenChange = (open: boolean) => {
-		if (!open) {
-			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(false))
-			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
-		}
-	}
 	const onTimeEnd = useCallback(() => {
-		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('idle'))
+		dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('idle'))
+	}, [dispatch])
+
+	const onTimeEndCreateNewCard = useCallback(() => {
+		dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('idle'))
 	}, [dispatch])
 
 	const onAddNewShelfClick = () => {
@@ -66,8 +65,18 @@ export const StatsAndActionsCupboardWidget = () => {
 			// animateComponentAfterLoadingFadeInTime={DURA}
 			componentAfterLoading={
 				<HStack gap='gap_14' className={cls.actions}>
-					<Button onClick={onAddNewShelfClick} borderRadius='borderRadius_4'>{t('new shelf')}</Button>
-					<Button onClick={onAddNewCardClick} data-button-type='shelf-add-card-general' borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
+					<Button
+						disabled={createNewShelfRequestStatus === 'pending'}
+						onClick={onAddNewShelfClick}
+					>
+						{t('new shelf')}
+					</Button>
+					<Button
+						onClick={onAddNewCardClick}
+						data-button-type='shelf-add-card-general'
+					>
+						{t('add card with hot key')}
+					</Button>
 					<Icon
 						Svg={InfoIcon}
 						width={infoIconSize}
@@ -76,7 +85,7 @@ export const StatsAndActionsCupboardWidget = () => {
 						clickable
 						onClick={onOpenInfoModal}
 					/>
-				</HStack>
+				</HStack >
 			}
 			noDelay={!cupboardIsLoading}
 			isLoading={cupboardIsLoading}
@@ -101,6 +110,24 @@ export const StatsAndActionsCupboardWidget = () => {
 				<MyToast
 					onTimeEnd={onTimeEnd}
 					status={createNewShelfRequestStatus}
+					messageSuccess='Полка успешно создана'
+					// messageLoading='Загрузка'
+					messageLoading='Ожидание ответа от сервера'
+					// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
+					// contentSuccess={<MyText text={'Все супер класс!'} />}
+					messageError='Ошибка'
+
+				/>
+				<MyToast
+					onTimeEnd={onTimeEndCreateNewCard}
+					status={createNewCardRequestStatus}
+					messageSuccess='Карточка добавлена'
+					// messageLoading='Загрузка'
+					messageLoading='Ожидание ответа от сервера'
+					// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
+					// contentSuccess={<MyText text={'Все супер класс!'} />}
+					messageError='Ошибка'
+
 				/>
 				{/* <Toast.Root
 				// onOpenChange={onOpenChange}

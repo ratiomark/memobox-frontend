@@ -91,6 +91,7 @@ export const memoboxApi = rtkApi.injectEndpoints({
 	}),
 })
 export const memoboxGetShelves = memoboxApi.endpoints.getShelves.initiate
+export const removeShelfByIdMutation = memoboxApi.endpoints.removeShelf.initiate
 export const { useGetShelvesQuery } = memoboxApi
 export const { useUpdateShelfMutation } = memoboxApi
 export const { useUpdateShelfWithTagMutation } = memoboxApi

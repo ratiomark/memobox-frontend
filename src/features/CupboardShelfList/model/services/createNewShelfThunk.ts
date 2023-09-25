@@ -10,12 +10,12 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 
 		const { dispatch, getState } = thunkAPI
 		try {
-			dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('pending'))
+			dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('pending'))
 			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(true))
 			// console.log('shelfName   ', shelfName)
 			const response = await dispatch(createNewShelf(shelfName)).unwrap()
 			if (!response) {
-				dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('error'))
+				dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
 				// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
 				throw new Error()
 			}
@@ -24,8 +24,11 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 				...shelf,
 				index: shelf.index + 1
 			}))
+			if (shelves) {
+				throw new Error()
+			}
 			// console.log(shelves)
-			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('error'))
+			// dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
 			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(true))
 			return [response, ...shelves]
 

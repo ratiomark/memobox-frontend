@@ -62,7 +62,7 @@ import { HTMLExporterPlugin } from './plugins/HTMLExporterPlugin/HTMLExporterPlu
 interface EditorProps {
 	onChange?: (editorState: EditorState) => void
 	// initialState?: string
-	editorState?: string
+	editorState?: string | null
 	editable?: boolean
 	id?: string
 	heightValue: number

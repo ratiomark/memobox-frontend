@@ -1,22 +1,45 @@
 .MyToast {
   // background: red;
-  background-color: var(--bg);
-  padding: 10px 20px 10px 15px;
+  // background-color: var(--bg);
+  padding: 10px 20px;
   border-radius: var(--border-radius-main);
-  min-width: 200px;
+  min-width: 300px;
   box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+
+  --color-scale-gray-5: #484f58;
+  --color-scale-gray-6: #30363d;
+  --color-scale-gray-7: #21262d;
+
+  background-color: var(--color-scale-gray-5);
 
   // padding: 10px;
 }
 
+.title {
+  // font-size: 10px;
+  color: whitesmoke;
+}
+
+.content {
+  display: flex;
+  min-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
 .pending {
   // border: 1px solid blue;
+  fill: var(--accent);
 }
 
 .error {
   // border: 1px solid var(--cancel);
+  fill: var(--cancel);
+  color: var(--cancel);
 }
 
 .success {
   // border: 1px solid var(--accent);
+  fill: var(--accent);
 }

@@ -11,6 +11,7 @@ import {
 	createNewShelfThunk,
 	cupboardShelfListActions,
 	getCreateNewShelfModalIsOpen,
+	getCreateNewShelfModalRequestStatus,
 	getCreateNewShelfModalShelfTitle,
 	getCreateNewShelfModalShelvesTitles,
 } from '@/features/CupboardShelfList'
@@ -23,6 +24,7 @@ export const CreateNewShelfModal = () => {
 	const isOpen = useSelector(getCreateNewShelfModalIsOpen)
 	const shelfName = useSelector(getCreateNewShelfModalShelfTitle)
 	const shelfNames = useSelector(getCreateNewShelfModalShelvesTitles)
+	const createNewShelfRequestStatus = useSelector(getCreateNewShelfModalRequestStatus)
 	const [inputErrors, setInputErrors] = useState([])
 	const dispatch = useAppDispatch()
 	// const [open, setOpen] = useState(false);
@@ -35,7 +37,7 @@ export const CreateNewShelfModal = () => {
 
 	const onCreateNewShelf = () => {
 		// setOpen(true)
-		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalRequestStatus('pending'))
+		dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('pending'))
 		setTimeout(() => {
 			dispatch(createNewShelfThunk(shelfName))
 		}, 4000)
@@ -62,9 +64,6 @@ export const CreateNewShelfModal = () => {
 					className={cls.input}
 					classNameInputError={cls.inputError}
 				/>
-				<Button onClick={onCreateNewShelf}>
-					Create
-				</Button>
 
 				{/* <Toast.Root open={open} duration={5000}>
 

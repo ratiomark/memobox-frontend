@@ -25,7 +25,7 @@ const initialState: CupboardPageSchema = {
 	entities: {},
 	ids: [],
 	shelvesTitles: [],
-	shelvesIdsAndIndexes: [],
+	shelvesIdsAndIndexesCurrent: [],
 	shelvesIdsAndIndexesInitial: [],
 	shelfBoxesTemplateModal: {
 		isOpen: false,
@@ -48,6 +48,7 @@ const initialState: CupboardPageSchema = {
 			x: 0,
 			y: 0,
 		},
+		requestStatus: 'idle',
 	},
 	boxSettingsDropdownModal: {
 		isOpen: false,
@@ -56,23 +57,31 @@ const initialState: CupboardPageSchema = {
 			x: 0,
 			y: 0,
 		},
+		requestStatus: 'idle',
 	},
 	createNewCardModal: {
 		shelfId: '',
 		boxId: '',
 		boxIndex: 0,
-		questionText: localStorage.getItem('questionData') ?? lexicalEmptyEditorState,
+		questionText: null,
+		// questionText: localStorage.getItem('questionData') ?? null,
+		// questionText: localStorage.getItem('questionData') ?? lexicalEmptyEditorState,
 		// questionText: lexicalEmptyEditorState,
-		answerText: lexicalEmptyEditorState,
+		answerText: null,
+		// answerText:  lexicalEmptyEditorState,
 		// answerText: '',
 		isOpen: false,
+		requestStatus: 'idle',
 	},
 	createNewShelfModal: {
 		shelfTitle: '',
 		isOpen: false,
 		isAwaitingResponse: false,
 		requestStatus: 'idle'
-		// isResponseSuccessful: boolean
+	},
+	shelfDeletionProcess: {
+		shelfId: '',
+		requestStatus: 'idle',
 	},
 	cupboardData: {
 		train: 0,
@@ -135,12 +144,15 @@ const cupboardShelfList = createSlice({
 		setIsCreateNewShelfModalSuccessfulResponse: (state, action: PayloadAction<boolean>) => {
 			state.createNewShelfModal.isResponseSuccessful = action.payload
 		},
-		setIsCreateNewShelfModalRequestStatus: (state, action: PayloadAction<RequestStatusType>) => {
+		setCreateNewShelfModalRequestStatus: (state, action: PayloadAction<RequestStatusType>) => {
 			state.createNewShelfModal.requestStatus = action.payload
 		},
 		// create new card
 		setIsCreateNewCardModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.createNewCardModal.isOpen = action.payload
+		},
+		setCreateNewCardModalRequestStatus: (state, action: PayloadAction<RequestStatusType>) => {
+			state.createNewCardModal.requestStatus = action.payload
 		},
 		setQuestionText: (state, action: PayloadAction<string>) => {
 			state.createNewCardModal.questionText = action.payload
@@ -166,11 +178,6 @@ const cupboardShelfList = createSlice({
 			state.createNewCardModal.boxId = state.entities[state.createNewCardModal.shelfId]!.boxesData[action.payload]._id
 		},
 
-		// boxes settings
-		// setBoxesSettingsShelfId: (state, action: PayloadAction<string>) => {
-		// 	state.boxesSettingsShelfId = action.payload
-		// 	// state.isBoxesSettingsModalOpen = true
-		// },
 		// TimeSetterModal
 		setTimingSetterModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.boxTimeSetterModal.isOpen = action.payload
@@ -272,7 +279,7 @@ const cupboardShelfList = createSlice({
 			shelvesAdapter.setAll(state, allShelves)
 			const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
 			state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
-			state.shelvesIdsAndIndexes = shelvesDndRepresentation
+			state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 			state.shelvesTitles = allShelves.map(shelf => shelf.title)
 			state.isDataAlreadyInStore = true
 			state.isNeedRefetch = true
@@ -291,7 +298,7 @@ const cupboardShelfList = createSlice({
 			shelvesAdapter.setAll(state, allShelves)
 			const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
 			state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
-			state.shelvesIdsAndIndexes = shelvesDndRepresentation
+			state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 			state.shelvesTitles = allShelves.map(shelf => shelf.title)
 			state.cupboardData = {
 				all: commonShelf.data.all,
@@ -313,11 +320,14 @@ const cupboardShelfList = createSlice({
 				id: shelf.id,
 				changes: { index }
 			}))
-			state.shelvesIdsAndIndexes = updates.map((item, index) => ({ id: item.id, index }))
+			state.shelvesIdsAndIndexesCurrent = updates.map((item, index) => ({ id: item.id, index }))
 			shelvesAdapter.updateMany(state, updates)
 			// shelvesAdapter.setAll(state, action.payload)
 		},
-		// shelf control
+		// shelf control deletion
+		setShelfDeletionRequestStatus: (state, action: PayloadAction<RequestStatusType>) => {
+			state.shelfDeletionProcess.requestStatus = action.payload
+		},
 		deleteShelf: (state, action: PayloadAction<EntityId>) => {
 			shelvesAdapter.removeOne(state, action.payload)
 		},
@@ -339,7 +349,7 @@ const cupboardShelfList = createSlice({
 					shelvesAdapter.setAll(state, allShelves)
 					const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
 					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
-					state.shelvesIdsAndIndexes = shelvesDndRepresentation
+					state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 					state.shelvesTitles = allShelves.map(shelf => shelf.title)
 					state.cupboardData = {
 						all: commonShelf.data.all,
@@ -362,7 +372,7 @@ const cupboardShelfList = createSlice({
 				updateShelfListOrderThunk.fulfilled,
 				(state, action: PayloadAction<boolean>) => {
 					if (action.payload) {
-						state.shelvesIdsAndIndexesInitial = state.shelvesIdsAndIndexes
+						state.shelvesIdsAndIndexesInitial = state.shelvesIdsAndIndexesCurrent
 					}
 				})
 			.addCase(
@@ -372,7 +382,7 @@ const cupboardShelfList = createSlice({
 						shelvesAdapter.setAll(state, action.payload)
 						const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
 						state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
-						state.shelvesIdsAndIndexes = shelvesDndRepresentation
+						state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 					}
 				})
 			.addCase(
@@ -382,9 +392,14 @@ const cupboardShelfList = createSlice({
 					state.createNewShelfModal.requestStatus = 'success'
 					const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
 					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
-					state.shelvesIdsAndIndexes = shelvesDndRepresentation
+					state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 					state.shelvesTitles.push(action.payload[0].title)
 					state.createNewShelfModal.shelfTitle = ''
+				})
+			.addCase(
+				createNewShelfThunk.rejected,
+				(state) => {
+					state.createNewShelfModal.requestStatus = 'error'
 				})
 		// .addCase(
 		// 	sendShelvesOrder.rejected,

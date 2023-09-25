@@ -1,4 +1,8 @@
 export {
+	getCreateNewCardRequestStatus
+} from './model/selectors/getCreateNewCardModal';
+
+export {
 	getCreateNewShelfModalIsOpen,
 	getCreateNewShelfModalShelfTitle,
 	getCreateNewShelfModalShelvesTitles,
@@ -7,7 +11,6 @@ export {
 	getCreateNewShelfModalRequestStatus,
 } from './model/selectors/getCreateNewShelfModal';
 export { createNewShelfThunk } from './model/services/createNewShelfThunk';
-
 export type { ShelfBoxesTemplateSchema } from './model/types/shelfBoxesTemplateSchema';
 // export { shelfBoxesTemplateSettingsReducer } from './model/slice/shelfBoxesTemplateSlice';
 export { CupboardShelfListWrapper } from './ui/CupboardShelfListWrapper/CupboardShelfListWrapper';

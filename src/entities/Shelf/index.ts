@@ -5,6 +5,7 @@ export {
 	useUpdateShelfMutation,
 	useUpdateCommonShelfMutation,
 	useRemoveShelfMutation,
+	removeShelfByIdMutation,
 } from './model/api/shelvesApi';
 
 export { ShelfButtons } from '../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons';

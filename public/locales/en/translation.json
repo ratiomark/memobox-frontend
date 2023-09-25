@@ -58,6 +58,7 @@
   "cancel": "Cancel (esc)",
   "cancel no keys": "Cancel",
   "save": "Save (shift + enter)",
+  "add new card": "Add card",
   "save no keys": "Save",
   "missedTrainingSettings": {
     "title": "What should you do with the card if you skipped its training?",

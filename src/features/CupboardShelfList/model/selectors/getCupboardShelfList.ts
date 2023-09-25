@@ -76,7 +76,7 @@ export const getShelfItems = createSelector(
 // 		return shelves
 // 	}
 // )
-export const getShelfIdAndIndexesList = (state: StateSchema) => state.cupboard.shelvesIdsAndIndexes ?? []
+export const getShelfIdAndIndexesList = (state: StateSchema) => state.cupboard.shelvesIdsAndIndexesCurrent ?? []
 export const getShelfIdAndIndexesListInitial = (state: StateSchema) => state.cupboard.shelvesIdsAndIndexesInitial ?? []
 
 export const getIsCupboardInfoOpen = (state: StateSchema) => state.cupboard.isCupboardInfoModalOpen
