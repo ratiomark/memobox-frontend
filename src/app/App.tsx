@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useLayoutEffect } from 'react'
 import { AppRouter } from './providers/router/AppRouter'
 import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
@@ -6,11 +6,21 @@ import { useSelector } from 'react-redux'
 import { getUserMounted, initAuthData } from '@/entities/User'
 import { Header, HeaderSkeleton } from '@/widgets/Header'
 import './styles/regularStyles.css'
+import { useTheme } from '@/shared/context/useTheme'
+import theme from '@/shared/ui/lexical-playground/src/themes/PlaygroundEditorTheme'
 
 
 export const App = () => {
 	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
+	const { theme } = useTheme()
+
+	// useEffect(() => {
+	// 	document.body.className = theme
+	// }, [theme])
+	// useLayoutEffect(() => {
+	// 	localStorage.setItem('theme', theme)
+	// }, [theme])
 
 	useEffect(() => {
 		dispatch(initAuthData())
@@ -19,8 +29,8 @@ export const App = () => {
 	if (!userMounted) return <LoaderWidget />
 
 	return (
-		<div className='app'>
-			{/* <div className={clsx('app', theme)}> */}
+		// <div className='app'>
+		<div className={`app ${theme}`}>
 			<Suspense fallback={<HeaderSkeleton />}>
 				<Header />
 			</Suspense>

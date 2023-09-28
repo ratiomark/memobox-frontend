@@ -1,0 +1,9 @@
+.app_light_theme header {
+  background: #141e30;
+  background: linear-gradient(to right, #243b55, #141e30);
+}
+
+.app_dark_theme header {
+  background: #252525;
+  background: linear-gradient(to right, #252525, #150f17);
+}

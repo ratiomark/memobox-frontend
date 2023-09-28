@@ -6,3 +6,4 @@ export const USER_ID_LS_KEY = 'id';
 export const COMMON_SHELF_IS_COLLAPSED_KEY = 'isCommonShelfCollapsed';
 export const COMMON_SHELF_KEY = 'commonShelf';
 export const SHELVES_KEY = 'shelves';
+export const THEME_KEY = 'theme';

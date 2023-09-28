@@ -1,6 +1,7 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useLayoutEffect } from 'react';
 import { Theme } from '../types/Theme';
 import { ThemeContext } from './ThemeContext';
+import { localDataService } from '../lib/helpers/common/localDataService';
 
 interface UseThemeResult {
 	toggleTheme: (saveAction: (theme: Theme) => void) => void;
@@ -10,8 +11,12 @@ interface UseThemeResult {
 export const useTheme = (): UseThemeResult => {
 	const { theme = Theme.LIGHT, setTheme } = useContext(ThemeContext);
 
+	// useLayoutEffect(() => {
+	// 	document.body.className = theme
+	// }, [theme])
+
 	useEffect(() => {
-		document.body.className = theme
+		localDataService.setTheme(theme)
 	}, [theme])
 
 	const toggleTheme = (saveAction: (theme: Theme) => void) => {
@@ -40,6 +45,8 @@ export const useTheme = (): UseThemeResult => {
 		// 		newTheme = Theme.LIGHT
 		// }
 		setTheme?.(newTheme)
+		// localStorage.setItem('theme', newTheme)
+		// document.body.className = newTheme
 		saveAction?.(newTheme)
 	}
 	return { theme, toggleTheme }

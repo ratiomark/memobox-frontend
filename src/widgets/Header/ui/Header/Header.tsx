@@ -7,12 +7,9 @@ import cls from './Header.module.scss'
 import { useLocation } from 'react-router-dom'
 import { HeaderAdditionalBlock } from '../HeaderAdditionalBlock/HeaderAdditionalBlock'
 import { WriteToUsModal } from '../Modals/WriteToUsModal/WriteToUsModal'
+import './Header.css'
 
-interface SidebarProps {
-	className?: string
-}
-
-export const Header = memo(({ className }: SidebarProps) => {
+export const Header = memo(() => {
 	const headerItemsList = useSelector(getHeaderItems)
 	const location = useLocation()
 	const HeaderItemsListRendered = useMemo(() => {
@@ -32,8 +29,7 @@ export const Header = memo(({ className }: SidebarProps) => {
 				data-testid='header'
 				className={clsx(
 					cls.header,
-
-					className)}
+					'header')}
 			>
 				<nav className={cls.navigation} >
 					<ul className={cls.items}>

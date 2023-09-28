@@ -1,5 +1,6 @@
 import { useJsonSettings } from '@/entities/User';
 import { ThemeContext } from '@/shared/context/ThemeContext';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 import { Theme } from '@/shared/types/Theme';
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 
@@ -14,8 +15,15 @@ export const ThemeProvider = ({ children, initialTheme }: ThemeProviderProps) =>
 	const { theme: themeFromUser } = useJsonSettings()
 
 	const [isThemeInited, setIsThemeInited] = useState(false)
-	const [theme, setTheme] = useState<Theme>(themeFromUser || initialTheme || Theme.LIGHT);
-	
+	const [theme, setTheme] = useState<Theme>(
+		themeFromUser
+		|| localDataService.getTheme()
+		|| initialTheme
+		|| Theme.LIGHT
+	);
+
+	console.log(themeFromUser)
+
 	useEffect(() => {
 		if (!isThemeInited && themeFromUser) {
 			setTheme(themeFromUser)
