@@ -6,13 +6,11 @@ import { ShelvesListViewWidget } from '@/widgets/ShelvesListViewWidget';
 import { SortControllerViewPageWidget } from '@/widgets/SortControllerViewPageWidget';
 import { StatsAndActionsViewPageWidget } from '@/widgets/StatsAndActionsViewPageWidget';
 import { memo } from 'react';
-import { ViewPageSkeleton } from './ViewPageSkeleton/ViewPageSkeleton';
 
 const ViewPage = memo(() => {
 	return (
 		<>
-			{/* <ViewPageSkeleton /> */}
-			<Page saveScroll={false} data-testid='ViewPage'>
+			<Page data-testid='ViewPage'>
 				<ViewPageInitializer
 					statsAndActionsViewPageBlock={<StatsAndActionsViewPageWidget />}
 					shelvesListViewPageBlock={<ShelvesListViewWidget />}

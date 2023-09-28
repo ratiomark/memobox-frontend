@@ -24,17 +24,17 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CupboardMainButtonsSkeleton } from './StatsAndActionsCupboardWidgetSkeleton/CupboardMainButtonsSkeleton';
 import { infoIconSize } from '@/shared/const/iconSizes';
 import { CreateNewShelfModal } from './CreateNewShelfModal/CreateNewShelfModal';
-import * as Toast from '@radix-ui/react-toast';
-import { MyToast } from '@/shared/ui/Toast/MyToast';
-import { MyText } from '@/shared/ui/Typography';
+import { MyToast } from '@/shared/ui/Toast';
 import { getCreateNewCardRequestStatus } from '@/features/CupboardShelfList'
+import { restoreAllShelves } from '@/entities/Cupboard';
+import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 
 export const StatsAndActionsCupboardWidget = () => {
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
 	const createNewShelfRequestStatus = useSelector(getCreateNewShelfModalRequestStatus)
-	const createNewCardRequestStatus = useSelector(getCreateNewCardRequestStatus)
+	// const createNewCardRequestStatus = useSelector(getCreateNewCardRequestStatus)
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
@@ -42,9 +42,9 @@ export const StatsAndActionsCupboardWidget = () => {
 		dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('idle'))
 	}, [dispatch])
 
-	const onTimeEndCreateNewCard = useCallback(() => {
-		dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('idle'))
-	}, [dispatch])
+	// const onTimeEndCreateNewCard = useCallback(() => {
+	// 	dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('idle'))
+	// }, [dispatch])
 
 	const onAddNewShelfClick = () => {
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(true))
@@ -65,6 +65,7 @@ export const StatsAndActionsCupboardWidget = () => {
 			// animateComponentAfterLoadingFadeInTime={DURA}
 			componentAfterLoading={
 				<HStack gap='gap_14' className={cls.actions}>
+					<Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button>
 					<Button
 						disabled={createNewShelfRequestStatus === 'pending'}
 						onClick={onAddNewShelfClick}
@@ -103,7 +104,8 @@ export const StatsAndActionsCupboardWidget = () => {
 			<HStack max className={cls.statsAndActionsCupboardWidget}>
 				<div>
 					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
-					{/* <ThemeSwitcher /> */}
+					<ThemeSwitcher />
+					{/* <Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button> */}
 				</div>
 				{buttons}
 				<CreateNewShelfModal />
@@ -118,7 +120,7 @@ export const StatsAndActionsCupboardWidget = () => {
 					messageError='Ошибка'
 
 				/>
-				<MyToast
+				{/* <MyToast
 					onTimeEnd={onTimeEndCreateNewCard}
 					status={createNewCardRequestStatus}
 					messageSuccess='Карточка добавлена'
@@ -126,9 +128,9 @@ export const StatsAndActionsCupboardWidget = () => {
 					messageLoading='Ожидание ответа от сервера'
 					// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
 					// contentSuccess={<MyText text={'Все супер класс!'} />}
-					messageError='Ошибка'
+					messageError='Ошибка добавления карточки'
 
-				/>
+				/> */}
 				{/* <Toast.Root
 				// onOpenChange={onOpenChange}
 				// open={isResponseSuccessful ? undefined : isAwaitingResponse}

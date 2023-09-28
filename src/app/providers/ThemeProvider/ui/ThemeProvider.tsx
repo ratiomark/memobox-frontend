@@ -15,7 +15,7 @@ export const ThemeProvider = ({ children, initialTheme }: ThemeProviderProps) =>
 
 	const [isThemeInited, setIsThemeInited] = useState(false)
 	const [theme, setTheme] = useState<Theme>(themeFromUser || initialTheme || Theme.LIGHT);
-
+	
 	useEffect(() => {
 		if (!isThemeInited && themeFromUser) {
 			setTheme(themeFromUser)
@@ -29,7 +29,7 @@ export const ThemeProvider = ({ children, initialTheme }: ThemeProviderProps) =>
 	}), [theme])
 
 	// useEffect(() => {
-		// document.body.className = theme
+	// document.body.className = theme
 	// }, [theme])
 
 	return (

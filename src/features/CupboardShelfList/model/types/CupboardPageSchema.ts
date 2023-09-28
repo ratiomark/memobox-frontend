@@ -25,6 +25,7 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	shelfDeletionProcess: {
 		requestStatus: RequestStatusType
 		shelfId: string
+		isAnyShelfInDeletionProcess?: boolean
 		// isShelf
 	}
 	shelfBoxesTemplateModal: {

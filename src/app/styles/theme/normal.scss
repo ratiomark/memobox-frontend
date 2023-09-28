@@ -1,3 +1,4 @@
+/* stylelint-disable scss/at-function-pattern */
 $colors: (
   "--text": #141c1f,
   "--hint": #adbcc0,
@@ -41,10 +42,9 @@ $colors: (
   --light-bg: #e2eef1;
   --shelf-bg: #fcfcfc;
   --delimiter-color: rgb(121 115 115 / 10%);
+  --body-bg-color: #f5f6fa;
 
-  // --body-bg-color: #f5f6fa;
-
-  // --bg: #eff5f6;
+  // --
 
   --cancel-rgb-2: rgb(var(--cancel-rgb) / 20%);
   --cancel-rgb-8: rgb(var(--cancel-rgb) / 80%);
@@ -99,4 +99,7 @@ $colors: (
   // listBox
   --list-box-bg: #e0e0e0;
   --list-box-option-active: #04ff04;
+
+  background: var(--body-bg-color);
+  scrollbar-color: #979797  var(--body-bg-color);
 }

@@ -10,37 +10,35 @@ import { getQuestionCardModal, getAnswerCardModal, getShelfIdCardModal, getBoxId
 // 	question: string
 // 	answer: string
 // }
-export const deleteShelfThunk = createAsyncThunk<boolean, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const deleteShelfThunk = createAsyncThunk<string, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/deleteShelfThunk',
 	async (shelfId, thunkAPI) => {
 
-		const { dispatch, getState } = thunkAPI
-		// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
-		// const response1 = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
-		// removeShelfMutation(shelfId)
-		dispatch(cupboardShelfListActions.setShelfDeletionRequestStatus('pending'))
+		const { dispatch } = thunkAPI
+		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { deletingRequestStatus: 'pending' } }))
+		// dispatch(cupboardShelfListActions.setShelfDeletionRequestStatus('pending'))
 		try {
-			setTimeout(() => {
-				// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
-				const response = Math.random() > 0.5
-				if (!response) {
-					// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false } }))
-					// dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('error'))
-					// dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
-					// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
-					dispatch(cupboardShelfListActions.setShelfDeletionRequestStatus('error'))
-					throw new Error()
-				}
-				dispatch(cupboardShelfListActions.setShelfDeletionRequestStatus('success'))
-				// console.log('НОВАЯ ПОЛКА', response)
-				// dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
-				// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(true))
-			}, 4000)
+			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать shelfId
 
-			return true
+			await new Promise((resolve, reject) => {
+				setTimeout(() => {
+					Math.random() > 0.5 ? resolve(null) : reject(null);
+				}, 3000);
+			});
+
+			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
+
+			const response = Math.random() > 50
+			// console.log('RESPONSE   ', response)
+			// const response = Math.random() > 0.5
+			if (!response) {
+				throw new Error()
+			}
+			dispatch(removeShelfByIdMutation(shelfId)).unwrap()
+			return shelfId
 
 		} catch (err) {
-			return thunkAPI.rejectWithValue('some error in fetchCupboardData')
+			return thunkAPI.rejectWithValue(shelfId)
 		}
 	}
 )

@@ -11,10 +11,10 @@ import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
 import { useRemoveShelfMutation } from '@/entities/Shelf';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { useSelector } from 'react-redux';
-import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 import { useLocation } from 'react-router-dom';
 import { deleteShelfThunk } from '../../model/services/deleteShelfThunk';
+import { getShelfIsDeleting } from '../../model/selectors/getShelfDeletionProcess';
 
 interface ShelfDeletingProps {
 	shelfId: string
@@ -30,9 +30,16 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 	const dispatch = useAppDispatch()
 	const [removeShelfMutation] = useRemoveShelfMutation()
 	const [timer, setTimer] = useState<TimeoutId | null>(null);
+	// const openToast = useToast()
 	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
 	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
+	// const isShelfDeleted = useSelector(getShelfIsDeleted(shelfId))
+	// const shelfDeletionRequestStatus = useSelector(getShelfDeletionRequestStatus(shelfId))
 	const location = useLocation();
+
+	// useEffect(() => {
+	// 	console.log(`${title}   ----   ${shelfDeletionRequestStatus}`)
+	// }, [title, shelfDeletionRequestStatus])
 
 	useEffect(() => {
 		return () => {
@@ -51,25 +58,36 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 	// 		removeShelfMutation(shelfId)
 	// 	}
 	// 	clearTimeout(timerId)
-	// }, DURATION_SHELF_DELETION_MILLISEC)
+
+
 	useEffect(() => {
 		// console.log('Я в АААААААААААААА')
-		if (isShelfDeleting) {
-
-			const timer = setTimeout(() => {
-				// console.log('ТАЙМАУТА')
-				if (isShelfDeleting) {
-					dispatch(deleteShelfThunk(shelfId))
-					// console.log('Я в ГЛВАВВЕЕЕА')
-					// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
-					// removeShelfMutation(shelfId)
-				}
-				// clearTimeout(timerId)
-			}, DURATION_SHELF_DELETION_MILLISEC)
-			setTimer(timer)
-		}
+		const timer = setTimeout(() => {
+			// console.log('ТАЙМАУТА')
+			// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { deletingRequestStatus: 'pending' } }))
+			dispatch(deleteShelfThunk(shelfId))
+			// clearTimeout(timerId)
+		}, DURATION_SHELF_DELETION_MILLISEC)
+		setTimer(timer)
+		// }
 		// return () => clearTimeout(timerId)
-	}, [shelfId, dispatch, isShelfDeleting, removeShelfMutation])
+	}, [dispatch, shelfId])
+	// useEffect(() => {
+	// 	openToast({
+	// 		onTimeEnd: onTimeEnd,
+	// 		status: shelfDeletionRequestStatus,
+	// 		messageSuccess: 'Полка удалена',
+	// 		messageLoading: 'ХОП. Ждем ответа от сервера',
+	// 		messageError: 'Ошибка!!!'
+	// 		// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
+	// 		// contentSuccess={<MyText text={'Все супер класс!'} />}
+	// 		// messageLoading='Загрузка'
+	// 	})
+	// 	// }
+	// 	// return () => clearTimeout(timerId)
+	// }, [onTimeEnd, shelfDeletionRequestStatus, openToast])
+	// }, [shelfId, dispatch, removeShelfMutation])
+	// }, [shelfId, dispatch, isShelfDeleting, removeShelfMutation])
 
 	useEffect(() => {
 		return () => {
@@ -77,9 +95,20 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 		}
 	}, [timer])
 
+	useEffect(() => {
+		return () => {
+			if (isShelfDeleting) {
+				// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
+				// removeShelfMutation(shelfId)
+			}
+			// if (isShelfDeleting) console.log('РОУТ РОУТ РОУТ ')
+		}
+	}, [dispatch, isShelfDeleting, shelfId, removeShelfMutation])
+
 	const onCancelDeletion = () => {
 		if (timer) clearTimeout(timer);
-		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false } }))
+		// dispatch(cupboardShelfListActions.setIsAnyShelfInDeletionProcess(false))
+		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
 	}
 
 	const { t } = useTranslation()
@@ -103,5 +132,6 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 				</svg>
 			</div>
 		</div>
+
 	)
 }

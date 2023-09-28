@@ -8,6 +8,11 @@
   height: calc(100vh - var(--header-height));
   overflow: auto;
   scrollbar-gutter: stable;
+  scrollbar-width: thin;
+
+  // border: 1px solid blue;
+
+  // scrollbar-color: red;
 
   // transition: all 2s;
 
@@ -26,8 +31,11 @@
 }
 
 .viewport {
+  display: grid;
+  gap: 20px;
   position: fixed;
   bottom: 0;
+  grid-auto-flow: revert;
   right: 0;
   z-index: 99999;
 

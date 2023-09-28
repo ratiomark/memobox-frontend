@@ -13,6 +13,7 @@
   --active-list-item-popover: rgb(128 128 128 / 9.2%);
   --button-color-training-empty: #f5f6fa;
   --button-color-training-filled: blue;
+  --body-bg-color: #f5f6fa;
 
   // data-labels
   --data-label-all: #33d69f;
@@ -47,4 +48,7 @@
   // listBox
   --list-box-bg: #1e1e90;
   --list-box-option-active: #1b61f8;
+
+  background: var(--body-bg-color);
+  scrollbar-color: #979797  var(--body-bg-color);
 }

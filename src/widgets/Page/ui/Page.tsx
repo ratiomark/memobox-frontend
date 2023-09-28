@@ -1,18 +1,17 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
-import clsx from 'clsx';
 import { getUIScrollByPath, uiActions } from '@/features/ScrollSave';
-import { memo, MutableRefObject, ReactNode, useRef, UIEvent } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useInfiniteScroll } from '@/shared/lib/helpers/hooks/useInfiniteScroll';
-import { useInitialEffect } from '@/shared/lib/helpers/hooks/useInitialEffect';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { TestProps } from '@/shared/types/TestProps';
+import clsx from 'clsx';
+import { motion } from 'framer-motion';
+import { MutableRefObject, ReactNode,  UIEvent,  memo,  useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import cls from './Page.module.scss';
-import { motion } from 'framer-motion'
-
-import * as Toast from '@radix-ui/react-toast';
+import { useInitialEffect } from '@/shared/lib/helpers/hooks/useInitialEffect';
+import { ToastViewport } from '@radix-ui/react-toast';
 
 interface PageProps extends TestProps {
 	className?: string
@@ -45,16 +44,14 @@ export const Page = memo((props: PageProps) => {
 		children,
 		onScrollEnd,
 		isLoading,
-		saveScroll = false,
+		saveScroll = false
 	} = props
 
 	const dispatch = useAppDispatch()
 	const { pathname } = useLocation()
 	// Этот селектор, кроме стейта, также принимает дополнительный аргумент - path. 
 	// Поэтому нужно передать стрелочную функцию, чтобы добавить нужный аргумент. Эти танцы с бубном нужны потому что useSelector умеет работать только с теми селекторами у которых один аргумент(стейт).
-	const scrollPosition = useSelector(
-		(state: StateSchema) => getUIScrollByPath(state, pathname)
-	)
+	const scrollPosition = useSelector((state: StateSchema) => getUIScrollByPath(state, pathname))
 
 	const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>
 	const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
@@ -63,6 +60,7 @@ export const Page = memo((props: PageProps) => {
 		wrapperRef.current.scrollTop = scrollPosition
 	})
 
+
 	useInfiniteScroll({
 		callback: onScrollEnd,
 		wrapperRef,
@@ -70,12 +68,19 @@ export const Page = memo((props: PageProps) => {
 		isLoading
 	})
 
-	const onScroll = useThrottle((e: UIEvent<HTMLElement>) => {
+	// const onScroll = useCallback((e: UIEvent<HTMLDivElement>) => {
+	// 	dispatch(uiActions.setScrollPosition({
+	// 		position: e.currentTarget.scrollTop,
+	// 		path: pathname
+	// 	}))
+	// }, [dispatch, pathname])
+	// const onScrollThrottled = useThrottle(onScroll, 2000, { leading: true, trailing: false })
+	const onScrollThrottled = useThrottle((e: UIEvent<HTMLDivElement>) => {
 		dispatch(uiActions.setScrollPosition({
 			position: e.currentTarget.scrollTop,
 			path: pathname
 		}))
-	}, 500, { leading: true, trailing: true })
+	}, 500, { leading: true, trailing: false })
 
 	return (
 		<motion.main
@@ -85,13 +90,13 @@ export const Page = memo((props: PageProps) => {
 			// exit='exit'
 			ref={wrapperRef}
 			className={clsx(cls.Page, className)}
-			onScroll={saveScroll ? onScroll : undefined}
+			onScroll={saveScroll ? onScrollThrottled : undefined}
 			data-testid={props['data-testid'] ?? 'Page'}
 		>
 			<div className={cls.wrapper}>
 				{children}
 			</div>
-			<Toast.Viewport className={cls.viewport} />
+			<ToastViewport className={cls.viewport} />
 			{onScrollEnd ? <div className={cls.trigger} ref={triggerRef} /> : null}
 		</motion.main>
 	)

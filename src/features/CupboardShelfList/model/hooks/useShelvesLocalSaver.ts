@@ -9,6 +9,7 @@ export const useShelvesLocalSaver = ({ cupboardShelves }: { cupboardShelves: She
 
 	useEffect(() => {
 		if (cupboardShelves.length > 0) {
+			// console.log(cupboardShelves)
 			localDataService.setShelves(cupboardShelves)
 		}
 	}, [cupboardShelves])

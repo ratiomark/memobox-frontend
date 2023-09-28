@@ -329,6 +329,32 @@ server.put('/shelves', (req, res) => {
 		});
 	});
 });
+server.post('/restoreAllShelves', (req, res) => {
+
+	fs.readFile(path.join(__dirname, 'db.json'), 'UTF-8', (err, data) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send({ message: 'Server error' });
+			return;
+		}
+
+		const db = JSON.parse(data);
+		const shelves = db.shelves
+		const newShelves = shelves.map(shelf=>({...shelf, isDeleted: false}))
+		db.shelves = newShelves
+
+		fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
+			if (err) {
+				console.error(err);
+				res.status(500).send({ message: 'Server error' });
+				return;
+			}
+
+			// Отправляем обновленные данные обратно клиенту
+			res.send(newShelves);
+		});
+	});
+});
 server.patch('/shelvesOrder', (req, res) => {
 	const newShelvesOrder = req.body;
 

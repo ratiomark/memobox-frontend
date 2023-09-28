@@ -10,7 +10,7 @@ export const initAuthData = createAsyncThunk<User, void, { rejectValue: string, 
 	async (_, thunkAPI) => {
 		const { dispatch, rejectWithValue } = thunkAPI
 
-		const userId = localStorage.getItem(USER_ID_LS_KEY)
+		const userId = localStorage.getItem(USER_ID_LS_KEY) ?? 'some_id'
 
 		if (!userId) return rejectWithValue('Нет userId в локал сторедж')
 

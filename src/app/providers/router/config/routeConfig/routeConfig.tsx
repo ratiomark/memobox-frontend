@@ -11,8 +11,7 @@ import { SettingsPageWidgetSkeleton } from '@/widgets/SettingsPageWidget';
 import { StatsAndActionsCupboardWidgetSkeleton } from '@/widgets/StatsAndActionsCupboardWidget';
 import { SubscriptionPage } from '@/pages/SubscriptionPage';
 import { ProfilePage } from '@/pages/ProfilePage';
-import { StatsPage } from '@/pages/StatsPage';
-import { StatsPageSkeleton } from '@/pages/StatsPage';
+import { StatsPageSkeleton, StatsPage } from '@/pages/StatsPage';
 import { ViewPageSkeleton } from '@/pages/ViewPage';
 
 export type AppRouteProps = RouteProps & {
@@ -92,7 +91,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	viewEmpty: {
 		path: '/view',
 		element: <ViewPage />,
-		suspense: <ViewPageSkeleton />	
+		suspense: <ViewPageSkeleton />
 	},
 	settings: {
 		path: obtainRouteSettings(),
@@ -101,6 +100,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	},
 	stats: {
 		path: obtainRouteStats(),
+		// element: <StatsPageSkeleton />,
 		element: <StatsPage />,
 		suspense: <StatsPageSkeleton />
 	},

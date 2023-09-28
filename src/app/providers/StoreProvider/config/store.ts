@@ -8,6 +8,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 // import { cardModalReducer } from '@/features/CardModal';
 import { cupboardShelfListReducer } from '@/features/CupboardShelfList';
 import { headerReducer } from '@/widgets/Header';
+import { toastsReducer } from '@/shared/ui/Toast';
 
 export function createReduxStore(
 	initialState?: StateSchema,
@@ -17,8 +18,9 @@ export function createReduxStore(
 		...asyncReducers,
 		user: userReducer,
 		header: headerReducer,
-		ui: uiReducer,
+		toasts: toastsReducer,
 		cupboard: cupboardShelfListReducer,
+		ui: uiReducer,
 		// cardModal: cardModalReducer,
 		// а это редьюсер, который создает RTKQuery с помощь createApi, чтобы ТС не ругался, но добавить в схему
 		// [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>

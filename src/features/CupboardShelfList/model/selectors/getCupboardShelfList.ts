@@ -1,5 +1,5 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
-import { createSelector } from '@reduxjs/toolkit';
+import { EntityId, createSelector } from '@reduxjs/toolkit';
 import { getAllShelves, getCupboardState } from '../slice/cupboardShelfListSlice';
 import { store } from '@/app/providers/StoreProvider'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
@@ -22,20 +22,21 @@ export const getCupboardShelves = (state: StateSchema) => state.cupboard
 // 	],
 // 	(shelf) => shelf?.isDeleting
 // )
-export const getShelfIsDeleting = (shelfId: string) => {
-	return createSelector(
-		[
-			(state: StateSchema) => state
-		],
-		(state) => getCupboardState.selectById(state, shelfId)?.isDeleting
-	)
-}
+
 export const getShelfById = (shelfId: string) => {
 	return createSelector(
 		[
 			(state: StateSchema) => state
 		],
 		(state) => getCupboardState.selectById(state, shelfId)
+	)
+}
+export const getShelfTitleByShelfId = (shelfId: string | EntityId) => {
+	return createSelector(
+		[
+			(state: StateSchema) => state
+		],
+		(state) => getCupboardState.selectById(state, shelfId)?.title
 	)
 }
 

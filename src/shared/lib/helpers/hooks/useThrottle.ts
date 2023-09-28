@@ -1,8 +1,16 @@
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
 import { useRef, useCallback } from 'react'
 
+
+type CallBack = (...args: any[]) => void
+
+interface Options {
+	leading?: boolean
+	trailing?: boolean
+}
+
 // выполнение колбека не чаще чем 1 раз в delay
-export function useThrottleOld(callback: (...args: any[]) => void, delay = 500) {
+export function useThrottleOld(callback: CallBack, delay = 500) {
 	const throttleRef = useRef(false)
 
 	return useCallback((...args: any[]) => {
@@ -19,12 +27,9 @@ export function useThrottleOld(callback: (...args: any[]) => void, delay = 500) 
 
 }
 
-type CallBack = (...args: any[]) => void
-interface Options {
-	leading?: boolean
-	trailing?: boolean
-}
-
+// Если leading true, функция callback будет вызвана сразу при первом вызове throttle, а затем будет игнорироваться на протяжении задержки.
+// Если trailing true, и функция throttle вызывается во время задержки, callback будет вызван после окончания задержки с последними аргументами, переданными функции throttle.
+// Если и leading, и trailing false, callback никогда не будет вызван.
 export const useThrottle = (callback: CallBack, delay = 500, option: Options) => {
 
 	const {

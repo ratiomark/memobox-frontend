@@ -10,6 +10,7 @@ import {
 	getShelfIdCardModal,
 	getShelfBoxesItems,
 	getBoxIdCheckedCardModal,
+	getCreateNewCardRequestStatus,
 } from '../../../model/selectors/getCreateNewCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
@@ -24,6 +25,7 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
 import { EditorUniversal } from '@/shared/ui/lexical-playground';
 import { createNewCardThunk } from '../../../model/services/createNewCardThunk';
+import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 
 export const CreateNewCardModal = memo(() => {
 	const { t } = useTranslation()
@@ -35,7 +37,7 @@ export const CreateNewCardModal = memo(() => {
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
 	const boxIndexCardModal = useSelector(getBoxIndexCardModal)
-	const boxIdCardModal = useSelector((state: StateSchema) => getBoxIdCheckedCardModal(state))
+	// const boxIdCardModal = useSelector((state: StateSchema) => getBoxIdCheckedCardModal(state))
 	// const shelfItems = useSelector(getShelfItems)
 	const shelfItems = useSelector((state: StateSchema) => getShelfItems(state))
 	const boxItems = useSelector((state: StateSchema) => getShelfBoxesItems(state))
@@ -68,16 +70,30 @@ export const CreateNewCardModal = memo(() => {
 		dispatch(cupboardShelfListActions.setBoxIndexAndBoxIdCardModal(boxIndex))
 	}, [dispatch])
 
+	const createNewCardRequestStatus = useSelector(getCreateNewCardRequestStatus)
+	const onTimeEndCreateNewCard = useCallback(() => {
+		dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('idle'))
+	}, [dispatch])
+
 	const onSubmit = useCallback(() => {
+		// dispatch(toastsActions.addToast({ id: 'new', toast: { status: createNewCardRequestStatus } }))
+		// openToast({
+		// 	onTimeEnd: onTimeEndCreateNewCard,
+		// 	status: createNewCardRequestStatus,
+		// 	messageSuccess: 'Карточка добавлена',
+		// 	messageLoading: 'Ожидание ответа от сервера',
+		// 	messageError: 'Ошибка добавления карточки',
+		// })
 		// console.log(shelfIdCardModal)
-		console.log(`${boxIdCardModal}  -- ${boxIndexCardModal}`)
+		// console.log(`${boxIdCardModal}  -- ${boxIndexCardModal}`)
 		// console.log(shelfBoxes![boxIndexCardModal]._id)
 		// dispatch(cupboardShelfListActions.setBoxIndexCardModal())
 		// dispatch(cupboardShelfListActions.setBoxIndexCardModal())
-		dispatch(createNewCardThunk())
-	// }, [ dispatch])
-	}, [boxIndexCardModal, boxIdCardModal, dispatch])
-	// }, [shelfIdCardModal, boxIndexCardModal, shelfBoxes])
+		dispatch(createNewCardThunk(genRandomId()))
+	}, [dispatch])
+	// }, [boxIndexCardModal, boxIdCardModal, dispatch, createNewCardRequestStatus, onTimeEndCreateNewCard, openToast])
+	// }, [boxIndexCardModal, boxIdCardModal, dispatch])
+	// }, [dispatch, createNewCardRequestStatus, onTimeEndCreateNewCard, openToast])
 
 	const shelvesAndBoxes = useMemo(() => {
 		if (cupboardIsLoading) {
@@ -182,7 +198,10 @@ export const CreateNewCardModal = memo(() => {
 						justify='end'
 						className={cls.actions}
 						onClose={() => onCloseCardModal(false)}
-						isSubmitDisabled={(!questionTextCardModal && !answerTextCardModal)}
+						isSubmitDisabled={
+							(!questionTextCardModal && !answerTextCardModal)
+							// || createNewCardRequestStatus === 'pending'
+						}
 						onSubmit={onSubmit}
 						textSubmitButton={t('add new card')}
 					// onSubmit={() => alert('Создаю новую карточку')}

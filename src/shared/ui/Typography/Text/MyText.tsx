@@ -31,6 +31,7 @@ interface TextOwnProps<E extends ElementType = ElementType> {
 	fontWeight?: FontWeight
 	as?: E
 	drop?: boolean
+	title?: string
 }
 
 export type TextProps<E extends ElementType> = TextOwnProps<E> &

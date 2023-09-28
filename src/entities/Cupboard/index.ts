@@ -10,4 +10,5 @@ export {
 	// useUpdateShelvesOrderMutation,
 	createNewShelf,
 	updateShelfListOrder,
+	restoreAllShelves,
 } from './model/api/cupboardApi'

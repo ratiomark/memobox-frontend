@@ -13,13 +13,14 @@ import { TrashPageInitializerSchema } from '@/features/TrashPageInitializer';
 import { ProfilePageWidgetSchema } from '@/widgets/ProfilePageWidget';
 import { HeaderSchema } from '@/widgets/Header';
 import { ShelfBoxesTemplateSchema } from '@/features/CupboardShelfList';
+import { ToastsSchema } from '@/shared/ui/Toast';
 
 // loginForm делаю не обязательным, таким образом я могу подружать его позже с помощью асинхронна и ТС не будет ругаться на то что я не объявил его в rootReducers
 export interface StateSchema {
 	[rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 	user: UserSchema
 	ui: UISchema
-	// cardModal: CardModalSchema
+	toasts: ToastsSchema
 	header: HeaderSchema
 	cupboard: CupboardPageSchema
 	// async reducers

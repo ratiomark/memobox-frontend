@@ -1,6 +1,7 @@
 import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { CupboardSchema } from '../types/CupboardSchema';
+import { RequestStatusType } from '@/shared/types/GeneralTypes';
 
 export const cupboardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
@@ -13,7 +14,12 @@ export const cupboardApi = rtkApi.injectEndpoints({
 			transformResponse: (response: CupboardSchema, meta, arg) => {
 				// console.log(response)
 				const shelves = response.shelves.map(shelf => {
-					return { ...shelf, isDeleting: false }
+					return {
+						...shelf,
+						isDeleting: false,
+						isDeleted: false,
+						deletingRequestStatus: 'idle' as RequestStatusType
+					}
 				})
 				response.shelves = shelves
 				return response
@@ -38,6 +44,12 @@ export const cupboardApi = rtkApi.injectEndpoints({
 				url: '/shelvesOrder',
 				method: 'PATCH',
 				body: arg
+			}),
+		}),
+		restoreAllShelves: build.mutation<ShelfSchema[], void>({
+			query: () => ({
+				url: '/restoreAllShelves',
+				method: 'POST',
 			}),
 		}),
 		createNewShelf: build.mutation<ShelfSchema, string>({
@@ -93,5 +105,6 @@ export const { useGetCupboardDataQuery } = cupboardApi
 export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 export const updateShelfListOrder = cupboardApi.endpoints.updateShelfListOrder.initiate
 export const createNewShelf = cupboardApi.endpoints.createNewShelf.initiate
+export const restoreAllShelves = cupboardApi.endpoints.restoreAllShelves.initiate
 export const { useGetShelvesQuery } = cupboardApi
 // export const { useUpdateShelvesOrderMutation } = cupboardApi

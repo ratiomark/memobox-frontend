@@ -8,14 +8,25 @@
 @import "fonts/fonts";
 @import "variables/global";
 
+html {
+  scrollbar-width: none;
+  background: #f5f6fa;
+
+  // max-height: fit-content;
+  // border: 3px solid red;
+
+  // scrollbar-color: red red;
+}
+
 body {
-  // overflow: auto;
-  // height: 100vh;
-  // background: var(--body-bg-color, #f5f6fa);
-  --body-bg-color: #f5f6fa;
-
   background: var(--body-bg-color);
+  scrollbar-width: thin;
 
+  // scrollbar-color: red green;
+
+  // scrollbar-color: #979797  var(--body-bg-color);
+
+  // width: var(--scroll-bar-main-width);;
   // cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/heart.svg), auto;
   // scrollbar-width: thin;
   // scrollbar-gutter: stable both-edges;
@@ -69,45 +80,6 @@ body.dragging * {
   display: flex;
 }
 
-// .bottom_left {
-//   top: 100%;
-//   right: 0;
-// }
-
-// .bottom_right {
-//   top: 100%;
-//   left: 0;
-// }
-
-// .top_right {
-//   bottom: 100%;
-//   left: 0;
-// }
-
-// .top_left {
-//   right: 0;
-//   bottom: 100%;
-// }
-
-// .fw_300 {
-//   font-weight: 300;
-// }
-
-// .fw_500 {
-//   font-weight: 500;
-// }
-
-// .fw_600 {
-//   font-weight: 600;
-// }
-
-// .fw_700 {
-//   font-weight: 700;
-// }
-
-// .fw_900 {
-//   font-weight: 900;
-// }
 ::-webkit-scrollbar-thumb {
   /* Укажи цвет скроллбара */
   background: #979797;

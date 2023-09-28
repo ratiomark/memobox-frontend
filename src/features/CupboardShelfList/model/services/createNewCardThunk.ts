@@ -4,26 +4,28 @@ import { cupboardShelfListActions, getCupboardState } from '../slice/cupboardShe
 import { createNewShelf } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
 import { getQuestionCardModal, getAnswerCardModal, getShelfIdCardModal, getBoxIdCheckedCardModal, getCreateNewCardRequestStatus } from '../selectors/getCreateNewCardModal'
+import { toastsActions } from '@/shared/ui/Toast'
 // interface NewCard {
 // 	shelfId: string
 // 	boxId: string
 // 	question: string
 // 	answer: string
 // }
-export const createNewCardThunk = createAsyncThunk<boolean, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const createNewCardThunk = createAsyncThunk<boolean, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/createNewCardThunk',
-	async (_, thunkAPI) => {
+	async (randomId, thunkAPI) => {
 
 		const { dispatch, getState } = thunkAPI
 		// dispatch(getCreateNewCardRequestStatus('pen'))
-		dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('pending'))
+		dispatch(toastsActions.addToast({ id: randomId, toast: { status: 'pending' } }))
+		// dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('pending'))
 		const question = getQuestionCardModal(getState())
 		const answer = getAnswerCardModal(getState())
 		const shelfId = getShelfIdCardModal(getState())
 		const boxId = getBoxIdCheckedCardModal(getState())
+		// console.log(question)
 		try {
 			setTimeout(() => {
-				// console.log(question)
 				// console.log(answer)
 				// console.log(shelfId)
 				// console.log(boxId)
@@ -33,12 +35,14 @@ export const createNewCardThunk = createAsyncThunk<boolean, void, { rejectValue:
 				const response = Math.random() > 0.5
 				// const response = await dispatch(createNewShelf(shelfName)).unwrap()
 				if (!response) {
-					dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('error'))
+					dispatch(toastsActions.updateToastById({ id: randomId, toast: { status: 'error' } }))
+					// dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('error'))
 					// dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
 					// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(false))
 					throw new Error()
 				}
-				dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('success'))
+				dispatch(toastsActions.updateToastById({ id: randomId, toast: { status: 'success' } }))
+				// dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('success'))
 				// console.log('НОВАЯ ПОЛКА', response)
 				// dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
 				// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(true))

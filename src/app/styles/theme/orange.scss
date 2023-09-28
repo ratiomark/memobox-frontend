@@ -2,6 +2,7 @@
   // redesigned
   --dark-bg: #fff3d6;
   --bg: #f0c048;
+  --body-bg-color: #f5f6fa;
 
   // --
   --light-bg: #f2d791;
@@ -50,4 +51,7 @@
 
   // listbox
   --listbox-bg: #d5d5d7;
+
+  background: var(--body-bg-color);
+  scrollbar-color: #979797  var(--body-bg-color);
 }

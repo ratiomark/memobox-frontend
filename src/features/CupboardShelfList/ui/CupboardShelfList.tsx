@@ -40,12 +40,11 @@ import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce';
 import { useShelvesDndHandler } from '../model/hooks/useShelvesDndHandler';
 import { useShelvesLocalSaver } from '../model/hooks/useShelvesLocalSaver';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
-import { ToastShelfDeletion } from './ToastShelfDeletion/ToastShelfDeletion';
+import { ShelvesDeletionToasts } from './ShelvesDeletionToasts/ShelvesDeletionToasts';
 // import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
 // import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
 
 let timerId: number;
-let shelvesData;
 export const CupboardShelfList = () => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
@@ -98,30 +97,14 @@ export const CupboardShelfList = () => {
 	}, [dispatch])
 
 	const reorderShelves = useCallback((shelves: ShelfSchema[]) => {
-		console.log('reorder ', shelves)
+		// console.log('reorder ', shelves)
 		dispatch(cupboardShelfListActions.reorderShelves(shelves))
 		// VAR: нужно показать плашку "новый порядок полок будет сохранен через 5 секунд". По прошествии 5-ти секунд отправить запрос на сервер
 	}, [dispatch])
 
 
 	const shelvesList = useMemo(() => {
-		// let shelvesData;
-		// if (cupboardIsLoading) {
-		// 	// shelvesData = localDataService.getShelves()
-		// 	// shelvesData = localDataService.getShelves()
-		// 	// const shelvesFromLocalData = undefined
-		// 	const shelvesFromLocalData = localDataService.getShelves()
-		// 	if (!shelvesFromLocalData) {
-		// 		return []
-		// 	} else {
-		// 		shelvesData = shelvesFromLocalData
-		// 	}
-		// } else {
-		// 	shelvesData = cupboardShelves
-		// }
-		// console.log('cupboardShelvesLIST  :  ', cupboardShelves)
-		// const shelvesData = cupboardShelves
-		// return shelvesData.map(shelf => {
+
 		return cupboardShelves.map(shelf => {
 			const completeSmallDataLabels =
 				<CompleteSmallDataLabels
@@ -223,7 +206,8 @@ export const CupboardShelfList = () => {
 				<HiddenTemplates />
 			</div>
 			<CreateNewCardModal />
-			<ToastShelfDeletion />
+			<ShelvesDeletionToasts/>
+			{/* <ToastShelfDeletion /> */}
 		</>
 	)
 }

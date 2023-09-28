@@ -1,42 +1,51 @@
-import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
-import cls from './ShelfItem.module.scss';
-import { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import { StateSchema } from '@/app/providers/StoreProvider';
 import { Shelf } from '@/entities/Shelf';
 import { ShelfDeleting } from '../ShelfDeleting/ShelfDeleting';
 import { ShelfProps } from '@/entities/Shelf';
-import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
-
-// interface ShelfItemProps {
-// 	id: string
-// 	title: string
-// 	completeSmallDataLabelsBlock: ReactNode
-// 	shelfButtonsBlock: ReactNode
-// 	index: number
-// 	className?: string
-// 	collapsed: boolean
-// }
-
+import { getShelfDeletionRequestStatus, getShelfIsDeleting } from '../../model/selectors/getShelfDeletionProcess';
+import { MyToast } from '@/shared/ui/Toast';
+import { useCallback } from 'react';
+import { cupboardShelfListActions } from '../..';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 
 // тут будет переключаться состояние полки в зависимости от того лежит она в стейте или нет. Вместо полки будет отрисован объект удаления с кнопкой "отменить удаление"
-// создать отдельное поле для каждой полки "inDeletionProcess"
 export const ShelfItem = (props: ShelfProps) => {
 	const {
 		shelf: {
 			title,
-			id
+			id: shelfId
 		}
 	} = props
-	const isShelfDeleting = useSelector(getShelfIsDeleting(id))
-	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, id))
-	
+	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
+	// const shelfDeletionRequestStatus = useSelector(getShelfDeletionRequestStatus(shelfId))
+	// const dispatch = useAppDispatch()
+
+	// const onTimeEnd = useCallback(() => {
+	// 	dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
+	// }, [dispatch, shelfId])
+
+	// const toast = <MyToast
+	// 	onTimeEnd={onTimeEnd}
+	// 	status={shelfDeletionRequestStatus}
+	// 	messageSuccess='УДАЛЕНА'
+	// 	// messageLoading='Загрузка'
+	// 	contentLoading={title}
+	// 	messageLoading='ХАП. Ожидание ответа от сервера'
+	// 	// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
+	// 	// contentSuccess={<MyText text={'Все супер класс!'} />}
+	// 	messageError='Ошибочка(('
+	// />
+
 	if (isShelfDeleting) {
-		return <ShelfDeleting title={title} shelfId={id} />
+		return <>
+			<ShelfDeleting title={title} shelfId={shelfId} />
+			{/* {toast} */}
+		</>
 	}
-	
-	return (
+
+	return (<>
 		<Shelf {...props} />
+		{/* {toast} */}
+	</>
 	)
 }

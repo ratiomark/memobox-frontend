@@ -1,55 +1,32 @@
 import { Button } from '@/shared/ui/Button';
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback, useMemo, } from 'react';
+import { memo, useCallback, useMemo, useRef, } from 'react';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../..';
 import { MyText } from '@/shared/ui/Typography';
 import cls from './SettingsButton.module.scss';
+import { getShelfDeletionIsAnyShelfInDeletionProcess, getShelfDeletionRequestStatus } from '../../model/selectors/getShelfDeletionProcess';
 import { useSelector } from 'react-redux';
-import { useRemoveShelfMutation } from '@/entities/Shelf';
-import { getShelfIsDeleting } from '../../model/selectors/getCupboardShelfList';
-import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
-import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
-import { deleteShelfThunk } from '../../model/services/deleteShelfThunk';
+// import { MyToastList } from '@/shared/ui/Toast/MyToastList';
 
-interface SettingButtonProps {
-	shelfId: string
-}
 
-// function trainHotKey(event: KeyboardEvent) {
-// 	if (event.code === 'Digit1' && event.code === 'KeyN')
-// }
-let timerId: number | TimeoutId;
-export const SettingButton = memo((props: SettingButtonProps) => {
-	const {
-		shelfId,
-	} = props
+
+export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 	const { t } = useTranslation()
-	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
+	// const isAnyShelfInDeletionProcess = useSelector(getShelfDeletionIsAnyShelfInDeletionProcess)
+	// const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
 	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
 	// const [removeShelfMutation] = useRemoveShelfMutation()
 	// const [updateShelfMutation] = useUpdateShelfMutation()
 	const dispatch = useAppDispatch()
 
-
-
 	const onDeleteClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
-		// timerId = setTimeout(() => {
-		// 	if (isShelfDeleting) {
-		// 		dispatch(deleteShelfThunk(shelfId))
-		// 		// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
-		// 		// removeShelfMutation(shelfId)
-		// 	}
-		// 	clearTimeout(timerId)
-		// }, DURATION_SHELF_DELETION_MILLISEC)
+		dispatch(cupboardShelfListActions.setShelfDeletionShelfId(shelfId))
+		dispatch(cupboardShelfListActions.setIsAnyShelfInDeletionProcess(true))
 	}, [dispatch, shelfId])
-	// }, [dispatch, isShelfDeleting, shelfId])
-	// }, [dispatch, isShelfDeleting, removeShelfMutation, shelfId])
-
 
 	const onBoxesSettingsClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.setShelfBoxesTemplateModalShelfId(shelfId))
@@ -65,12 +42,14 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 		dispatch(cupboardShelfListActions.setNotificationModalShelfId(shelfId))
 		dispatch(cupboardShelfListActions.setNotificationModalIsOpen(true))
 	}, [dispatch, shelfId])
+
 	// const onRenameShelf = useCallback((shelfId: string) => {
 	// 	dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
 	// }, [dispatch])
 
 
 	const settingItems: DropdownItem[] = useMemo(() => {
+	// const settingItemsWithoutDeletion: DropdownItem[] = useMemo(() => {
 		return [
 			{
 				content: t('settingsItems.rename'),
@@ -93,21 +72,43 @@ export const SettingButton = memo((props: SettingButtonProps) => {
 				onClick: onDeleteClick
 			},
 		]
+	// }, [t, shelfId, onNotificationClick, onMissedTrainingClick, onBoxesSettingsClick])
 	}, [t, shelfId, onNotificationClick, onDeleteClick, onMissedTrainingClick, onBoxesSettingsClick])
 
+	// const settingItems: DropdownItem[] = useMemo(() => {
+	// 	const shelfDeletionItem = isAnyShelfInDeletionProcess
+	// 		? {
+	// 			content: <MyText fontWeight='300' className={cls.removeShelfButton} text={t('settingsItems.remove')} variant='hint' />,
+	// 			onClick: onDeleteClick
+	// 			// onClick: () => alert('NONONONONONONONOONONONNONNOONONONONONONONON')
+	// 		}
+	// 		: {
+	// 			content: <MyText fontWeight='300' className={cls.removeShelfButton} text={t('settingsItems.remove')} variant='error' />,
+	// 			onClick: onDeleteClick
+	// 		}
+	// 	return [...settingItemsWithoutDeletion, shelfDeletionItem]
+	// }, [t, settingItemsWithoutDeletion, onDeleteClick, isAnyShelfInDeletionProcess])
+
+	// const savedRef = useRef()
+	// const shelfDeletionRequestStatus = useSelector(getShelfDeletionRequestStatus)
+
+	// const onTimeEnd = () => {
+	// 	dispatch(cupboardShelfListActions.setShelfDeletionRequestStatus('idle'))
+	// }
 
 	return (
-		<Dropdown
-			items={settingItems}
-			trigger={
-				<Button
-					fontWeight='300'
-				// className={cls.button}
-				>
-					{t('settingsItems.settings')}
-				</Button>
-			}
-		/>
+		<>
+			<Dropdown
+				items={settingItems}
+				trigger={
+					<Button
+						fontWeight='300'
+					// className={cls.button}
+					>
+						{t('settingsItems.settings')}
+					</Button>
+				}
+			/>
+		</>
 	)
 })
-SettingButton.displayName = 'SettingButton'

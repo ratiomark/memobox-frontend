@@ -13,6 +13,7 @@ import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk
 import { setLocalShelvesToStore } from '../services/setLocalShelvesToStore'
 import { createNewShelfThunk } from '../services/createNewShelfThunk'
 import { RequestStatusType } from '@/shared/types/GeneralTypes'
+import { deleteShelfThunk } from '../services/deleteShelfThunk'
 // import { store } from '@/app/providers/StoreProvider/ui/StoreProvider'
 
 const initialState: CupboardPageSchema = {
@@ -324,9 +325,16 @@ const cupboardShelfList = createSlice({
 			shelvesAdapter.updateMany(state, updates)
 			// shelvesAdapter.setAll(state, action.payload)
 		},
-		// shelf control deletion
+		// shelf control and shelf deletion 
 		setShelfDeletionRequestStatus: (state, action: PayloadAction<RequestStatusType>) => {
 			state.shelfDeletionProcess.requestStatus = action.payload
+		},
+		setShelfDeletionShelfId: (state, action: PayloadAction<string>) => {
+			state.shelfDeletionProcess.shelfId = action.payload
+			// state.shelfDeletionProcess.isAnyShelfInDeletionProcess = true
+		},
+		setIsAnyShelfInDeletionProcess: (state, action: PayloadAction<boolean>) => {
+			state.shelfDeletionProcess.isAnyShelfInDeletionProcess = action.payload
 		},
 		deleteShelf: (state, action: PayloadAction<EntityId>) => {
 			shelvesAdapter.removeOne(state, action.payload)
@@ -400,6 +408,20 @@ const cupboardShelfList = createSlice({
 				createNewShelfThunk.rejected,
 				(state) => {
 					state.createNewShelfModal.requestStatus = 'error'
+				})
+			.addCase(
+				deleteShelfThunk.fulfilled,
+				(state, action: PayloadAction<string>) => {
+					// state.shelfDeletionProcess.requestStatus = 'success'
+					// state.shelfDeletionProcess.isAnyShelfInDeletionProcess = false
+					shelvesAdapter.removeOne(state, action.payload)
+				})
+			.addCase(
+				deleteShelfThunk.rejected,
+				(state, action) => {
+					// state.shelfDeletionProcess.requestStatus = 'error'
+					// state.shelfDeletionProcess.isAnyShelfInDeletionProcess = false
+					shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false, deletingRequestStatus: 'error' } })
 				})
 		// .addCase(
 		// 	sendShelvesOrder.rejected,
