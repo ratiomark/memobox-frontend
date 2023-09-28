@@ -1464,7 +1464,7 @@
     {
       "id": "648c920b6adf96517748f3c1",
       "index": 0,
-      "isCollapsed": true,
+      "isCollapsed": false,
       "title": "английский",
       "boxesData": [
         {
@@ -1551,12 +1551,13 @@
         "wait": 11
       },
       "isDeleting": false,
-      "isDeleted": false
+      "isDeleted": false,
+      "deletingRequestStatus": "idle"
     },
     {
       "id": "648c920baa3edb04cec38442",
       "index": 1,
-      "isCollapsed": true,
+      "isCollapsed": false,
       "title": "math",
       "boxesData": [
         {
@@ -1763,7 +1764,8 @@
       },
       "isDeleting": false,
       "isDeleted": false,
-      "missedTrainingAction": "none"
+      "missedTrainingAction": "none",
+      "deletingRequestStatus": "idle"
     },
     {
       "id": "648c920b07d1f8f9ed46604e",

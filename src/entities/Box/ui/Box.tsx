@@ -168,7 +168,7 @@ export const Box = (props: BoxPropsBase) => {
 					{title}
 					{completeSmallDataLabels}
 					{buttons}
-					
+
 					<MyText className={cls.timing} text={getBoxTimingStringRepresentation(boxItem) ?? 'ERROR'} />
 				</div>
 				<Button onClick={startTraining} variant='filledBox' disabled={data.train < 1} className={cls.trainButton} >{t('train')}</Button>

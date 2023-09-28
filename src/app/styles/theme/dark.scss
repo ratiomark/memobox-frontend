@@ -4,7 +4,8 @@ $colors: (
   "--text": #a2a2a2,
   "--hint": #adbcc0,
   "--text-header": #ffffffc7,
-  "--accent": #46b690,
+  "--accent": #005f3f,
+  // "--accent": #46b690,
   // "--accent": #33d69f,
   "--accent-bg": #e6faf3,
   "--wait-color": #ff8b57,
@@ -51,23 +52,30 @@ $colors: (
 
   --active-list-item-popover: rgb(128 128 128 / 9.2%);
   --button-color-training-empty: #f5f6fa;
+  --button-filled-text-color: #a2a2a2;
   --button-color-training-filled: blue;
   --create-edit-modals-bottom-buttons-bg: rgb(211 209 255);
 
   // data-labels
-  --data-label-all: #46b690;
-  --data-label-train: #eb4b4b;
-  --data-label-wait: #ff8b57;
+  // --data-label-all: #46b690;
+  // --data-label-train: #eb4b4b;
+  // --data-label-wait: #ff8b57;
+  --data-label-all: #003f29;
+  --data-label-train: #963030b0;
+  --data-label-wait: #8a4f32;
   --data-label-text-color: #a2a2a2;
   --data-label-metric-value-color: #b5b5b5;
   --small-data-label-background-all: #003f29;
-  --small-data-label-background-train: #eb4b4bb0;
+  --small-data-label-background-train: #963030b0;
+  --small-data-label-background-wait: #8a4f32;
 
   // --small-data-label-background-train: #fce9e9;
-  --small-data-label-background-wait: #fff1ea;
-  --small-data-label-color-all: #46b690;
-  --small-data-label-color-train: #eb4b4b;
-  --small-data-label-color-wait: #ff8b57;
+  // --small-data-label-background-wait: #fff1ea;
+  // --small-data-label-color-all: #46b690;
+  // --small-data-label-color-wait: #ff8b57;
+  --small-data-label-color-all: #66e1b7;
+  --small-data-label-color-train: #ff7f7f;
+  --small-data-label-color-wait: #f6b598;
 
   // lexical-editor
   --toolbar-item-hover-color: rgb(var(--accent-rgb) / 20%);

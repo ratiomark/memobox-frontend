@@ -18,9 +18,7 @@ export const App = () => {
 	// useEffect(() => {
 	// 	document.body.className = theme
 	// }, [theme])
-	// useLayoutEffect(() => {
-	// 	localStorage.setItem('theme', theme)
-	// }, [theme])
+
 
 	useEffect(() => {
 		dispatch(initAuthData())
