@@ -1,33 +1,24 @@
 /* stylelint-disable scss/at-function-pattern */
+// "--save": #62de85,
+// "--icon": #5ed3f3,
+@use "../utils" as utils;
+
 $colors: (
   "--text": #141c1f,
   "--hint": #adbcc0,
   "--text-header": #ffffffc7,
-  "--save": #62de85,
-  "--icon": #5ed3f3,
   "--accent": #33d69f,
   "--accent-bg": #e6faf3,
   "--wait-color": #ff8b57,
   "--cancel": #f77,
+  "--toast-bg": #30363d
 );
-
-@function HexToRGB($hex) {
-  @return red($hex) green($hex) blue($hex);
-}
-
-@function HexToRGBComas($hex) {
-  @return red($hex), green($hex), blue($hex);
-}
-
-@function ccc($name, $opacity: false) {
-  @return rgb(var(#{unquote($name)}));
-}
 
 .app_light_theme {
   @if $colors {
     @each $key, $value in $colors {
       // --color-#{$key}: #{$value};
-      #{$key}-rgb: #{HexToRGB($value)};
+      #{$key}-rgb: #{utils.HexToRGB($value)};
     }
 
     @each $key, $value in $colors {
@@ -50,7 +41,17 @@ $colors: (
   --cancel-rgb-8: rgb(var(--cancel-rgb) / 80%);
   --accent-rgb-2: rgb(var(--accent-rgb) / 20%);
   --accent-rgb-8: rgb(var(--accent-rgb) / 80%);
+  --toast-bg-rgb-2: rgb(var(--toast-bg-rgb) / 20%);
+  --toast-bg-rgb-4: rgb(var(--toast-bg-rgb) / 40%);
+  --toast-bg-rgb-6: rgb(var(--toast-bg-rgb) / 60%);
+  --toast-bg-rgb-8: rgb(var(--toast-bg-rgb) / 80%);
+  --toast-bg-rgb-9: rgb(var(--toast-bg-rgb) / 90%);
 
+  // --color-scale-gray-5: #484f58;
+  // --color-scale-gray-6: #30363d;
+  // --color-scale-gray-7: #21262d;
+
+  // background-color: var(--color-scale-gray-5);
   // --text: #141c1f;
   // --hint: #adbcc0;
   // --cancel: #f77;
@@ -69,6 +70,7 @@ $colors: (
   --data-label-train: #eb4b4b;
   --data-label-wait: #ff8b57;
   --data-label-text-color: #676872;
+  --data-label-metric-value-color: rgb(22 22 22 / 85.3%);
   --small-data-label-background-all: #e6faf3;
   --small-data-label-background-train: #fce9e9;
   --small-data-label-background-wait: #fff1ea;
@@ -95,6 +97,7 @@ $colors: (
 
   // card-bg
   --card-bg: #e0e0e0;
+  --entities-box-shadow-main: 0 1px 4px rgb(0 0 0 / 10%);
 
   // listBox
   --list-box-bg: #e0e0e0;

@@ -12,8 +12,6 @@ i18n
 	.use(initReactI18next)
 	.init({
 
-
-
 		supportedLngs: ['ru', 'en',],
 		// supportedLngs: ['ru', 'en', 'zk','it', 'uk', 'de'],
 		fallbackLng: ['en', 'ru'],

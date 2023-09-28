@@ -7,6 +7,7 @@ import { getQuestionCardModal, getAnswerCardModal, getShelfIdCardModal, getBoxId
 import { toastsActions } from '@/shared/ui/Toast'
 import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
+import { t } from 'i18next'
 // interface NewCard {
 // 	shelfId: string
 // 	boxId: string
@@ -20,7 +21,19 @@ export const deleteShelfThunk = createAsyncThunk<string, string, { rejectValue: 
 		const { dispatch, getState } = thunkAPI
 		const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
 		// console.log(shelfTitle)
-		dispatch(toastsActions.addToast({ id: shelfId, toast: { status: 'pending', messageLoading: 'ЙОЙОЙОЙ Удаление', contentLoading: shelfTitle } }))
+		dispatch(toastsActions.addToast({
+			id: shelfId,
+			toast: {
+				status: 'pending',
+				messageLoading: t('toast:messageLoading'),
+				messageError: t('toast:messageError'),
+				messageSuccess: t('toast:delete_shelf.messageSuccess'),
+				contentLoading: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
+				contentSuccess: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
+				contentError: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
+				duration: 1000000,
+			}
+		}))
 		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { deletingRequestStatus: 'pending' } }))
 		// dispatch(cupboardShelfListActions.setShelfDeletionRequestStatus('pending'))
 		try {
@@ -30,19 +43,18 @@ export const deleteShelfThunk = createAsyncThunk<string, string, { rejectValue: 
 			// const response = false
 			// const response = Math.random() > 0.5
 			const response = Math.random() > 50
-			// console.log('RESPONSE   ', response)
 			if (!response) {
 				dispatch(toastsActions.updateToastById({
 					id: shelfId,
-					toast: { status: 'error', messageError: 'ОООООООООООООО ошбика', contentError: shelfTitle }
+					toast: { status: 'error' }
 				}))
 
 				throw new Error()
 			}
-			
+
 			dispatch(toastsActions.updateToastById({
 				id: shelfId,
-				toast: { status: 'success', messageLoading: '!!!!!!!!!! Успешный успеш', contentLoading: shelfTitle }
+				toast: { status: 'success' }
 			}))
 			// dispatch(removeShelfByIdMutation(shelfId)).unwrap()
 			return shelfId

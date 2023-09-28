@@ -118,7 +118,6 @@ export const StatsAndActionsCupboardWidget = () => {
 					// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
 					// contentSuccess={<MyText text={'Все супер класс!'} />}
 					messageError='Ошибка'
-
 				/>
 				{/* <MyToast
 					onTimeEnd={onTimeEndCreateNewCard}

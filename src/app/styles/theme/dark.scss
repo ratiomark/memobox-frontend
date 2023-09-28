@@ -1,53 +1,98 @@
+@use "../utils" as utils;
+
+$colors: (
+  "--text": #a2a2a2,
+  "--hint": #adbcc0,
+  "--text-header": #ffffffc7,
+  "--accent": #46b690,
+  // "--accent": #33d69f,
+  "--accent-bg": #e6faf3,
+  "--wait-color": #ff8b57,
+  "--cancel": #f77,
+  "--toast-bg": #30363d
+);
+
 .app_dark_theme {
+  @if $colors {
+    @each $key, $value in $colors {
+      // --color-#{$key}: #{$value};
+      #{$key}-rgb: #{utils.HexToRGB($value)};
+    }
+
+    @each $key, $value in $colors {
+      // --color-#{$key}: #{$value};
+      #{$key}: #{$value};
+    }
+  }
+
   // redesigned
+  // --shelf-bg: #fcfcfc;
+  --delimiter-color: rgb(121 115 115 / 10%);
   --dark-bg: #090f11;
-  --bg: #0c1214;
-  --light-bg: #151c1f;
-  --text: #dbdbdb;
-  --hint: #555;
-  --cancel: #d95757;
-  --save: #6cd98b;
-  --icon: #74a2b2;
-  --accent: #5ed3f3;
-  --shelf-bg: #fcfcfc;
+  --bg: #202223;
+  --body-bg-color: #171818;
+
+  // --bg: #30363d;
+  // --body-bg-color: #30363d;
+
+  // --
+
+  --cancel-rgb-2: rgb(var(--cancel-rgb) / 20%);
+  --cancel-rgb-8: rgb(var(--cancel-rgb) / 80%);
+  --accent-rgb-2: rgb(var(--accent-rgb) / 20%);
+  --accent-rgb-8: rgb(var(--accent-rgb) / 80%);
+  --toast-bg-rgb-2: rgb(var(--toast-bg-rgb) / 20%);
+  --toast-bg-rgb-4: rgb(var(--toast-bg-rgb) / 40%);
+  --toast-bg-rgb-6: rgb(var(--toast-bg-rgb) / 60%);
+  --toast-bg-rgb-8: rgb(var(--toast-bg-rgb) / 80%);
+  --toast-bg-rgb-9: rgb(var(--toast-bg-rgb) / 90%);
+
+  // --
+
   --active-list-item-popover: rgb(128 128 128 / 9.2%);
   --button-color-training-empty: #f5f6fa;
   --button-color-training-filled: blue;
-  --body-bg-color: #f5f6fa;
+  --create-edit-modals-bottom-buttons-bg: rgb(211 209 255);
 
   // data-labels
-  --data-label-all: #33d69f;
+  --data-label-all: #46b690;
   --data-label-train: #eb4b4b;
   --data-label-wait: #ff8b57;
-  --data-label-text-color: #676872;
-  --small-data-label-background-all: #e6faf3;
-  --small-data-label-background-train: #fce9e9;
+  --data-label-text-color: #a2a2a2;
+  --data-label-metric-value-color: #b5b5b5;
+  --small-data-label-background-all: #003f29;
+  --small-data-label-background-train: #eb4b4bb0;
+
+  // --small-data-label-background-train: #fce9e9;
   --small-data-label-background-wait: #fff1ea;
-  --small-data-label-color-all: #33d69f;
+  --small-data-label-color-all: #46b690;
   --small-data-label-color-train: #eb4b4b;
   --small-data-label-color-wait: #ff8b57;
 
+  // lexical-editor
+  --toolbar-item-hover-color: rgb(var(--accent-rgb) / 20%);
+
   // border
   --border-main: 1px solid var(--accent);
-  --border-focus: 1px solid var(--icon);
-  --border-input: 1px solid var(--icon);
+  --border-input: 1px solid var(--accent);
   --border-input-focus: 1px solid var(--accent);
   --border-success: 1px solid var(--save);
   --border-cancel: 1px solid var(--cancel);
 
   // skeleton
-  --skeleton-color: #1515ad;
-  --skeleton-shadow: #2b2be8;
+  --skeleton-color: #fff;
+  --skeleton-shadow: rgba(0 0 0 / 20%);
 
   // code
-  --code-bg: #0e0e37;
+  --code-bg: #fff;
 
   // card-bg
-  --card-bg: #1e1e90;
+  --card-bg: #e0e0e0;
+  --entities-box-shadow-main: 0 1px 4px rgb(0 0 0 / 10%);
 
   // listBox
-  --list-box-bg: #1e1e90;
-  --list-box-option-active: #1b61f8;
+  --list-box-bg: #e0e0e0;
+  --list-box-option-active: #04ff04;
 
   background: var(--body-bg-color);
   scrollbar-color: #979797  var(--body-bg-color);

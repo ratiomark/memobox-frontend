@@ -8,9 +8,14 @@ export interface MyToastProps {
 	messageLoading?: string
 	messageSuccess?: string
 	messageError?: string
-	contentLoading?: ReactNode
-	contentSuccess?: ReactNode
-	contentError?: ReactNode
+	contentLoading?: string
+	contentSuccess?: string
+	contentError?: string
+	contentCommon?: string
+	// contentLoading?: string | ReactNode
+	// contentSuccess?: string | ReactNode
+	// contentError?: string | ReactNode
+	// contentCommon?: string | ReactNode
 	id?: string
 }
 

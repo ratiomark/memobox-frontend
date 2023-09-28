@@ -10,15 +10,15 @@ import CheckIcon from '@/shared/assets/icons/checkIcon.svg'
 import CheckIcon2 from '@/shared/assets/icons/done-20-20.svg'
 import ErrorIcon from '@/shared/assets/icons/errorIcon.svg'
 import { MyToastProps } from '../model/types/ToastsSchema';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { getToastsObject } from '../model/selectors/getToasts';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { toastsActions, toastsReducer } from '../model/slice/toastSlice';
 import { Root, ToastDescription, ToastTitle } from '@radix-ui/react-toast';
-// import * as RadixToast from '@radix-ui/react-toast';
 import cls from './MyToast.module.scss';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { motion } from 'framer-motion';
+import { toastIconSize } from '@/shared/const/iconSizes';
 
 interface MyComponentToastsProps extends MyToastProps {
 	onTimeEnd?: () => void
@@ -29,16 +29,17 @@ export const MyToast = (props: MyComponentToastsProps) => {
 		className,
 		status = 'idle',
 		duration = 3000,
-		messageLoading = 'loading',
-		messageSuccess = 'success',
-		messageError = 'failure',
+		messageLoading = 'messageLoading',
+		messageSuccess = 'messageSuccess',
+		messageError = 'messageError',
 		contentLoading,
 		contentSuccess,
 		contentError,
+		contentCommon,
 		onTimeEnd,
 	} = props
 
-	const { t } = useTranslation()
+	const { t } = useTranslation('toast')
 
 	useEffect(() => {
 		if ((status === 'error' || status === 'success') && onTimeEnd) {
@@ -47,67 +48,59 @@ export const MyToast = (props: MyComponentToastsProps) => {
 	}, [status, onTimeEnd, duration])
 
 	let message: string
-	let content: ReactNode;
-	let additionalContent: ReactNode;
+	let mainContent: ReactNode;
+	let additionalMessage: string | undefined
 	switch (status) {
 		case 'pending':
 			message = messageLoading
-			content = (
-				<div className={cls.content} >
-					<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
-					<Spinner className={cls[status]} width={32} height={32} />
-				</div>)
-			additionalContent = contentLoading
-				? <ToastDescription>{contentLoading}</ToastDescription>
-				: null
+			mainContent = (<div className={cls.content} >
+				<ToastTitle className={cls.title}>{t(message)}</ToastTitle>
+				<Spinner className={cls[status]} width={toastIconSize} height={toastIconSize} />
+			</div>)
+			additionalMessage = contentLoading ?? contentCommon
 			break;
 		case 'success':
 			message = messageSuccess
-			content = (
-				<div className={cls.content} >
-					<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
-					<CheckIcon className={cls[status]} width={32} height={32} />
-				</div>)
-			additionalContent = contentSuccess
-				? <ToastDescription>{contentSuccess}</ToastDescription>
-				: null
+			mainContent = (<div className={cls.content} >
+				<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
+				<CheckIcon className={cls[status]} width={toastIconSize} height={toastIconSize} />
+			</div>)
+			additionalMessage = contentSuccess ?? contentCommon
 			break;
 		case 'error':
 			message = messageError
-			content = (
-				<div className={cls.content} >
-					<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
-					<ErrorIcon className={cls[status]} width={32} height={32} />
-				</div>)
-			additionalContent = contentError
-				? <ToastDescription>{contentError}</ToastDescription>
-				: null
+			mainContent = (<div className={cls.content} >
+				<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
+				<ErrorIcon className={cls[status]} width={toastIconSize} height={toastIconSize} />
+			</div>)
+			additionalMessage = contentError ?? contentCommon
 			break;
 		default:
 			message = messageLoading
-			content = (
-				<div className={cls.content} >
-					<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
-					<Spinner className={cls[status]} width={32} height={32} />
-				</div>)
-			additionalContent = contentLoading
-				? <ToastDescription>{contentLoading}</ToastDescription>
-				: null
+			mainContent = (<div className={cls.content} >
+				<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
+				<Spinner className={cls[status]} width={toastIconSize} height={toastIconSize} />
+			</div>)
+			additionalMessage = contentLoading ?? contentCommon
 			break;
 	}
-
+	
+	const additionalContent = additionalMessage
+		? <ToastDescription className={cls.description} >{t(additionalMessage)}</ToastDescription>
+		: null
+	
 	return (
 		<Root
 			// onOpenChange={onOpenChange}
 			open={status !== 'idle'}
 			className={clsx(
 				cls.MyToast,
-				cls[status],
+				cls[status + '_toast'],
 				className
 			)}
 		// duration={5000}
 		>
-			{content}
+			{mainContent}
 			{additionalContent}
 		</Root>
 	)

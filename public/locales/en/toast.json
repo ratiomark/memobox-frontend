@@ -1,0 +1,17 @@
+{
+  "messageLoading": "Awaiting response",
+  "messageError": "Server-side error",
+  "messageSuccess": "Success",
+  "create_new_card": {
+    "messageSuccess": "Card created",
+    "additional": "Creating new card"
+  },
+  "create_new_shelf": {
+    "messageSuccess": "Shelf created",
+    "additional": "Creating new shelf"
+  },
+  "delete_shelf": {
+    "messageSuccess": "Shelf deleted",
+    "additional": "Shelf is deleting"
+  }
+}

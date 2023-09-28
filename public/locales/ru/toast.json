@@ -1,0 +1,17 @@
+{
+  "messageLoading": "Ожидаем ответ от сервера",
+  "messageError": "Ошибка сервера",
+  "messageSuccess": "Успешно",
+  "create_new_card": {
+    "messageSuccess": "Карточка создана",
+    "additional": "Добавление новой карточки"
+  },
+  "create_new_shelf": {
+    "messageSuccess": "Полка создана",
+    "additional": "Добавление новой полки"
+  },
+  "delete_shelf": {
+    "messageSuccess": "Полка удалена",
+    "additional": "Удаление полки"
+  }
+}

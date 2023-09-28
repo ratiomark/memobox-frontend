@@ -1,0 +1,12 @@
+/* stylelint-disable scss/at-function-pattern */
+@function HexToRGB($hex) {
+  @return red($hex) green($hex) blue($hex);
+}
+
+// @function HexToRGBComas($hex) {
+//   @return red($hex), green($hex), blue($hex);
+// }
+
+// @function ccc($name, $opacity: false) {
+//   @return rgb(var(#{unquote($name)}));
+// }
