@@ -1,6 +1,3 @@
-import i18next from 'i18next'
-import { memo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { ValidationErrorText, ValidationFunctionText } from './validationErrorTexts'
 export const validateLastName: ValidationFunctionText = (inputValue: string) => {
 	const errors: string[] = []

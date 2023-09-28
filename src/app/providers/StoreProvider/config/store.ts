@@ -18,7 +18,7 @@ export function createReduxStore(
 		...asyncReducers,
 		user: userReducer,
 		header: headerReducer,
-		toasts: toastsReducer,
+		// toasts: toastsReducer,
 		cupboard: cupboardShelfListReducer,
 		ui: uiReducer,
 		// cardModal: cardModalReducer,

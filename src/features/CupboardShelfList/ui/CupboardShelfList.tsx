@@ -206,7 +206,7 @@ export const CupboardShelfList = () => {
 				<HiddenTemplates />
 			</div>
 			<CreateNewCardModal />
-			<ShelvesDeletionToasts/>
+			{/* <ShelvesDeletionToasts/> */}
 			{/* <ToastShelfDeletion /> */}
 		</>
 	)

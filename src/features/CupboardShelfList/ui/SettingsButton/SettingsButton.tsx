@@ -24,8 +24,8 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 
 	const onDeleteClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
-		dispatch(cupboardShelfListActions.setShelfDeletionShelfId(shelfId))
-		dispatch(cupboardShelfListActions.setIsAnyShelfInDeletionProcess(true))
+		// dispatch(cupboardShelfListActions.setShelfDeletionShelfId(shelfId))
+		// dispatch(cupboardShelfListActions.setIsAnyShelfInDeletionProcess(true))
 	}, [dispatch, shelfId])
 
 	const onBoxesSettingsClick = useCallback(() => {

@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { ValidationErrorText, ValidationFunctionText } from './validationErrorTexts'
 
 export const validateFirstName: ValidationFunctionText = (inputValue: string) => {

@@ -73,6 +73,18 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 		// return () => clearTimeout(timerId)
 	}, [dispatch, shelfId])
 	// useEffect(() => {
+	// 	// console.log('Я в АААААААААААААА')
+	// 	const timer = setTimeout(() => {
+	// 		// console.log('ТАЙМАУТА')
+	// 		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { deletingRequestStatus: 'pending' } }))
+	// 		dispatch(deleteShelfThunk(shelfId))
+	// 		// clearTimeout(timerId)
+	// 	}, DURATION_SHELF_DELETION_MILLISEC)
+	// 	setTimer(timer)
+	// 	// }
+	// 	// return () => clearTimeout(timerId)
+	// }, [dispatch, shelfId])
+	// useEffect(() => {
 	// 	openToast({
 	// 		onTimeEnd: onTimeEnd,
 	// 		status: shelfDeletionRequestStatus,

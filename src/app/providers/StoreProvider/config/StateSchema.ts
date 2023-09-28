@@ -20,10 +20,10 @@ export interface StateSchema {
 	[rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 	user: UserSchema
 	ui: UISchema
-	toasts: ToastsSchema
 	header: HeaderSchema
 	cupboard: CupboardPageSchema
 	// async reducers
+	toasts?: ToastsSchema
 	loginForm?: LoginSchema
 	viewPage?: ViewPageInitializerSchema
 	trashPage?: TrashPageInitializerSchema

@@ -13,10 +13,12 @@ import { MyToastProps } from '../model/types/ToastsSchema';
 import { useSelector } from 'react-redux';
 import { getToastsObject } from '../model/selectors/getToasts';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { toastsActions } from '../model/slice/toastSlice';
+import { toastsActions, toastsReducer } from '../model/slice/toastSlice';
 import { Root, ToastDescription, ToastTitle } from '@radix-ui/react-toast';
 // import * as RadixToast from '@radix-ui/react-toast';
 import cls from './MyToast.module.scss';
+import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
+import { motion } from 'framer-motion';
 
 interface MyComponentToastsProps extends MyToastProps {
 	onTimeEnd?: () => void
@@ -126,12 +128,15 @@ const MyToastWrapper = ({ id, toast }: { id: string, toast: MyToastProps }) => {
 	)
 
 }
-
+const reducers: ReducersList = {
+	toasts: toastsReducer
+}
 export const MyToastsRTK = () => {
+	useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const toastsObj = useSelector(getToastsObject)
-	// useEffect(() => {
-	// 	console.log(toastsObj)
-	// }, [toastsObj])
+	useEffect(() => {
+		console.log(toastsObj)
+	}, [toastsObj])
 
 	const renderedToasts = Object.entries(toastsObj).map(([id, toast]) => {
 		// console.log(id, toast)
@@ -139,9 +144,11 @@ export const MyToastsRTK = () => {
 		// return null
 	})
 	return (
+		// <motion.div layout>
 		<>
 			{renderedToasts}
 		</>
+		// </motion.div>
 	)
 }
 // export const MyToastsRTK = memo(() => {
