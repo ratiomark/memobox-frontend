@@ -5,8 +5,8 @@ import { createNewShelf } from '@/entities/Cupboard'
 import { ShelfSchema } from '@/entities/Shelf'
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
 import { toastsActions } from '@/shared/ui/Toast'
-import { t } from 'i18next'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
+import { t } from 'i18next'
 
 export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/createNewShelfThunk',
@@ -20,7 +20,10 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 				messageLoading: t('toast:messageLoading'),
 				messageError: t('toast:messageError'),
 				messageSuccess: t('toast:create_new_shelf.messageSuccess'),
-				contentCommon: `${t('toast:create_new_shelf.additional')} `,
+				contentCommon: t('toast:create_new_shelf.additional'),
+				// contentCommon: `${t('toast:create_new_shelf.additional')} `,
+				// contentCommon: `${t('toast:create_new_shelf.additional')} `,
+				// contentCommon: `${t('toast:create_new_shelf.additional')} `,
 				// duration: 1000000,
 			}
 		}))

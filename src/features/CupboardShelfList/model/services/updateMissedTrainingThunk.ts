@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
-import { MissedTrainingValue, TimingBlock } from '@/shared/types/DataBlock'
+import { MissedTrainingValue } from '@/shared/types/DataBlock'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
@@ -29,7 +29,7 @@ export const updateMissedTrainingThunk = createAsyncThunk<UpdateMissedTrainingTh
 				messageError: t('toast:messageError'),
 				messageSuccess: t('toast:update_missed_training.messageSuccess'),
 				contentCommon: `${t('toast:update_missed_training.additional')} ${shelfTitle}`,
-				duration: 1000000,
+				// duration: 1000000,
 			}
 		}))
 		try {
@@ -37,8 +37,7 @@ export const updateMissedTrainingThunk = createAsyncThunk<UpdateMissedTrainingTh
 			const response = boxId
 				? dispatch(updateBoxWithTag({ shelfId, box: { missedTrainingValue, _id: boxId } })).unwrap()
 				: dispatch(updateShelfWithTag({ id: shelfId, missedTrainingValue })).unwrap()
-			// const response = Math.random() > 0
-			// const response = Math.random() > 50
+
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error()
