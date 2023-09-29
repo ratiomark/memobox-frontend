@@ -41,8 +41,6 @@ import { useShelvesLocalSaver } from '../model/hooks/useShelvesLocalSaver';
 import useCupboardButtonsSizes from '../model/hooks/useCupboardButtonsSizes';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
 
-
-let timerId: number;
 export const CupboardShelfList = () => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
@@ -50,19 +48,12 @@ export const CupboardShelfList = () => {
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
-	// const cupboardShelves = useSelector(getShelvesFromStorOrLocalSaver)
-	// const [updateShelvesMutation] = useUpdateShelvesOrderMutation()
 	const isFirstRender = useSelector(getCupboardIsFirstRender)
 	useShelvesDndHandler()
 	useShelvesLocalSaver({ cupboardShelves })
 	useCupboardButtonsSizes(cupboardIsLoading)
-	// const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
-	// useEffect(() => {
-	// 	// if (cupboardShelves.length) {
-	// 	localDataService.setShelves(cupboardShelves)
-	// 	// }
-	// }, [cupboardShelves])
-	useLayoutEffect(() => {
+
+	useEffect(() => {
 		dispatch(setLocalShelvesToStore())
 	}, [dispatch])
 
@@ -123,19 +114,6 @@ export const CupboardShelfList = () => {
 	}, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick])
 	// }, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick, moveShelf])
 
-	// if (cupboardIsLoading) {
-	// 	return <>
-	// 		<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
-	// 		{shelfNamesList!.map(title => <ShelfSkeleton key={title} title={title} />)}
-	// 	</>
-	// }
-	// const actualShelvesList = (
-	// 	<AnimateSkeletonLoader
-	// 		skeletonComponent={<>{shelfNamesList!.map(title => <ShelfSkeleton key={title} title={title} />)}</>}
-	// 	/>
-	// )
-
-
 	return (
 		<>
 			<div
@@ -148,34 +126,11 @@ export const CupboardShelfList = () => {
 					// layout
 					// layoutRoot
 					values={cupboardShelves}
+					// принимает массив с элементами в текущем порядке
 					onReorder={reorderShelves}
 				>
 					{shelvesList}
 				</Reorder.Group>
-				{/* {cupboardIsLoading
-
-					? <Reorder.Group values={cupboardIsLoading ? localDataService.getShelves() : cupboardShelves} onReorder={(values) => { }}> {shelvesList}</Reorder.Group>
-					: (<Reorder.Group
-						// layoutScroll
-						// layout
-						// layoutRoot
-						// values={cupboardShelves}
-						values={cupboardShelves}
-						// values={cupboardIsLoading ? localDataService.getShelves() : cupboardShelves}
-						// onDragEnd={() => {
-						// 	console.log('DRAG END')
-						// 	debouncedUpdateServer()
-						// }}
-						// onDragEnd={(event, info) => {
-						// 	console.log(info.point.x, info.point.y)
-						// 	console.log(event)
-						// 	console.log(info)
-						// }}
-						onReorder={reorderShelves}
-					>
-						{shelvesList}
-					</Reorder.Group>)
-				} */}
 				<ShelfBoxesTemplateModal />
 				<MissedTrainingSettingsModal />
 				<NotificationSettingsModal />
