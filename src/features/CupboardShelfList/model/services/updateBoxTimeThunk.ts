@@ -3,9 +3,7 @@ import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { TimingBlock } from '@/shared/types/DataBlock'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
-import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
-import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 
 export interface UpdateBoxTimeThunkArg {
 	timeObject: TimingBlock
@@ -27,9 +25,10 @@ export const updateBoxTimeThunk = createAsyncThunk<UpdateBoxTimeThunkArg, Update
 				messageLoading: t('toast:messageLoading'),
 				messageError: t('toast:messageError'),
 				messageSuccess: t('toast:update_box_time.messageSuccess'),
-				contentLoading: `${t('toast:update_box_time.additional')}`,
-				contentSuccess: `${t('toast:update_box_time.additional')} `,
-				contentError: `${t('toast:update_box_time.additional')}`,
+				contentCommon: `${t('toast:update_box_time.additional')}`,
+				// contentLoading: `${t('toast:update_box_time.additional')}`,
+				// contentSuccess: `${t('toast:update_box_time.additional')} `,
+				// contentError: `${t('toast:update_box_time.additional')}`,
 				// duration: 1000000,
 			}
 		}))

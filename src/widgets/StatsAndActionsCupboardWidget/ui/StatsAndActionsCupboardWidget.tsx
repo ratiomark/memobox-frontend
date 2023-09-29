@@ -39,9 +39,9 @@ export const StatsAndActionsCupboardWidget = () => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
-	const onTimeEnd = useCallback(() => {
-		dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('idle'))
-	}, [dispatch])
+	// const onTimeEnd = useCallback(() => {
+	// 	dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('idle'))
+	// }, [dispatch])
 
 	// const onTimeEndCreateNewCard = useCallback(() => {
 	// 	dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('idle'))
@@ -110,39 +110,6 @@ export const StatsAndActionsCupboardWidget = () => {
 				</div>
 				{buttons}
 				<CreateNewShelfModal />
-				<MyToast
-					onTimeEnd={onTimeEnd}
-					status={createNewShelfRequestStatus}
-					messageSuccess='Полка успешно создана'
-					// messageLoading='Загрузка'
-					messageLoading='Ожидание ответа от сервера'
-					// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
-					// contentSuccess={<MyText text={'Все супер класс!'} />}
-					messageError='Ошибка'
-				/>
-				{/* <MyToast
-					onTimeEnd={onTimeEndCreateNewCard}
-					status={createNewCardRequestStatus}
-					messageSuccess='Карточка добавлена'
-					// messageLoading='Загрузка'
-					messageLoading='Ожидание ответа от сервера'
-					// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
-					// contentSuccess={<MyText text={'Все супер класс!'} />}
-					messageError='Ошибка добавления карточки'
-
-				/> */}
-				{/* <Toast.Root
-				// onOpenChange={onOpenChange}
-				// open={isResponseSuccessful ? undefined : isAwaitingResponse}
-				// duration={5000}
-				>
-					<Toast.Title>Загрузка</Toast.Title>
-					<Toast.Description>{(isResponseSuccessful)?.toString()}</Toast.Description>
-
-	
-				</Toast.Root> */}
-				{/* import * as Toast from '@radix-ui/react-toast'; */}
-				{/* <Toast.Viewport /> */}
 			</HStack>
 		</motion.div>
 	)

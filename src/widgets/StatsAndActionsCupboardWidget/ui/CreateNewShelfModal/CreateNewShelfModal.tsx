@@ -36,14 +36,24 @@ export const CreateNewShelfModal = () => {
 	}
 
 	const onCreateNewShelf = () => {
-		// setOpen(true)
-		dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('pending'))
-		setTimeout(() => {
-			dispatch(createNewShelfThunk(shelfName))
-		}, 4000)
+		dispatch(createNewShelfThunk(shelfName))
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(false))
+		// setOpen(true)
+		// dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('pending'))
+		// setTimeout(() => {
+		// }, 4000)
 		// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(false))
 	}
+
+	// const onCreateNewShelf = () => {
+	// 	// setOpen(true)
+	// 	dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('pending'))
+	// 	setTimeout(() => {
+	// 		dispatch(createNewShelfThunk(shelfName))
+	// 	}, 4000)
+	// 	dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(false))
+	// 	// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(false))
+	// }
 
 	const onClose = () => {
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(false))
