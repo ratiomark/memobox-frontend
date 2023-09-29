@@ -13,5 +13,9 @@
   "delete_shelf": {
     "messageSuccess": "Полка удалена",
     "additional": "Удаление полки"
+  },
+  "update_box_time": {
+    "messageSuccess": "Время коробки сохраненно",
+    "additional": "Сохраняем новое время для коробки"
   }
 }

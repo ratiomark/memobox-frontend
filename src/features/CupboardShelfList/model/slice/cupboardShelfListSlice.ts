@@ -1,19 +1,19 @@
-import { StateSchema, store } from '@/app/providers/StoreProvider'
+import { StateSchema } from '@/app/providers/StoreProvider'
 import { BoxCoordinates } from '@/entities/Box'
 import { CupboardSchema } from '@/entities/Cupboard'
 import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf'
 import { timingDataDefault } from '@/shared/const/timingBlock'
 import { TimingBlock } from '@/shared/types/DataBlock'
-import { createEntityAdapter, createSlice, EntityId, PayloadAction, SerializedError } from '@reduxjs/toolkit'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
-import { fetchCupboardData } from '../services/fetchCupboardData'
-import { CupboardPageSchema } from '../types/CupboardPageSchema'
-import { lexicalEmptyEditorState } from '@/shared/const/lexical'
-import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk'
-import { setLocalShelvesToStore } from '../services/setLocalShelvesToStore'
-import { createNewShelfThunk } from '../services/createNewShelfThunk'
 import { RequestStatusType } from '@/shared/types/GeneralTypes'
+import { EntityId, PayloadAction, SerializedError, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
+import { createNewShelfThunk } from '../services/createNewShelfThunk'
 import { deleteShelfThunk } from '../services/deleteShelfThunk'
+import { fetchCupboardData } from '../services/fetchCupboardData'
+import { setLocalShelvesToStore } from '../services/setLocalShelvesToStore'
+import { UpdateBoxTimeThunkArg, updateBoxTimeThunk } from '../services/updateBoxTimeThunk'
+import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk'
+import { CupboardPageSchema } from '../types/CupboardPageSchema'
 // import { store } from '@/app/providers/StoreProvider/ui/StoreProvider'
 
 const initialState: CupboardPageSchema = {
@@ -45,11 +45,12 @@ const initialState: CupboardPageSchema = {
 		isOpen: false,
 		boxTimingData: timingDataDefault,
 		boxId: '',
+		shelfId: '',
 		boxCoordinates: {
 			x: 0,
 			y: 0,
 		},
-		requestStatus: 'idle',
+		// requestStatus: 'idle',
 	},
 	boxSettingsDropdownModal: {
 		isOpen: false,
@@ -185,6 +186,9 @@ const cupboardShelfList = createSlice({
 		},
 		setTimingSetterModalBoxId: (state, action: PayloadAction<string>) => {
 			state.boxTimeSetterModal.boxId = action.payload
+		},
+		setTimingSetterModalShelfId: (state, action: PayloadAction<string>) => {
+			state.boxTimeSetterModal.shelfId = action.payload
 		},
 		setTimingSetterBoxTimingData: (state, action: PayloadAction<TimingBlock>) => {
 			state.boxTimeSetterModal.boxTimingData = action.payload
@@ -412,16 +416,28 @@ const cupboardShelfList = createSlice({
 			.addCase(
 				deleteShelfThunk.fulfilled,
 				(state, action: PayloadAction<string>) => {
-					// state.shelfDeletionProcess.requestStatus = 'success'
-					// state.shelfDeletionProcess.isAnyShelfInDeletionProcess = false
 					shelvesAdapter.removeOne(state, action.payload)
 				})
 			.addCase(
 				deleteShelfThunk.rejected,
 				(state, action) => {
+					shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false, deletingRequestStatus: 'error' } })
+				})
+			.addCase(
+				updateBoxTimeThunk.fulfilled,
+				(state, action: PayloadAction<UpdateBoxTimeThunkArg>) => {
+					const { boxId, shelfId, timeObject } = action.payload
+					const box = state.entities[shelfId]?.boxesData.find(box => box._id === boxId)
+					if (box && box?.specialType !== 'new') {
+						box.timing = timeObject
+					}
+				})
+			.addCase(
+				updateBoxTimeThunk.rejected,
+				(state, action) => {
 					// state.shelfDeletionProcess.requestStatus = 'error'
 					// state.shelfDeletionProcess.isAnyShelfInDeletionProcess = false
-					shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false, deletingRequestStatus: 'error' } })
+					// shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false, deletingRequestStatus: 'error' } })
 				})
 		// .addCase(
 		// 	sendShelvesOrder.rejected,

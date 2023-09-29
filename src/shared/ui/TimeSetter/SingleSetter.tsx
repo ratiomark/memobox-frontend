@@ -7,6 +7,7 @@ import { MyText } from '../Typography';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Button } from '../Button';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
+import { dataAttrTimeSetterSingle } from '@/shared/const/idsAndDataAttributes';
 
 
 type OnWheelScrollGlobal = (e: globalThis.WheelEvent) => void
@@ -105,7 +106,7 @@ export const SingleSetter = (props: TimeSetterProps) => {
 		<div
 			className={cls.timeWrapper}
 			ref={divRef}
-			data-time-setter="time-setter-single-setter-component"
+			data-time-setter={`${dataAttrTimeSetterSingle}`}
 		>
 			{title && <MyText variant={disabled ? 'hint' : 'primary'} className={cls.title} text={title} />}
 

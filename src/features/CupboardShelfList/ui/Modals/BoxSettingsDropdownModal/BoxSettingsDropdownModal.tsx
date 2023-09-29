@@ -11,7 +11,7 @@ import { MyText } from '@/shared/ui/Typography';
 import { dropDownLocalTextSize } from '@/shared/const/fontSizes';
 import { missedTrainingDropdownLocalKey, removeBoxDropdownLocalKey } from '@/shared/const/translationKeys';
 import { DropdownLocalList } from './DropdownLocalList';
-import { idCupboardShelfList, idDropDownLocalTemplateHidden } from '@/shared/const/ids';
+import { idCupboardShelfList, idDropDownLocalTemplateHidden } from '@/shared/const/idsAndDataAttributes';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { useRef, useState, useEffect, useCallback } from 'react';
 

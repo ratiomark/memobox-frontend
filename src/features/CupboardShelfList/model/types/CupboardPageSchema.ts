@@ -55,10 +55,11 @@ interface CreateNewShelfModal {
 }
 interface BoxTimeSetterModal {
 	isOpen: boolean
-	requestStatus: RequestStatusType
+	// requestStatus: RequestStatusType
 	boxCoordinates: BoxCoordinates
 	boxTimingData: TimingBlock
 	boxId: string
+	shelfId: string
 }
 interface BoxSettingsDropdownModal {
 	isOpen: boolean

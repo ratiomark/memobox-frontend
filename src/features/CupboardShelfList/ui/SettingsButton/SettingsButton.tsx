@@ -4,7 +4,7 @@ import { memo, useCallback, useMemo, useRef, } from 'react';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { cupboardShelfListActions } from '../..';
+import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice';
 import { MyText } from '@/shared/ui/Typography';
 import cls from './SettingsButton.module.scss';
 import { useSelector } from 'react-redux';

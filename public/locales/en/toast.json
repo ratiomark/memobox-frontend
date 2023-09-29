@@ -13,5 +13,9 @@
   "delete_shelf": {
     "messageSuccess": "Shelf deleted",
     "additional": "Shelf is deleting"
+  },
+  "update_box_time": {
+    "messageSuccess": "Time successfully updated",
+    "additional": "Updating box time"
   }
 }

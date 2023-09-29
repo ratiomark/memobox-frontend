@@ -22,7 +22,6 @@ export const ThemeProvider = ({ children, initialTheme }: ThemeProviderProps) =>
 		|| Theme.LIGHT
 	);
 
-	console.log(themeFromUser)
 
 	useEffect(() => {
 		if (!isThemeInited && themeFromUser) {

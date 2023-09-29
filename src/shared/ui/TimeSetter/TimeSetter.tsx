@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './TimeSetter.module.scss';
-import { CSSProperties, WheelEvent, useEffect, useRef, useState } from 'react';
+import { CSSProperties, MutableRefObject, WheelEvent, useEffect, useRef, useState } from 'react';
 import { MyText } from '../Typography';
 import { Button } from '../Button';
 import { SingleSetter } from './SingleSetter';
@@ -9,6 +9,10 @@ import { HStack } from '../Stack';
 import { TimingBlock } from '@/shared/types/DataBlock';
 import { timingDataDefault } from '@/shared/const/timingBlock';
 import { ModalButtons } from '../ModalButtons';
+// eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
+import { useCustomTranslate } from '@/features/LanguageSwitcher';
+import { dataAttrTimeSetterSingle } from '@/shared/const/idsAndDataAttributes.ts';
+import useSingleSettersWidth from './useSingleSettersWidth.ts'
 
 interface TimeSetterProps {
 	className?: string
@@ -22,7 +26,8 @@ interface TimeSetterProps {
 	id?: string
 }
 
-let singleSetterMaxWidth: number;
+// let singleSetterMaxWidth: number | boolean;
+// let lastLang: string;
 export const TimeSetter = (props: TimeSetterProps) => {
 	const {
 		className,
@@ -32,15 +37,16 @@ export const TimeSetter = (props: TimeSetterProps) => {
 		onSaveTime,
 		id,
 	} = props
-	const { t } = useTranslation()
-	// const timeSetterRef = useRef<HTMLDivElement>(null)
+	const { t, currentLang } = useCustomTranslate()
 	const [minutes, setMinutes] = useState(timingData.minutes)
 	const [hours, setHours] = useState(timingData.hours)
 	const [days, setDays] = useState(timingData.days)
 	const [weeks, setWeeks] = useState(timingData.weeks)
 	const [months, setMonths] = useState(timingData.months)
 	const [disabled, setDisabled] = useState(false)
-
+	useSingleSettersWidth(currentLang)
+	
+	
 	// useEffect(() => {
 	// 	if (timeSetterRef.current && startCallback) {
 	// 		const sizes = { width: timeSetterRef.current.offsetWidth, height: timeSetterRef.current.offsetHeight }
@@ -54,6 +60,22 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	// }, [startCallback])
 
 	const onSaveTimeHandle = () => {
+		// if (
+		// 	minutes === timingData.minutes &&
+		// 	hours === timingData.hours &&
+		// 	days === timingData.days &&
+		// 	weeks === timingData.weeks &&
+		// 	months === timingData.months
+		// ) {
+		// 	// console.log('Время осталось без измененией!!')
+		// 	return
+		// }
+		// // console.log('Внутри тайм сеттера')
+		// // console.log({ minutes, hours, days, weeks, months })
+		onSaveTime({ minutes, hours, days, weeks, months })
+	}
+
+	useEffect(() => {
 		if (
 			minutes === timingData.minutes &&
 			hours === timingData.hours &&
@@ -61,30 +83,13 @@ export const TimeSetter = (props: TimeSetterProps) => {
 			weeks === timingData.weeks &&
 			months === timingData.months
 		) {
-			console.log('Время осталось без измененией!!')
+			setDisabled(true)
 			return
 		}
-		console.log('Внутри тайм сеттера')
-		console.log({ minutes, hours, days, weeks, months })
-		onSaveTime({ minutes, hours, days, weeks, months })
-	}
-
-	useEffect(() => {
 		const total = minutes + hours + days + weeks + months
 		if (total) setDisabled(false)
 		else setDisabled(true)
-	}, [minutes, hours, days, weeks, months])
-
-	useEffect(() => {
-		const singleSetters = document.querySelectorAll('[data-time-setter="time-setter-single-setter-component"]') as NodeListOf<HTMLDivElement>
-		if (!singleSetterMaxWidth) {
-			const singleSettersWidthList: number[] = []
-			singleSetters.forEach(button => singleSettersWidthList.push(button.clientWidth))
-			singleSetterMaxWidth = Math.ceil(Math.max(...singleSettersWidthList))
-			// console.log('Установленна одинаковая ширина столбцов')
-		}
-		singleSetters.forEach(div => div.style.minWidth = `${singleSetterMaxWidth + 2}px`)
-	}, [])
+	}, [minutes, hours, days, weeks, months, setDisabled, timingData])
 
 	const onUpClickMinutes = () => {
 		if (minutes === 59) return //setMinutes(0);
@@ -162,6 +167,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 			id={id}
 		// ref={timeSetterRef}
 		>
+			<div className={'lineInCenter'} />
 			{title && <MyText text={title} align='center' className={cls.timeSetterTitle} />}
 			<div className={cls.singleSettersColumnsWrapper} >
 				<SingleSetter
@@ -214,20 +220,6 @@ export const TimeSetter = (props: TimeSetterProps) => {
 				textSubmitButton={t('save no keys')}
 
 			/>
-			{/* <HStack justify='between' gap='gap_14' max className={cls.buttonsWrapper}  >
-				<Button fontWeight='300' onClick={onClose}>
-					{t('cancel no keys')}
-				</Button>
-				<Button
-					fontWeight='300'
-					variant='filled'
-					disabled={disabled}
-					onClick={onSaveTimeHandle}
-				>
-					{t('save no keys')}
-				</Button>
-			</HStack> */}
 		</div>
-
 	)
 }

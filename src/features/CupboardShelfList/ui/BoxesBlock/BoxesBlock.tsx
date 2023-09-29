@@ -9,16 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { Box, BoxCoordinates } from '@/entities/Box';
 import cls from './BoxesBlock.module.scss';
 import { TimingBlock } from '@/shared/types/DataBlock';
-import { idBoxesBlockCommonWrapper } from '@/shared/const/ids';
+import { idBoxesBlockCommonWrapper } from '@/shared/const/idsAndDataAttributes';
 
-interface BoxesBlockProps {
-	shelf: ShelfSchema
-}
 // `#${idBoxesBlockCommonWrapper}`
-export const BoxesBlock = (props: BoxesBlockProps) => {
-	const {
-		shelf,
-	} = props
+export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
@@ -40,14 +34,15 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
 	}, [dispatch])
 
-	const onOpenTimeSetter = useCallback((coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string) => {
+	const onOpenTimeSetter = useCallback((coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string, shelfId: string) => {
 		dispatch(cupboardShelfListActions.setTimingSetterBoxCoordinates(coordinates))
 		dispatch(cupboardShelfListActions.setTimingSetterModalIsOpen(true))
 		dispatch(cupboardShelfListActions.setTimingSetterModalBoxId(boxId))
+		dispatch(cupboardShelfListActions.setTimingSetterModalShelfId(shelfId))
 		dispatch(cupboardShelfListActions.setTimingSetterBoxTimingData(timingData))
 	}, [dispatch])
 
-	const onOpenBoxSettings = useCallback((coordinates: BoxCoordinates, shelfId: string, boxId: string,) => {
+	const onOpenBoxSettings = useCallback((coordinates: BoxCoordinates, boxId: string, shelfId: string) => {
 		dispatch(cupboardShelfListActions.setBoxSettingsBoxCoordinates(coordinates))
 		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(true))
 		dispatch(cupboardShelfListActions.setBoxSettingsModalBoxId(boxId))

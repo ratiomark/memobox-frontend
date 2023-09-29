@@ -4,7 +4,7 @@ import { BoxesBlock } from './BoxesBlock';
 import { BoxesBlockSkeleton } from './BoxesBlockSkeleton';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
-import { idBoxesBlockCommonWrapper } from '@/shared/const/ids';
+import { idBoxesBlockCommonWrapper } from '@/shared/const/idsAndDataAttributes';
 
 interface BoxesBlockProps {
 	shelf: ShelfSchema

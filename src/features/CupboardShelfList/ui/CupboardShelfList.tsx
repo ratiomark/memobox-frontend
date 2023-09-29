@@ -32,7 +32,7 @@ import { ShelfButtonsSkeleton } from './ShelfButtons/ShelfButtonsSkeleton';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 import { BoxSettingsDropdownModal } from './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal';
 import { HiddenTemplates } from './HiddenTemplates/HiddenTemplates';
-import { idCupboardShelfList } from '@/shared/const/ids';
+import { idCupboardShelfList } from '@/shared/const/idsAndDataAttributes';
 import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
 import { Reorder } from 'framer-motion';
 import { ShelfBoxesTemplateModal } from './BoxesSettingsModal/ShelfTemplateSettings';

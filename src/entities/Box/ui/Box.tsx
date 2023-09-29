@@ -30,8 +30,8 @@ interface BoxPropsBase {
 	shelfId: string
 	onAddNewCard: (shelfId: string, boxIndex: number) => void
 	onBoxViewClick: (shelfId: string, boxIndex: number | string) => void
-	onOpenTimeSetter: (coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string) => void
-	onOpenBoxSettings: (coordinates: BoxCoordinates, shelfId: string, boxId: string) => void
+	onOpenTimeSetter: (coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string, shelfId: string) => void
+	onOpenBoxSettings: (coordinates: BoxCoordinates, boxId: string, shelfId: string) => void
 }
 
 const timeSetterAnimation = {
@@ -108,7 +108,7 @@ export const Box = (props: BoxPropsBase) => {
 				x: x + width / 2,
 				y: y + height / 2
 			}
-			onOpenTimeSetter(coordinates, boxItem.timing, boxItem._id)
+			onOpenTimeSetter(coordinates, boxItem.timing, boxItem._id, shelfId)
 		}
 
 		const onOpenBoxSettingsHandle = (e: MouseEvent) => {
@@ -117,7 +117,7 @@ export const Box = (props: BoxPropsBase) => {
 				x: x + width / 2,
 				y: y + height
 			}
-			onOpenBoxSettings(coordinates, shelfId, boxItem._id)
+			onOpenBoxSettings(coordinates, boxItem._id, shelfId)
 		}
 
 		const buttons = (

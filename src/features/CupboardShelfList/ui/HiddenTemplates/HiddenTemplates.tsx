@@ -5,7 +5,7 @@ import cls from './HiddenTemplatesStyles.module.scss'
 import { useTranslation } from 'react-i18next'
 import { TimeSetter } from '@/shared/ui/TimeSetter'
 import { missedTrainingDropdownLocalKey, removeBoxDropdownLocalKey } from '@/shared/const/translationKeys'
-import { idDropDownLocalTemplateHidden, idTimeSetterHidden } from '@/shared/const/ids'
+import { idDropDownLocalTemplateHidden, idTimeSetterHidden } from '@/shared/const/idsAndDataAttributes'
 
 export const HiddenTemplates = () => {
 	const { t } = useTranslation()
