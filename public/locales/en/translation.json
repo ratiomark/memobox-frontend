@@ -1,4 +1,7 @@
 {
+  "warning": {
+    "only one shelf in cupboard": "Sorry, but in cupboard has to be at least one shelf"
+  },
   "add files": "Add image/video",
   "all big data label name": "All",
   "train big data label name": "Train",

@@ -162,7 +162,6 @@ export const BoxesBlock = (props: BoxesBlockProps) => {
 		<ul
 			className={cls.BoxesBlock} 
 			ref={boxesBlockRef}
-				
 		>
 			{boxList}
 		</ul>

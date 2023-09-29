@@ -31,7 +31,7 @@ export const deleteShelfThunk = createAsyncThunk<string, string, { rejectValue: 
 				contentLoading: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
 				contentSuccess: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
 				contentError: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
-				duration: 1000000,
+				// duration: 1000000,
 			}
 		}))
 		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { deletingRequestStatus: 'pending' } }))

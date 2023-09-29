@@ -1,4 +1,7 @@
 {
+  "warning": {
+    "only one shelf in cupboard": "Извините, но в шкафу должна оставаться как минимум одна полка"
+  },
   "add files": "Добавить фото/видео",
   "all big data label name": "Все",
   "train big data label name": "Тренировать",

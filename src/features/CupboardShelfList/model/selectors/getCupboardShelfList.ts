@@ -15,6 +15,7 @@ export const getCupboardData = (state: StateSchema) => state.cupboard.cupboardDa
 export const getCupboardIsLoading = (state: StateSchema) => state.cupboard.isLoading
 export const getCupboardError = (state: StateSchema) => state.cupboard.error
 export const getCupboardShelves = (state: StateSchema) => state.cupboard
+export const getIsOnlyOneShelfLeftInCupboard = (state: StateSchema) => state.cupboard.ids.length < 2
 // export const getCupboardShelves = (state: StateSchema) => state.cupboard.shelves
 // export const getShelfIsDeleting = createSelector(
 // 	[

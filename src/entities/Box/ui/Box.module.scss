@@ -8,18 +8,12 @@
   // padding: 5px 10px;
   border-radius: 4px;
   min-width: 140px;
-
-  // border: 1px solid red;
   box-shadow: var(--entity-box-box-shadow);
-
-  // box-shadow: rgb(0 0 0 / 10%) 0 4px 6px -1px, rgb(0 0 0 / 6%) 0 2px 4px -1px;
   position: relative;
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.app_dark_theme) .Box {
-  background: red;
-  background-color: red;
+  background: #272a2c;
 }
 
 .Box:last-of-type {
@@ -42,10 +36,12 @@
 .title {
   font-size: 13px;
   font-weight: 500;
-  color: var(--text);
-
-  // color: rgb(22 22 22 / 68.3%);
+  color: rgb(22 22 22 / 68.3%);
   margin-bottom: 15px;
+}
+
+:global(.app_dark_theme) .title {
+  color: var(--text);
 }
 
 .dataLabels {
