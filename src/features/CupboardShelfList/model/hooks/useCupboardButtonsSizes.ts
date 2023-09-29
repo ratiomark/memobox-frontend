@@ -1,9 +1,7 @@
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { useCustomTranslate } from '@/features/LanguageSwitcher'
 import { dataAttrButtonTypeAddCard, dataAttrButtonTypeAddCardButtonGeneral, dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
-import { useEffect, useLayoutEffect } from 'react'
-let timerId: number;
-// let isFirstRender = true;
+import { useEffect} from 'react'
 let lastLang: string;
 
 const useCupboardButtonsSizes = (isLoading: boolean) => {
@@ -33,7 +31,6 @@ const useCupboardButtonsSizes = (isLoading: boolean) => {
 			window.addEventListener('load', updateSizes);
 			return () => window.removeEventListener('load', updateSizes);
 		}
-		// }, [isLoading])
 	}, [isLoading, currentLang])
 }
 export default useCupboardButtonsSizes
