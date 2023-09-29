@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import cls from './MissedTrainingSettings.module.scss';
 import { useSelector } from 'react-redux';
 import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import {
 	getMissedTrainingModalIsOpen,
 	getMissedTrainingModalShelfId,
@@ -13,11 +13,12 @@ import {
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfListSlice';
 import { useUpdateShelfWithTagMutation } from '@/entities/Shelf';
-import { MissedTrainingValues } from '@/shared/types/DataBlock';
+import { MissedTrainingValue } from '@/shared/types/DataBlock';
 import { useUpdateBoxWithTagMutation } from '@/entities/Box';
 import { Heading } from '@/shared/ui/Typography';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
+import { updateBoxMissedTrainingThunk } from '../../../model/services/updateBoxMissedTrainingThunk';
 
 export const MissedTrainingSettingsModal = () => {
 	const { t } = useTranslation()
@@ -31,7 +32,7 @@ export const MissedTrainingSettingsModal = () => {
 	const [updateShelfMutation,] = useUpdateShelfWithTagMutation()
 	const [updateBoxMutation,] = useUpdateBoxWithTagMutation()
 
-	const items = useMemo(() => ([
+	const items = useMemo<{ value: MissedTrainingValue, content: ReactNode }[]>(() => ([
 		{ value: 'none', content: t('missedTrainingSettings.none') },
 		{ value: 'additional', content: t('missedTrainingSettings.additional') },
 		{ value: 'backwards', content: t('missedTrainingSettings.backwards') }
@@ -83,21 +84,23 @@ export const MissedTrainingSettingsModal = () => {
 	}
 
 	const onSaveMissedTraining = () => {
-		if (boxId) {
-			updateBoxMutation({
-				shelfId,
-				box: {
-					missedTrainingAction: boxValue.value as MissedTrainingValues,
-					_id: boxId,
-				}
-			})
-			onCloseHandle()
-		}
-		if (!boxId) {
-			// console.log(value.value)
-			updateShelfMutation({ id: shelfId, missedTrainingAction: value.value as MissedTrainingValues })
-			onCloseHandle()
-		}
+		dispatch(updateBoxMissedTrainingThunk({ boxId, shelfId, missedTrainingValue: boxValue.value }))
+		onCloseHandle()
+		// if (boxId) {
+		// 	// updateBoxMutation({
+		// 	// 	shelfId,
+		// 	// 	box: {
+		// 	// 		missedTrainingValue: boxValue.value as MissedTrainingValue,
+		// 	// 		_id: boxId,
+		// 	// 	}
+		// 	// })
+		// 	// onCloseHandle()
+		// }
+		// if (!boxId) {
+		// 	dispatch(updateBoxMissedTrainingThunk({ shelfId, missedTrainingValue: boxValue.value }))
+		// 	// console.log(value.value)
+		// 	updateShelfMutation({ id: shelfId, missedTrainingValue: value.value })
+		// }
 	}
 
 	return (

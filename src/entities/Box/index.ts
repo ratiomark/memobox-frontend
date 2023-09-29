@@ -1,4 +1,7 @@
-export { useUpdateBoxWithTagMutation } from './model/api/boxApi';
+export {
+	useUpdateBoxWithTagMutation,
+	updateBoxWithTag
+} from './model/api/boxApi';
 
 export { BoxesBlockSkeleton } from './ui/BoxesBlockSkeleton';
 

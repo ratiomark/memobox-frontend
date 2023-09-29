@@ -17,5 +17,9 @@
   "update_box_time": {
     "messageSuccess": "Время коробки сохраненно",
     "additional": "Сохраняем новое время для коробки"
+  },
+  "update_missed_training": {
+    "messageSuccess": "Пропущенные тренировки обновлены",
+    "additional": "Обновление пропущенных тренировок"
   }
 }

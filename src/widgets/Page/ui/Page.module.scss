@@ -30,7 +30,7 @@
   // transition: all 2s;
 }
 
-.viewport {
+.toastViewport {
   display: grid;
   gap: 20px;
   position: fixed;
@@ -38,11 +38,7 @@
   grid-auto-flow: revert;
   right: 0;
   z-index: 99999;
-
-  // display: flex;
   padding: 25px;
-
-  // flex-direction: column;
 }
 
 .trigger {

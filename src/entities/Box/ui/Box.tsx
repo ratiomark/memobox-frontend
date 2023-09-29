@@ -180,8 +180,6 @@ export const Box = (props: BoxPropsBase) => {
 	return (
 		<li className={clsx(cls.Box, [className])} >
 			<div className={cls.boxInnerWrapper} >
-
-
 				{title}
 				<SmallDataLabel
 					className={cls.dataLabels}

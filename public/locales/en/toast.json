@@ -17,5 +17,9 @@
   "update_box_time": {
     "messageSuccess": "Time successfully updated",
     "additional": "Updating box time"
+  },
+  "update_missed_training": {
+    "messageSuccess": "Missed training updated",
+    "additional": "Updating missed training option"
   }
 }

@@ -1,4 +1,4 @@
-import { DataBlock, MissedTrainingValues, TimingBlock } from '@/shared/types/DataBlock'
+import { DataBlock, MissedTrainingValue, TimingBlock } from '@/shared/types/DataBlock'
 
 interface BoxBaseSchema {
 	_id: string
@@ -16,7 +16,7 @@ export interface RegularAndLearntCardsBox extends BoxBaseSchema {
 	specialType: 'none' | 'learnt',
 	data: DataBlock
 	timing: TimingBlock
-	missedTrainingAction?: MissedTrainingValues
+	missedTrainingValue?: MissedTrainingValue
 }
 
 export interface BoxCoordinates {

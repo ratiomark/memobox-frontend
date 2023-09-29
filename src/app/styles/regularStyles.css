@@ -1,6 +1,9 @@
-.viewport {
+.toastViewport {
+  display: grid;
+  gap: 20px;
   position: fixed;
   bottom: 0;
+  grid-auto-flow: revert;
   right: 0;
   z-index: 99999;
   padding: 25px;

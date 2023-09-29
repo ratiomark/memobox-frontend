@@ -54,7 +54,7 @@ export interface TimeSleepSettings {
 }
 export interface UserSettings {
 	notifications: NotificationSettings
-	missedTrainingAction: 'none' | 'additionalTraining' | 'sendBackwards'
+	missedTrainingValue: 'none' | 'additionalTraining' | 'sendBackwards'
 	shelfTemplate: TimingBlock[]
 	timeSleep: TimeSleepSettings
 }
@@ -140,7 +140,7 @@ export interface UserSchema {
 // }
 // export interface UserSettings {
 // 	notifications: NotificationSettings
-// 	missedTrainingAction: 'none' | 'additionalTraining' | 'sendBackwards'
+// 	missedTrainingValue: 'none' | 'additionalTraining' | 'sendBackwards'
 // 	shelfTemplate: TimingBlock[]
 // 	timeSleep: TimeSleepSettings
 // }
@@ -156,7 +156,7 @@ export interface UserSchema {
 // 	// avatar?: string
 // 	userSettings: {
 // 		notifications: NotificationSettings
-// 		missedTrainingAction: 'none' | 'additionalTraining' | 'sendBackwards'
+// 		missedTrainingValue: 'none' | 'additionalTraining' | 'sendBackwards'
 // 		shelfTemplate: TimingBlock[]
 // 		timeSleep: TimeSleepSettings
 // 	}

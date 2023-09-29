@@ -1,5 +1,5 @@
 import { BoxSchema } from '@/entities/Box';
-import { DataBlock, MissedTrainingValues } from '@/shared/types/DataBlock';
+import { DataBlock, MissedTrainingValue } from '@/shared/types/DataBlock';
 import { RequestStatusType } from '@/shared/types/GeneralTypes';
 
 // type OnlyDefaultBoxes = [NewCardsBox, LearntCardBox]
@@ -15,7 +15,7 @@ export interface ShelfSchema {
 	isDeleted: boolean
 	isLoading: boolean
 	deletingRequestStatus: RequestStatusType
-	missedTrainingAction?: MissedTrainingValues
+	missedTrainingValue?: MissedTrainingValue
 	notificationEnabled?: boolean
 	boxesData: BoxSchema[]
 }

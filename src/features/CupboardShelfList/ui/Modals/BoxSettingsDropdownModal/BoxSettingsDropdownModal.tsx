@@ -83,7 +83,7 @@ export const BoxSettingsDropdownModal = () => {
 		setChecked(false)
 		// if (!boxId) {
 		// 	// console.log(value.value)
-		// 	updateShelfMutation({ id: shelfId, missedTrainingAction: value.value as MissedTrainingValues })
+		// 	updateShelfMutation({ id: shelfId, missedTrainingValue: value.value as MissedTrainingValue })
 		// 	onCloseHandle()
 		// }
 	}

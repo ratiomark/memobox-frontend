@@ -59,8 +59,8 @@ export const boxApi = rtkApi.injectEndpoints({
 	}),
 })
 export const getBoxesByShelfId = boxApi.endpoints.getBoxesByShelfId.initiate
-export const { useUpdateBoxWithTagMutation} =boxApi
+export const { useUpdateBoxWithTagMutation } = boxApi
+export const updateBoxWithTag = boxApi.endpoints.updateBoxWithTag.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
-// export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 // export const { useGetBoxByShelfAndBoxIdQuery } = boxApi
 // export const { useGetMovieByIdBeatFilmQuery } = beatFilmMoviesApi

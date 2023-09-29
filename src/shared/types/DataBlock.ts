@@ -21,4 +21,4 @@ export type ExtendedTimingBlock = TimingBlock & {
 	isOpen: boolean
 }
 
-export type MissedTrainingValues = 'none' | 'additional' | 'backwards'
+export type MissedTrainingValue = 'none' | 'additional' | 'backwards'

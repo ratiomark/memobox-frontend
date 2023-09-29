@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { getShelfIdAndIndexesList, getShelfIdAndIndexesListInitial } from '../selectors/getCupboardShelfList';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk';
-import { isShelvesDndRepresentationEqual } from '../slice/cupboardShelfListSlice';
 import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce';
 import { callbackMainDelay } from '@/shared/const/callbackDelays';
 import { useCallback, useEffect } from 'react';

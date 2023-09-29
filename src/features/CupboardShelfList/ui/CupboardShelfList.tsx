@@ -42,7 +42,6 @@ import useCupboardButtonsSizes from '../model/hooks/useCupboardButtonsSizes';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
 
 export const CupboardShelfList = () => {
-	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const cupboardData = useSelector(getCupboardData)
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)

@@ -8,6 +8,7 @@ import { Header, HeaderSkeleton } from '@/widgets/Header'
 import './styles/regularStyles.css'
 import { useTheme } from '@/shared/context/useTheme'
 import theme from '@/shared/ui/lexical-playground/src/themes/PlaygroundEditorTheme'
+import { ToastViewport } from '@radix-ui/react-toast'
 
 
 export const App = () => {
@@ -33,6 +34,7 @@ export const App = () => {
 				<Header />
 			</Suspense>
 			<AppRouter />
+			<ToastViewport className='toastViewport' />
 			{/* <img src="https://i.pinimg.com/originals/e5/e8/30/e5e830f89f89f0259e1d705e14a5de93.gif" alt="Your GIF" id="my-gif" /> */}
 			{/* <Toast.Viewport className='viewport' /> */}
 		</div>
