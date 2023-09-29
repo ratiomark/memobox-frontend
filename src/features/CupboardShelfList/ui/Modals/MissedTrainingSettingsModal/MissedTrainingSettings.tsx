@@ -18,7 +18,7 @@ import { useUpdateBoxWithTagMutation } from '@/entities/Box';
 import { Heading } from '@/shared/ui/Typography';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
-import { updateBoxMissedTrainingThunk } from '../../../model/services/updateBoxMissedTrainingThunk';
+import { updateMissedTrainingThunk } from '../../../model/services/updateMissedTrainingThunk';
 
 export const MissedTrainingSettingsModal = () => {
 	const { t } = useTranslation()
@@ -84,7 +84,7 @@ export const MissedTrainingSettingsModal = () => {
 	}
 
 	const onSaveMissedTraining = () => {
-		dispatch(updateBoxMissedTrainingThunk({ boxId, shelfId, missedTrainingValue: boxValue.value }))
+		dispatch(updateMissedTrainingThunk({ boxId, shelfId, missedTrainingValue: boxValue.value }))
 		onCloseHandle()
 		// if (boxId) {
 		// 	// updateBoxMutation({
@@ -97,7 +97,7 @@ export const MissedTrainingSettingsModal = () => {
 		// 	// onCloseHandle()
 		// }
 		// if (!boxId) {
-		// 	dispatch(updateBoxMissedTrainingThunk({ shelfId, missedTrainingValue: boxValue.value }))
+		// 	dispatch(updateMissedTrainingThunk({ shelfId, missedTrainingValue: boxValue.value }))
 		// 	// console.log(value.value)
 		// 	updateShelfMutation({ id: shelfId, missedTrainingValue: value.value })
 		// }

@@ -9,19 +9,18 @@ import { updateShelfWithTag } from '@/entities/Shelf'
 import { updateBoxWithTag } from '@/entities/Box'
 import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 
-export interface UpdateBoxMissedTrainingThunkArg {
+export interface UpdateMissedTrainingThunkArg {
 	missedTrainingValue: MissedTrainingValue
 	boxId?: string
 	shelfId: string
 }
-export const updateBoxMissedTrainingThunk = createAsyncThunk<UpdateBoxMissedTrainingThunkArg, UpdateBoxMissedTrainingThunkArg, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
-	'cupboardPage/updateBoxMissedTrainingThunk',
+export const updateMissedTrainingThunk = createAsyncThunk<UpdateMissedTrainingThunkArg, UpdateMissedTrainingThunkArg, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+	'cupboardPage/updateMissedTrainingThunk',
 	async (arg, thunkAPI) => {
 		const { boxId, shelfId, missedTrainingValue } = arg
 		const id = shelfId + genRandomId()
 		const { dispatch, getState } = thunkAPI
 		const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
-		// console.log(shelfTitle)
 		dispatch(toastsActions.addToast({
 			id,
 			toast: {
@@ -30,10 +29,8 @@ export const updateBoxMissedTrainingThunk = createAsyncThunk<UpdateBoxMissedTrai
 				messageError: t('toast:messageError'),
 				messageSuccess: t('toast:update_missed_training.messageSuccess'),
 				contentCommon: `${t('toast:update_missed_training.additional')} ${shelfTitle}`,
-				// contentSuccess: `${t('toast:update_missed_training.additional')} ${shelfTitle}`,
-				// contentError: `${t('toast:update_missed_training.additional')} ${shelfTitle}`,
+				duration: 1000000,
 			}
-			// duration: 1000000,
 		}))
 		try {
 			await sleep(4)

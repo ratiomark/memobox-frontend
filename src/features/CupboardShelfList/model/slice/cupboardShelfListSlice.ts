@@ -14,8 +14,7 @@ import { setLocalShelvesToStore } from '../services/setLocalShelvesToStore'
 import { UpdateBoxTimeThunkArg, updateBoxTimeThunk } from '../services/updateBoxTimeThunk'
 import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk'
 import { CupboardPageSchema } from '../types/CupboardPageSchema'
-import { updateBoxMissedTrainingThunk, UpdateBoxMissedTrainingThunkArg } from '../services/updateBoxMissedTrainingThunk'
-// import { store } from '@/app/providers/StoreProvider/ui/StoreProvider'
+import { updateMissedTrainingThunk, UpdateMissedTrainingThunkArg } from '../services/updateMissedTrainingThunk'
 
 const initialState: CupboardPageSchema = {
 	isDataAlreadyInStore: false,
@@ -441,8 +440,8 @@ const cupboardShelfList = createSlice({
 					// shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false, deletingRequestStatus: 'error' } })
 				})
 			.addCase(
-				updateBoxMissedTrainingThunk.fulfilled,
-				(state, action: PayloadAction<UpdateBoxMissedTrainingThunkArg>) => {
+				updateMissedTrainingThunk.fulfilled,
+				(state, action: PayloadAction<UpdateMissedTrainingThunkArg>) => {
 					const { boxId, shelfId, missedTrainingValue } = action.payload
 					if (!boxId) shelvesAdapter.updateOne(state, { id: shelfId, changes: { missedTrainingValue } })
 					else {
@@ -453,7 +452,7 @@ const cupboardShelfList = createSlice({
 					}
 				})
 			.addCase(
-				updateBoxMissedTrainingThunk.rejected,
+				updateMissedTrainingThunk.rejected,
 				(state, action) => {
 					// state.shelfDeletionProcess.requestStatus = 'error'
 					// state.shelfDeletionProcess.isAnyShelfInDeletionProcess = false
