@@ -200,10 +200,11 @@ export const CupboardShelfList = () => {
 				<ShelfBoxesTemplateModal />
 				<MissedTrainingSettingsModal />
 				<NotificationSettingsModal />
-				<BoxTimeSetterModal />
 				<BoxSettingsDropdownModal />
 				<CupboardInfoModal />
+				{/* Важно HiddenTemplates должен стоять выше BoxTimeSetterModal там происходят определенные вычисления*/}
 				<HiddenTemplates />
+				<BoxTimeSetterModal />
 			</div>
 			<CreateNewCardModal />
 			{/* <ShelvesDeletionToasts/> */}

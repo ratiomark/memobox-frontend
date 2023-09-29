@@ -1,17 +1,13 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './TimeSetter.module.scss';
-import { CSSProperties, MutableRefObject, WheelEvent, useEffect, useRef, useState } from 'react';
+import { CSSProperties, WheelEvent, useEffect, useState } from 'react';
 import { MyText } from '../Typography';
-import { Button } from '../Button';
 import { SingleSetter } from './SingleSetter';
-import { HStack } from '../Stack';
 import { TimingBlock } from '@/shared/types/DataBlock';
 import { timingDataDefault } from '@/shared/const/timingBlock';
 import { ModalButtons } from '../ModalButtons';
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
-import { dataAttrTimeSetterSingle } from '@/shared/const/idsAndDataAttributes.ts';
 import useSingleSettersWidth from './useSingleSettersWidth.ts'
 
 interface TimeSetterProps {
@@ -45,8 +41,8 @@ export const TimeSetter = (props: TimeSetterProps) => {
 	const [months, setMonths] = useState(timingData.months)
 	const [disabled, setDisabled] = useState(false)
 	useSingleSettersWidth(currentLang)
-	
-	
+
+
 	// useEffect(() => {
 	// 	if (timeSetterRef.current && startCallback) {
 	// 		const sizes = { width: timeSetterRef.current.offsetWidth, height: timeSetterRef.current.offsetHeight }
@@ -167,7 +163,7 @@ export const TimeSetter = (props: TimeSetterProps) => {
 			id={id}
 		// ref={timeSetterRef}
 		>
-			<div className={'lineInCenter'} />
+			{/* <div className={'lineInCenter'} /> */}
 			{title && <MyText text={title} align='center' className={cls.timeSetterTitle} />}
 			<div className={cls.singleSettersColumnsWrapper} >
 				<SingleSetter

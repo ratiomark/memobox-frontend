@@ -18,7 +18,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { idCupboardShelfList, idTimeSetterHidden } from '@/shared/const/idsAndDataAttributes';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { updateBoxTimeThunk } from '../../../model/services/updateBoxTimeThunk';
-import { useHeaderCupboardTimeSetterSizes } from './useF';
+import  useCoordinates  from './useCoordinates';
 const useDocumentReadyState = () => {
 	const [readyState, setReadyState] = useState(document.readyState);
 
@@ -65,66 +65,16 @@ const useDocumentReadyState = () => {
 
 
 export const BoxTimeSetterModal = () => {
-	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const isOpen = useSelector(getTimingSetterModalIsOpen)
 	const coordinates = useSelector(getBoxCoordinates)
 	const timingData = useSelector(getBoxTimingData)
 	const boxId = useSelector(getTimingSetterBoxId)
 	const shelfId = useSelector(getTimingSetterShelfId)
-	// const checked = useRef(false)
-	// const currentMissedTrainingValueOfBox = useSelector((state: StateSchema) => getMissedTrainingBoxValue(state, shelfId, boxId))
-	// const headerHeight = useRef(0)
-	// const cupboardShelfListRects = useRef({ x: 0, y: 0, width: 0 })
-	// const timeSetterSizes = useRef({ height: 0, width: 0 })
-	const [coordinatesChecked, setCoordinatesChecked] = useState({ x: 0, y: 0 })
-	const [checked, setChecked] = useState(false)
-	const sizes = useHeaderCupboardTimeSetterSizes()
-
-	// const {
-	// 	headerHeight,
-	// 	cupboardShelfListRects,
-	// 	timeSetterSizes,
-	// 	isLoaded,
-	// } = useHeaderCupboardTimeSetterSizes()
-	// const coordinatesChecked = useRef({ x: 0, y: 0 })
-
-
-	useEffect(() => {
-		if (sizes) {
-			const {
-				headerHeight,
-				cupboardShelfListRects,
-				timeSetterSizes
-			} = sizes
-			console.log(sizes)
-			// console.log(timeSetterSizes.current)
-			if (timeSetterSizes.height === 0) return
-			const coordinatesHeightCorrection = timeSetterSizes.height / 2
-			const coordinatesWidthCorrection = timeSetterSizes.width / 2
-			const viewPortHeight = window.innerHeight
-			let actualX = coordinates.x - coordinatesWidthCorrection
-			const containerEdge = cupboardShelfListRects.x + cupboardShelfListRects.width
-			if (actualX + timeSetterSizes.width > containerEdge) {
-				actualX = (containerEdge - timeSetterSizes.width)
-			} else if (actualX < cupboardShelfListRects.x) {
-				actualX = cupboardShelfListRects.x
-			}
-			let actualY = coordinates.y - coordinatesHeightCorrection
-			if (actualY < headerHeight) {
-				actualY = headerHeight
-			} else if (actualY + timeSetterSizes.height > viewPortHeight) {
-				actualY = viewPortHeight - timeSetterSizes.height
-			}
-			setCoordinatesChecked({ y: actualY, x: actualX })
-		}
-	}, [coordinates, sizes])
-	// }, [coordinates, isLoaded, cupboardShelfListRects, headerHeight, timeSetterSizes])
-
-	// useEffect(() => {
-	// 	console.log('TIMESETTER   ', boxId)
-	// }, [boxId])
-
+	const coordinatesChecked = useCoordinates(coordinates)
+	// const sizes = useHeaderCupboardTimeSetterSizes()
+	// const coordinatesChecked = useCoordinates(coordinates, sizes)
+	
 	const onCloseHandle = () => {
 		dispatch(cupboardShelfListActions.setTimingSetterModalIsOpen(false))
 		// dispatch(cupboardShelfListActions.dropMissedTrainingShelfAndBoxId())
