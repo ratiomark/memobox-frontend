@@ -25,7 +25,7 @@ export const updateBoxTimeThunk = createAsyncThunk<UpdateBoxTimeThunkArg, Update
 				messageLoading: t('toast:messageLoading'),
 				messageError: t('toast:messageError'),
 				messageSuccess: t('toast:update_box_time.messageSuccess'),
-				contentCommon: `${t('toast:update_box_time.additional')}`,
+				contentCommon: t('toast:update_box_time.additional'),
 				// contentLoading: `${t('toast:update_box_time.additional')}`,
 				// contentSuccess: `${t('toast:update_box_time.additional')} `,
 				// contentError: `${t('toast:update_box_time.additional')}`,

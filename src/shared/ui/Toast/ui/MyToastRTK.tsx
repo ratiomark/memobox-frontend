@@ -84,11 +84,12 @@ export const MyToast = (props: MyComponentToastsProps) => {
 			additionalMessage = contentLoading ?? contentCommon
 			break;
 	}
-	
+
 	const additionalContent = additionalMessage
 		? <ToastDescription className={cls.description} >{t(additionalMessage)}</ToastDescription>
+		// ? <ToastDescription className={cls.description} >{t(additionalMessage)}</ToastDescription>
 		: null
-	
+
 	return (
 		<Root
 			// onOpenChange={onOpenChange}
@@ -127,9 +128,10 @@ const reducers: ReducersList = {
 export const MyToastsRTK = () => {
 	useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const toastsObj = useSelector(getToastsObject)
-	useEffect(() => {
-		console.log(toastsObj)
-	}, [toastsObj])
+	const { t } = useTranslation('toast')
+	// useEffect(() => {
+	// 	console.log(toastsObj)
+	// }, [toastsObj])
 
 	const renderedToasts = Object.entries(toastsObj).map(([id, toast]) => {
 		// console.log(id, toast)
