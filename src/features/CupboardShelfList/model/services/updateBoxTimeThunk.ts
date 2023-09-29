@@ -15,7 +15,7 @@ export const updateBoxTimeThunk = createAsyncThunk<UpdateBoxTimeThunkArg, Update
 	async (arg, thunkAPI) => {
 		const boxId = arg.boxId
 		const id = boxId + genRandomId()
-		const { dispatch, getState } = thunkAPI
+		const { dispatch } = thunkAPI
 		// const shelfTitle = getShelfTitleByShelfId(arg.shelfId)(getState())
 		// console.log(shelfTitle)
 		dispatch(toastsActions.addToast({
