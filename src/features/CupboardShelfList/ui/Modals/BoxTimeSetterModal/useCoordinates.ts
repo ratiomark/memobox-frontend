@@ -62,9 +62,6 @@ const useCoordinates = (coordinates: BoxCoordinates) => {
 			cupboardShelfListRects,
 			timeSetterSizes
 		} = sizes
-		// console.log(sizes)
-		// console.log(timeSetterSizes.current)
-		// if (timeSetterSizes.height === 0) return
 		const coordinatesHeightCorrection = timeSetterSizes.height / 2
 		const coordinatesWidthCorrection = timeSetterSizes.width / 2
 		const viewPortHeight = window.innerHeight

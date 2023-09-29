@@ -6,7 +6,7 @@ import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce';
 import { callbackMainDelay } from '@/shared/const/callbackDelays';
 import { useCallback, useEffect } from 'react';
 
-export const useShelvesDndHandler = () => {
+const useShelvesDndHandler = () => {
 	const shelvesIdsAndIndexesCurrent = useSelector(getShelfIdAndIndexesList)
 	const shelvesIdsAndIndexesInitial = useSelector(getShelfIdAndIndexesListInitial)
 
@@ -40,3 +40,5 @@ export const useShelvesDndHandler = () => {
 		};
 	}, [sendShelvesOrderCallback]);
 }
+
+export default useShelvesDndHandler

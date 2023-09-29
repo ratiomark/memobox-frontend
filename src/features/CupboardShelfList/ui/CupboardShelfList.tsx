@@ -36,8 +36,8 @@ import { idCupboardShelfList } from '@/shared/const/idsAndDataAttributes';
 import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
 import { Reorder } from 'framer-motion';
 import { ShelfBoxesTemplateModal } from './BoxesSettingsModal/ShelfTemplateSettings';
-import { useShelvesDndHandler } from '../model/hooks/useShelvesDndHandler';
-import { useShelvesLocalSaver } from '../model/hooks/useShelvesLocalSaver';
+import useShelvesDndHandler from '../model/hooks/useShelvesDndHandler';
+import  useShelvesLocalSaver from '../model/hooks/useShelvesLocalSaver';
 import useCupboardButtonsSizes from '../model/hooks/useCupboardButtonsSizes';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
 

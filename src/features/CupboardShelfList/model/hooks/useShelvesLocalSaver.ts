@@ -5,16 +5,15 @@ import { ShelfSchema } from '@/entities/Shelf';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 
-export const useShelvesLocalSaver = ({ cupboardShelves }: { cupboardShelves: ShelfSchema[] }) => {
-
+const useShelvesLocalSaver = ({ cupboardShelves }: { cupboardShelves: ShelfSchema[] }) => {
 	useEffect(() => {
 		if (cupboardShelves.length > 0) {
-			// console.log(cupboardShelves)
 			localDataService.setShelves(cupboardShelves)
 		}
 	}, [cupboardShelves])
-
 }
+
+export default useShelvesLocalSaver
 // export const useShelvesLocalSaver = ({ cupboardShelves }: { cupboardShelves: ShelfSchema[] }) => {
 
 
