@@ -1,36 +1,29 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
-import { cupboardShelfListActions, getCupboardState } from '../slice/cupboardShelfListSlice'
-import { createNewShelf } from '@/entities/Cupboard'
-import { ShelfSchema, removeShelfByIdMutation } from '@/entities/Shelf'
-import { getQuestionCardModal, getAnswerCardModal, getShelfIdCardModal, getBoxIdCheckedCardModal, getCreateNewCardRequestStatus } from '../selectors/getCreateNewCardModal'
 import { toastsActions } from '@/shared/ui/Toast'
 import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { t } from 'i18next'
-// interface NewCard {
-// 	shelfId: string
-// 	boxId: string
-// 	question: string
-// 	answer: string
-// }
+import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
+
 export const deleteShelfThunk = createAsyncThunk<string, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/deleteShelfThunk',
 	async (shelfId, thunkAPI) => {
 
 		const { dispatch, getState } = thunkAPI
 		const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
-		// console.log(shelfTitle)
+		const id = shelfId + genRandomId()
 		dispatch(toastsActions.addToast({
-			id: shelfId,
+			id,
 			toast: {
 				status: 'pending',
 				messageLoading: t('toast:messageLoading'),
 				messageError: t('toast:messageError'),
 				messageSuccess: t('toast:delete_shelf.messageSuccess'),
-				contentLoading: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
-				contentSuccess: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
-				contentError: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
+				contentCommon: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
+				// contentLoading: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
+				// contentSuccess: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
+				// contentError: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
 				// duration: 1000000,
 			}
 		}))
@@ -44,18 +37,12 @@ export const deleteShelfThunk = createAsyncThunk<string, string, { rejectValue: 
 			// const response = Math.random() > 0.5
 			const response = Math.random() > 50
 			if (!response) {
-				dispatch(toastsActions.updateToastById({
-					id: shelfId,
-					toast: { status: 'error' }
-				}))
+				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 
 				throw new Error()
 			}
 
-			dispatch(toastsActions.updateToastById({
-				id: shelfId,
-				toast: { status: 'success' }
-			}))
+			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			// dispatch(removeShelfByIdMutation(shelfId)).unwrap()
 			return shelfId
 

@@ -1553,7 +1553,8 @@
       "isDeleting": false,
       "isDeleted": false,
       "deletingRequestStatus": "idle",
-      "missedTrainingAction": "none"
+      "missedTrainingAction": "none",
+      "missedTrainingValue": "none"
     },
     {
       "id": "648c920baa3edb04cec38442",

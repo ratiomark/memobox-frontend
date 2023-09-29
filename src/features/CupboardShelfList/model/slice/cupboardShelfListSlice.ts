@@ -110,8 +110,6 @@ export const getAllShelvesEntities = (state: StateSchema) => getCupboardState.se
 // 	(state) => state.books
 // )
 export const isShelvesDndRepresentationEqual = (initialShelves: ShelfDndRepresentation[], currentShelves: ShelfDndRepresentation[]) => {
-	// console.log(initialShelves)
-	// console.log(currentShelves)
 	for (let index = 0; index < initialShelves.length; index++) {
 		if (initialShelves[index].id !== currentShelves[index].id) {
 			return false
@@ -119,12 +117,7 @@ export const isShelvesDndRepresentationEqual = (initialShelves: ShelfDndRepresen
 	}
 	return true
 }
-// And then use the selectors to retrieve values
-// const allBooks = getCupboardState.selectAll(store.getState())
-// export const { selectEntities: getAllShelves, selectIds: getAllShelvesIds } = shelvesAdapter.getSelectors()
-// export const getCupboardEntities = shelvesAdapter.getSelectors<StateSchema>(
-// 	(state) => state.cupboard.entities
-// )
+
 
 const cupboardShelfList = createSlice({
 	name: 'cupboardShelfList',
@@ -421,7 +414,7 @@ const cupboardShelfList = createSlice({
 			.addCase(
 				deleteShelfThunk.rejected,
 				(state, action) => {
-					shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false, deletingRequestStatus: 'error' } })
+					shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false } })
 				})
 			.addCase(
 				updateBoxTimeThunk.fulfilled,
@@ -431,13 +424,6 @@ const cupboardShelfList = createSlice({
 					if (box && box?.specialType !== 'new') {
 						box.timing = timeObject
 					}
-				})
-			.addCase(
-				updateBoxTimeThunk.rejected,
-				(state, action) => {
-					// state.shelfDeletionProcess.requestStatus = 'error'
-					// state.shelfDeletionProcess.isAnyShelfInDeletionProcess = false
-					// shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false, deletingRequestStatus: 'error' } })
 				})
 			.addCase(
 				updateMissedTrainingThunk.fulfilled,
@@ -451,13 +437,7 @@ const cupboardShelfList = createSlice({
 						}
 					}
 				})
-			.addCase(
-				updateMissedTrainingThunk.rejected,
-				(state, action) => {
-					// state.shelfDeletionProcess.requestStatus = 'error'
-					// state.shelfDeletionProcess.isAnyShelfInDeletionProcess = false
-					// shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false, deletingRequestStatus: 'error' } })
-				})
+
 		// .addCase(
 		// 	sendShelvesOrder.rejected,
 		// 	(state) => {

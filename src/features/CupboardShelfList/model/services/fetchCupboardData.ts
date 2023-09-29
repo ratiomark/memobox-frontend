@@ -7,7 +7,7 @@ export const fetchCupboardData = createAsyncThunk<CupboardSchema, void, { reject
 	'cupboardPage/fetchCupboardData',
 	async (_, thunkAPI) => {
 
-		const { dispatch, extra, getState } = thunkAPI
+		const { dispatch } = thunkAPI
 
 		try {
 			const response = dispatch(cupboardGetData()).unwrap()
