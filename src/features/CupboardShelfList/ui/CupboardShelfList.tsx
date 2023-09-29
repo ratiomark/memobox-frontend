@@ -36,13 +36,11 @@ import { idCupboardShelfList } from '@/shared/const/idsAndDataAttributes';
 import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal';
 import { Reorder } from 'framer-motion';
 import { ShelfBoxesTemplateModal } from './BoxesSettingsModal/ShelfTemplateSettings';
-import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce';
 import { useShelvesDndHandler } from '../model/hooks/useShelvesDndHandler';
 import { useShelvesLocalSaver } from '../model/hooks/useShelvesLocalSaver';
+import useCupboardButtonsSizes from '../model/hooks/useCupboardButtonsSizes';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
-import { ShelvesDeletionToasts } from './ShelvesDeletionToasts/ShelvesDeletionToasts';
-// import { ContentLooker } from './Modals/CreateNewCardModal copy/ContentLooker';
-// import { EditorV2 } from '@/shared/ui/lexical-playground/src/Editor';
+
 
 let timerId: number;
 export const CupboardShelfList = () => {
@@ -57,6 +55,7 @@ export const CupboardShelfList = () => {
 	const isFirstRender = useSelector(getCupboardIsFirstRender)
 	useShelvesDndHandler()
 	useShelvesLocalSaver({ cupboardShelves })
+	useCupboardButtonsSizes(cupboardIsLoading)
 	// const cupboardShelves = useSelector(getCupboardState.selectAll).sort((a, b) => a.index - b.index)
 	// useEffect(() => {
 	// 	// if (cupboardShelves.length) {
@@ -66,26 +65,6 @@ export const CupboardShelfList = () => {
 	useLayoutEffect(() => {
 		dispatch(setLocalShelvesToStore())
 	}, [dispatch])
-
-
-	useLayoutEffect(() => {
-		if (!cupboardIsLoading) {
-			const trainButtons = document.querySelectorAll('[data-button-type="shelf-train"]') as NodeListOf<HTMLButtonElement>
-			const addCardButtons = document.querySelectorAll('[data-button-type="shelf-add-card"]') as NodeListOf<HTMLButtonElement>
-			const addCardButtonGeneral = document.querySelector('[data-button-type="shelf-add-card-general"]') as HTMLButtonElement
-			const buttonsWidthList: number[] = []
-			const addCardsButtonsWidthList: number[] = []
-			buttonsWidthList.push(addCardButtonGeneral.clientWidth)
-			trainButtons.forEach(button => buttonsWidthList.push(button.clientWidth))
-			addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
-			const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
-			const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
-			trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
-			addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
-			addCardButtonGeneral.style.minWidth = `${maxButtonWidth + 2}px`
-			clearTimeout(timerId)
-		}
-	}, [cupboardIsLoading])
 
 	const onAddNewCardClick = useCallback((shelfId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
@@ -212,27 +191,3 @@ export const CupboardShelfList = () => {
 		</>
 	)
 }
-
-
-
-// const moveShelf = useCallback((dropAtIndex: number, shelfIndexDragged: number) => {
-// 	// console.log('функция ', 'ставлю на: ', dropAtIndex, '  индекс: ', shelfIndexDragged)
-// 	if (dropAtIndex === shelfIndexDragged) return
-// 	const updates = []
-// 	const currentShelf = { ...cupboardShelves.find(shelf => shelf.index === shelfIndexDragged) } as ShelfSchema
-// 	updates.push({ id: currentShelf.id, changes: { index: dropAtIndex } })
-// 	if (dropAtIndex > shelfIndexDragged) {
-// 		cupboardShelves.forEach(shelf => {
-// 			if (shelf.index <= dropAtIndex && shelf.index > shelfIndexDragged) {
-// 				updates.push({ id: shelf.id, changes: { index: shelf.index - 1 } })
-// 			}
-// 		})
-// 	} else {
-// 		cupboardShelves.forEach(shelf => {
-// 			if (shelf.index >= dropAtIndex && shelf.index < shelfIndexDragged) {
-// 				updates.push({ id: shelf.id, changes: { index: shelf.index + 1 } })
-// 			}
-// 		})
-// 	}
-// 	dispatch(cupboardShelfListActions.updateIndexes(updates))
-// }, [cupboardShelves, dispatch])

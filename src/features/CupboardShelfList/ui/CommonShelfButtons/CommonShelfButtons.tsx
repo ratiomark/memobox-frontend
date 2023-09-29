@@ -15,6 +15,7 @@ import { cupboardShelfListActions } from '../..';
 import { useUpdateCommonShelfMutation } from '@/entities/Shelf';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
+import { dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
 
 interface ShelfButtonsProps {
 	className?: string
@@ -69,7 +70,7 @@ export const CommonShelfButtons = (props: ShelfButtonsProps) => {
 			<Button
 				className={cls.button}
 				variant='filled'
-				data-button-type='shelf-train'
+				data-button-type={dataAttrButtonTypeTrain}
 				onClick={startTraining}
 			>
 				{t('train') + ' (t)'}

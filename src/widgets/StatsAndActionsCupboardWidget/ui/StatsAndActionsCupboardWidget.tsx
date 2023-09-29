@@ -28,6 +28,7 @@ import { MyToast } from '@/shared/ui/Toast';
 import { getCreateNewCardRequestStatus } from '@/features/CupboardShelfList'
 import { restoreAllShelves } from '@/entities/Cupboard';
 import { ThemeSwitcher } from '@/features/ThemeSwitcher';
+import { dataAttrButtonTypeAddCardButtonGeneral } from '@/shared/const/idsAndDataAttributes';
 
 export const StatsAndActionsCupboardWidget = () => {
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
@@ -74,7 +75,7 @@ export const StatsAndActionsCupboardWidget = () => {
 					</Button>
 					<Button
 						onClick={onAddNewCardClick}
-						data-button-type='shelf-add-card-general'
+						data-button-type={dataAttrButtonTypeAddCardButtonGeneral}
 					>
 						{t('add card with hot key')}
 					</Button>
