@@ -125,7 +125,7 @@ const MyToastWrapper = ({ id, toast }: { id: string, toast: MyToastProps }) => {
 const reducers: ReducersList = {
 	toasts: toastsReducer
 }
-export const MyToastsRTK = () => {
+const MyToastsRTK = () => {
 	useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const toastsObj = useSelector(getToastsObject)
 	const { t } = useTranslation('toast')
@@ -146,6 +146,28 @@ export const MyToastsRTK = () => {
 		// </motion.div>
 	)
 }
+export default MyToastsRTK
+// export const MyToastsRTK = () => {
+// 	useAsyncReducer({ reducers, removeAfterUnmount: false })
+// 	const toastsObj = useSelector(getToastsObject)
+// 	const { t } = useTranslation('toast')
+// 	// useEffect(() => {
+// 	// 	console.log(toastsObj)
+// 	// }, [toastsObj])
+
+// 	const renderedToasts = Object.entries(toastsObj).map(([id, toast]) => {
+// 		// console.log(id, toast)
+// 		return <MyToastWrapper key={id} id={id} toast={toast} />
+// 		// return null
+// 	})
+// 	return (
+// 		// <motion.div layout>
+// 		<>
+// 			{renderedToasts}
+// 		</>
+// 		// </motion.div>
+// 	)
+// }
 // export const MyToastsRTK = memo(() => {
 // 	// const toasts = useSelector(getToastsList)
 // 	const toastsObj = useSelector(getToastsObject)

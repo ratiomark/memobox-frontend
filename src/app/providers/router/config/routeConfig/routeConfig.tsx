@@ -81,28 +81,28 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	main: {
 		path: obtainRouteMain(),
 		element: <MainPage />,
-		suspense: <StatsAndActionsCupboardWidgetSkeleton />
+		// suspense: <StatsAndActionsCupboardWidgetSkeleton />
 	},
 	view: {
 		path: obtainRouteView(':shelfId', ':boxId'),
 		element: <ViewPage />,
-		suspense: <ViewPageSkeleton />
+		// suspense: <ViewPageSkeleton />
 	},
 	viewEmpty: {
 		path: '/view',
 		element: <ViewPage />,
-		suspense: <ViewPageSkeleton />
+		// suspense: <ViewPageSkeleton />
 	},
 	settings: {
 		path: obtainRouteSettings(),
 		element: <SettingsPage />,
-		suspense: <SettingsPageWidgetSkeleton />
+		// suspense: <SettingsPageWidgetSkeleton />
 	},
 	stats: {
 		path: obtainRouteStats(),
 		// element: <StatsPageSkeleton />,
 		element: <StatsPage />,
-		suspense: <StatsPageSkeleton />
+		// suspense: <StatsPageSkeleton />
 	},
 	trash: {
 		path: obtainRouteTrash(),

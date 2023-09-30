@@ -1,12 +1,12 @@
-// import { lazy } from 'react'
-// import { LazyLoader } from '../../LazyLoader/LazyLoader'
+import { lazy } from 'react'
+import { LazyLoader } from '../../LazyLoader/LazyLoader'
 
-// const MyToastsRTKLazy = lazy(() => import('./MyToastRTK'))
+const MyToastsRTKLazy = lazy(() => import('./MyToastRTK'))
 
-// export const MyToastsRTK = () => {
-// 	return <LazyLoader
-// 		isOpen={true}
-// 		fallback={null}
-// 		render={() => <MyToastsRTKLazy />}
-// 	/>
-// }
+export const MyToastsRTK = () => {
+	return <LazyLoader
+		isOpen={true}
+		fallback={null}
+		render={() => <MyToastsRTKLazy />}
+	/>
+}
