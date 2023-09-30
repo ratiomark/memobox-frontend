@@ -44,7 +44,7 @@ import { DialogActions } from '../../ui/Dialog';
 import FileInput from '../../ui/FileInput';
 import Select from '../../ui/Select';
 import TextInput from '../../ui/TextInput';
-import { CAN_USE_DOM } from '../../../shared/src/canUseDOM';
+import { CAN_USE_DOM } from '../../../shared/canUseDOM';
 
 export type InsertInlineImagePayload = Readonly<InlineImagePayload>;
 

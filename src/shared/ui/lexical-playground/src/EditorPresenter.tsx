@@ -39,7 +39,7 @@ import { EditorState } from 'lexical';
 import { ChangePlugin } from './plugins/ChangePlugin/ChangePlugin';
 import { CommandsPlugin } from './plugins/CommandPlugin/CommandPlugin';
 import { EditorStateSetterPlugin } from './plugins/EditorStateSetterPlugin/EditorStateSetterPlugin';
-import { CAN_USE_DOM } from '../shared/src/canUseDOM';
+import { CAN_USE_DOM } from '../shared/canUseDOM';
 
 
 const useShowToolBar = ({ editorRef }: { editorRef: RefObject<HTMLDivElement> }) => {

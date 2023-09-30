@@ -39,7 +39,7 @@ import { useActiveElement } from '@/shared/lib/helpers/hooks/useActiveElement';
 import { EditorState } from 'lexical';
 import { ChangePlugin } from './plugins/ChangePlugin/ChangePlugin';
 import { CommandsPlugin } from './plugins/CommandPlugin/CommandPlugin';
-import { CAN_USE_DOM } from '../shared/src/canUseDOM';
+import { CAN_USE_DOM } from '../shared/canUseDOM';
 import { EditorStateSetterPlugin } from './plugins/EditorStateSetterPlugin/EditorStateSetterPlugin';
 import { lexicalEmptyEditorState } from '@/shared/const/lexical';
 import { LockEditorPlugin } from './plugins/LockEditor/ChangePlugin';
@@ -282,3 +282,4 @@ export const EditorUniversal = (props: EditorProps) => {
 		</SettingsContext>
 	)
 }
+// export default EditorUniversal

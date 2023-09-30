@@ -1,5 +1,5 @@
 import cls from './BigDataLabelsSkeleton.module.scss';
-import { Skeleton } from '..';
+import { Skeleton } from '../Skeleton';
 
 
 export const BigDataLabelsSkeleton = () => {

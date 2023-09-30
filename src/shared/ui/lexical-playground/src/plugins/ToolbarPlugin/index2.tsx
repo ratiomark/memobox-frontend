@@ -102,7 +102,7 @@ import {
 	InsertImageDialog,
 	// InsertImagePayload,
 } from '../ImagesPlugin';
-import { IS_APPLE } from '../../../shared/src/environment';
+import { IS_APPLE } from '../../../shared/environment';
 import { useTranslation } from 'react-i18next';
 import { buttonTitles } from '../../const/buttonTitles';
 import { $isEquationNode } from '../../nodes/EquationNode';

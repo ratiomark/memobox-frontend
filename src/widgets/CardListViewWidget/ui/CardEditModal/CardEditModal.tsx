@@ -14,17 +14,9 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
-import { EditorUniversal } from '@/shared/ui/lexical-playground/src/EditorUniversal';
+import { EditorUniversal } from '@/shared/ui/lexical-playground';
 
-
-interface CardEditModalProps {
-	className?: string
-}
-
-export const CardEditModal = memo((props: CardEditModalProps) => {
-	const {
-		className,
-	} = props
+export const CardEditModal = memo(() => {
 	const { t } = useTranslation()
 	// const cupboardError = useSelector(getCupboardError)
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()

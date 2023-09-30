@@ -1,7 +1,7 @@
-import { memo } from 'react';
 import clsx from 'clsx';
 import cls from './DefaultButtonSkeleton.module.scss';
-import { Skeleton } from '..';
+import { memo } from 'react';
+import { Skeleton } from '../Skeleton';
 
 interface SkeletonProps {
 	className?: string

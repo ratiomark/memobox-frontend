@@ -40,7 +40,7 @@ import Button from '../../ui/Button';
 import { DialogActions, DialogButtonsList } from '../../ui/Dialog';
 import FileInput from '../../ui/FileInput';
 import TextInput from '../../ui/TextInput';
-import { CAN_USE_DOM } from '../../../shared/src/canUseDOM';
+import { CAN_USE_DOM } from '../../../shared/canUseDOM';
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 

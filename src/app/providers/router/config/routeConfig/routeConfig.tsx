@@ -81,7 +81,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	main: {
 		path: obtainRouteMain(),
 		element: <MainPage />,
-		// suspense: <StatsAndActionsCupboardWidgetSkeleton />
+		suspense: <StatsAndActionsCupboardWidgetSkeleton />
 	},
 	view: {
 		path: obtainRouteView(':shelfId', ':boxId'),

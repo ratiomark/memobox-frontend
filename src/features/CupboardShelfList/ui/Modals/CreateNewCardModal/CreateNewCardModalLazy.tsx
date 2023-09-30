@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { lazy } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { LazyLoader } from '@/shared/ui/LazyLoader/LazyLoader'
 import { getIsOpenCardModal } from '../../../model/selectors/getCreateNewCardModal'
 
@@ -7,9 +7,15 @@ const CreateNewCardModalLazy = lazy(() => import('./CreateNewCardModal'))
 
 export const CreateNewCardModal = () => {
 	const isOpen = useSelector(getIsOpenCardModal)
-	return <LazyLoader
-		isOpen={isOpen}
-		render={() => <CreateNewCardModalLazy />}
-		fallback={<div>Loading...</div>}
-	/>
+	const [isLoaded, setIsLoaded] = useState(false)
+	useEffect(() => {
+		if (!isLoaded && isOpen) setIsLoaded(true)
+	}, [isOpen, isLoaded])
+	return <>
+		{isLoaded &&
+			<Suspense fallback={null}>
+				<CreateNewCardModalLazy />
+			</Suspense>
+		}
+	</>
 }

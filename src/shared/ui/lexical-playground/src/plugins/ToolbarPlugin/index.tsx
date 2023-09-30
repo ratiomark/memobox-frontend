@@ -98,7 +98,7 @@ import {
 	InsertImageDialog,
 	// InsertImagePayload,
 } from '../ImagesPlugin';
-import { IS_APPLE } from '../../../shared/src/environment';
+import { IS_APPLE } from '../../../shared/environment';
 import { useTranslation } from 'react-i18next';
 import { buttonTitles } from '../../const/buttonTitles';
 import { $isEquationNode } from '../../nodes/EquationNode';
@@ -996,7 +996,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 						title={IS_APPLE ? 'Bold (⌘B)' : 'Bold (Ctrl+B)'}
 						type="button"
 						aria-label={`Format text as bold. Shortcut: ${IS_APPLE ? '⌘B' : 'Ctrl+B'
-							}`}>
+						}`}>
 						<i className="format bold" />
 					</button>
 					<button
@@ -1009,7 +1009,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 						title={IS_APPLE ? 'Italic (⌘I)' : 'Italic (Ctrl+I)'}
 						type="button"
 						aria-label={`Format text as italics. Shortcut: ${IS_APPLE ? '⌘I' : 'Ctrl+I'
-							}`}>
+						}`}>
 						<i className="format italic" />
 					</button>
 					<button
@@ -1022,7 +1022,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 						title={IS_APPLE ? 'Underline (⌘U)' : 'Underline (Ctrl+U)'}
 						type="button"
 						aria-label={`Format text to underlined. Shortcut: ${IS_APPLE ? '⌘U' : 'Ctrl+U'
-							}`}>
+						}`}>
 						<i className="format underline" />
 					</button>
 
