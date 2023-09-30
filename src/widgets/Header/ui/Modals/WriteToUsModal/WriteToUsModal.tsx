@@ -1,29 +1,23 @@
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import cls from './WriteToUsModal.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { getIsWriteToUsOpen } from '../../../model/selectors/getHeaderModals';
-import { useMemo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { headerActions } from '../../../model/slice/headerSlice';
 import { Input } from '@/shared/ui/Input/Input';
 import { getUserEmail, getUserName } from '@/entities/User';
 import { ListBox } from '@/shared/ui/Popup';
 import { topicsList } from '../../../model/selectors/getTopicsWriteToUs';
-import { Heading, MyText, TextArea } from '@/shared/ui/Typography';
+import { MyText, TextArea } from '@/shared/ui/Typography';
 import { AppLink } from '@/shared/ui/AppLink/AppLink';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { useFileUploader } from '@/features/FileUploader';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
+import cls from './WriteToUsModal.module.scss';
 
-interface WriteToUsModalProps {
-	className?: string
-}
 
-export const WriteToUsModal = (props: WriteToUsModalProps) => {
-	const {
-		className
-	} = props
+const WriteToUsModal = memo(() => {
+
 	const isOpen = useSelector(getIsWriteToUsOpen)
 	const userName = useSelector(getUserName)
 	const [userNameLocal, setUserNameLocal] = useState(userName)
@@ -77,11 +71,7 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 			onClose={onCloseHandle}
 			onSubmit={() => alert('Сохраняю имя пользователя')}
 		>
-			<div className={clsx(
-				cls.writeToUsModal,
-				className)}
-			>
-
+			<div className={cls.writeToUsModal}>
 				<div className={cls.nameAndEmailBlock} >
 					<div>
 						<Input
@@ -150,4 +140,6 @@ export const WriteToUsModal = (props: WriteToUsModalProps) => {
 		</HDialogHeadless>
 
 	)
-}
+})
+WriteToUsModal.displayName = 'WriteToUsModal'
+export default WriteToUsModal

@@ -5,8 +5,7 @@ import { getHeaderItems } from '../../model/selectors/getHeaderItems'
 import cls from './Header.module.scss'
 import { useLocation } from 'react-router-dom'
 import { HeaderAdditionalBlock } from '../HeaderAdditionalBlock/HeaderAdditionalBlock'
-import { WriteToUsModal } from '../Modals/WriteToUsModal/WriteToUsModal'
-import './Header.css'
+import { WriteToUsModal } from '../Modals/WriteToUsModal/WriteToUsModalLazy'
 
 export const Header = memo(() => {
 	const headerItemsList = useSelector(getHeaderItems)
