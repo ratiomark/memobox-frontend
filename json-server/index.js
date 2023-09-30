@@ -286,6 +286,7 @@ server.post('/createNewShelf', (req, res) => {
 		const shelf = db.shelves[0]
 		shelf.title = titleFromUser
 		shelf.id = titleFromUser + Math.random().toString()
+		shelf.index = 0
 
 		// Перезаписываем файл JSON с обновленными данными
 		// fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
@@ -340,7 +341,7 @@ server.post('/restoreAllShelves', (req, res) => {
 
 		const db = JSON.parse(data);
 		const shelves = db.shelves
-		const newShelves = shelves.map(shelf=>({...shelf, isDeleted: false}))
+		const newShelves = shelves.map(shelf => ({ ...shelf, isDeleted: false }))
 		db.shelves = newShelves
 
 		fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(db), 'UTF-8', (err) => {
