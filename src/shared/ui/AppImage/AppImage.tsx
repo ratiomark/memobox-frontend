@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { ImgHTMLAttributes, ReactElement, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import cls from './AppImage.module.scss';
 import ErrorFallback from '@/shared/assets/icons_redesigned/picture-svgrepo-com.svg'
 import { Icon } from '../Icon/Icon';
