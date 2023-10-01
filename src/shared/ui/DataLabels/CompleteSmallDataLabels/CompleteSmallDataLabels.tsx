@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { SmallDataLabel } from '../SmallDataLabels/SmallDataLabel';
 import cls from './CompleteSmallDataLabels.module.scss';
 
@@ -20,10 +19,6 @@ export const CompleteSmallDataLabels = memo((props: CompleteSmallDataLabelsProps
 		data,
 		isLoading
 	} = props
-
-	// if (isLoading || !data) {
-	// 	return 
-	// }
 
 	return (
 		<div className={clsx(

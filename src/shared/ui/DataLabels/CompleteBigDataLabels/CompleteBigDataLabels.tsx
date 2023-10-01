@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import { BigDataLabel } from '../BigDataLabels/BigDataLabel';
 import cls from './CompleteBigDataLabels.module.scss';
 import { DataBlock } from '@/shared/types/DataBlock';
