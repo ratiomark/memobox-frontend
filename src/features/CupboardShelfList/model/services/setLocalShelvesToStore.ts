@@ -9,7 +9,7 @@ export const setLocalShelvesToStore = createAsyncThunk<ShelfSchema[], void, { re
 	async (_, thunkAPI) => {
 
 		try {
-			console.log('Полки из LS: ', localDataService.getShelves())
+			// console.log('Полки из LS: ', localDataService.getShelves())
 			return localDataService.getShelves()
 		} catch (err) {
 			return thunkAPI.rejectWithValue('some error in fetchCupboardData')

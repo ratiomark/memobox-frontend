@@ -13,6 +13,8 @@ dist-ssr
 *.local
 stats.html
 q.txt
+wgithelp
+LangComponent.tsx
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -15,6 +15,7 @@ import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/type
 import { useLocation } from 'react-router-dom';
 import { deleteShelfThunk } from '../../model/services/deleteShelfThunk';
 import { getShelfIsDeleting } from '../../model/selectors/getShelfDeletionProcess';
+import { CircularCountDownWithProgress } from '@/shared/ui/CircularCountDownWithProgress';
 
 interface ShelfDeletingProps {
 	shelfId: string
@@ -61,14 +62,10 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 
 	useEffect(() => {
-		// console.log('Я в АААААААААААААА')
-		const timer = setTimeout(() => {
-			// console.log('ТАЙМАУТА')
-			// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { deletingRequestStatus: 'pending' } }))
-			dispatch(deleteShelfThunk(shelfId))
-			// clearTimeout(timerId)
-		}, DURATION_SHELF_DELETION_MILLISEC)
-		setTimer(timer)
+		// const timer = setTimeout(() => {
+		// 	dispatch(deleteShelfThunk(shelfId))
+		// }, DURATION_SHELF_DELETION_MILLISEC)
+		// setTimer(timer)
 		// }
 		// return () => clearTimeout(timerId)
 	}, [dispatch, shelfId])
@@ -137,12 +134,13 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 			<Button className={cls.button} fontWeight='300' onClick={onCancelDeletion}>
 				{t('cancel shelf deletion')}
 			</Button>
-			<div className={cls.countdown}>
+			<CircularCountDownWithProgress duration={10} />
+			{/* <div className={cls.countdown}>
 				<svg className={cls.svg} viewBox="-50 -50 100 100" strokeWidth="7">
 					<circle className={cls.first} r="45"></circle>
 					<circle className={cls.first} r="45" pathLength="1"></circle>
 				</svg>
-			</div>
+			</div> */}
 		</div>
 
 	)
