@@ -105,29 +105,25 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 	useEffect(() => {
 		return () => {
-			// if (isShelfDeleting) {
 			dispatch(deleteShelfThunk(shelfId))
-			// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
-			// removeShelfMutation(shelfId)
 		}
-		// if (isShelfDeleting) console.log('РОУТ РОУТ РОУТ ') }
 	}, [dispatch, shelfId])
 	// }, [dispatch, isShelfDeleting, shelfId])
 
 
-	// useEffect(() => {
-	// 	const deleteShelf = () => {
-	// 		if (isShelfDeleting) {
-	// 			dispatch(deleteShelfThunk(shelfId))
-	// 		}
-	// 	}
+	useEffect(() => {
+		const deleteShelf = () => {
+			if (isShelfDeleting) {
+				dispatch(deleteShelfThunk(shelfId))
+			}
+		}
 
-	// 	window.addEventListener('beforeunload', deleteShelf)
+		window.addEventListener('beforeunload', deleteShelf)
 
-	// 	return () => {
-	// 		window.removeEventListener('beforeunload', deleteShelf)
-	// 	}
-	// }, [dispatch, isShelfDeleting, shelfId])
+		return () => {
+			window.removeEventListener('beforeunload', deleteShelf)
+		}
+	}, [dispatch, isShelfDeleting, shelfId])
 
 	const onCancelDeletion = () => {
 		if (timer) clearTimeout(timer);

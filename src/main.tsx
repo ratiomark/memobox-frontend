@@ -8,7 +8,6 @@ import { domAnimation, LazyMotion } from 'framer-motion';
 import { ToastProvider } from '@radix-ui/react-toast'
 import '@/shared/config/i18n/i18n'
 import './app/styles/index.scss'
-import { Suspense } from 'react'
 import { MyToastsRTK } from './shared/ui/Toast/ui/MyToastRTKLazy'
 
 const container = document.getElementById('root')
@@ -24,9 +23,7 @@ root.render(
 					<ThemeProvider>
 						<LazyMotion features={domAnimation}>
 							<App />
-							<Suspense fallback={null}>
-								<MyToastsRTK />
-							</Suspense>
+							<MyToastsRTK />
 						</LazyMotion>
 					</ThemeProvider>
 				</ToastProvider>

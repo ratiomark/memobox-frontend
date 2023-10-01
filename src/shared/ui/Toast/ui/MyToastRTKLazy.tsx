@@ -1,12 +1,10 @@
 import { lazy } from 'react'
-import { LazyLoader } from '../../LazyLoader/LazyLoader'
+import { LazyLoaderQuick } from '../../LazyLoader/LazyLoader'
 
 const MyToastsRTKLazy = lazy(() => import('./MyToastRTK'))
 
 export const MyToastsRTK = () => {
-	return <LazyLoader
-		isOpen={true}
-		fallback={null}
+	return <LazyLoaderQuick
 		render={() => <MyToastsRTKLazy />}
 	/>
 }

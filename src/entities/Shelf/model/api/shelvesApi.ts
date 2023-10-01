@@ -70,7 +70,7 @@ export const memoboxApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Shelves']
 		}),
-		removeShelf: build.mutation<void, string>({
+		removeShelf: build.mutation<string, string>({
 			query: (arg) => ({
 				url: '/shelves',
 				// params: { id: arg.id },

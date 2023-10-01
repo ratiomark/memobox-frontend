@@ -4,7 +4,7 @@ import { toastsActions } from '@/shared/ui/Toast'
 import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { t } from 'i18next'
-import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
+import { removeShelfByIdMutation } from '@/entities/Shelf'
 
 export const deleteShelfThunk = createAsyncThunk<string, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/deleteShelfThunk',
