@@ -1,6 +1,6 @@
 import { Button } from '@/shared/ui/Button';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback, useMemo, useRef, } from 'react';
+import { memo, useCallback, useMemo} from 'react';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
@@ -10,8 +10,6 @@ import cls from './SettingsButton.module.scss';
 import { useSelector } from 'react-redux';
 import { getIsOnlyOneShelfLeftInCupboard } from '../../model/selectors/getCupboardShelfList';
 
-
-
 export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 	const { t } = useTranslation()
 	const isOnlyOneShelfLeftInCupboard = useSelector(getIsOnlyOneShelfLeftInCupboard)
@@ -19,8 +17,6 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 
 	const onDeleteClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
-		// dispatch(cupboardShelfListActions.setShelfDeletionShelfId(shelfId))
-		// dispatch(cupboardShelfListActions.setIsAnyShelfInDeletionProcess(true))
 	}, [dispatch, shelfId])
 
 	const onBoxesSettingsClick = useCallback(() => {
@@ -78,7 +74,6 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 			}
 
 		]
-		// }, [t, shelfId, onNotificationClick, onMissedTrainingClick, onBoxesSettingsClick])
 	}, [t, shelfId, isOnlyOneShelfLeftInCupboard, onNotificationClick, onDeleteClick, onMissedTrainingClick, onBoxesSettingsClick])
 
 	return (
