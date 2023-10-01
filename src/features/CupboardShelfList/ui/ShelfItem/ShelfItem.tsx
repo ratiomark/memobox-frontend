@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Shelf } from '@/entities/Shelf';
 import { ShelfDeleting } from '../ShelfDeleting/ShelfDeleting';
 import { ShelfProps } from '@/entities/Shelf';
-import {  getShelfIsDeleting } from '../../model/selectors/getShelfDeletionProcess';
+import { getShelfIsDeleting } from '../../model/selectors/getShelfDeletionProcess';
 
 // тут будет переключаться состояние полки в зависимости от того лежит она в стейте или нет. Вместо полки будет отрисован объект удаления с кнопкой "отменить удаление"
 export const ShelfItem = (props: ShelfProps) => {
@@ -13,35 +13,10 @@ export const ShelfItem = (props: ShelfProps) => {
 		}
 	} = props
 	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
-	// const shelfDeletionRequestStatus = useSelector(getShelfDeletionRequestStatus(shelfId))
-	// const dispatch = useAppDispatch()
-
-	// const onTimeEnd = useCallback(() => {
-	// 	dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
-	// }, [dispatch, shelfId])
-
-	// const toast = <MyToast
-	// 	onTimeEnd={onTimeEnd}
-	// 	status={shelfDeletionRequestStatus}
-	// 	messageSuccess='УДАЛЕНА'
-	// 	// messageLoading='Загрузка'
-	// 	contentLoading={title}
-	// 	messageLoading='ХАП. Ожидание ответа от сервера'
-	// 	// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
-	// 	// contentSuccess={<MyText text={'Все супер класс!'} />}
-	// 	messageError='Ошибочка(('
-	// />
 
 	if (isShelfDeleting) {
-		return <>
-			<ShelfDeleting title={title} shelfId={shelfId} />
-			{/* {toast} */}
-		</>
+		return <ShelfDeleting isShelfDeleting={isShelfDeleting} title={title} shelfId={shelfId} />
 	}
 
-	return (<>
-		<Shelf {...props} />
-		{/* {toast} */}
-	</>
-	)
+	return <Shelf {...props} />
 }

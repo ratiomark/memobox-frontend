@@ -10,92 +10,33 @@ import { Button } from '@/shared/ui/Button';
 import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
 import { useRemoveShelfMutation } from '@/entities/Shelf';
 import { StateSchema } from '@/app/providers/StoreProvider';
-import { useSelector } from 'react-redux';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
-import { useLocation } from 'react-router-dom';
 import { deleteShelfThunk } from '../../model/services/deleteShelfThunk';
-import { getShelfIsDeleting } from '../../model/selectors/getShelfDeletionProcess';
 import { CircularCountDownWithProgress } from '@/shared/ui/CircularCountDownWithProgress';
 
 interface ShelfDeletingProps {
 	shelfId: string
 	title: string
+	isShelfDeleting: boolean
 }
 
 export const ShelfDeleting = (props: ShelfDeletingProps) => {
 	const {
 		shelfId,
-		title
+		title,
+		isShelfDeleting,
 	} = props
 
 	const dispatch = useAppDispatch()
 	const [removeShelfMutation] = useRemoveShelfMutation()
 	const [timer, setTimer] = useState<TimeoutId | null>(null);
-	// const openToast = useToast()
-	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
-	const isShelfDeleting = useSelector(getShelfIsDeleting(shelfId))
-	// const isShelfDeleted = useSelector(getShelfIsDeleted(shelfId))
-	// const shelfDeletionRequestStatus = useSelector(getShelfDeletionRequestStatus(shelfId))
-	const location = useLocation();
-
-	// useEffect(() => {
-	// 	console.log(`${title}   ----   ${shelfDeletionRequestStatus}`)
-	// }, [title, shelfDeletionRequestStatus])
-
-	useEffect(() => {
-		return () => {
-			if (isShelfDeleting) {
-				// удаляет полку, если перейти на новый роут и если полка находится в режими ожидания удаления
-				// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
-				// removeShelfMutation(shelfId)
-			}
-		}
-	}, [location, isShelfDeleting, shelfId, dispatch, removeShelfMutation]);
-
-	// const isShelfDeleting = useSelector((state: StateSchema) => getShelfIsDeleting(state, shelfId))
-	// timerId = setTimeout(() => {
-	// 	if (isShelfDeleting) {
-	// 		dispatch(cupboardShelfListActions.deleteShelf(shelfId))
-	// 		removeShelfMutation(shelfId)
-	// 	}
-	// 	clearTimeout(timerId)
-
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			dispatch(deleteShelfThunk(shelfId))
 		}, DURATION_SHELF_DELETION_MILLISEC)
 		setTimer(timer)
-		// return () => clearTimeout(timerId)
 	}, [dispatch, shelfId])
-	// useEffect(() => {
-	// 	// console.log('Я в АААААААААААААА')
-	// 	const timer = setTimeout(() => {
-	// 		// console.log('ТАЙМАУТА')
-	// 		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { deletingRequestStatus: 'pending' } }))
-	// 		dispatch(deleteShelfThunk(shelfId))
-	// 		// clearTimeout(timerId)
-	// 	}, DURATION_SHELF_DELETION_MILLISEC)
-	// 	setTimer(timer)
-	// 	// }
-	// 	// return () => clearTimeout(timerId)
-	// }, [dispatch, shelfId])
-	// useEffect(() => {
-	// 	openToast({
-	// 		onTimeEnd: onTimeEnd,
-	// 		status: shelfDeletionRequestStatus,
-	// 		messageSuccess: 'Полка удалена',
-	// 		messageLoading: 'ХОП. Ждем ответа от сервера',
-	// 		messageError: 'Ошибка!!!'
-	// 		// contentLoading={<MyText text={'Ожидание ответа от сервера'} />}
-	// 		// contentSuccess={<MyText text={'Все супер класс!'} />}
-	// 		// messageLoading='Загрузка'
-	// 	})
-	// 	// }
-	// 	// return () => clearTimeout(timerId)
-	// }, [onTimeEnd, shelfDeletionRequestStatus, openToast])
-	// }, [shelfId, dispatch, removeShelfMutation])
-	// }, [shelfId, dispatch, isShelfDeleting, removeShelfMutation])
 
 	useEffect(() => {
 		return () => {
@@ -103,6 +44,7 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 		}
 	}, [timer])
 
+	// удаляет, если уходит на другой роут
 	useEffect(() => {
 		return () => {
 			dispatch(deleteShelfThunk(shelfId))
@@ -110,7 +52,7 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 	}, [dispatch, shelfId])
 	// }, [dispatch, isShelfDeleting, shelfId])
 
-
+	// удаляет полку сразу, если перезагружает или закрывает вкладку
 	useEffect(() => {
 		const deleteShelf = () => {
 			if (isShelfDeleting) {
@@ -119,11 +61,12 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 		}
 
 		window.addEventListener('beforeunload', deleteShelf)
-
 		return () => {
 			window.removeEventListener('beforeunload', deleteShelf)
 		}
 	}, [dispatch, isShelfDeleting, shelfId])
+
+
 
 	const onCancelDeletion = () => {
 		if (timer) clearTimeout(timer);

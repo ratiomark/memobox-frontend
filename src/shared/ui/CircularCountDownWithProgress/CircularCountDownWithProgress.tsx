@@ -29,6 +29,7 @@ export const CircularCountDownWithProgress = ({ duration, size, strokeWidth, tra
 			duration={duration ?? 8}
 			isSmoothColorTransition
 			rotation='counterclockwise'
+			// @ts-ignore
 			colors='var(--count-down-deletion-path-color)'
 			// trailColor='var(--accent)'
 			// colors={['var(--accent)', 'var(--cancel)', 'var(--accent)', 'var(--cancel)']}

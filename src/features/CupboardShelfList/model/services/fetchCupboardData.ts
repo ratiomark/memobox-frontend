@@ -14,7 +14,7 @@ export const fetchCupboardData = createAsyncThunk<CupboardSchema, void, { reject
 			if (!response) {
 				throw new Error()
 			}
-			console.log(response)
+			// console.log(response)
 			return response
 
 		} catch (err) {

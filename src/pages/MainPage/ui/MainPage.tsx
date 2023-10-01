@@ -3,7 +3,6 @@ import { StatsAndActionsCupboardWidget } from '@/widgets/StatsAndActionsCupboard
 import { CupboardShelfListWrapper } from '@/features/CupboardShelfList'
 
 const MainPage = () => {
-
 	return (
 		<>
 			<Page data-testid='MainPage'>
