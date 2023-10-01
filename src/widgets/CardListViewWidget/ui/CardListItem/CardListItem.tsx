@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { CardSchemaExtended } from '@/entities/Card';
 import { MyText } from '@/shared/ui/Typography';
 // import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
-import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
+// import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { getViewPageCardEditedListIds, getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
@@ -12,10 +12,10 @@ import { ChangeEvent, MouseEvent, useMemo, useState, } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { AnimateSkeletonLoader, Collapsible } from '@/shared/ui/Animations';
+import {  Collapsible } from '@/shared/ui/Animations';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { formatDate } from '@/shared/lib/helpers/common/formaters';
-import { EditorCardPresenter } from '@/shared/ui/lexical-playground/src/EditorCardPresenter';
+import { EditorCardPresenter } from '@/shared/ui/LexicalEditor';
 
 const animations = {
 	selected: {

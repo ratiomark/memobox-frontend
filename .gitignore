@@ -15,6 +15,7 @@ stats.html
 q.txt
 wgithelp
 LangComponent.tsx
+DndShelfListWrapper.tsx
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

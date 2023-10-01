@@ -204,7 +204,7 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { AnimateSkeletonLoader, Collapsible } from '@/shared/ui/Animations';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { formatDate } from '@/shared/lib/helpers/common/formaters';
-import { EditorUniversal } from '@/shared/ui/lexical-playground/src/EditorUniversal';
+import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 
 const animations = {
 	selected: {

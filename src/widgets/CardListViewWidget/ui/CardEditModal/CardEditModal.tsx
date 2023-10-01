@@ -14,7 +14,7 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
-import { EditorUniversal } from '@/shared/ui/lexical-playground';
+import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 
 export const CardEditModal = memo(() => {
 	const { t } = useTranslation()

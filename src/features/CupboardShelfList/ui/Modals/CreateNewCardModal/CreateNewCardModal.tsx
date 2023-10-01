@@ -22,7 +22,7 @@ import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeigh
 import { memo, useRef, useMemo, useCallback, Suspense } from 'react';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
-import { EditorUniversal } from '@/shared/ui/lexical-playground';
+import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 import { createNewCardThunk } from '../../../model/services/createNewCardThunk';
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 
