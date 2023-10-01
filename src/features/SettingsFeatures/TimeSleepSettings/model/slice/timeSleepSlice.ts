@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction, } from '@reduxjs/toolkit'
-import { isEqual } from 'lodash'
 import { DaysOfWeek, TimeSleepSettings } from '@/entities/User'
 import { SetTimePayloadAction } from '../types/TimeSleepTypes'
 

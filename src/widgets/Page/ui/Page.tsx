@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import cls from './Page.module.scss';
 import { useInitialEffect } from '@/shared/lib/helpers/hooks/useInitialEffect';
-import { ToastViewport } from '@radix-ui/react-toast';
 
 interface PageProps extends TestProps {
 	className?: string

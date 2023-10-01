@@ -3,15 +3,14 @@ import { useTranslation } from 'react-i18next';
 import cls from './ShelfDeleting.module.scss';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { cupboardShelfListActions } from '../..';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { Button } from '@/shared/ui/Button';
 import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
-import { useRemoveShelfMutation } from '@/entities/Shelf';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
-import { deleteShelfThunk } from '../../model/services/deleteShelfThunk';
 import { CircularCountDownWithProgress } from '@/shared/ui/CircularCountDownWithProgress';
+import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfListSlice';
+import { deleteShelfThunk } from '../../../model/services/deleteShelfThunk';
 
 interface ShelfDeletingProps {
 	shelfId: string
@@ -86,13 +85,12 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 			<Button className={cls.button} fontWeight='300' onClick={onCancelDeletion}>
 				{t('cancel shelf deletion')}
 			</Button>
-			<CircularCountDownWithProgress duration={DURATION_SHELF_DELETION_MILLISEC / 1000} />
-			{/* <div className={cls.countdown}>
+			<div className={cls.countdown}>
 				<svg className={cls.svg} viewBox="-50 -50 100 100" strokeWidth="7">
 					<circle className={cls.first} r="45"></circle>
 					<circle className={cls.first} r="45" pathLength="1"></circle>
 				</svg>
-			</div> */}
+			</div>
 		</div>
 
 	)

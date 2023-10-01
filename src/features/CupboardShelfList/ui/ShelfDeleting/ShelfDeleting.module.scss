@@ -1,16 +1,3 @@
-// @property --t {
-//   syntax: "<number>";
-//   initial-value: 8;
-//   inherits: true;
-// }
-
-// /* won't be needed once Chrome supports round() */
-// @property --s {
-//   syntax: "<integer>";
-//   initial-value: 0;
-//   inherits: true;
-// }
-
 .ShelfDeleting {
   margin-bottom: 30px;
   display: flex;
@@ -20,8 +7,6 @@
 
   // VAR: вот тут время удаления анимациии DURATION_SHELF_DELETION_MILLISEC
   animation: shrink-height 500ms ease 7900ms normal forwards;
-
-  // animation: shrink-height 500ms ease 7400ms normal forwards;
 }
 
 @keyframes shrink-height {
@@ -53,8 +38,6 @@
 .description {
   font-size: 14px;
   color: rgb(128 128 128 / 45.6%);
-
-  // padding-right: 200px;
 }
 
 .button {
@@ -63,59 +46,3 @@
   font-weight: 300;
   line-height: 18px;
 }
-
-// .countdown {
-//   /* when Chrome supports round(), this can be simplified */
-
-//   /* more on this rounding trick
-//    * https://css-tricks.com/using-absolute-value-sign-rounding-and-modulo-in-css-today/ */
-//   --s: calc(var(--t) / 1);
-
-//   // --s: var(--t) ;
-
-//   display: grid;
-
-//   // margin: 1em auto;
-//   width: 56px;
-//   height: 56px;
-//   animation: t 7500ms linear;
-
-//   // margin-right: 200px;
-// }
-
-// .countdown::after {
-//   grid-column: 1;
-//   grid-row: 1;
-//   place-self: center;
-//   font-size: 18px;
-//   color: rgb(128 128 128 / 45.6%);
-//   counter-reset: s var(--s);
-//   content: counter(s);
-// }
-
-// @keyframes t {
-//   to {
-//     --t: 0;
-//   }
-// }
-
-// .svg {
-//   grid-column: 1;
-//   grid-row: 1;
-// }
-
-// .first {
-//   fill: none;
-//   stroke: rgb(192 192 192 / 21.2%);
-// }
-
-// .first + .first {
-//   --k: calc(var(--t) / 8);
-
-//   transform: rotate(-90deg);
-//   stroke-linecap: round;
-//   stroke: color-mix(in hsl shorter hue, #c12c42 calc(var(--k) * 100%), #e12369);
-
-//   // stroke: color-mix(in hsl shorter hue, #8a9b0f calc(var(--k) * 100%), #940a3d);
-//   stroke-dasharray: var(--k) 1;
-// }

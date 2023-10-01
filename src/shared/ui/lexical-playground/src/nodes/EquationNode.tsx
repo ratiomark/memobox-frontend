@@ -17,6 +17,7 @@ import type {
 } from 'lexical';
 
 import katex from 'katex';
+// import katex from 'katex';
 import { $applyNodeReplacement, DecoratorNode, DOMExportOutput } from 'lexical';
 import * as React from 'react';
 import { Suspense } from 'react';
