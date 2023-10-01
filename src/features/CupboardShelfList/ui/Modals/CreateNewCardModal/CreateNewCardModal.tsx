@@ -76,25 +76,9 @@ const CreateNewCardModal = memo(() => {
 	}, [dispatch])
 
 	const onSubmit = useCallback(() => {
-		// dispatch(toastsActions.addToast({ id: 'new', toast: { status: createNewCardRequestStatus } }))
-		// openToast({
-		// 	onTimeEnd: onTimeEndCreateNewCard,
-		// 	status: createNewCardRequestStatus,
-		// 	messageSuccess: 'Карточка добавлена',
-		// 	messageLoading: 'Ожидание ответа от сервера',
-		// 	messageError: 'Ошибка добавления карточки',
-		// })
-		// console.log(shelfIdCardModal)
-		// console.log(`${boxIdCardModal}  -- ${boxIndexCardModal}`)
-		// console.log(shelfBoxes![boxIndexCardModal]._id)
-		// dispatch(cupboardShelfListActions.setBoxIndexCardModal())
-		// dispatch(cupboardShelfListActions.setBoxIndexCardModal())
 		dispatch(createNewCardThunk(genRandomId()))
 	}, [dispatch])
-	// }, [boxIndexCardModal, boxIdCardModal, dispatch, createNewCardRequestStatus, onTimeEndCreateNewCard, openToast])
-	// }, [boxIndexCardModal, boxIdCardModal, dispatch])
-	// }, [dispatch, createNewCardRequestStatus, onTimeEndCreateNewCard, openToast])
-
+	
 	const shelvesAndBoxes = useMemo(() => {
 		if (cupboardIsLoading) {
 			return (
