@@ -62,11 +62,10 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 
 	useEffect(() => {
-		// const timer = setTimeout(() => {
-		// 	dispatch(deleteShelfThunk(shelfId))
-		// }, DURATION_SHELF_DELETION_MILLISEC)
-		// setTimer(timer)
-		// }
+		const timer = setTimeout(() => {
+			dispatch(deleteShelfThunk(shelfId))
+		}, DURATION_SHELF_DELETION_MILLISEC)
+		setTimer(timer)
 		// return () => clearTimeout(timerId)
 	}, [dispatch, shelfId])
 	// useEffect(() => {
@@ -106,13 +105,29 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 	useEffect(() => {
 		return () => {
-			if (isShelfDeleting) {
-				// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
-				// removeShelfMutation(shelfId)
-			}
-			// if (isShelfDeleting) console.log('РОУТ РОУТ РОУТ ')
+			// if (isShelfDeleting) {
+			dispatch(deleteShelfThunk(shelfId))
+			// dispatch(cupboardShelfListActions.deleteShelf(shelfId))
+			// removeShelfMutation(shelfId)
 		}
-	}, [dispatch, isShelfDeleting, shelfId, removeShelfMutation])
+		// if (isShelfDeleting) console.log('РОУТ РОУТ РОУТ ') }
+	}, [dispatch, shelfId])
+	// }, [dispatch, isShelfDeleting, shelfId])
+
+
+	// useEffect(() => {
+	// 	const deleteShelf = () => {
+	// 		if (isShelfDeleting) {
+	// 			dispatch(deleteShelfThunk(shelfId))
+	// 		}
+	// 	}
+
+	// 	window.addEventListener('beforeunload', deleteShelf)
+
+	// 	return () => {
+	// 		window.removeEventListener('beforeunload', deleteShelf)
+	// 	}
+	// }, [dispatch, isShelfDeleting, shelfId])
 
 	const onCancelDeletion = () => {
 		if (timer) clearTimeout(timer);
@@ -134,7 +149,7 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 			<Button className={cls.button} fontWeight='300' onClick={onCancelDeletion}>
 				{t('cancel shelf deletion')}
 			</Button>
-			<CircularCountDownWithProgress duration={10} />
+			<CircularCountDownWithProgress duration={DURATION_SHELF_DELETION_MILLISEC / 1000} />
 			{/* <div className={cls.countdown}>
 				<svg className={cls.svg} viewBox="-50 -50 100 100" strokeWidth="7">
 					<circle className={cls.first} r="45"></circle>

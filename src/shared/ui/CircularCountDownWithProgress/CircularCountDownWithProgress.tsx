@@ -9,12 +9,6 @@ interface CircularCountDownWithProgressProps {
 	strokeWidth?: number
 	trailStrokeWidth?: number
 }
-const q = <svg viewBox="0 0 56 56" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
-	<path d="m 28,2.5 a 25.5,25.5 0 0,1 0,51 a 25.5,25.5 0 0,1 0,-51" fill="none" stroke="#d9d9d9" strokeWidth="2">
-	</path>
-	<path d="m 28,2.5 a 25.5,25.5 0 0,1 0,51 a 25.5,25.5 0 0,1 0,-51" fill="none" stroke="var(--count-down-deletion-path-color)" strokeLinecap="round" strokeWidth="5" strokeDasharray="10 10" strokeDashoffset="160.22122533307945">
-	</path>
-</svg>
 
 export const CircularCountDownWithProgress = ({ duration, size, strokeWidth, trailStrokeWidth }: CircularCountDownWithProgressProps) => {
 	const renderTime = ({ remainingTime }: { remainingTime: number }) => {

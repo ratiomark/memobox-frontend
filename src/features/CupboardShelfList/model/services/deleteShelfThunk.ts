@@ -12,7 +12,7 @@ export const deleteShelfThunk = createAsyncThunk<string, string, { rejectValue: 
 
 		const { dispatch, getState } = thunkAPI
 		const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
-		const id = shelfId + genRandomId()
+		const id = 'shelfDeletion' + shelfId
 		dispatch(toastsActions.addToast({
 			id,
 			toast: {

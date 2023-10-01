@@ -11,7 +11,9 @@ const toastsSlice = createSlice({
 	initialState,
 	reducers: {
 		addToast: (state, action: PayloadAction<{ id: string, toast: MyToastProps }>) => {
-			state.toasts[action.payload.id] = action.payload.toast
+			if (!state.toasts[action.payload.id]) {
+				state.toasts[action.payload.id] = action.payload.toast
+			}
 			// state.toastsIds.push(action.payload.id)
 		},
 		removeToastById: (state, action: PayloadAction<string>) => {
