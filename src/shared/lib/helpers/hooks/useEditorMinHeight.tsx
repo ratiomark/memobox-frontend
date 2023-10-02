@@ -9,6 +9,8 @@ interface useEditorMinHeightProps {
 }
 const modalButtonsHeightMock = 55.6
 const shelvesAndBoxesHeightMock = 68
+const maxPercentOfScreenForMainContentMock = 0.9
+const topAndBottomEmptySpacesMock = 20
 export const useEditorMinHeight = (props: useEditorMinHeightProps) => {
 	const {
 		isOpen,
@@ -16,23 +18,22 @@ export const useEditorMinHeight = (props: useEditorMinHeightProps) => {
 		modalButtonsRef,
 	} = props
 	const [checked, setChecked] = useState(false)
-	const [textAreaRows, setTextAreaRows] = useState(2)
 	const [editorMinHeight, setEditorMinHeight] = useState(300)
 	const variables = useModalVariables()
 	const { windowHeight } = useWindowSize()
-	const [mainContentMaxHeight, setMainContentMaxHeight] = useState(`${windowHeight * 0.9 - shelvesAndBoxesHeightMock - modalButtonsHeightMock - 20}px`)
+	const [mainContentMaxHeight, setMainContentMaxHeight] = useState(`${windowHeight * maxPercentOfScreenForMainContentMock - shelvesAndBoxesHeightMock - modalButtonsHeightMock - topAndBottomEmptySpacesMock}px`)
 
 	useEffect(() => {
 
 		const {
-			paddingTextareaTopAndBottom,
+			// paddingTextareaTopAndBottom,
 			emptySpaceTopHeight,
 			emptySpaceBottomHeight,
 			gapBetweenLabelAndTextarea,
 			areaAndLabelWrapperPaddingBottom,
 			mainContentVerticalGap,
 			maxPercentOfScreenForMainContent,
-			areaBorders,
+			// areaBorders,
 			lineHeight
 		} = variables
 
@@ -56,7 +57,7 @@ export const useEditorMinHeight = (props: useEditorMinHeightProps) => {
 		setChecked(true)
 	}, [windowHeight, isOpen, modalButtonsRef, shelvesAndBoxesRef, variables])
 
-	return { textAreaRows, checked, mainContentMaxHeight, editorMinHeight }
+	return { checked, mainContentMaxHeight, editorMinHeight }
 
 }
 
@@ -81,42 +82,42 @@ const getMainContentMaxHeight: GetMainContentMaxHeightFn = (arg) => {
 	return Math.min(mainContentMaxHeight, 865)
 }
 
-type GetAreaAndLabelsHeightArg = {
-	mainContentMaxHeight: number
-	shelvesAndBoxesHeight: number
-	mainContentVerticalGap: number
-}
-type GetAreaAndLabelsHeightFn = (arg: GetAreaAndLabelsHeightArg) => number
-const getAreaAndLabelsHeight: GetAreaAndLabelsHeightFn = (arg) => {
-	const {
-		mainContentMaxHeight,
-		mainContentVerticalGap,
-		shelvesAndBoxesHeight,
-	} = arg
-	return mainContentMaxHeight - shelvesAndBoxesHeight
-	// return mainContentMaxHeight - shelvesAndBoxesHeight - mainContentVerticalGap * 2
-}
+// type GetAreaAndLabelsHeightArg = {
+// 	mainContentMaxHeight: number
+// 	shelvesAndBoxesHeight: number
+// 	mainContentVerticalGap: number
+// }
+// type GetAreaAndLabelsHeightFn = (arg: GetAreaAndLabelsHeightArg) => number
+// const getAreaAndLabelsHeight: GetAreaAndLabelsHeightFn = (arg) => {
+// 	const {
+// 		mainContentMaxHeight,
+// 		// mainContentVerticalGap,
+// 		shelvesAndBoxesHeight,
+// 	} = arg
+// 	return mainContentMaxHeight - shelvesAndBoxesHeight
+// 	// return mainContentMaxHeight - shelvesAndBoxesHeight - mainContentVerticalGap * 2
+// }
 
-type GetMaxHeightForTextAreaArg = {
-	areaAndLabelHeight: number
-	paddingTextareaTopAndBottom: number
-	lineHeight: number
-	areaAndLabelWrapperPaddingBottom: number
-	gapBetweenLabelAndTextarea: number
-	areaBorders: number
-}
-type GetMaxHeightForTextAreaFn = (arg: GetMaxHeightForTextAreaArg) => number
-const getMaxHeightForTextArea: GetMaxHeightForTextAreaFn = (arg) => {
-	const {
-		areaAndLabelHeight,
-		areaAndLabelWrapperPaddingBottom,
-		areaBorders,
-		lineHeight,
-		paddingTextareaTopAndBottom,
-		gapBetweenLabelAndTextarea,
-	} = arg
-	return areaAndLabelHeight - (lineHeight * 2 + gapBetweenLabelAndTextarea + areaAndLabelWrapperPaddingBottom + paddingTextareaTopAndBottom + areaBorders)
-}
+// type GetMaxHeightForTextAreaArg = {
+// 	areaAndLabelHeight: number
+// 	paddingTextareaTopAndBottom: number
+// 	lineHeight: number
+// 	areaAndLabelWrapperPaddingBottom: number
+// 	gapBetweenLabelAndTextarea: number
+// 	areaBorders: number
+// }
+// type GetMaxHeightForTextAreaFn = (arg: GetMaxHeightForTextAreaArg) => number
+// const getMaxHeightForTextArea: GetMaxHeightForTextAreaFn = (arg) => {
+// 	const {
+// 		areaAndLabelHeight,
+// 		areaAndLabelWrapperPaddingBottom,
+// 		areaBorders,
+// 		lineHeight,
+// 		paddingTextareaTopAndBottom,
+// 		gapBetweenLabelAndTextarea,
+// 	} = arg
+// 	return areaAndLabelHeight - (lineHeight * 2 + gapBetweenLabelAndTextarea + areaAndLabelWrapperPaddingBottom + paddingTextareaTopAndBottom + areaBorders)
+// }
 // import { useState, useEffect } from 'react'
 // import { useModalVariables } from './useModalVariables'
 // import { useWindowSize } from './useWindowHeight'
