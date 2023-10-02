@@ -7,7 +7,8 @@ interface useEditorMinHeightProps {
 	shelvesAndBoxesRef: HTMLDivElement | null
 	modalButtonsRef: HTMLDivElement | null
 }
-
+const modalButtonsHeightMock = 55.6
+const shelvesAndBoxesHeightMock = 68
 export const useEditorMinHeight = (props: useEditorMinHeightProps) => {
 	const {
 		isOpen,
@@ -19,7 +20,7 @@ export const useEditorMinHeight = (props: useEditorMinHeightProps) => {
 	const [editorMinHeight, setEditorMinHeight] = useState(300)
 	const variables = useModalVariables()
 	const { windowHeight } = useWindowSize()
-	const [mainContentMaxHeight, setMainContentMaxHeight] = useState(`${windowHeight * 0.9 - 68 - 55.6 - 20}px`)
+	const [mainContentMaxHeight, setMainContentMaxHeight] = useState(`${windowHeight * 0.9 - shelvesAndBoxesHeightMock - modalButtonsHeightMock - 20}px`)
 
 	useEffect(() => {
 
@@ -35,8 +36,8 @@ export const useEditorMinHeight = (props: useEditorMinHeightProps) => {
 			lineHeight
 		} = variables
 
-		const shelvesAndBoxesHeight = shelvesAndBoxesRef ? shelvesAndBoxesRef.scrollHeight : 68
-		const buttonsHeight = modalButtonsRef ? modalButtonsRef.scrollHeight : 55.6
+		const shelvesAndBoxesHeight = shelvesAndBoxesRef ? shelvesAndBoxesRef.scrollHeight : shelvesAndBoxesHeightMock
+		const buttonsHeight = modalButtonsRef ? modalButtonsRef.scrollHeight : modalButtonsHeightMock
 		const mainContentMaxHeightCalculated = getMainContentMaxHeight({
 			windowHeight,
 			maxPercentOfScreenForMainContent,
@@ -76,7 +77,8 @@ const getMainContentMaxHeight: GetMainContentMaxHeightFn = (arg) => {
 		emptySpaceBottomHeight,
 		buttonsHeight,
 	} = arg
-	return windowHeight * maxPercentOfScreenForMainContent - emptySpaceTopHeight - emptySpaceBottomHeight - buttonsHeight
+	const mainContentMaxHeight = windowHeight * maxPercentOfScreenForMainContent - emptySpaceTopHeight - emptySpaceBottomHeight - buttonsHeight
+	return Math.min(mainContentMaxHeight, 865)
 }
 
 type GetAreaAndLabelsHeightArg = {
