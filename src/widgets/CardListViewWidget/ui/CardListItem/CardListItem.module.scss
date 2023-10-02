@@ -5,10 +5,16 @@
   cursor: pointer;
   position: relative;
   margin-bottom: var(--card-list-item-li-margin-bottom);
+  border-radius: var(--border-radius-main);
 
   // z-index: 1;
 
   // border: 1px solid red;
+}
+
+.isCardSelected {
+  // border: 1px solid red;
+  box-shadow: 0 0 4px 2px var(--accent-rgb-2), 0 0 1px 1px var(--accent-rgb-8);
 }
 
 .checkBox {
@@ -19,26 +25,57 @@
 
 .cardEditedLabel {
   position: absolute;
+
+  // left: -5px;
+  // top: -5px;
+
+  // padding: 6px 12px;
+
   left: 0;
   top: 0;
-  padding: 6px 12px;
 
-  // left: 0px;
-  // top: 0px;
-
+  // border-radius: 9999px;
   // width: 16px;
   // height: 16px;
-
-  background-color: var(--accent);
+  // background-color: var(--accent);
 }
 
+.innerLabel {
+  height: 200px;
+  width: 10px;
+
+  // padding: var(--card-list-item-padding-top-and-bottom) var(--card-list-item-padding-left-and-right);
+
+  background-color: var(--accent);
+
+  // border-top: 10px solid var(--accent);
+  // border-bottom: 10px solid var(--accent);
+  // border-left: 10px solid var(--accent);
+  // border-radius: var(--border-radius-main);
+}
+
+// .cardEditedLabel {
+//   position: absolute;
+//   left: -5px;
+//   top: -5px;
+
+//   // padding: 6px 12px;
+
+//   // left: 0px;
+//   // top: 0px;
+//   border-radius: 9999px;
+//   width: 16px;
+//   height: 16px;
+//   background-color: var(--accent);
+// }
+
 .CardListItem {
-  align-items: center;
+  position: relative;
+  overflow: hidden;
   display: flex;
+  align-items: center;
   min-width: 100%;
   padding: var(--card-list-item-padding-top-and-bottom) var(--card-list-item-padding-left-and-right);
-
-  // box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
   background-color: var(--bg);
   box-shadow: var(--entities-box-shadow-main);
   border-radius: var(--border-radius-main);

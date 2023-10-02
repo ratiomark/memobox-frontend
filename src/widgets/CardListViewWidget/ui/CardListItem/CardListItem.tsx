@@ -12,7 +12,8 @@ import { ChangeEvent, MouseEvent, useMemo, useState, } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import {  Collapsible } from '@/shared/ui/Animations';
+import { Collapsible } from '@/shared/ui/Animations';
+import UnsavedIcon from '@/shared/assets/icons/unsavedIcon.svg'
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { formatDate } from '@/shared/lib/helpers/common/formaters';
 import { EditorCardPresenter } from '@/shared/ui/LexicalEditor';
@@ -158,7 +159,10 @@ export const CardListItem = (props: CardListItemProps) => {
 					// initial={{ opacity: 0 }}
 					// animate={{ opacity: 1 }}
 					// exit={{ opacity: 0, translateY: -64, transition: { delay: 0, duration: 4 } }}
-					className={clsx(cls.item)}
+					className={clsx(
+						cls.item,
+						{ [cls.isCardSelected]: isCardSelected }
+					)}
 					onClick={isMultiSelectActive ? onSelectCardByCardClick : onOpenEditCardModalHandle}
 				>
 					<CheckBox
@@ -167,12 +171,23 @@ export const CardListItem = (props: CardListItemProps) => {
 						isChecked={isCardSelected}
 						onClick={onSelectCardHandle}
 					/>
-					{isCardEdited && <div className={cls.cardEditedLabel} >
+					{/* {isCardEdited && <div className={cls.cardEditedLabel} >
+						<div className={cls.innerLabel} />
+					</div>} */}
+					{/* {isCardEdited && <div className={cls.cardEditedLabel} >
 						<p style={{ color: 'white' }}>Edited</p>
-					</div>}
+					</div>} */}
 					<div
 						className={cls.CardListItem}
 					>
+						{isCardEdited && <div className={cls.cardEditedLabel} >
+							<div className={cls.innerLabel} />
+							{/* <Icon
+							width={24}
+							height={24}
+							Svg={UnsavedIcon}
+						/> */}
+						</div>}
 						<div className={cls.content} >
 							<div className={cls.mainContentWrapper} >
 								{question}

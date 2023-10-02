@@ -7,6 +7,7 @@ interface CheckBoxProps {
 	onClick: (e: ChangeEvent) => void
 	isChecked: boolean
 	blurOnChange?: boolean
+	disabled?: boolean
 }
 
 export const CheckBox = (props: CheckBoxProps) => {
@@ -15,15 +16,16 @@ export const CheckBox = (props: CheckBoxProps) => {
 		isChecked,
 		onClick,
 		blurOnChange = false,
+		disabled = false,
 	} = props
 	const ref = useRef<HTMLInputElement>(null)
-	
+
 	const onKeyDown = (e: KeyboardEvent) => {
 		if (e.key === 'Enter') {
 			ref.current?.click()
 		}
 	}
-	
+
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		onClick(e)
 		if (blurOnChange) e.target.blur()
@@ -36,6 +38,7 @@ export const CheckBox = (props: CheckBoxProps) => {
 			checked={isChecked}
 			onKeyDown={onKeyDown}
 			onChange={handleChange}
+			disabled={disabled}
 			className={clsx(cls.checkBox, className)}
 		/>
 	)

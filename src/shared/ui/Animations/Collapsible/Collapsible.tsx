@@ -58,7 +58,8 @@ export const Collapsible = (props: CollapsibleProps) => {
 			variants={{
 				open: {
 					height: 'auto',
-					overflow: 'hidden',
+					overflow: 'visible',
+					// overflow: 'hidden',
 					opacity:
 						withOpacity
 							? [0, 1]

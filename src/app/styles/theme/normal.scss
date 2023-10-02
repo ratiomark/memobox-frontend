@@ -41,6 +41,7 @@ $colors: (
   --cancel-rgb-2: rgb(var(--cancel-rgb) / 20%);
   --cancel-rgb-8: rgb(var(--cancel-rgb) / 80%);
   --accent-rgb-2: rgb(var(--accent-rgb) / 20%);
+  --accent-rgb-6: rgb(var(--accent-rgb) / 60%);
   --accent-rgb-8: rgb(var(--accent-rgb) / 80%);
   --toast-bg-rgb-2: rgb(var(--toast-bg-rgb) / 20%);
   --toast-bg-rgb-4: rgb(var(--toast-bg-rgb) / 40%);
@@ -66,6 +67,7 @@ $colors: (
   --button-filled-text-color: #f5f6fa;
   --button-color-training-filled: blue;
   --create-edit-modals-bottom-buttons-bg: rgb(211 209 255);
+  --checkbox-bg-color: white;
 
   // data-labels
   --data-label-all: #33d69f;

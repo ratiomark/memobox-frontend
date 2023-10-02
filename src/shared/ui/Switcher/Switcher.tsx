@@ -21,11 +21,10 @@ export const Switcher = (props: SwitcherProps) => {
 		title
 	} = props
 
-	const { t } = useTranslation()
 	// const onEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {
 	// 	if (e.key === 'Enter') onClickSwitcher()
 	// }
-	
+
 	return (
 		<div
 			className={clsx(
@@ -36,7 +35,7 @@ export const Switcher = (props: SwitcherProps) => {
 			// onKeyDown={onEnterDown}
 			tabIndex={0}
 		>
-			{title && <label  className={cls.label}>{title}</label >}
+			{title && <label className={cls.label}>{title}</label >}
 			<Switch.Root
 				checked={isChecked}
 				disabled={disabled}
