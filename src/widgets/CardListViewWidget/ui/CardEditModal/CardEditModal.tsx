@@ -8,11 +8,11 @@ import { Skeleton, TextEditorSkeleton } from '@/shared/ui/Skeleton';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
 import { HDialog } from '@/shared/ui/HDialog';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
-import { getCardModalHeights, getViewPageCardDataOriginal, getViewPageEditModalIsOpen, getViewPageCardDataEdited, getViewPageIsCardInModalEdited, viewPageActions } from '@/features/ViewPageInitializer';
+import { getViewPageCardDataOriginal, getViewPageEditModalIsOpen, getViewPageCardDataEdited, getViewPageIsCardInModalEdited, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
-import { EditorState } from 'lexical';
+import type { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
 import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 

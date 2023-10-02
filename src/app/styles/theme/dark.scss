@@ -102,5 +102,8 @@ $colors: (
   --list-box-option-active: #04ff04;
 
   background: var(--body-bg-color);
+
+  --scrollbar-color: #979797  var(--body-bg-color);
+
   scrollbar-color: #979797  var(--body-bg-color);
 }

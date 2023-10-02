@@ -28,8 +28,6 @@ import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 
 interface CreateNewCardModalProps {
 	cardModalSkeleton: JSX.Element
-	editorMinHeight: number
-	mainContentMaxHeight: string
 }
 
 const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
@@ -117,10 +115,10 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 			<div className={cls.areaAndLabelWrapper} >
 				<MyText text={t('question')} />
 				<Suspense fallback={
-					<TextEditorSkeleton editorMinHeight={checked ? editorMinHeight : props.editorMinHeight} />
+					<TextEditorSkeleton editorMinHeight={editorMinHeight} />
 				}>
 					<EditorUniversal
-						heightValue={checked ? editorMinHeight : props.editorMinHeight}
+						heightValue={editorMinHeight}
 						onChange={onChangeQuestion}
 						editorState={questionTextCardModal}
 						autoFocus
@@ -128,29 +126,29 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 				</Suspense>
 			</div>
 		)
-	}, [onChangeQuestion, questionTextCardModal, editorMinHeight, t, props.editorMinHeight, checked])
+	}, [onChangeQuestion, questionTextCardModal, editorMinHeight, t])
 
 	const editorBlockAnswer = useMemo(() => {
 		return (
 			<div className={cls.areaAndLabelWrapper}>
 				<MyText text={t('answer')} />
 				<Suspense fallback={
-					<TextEditorSkeleton editorMinHeight={checked ? editorMinHeight : props.editorMinHeight} />
+					<TextEditorSkeleton editorMinHeight={editorMinHeight} />
 				}>
 					<EditorUniversal
-						heightValue={checked ? editorMinHeight : props.editorMinHeight}
+						heightValue={editorMinHeight}
 						onChange={onChangeAnswer}
 						editorState={answerTextCardModal}
 					/>
 				</Suspense>
 			</div>
 		)
-	}, [onChangeAnswer, answerTextCardModal, editorMinHeight, t, props.editorMinHeight, checked])
+	}, [onChangeAnswer, answerTextCardModal, editorMinHeight, t])
 
-	// if (!checked) {
-	// 	console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD')
-	// 	return props.cardModalSkeleton
-	// }
+	if (!checked) {
+		console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD')
+		return props.cardModalSkeleton
+	}
 
 	return (
 		<HDialog
@@ -169,7 +167,7 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 
 					<div
 						className={cls.mainContent}
-						style={{ maxHeight: checked ? mainContentMaxHeight : props.mainContentMaxHeight }}
+						style={{ maxHeight: mainContentMaxHeight }}
 					>
 						<div ref={shelvesAndBoxesRef}>
 							{shelvesAndBoxes}

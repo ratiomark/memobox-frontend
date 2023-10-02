@@ -77,3 +77,9 @@
     border-radius: 10px;
   }
 }
+
+@supports (-moz-appearance:none) {
+  .substitute {
+    padding-bottom: 205px;
+  }
+}

@@ -14,6 +14,7 @@ export const useEditorMinHeight = (props: useEditorMinHeightProps) => {
 		shelvesAndBoxesRef,
 		modalButtonsRef,
 	} = props
+	const [checked, setChecked] = useState(false)
 	const [textAreaRows, setTextAreaRows] = useState(2)
 	const [editorMinHeight, setEditorMinHeight] = useState(300)
 	const variables = useModalVariables()
@@ -51,9 +52,10 @@ export const useEditorMinHeight = (props: useEditorMinHeightProps) => {
 
 		setEditorMinHeight(areaHeight)
 		setMainContentMaxHeight(`${mainContentMaxHeightCalculated}px`)
+		setChecked(true)
 	}, [windowHeight, isOpen, modalButtonsRef, shelvesAndBoxesRef, variables])
 
-	return { textAreaRows, mainContentMaxHeight, editorMinHeight }
+	return { textAreaRows, checked, mainContentMaxHeight, editorMinHeight }
 
 }
 

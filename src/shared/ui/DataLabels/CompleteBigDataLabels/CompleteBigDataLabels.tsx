@@ -33,7 +33,7 @@ export const CompleteBigDataLabels = (props: CompleteBigDataLabelsProps) => {
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.all} type='all' />
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.train} type='train' />
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.wait} type='wait' />
-			<LangComponent size={32}/>
+			{/* <LangComponent size={32}/> */}
 			<Icon
 				clickable
 				onClick={() => setLang(currentLang === 'ru' ? 'en' : 'ru')}

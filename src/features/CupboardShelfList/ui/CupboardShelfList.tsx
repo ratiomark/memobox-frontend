@@ -25,6 +25,7 @@ import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModa
 import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
 import { BoxTimeSetterModal } from './Modals/BoxTimeSetterModal/BoxTimeSetterModal';
 import { CreateNewCardModal } from './Modals/CreateNewCardModal/CreateNewCardModalLazy';
+// import CreateNewCardModal  from './Modals/CreateNewCardModal/CreateNewCardModal';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { ShelfButtonsSkeleton } from './ShelfButtons/ShelfButtonsSkeleton';
 import { BoxSettingsDropdownModal } from './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal';

@@ -13,10 +13,13 @@
 }
 
 .listBoxWrapper {
+  // width: calc(100% - var(--padding-for-scroll));
   width: 80%;
 
   @media (max-width: 1100px) {
     width: 100%;
+
+    // width: calc(100% - 20px);
   }
 }
 
@@ -39,8 +42,8 @@
 .mainContent {
   display: flex;
   flex-direction: column;
-  min-width: 100%;
   gap: var(--main-content-vertical-gap);
+  min-width: 100%;
   padding-right: calc(var(--padding-right) - var(--padding-for-scroll));
   padding-left: var(--padding-right);
   overflow: auto;
@@ -57,16 +60,23 @@
 .emptySpace_top {
   height: var(--empty-space-top-height);
   width: 1200px;
-
-  // нужно чтобы растянуть окно на 1200px
 }
 
 .emptySpace_bottom {
   height: var(--empty-space-bottom-height);
 }
 
-.actions,
-.actionsSkeleton {
+.shadowAreaWrapper {
+  position: relative;
+  width: 100%;
+  visibility: hidden;
+}
+
+.shadowArea {
+  position: absolute;
+}
+
+.actions {
   width: 100%;
   padding-right: calc(var(--padding-right) + var(--scroll-bar-main-width));
   border-bottom-left-radius: var(--border-radius-main);
@@ -74,18 +84,5 @@
   padding-left: var(--padding-right);
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.actions {
-  background-color: var(--create-edit-modals-bottom-buttons-bg);
-}
-
-.actionsCardEditModal {
-  display: flex;
-  justify-content: space-between;
-}
-
-.modalButtons {
-  max-width: 100%;
-  min-width: fit-content;
+  background-color: rgb(211 209 255);
 }

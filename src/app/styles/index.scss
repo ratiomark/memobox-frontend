@@ -20,7 +20,6 @@ html {
 
 body {
   background: var(--body-bg-color);
-  scrollbar-width: thin;
 
   // scrollbar-color: red green;
 
@@ -30,6 +29,11 @@ body {
   // cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/heart.svg), auto;
   // scrollbar-width: thin;
   // scrollbar-gutter: stable both-edges;
+}
+
+body * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-color);
 }
 
 *:focus-visible {
