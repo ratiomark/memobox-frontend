@@ -19,7 +19,7 @@ import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
-import { memo, useRef, useMemo, useCallback, Suspense, ReactNode } from 'react';
+import { memo, useRef, useMemo, useCallback, Suspense } from 'react';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
 import { EditorUniversal } from '@/shared/ui/LexicalEditor';
