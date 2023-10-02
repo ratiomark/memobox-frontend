@@ -264,7 +264,7 @@ export const CardListItem = (props: CardListItemProps) => {
 
 	const onDeleteCard = (e: MouseEvent) => {
 		e.stopPropagation()
-		dispatch(viewPageActions.removeCard(card))
+		dispatch(viewPageActions.removeCard(card.id))
 	}
 
 	const onSelectCardHandle = (e: ChangeEvent) => {

@@ -48,7 +48,7 @@ export const CardEditModal = memo(() => {
 	const questionTextOriginal = cardOriginalData?.question
 	// const questionTextOriginal = cardOriginalData?.question
 	const answerTextOriginal = cardOriginalData?.answer
-	const cardId = cardOriginalData?._id
+	const cardId = cardOriginalData?.id
 	const originalShelf = cardOriginalData?.shelf
 	const originalBox = cardOriginalData?.box
 

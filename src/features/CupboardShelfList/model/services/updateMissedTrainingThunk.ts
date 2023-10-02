@@ -35,7 +35,7 @@ export const updateMissedTrainingThunk = createAsyncThunk<UpdateMissedTrainingTh
 		try {
 			await sleep(4)
 			const response = boxId
-				? dispatch(updateBoxWithTag({ shelfId, box: { missedTrainingValue, _id: boxId } })).unwrap()
+				? dispatch(updateBoxWithTag({ shelfId, box: { missedTrainingValue, id: boxId } })).unwrap()
 				: dispatch(updateShelfWithTag({ id: shelfId, missedTrainingValue })).unwrap()
 
 			if (!response) {

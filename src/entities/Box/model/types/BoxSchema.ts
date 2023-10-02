@@ -1,7 +1,7 @@
 import { DataBlock, MissedTrainingValue, TimingBlock } from '@/shared/types/DataBlock'
 
 interface BoxBaseSchema {
-	_id: string
+	id: string
 	index: number
 }
 
@@ -33,4 +33,4 @@ export interface BoxCoordinates {
 export type BoxSchema =
 	| NewCardsBox
 	| RegularAndLearntCardsBox
-	// | LearntCardBox
+// | LearntCardBox

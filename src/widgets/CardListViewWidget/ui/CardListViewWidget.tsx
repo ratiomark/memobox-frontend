@@ -97,7 +97,7 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 				onSelectCard={onSelectCard}
 				onOpenEditCardModal={onOpenEditCardModal}
 				card={item}
-				key={item._id}
+				key={item.id}
 			/>)
 		)
 	}, [cards, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])

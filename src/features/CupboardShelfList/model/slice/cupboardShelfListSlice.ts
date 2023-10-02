@@ -170,7 +170,7 @@ const cupboardShelfList = createSlice({
 		setBoxIndexAndBoxIdCardModal: (state, action: PayloadAction<number>) => {
 			state.createNewCardModal.boxIndex = action.payload
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			state.createNewCardModal.boxId = state.entities[state.createNewCardModal.shelfId]!.boxesData[action.payload]._id
+			state.createNewCardModal.boxId = state.entities[state.createNewCardModal.shelfId]!.boxesData[action.payload].id
 		},
 
 		// TimeSetterModal
@@ -420,7 +420,7 @@ const cupboardShelfList = createSlice({
 				updateBoxTimeThunk.fulfilled,
 				(state, action: PayloadAction<UpdateBoxTimeThunkArg>) => {
 					const { boxId, shelfId, timeObject } = action.payload
-					const box = state.entities[shelfId]?.boxesData.find(box => box._id === boxId)
+					const box = state.entities[shelfId]?.boxesData.find(box => box.id === boxId)
 					if (box && box?.specialType !== 'new') {
 						box.timing = timeObject
 					}
@@ -431,7 +431,7 @@ const cupboardShelfList = createSlice({
 					const { boxId, shelfId, missedTrainingValue } = action.payload
 					if (!boxId) shelvesAdapter.updateOne(state, { id: shelfId, changes: { missedTrainingValue } })
 					else {
-						const box = state.entities[shelfId]?.boxesData.find(box => box._id === boxId)
+						const box = state.entities[shelfId]?.boxesData.find(box => box.id === boxId)
 						if (box && box?.specialType !== 'new') {
 							box.missedTrainingValue = missedTrainingValue
 						}

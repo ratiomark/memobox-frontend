@@ -52,7 +52,7 @@ const ShelfBoxesTemplateSettings = createSlice({
 				return ({
 					isSaved: true,
 					keyId: 'initial',
-					id: box._id,
+					id: box.id,
 					isOpen: false,
 					// нужно уменьшить индекс, так как я передаю .slice(1,)
 					index: box.index - 1,
@@ -176,7 +176,7 @@ const ShelfBoxesTemplateSettings = createSlice({
 			// 	return ({
 			// 		isSaved: true,
 			// 		keyId: 'initial',
-			// 		id: box._id,
+			// 		id: box.id,
 			// 		isOpen: false,
 			// 		...box.timing
 			// 	})

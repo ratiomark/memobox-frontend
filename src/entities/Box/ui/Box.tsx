@@ -86,7 +86,7 @@ export const Box = (props: BoxPropsBase) => {
 	}, [onAddNewCard, shelfId, boxItem.index])
 
 	const startTraining = () => {
-		navigate(obtainRouteTraining(shelfId, boxItem._id))
+		navigate(obtainRouteTraining(shelfId, boxItem.id))
 	}
 
 	if (specialType === 'none' || specialType === 'learnt') {
@@ -108,7 +108,7 @@ export const Box = (props: BoxPropsBase) => {
 				x: x + width / 2,
 				y: y + height / 2
 			}
-			onOpenTimeSetter(coordinates, boxItem.timing, boxItem._id, shelfId)
+			onOpenTimeSetter(coordinates, boxItem.timing, boxItem.id, shelfId)
 		}
 
 		const onOpenBoxSettingsHandle = (e: MouseEvent) => {
@@ -117,7 +117,7 @@ export const Box = (props: BoxPropsBase) => {
 				x: x + width / 2,
 				y: y + height
 			}
-			onOpenBoxSettings(coordinates, boxItem._id, shelfId)
+			onOpenBoxSettings(coordinates, boxItem.id, shelfId)
 		}
 
 		const buttons = (

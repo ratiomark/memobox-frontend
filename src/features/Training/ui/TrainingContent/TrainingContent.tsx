@@ -36,14 +36,14 @@ export const TrainingContent = (props: TrainingContentProps) => {
 
 	const onAnswerClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const answer = e && e.currentTarget.getAttribute('data-answer-type') as AnswerType
-		const cardId = dataObj[String(currIndex)]._id
+		const cardId = dataObj[String(currIndex)].id
 		setAnswerObj(prev => ({ ...prev, [cardId]: answer! }))
 		setCurrIndex(prev => prev + 1)
 		setShowAnswer(false)
 	}
 
 	const onAnswerHotKeyHandle = (answerValue: AnswerType) => {
-		const cardId = dataObj[String(currIndex)]._id
+		const cardId = dataObj[String(currIndex)].id
 		setAnswerObj(prev => ({ ...prev, [cardId]: answerValue }))
 		setCurrIndex(prev => prev + 1)
 		setShowAnswer(false)

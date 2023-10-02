@@ -55,7 +55,7 @@ export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 		return boxesData.map(boxItem => {
 			return (
 				<Box
-					key={boxItem._id}
+					key={boxItem.id}
 					boxItem={boxItem}
 					shelfId={shelf.id}
 					onOpenTimeSetter={onOpenTimeSetter}
@@ -220,7 +220,7 @@ export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 // 		return boxesData.map(boxItem => {
 // 			return (
 // 				<Box
-// 					key={boxItem._id}
+// 					key={boxItem.id}
 // 					boxItem={boxItem}
 // 					shelfId={shelf.id}
 // 					onOpenTimeSetter={onOpenTimeSetter}

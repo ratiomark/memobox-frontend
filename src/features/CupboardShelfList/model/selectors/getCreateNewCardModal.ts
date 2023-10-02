@@ -22,9 +22,9 @@ export const getBoxIdCheckedCardModal = createSelector(
 		if (boxId !== '') return boxId
 		if (!shelvesIds || shelvesIds.length < 1) return
 		if (shelfId === '') {
-			return shelves[shelvesIds[0]]?.boxesData[0]._id
+			return shelves[shelvesIds[0]]?.boxesData[0].id
 		}
-		return shelves[shelfId]?.boxesData[0]._id
+		return shelves[shelfId]?.boxesData[0].id
 	}
 )
 

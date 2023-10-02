@@ -67,7 +67,7 @@ export const MoveCardsModal = memo(() => {
 				}
 				return {
 					value: box.index.toString(),
-					// value: box._id,
+					// value: box.id,
 					content,
 				}
 			})
@@ -139,7 +139,7 @@ export const MoveCardsModal = memo(() => {
 				onSubmit={onMoveCards}
 				textSubmitButton='move cards'
 				className={cls.actions} />
-			
+
 			{/* <div className={cls.actions} >
 				<Button onClick={onCloseMoveCards}>{t('back button')}</Button>
 				<Button variant='filled' onClick={onMoveCards}>{t('move cards')}</Button>
