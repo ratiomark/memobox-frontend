@@ -33,9 +33,9 @@ const trashPageSlice = createSlice({
 		setActiveEntity: (state, action: PayloadAction<TrashPageEntityType>) => {
 			state.activeEntity = action.payload
 		},
-		
+
 		setIsMultiSelectActive: (state, action: PayloadAction<boolean>) => {
-			state.isMultiSelectActive= action.payload
+			state.isMultiSelectActive = action.payload
 		},
 		addOrRemoveCardFromSelectedCardIds: (state, action: PayloadAction<string>) => {
 			if (state.selectedCardIds.includes(action.payload)) {
@@ -105,7 +105,7 @@ const trashPageSlice = createSlice({
 		// },
 		// removeCard: (state, action: PayloadAction<CardSchemaExtended>) => {
 		// 	state.cards.find(card => {
-		// 		if (card._id === action.payload._id) {
+		// 		if (card.id === action.payload._id) {
 		// 			card.deleted = true
 		// 			return true
 		// 		}
@@ -113,7 +113,7 @@ const trashPageSlice = createSlice({
 		// },
 		// removeSelectedCards: (state) => {
 		// 	state.cards = state.cards.map(card => {
-		// 		if (state.selectedCardIds.includes(card._id)) {
+		// 		if (state.selectedCardIds.includes(card.id)) {
 		// 			card.deleted = true
 		// 		}
 		// 		return card

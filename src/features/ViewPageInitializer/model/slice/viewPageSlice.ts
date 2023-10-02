@@ -91,22 +91,38 @@ const viewPageSlice = createSlice({
 		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
 			state.isMultiSelectActive = action.payload
 		},
-		removeCard: (state, action: PayloadAction<CardSchemaExtended>) => {
+		removeCard: (state, action: PayloadAction<string>) => {
 			state.cards.find(card => {
-				if (card._id === action.payload._id) {
-					card.deleted = true
+				if (card.id === action.payload) {
+					card.isDeleting = true
 					return true
 				}
 			})
 		},
 		removeSelectedCards: (state) => {
 			state.cards = state.cards.map(card => {
-				if (state.selectedCardIds.includes(card._id)) {
+				if (state.selectedCardIds.includes(card.id)) {
 					card.deleted = true
 				}
 				return card
 			})
 		},
+		// removeCard: (state, action: PayloadAction<CardSchemaExtended>) => {
+		// 	state.cards.find(card => {
+		// 		if (card.id === action.payload.id) {
+		// 			card.deleted = true
+		// 			return true
+		// 		}
+		// 	})
+		// },
+		// removeSelectedCards: (state) => {
+		// 	state.cards = state.cards.map(card => {
+		// 		if (state.selectedCardIds.includes(card.id)) {
+		// 			card.deleted = true
+		// 		}
+		// 		return card
+		// 	})
+		// },
 		// 
 		setActiveBoxId: (state, action: PayloadAction<string | number>) => {
 			state.boxId = action.payload
@@ -124,11 +140,11 @@ const viewPageSlice = createSlice({
 			state.isCardEditModalOpen = action.payload
 		},
 		setCardDataOriginal: (state, action: PayloadAction<CardSchemaExtended>) => {
-			if (action.payload._id in state.cardsDataOriginal) null
-			else state.cardsDataOriginal[action.payload._id] = action.payload
+			if (action.payload.id in state.cardsDataOriginal) null
+			else state.cardsDataOriginal[action.payload.id] = action.payload
 		},
 		setCardDataEdited: (state, action: PayloadAction<CardSchemaExtended>) => {
-			const cardId = action.payload._id
+			const cardId = action.payload.id
 			if (cardId in state.cardsDataEdited) null
 			else {
 				const obj = {

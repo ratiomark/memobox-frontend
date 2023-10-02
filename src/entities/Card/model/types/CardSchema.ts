@@ -4,7 +4,7 @@
 // }
 
 export interface CardSchema {
-	_id: string,
+	id: string,
 	index: number,
 	question: string,
 	answer: string,

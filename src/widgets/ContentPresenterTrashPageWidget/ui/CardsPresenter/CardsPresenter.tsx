@@ -32,8 +32,8 @@ export const CardsPresenter = (props: CardsPresenterProps) => {
 	useHotkeys('a', onSelectAllCards, { enabled: isMultiSelectActive })
 	useHotkeys('r', onRemoveCards, { enabled: isMultiSelectActive })
 	useHotkeys('m', onMoveCardsClick, { enabled: isMultiSelectActive })
-	
-	const cards = data?.cards.map(card => <CardItemTrash key={card._id} card={card} />)
+
+	const cards = data?.cards.map(card => <CardItemTrash key={card.id} card={card} />)
 
 	return (
 		<div className={clsx(

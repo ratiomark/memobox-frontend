@@ -1,0 +1,36 @@
+.CardDeleting {
+
+}
+
+.item {
+  display: flex;
+  gap: 20px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: var(--card-list-item-li-margin-bottom);
+  border-radius: var(--border-radius-main);
+}
+
+.CardListItem {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-width: 100%;
+  padding: var(--card-list-item-padding-top-and-bottom) var(--card-list-item-padding-left-and-right);
+  border-radius: var(--border-radius-main);
+}
+
+.mainContentWrapper {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
+  // place-content: center;
+  justify-content: space-between;
+  gap: 40px;
+  height: calc(var(--view-rows) * var(--font-line-m));
+  overflow: hidden;
+}

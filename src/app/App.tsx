@@ -7,7 +7,6 @@ import { getUserMounted, initAuthData } from '@/entities/User'
 import { Header, HeaderSkeleton } from '@/widgets/Header'
 import './styles/regularStyles.css'
 import { useTheme } from '@/shared/context/useTheme'
-import theme from '@/shared/ui/lexical-playground/src/themes/PlaygroundEditorTheme'
 import { ToastViewport } from '@radix-ui/react-toast'
 
 

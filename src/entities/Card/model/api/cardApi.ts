@@ -43,6 +43,7 @@ export const cardApi = rtkApi.injectEndpoints({
 				response.cards.forEach(card => (
 					{
 						...card,
+						// id: card._id,
 						deleted: false,
 						isDeleting: false,
 					}

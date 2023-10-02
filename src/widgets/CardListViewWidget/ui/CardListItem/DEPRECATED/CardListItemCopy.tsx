@@ -64,7 +64,7 @@
 // 	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
 // 	const shelvesDataDictionary = useSelector(getViewPageShelvesDataDictionary)
 // 	const cardsEditedListIds = useSelector(getViewPageCardEditedListIds)
-// 	const isCardEdited = cardsEditedListIds?.includes(card._id)
+// 	const isCardEdited = cardsEditedListIds?.includes(card.id)
 // 	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
 // 	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
 // 	const dispatch = useAppDispatch()
@@ -76,7 +76,7 @@
 
 // 	const onSelectCardHandle = (e: ChangeEvent) => {
 // 		e.stopPropagation()
-// 		if (e.target.tagName === 'INPUT') onSelectCard(card._id)
+// 		if (e.target.tagName === 'INPUT') onSelectCard(card.id)
 // 	}
 
 // 	const onSelectCardByCardClick = (e: MouseEvent<HTMLLIElement>) => {
@@ -86,7 +86,7 @@
 // 		)) {
 // 			return
 // 		}
-// 		onSelectCard(card._id)
+// 		onSelectCard(card.id)
 // 	}
 
 // 	const onOpenEditCardModalHandle = (e: MouseEvent<HTMLLIElement>) => {
@@ -100,7 +100,7 @@
 // 		onOpenEditCardModal(card)
 // 	}
 
-// 	const isCardSelected = selectedCardIds?.includes(card._id) ?? false
+// 	const isCardSelected = selectedCardIds?.includes(card.id) ?? false
 // 	const columns = useSelector(getViewPageColumns)
 
 // 	const columnsRendered = useMemo(() => {
@@ -254,7 +254,7 @@ export const CardListItem = (props: CardListItemProps) => {
 	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
 	const shelvesDataDictionary = useSelector(getViewPageShelvesDataDictionary)
 	const cardsEditedListIds = useSelector(getViewPageCardEditedListIds)
-	const isCardEdited = cardsEditedListIds?.includes(card._id)
+	const isCardEdited = cardsEditedListIds?.includes(card.id)
 	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
 	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
 	const dispatch = useAppDispatch()
@@ -269,7 +269,7 @@ export const CardListItem = (props: CardListItemProps) => {
 
 	const onSelectCardHandle = (e: ChangeEvent) => {
 		e.stopPropagation()
-		if (e.target.tagName === 'INPUT') onSelectCard(card._id)
+		if (e.target.tagName === 'INPUT') onSelectCard(card.id)
 	}
 
 	const onSelectCardByCardClick = (e: MouseEvent<HTMLLIElement>) => {
@@ -279,7 +279,7 @@ export const CardListItem = (props: CardListItemProps) => {
 		)) {
 			return
 		}
-		onSelectCard(card._id)
+		onSelectCard(card.id)
 	}
 
 	const onOpenEditCardModalHandle = (e: MouseEvent<HTMLLIElement>) => {
@@ -293,7 +293,7 @@ export const CardListItem = (props: CardListItemProps) => {
 		onOpenEditCardModal(card)
 	}
 
-	const isCardSelected = selectedCardIds?.includes(card._id) ?? false
+	const isCardSelected = selectedCardIds?.includes(card.id) ?? false
 	const columns = useSelector(getViewPageColumns)
 
 	const columnsRendered = useMemo(() => {
