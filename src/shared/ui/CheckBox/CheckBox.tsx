@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import cls from './CheckBox.module.scss';
-import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef } from 'react';
 
 interface CheckBoxProps {
 	className?: string
@@ -8,6 +8,7 @@ interface CheckBoxProps {
 	isChecked: boolean
 	blurOnChange?: boolean
 	disabled?: boolean
+	shiny?: boolean
 }
 
 export const CheckBox = (props: CheckBoxProps) => {
@@ -17,6 +18,7 @@ export const CheckBox = (props: CheckBoxProps) => {
 		onClick,
 		blurOnChange = false,
 		disabled = false,
+		shiny = false,
 	} = props
 	const ref = useRef<HTMLInputElement>(null)
 
@@ -39,22 +41,11 @@ export const CheckBox = (props: CheckBoxProps) => {
 			onKeyDown={onKeyDown}
 			onChange={handleChange}
 			disabled={disabled}
-			className={clsx(cls.checkBox, className)}
+			className={clsx(
+				cls.checkBox,
+				shiny && 'shiny',
+				className,
+			)}
 		/>
 	)
 }
-
-{/* <div
-	className={clsx(
-		className ? '' : cls.switcherWrapper,
-		className
-	)}
-// onClick={onClick}
->
-	<input
-		type="checkbox"
-		checked={isChecked}
-		onChange={handleChange}
-		className={cls.checkBox}
-	/>
-</div> */}

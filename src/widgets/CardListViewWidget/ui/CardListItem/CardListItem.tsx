@@ -153,6 +153,7 @@ export const CardListItem = (props: CardListItemProps) => {
 			layout={false}
 			initial={false}
 			isOpen={!card.deleted}
+			className={cls.cardCollapse}
 		>
 			{!card.deleted && (
 				<motion.li

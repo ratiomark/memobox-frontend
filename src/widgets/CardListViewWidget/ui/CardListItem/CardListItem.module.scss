@@ -12,6 +12,10 @@
   // border: 1px solid red;
 }
 
+.cardCollapse:last-child {
+  margin-bottom: 400px;
+}
+
 .isCardSelected {
   // border: 1px solid red;
   box-shadow: 0 0 4px 2px var(--accent-rgb-2), 0 0 1px 1px var(--accent-rgb-8);

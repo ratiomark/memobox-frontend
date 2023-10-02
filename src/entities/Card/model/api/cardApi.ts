@@ -44,6 +44,7 @@ export const cardApi = rtkApi.injectEndpoints({
 					{
 						...card,
 						deleted: false,
+						isDeleting: false,
 					}
 				))
 				return response

@@ -18,5 +18,6 @@ export interface CardSchema {
 }
 
 export interface CardSchemaExtended extends CardSchema {
+	isDeleting: boolean
 	deleted: boolean
 }

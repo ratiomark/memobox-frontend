@@ -17,6 +17,7 @@ interface CollapsibleProps {
 	withOpacity?: boolean
 	opacityDelay?: number
 	animationOpacityDuration?: number
+	className?: string
 }
 
 export const Collapsible = (props: CollapsibleProps) => {
