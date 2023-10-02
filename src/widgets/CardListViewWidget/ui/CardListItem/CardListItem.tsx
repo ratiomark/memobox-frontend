@@ -61,7 +61,7 @@ export const CardListItem = (props: CardListItemProps) => {
 		onSelectCard,
 		onOpenEditCardModal,
 	} = props
-	const { t } = useTranslation()
+	// const { t } = useTranslation()
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
 	const shelvesDataDictionary = useSelector(getViewPageShelvesDataDictionary)
@@ -76,7 +76,7 @@ export const CardListItem = (props: CardListItemProps) => {
 
 	const onDeleteCard = (e: MouseEvent) => {
 		e.stopPropagation()
-		dispatch(viewPageActions.removeCard(card.id))
+		dispatch(viewPageActions.setCardIsDeleting(card.id))
 	}
 
 	const onSelectCardHandle = (e: ChangeEvent) => {
@@ -157,7 +157,7 @@ export const CardListItem = (props: CardListItemProps) => {
 			className={cls.cardCollapse}
 		>
 			{card.isDeleting ?
-				<CardDeleting card={card} />
+				<CardDeleting cardId={card.id} isCardDeleting={card.isDeleting} />
 		
 				: (
 					<motion.li

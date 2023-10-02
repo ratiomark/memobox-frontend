@@ -2,5 +2,7 @@
   "cancel": "Отмена (esc)",
   "remove": "Удалить (r)",
   "select all": "Выбрать все (a)",
-  "move selected cards": "Переместить выбранные (m)"
+  "move selected cards": "Переместить выбранные (m)",
+  "card will be deleted": "Карточка будет удалена в корзину",
+  "cancel card deletion": "Отменить удаление"
 }

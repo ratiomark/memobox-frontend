@@ -1,7 +1,7 @@
+export { deleteCardThunk } from './model/services/deleteCardThunk';
 
 
 export { getViewPageShelvesDataDictionary } from './model/selectors/getViewPageShelvesDataDictionary';
-
 export {
 	getViewPageColumnSettingsIsOpen,
 	getViewPageSort,

@@ -91,11 +91,19 @@ const viewPageSlice = createSlice({
 		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
 			state.isMultiSelectActive = action.payload
 		},
-		removeCard: (state, action: PayloadAction<string>) => {
+		setCardIsDeleting: (state, action: PayloadAction<string>) => {
 			state.cards.find(card => {
 				if (card.id === action.payload) {
 					card.isDeleting = true
-					return true
+					// return true
+				}
+			})
+		},
+		setCardIsNotDeleting: (state, action: PayloadAction<string>) => {
+			state.cards.find(card => {
+				if (card.id === action.payload) {
+					card.isDeleting = false
+					// return true
 				}
 			})
 		},

@@ -2,5 +2,7 @@
   "cancel": "Cancel (esc)",
   "remove": "Remove (r)",
   "select all": "Select all (a)",
-  "move selected cards": "Move selected cards (m)"
+  "move selected cards": "Move selected cards (m)",
+  "card will be deleted": "The card will be moved to the trash",
+  "cancel card deletion": "Cancel deletion"
 }

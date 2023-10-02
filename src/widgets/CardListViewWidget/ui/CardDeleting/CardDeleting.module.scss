@@ -3,10 +3,6 @@
 }
 
 .item {
-  display: flex;
-  gap: 20px;
-  cursor: pointer;
-  position: relative;
   margin-bottom: var(--card-list-item-li-margin-bottom);
   border-radius: var(--border-radius-main);
 }
@@ -33,4 +29,23 @@
   gap: 40px;
   height: calc(var(--view-rows) * var(--font-line-m));
   overflow: hidden;
+}
+
+.buttonAndProgressBar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.description {
+  padding-left: 30px;
+  font-size: 14px;
+  color: rgb(128 128 128 / 45.6%);
+}
+
+.button {
+  max-height: 35px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
 }
