@@ -2,14 +2,10 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { Icon } from '@/shared/ui/Icon';
-import { memo, useCallback, useMemo, useRef } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import {
-	getViewPageIsLoading,
-	getViewPageIsMounted,
-	getViewPageMoveCardsModalIsOpen,
-	getViewPageMultiSelectIsActive,
 	getViewPageShelfId,
 	viewPageActions,
 } from '@/features/ViewPageInitializer';
@@ -17,9 +13,7 @@ import { HorizontalScrollerList } from '@/shared/ui/HorizontalScrollerList';
 import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
 import cls from './ShelvesListViewWidget.module.scss';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
-import { ShelvesListViewWidgetSkeleton, Skeleton } from '@/shared/ui/Skeleton';
-import { HStack } from '@/shared/ui/Stack';
-import { useHotkeys } from 'react-hotkeys-hook';
+import { ShelvesListViewWidgetSkeleton} from '@/shared/ui/Skeleton';
 
 
 interface ShelvesListViewWidgetProps {
@@ -37,12 +31,9 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 	const dispatch = useAppDispatch()
 	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
 
-	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
-	const isMoveCardsModalOpen = useSelector(getViewPageMoveCardsModalIsOpen)
 	const onCancelMultiSelect = useCallback(() => {
 		dispatch(viewPageActions.cancelMultiSelect())
 	}, [dispatch])
-	useHotkeys('esc', onCancelMultiSelect, { enabled: isMultiSelectActive && !isMoveCardsModalOpen })
 
 	const onChangeShelf = useCallback((shelfId: string) => {
 		onCancelMultiSelect()
@@ -131,10 +122,6 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 			cls.shelvesListViewWidget,
 			className)}
 		>
-			{/* <Icon
-				Svg={MultiSelectIcon}
-			/> */}
-			{/* <HorizontalScrollerList value={shelfId} items={items} /> */}
 			{content}
 		</div>
 	)
