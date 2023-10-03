@@ -153,7 +153,7 @@ export const CardListItem = (props: CardListItemProps) => {
 		<Collapsible
 			layout={false}
 			initial={false}
-			isOpen={!card.deleted}
+			isOpen={!card.isDeleted}
 			className={cls.cardCollapse}
 		>
 			{card.isDeleting ?

@@ -51,43 +51,6 @@ export const CardDeleting = (props: CardDeletingProps) => {
 		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
 	}
 
-	// useEffect(() => {
-	// 	const timer = setTimeout(() => {
-	// 		dispatch(deleteCardThunk(cardId))
-	// 	}, DURATION_SHELF_DELETION_MILLISEC)
-	// 	setTimer(timer)
-	// }, [dispatch, cardId])
-
-	// useEffect(() => {
-	// 	return () => {
-	// 		if (timer) clearTimeout(timer)
-	// 	}
-	// }, [timer])
-
-
-	// useEffect(() => {
-	// 	return () => {
-	// 		dispatch(deleteCardThunk(cardId))
-	// 	}
-	// }, [dispatch, cardId])
-
-	// // удаляет полку сразу, если перезагружает или закрывает вкладку
-	// useEffect(() => {
-	// 	const deleteCard = () => {
-	// 		if (isCardDeleting) {
-	// 			dispatch(deleteCardThunk(cardId))
-	// 		}
-	// 	}
-
-	// 	window.addEventListener('beforeunload', deleteCard)
-	// 	return () => {
-	// 		window.removeEventListener('beforeunload', deleteCard)
-	// 	}
-	// }, [dispatch, isCardDeleting, cardId])
-
-
-
-
 	const { t } = useTranslation('viewPage')
 
 	return (
@@ -109,3 +72,38 @@ export const CardDeleting = (props: CardDeletingProps) => {
 		</div>
 	)
 }
+
+
+// useEffect(() => {
+// 	const timer = setTimeout(() => {
+// 		dispatch(deleteCardThunk(cardId))
+// 	}, DURATION_SHELF_DELETION_MILLISEC)
+// 	setTimer(timer)
+// }, [dispatch, cardId])
+
+// useEffect(() => {
+// 	return () => {
+// 		if (timer) clearTimeout(timer)
+// 	}
+// }, [timer])
+
+
+// useEffect(() => {
+// 	return () => {
+// 		dispatch(deleteCardThunk(cardId))
+// 	}
+// }, [dispatch, cardId])
+
+// // удаляет полку сразу, если перезагружает или закрывает вкладку
+// useEffect(() => {
+// 	const deleteCard = () => {
+// 		if (isCardDeleting) {
+// 			dispatch(deleteCardThunk(cardId))
+// 		}
+// 	}
+
+// 	window.addEventListener('beforeunload', deleteCard)
+// 	return () => {
+// 		window.removeEventListener('beforeunload', deleteCard)
+// 	}
+// }, [dispatch, isCardDeleting, cardId])

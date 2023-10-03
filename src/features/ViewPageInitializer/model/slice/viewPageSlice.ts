@@ -7,7 +7,7 @@ import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
 import { CardSchemaExtended } from '@/entities/Card'
 import { isNumeric } from '@/shared/lib/helpers/common/isNumeric'
-import { deleteCardThunk } from '../..'
+import { deleteCardThunk } from '../services/deleteCardThunk'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
@@ -37,15 +37,15 @@ const initialState: ViewPageInitializerSchema = {
 	shelvesDataSaved: {},
 	abortedThunkIds: [],
 }
-	// .addCase(
-	// 	deleteShelfThunk.rejected,
-	// 	(state, action) => {
-	// 		if (action.meta.aborted) {
-	// 			state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)
-	// 			return
-	// 		}
-	// 		shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false } })
-	// 	})
+// .addCase(
+// 	deleteShelfThunk.rejected,
+// 	(state, action) => {
+// 		if (action.meta.aborted) {
+// 			state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)
+// 			return
+// 		}
+// 		shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false } })
+// 	})
 export interface InitiateShelfPayload {
 	shelfId: string
 	boxId: string
@@ -57,6 +57,9 @@ const viewPageSlice = createSlice({
 	reducers: {
 		setAbortedThunkId: (state, action: PayloadAction<string>) => {
 			state.abortedThunkIds.push(action.payload)
+		},
+		removeAbortedThunkId: (state, action: PayloadAction<string>) => {
+			state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)
 		},
 		// 
 		setActiveShelfId: (state, action: PayloadAction<string>) => {
@@ -121,10 +124,26 @@ const viewPageSlice = createSlice({
 				}
 			})
 		},
+		setCardIsDeleted: (state, action: PayloadAction<string>) => {
+			state.cards.find(card => {
+				if (card.id === action.payload) {
+					card.isDeleted = true
+					// return true
+				}
+			})
+		},
+		setCardIsNotDeleted: (state, action: PayloadAction<string>) => {
+			state.cards.find(card => {
+				if (card.id === action.payload) {
+					card.isDeleted = false
+					// return true
+				}
+			})
+		},
 		removeSelectedCards: (state) => {
 			state.cards = state.cards.map(card => {
 				if (state.selectedCardIds.includes(card.id)) {
-					card.deleted = true
+					card.isDeleted = true
 				}
 				return card
 			})
@@ -291,7 +310,22 @@ const viewPageSlice = createSlice({
 				deleteCardThunk.rejected,
 				(state, action) => {
 					if (action.meta.aborted) {
-						state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)	
+						state.abortedThunkIds = state.abortedThunkIds.filter(id => id != action.payload)
+					}
+				})
+			.addCase(
+				deleteCardThunk.fulfilled,
+				(state, action: PayloadAction<string>) => {
+					const cardId = action.payload
+					state.cards = state.cards.filter(card => card.id !== cardId)
+					if (state.cardEditedListIds.includes(cardId)) {
+						state.cardEditedListIds = state.cardEditedListIds.filter(id => id !== cardId)
+					}
+					if (cardId in state.cardsDataEdited) {
+						delete state.cardsDataEdited[cardId]
+					}
+					if (cardId in state.cardsDataOriginal) {
+						delete state.cardsDataOriginal[cardId]
 					}
 				})
 		// .addCase(

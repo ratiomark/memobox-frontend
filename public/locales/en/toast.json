@@ -11,15 +11,15 @@
     "additional": "Creating new shelf"
   },
   "delete_shelf": {
-    "messageSuccess": "Shelf deleted",
+    "messageSuccess": "Shelf was deleted",
     "additional": "Shelf is deleting"
   },
   "update_box_time": {
     "messageSuccess": "Time successfully updated",
     "additional": "Updating box time"
   },
-  "update_missed_training": {
-    "messageSuccess": "Missed training updated",
-    "additional": "Updating missed training option"
+  "delete_card": {
+    "messageSuccess": "Card was deleted",
+    "additional": "Card is deleting"
   }
 }

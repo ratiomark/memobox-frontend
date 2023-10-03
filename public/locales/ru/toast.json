@@ -21,5 +21,9 @@
   "update_missed_training": {
     "messageSuccess": "Пропущенные тренировки обновлены",
     "additional": "Обновление пропущенных тренировок"
+  },
+  "delete_card": {
+    "messageSuccess": "Карточка удалена",
+    "additional": "Удаление карточки"
   }
 }
