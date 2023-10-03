@@ -200,6 +200,19 @@
     }
   }
 
+  &.attention {
+    // color: white;
+    background: transparent;
+    border: 1px solid  var(--cancel);
+    color: var(--cancel);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--cancel-rgb-8);
+      border: 1px solid  var(--cancel-rgb-8);
+    }
+  }
+
   &.trainingAction {
     color: var(--button-color-training-empty);
     border: 1px solid var(--button-color-training-empty);

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { Icon } from '@/shared/ui/Icon';
-import { memo, useCallback, useMemo } from 'react';
+import { forwardRef, memo, useCallback, useMemo } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import {
@@ -13,11 +13,38 @@ import { HorizontalScrollerList } from '@/shared/ui/HorizontalScrollerList';
 import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
 import cls from './ShelvesListViewWidget.module.scss';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
-import { ShelvesListViewWidgetSkeleton} from '@/shared/ui/Skeleton';
+import { ShelvesListViewWidgetSkeleton } from '@/shared/ui/Skeleton';
+import { motion } from 'framer-motion';
+import { t } from 'i18next';
 
 
 interface ShelvesListViewWidgetProps {
 	className?: string
+}
+
+export function forward() {
+	return (
+		<div style={{ color: 'var(--cancel)' }}>
+			<svg viewBox="0 0 100 1" xmlns="http://www.w3.org/2000/svg">
+				<motion.path
+					initial={{ pathLength: 1 }}
+					animate={{ pathLength: 0 }}
+					transition={{
+						duration: 8,
+						ease: 'easeInOut',
+						repeat: Infinity,
+						repeatType: 'loop',
+						repeatDelay: 2
+					}}
+					stroke={'currentColor'}
+					color={'currentColor'}
+					strokeWidth={1}
+					d="M 0, 1 L 100, 1"
+				// d="M 0, 1 L 100, 1"
+				/>
+			</svg>
+		</div>
+	);
 }
 
 export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) => {

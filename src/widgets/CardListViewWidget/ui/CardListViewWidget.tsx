@@ -62,17 +62,16 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 		dispatch(viewPageActions.setCardDataEdited(card))
 	}, [dispatch])
 
-	const onSelectAllCards = () => {
-		dispatch(viewPageActions.selectAllCards([...cards.map(card => card.id)]))
-	}
-
 	const onCancelMultiSelect = useCallback(() => {
 		dispatch(viewPageActions.cancelMultiSelect())
 	}, [dispatch])
 
+	const onSelectAllCards = () => {
+		dispatch(viewPageActions.selectAllCards([...cards.map(card => card.id)]))
+	}
+
 	const onRemoveCards = useCallback(() => {
 		dispatch(viewPageActions.removeSelectedCards())
-		// updateCardsMutation({ cardIds: })
 	}, [dispatch])
 
 

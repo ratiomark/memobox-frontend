@@ -13,7 +13,7 @@ export type ButtonVariant =
 	| 'back'
 // | 'listBox'
 
-type ButtonColor =
+export type ButtonColor =
 	| 'main'
 	| 'attention'
 	| 'wait'

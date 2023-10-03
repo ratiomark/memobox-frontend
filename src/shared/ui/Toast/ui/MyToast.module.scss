@@ -1,6 +1,5 @@
+.MyToastWithButton,
 .MyToast {
-  // background: red;
-  // background-color: var(--bg);
   padding: 10px 20px 10px 15px;
   border-radius: var(--border-radius-main);
   min-width: 350px;
@@ -13,6 +12,23 @@
   background-color: var(--toast-bg-rgb-9);
 
   // padding: 10px;
+}
+
+.MyToastWithButton {
+  padding: 10px 20px 6px 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progressBar {
+  width: calc(100% + 35px);
+  height: 6px;
+  translate: -15px 7px;
+  background: var(--cancel);
+}
+
+.button {
+  padding: 5px 10px;
 }
 
 .title {

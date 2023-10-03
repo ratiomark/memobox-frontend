@@ -7,6 +7,7 @@ import { getViewPageIsMounted } from '../model/selectors/getViewPageInitializer'
 import { useGetAllCardsQuery } from '@/entities/Card';
 import cls from './ViewPageInitializer.module.scss';
 import { obtainRouteViewEmpty } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { MyToastWithButton } from '@/shared/ui/Toast/ui/MyToastRTK';
 
 interface ViewPageInitializerProps {
 	shelvesListViewPageBlock: ReactNode
@@ -75,6 +76,15 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 			{boxListViewPageBlock}
 			{sortControllerViewPageBlock}
 			{cardListViewPageBlock}
+			<MyToastWithButton
+				message='Карточки будут удалены'
+				buttonText='Отмена'
+				onButtonClick={() => { }}
+				// onButtonClick={() => alert('CCCCCCCCC')}
+				onTimeEnd={() => { }}
+				// onTimeEnd={() => alert('Закрывашка')}
+				duration={20000}
+			/>
 		</div>
 	)
 })

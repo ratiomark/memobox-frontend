@@ -2,6 +2,7 @@ import {
 	PropsWithChildren,
 	ReactNode,
 	useEffect,
+	useRef,
 } from 'react';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
@@ -19,9 +20,13 @@ import cls from './MyToast.module.scss';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { motion } from 'framer-motion';
 import { toastIconSize } from '@/shared/const/iconSizes';
+import { RequestStatusType } from '@/shared/types/GeneralTypes';
+import { Button } from '../../Button';
+import { ButtonColor } from '../../Button/Button';
 
 interface MyComponentToastsProps extends MyToastProps {
 	onTimeEnd?: () => void
+	// type?: 'withButton'
 }
 
 export const MyToast = (props: MyComponentToastsProps) => {
@@ -107,6 +112,66 @@ export const MyToast = (props: MyComponentToastsProps) => {
 	)
 }
 
+interface MyComponentToastWithButtonProps extends Omit<MyToastProps, 'status'> {
+	onTimeEnd: () => void
+	onButtonClick: () => void
+	buttonText?: string
+	message?: string
+	buttonColor?: ButtonColor
+}
+
+export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
+	const {
+		className,
+		duration = 3000,
+		message = 'some text',
+		onTimeEnd,
+		onButtonClick,
+		buttonText = 'some text',
+		buttonColor = 'attention'
+	} = props
+
+	const { t } = useTranslation('toast')
+
+	useEffect(() => {
+		const timer = setTimeout(onTimeEnd, duration);
+		() => {
+			clearTimeout(timer)
+		}
+	}, [onTimeEnd, duration])
+
+
+	const mainContent = (<div className={cls.content} >
+		<ToastTitle className={cls.title}>{t(message)}</ToastTitle>
+		<Button
+			variant='empty'
+			color={buttonColor}
+			className={cls.button}
+			onClick={onButtonClick}
+		>
+			{t(buttonText)}
+		</Button>
+	</div>)
+
+
+	return (
+		<Root
+			duration={duration * 100}
+			className={clsx(
+				cls.MyToastWithButton,
+				className
+			)}
+		>
+			{mainContent}
+			<motion.div
+				className={cls.progressBar}
+				animate={{ translateX: '-100%' }}
+				transition={{ duration: duration / 1000 }}
+			/>
+		</Root>
+	)
+}
+
 
 const MyToastWrapper = ({ id, toast }: { id: string, toast: MyToastProps }) => {
 	const dispatch = useAppDispatch()
@@ -120,8 +185,10 @@ const MyToastWrapper = ({ id, toast }: { id: string, toast: MyToastProps }) => {
 			{...toast}
 		/>
 	)
-
 }
+
+
+
 const reducers: ReducersList = {
 	toasts: toastsReducer
 }
