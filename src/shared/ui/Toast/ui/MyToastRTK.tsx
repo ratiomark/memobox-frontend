@@ -152,7 +152,6 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 	useEffect(() => {
 		return () => {
 			if (timer) clearTimeout(timer)
-			// if (timer) clearTimeout(timer)
 		}
 	}, [timer])
 
