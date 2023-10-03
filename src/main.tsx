@@ -13,7 +13,18 @@ import { MyToastsRTK } from './shared/ui/Toast/ui/MyToastRTKLazy'
 const container = document.getElementById('root')
 
 if (!container) throw new Error('Root container is not Found! Check main.tsx file')
-
+let check = 0
+const clearTimeoutOriginal = window.clearTimeout;
+window.clearTimeout = function (timerId: number | undefined, customText: string) {
+	console.log('clearTimeout:   ', check, customText ? customText : '');
+	return clearTimeoutOriginal(timerId)
+};
+const originalSetTimeout = window.setTimeout;
+window.setTimeout = function (fn, delay) {
+	check += 1
+	console.log('setTimeout:  ', check);
+	return originalSetTimeout(fn, delay);
+};
 const root = ReactDOM.createRoot(container)
 root.render(
 	<BrowserRouter>

@@ -17,7 +17,8 @@ import { timingDataDefault } from '@/shared/const/timingBlock';
 import { getTiming } from '@/shared/lib/helpers/common/formaters';
 import { getBoxesTemplateModalMode } from '../../../model/selectors/getShelfBoxesTemplateModal';
 import { shelfBoxesTemplateSettingsActions } from '../../../model/slice/shelfBoxesTemplateSlice';
-import { useState, useCallback, MouseEvent, useEffect } from 'react';
+import { useState, useCallback, MouseEvent, useEffect, useRef } from 'react';
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
 interface BoxSettingsItemProps {
 	className?: string
@@ -43,11 +44,12 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		onAddBoxClick,
 		isLastBox = false,
 	} = props
+	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
+	const timer = useRef<TimeoutId>()
 	const { isSaved: isBoxSaved, minutes, hours, days, weeks, months, id, index: boxIndex, isRemoved } = boxItem
 	const mode = useSelector(getBoxesTemplateModalMode)
 	const isAddBoxModeActive = mode === 'choosingBoxPlace'
-	const { t } = useTranslation()
 
 
 	const onAddNewBoxClickHandle = (e: MouseEvent<HTMLDivElement>) => {
@@ -76,8 +78,9 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 
 	const onRemoveClick = () => {
 		dispatch(shelfBoxesTemplateSettingsActions.switchBoxToRemovedState(boxIndex))
-		setTimeout(() => {
+		timer.current = setTimeout(() => {
 			onRemoveBox(boxIndex)
+			clearTimeout(timer.current)
 		}, DURATION_MILLISEC)
 	}
 

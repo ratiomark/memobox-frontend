@@ -59,6 +59,10 @@ export interface ViewPageInitializerSchema {
 	// 
 	isMoveCardsModalOpen: boolean
 	abortedThunkIds: string[]
+	multiSelectDeleteCardIdList: string[]
+	multiSelectDeleteCardIdObject: {
+		[randomId: string]: string[]
+	}
 	// 
 	shelvesDataSaved: {
 		[shelfId: string]: {

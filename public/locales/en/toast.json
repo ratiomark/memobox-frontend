@@ -21,5 +21,9 @@
   "delete_card": {
     "messageSuccess": "Card was deleted",
     "additional": "Card is deleting"
+  },
+  "delete_multiple_card": {
+    "messageSuccess": "Cards were deleted",
+    "additional": "Cards are deleting"
   }
 }

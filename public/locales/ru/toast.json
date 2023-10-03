@@ -25,5 +25,9 @@
   "delete_card": {
     "messageSuccess": "Карточка удалена",
     "additional": "Удаление карточки"
+  },
+  "delete_multiple_card": {
+    "messageSuccess": "Карточки уделны",
+    "additional": "Удаление карточек"
   }
 }

@@ -3,6 +3,7 @@ import {
 	ReactNode,
 	useEffect,
 	useRef,
+	useState,
 } from 'react';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +24,8 @@ import { toastIconSize } from '@/shared/const/iconSizes';
 import { RequestStatusType } from '@/shared/types/GeneralTypes';
 import { Button } from '../../Button';
 import { ButtonColor } from '../../Button/Button';
+import { useDeleteWithCountdown } from '@/shared/lib/helpers/hooks/useDeleteWithCountdown';
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
 interface MyComponentToastsProps extends MyToastProps {
 	onTimeEnd?: () => void
@@ -132,13 +135,41 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 	} = props
 
 	const { t } = useTranslation('toast')
+	// useDeleteWithCountdown({
+	// 	startCondition: true,
+	// 	deletionFn: onTimeEnd,
+	// 	duration,
+	// })
+	const [timer, setTimer] = useState<TimeoutId | null>(null)
 
 	useEffect(() => {
-		const timer = setTimeout(onTimeEnd, duration);
-		() => {
-			clearTimeout(timer)
+		const timer = setTimeout(() => {
+			onTimeEnd()
+		}, duration)
+		setTimer(timer)
+	}, [duration, onTimeEnd])
+
+	useEffect(() => {
+		return () => {
+			if (timer) clearTimeout(timer)
+			// if (timer) clearTimeout(timer)
 		}
-	}, [onTimeEnd, duration])
+	}, [timer])
+
+	useEffect(() => {
+		console.log('render')
+		return () => {
+			onTimeEnd()
+		}
+	}, [onTimeEnd])
+
+
+	// useEffect(() => {
+	// 	const timer = setTimeout(onTimeEnd, duration);
+	// 	() => {
+	// 		clearTimeout(timer)
+	// 	}
+	// }, [onTimeEnd, duration])
 
 
 	const mainContent = (<div className={cls.content} >
@@ -156,7 +187,11 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 
 	return (
 		<Root
-			duration={duration * 100}
+			onOpenChange={(open) => {
+				// console.log(open)
+				// onTimeEnd()
+			}}
+			duration={duration}
 			className={clsx(
 				cls.MyToastWithButton,
 				className
@@ -165,6 +200,7 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 			{mainContent}
 			<motion.div
 				className={cls.progressBar}
+				initial={{ x: -15, y: 7 }}
 				animate={{ translateX: '-100%' }}
 				transition={{ duration: duration / 1000 }}
 			/>

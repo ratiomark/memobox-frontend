@@ -111,7 +111,7 @@ const trashPageSlice = createSlice({
 		// 		}
 		// 	})
 		// },
-		// removeSelectedCards: (state) => {
+		// setSelectedCardIsDeleted: (state) => {
 		// 	state.cards = state.cards.map(card => {
 		// 		if (state.selectedCardIds.includes(card.id)) {
 		// 			card.deleted = true

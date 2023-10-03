@@ -8,6 +8,7 @@ import { SortOrderType } from '@/shared/types/SortOrderType'
 import { CardSchemaExtended } from '@/entities/Card'
 import { isNumeric } from '@/shared/lib/helpers/common/isNumeric'
 import { deleteCardThunk } from '../services/deleteCardThunk'
+import { deleteMultipleCardsThunk } from '../services/deleteMultipleCardsThunk'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
@@ -36,6 +37,8 @@ const initialState: ViewPageInitializerSchema = {
 	// 
 	shelvesDataSaved: {},
 	abortedThunkIds: [],
+	multiSelectDeleteCardIdList: [],
+	multiSelectDeleteCardIdObject: {}
 }
 // .addCase(
 // 	deleteShelfThunk.rejected,
@@ -86,6 +89,21 @@ const viewPageSlice = createSlice({
 			state.isTableSettingsModalOpen = action.payload
 		},
 		// multiSelect
+		addMultiSelectDeleteIds: (state, action: PayloadAction<string>) => {
+			state.multiSelectDeleteCardIdList.push(action.payload)
+			state.multiSelectDeleteCardIdObject[action.payload] = [...state.selectedCardIds]
+			state.selectedCardIds = []
+		},
+		removeMultiSelectDeleteIds: (state, action: PayloadAction<string>) => {
+			state.multiSelectDeleteCardIdList = state.multiSelectDeleteCardIdList.filter(id => id !== action.payload)
+			const listWithCardIds = state.multiSelectDeleteCardIdObject[action.payload]
+			state.cards.forEach(card => {
+				if (card.isDeleted && listWithCardIds.includes(card.id)) {
+					card.isDeleted = false
+				}
+			})
+			delete state.multiSelectDeleteCardIdObject[action.payload]
+		},
 		addOrRemoveCardFromSelectedCardIds: (state, action: PayloadAction<string>) => {
 			if (state.selectedCardIds.includes(action.payload)) {
 				state.selectedCardIds = state.selectedCardIds.filter(cardId => cardId !== action.payload)
@@ -140,13 +158,24 @@ const viewPageSlice = createSlice({
 				}
 			})
 		},
-		removeSelectedCards: (state) => {
+		setSelectedCardIsDeleted: (state) => {
 			state.cards = state.cards.map(card => {
 				if (state.selectedCardIds.includes(card.id)) {
 					card.isDeleted = true
 				}
 				return card
 			})
+		},
+		setCardsIsNotDeletedByIdList: (state, action: PayloadAction<string[]>) => {
+			action.payload.forEach(cardId => {
+				state.cards.find(card => {
+					if (card.id === cardId) {
+						card.isDeleted = false
+						// return true
+					}
+				})
+			})
+
 		},
 		// removeCard: (state, action: PayloadAction<CardSchemaExtended>) => {
 		// 	state.cards.find(card => {
@@ -156,7 +185,7 @@ const viewPageSlice = createSlice({
 		// 		}
 		// 	})
 		// },
-		// removeSelectedCards: (state) => {
+		// setSelectedCardIsDeleted: (state) => {
 		// 	state.cards = state.cards.map(card => {
 		// 		if (state.selectedCardIds.includes(card.id)) {
 		// 			card.deleted = true
@@ -327,6 +356,17 @@ const viewPageSlice = createSlice({
 					if (cardId in state.cardsDataOriginal) {
 						delete state.cardsDataOriginal[cardId]
 					}
+				})
+			.addCase(
+				deleteMultipleCardsThunk.fulfilled,
+				(state, action) => {
+					action.payload.forEach(cardId => {
+						state.cards.find(card => {
+							if (card.id === cardId) {
+								card.isDeleted = false
+							}
+						})
+					})
 				})
 		// .addCase(
 		// 	fetchCards.fulfilled,

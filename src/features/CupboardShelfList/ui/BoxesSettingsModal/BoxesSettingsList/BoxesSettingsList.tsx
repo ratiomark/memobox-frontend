@@ -16,6 +16,7 @@ import { DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS } from '@/shared/con
 import { getBoxesTemplateModalMode, getBoxesTemplateModalCurrentShelfTemplate } from '../../../model/selectors/getShelfBoxesTemplateModal';
 import { shelfBoxesTemplateSettingsActions } from '../../../model/slice/shelfBoxesTemplateSlice';
 import { timingDataDefault } from '@/shared/const/timingBlock';
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
 const createBox = (index: number): ExtendedTimingBlock => {
 	return {
@@ -51,6 +52,8 @@ export const BoxesSettingsList = () => {
 	const mode = useSelector(getBoxesTemplateModalMode)
 	const currentShelfTemplate = useSelector(getBoxesTemplateModalCurrentShelfTemplate)
 	const containerRef = useRef<HTMLDivElement>(null)
+	const timer = useRef<TimeoutId>()
+	const timer2 = useRef<TimeoutId>()
 
 	const onRemoveBox = useCallback((boxIndex: number) => {
 		dispatch(shelfBoxesTemplateSettingsActions.removeBoxFromCurrentShelfTemplateByIndex(boxIndex))
@@ -96,12 +99,14 @@ export const BoxesSettingsList = () => {
 		// dispatch(shelfBoxesTemplateSettingsActions.setChanged(true))
 		dispatch(shelfBoxesTemplateSettingsActions.setMode('settingTimeToNewBox'))
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxData(newBox))
-		setTimeout(() => {
+		timer.current = setTimeout(() => {
 			dispatch(shelfBoxesTemplateSettingsActions.setMode('waitingForSaving'))
+			clearTimeout(timer.current)
 		}, DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS)
 		// вот тут нужно изменить isOpen у только что добавленнной коробки, через таймаут
-		setTimeout(() => {
+		timer2.current = setTimeout(() => {
 			dispatch(shelfBoxesTemplateSettingsActions.setCurrentTemplate(updatedBoxesList))
+			clearTimeout(timer2.current)
 		}, 500)
 	}, [currentShelfTemplate, dispatch])
 

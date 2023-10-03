@@ -9,11 +9,12 @@ import { Icon } from '@/shared/ui/Icon';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { Collapsible } from '@/shared/ui/Animations';
 import { useDragControls, Reorder } from 'framer-motion';
-import { ReactNode, memo, useState } from 'react';
+import { ReactNode, memo, useRef, useState } from 'react';
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
 // const dndIsActiveValue = false
 // const isCollapsingValue = false
-let timerId: number;
+// let timerId: number;
 export interface ShelfProps {
 	shelf: ShelfSchema
 	completeSmallDataLabelsBlock: ReactNode
@@ -31,30 +32,25 @@ export const Shelf = memo((props: ShelfProps) => {
 		shelfButtonsBlock,
 		boxesBlock,
 		isFirstRender,
-		// moveShelf,
 		shelf: {
 			title,
-			// id,
 			isCollapsed,
-			// index,
 		}
 	} = props
 
 	const [isDragging, setIsDragging] = useState(false)
-	// const [isCollapsing, setIsCollapsing] = useState(false)
-	// const { t } = useTranslation()
+	const timerId = useRef<TimeoutId>()
 	const controls = useDragControls()
 
 	const handleDragStart = () => {
-		console.log(props.shelf.title)
 		setIsDragging(true);
 		document.body.classList.add('dragging');
 	}
 
 	const handleDragEnd = () => {
-		timerId = setTimeout(() => {
+		timerId.current = setTimeout(() => {
 			setIsDragging(false);
-			clearTimeout(timerId)
+			clearTimeout(timerId.current)
 		}, 300)
 		document.body.classList.remove('dragging');
 	}

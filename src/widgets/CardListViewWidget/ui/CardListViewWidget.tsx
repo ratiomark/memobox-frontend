@@ -18,6 +18,7 @@ import { CardEditModal } from './CardEditModal/CardEditModal';
 import { MoveCardsModal } from './MoveCardsModal/MoveCardsModal';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CardModalSkeleton, CardsListSkeleton } from '@/shared/ui/Skeleton';
+import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 
 interface CardListViewWidgetProps {
 	className?: string
@@ -33,7 +34,7 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	const cards = useSelector(getViewPageCardsSorted)
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const isMoveCardsModalOpen = useSelector(getViewPageMoveCardsModalIsOpen)
-	const [updateCardsMutation] = useUpdateCardsMutation()
+	// const [updateCardsMutation] = useUpdateCardsMutation()
 
 	const onSelectCard = useCallback((cardId: string) => {
 		dispatch(viewPageActions.addOrRemoveCardFromSelectedCardIds(cardId))
@@ -71,7 +72,10 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	}
 
 	const onRemoveCards = useCallback(() => {
-		dispatch(viewPageActions.removeSelectedCards())
+		const id = genRandomId()
+		dispatch(viewPageActions.setSelectedCardIsDeleted())
+		dispatch(viewPageActions.addMultiSelectDeleteIds(id))
+		dispatch(viewPageActions.cancelMultiSelect())
 	}, [dispatch])
 
 
