@@ -15,6 +15,8 @@ import { UpdateBoxTimeThunkArg, updateBoxTimeThunk } from '../services/updateBox
 import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk'
 import { CupboardPageSchema } from '../types/CupboardPageSchema'
 import { updateMissedTrainingThunk, UpdateMissedTrainingThunkArg } from '../services/updateMissedTrainingThunk'
+import { RejectedAction } from '@reduxjs/toolkit/dist/query/core/buildThunks'
+import { RejectedWithValueActionFromAsyncThunk } from '@reduxjs/toolkit/dist/matchers'
 
 const initialState: CupboardPageSchema = {
 	isDataAlreadyInStore: false,
@@ -90,7 +92,8 @@ const initialState: CupboardPageSchema = {
 		all: 0,
 		wait: 0
 	},
-	isCupboardInfoModalOpen: false
+	isCupboardInfoModalOpen: false,
+	abortedThunkIds: []
 }
 
 const shelvesAdapter = createEntityAdapter<ShelfSchema>({
@@ -123,6 +126,9 @@ const cupboardShelfList = createSlice({
 	name: 'cupboardShelfList',
 	initialState,
 	reducers: {
+		setAbortedThunkId: (state, action: PayloadAction<string>) => {
+			state.abortedThunkIds.push(action.payload)
+		},
 		setCommonShelfCollapsed: (state, action: PayloadAction<boolean>) => {
 			state.commonShelf!.isCollapsed = action.payload
 		},
@@ -414,6 +420,10 @@ const cupboardShelfList = createSlice({
 			.addCase(
 				deleteShelfThunk.rejected,
 				(state, action) => {
+					if (action.meta.aborted) {
+						state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)
+						return
+					}
 					shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false } })
 				})
 			.addCase(

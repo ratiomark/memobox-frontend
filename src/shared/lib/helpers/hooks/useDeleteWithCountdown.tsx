@@ -1,22 +1,19 @@
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useAppDispatch } from './useAppDispatch';
 
 
 interface useDeleteWithCountdownProps {
-	deletionFn: ()=>void
-	// deletionFn: (id: string) => void
-	condition: boolean
+	deletionFn: () => void
+	startCondition: boolean
 	duration: number
-	id: string
 }
 
 export const useDeleteWithCountdown = (props: useDeleteWithCountdownProps) => {
 	const {
 		deletionFn,
-		condition,
+		startCondition,
 		duration,
-		id,
 	} = props
 
 	const [timer, setTimer] = useState<TimeoutId | null>(null)
@@ -27,7 +24,6 @@ export const useDeleteWithCountdown = (props: useDeleteWithCountdownProps) => {
 		}, duration)
 		setTimer(timer)
 	}, [duration, deletionFn])
-	// }, [dispatch, id])
 
 	useEffect(() => {
 		return () => {
@@ -35,17 +31,18 @@ export const useDeleteWithCountdown = (props: useDeleteWithCountdownProps) => {
 		}
 	}, [timer])
 
-
 	useEffect(() => {
 		return () => {
 			deletionFn()
 		}
 	}, [deletionFn])
 
+
 	// удаляет полку сразу, если перезагружает или закрывает вкладку
 	useEffect(() => {
 		const deleteCard = () => {
-			if (condition) {
+			if (startCondition) {
+				console.log('FIRE')
 				deletionFn()
 			}
 		}
@@ -54,6 +51,8 @@ export const useDeleteWithCountdown = (props: useDeleteWithCountdownProps) => {
 		return () => {
 			window.removeEventListener('beforeunload', deleteCard)
 		}
-	}, [condition, deletionFn])
-
+	}, [deletionFn, startCondition])
+	// }, [condition, deletionFn])
+	return { timer }
+	// return { timer, condition, setCondition }
 }

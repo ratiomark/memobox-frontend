@@ -7,6 +7,7 @@ import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
 import { CardSchemaExtended } from '@/entities/Card'
 import { isNumeric } from '@/shared/lib/helpers/common/isNumeric'
+import { deleteCardThunk } from '../..'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
@@ -34,8 +35,17 @@ const initialState: ViewPageInitializerSchema = {
 	isTableSettingsModalOpen: false,
 	// 
 	shelvesDataSaved: {},
+	abortedThunkIds: [],
 }
-
+	// .addCase(
+	// 	deleteShelfThunk.rejected,
+	// 	(state, action) => {
+	// 		if (action.meta.aborted) {
+	// 			state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)
+	// 			return
+	// 		}
+	// 		shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false } })
+	// 	})
 export interface InitiateShelfPayload {
 	shelfId: string
 	boxId: string
@@ -45,6 +55,10 @@ const viewPageSlice = createSlice({
 	name: 'viewPage',
 	initialState,
 	reducers: {
+		setAbortedThunkId: (state, action: PayloadAction<string>) => {
+			state.abortedThunkIds.push(action.payload)
+		},
+		// 
 		setActiveShelfId: (state, action: PayloadAction<string>) => {
 			const shelfId = action.payload
 			state.shelfId = shelfId
@@ -272,6 +286,13 @@ const viewPageSlice = createSlice({
 				(state) => {
 					state.isLoading = true
 					state.error = ''
+				})
+			.addCase(
+				deleteCardThunk.rejected,
+				(state, action) => {
+					if (action.meta.aborted) {
+						state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)	
+					}
 				})
 		// .addCase(
 		// 	fetchCards.fulfilled,

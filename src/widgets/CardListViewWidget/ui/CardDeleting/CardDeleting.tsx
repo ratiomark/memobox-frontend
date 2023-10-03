@@ -9,8 +9,10 @@ import { MyText } from '@/shared/ui/Typography';
 import { deleteCardThunk } from '@/features/ViewPageInitializer';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { viewPageActions } from '@/features/ViewPageInitializer';
+import { useDeleteWithCountdown } from '@/shared/lib/helpers/hooks/useDeleteWithCountdown';
+import { idPrefixCardDeletion } from '@/shared/const/idsAndDataAttributes';
 
 
 interface CardDeletingProps {
@@ -31,46 +33,57 @@ export const CardDeleting = (props: CardDeletingProps) => {
 	} = props
 
 	const dispatch = useAppDispatch()
+	const deleteCard = useCallback(() => {
+		dispatch(deleteCardThunk(cardId))
+	}, [dispatch, cardId])
+	const { timer } = useDeleteWithCountdown({
+		startCondition: isCardDeleting,
+		deletionFn: deleteCard,
+		duration: DURATION_SHELF_DELETION_MILLISEC,
+	})
 	// const [removeShelfMutation] = useRemoveShelfMutation()
-	const [timer, setTimer] = useState<TimeoutId | null>(null)
+	// const [timer, setTimer] = useState<TimeoutId | null>(null)
 
 	const onCancelDeletion = () => {
+		if (timer) clearTimeout(timer)
 		dispatch(viewPageActions.setCardIsNotDeleting(cardId))
+		dispatch(viewPageActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
+		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
 	}
 
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			dispatch(deleteCardThunk(cardId))
-		}, DURATION_SHELF_DELETION_MILLISEC)
-		setTimer(timer)
-	}, [dispatch, cardId])
+	// useEffect(() => {
+	// 	const timer = setTimeout(() => {
+	// 		dispatch(deleteCardThunk(cardId))
+	// 	}, DURATION_SHELF_DELETION_MILLISEC)
+	// 	setTimer(timer)
+	// }, [dispatch, cardId])
 
-	useEffect(() => {
-		return () => {
-			if (timer) clearTimeout(timer)
-		}
-	}, [timer])
+	// useEffect(() => {
+	// 	return () => {
+	// 		if (timer) clearTimeout(timer)
+	// 	}
+	// }, [timer])
 
 
-	useEffect(() => {
-		return () => {
-			dispatch(deleteCardThunk(cardId))
-		}
-	}, [dispatch, cardId])
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(deleteCardThunk(cardId))
+	// 	}
+	// }, [dispatch, cardId])
 
-	// удаляет полку сразу, если перезагружает или закрывает вкладку
-	useEffect(() => {
-		const deleteCard = () => {
-			if (isCardDeleting) {
-				dispatch(deleteCardThunk(cardId))
-			}
-		}
+	// // удаляет полку сразу, если перезагружает или закрывает вкладку
+	// useEffect(() => {
+	// 	const deleteCard = () => {
+	// 		if (isCardDeleting) {
+	// 			dispatch(deleteCardThunk(cardId))
+	// 		}
+	// 	}
 
-		window.addEventListener('beforeunload', deleteCard)
-		return () => {
-			window.removeEventListener('beforeunload', deleteCard)
-		}
-	}, [dispatch, isCardDeleting, cardId])
+	// 	window.addEventListener('beforeunload', deleteCard)
+	// 	return () => {
+	// 		window.removeEventListener('beforeunload', deleteCard)
+	// 	}
+	// }, [dispatch, isCardDeleting, cardId])
 
 
 

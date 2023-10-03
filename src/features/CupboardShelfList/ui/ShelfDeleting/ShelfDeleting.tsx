@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './ShelfDeleting.module.scss';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../..';
 import { Heading, MyText } from '@/shared/ui/Typography';
@@ -12,6 +12,10 @@ import { useRemoveShelfMutation } from '@/entities/Shelf';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 import { deleteShelfThunk } from '../../model/services/deleteShelfThunk';
 import { CircularCountDownWithProgress } from '@/shared/ui/CircularCountDownWithProgress';
+import { useDeleteWithCountdown } from '@/shared/lib/helpers/hooks/useDeleteWithCountdown';
+import { toastsActions } from '@/shared/ui/Toast';
+import { unstable_batchedUpdates } from 'react-dom';
+import { idPrefixShelfDeletion } from '@/shared/const/idsAndDataAttributes';
 
 interface ShelfDeletingProps {
 	shelfId: string
@@ -25,54 +29,25 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 		title,
 		isShelfDeleting,
 	} = props
-
+	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
-	// const [removeShelfMutation] = useRemoveShelfMutation()
-	const [timer, setTimer] = useState<TimeoutId | null>(null)
 
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			dispatch(deleteShelfThunk(shelfId))
-		}, DURATION_SHELF_DELETION_MILLISEC)
-		setTimer(timer)
-	}, [dispatch, shelfId])
+	const deleteShelf = useCallback(() => {
+		dispatch(deleteShelfThunk(shelfId))
+	}, [shelfId, dispatch,])
 
-	useEffect(() => {
-		return () => {
-			if (timer) clearTimeout(timer)
-		}
-	}, [timer])
+	const { timer } = useDeleteWithCountdown({
+		startCondition: isShelfDeleting,
+		deletionFn: deleteShelf,
+		duration: DURATION_SHELF_DELETION_MILLISEC,
+	})
 
-	// удаляет, если уходит на другой роут
-	useEffect(() => {
-		return () => {
-			dispatch(deleteShelfThunk(shelfId))
-		}
-	}, [dispatch, shelfId])
-	// }, [dispatch, isShelfDeleting, shelfId])
-
-	// удаляет полку сразу, если перезагружает или закрывает вкладку
-	useEffect(() => {
-		const deleteShelf = () => {
-			if (isShelfDeleting) {
-				dispatch(deleteShelfThunk(shelfId))
-			}
-		}
-
-		window.addEventListener('beforeunload', deleteShelf)
-		return () => {
-			window.removeEventListener('beforeunload', deleteShelf)
-		}
-	}, [dispatch, isShelfDeleting, shelfId])
-
-
-
-	const onCancelDeletion = () => {
-		if (timer) clearTimeout(timer);
+	const onCancelDeletion = async () => {
+		if (timer) clearTimeout(timer)
+		dispatch(cupboardShelfListActions.setAbortedThunkId(idPrefixShelfDeletion + shelfId))
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
 	}
 
-	const { t } = useTranslation()
 
 	return (
 		<div className={clsx(
@@ -97,3 +72,21 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 	)
 }
+
+
+// useEffect(() => {
+// 	if (!condition) {
+// 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }));
+// 		dispatch(toastsActions.removeToastById('shelfDeletion' + shelfId));
+// 	}
+// }, [condition, dispatch, shelfId]);
+
+// useEffect(() => {
+// 	return () => {
+// 		if (condition) {
+// 			console.log('SSSSSSSSSSSSSSSSSSS')
+// 			dispatch(deleteShelfThunk(shelfId))
+// 		}
+
+// 	}
+// }, [dispatch, shelfId, condition])

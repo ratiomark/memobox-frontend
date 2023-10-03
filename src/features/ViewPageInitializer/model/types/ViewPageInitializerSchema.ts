@@ -1,5 +1,5 @@
 import { ShelfRepresentedByBoxes } from '@/entities/Box'
-import { CardSchema, CardSchemaExtended } from '@/entities/Card'
+import { CardSchemaExtended } from '@/entities/Card'
 import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
 import { ShelvesDataViewPage } from '../services/fetchCards'
@@ -58,6 +58,7 @@ export interface ViewPageInitializerSchema {
 	},
 	// 
 	isMoveCardsModalOpen: boolean
+	abortedThunkIds: string[]
 	// 
 	shelvesDataSaved: {
 		[shelfId: string]: {

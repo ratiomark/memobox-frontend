@@ -8,6 +8,7 @@ export const getViewPageIsLoading = (state: StateSchema) => state.viewPage?.isLo
 // 
 export const getViewPageShelfId = (state: StateSchema) => state.viewPage?.shelfId ?? 'all'
 export const getViewPageBoxId = (state: StateSchema) => state.viewPage?.boxId ?? 'new'
+export const getViewPageAbortedThunkIds = (state: StateSchema) => state.viewPage?.abortedThunkIds ?? []
 
 export const getViewPageBoxIdChecked = createSelector(
 	[

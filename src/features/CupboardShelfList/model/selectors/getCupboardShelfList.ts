@@ -5,6 +5,7 @@ import { store } from '@/app/providers/StoreProvider'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 export const getCupboard = (state: StateSchema) => state.cupboard
+export const getAbortedThunkIds = (state: StateSchema) => state.cupboard.abortedThunkIds
 export const getCupboardIsDataAlreadyInStore = (state: StateSchema) => state.cupboard.isDataAlreadyInStore
 export const getCupboardIsNeedRefetch = (state: StateSchema) => state.cupboard.isNeedRefetch
 export const getCupboardIsNeedStop = (state: StateSchema) => state.cupboard.isNeedStop
