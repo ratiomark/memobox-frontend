@@ -1,5 +1,7 @@
 import {
 	getViewPageIsLoading,
+	getViewPageMoveCardsModalIsOpen,
+	getViewPageMultiSelectIsActive,
 	getViewPageShelfId,
 	viewPageActions
 } from '@/features/ViewPageInitializer';
@@ -13,6 +15,7 @@ import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { getViewPageBoxIdChecked } from '@/features/ViewPageInitializer';
 import cls from './BoxesListViewWidget.module.scss'
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 export const BoxesListViewWidget = memo(() => {
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
@@ -23,6 +26,14 @@ export const BoxesListViewWidget = memo(() => {
 	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
 	const boxId = useSelector(getViewPageBoxIdChecked)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
+	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
+	const isMoveCardsModalOpen = useSelector(getViewPageMoveCardsModalIsOpen)
+	
+	const onCancelMultiSelect = useCallback(() => {
+		dispatch(viewPageActions.cancelMultiSelect())
+	}, [dispatch])
+	
+	useHotkeys('esc', onCancelMultiSelect, { enabled: isMultiSelectActive && !isMoveCardsModalOpen })
 
 	const tabs = useMemo(() => {
 		if (viewPageIsLoading || isShelvesLoading) return
@@ -46,8 +57,9 @@ export const BoxesListViewWidget = memo(() => {
 	}, [isShelvesLoading, viewPageIsLoading, shelvesData, shelfId, t])
 
 	const onBoxClick = useCallback((tabItem: TabItem) => {
+		onCancelMultiSelect()
 		dispatch(viewPageActions.setActiveBoxId(tabItem.value))
-	}, [dispatch])
+	}, [dispatch, onCancelMultiSelect])
 
 	let tabsRendered;
 	if (tabs) {

@@ -1,165 +1,3 @@
-/* stylelint-disable value-no-vendor-prefix */
-.item {
-  display: flex;
-  gap: 20px;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 8px;
-
-  // z-index: 1;
-
-  // border: 1px solid red;
-}
-
-.checkBox {
-  position: absolute;
-  left: -30px;
-  top: calc(50% - var(--checkbox-size) / 2);
-}
-
-.cardEditedLabel {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 9999;
-  padding: 6px 12px;
-
-  // left: 0px;
-  // top: 0px;
-
-  // width: 16px;
-  // height: 16px;
-
-  background-color: var(--accent);
-}
-
-.CardListItem {
-  align-items: center;
-  display: flex;
-  min-width: 100%;
-  padding: var(--card-list-item-padding-top-and-bottom) var(--card-list-item-padding-left-and-right);
-
-  // box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
-  background-color: var(--bg);
-  box-shadow: var(--entities-box-shadow-main);
-  border-radius: var(--border-radius-main);
-}
-
-.content {
-  // width: 100%;
-  align-items: center;
-  display: grid;
-
-  // grid-template-columns: 300px 300px 100px 100px 100px;
-  grid-template-columns: repeat(4, auto);
-
-  // grid-template-columns: auto max-content max-content max-content;
-  gap: 40px;
-}
-
-// .content {
-//   align-items: center;
-//   display: flex;
-//   gap: 40px;
-// }
-
-.columns {
-  padding: 8px 14px;
-  align-items: center;
-  display: flex;
-  gap: 40px;
-}
-
-.CardListItemSelected {
-  box-shadow: 0 0 1px 2px rgb(51 214 159 / 20%);
-  border: 1px solid var(--accent);
-}
-
-.icons {
-  // justify-self: end;
-  margin: 0 0 0 auto;
-}
-
-.icon {
-  transition: all 0.25s;
-  width: var(--view-page-icon-button-size);
-  height: var(--view-page-icon-button-size);
-  flex-shrink: 0;
-}
-
-.removeIcon {
-  border-radius: var(--border-radius-main);
-  background-color: var(--cancel-rgb-2);
-  border: 1px solid transparent;
-
-  &:hover {
-    opacity: 0.7;
-  }
-
-  // background-color: ccc(--cancel-rgb);
-
-  // background-color: rgb(var(--cancel-rgb) / 30%);
-}
-
-.trashIcon {
-  fill: none;
-}
-
-.mainContentWrapper {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  height: calc(var(--view-rows) * var(--font-line-m));
-  overflow: hidden;
-}
-
-.mainContent {
-  width: 100%;
-  display: -webkit-box;
-  -webkit-line-clamp: var(--view-rows);
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-
-  // border: 1px solid red;
-}
-
-.createdAt {
-  min-width: 80px;
-  max-width: 80px;
-  padding-left: 5px;
-
-  // border: 1px solid red;
-}
-
-.shelf {
-  // color: blue;
-  width: 120px;
-
-  //  display: -webkit-box;
-  // -webkit-line-clamp: var(--view-rows);
-  // -webkit-box-orient: vertical;
-  overflow: hidden;
-
-  // border: 1px solid blue;
-}
-
-.lastTraining {
-  // color: orange;
-  min-width: 90px;
-  max-width: 90px;
-  padding-left: 8px;
-
-  // border: 1px solid orange;
-}
-
-// .mainContent {
-//   width: 20%;
-//   display: -webkit-box;
-//   -webkit-line-clamp: 2;
-//   -webkit-box-orient: vertical;
-//   overflow: hidden;
-// }
 // /* stylelint-disable value-no-vendor-prefix */
 // .item {
 //   display: flex;
@@ -176,29 +14,55 @@
 // .checkBox {
 //   position: absolute;
 //   left: -30px;
-//   top: calc(50% - var(--checkbox-size)/2);
+//   top: calc(50% - var(--checkbox-size) / 2);
+// }
 
-//   // z-index: 5;
+// .cardEditedLabel {
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   z-index: 9999;
+//   padding: 6px 12px;
+
+//   // left: 0px;
+//   // top: 0px;
+
+//   // width: 16px;
+//   // height: 16px;
+
+//   background-color: var(--accent);
 // }
 
 // .CardListItem {
-//   border-radius: 4px;
-//   background-color: var(--bg);
-//   box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
-
-//   // box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
-//   padding: 8px 14px;
 //   align-items: center;
 //   display: flex;
+//   min-width: 100%;
+//   padding: var(--card-list-item-padding-top-and-bottom) var(--card-list-item-padding-left-and-right);
+
+//   // box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+//   background-color: var(--bg);
+//   box-shadow: var(--entities-box-shadow-main);
+//   border-radius: var(--border-radius-main);
+// }
+
+// .content {
+//   // width: 100%;
+//   align-items: center;
+//   display: grid;
+
+//   // grid-template-columns: 300px 300px 100px 100px 100px;
+//   grid-template-columns: repeat(4, auto);
+
+//   // grid-template-columns: auto max-content max-content max-content;
 //   gap: 40px;
-
-//   // max-width: fit-content;
-//   // min-width: calc(100% - 32px);
-//   // border: 0px solid transparent;
 // }
-// .content{
 
-// }
+// // .content {
+// //   align-items: center;
+// //   display: flex;
+// //   gap: 40px;
+// // }
+
 // .columns {
 //   padding: 8px 14px;
 //   align-items: center;
@@ -216,14 +80,38 @@
 //   margin: 0 0 0 auto;
 // }
 
+// .icon {
+//   transition: all 0.25s;
+//   width: var(--view-page-icon-button-size);
+//   height: var(--view-page-icon-button-size);
+//   flex-shrink: 0;
+// }
+
+// .removeIcon {
+//   border-radius: var(--border-radius-main);
+//   background-color: var(--cancel-rgb-2);
+//   border: 1px solid transparent;
+
+//   &:hover {
+//     opacity: 0.7;
+//   }
+
+//   // background-color: ccc(--cancel-rgb);
+
+//   // background-color: rgb(var(--cancel-rgb) / 30%);
+// }
+
 // .trashIcon {
 //   fill: none;
 // }
 
 // .mainContentWrapper {
 //   width: 100%;
-//   display: flex;
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
 //   gap: 40px;
+//   height: calc(var(--view-rows) * var(--font-line-m));
+//   overflow: hidden;
 // }
 
 // .mainContent {
@@ -272,3 +160,115 @@
 // //   -webkit-box-orient: vertical;
 // //   overflow: hidden;
 // // }
+// // /* stylelint-disable value-no-vendor-prefix */
+// // .item {
+// //   display: flex;
+// //   gap: 20px;
+// //   cursor: pointer;
+// //   position: relative;
+// //   margin-bottom: 8px;
+
+// //   // z-index: 1;
+
+// //   // border: 1px solid red;
+// // }
+
+// // .checkBox {
+// //   position: absolute;
+// //   left: -30px;
+// //   top: calc(50% - var(--checkbox-size)/2);
+
+// //   // z-index: 5;
+// // }
+
+// // .CardListItem {
+// //   border-radius: 4px;
+// //   background-color: var(--bg);
+// //   box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+
+// //   // box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+// //   padding: 8px 14px;
+// //   align-items: center;
+// //   display: flex;
+// //   gap: 40px;
+
+// //   // max-width: fit-content;
+// //   // min-width: calc(100% - 32px);
+// //   // border: 0px solid transparent;
+// // }
+// // .content{
+
+// // }
+// // .columns {
+// //   padding: 8px 14px;
+// //   align-items: center;
+// //   display: flex;
+// //   gap: 40px;
+// // }
+
+// // .CardListItemSelected {
+// //   box-shadow: 0 0 1px 2px rgb(51 214 159 / 20%);
+// //   border: 1px solid var(--accent);
+// // }
+
+// // .icons {
+// //   // justify-self: end;
+// //   margin: 0 0 0 auto;
+// // }
+
+// // .trashIcon {
+// //   fill: none;
+// // }
+
+// // .mainContentWrapper {
+// //   width: 100%;
+// //   display: flex;
+// //   gap: 40px;
+// // }
+
+// // .mainContent {
+// //   width: 100%;
+// //   display: -webkit-box;
+// //   -webkit-line-clamp: var(--view-rows);
+// //   -webkit-box-orient: vertical;
+// //   overflow: hidden;
+
+// //   // border: 1px solid red;
+// // }
+
+// // .createdAt {
+// //   min-width: 80px;
+// //   max-width: 80px;
+// //   padding-left: 5px;
+
+// //   // border: 1px solid red;
+// // }
+
+// // .shelf {
+// //   // color: blue;
+// //   width: 120px;
+
+// //   //  display: -webkit-box;
+// //   // -webkit-line-clamp: var(--view-rows);
+// //   // -webkit-box-orient: vertical;
+// //   overflow: hidden;
+
+// //   // border: 1px solid blue;
+// // }
+
+// // .lastTraining {
+// //   // color: orange;
+// //   min-width: 90px;
+// //   max-width: 90px;
+// //   padding-left: 8px;
+
+// //   // border: 1px solid orange;
+// // }
+
+// // // .mainContent {
+// // //   width: 20%;
+// // //   display: -webkit-box;
+// // //   -webkit-line-clamp: 2;
+// // //   -webkit-box-orient: vertical;
+// // //   overflow: hidden;
+// // // }

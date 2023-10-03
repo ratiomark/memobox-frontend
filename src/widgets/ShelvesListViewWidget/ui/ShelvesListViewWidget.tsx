@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import {
 	getViewPageIsLoading,
 	getViewPageIsMounted,
+	getViewPageMoveCardsModalIsOpen,
+	getViewPageMultiSelectIsActive,
 	getViewPageShelfId,
 	viewPageActions,
 } from '@/features/ViewPageInitializer';
@@ -17,6 +19,7 @@ import cls from './ShelvesListViewWidget.module.scss';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { ShelvesListViewWidgetSkeleton, Skeleton } from '@/shared/ui/Skeleton';
 import { HStack } from '@/shared/ui/Stack';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 
 interface ShelvesListViewWidgetProps {
@@ -34,10 +37,17 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 	const dispatch = useAppDispatch()
 	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
 
+	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
+	const isMoveCardsModalOpen = useSelector(getViewPageMoveCardsModalIsOpen)
+	const onCancelMultiSelect = useCallback(() => {
+		dispatch(viewPageActions.cancelMultiSelect())
+	}, [dispatch])
+	useHotkeys('esc', onCancelMultiSelect, { enabled: isMultiSelectActive && !isMoveCardsModalOpen })
 
 	const onChangeShelf = useCallback((shelfId: string) => {
+		onCancelMultiSelect()
 		dispatch(viewPageActions.setActiveShelfId(shelfId))
-	}, [dispatch])
+	}, [dispatch, onCancelMultiSelect])
 
 	const items = useMemo(() => {
 		if (isShelvesLoading) return

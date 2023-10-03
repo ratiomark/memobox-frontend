@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { toastsActions } from '@/shared/ui/Toast'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
-import { t } from 'i18next'
 import { idPrefixCardDeletion } from '@/shared/const/idsAndDataAttributes'
 import { getViewPageAbortedThunkIds } from '../selectors/getViewPageInitializer'
-import { viewPageActions } from '../..'
+import { viewPageActions } from '../slice/viewPageSlice'
+import { t } from 'i18next'
 
 export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema, rejectedMeta: { aborted: boolean } }>(
 	'viewPage/deleteCardThunk',
@@ -27,21 +27,15 @@ export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: s
 					messageError: t('toast:messageError'),
 					messageSuccess: t('toast:delete_card.messageSuccess'),
 					contentCommon: t('toast:delete_card.additional'),
-					// contentLoading: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
-					// contentSuccess: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
-					// contentError: `${t('toast:delete_shelf.additional')} ${shelfTitle}`,
 				}
 			}))
-			// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { deletingRequestStatus: 'pending' } }))
-			// dispatch(cupboardShelfListActions.setShelfDeletionRequestStatus('pending'))
-			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать shelfId
+			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать cardId
 			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
 			// await sleep()
 			const response = Math.random() > 0.5
 			// const response = Math.random() > 50
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
-
 				throw new Error('Request failed')
 			}
 

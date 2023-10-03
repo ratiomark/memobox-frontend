@@ -85,9 +85,9 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 	useHotkeys('r', onRemoveCards, { enabled: isMultiSelectActive })
 	useHotkeys('m', onMoveCardsClick, { enabled: isMultiSelectActive })
 
-	useEffect(() => {
-		onCancelMultiSelect()
-	}, [cards, onCancelMultiSelect])
+	// useEffect(() => {
+	// 	onCancelMultiSelect()
+	// }, [cards, onCancelMultiSelect])
 
 	const content = useMemo(() => {
 		if (!viewPageIsMounted || viewPageIsLoading) return

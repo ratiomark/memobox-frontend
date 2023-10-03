@@ -1393,7 +1393,7 @@
       },
       "jsonSavedData": {
         "commonShelfCollapsed": true,
-        "viewPageCardRowsCount": "3",
+        "viewPageCardRowsCount": "2",
         "viewPageColumns": [
           {
             "value": "shelf",
@@ -1402,14 +1402,14 @@
             "index": 0
           },
           {
-            "value": "lastTraining",
-            "content": "last training",
+            "value": "createdAt",
+            "content": "creation",
             "enabled": true,
             "index": 1
           },
           {
-            "value": "createdAt",
-            "content": "creation",
+            "value": "lastTraining",
+            "content": "last training",
             "enabled": true,
             "index": 2
           }
