@@ -7,3 +7,4 @@ export const COMMON_SHELF_IS_COLLAPSED_KEY = 'isCommonShelfCollapsed';
 export const COMMON_SHELF_KEY = 'commonShelf';
 export const SHELVES_KEY = 'shelves';
 export const THEME_KEY = 'theme';
+export const VIEW_ROWS_KEY = 'viewRows';

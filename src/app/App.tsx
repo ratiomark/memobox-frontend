@@ -8,17 +8,14 @@ import { Header, HeaderSkeleton } from '@/widgets/Header'
 import './styles/regularStyles.css'
 import { useTheme } from '@/shared/context/useTheme'
 import { ToastViewport } from '@radix-ui/react-toast'
+import { useInitialCssValuesFromLocalService } from '@/shared/lib/helpers/hooks/useInitialCssValuesFromLocalService'
 
 
 export const App = () => {
 	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
 	const { theme } = useTheme()
-
-	// useEffect(() => {
-	// 	document.body.className = theme
-	// }, [theme])
-
+	useInitialCssValuesFromLocalService()
 
 	useEffect(() => {
 		dispatch(initAuthData())

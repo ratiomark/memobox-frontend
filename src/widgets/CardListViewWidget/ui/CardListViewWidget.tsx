@@ -26,29 +26,10 @@ export const CardListViewWidget = () => {
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	const dispatch = useAppDispatch()
 	const cards = useSelector(getViewPageCardsSorted)
-	// const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
-	// const isMoveCardsModalOpen = useSelector(getViewPageMoveCardsModalIsOpen)
-	// const [updateCardsMutation] = useUpdateCardsMutation()
 
 	const onSelectCard = useCallback((cardId: string) => {
 		dispatch(viewPageActions.addOrRemoveCardFromSelectedCardIds(cardId))
 	}, [dispatch])
-	// const onSelectCard = useCallback((cardId: string) => {
-	// 	dispatch(viewPageActions.addOrRemoveCardFromSelectedCardId(cardId))
-	// 	// if (!isMultiSelectActive) dispatch(viewPageActions.setMultiSelect(true))
-	// 	// else if (selectedCardIds.length === 0) {
-	// 	// 	dispatch(viewPageActions.setMultiSelect(false))
-	// 	// }
-	// 	if (selectedCardIds.includes(cardId)) {
-	// 		const idsFiltered = selectedCardIds.filter(id => id !== cardId)
-	// 		setSelectedCardIds(idsFiltered)
-	// 		return
-	// 	}
-	// 	setSelectedCardIds(prev => [...prev, cardId])
-	// 	// if (selectedCardIds.length === 0) {
-	// 	// 	dispatch(viewPageActions.setMultiSelect(false))
-	// 	// }
-	// }, [selectedCardIds, dispatch, isMultiSelectActive])
 
 	const onOpenEditCardModal = useCallback((card: CardSchemaExtended) => {
 		dispatch(viewPageActions.setCardDataOriginal(card))
@@ -57,37 +38,8 @@ export const CardListViewWidget = () => {
 		dispatch(viewPageActions.setCardDataEdited(card))
 	}, [dispatch])
 
-	// const onCancelMultiSelect = useCallback(() => {
-	// 	dispatch(viewPageActions.cancelMultiSelect())
-	// }, [dispatch])
-
-	// const onSelectAllCards = () => {
-	// 	dispatch(viewPageActions.selectAllCards([...cards.map(card => card.id)]))
-	// }
-
-	// const onRemoveCards = useCallback(() => {
-	// 	const id = genRandomId()
-	// 	dispatch(viewPageActions.setSelectedCardIsDeleted())
-	// 	dispatch(viewPageActions.addMultiSelectDeleteIds(id))
-	// 	dispatch(viewPageActions.cancelMultiSelect())
-	// }, [dispatch])
-
-
-	// const onMoveCardsClick = useCallback(() => {
-	// 	dispatch(viewPageActions.setMoveCardsModalIsOpen(true))
-	// }, [dispatch])
-
-	// useHotkeys('esc', onCancelMultiSelect, { enabled: isMultiSelectActive && !isMoveCardsModalOpen })
-	// useHotkeys('a', onSelectAllCards, { enabled: isMultiSelectActive })
-	// useHotkeys('r', onRemoveCards, { enabled: isMultiSelectActive })
-	// useHotkeys('m', onMoveCardsClick, { enabled: isMultiSelectActive })
-
-	// useEffect(() => {
-	// 	onCancelMultiSelect()
-	// }, [cards, onCancelMultiSelect])
-
 	const content = useMemo(() => {
-		if (!viewPageIsMounted || viewPageIsLoading) return
+		if (!viewPageIsMounted || viewPageIsLoading) return []
 		return cards?.map(item => (
 			<CardListItem
 				onSelectCard={onSelectCard}
@@ -117,17 +69,11 @@ export const CardListViewWidget = () => {
 				{contentRendered}
 				{
 					!(!viewPageIsMounted || viewPageIsLoading)
-					&& !content?.length
+					&& !content.length
 					&& <p>Кажется, тут нет карточек</p>
 				}
 
 			</div>
-			{/* <MultiSelectScreen
-				onCancelMultiSelect={onCancelMultiSelect}
-				onSelectAllCards={onSelectAllCards}
-				onMoveCardsClick={onMoveCardsClick}
-				onRemoveCards={onRemoveCards}
-			/> */}
 			<MultiSelectWrapper />
 			<CardEditModal />
 			<MoveCardsModal />

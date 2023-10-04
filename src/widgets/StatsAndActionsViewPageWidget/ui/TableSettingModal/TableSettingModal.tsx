@@ -23,6 +23,7 @@ import { Card } from '@/shared/ui/Card';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { updateJsonSavedData } from '@/entities/User';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 interface TableSettingModalProps {
 	className?: string
@@ -46,7 +47,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 
 	useEffect(() => {
 		const root = document.querySelector('#root') as HTMLElement
-		root.style.setProperty('--view-rows', rowsCount?.toString() ?? '2')
+		root.style.setProperty('--view-rows', rowsCount?.toString())
 	}, [rowsCount])
 
 	const isOpen = useSelector(getViewPageColumnSettingsIsOpen) ?? false
@@ -55,6 +56,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 	}
 
 	const onRowValueClick = (tab: TabItem) => {
+		localDataService.setViewRows(tab.value)
 		dispatch(userActions.setViewPageCardRowsCount(tab.value))
 		dispatch(updateJsonSavedData())
 	}

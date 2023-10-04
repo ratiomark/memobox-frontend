@@ -11,10 +11,6 @@ interface UseThemeResult {
 export const useTheme = (): UseThemeResult => {
 	const { theme = Theme.LIGHT, setTheme } = useContext(ThemeContext);
 
-	// useLayoutEffect(() => {
-	// 	document.body.className = theme
-	// }, [theme])
-
 	useEffect(() => {
 		localDataService.setTheme(theme)
 	}, [theme])

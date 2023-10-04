@@ -1,6 +1,6 @@
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { ShelfSchema } from '@/entities/Shelf';
-import { COMMON_SHELF_IS_COLLAPSED_KEY, SHELVES_KEY, THEME_KEY } from '@/shared/const/localStorage';
+import { COMMON_SHELF_IS_COLLAPSED_KEY, SHELVES_KEY, THEME_KEY, VIEW_ROWS_KEY } from '@/shared/const/localStorage';
 import { Theme } from '@/shared/types/Theme';
 
 interface IStorageService {
@@ -53,6 +53,8 @@ interface ILocalDataService {
 	getCommonShelfCollapsed(): boolean | undefined
 	setTheme(theme: Theme): void
 	getTheme(): Theme
+	setViewRows(viewRowsValue: string | number): void
+	getViewRows(): string
 }
 
 class LocalDataService implements ILocalDataService {
@@ -85,6 +87,12 @@ class LocalDataService implements ILocalDataService {
 	}
 	getTheme(): Theme {
 		return this.getData(THEME_KEY)
+	}
+	setViewRows(viewRows: string | number): void {
+		this.saveData(VIEW_ROWS_KEY, viewRows)
+	}
+	getViewRows(): string {
+		return this.getData(VIEW_ROWS_KEY)
 	}
 	setCommonShelfCollapsed(commonShelfCollapsed: boolean | undefined): void {
 		if (commonShelfCollapsed === undefined) return
