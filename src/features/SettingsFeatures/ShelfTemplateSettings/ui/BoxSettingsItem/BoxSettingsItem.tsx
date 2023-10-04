@@ -19,7 +19,7 @@ import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
 import { DURATION_MILLISEC, DURATION_SEC, } from '@/shared/const/animation';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { HStack } from '@/shared/ui/Stack';
-import { timingDataDefault } from '@/shared/const/timingBlock';
+import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock';
 import { getTiming } from '@/shared/lib/helpers/common/formaters';
 
 interface BoxSettingsItemProps {
@@ -80,7 +80,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 		dispatch(settingsShelfTemplateActions.setTimingSetterBoxCoordinates(coordinates))
 		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(true))
 		// dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId((Math.random() * Math.random()).toString()))
-		dispatch(settingsShelfTemplateActions.setTimingSetterBoxTimingData(timingDataDefault))
+		dispatch(settingsShelfTemplateActions.setTimingSetterBoxTimingData(BOX_TIMING_DATA_DEFAULT))
 	}
 
 	const onOpenTimeSetterHandle = (e: MouseEvent) => {

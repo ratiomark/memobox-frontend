@@ -4,7 +4,7 @@ import { CSSProperties, WheelEvent, useEffect, useState } from 'react';
 import { MyText } from '../Typography';
 import { SingleSetter } from './SingleSetter';
 import { TimingBlock } from '@/shared/types/DataBlock';
-import { timingDataDefault } from '@/shared/const/timingBlock';
+import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock';
 import { ModalButtons } from '../ModalButtons';
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
@@ -27,7 +27,7 @@ interface TimeSetterProps {
 export const TimeSetter = (props: TimeSetterProps) => {
 	const {
 		className,
-		timingData = timingDataDefault,
+		timingData = BOX_TIMING_DATA_DEFAULT,
 		title,
 		onClose,
 		onSaveTime,

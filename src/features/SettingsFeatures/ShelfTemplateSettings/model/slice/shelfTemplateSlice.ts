@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, } from '@reduxjs/toolkit'
 import { SettingsShelfTemplate } from '../types/SettingsShelfTemplate'
 import { ExtendedTimingBlock, TimingBlock } from '@/shared/types/DataBlock'
-import { timingDataDefault } from '@/shared/const/timingBlock'
+import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock'
 import { BoxCoordinates } from '@/entities/Box'
 import { SettingsShelfTemplateMod } from '@/shared/types/SettingsShelfTemplateMod'
 
@@ -17,7 +17,7 @@ const initialState: SettingsShelfTemplate = {
 	},
 	boxTimeSetterModal: {
 		isOpen: false,
-		boxTimingData: timingDataDefault,
+		boxTimingData: BOX_TIMING_DATA_DEFAULT,
 		boxId: '',
 		boxCoordinates: {
 			x: 0,

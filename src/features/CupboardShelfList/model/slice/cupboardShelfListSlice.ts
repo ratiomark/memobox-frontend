@@ -2,7 +2,7 @@ import { StateSchema } from '@/app/providers/StoreProvider'
 import { BoxCoordinates } from '@/entities/Box'
 import { CupboardSchema } from '@/entities/Cupboard'
 import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf'
-import { timingDataDefault } from '@/shared/const/timingBlock'
+import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock'
 import { TimingBlock } from '@/shared/types/DataBlock'
 import { RequestStatusType } from '@/shared/types/GeneralTypes'
 import { EntityId, PayloadAction, SerializedError, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
@@ -45,7 +45,7 @@ const initialState: CupboardPageSchema = {
 	},
 	boxTimeSetterModal: {
 		isOpen: false,
-		boxTimingData: timingDataDefault,
+		boxTimingData: BOX_TIMING_DATA_DEFAULT,
 		boxId: '',
 		shelfId: '',
 		boxCoordinates: {

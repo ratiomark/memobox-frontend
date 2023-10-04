@@ -10,7 +10,7 @@ import { BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCard
 import { DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS } from '@/shared/const/animation';
 import { getBoxesTemplateModalMode, getBoxesTemplateModalCurrentShelfTemplate } from '../../../model/selectors/getShelfBoxesTemplateModal';
 import { shelfBoxesTemplateSettingsActions } from '../../../model/slice/shelfBoxesTemplateSlice';
-import { timingDataDefault } from '@/shared/const/timingBlock';
+import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock';
 
 const createBox = (index: number): ExtendedTimingBlock => {
 	return {
@@ -84,7 +84,7 @@ export const BoxesSettingsList = () => {
 			dispatch(shelfBoxesTemplateSettingsActions.setMode('waitingForSaving'))
 		}, DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS)
 		// вот тут нужно изменить isOpen у только что добавленнной коробки, через таймаут
-		 setTimeout(() => {
+		setTimeout(() => {
 			dispatch(shelfBoxesTemplateSettingsActions.setCurrentTemplate(updatedBoxesList))
 		}, 500)
 	}, [currentShelfTemplate, dispatch])
@@ -177,7 +177,7 @@ export const BoxesSettingsList = () => {
 		// console.log('Add ICON ', coordinates)
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxCoordinates(coordinates))
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalIsOpen(true))
-		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxTimingData(timingDataDefault))
+		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterBoxTimingData(BOX_TIMING_DATA_DEFAULT))
 	}
 	const firstIcon = (
 		<AnimatePresence>

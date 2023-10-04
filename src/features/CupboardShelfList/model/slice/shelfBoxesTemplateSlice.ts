@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, } from '@reduxjs/toolkit'
 import { ExtendedTimingBlock, TimingBlock } from '@/shared/types/DataBlock'
-import { timingDataDefault } from '@/shared/const/timingBlock'
+import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock'
 import { BoxCoordinates, RegularAndLearntCardsBox } from '@/entities/Box'
 import { ShelfBoxesTemplateSchema } from '../types/shelfBoxesTemplateSchema'
 import { SettingsShelfTemplateMod } from '@/shared/types/SettingsShelfTemplateMod'
@@ -19,7 +19,7 @@ const initialState: ShelfBoxesTemplateSchema = {
 	},
 	boxTimeSetterModal: {
 		isOpen: false,
-		boxTimingData: timingDataDefault,
+		boxTimingData: BOX_TIMING_DATA_DEFAULT,
 		boxId: '',
 		boxCoordinates: {
 			x: 0,
