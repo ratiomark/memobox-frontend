@@ -1,6 +1,4 @@
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { Icon } from '@/shared/ui/Icon';
 import { memo, useCallback, useMemo } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
@@ -18,12 +16,12 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { ShelvesListViewWidgetSkeleton } from '@/shared/ui/Skeleton';
 
 export const ShelvesListViewWidget = memo(() => {
+	const { t } = useTranslation()
 	const isLoading = useSelector(getViewPageIsLoading)
 	const shelfItemsFromSelector = useSelector(getViewPageShelfItems)
-	const { t } = useTranslation()
 
 	const dispatch = useAppDispatch()
-	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
+	const shelfId = useSelector(getViewPageShelfId)
 
 	const onCancelMultiSelect = useCallback(() => {
 		dispatch(viewPageActions.cancelMultiSelect())
