@@ -5,8 +5,8 @@
   ],
   "rules": {
     "indentation": 2,
-    "max-line-length": null,
     "selector-class-pattern": null,
+    "max-line-length": null,
     "block-no-empty": null,
     "value-keyword-case": [
       "lower",
