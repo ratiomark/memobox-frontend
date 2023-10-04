@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import cls from './Shelf.module.scss';
-import { useTranslation } from 'react-i18next';
 import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { ShelfSchema } from '../../model/types/ShelfSchema';
@@ -10,18 +9,13 @@ import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { Collapsible } from '@/shared/ui/Animations';
 import { useDragControls, Reorder } from 'framer-motion';
 import { ReactNode, memo, useRef, useState } from 'react';
-import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
-// const dndIsActiveValue = false
-// const isCollapsingValue = false
-// let timerId: number;
 export interface ShelfProps {
 	shelf: ShelfSchema
 	completeSmallDataLabelsBlock: ReactNode
 	shelfButtonsBlock: ReactNode
 	boxesBlock?: ReactNode
 	className?: string
-	// moveShelf?: (atIndex: number, shelfIndex: number) => void
 	isFirstRender: boolean
 }
 
@@ -40,13 +34,9 @@ export const Shelf = memo((props: ShelfProps) => {
 
 	const [isDragging, setIsDragging] = useState(false)
 	const controls = useDragControls()
-	const timerId = useRef<TimeoutId>()
 
 	const handleDragEnd = () => {
 		setIsDragging(false);
-		// timerId.current = setTimeout(() => {
-		// 	clearTimeout(timerId.current)
-		// }, 30000)
 		document.body.classList.remove('dragging');
 	}
 
@@ -54,7 +44,6 @@ export const Shelf = memo((props: ShelfProps) => {
 		setIsDragging(true);
 		document.body.classList.add('dragging');
 	}
-
 
 	return (
 		<Reorder.Item
@@ -110,6 +99,5 @@ export const Shelf = memo((props: ShelfProps) => {
 				</Collapsible>
 			</div>
 		</Reorder.Item>
-
 	)
 })

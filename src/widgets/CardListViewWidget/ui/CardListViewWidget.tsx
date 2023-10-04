@@ -6,8 +6,8 @@ import {
 	viewPageActions
 } from '@/features/ViewPageInitializer'
 import { useSelector } from 'react-redux';
-import { CardSchemaExtended, useUpdateCardsMutation } from '@/entities/Card';
-import { Suspense, useCallback, useEffect, useMemo, } from 'react';
+import { CardSchemaExtended, } from '@/entities/Card';
+import { useCallback, useMemo, } from 'react';
 import { getViewPageIsLoading } from '@/features/ViewPageInitializer';
 import { CardListItem } from './CardListItem/CardListItem';
 import { getViewPageCardsSorted } from '@/features/ViewPageInitializer'
@@ -20,14 +20,7 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CardModalSkeleton, CardsListSkeleton } from '@/shared/ui/Skeleton';
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 
-interface CardListViewWidgetProps {
-	className?: string
-}
-
-export const CardListViewWidget = (props: CardListViewWidgetProps) => {
-	const {
-		className
-	} = props
+export const CardListViewWidget = () => {
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	const dispatch = useAppDispatch()
@@ -96,7 +89,6 @@ export const CardListViewWidget = (props: CardListViewWidgetProps) => {
 		if (!viewPageIsMounted || viewPageIsLoading) return
 		return cards?.map(item => (
 			<CardListItem
-				// selectedCardIds={selectedCardIds}
 				onSelectCard={onSelectCard}
 				onOpenEditCardModal={onOpenEditCardModal}
 				card={item}

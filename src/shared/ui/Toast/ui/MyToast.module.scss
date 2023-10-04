@@ -4,14 +4,7 @@
   border-radius: var(--border-radius-main);
   min-width: 350px;
   box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
-
-  // --color-scale-gray-5: #484f58;
-  // --color-scale-gray-6: #30363d;
-  // --color-scale-gray-7: #21262d;
-
   background-color: var(--toast-bg-rgb-9);
-
-  // padding: 10px;
 }
 
 .MyToastWithButton {
@@ -23,7 +16,6 @@
 .progressBar {
   width: calc(100% + 35px);
   height: 6px;
-  // translate: -15px 7px;
   background: var(--cancel);
 }
 

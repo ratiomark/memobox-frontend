@@ -1,11 +1,6 @@
-import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsList.module.scss';
-import { BoxSchema } from '@/entities/Box';
 import { MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion'
-import { Icon } from '@/shared/ui/Icon';
-import PlusIcon from '@/shared/assets/icons/plusIcon2.svg'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
@@ -16,7 +11,6 @@ import { DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS } from '@/shared/con
 import { getBoxesTemplateModalMode, getBoxesTemplateModalCurrentShelfTemplate } from '../../../model/selectors/getShelfBoxesTemplateModal';
 import { shelfBoxesTemplateSettingsActions } from '../../../model/slice/shelfBoxesTemplateSlice';
 import { timingDataDefault } from '@/shared/const/timingBlock';
-import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
 const createBox = (index: number): ExtendedTimingBlock => {
 	return {
@@ -52,61 +46,46 @@ export const BoxesSettingsList = () => {
 	const mode = useSelector(getBoxesTemplateModalMode)
 	const currentShelfTemplate = useSelector(getBoxesTemplateModalCurrentShelfTemplate)
 	const containerRef = useRef<HTMLDivElement>(null)
-	const timer = useRef<TimeoutId>()
-	const timer2 = useRef<TimeoutId>()
 
 	const onRemoveBox = useCallback((boxIndex: number) => {
 		dispatch(shelfBoxesTemplateSettingsActions.removeBoxFromCurrentShelfTemplateByIndex(boxIndex))
 	}, [dispatch])
 
 	const onAddBoxClick = useCallback((index: number) => {
-		console.log(' INDEX   INDEX   ', index)
+		// console.log(' INDEX   INDEX   ', index)
 		if (!currentShelfTemplate?.length) return
 		const newBox = createBox(index)
-		// console.log(newBox)
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxId(newBox.id))
 		const updatedBoxesList: ExtendedTimingBlock[] = [];
 		const boxListRelevant = currentShelfTemplate.slice(0, currentShelfTemplate.length)
 
-		// console.log(' INDEX   INDEX   ', index)
 		if (index === 0) {
-			// updatedBoxesList.push({ ...newBox, index })
 			updatedBoxesList.push(newBox)
 			console.log(updatedBoxesList)
 			boxListRelevant.forEach(boxItem => {
 				updatedBoxesList.push({ ...boxItem, index: boxItem.index! + 1 })
 			})
-			// console.log(updatedBoxesList)
-			// console.log('КОНЕЦЦЦЦЦЦЦ')
+
 		} else if (index === boxListRelevant.length) {
-			// console.log('LAST LAST LAST LAST LAST LAST LAST LAST')
 			boxListRelevant.forEach(boxItem => updatedBoxesList.push(boxItem))
 			updatedBoxesList.push(newBox)
 		} else {
 			boxListRelevant.slice(0, index).forEach(boxItem => {
 				updatedBoxesList.push(boxItem)
 			})
-			// console.log(updatedBoxesList)
 			updatedBoxesList.push(newBox)
-			// console.log(updatedBoxesList)
 			currentShelfTemplate.slice(index,).forEach(boxItem => {
 				updatedBoxesList.push({ ...boxItem, index: boxItem.index! + 1 })
 			})
 		}
-		// setTimeout(() => {
-		// 	dispatch(shelfBoxesTemplateSettingsActions.setCurrentTemplate(updatedBoxesList))
-		// }, 700)
-		// dispatch(shelfBoxesTemplateSettingsActions.setChanged(true))
 		dispatch(shelfBoxesTemplateSettingsActions.setMode('settingTimeToNewBox'))
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalBoxData(newBox))
-		timer.current = setTimeout(() => {
+		setTimeout(() => {
 			dispatch(shelfBoxesTemplateSettingsActions.setMode('waitingForSaving'))
-			clearTimeout(timer.current)
 		}, DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS)
 		// вот тут нужно изменить isOpen у только что добавленнной коробки, через таймаут
-		timer2.current = setTimeout(() => {
+		 setTimeout(() => {
 			dispatch(shelfBoxesTemplateSettingsActions.setCurrentTemplate(updatedBoxesList))
-			clearTimeout(timer2.current)
 		}, 500)
 	}, [currentShelfTemplate, dispatch])
 

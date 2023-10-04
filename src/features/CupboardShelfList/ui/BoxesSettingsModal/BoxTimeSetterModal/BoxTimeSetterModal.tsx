@@ -1,5 +1,4 @@
 /* eslint-disable prefer-const */
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './BoxTimeSetterModal.module.scss';
 import { useSelector } from 'react-redux';
@@ -21,7 +20,6 @@ import {
 	getBoxTimingData,
 	getTimingSetterModalBoxData,
 } from '../../../model/selectors/getShelfBoxesTemplateModalTimeSetterModal';
-import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
 
 export const BoxTimeSetterShelfBoxesTemplateModal = () => {
@@ -35,8 +33,6 @@ export const BoxTimeSetterShelfBoxesTemplateModal = () => {
 	const wrapperRef = useRef<HTMLDivElement>(null)
 	const [timeSetterSizeData, setTimeSetterSizeData] = useState({ height: 0, width: 0 })
 	const [coordinatesChecked, setCoordinatesChecked] = useState({ x: 0, y: 0 })
-	const timer = useRef<TimeoutId>()
-	const timer2 = useRef<TimeoutId>()
 
 	useEffect(() => {
 		if (coordinates) {
@@ -64,14 +60,12 @@ export const BoxTimeSetterShelfBoxesTemplateModal = () => {
 		dispatch(shelfBoxesTemplateSettingsActions.setTimingSetterModalIsOpen(false))
 		if (!boxData || (boxData && boxData.isSaved)) return
 		// переключить флаг, после того как исчезнет timeSetter
-		timer.current = setTimeout(() => {
+		setTimeout(() => {
 			dispatch(shelfBoxesTemplateSettingsActions.switchAddedBoxToRemovedState())
-			clearTimeout(timer.current)
 		}, (DURATION_SEC - 0.2) * 1000)
 		// полностью удалить коробку, после того как исчезнет timeSetter + отработает анимания удаления коробки
-		timer2.current = setTimeout(() => {
+		setTimeout(() => {
 			dispatch(shelfBoxesTemplateSettingsActions.removeAddedBox())
-			clearTimeout(timer2.current)
 		}, (DURATION_SEC + DURATION_SEC - 0.1) * 1000)
 	}
 
