@@ -13,6 +13,7 @@ interface ShelfData {
 	maxIndexBox: number
 	boxesItems: { index: number, id: string }[]
 	shelfTitle: string
+	shelfIndex: number
 }
 export interface FetchBoxesThunkResponse {
 	[shelfId: string]: ShelfRepresentedByBoxes

@@ -1,3 +1,8 @@
+export {
+	getViewPageShelfItems,
+	
+} from './model/selectors/getViewPageShelfAndBoxItems';
+
 export { deleteCardThunk } from './model/services/deleteCardThunk';
 
 
@@ -7,7 +12,6 @@ export {
 	getViewPageSort,
 	getViewPageSortOrder
 } from './model/selectors/getViewPageSorting';
-
 export {
 	getViewPageMoveCardsModalIsOpen
 } from './model/selectors/getViewPageMoveCardsModal';

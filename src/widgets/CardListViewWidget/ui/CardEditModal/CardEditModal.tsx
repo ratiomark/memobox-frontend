@@ -15,6 +15,7 @@ import { ModalButtons } from '@/shared/ui/ModalButtons';
 import type { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
 import { EditorUniversal } from '@/shared/ui/LexicalEditor';
+import { getViewPageShelfItems } from '@/features/ViewPageInitializer';
 
 export const CardEditModal = memo(() => {
 	const { t } = useTranslation()
@@ -26,7 +27,7 @@ export const CardEditModal = memo(() => {
 	const isOpen = useSelector(getViewPageEditModalIsOpen) ?? false
 	const isCardEdited = useSelector(getViewPageIsCardInModalEdited)
 	const dispatch = useAppDispatch()
-
+	const shelfItems = useSelector(getViewPageShelfItems)
 	// const mainContentRef = useRef<HTMLDivElement>(null)
 	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)
 	const modalButtonsRef = useRef<HTMLDivElement>(null)
@@ -85,15 +86,15 @@ export const CardEditModal = memo(() => {
 		}
 	}, [isOpen])
 
-	const shelfItems = useMemo(() => {
-		if (isShelvesLoading) return []
-		return shelvesData?.map(shelfItem => {
-			return ({
-				value: shelfItem.id,
-				content: shelfItem.title
-			})
-		})
-	}, [shelvesData, isShelvesLoading])
+	// const shelfItems = useMemo(() => {
+	// 	if (isShelvesLoading) return []
+	// 	return shelvesData?.map(shelfItem => {
+	// 		return ({
+	// 			value: shelfItem.id,
+	// 			content: shelfItem.title
+	// 		})
+	// 	})
+	// }, [shelvesData, isShelvesLoading])
 
 	const boxItems = useMemo(() => {
 		if (isShelvesLoading) return []

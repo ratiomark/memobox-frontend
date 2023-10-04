@@ -6,7 +6,9 @@ import { memo, useCallback, useMemo } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import {
+	getViewPageIsLoading,
 	getViewPageShelfId,
+	getViewPageShelfItems,
 	viewPageActions,
 } from '@/features/ViewPageInitializer';
 import { HorizontalScrollerList } from '@/shared/ui/HorizontalScrollerList';
@@ -15,17 +17,9 @@ import cls from './ShelvesListViewWidget.module.scss';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { ShelvesListViewWidgetSkeleton } from '@/shared/ui/Skeleton';
 
-
-interface ShelvesListViewWidgetProps {
-	className?: string
-}
-
-export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) => {
-	const {
-		className
-	} = props
-
-	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
+export const ShelvesListViewWidget = memo(() => {
+	const isLoading = useSelector(getViewPageIsLoading)
+	const shelfItemsFromSelector = useSelector(getViewPageShelfItems)
 	const { t } = useTranslation()
 
 	const dispatch = useAppDispatch()
@@ -41,64 +35,22 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 	}, [dispatch, onCancelMultiSelect])
 
 	const items = useMemo(() => {
-		if (isShelvesLoading) return
+		if (isLoading) return
 		const items = [{ value: 'all', content: t('common shelf name'), onChange: () => onChangeShelf('all') }]
-		shelvesData?.forEach(shelfItem => {
+		shelfItemsFromSelector.forEach(({ value, content }) => {
 			items.push({
-				value: shelfItem.id,
-				content: shelfItem.title,
-				onChange: () => onChangeShelf(shelfItem.id),
+				value,
+				content,
+				onChange: () => onChangeShelf(value),
 			})
 		})
-		// shelvesData?.forEach(shelfItem => {
-		// 	items.push({
-		// 		value: shelfItem.id + 'ds',
-		// 		content: shelfItem.title + ' 2',
-		// 		onChange: () => onChangeShelf(shelfItem.id + 'ds'),
-		// 	})
-		// })
-		// shelvesData?.forEach(shelfItem => {
-		// 	items.push({
-		// 		value: shelfItem.id + 'dss',
-		// 		content: shelfItem.title + ' 3',
-		// 		onChange: () => onChangeShelf(shelfItem.id + 'dss'),
-		// 	})
-		// })
-		// shelvesData?.forEach(shelfItem => {
-		// 	items.push({
-		// 		value: shelfItem.id+'ds',
-		// 		content: shelfItem.title+ ' 2',
-		// 		onChange: () => onChangeShelf(shelfItem.id+'ds'),
-		// 	})
-		// })
-		// shelvesData?.forEach(shelfItem => {
-		// 	items.push({
-		// 		value: shelfItem.id+'dss',
-		// 		content: shelfItem.title+ ' 3',
-		// 		onChange: () => onChangeShelf(shelfItem.id+'dss'),
-		// 	})
-		// })
-		// shelvesData?.forEach(shelfItem => {
-		// 	items.push({
-		// 		value: shelfItem.id+'ds',
-		// 		content: shelfItem.title+ ' 2',
-		// 		onChange: () => onChangeShelf(shelfItem.id+'ds'),
-		// 	})
-		// })
-		// shelvesData?.forEach(shelfItem => {
-		// 	items.push({
-		// 		value: shelfItem.id+'dss',
-		// 		content: shelfItem.title+ ' 3',
-		// 		onChange: () => onChangeShelf(shelfItem.id+'dss'),
-		// 	})
-		// })
 		return items
-	}, [shelvesData, isShelvesLoading, onChangeShelf, t])
+	}, [shelfItemsFromSelector, isLoading, onChangeShelf, t])
 
 
 	const content = (
 		<AnimateSkeletonLoader
-			isLoading={isShelvesLoading}
+			isLoading={isLoading}
 			noDelay={(items && items?.length > 1)}
 			skeletonComponent={<ShelvesListViewWidgetSkeleton />}
 			commonWrapper={false}
@@ -118,14 +70,139 @@ export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) =>
 
 
 	return (
-		<div className={clsx(
-			cls.shelvesListViewWidget,
-			className)}
-		>
+		<div className={cls.shelvesListViewWidget}>
 			{content}
 		</div>
 	)
 })
+// import clsx from 'clsx';
+// import { useTranslation } from 'react-i18next';
+// import { useGetShelvesQuery } from '@/entities/Cupboard';
+// import { Icon } from '@/shared/ui/Icon';
+// import { memo, useCallback, useMemo } from 'react';
+// import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+// import { useSelector } from 'react-redux';
+// import {
+// 	getViewPageShelfId,
+// 	viewPageActions,
+// } from '@/features/ViewPageInitializer';
+// import { HorizontalScrollerList } from '@/shared/ui/HorizontalScrollerList';
+// import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
+// import cls from './ShelvesListViewWidget.module.scss';
+// import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
+// import { ShelvesListViewWidgetSkeleton } from '@/shared/ui/Skeleton';
+
+
+// interface ShelvesListViewWidgetProps {
+// 	className?: string
+// }
+
+// export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) => {
+// 	const {
+// 		className
+// 	} = props
+
+// 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
+// 	const { t } = useTranslation()
+
+// 	const dispatch = useAppDispatch()
+// 	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
+
+// 	const onCancelMultiSelect = useCallback(() => {
+// 		dispatch(viewPageActions.cancelMultiSelect())
+// 	}, [dispatch])
+
+// 	const onChangeShelf = useCallback((shelfId: string) => {
+// 		onCancelMultiSelect()
+// 		dispatch(viewPageActions.setActiveShelfId(shelfId))
+// 	}, [dispatch, onCancelMultiSelect])
+
+// 	const items = useMemo(() => {
+// 		if (isShelvesLoading) return
+// 		const items = [{ value: 'all', content: t('common shelf name'), onChange: () => onChangeShelf('all') }]
+// 		shelvesData?.forEach(shelfItem => {
+// 			items.push({
+// 				value: shelfItem.id,
+// 				content: shelfItem.title,
+// 				onChange: () => onChangeShelf(shelfItem.id),
+// 			})
+// 		})
+// 		// shelvesData?.forEach(shelfItem => {
+// 		// 	items.push({
+// 		// 		value: shelfItem.id + 'ds',
+// 		// 		content: shelfItem.title + ' 2',
+// 		// 		onChange: () => onChangeShelf(shelfItem.id + 'ds'),
+// 		// 	})
+// 		// })
+// 		// shelvesData?.forEach(shelfItem => {
+// 		// 	items.push({
+// 		// 		value: shelfItem.id + 'dss',
+// 		// 		content: shelfItem.title + ' 3',
+// 		// 		onChange: () => onChangeShelf(shelfItem.id + 'dss'),
+// 		// 	})
+// 		// })
+// 		// shelvesData?.forEach(shelfItem => {
+// 		// 	items.push({
+// 		// 		value: shelfItem.id+'ds',
+// 		// 		content: shelfItem.title+ ' 2',
+// 		// 		onChange: () => onChangeShelf(shelfItem.id+'ds'),
+// 		// 	})
+// 		// })
+// 		// shelvesData?.forEach(shelfItem => {
+// 		// 	items.push({
+// 		// 		value: shelfItem.id+'dss',
+// 		// 		content: shelfItem.title+ ' 3',
+// 		// 		onChange: () => onChangeShelf(shelfItem.id+'dss'),
+// 		// 	})
+// 		// })
+// 		// shelvesData?.forEach(shelfItem => {
+// 		// 	items.push({
+// 		// 		value: shelfItem.id+'ds',
+// 		// 		content: shelfItem.title+ ' 2',
+// 		// 		onChange: () => onChangeShelf(shelfItem.id+'ds'),
+// 		// 	})
+// 		// })
+// 		// shelvesData?.forEach(shelfItem => {
+// 		// 	items.push({
+// 		// 		value: shelfItem.id+'dss',
+// 		// 		content: shelfItem.title+ ' 3',
+// 		// 		onChange: () => onChangeShelf(shelfItem.id+'dss'),
+// 		// 	})
+// 		// })
+// 		return items
+// 	}, [shelvesData, isShelvesLoading, onChangeShelf, t])
+
+
+// 	const content = (
+// 		<AnimateSkeletonLoader
+// 			isLoading={isShelvesLoading}
+// 			noDelay={(items && items?.length > 1)}
+// 			skeletonComponent={<ShelvesListViewWidgetSkeleton />}
+// 			commonWrapper={false}
+// 			classNameAbsoluteParts={cls.shelfItems}
+// 			componentAfterLoading={(
+// 				<div
+// 					className={cls.wrapper}
+// 				>
+// 					<Icon
+// 						Svg={MultiSelectIcon}
+// 						className={cls.listIcon}
+// 					/>
+// 					<HorizontalScrollerList value={shelfId} items={items} />
+// 				</div>
+// 			)}
+// 		/>)
+
+
+// 	return (
+// 		<div className={clsx(
+// 			cls.shelvesListViewWidget,
+// 			className)}
+// 		>
+// 			{content}
+// 		</div>
+// 	)
+// })
 
 // export const ShelvesListViewWidget = memo((props: ShelvesListViewWidgetProps) => {
 // 	const {
