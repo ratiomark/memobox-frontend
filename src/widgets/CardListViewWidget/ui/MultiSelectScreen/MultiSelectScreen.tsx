@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './MultiSelectScreen.module.scss';
 import { useSelector } from 'react-redux';
-import { getViewPageMultiSelectIsActive, getViewPageSelectedCardIds } from '@/features/ViewPageInitializer';
+import { getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelfItems } from '@/features/ViewPageInitializer';
 import { Button } from '@/shared/ui/Button';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
@@ -24,14 +24,15 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 		onMoveCardsClick,
 		onRemoveCards
 	} = props
-	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
-	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
-	const [updateCardsMutation] = useUpdateCardsMutation()
+	const shelfItems = useSelector(getViewPageShelfItems)
+	// const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
+	// const selectedCardIds = useSelector(getViewPageSelectedCardIds)
+	// const [updateCardsMutation] = useUpdateCardsMutation()
 	// updateCardsMutation({ cardIds: })
 
 	const onRemoveCardsHandle = () => {
-		updateCardsMutation({ requestAction: 'removeCards', cardIds: selectedCardIds! })
 		onRemoveCards()
+		// updateCardsMutation({ requestAction: 'removeCards', cardIds: selectedCardIds! })
 	}
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 
@@ -51,8 +52,8 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 				</div>
 				<div className={cls.innerWrapper} >
 					<Button onClick={onSelectAllCards}>{t('select all')}</Button>
-					{shelvesData
-						&& shelvesData.length > 1
+					{shelfItems
+						&& shelfItems.length > 1
 						&& <Button onClick={onMoveCardsClick}>{t('move selected cards')}</Button>
 					}
 				</div>

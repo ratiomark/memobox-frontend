@@ -13,13 +13,12 @@ import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { getViewPageBoxIdChecked } from '@/features/ViewPageInitializer';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import cls from './BoxesListViewWidget.module.scss'
-import { getViewPageBoxItemsForWidget } from '@/features/ViewPageInitializer/model/selectors/getViewPageShelfAndBoxItems';
+import { getViewPageBoxItemsForWidget } from '@/features/ViewPageInitializer';
 
 export const BoxesListViewWidget = memo(() => {
-	const { t } = useTranslation()
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	const dispatch = useAppDispatch()
-	const shelfId = useSelector(getViewPageShelfId)
+	// const shelfId = useSelector(getViewPageShelfId)
 	const boxId = useSelector(getViewPageBoxIdChecked)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	

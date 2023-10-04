@@ -1,5 +1,6 @@
 export {
 	getViewPageShelfItems,
+	getViewPageBoxItemsForWidget,
 	
 } from './model/selectors/getViewPageShelfAndBoxItems';
 
