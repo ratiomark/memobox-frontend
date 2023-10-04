@@ -1,6 +1,6 @@
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { ShelfSchema } from '@/entities/Shelf';
-import { COMMON_SHELF_IS_COLLAPSED_KEY, SHELVES_KEY, THEME_KEY, VIEW_ROWS_KEY } from '@/shared/const/localStorage';
+import { KEY_COMMON_SHELF_IS_COLLAPSED, KEY_SHELVES_LOCAL_STORAGE, KEY_THEME_LOCAL_STORAGE, KEY_VIEW_ROWS_LOCAL_STORAGE } from '@/shared/const/localStorage';
 import { Theme } from '@/shared/types/Theme';
 
 interface IStorageService {
@@ -71,10 +71,10 @@ class LocalDataService implements ILocalDataService {
 		this.storage.removeData(key)
 	}
 	setShelves(shelves: ShelfSchema[]): void {
-		this.saveData(SHELVES_KEY, shelves)
+		this.saveData(KEY_SHELVES_LOCAL_STORAGE, shelves)
 	}
 	getShelves(): ShelfSchema[] | [] {
-		const localShelves = this.getData(SHELVES_KEY)
+		const localShelves = this.getData(KEY_SHELVES_LOCAL_STORAGE)
 		if (Array.isArray(localShelves) && localShelves.length > 0) {
 			return localShelves.sort((a, b) => a.index - b.index)
 		}
@@ -83,23 +83,23 @@ class LocalDataService implements ILocalDataService {
 		// return shelvesFromStorage
 	}
 	setTheme(theme: Theme): void {
-		this.saveData(THEME_KEY, theme)
+		this.saveData(KEY_THEME_LOCAL_STORAGE, theme)
 	}
 	getTheme(): Theme {
-		return this.getData(THEME_KEY)
+		return this.getData(KEY_THEME_LOCAL_STORAGE)
 	}
 	setViewRows(viewRows: string | number): void {
-		this.saveData(VIEW_ROWS_KEY, viewRows)
+		this.saveData(KEY_VIEW_ROWS_LOCAL_STORAGE, viewRows)
 	}
 	getViewRows(): string {
-		return this.getData(VIEW_ROWS_KEY)
+		return this.getData(KEY_VIEW_ROWS_LOCAL_STORAGE)
 	}
 	setCommonShelfCollapsed(commonShelfCollapsed: boolean | undefined): void {
 		if (commonShelfCollapsed === undefined) return
-		this.saveData(COMMON_SHELF_IS_COLLAPSED_KEY, commonShelfCollapsed)
+		this.saveData(KEY_COMMON_SHELF_IS_COLLAPSED, commonShelfCollapsed)
 	}
 	getCommonShelfCollapsed() {
-		return this.getData(COMMON_SHELF_IS_COLLAPSED_KEY) ?? true
+		return this.getData(KEY_COMMON_SHELF_IS_COLLAPSED) ?? true
 	}
 }
 

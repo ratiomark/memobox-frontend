@@ -1,5 +1,5 @@
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
-import { USER_ID_LS_KEY } from '@/shared/const/localStorage'
+import { KEY_USER_ID_LOCAL_STORAGE } from '@/shared/const/localStorage'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getUserDataByIdQuery } from '../api/userApi'
 import { User } from '../types/user'
@@ -10,7 +10,7 @@ export const initAuthData = createAsyncThunk<User, void, { rejectValue: string, 
 	async (_, thunkAPI) => {
 		const { dispatch, rejectWithValue } = thunkAPI
 
-		const userId = localStorage.getItem(USER_ID_LS_KEY) ?? 'some_id'
+		const userId = localStorage.getItem(KEY_USER_ID_LOCAL_STORAGE) ?? 'some_id'
 
 		if (!userId) return rejectWithValue('Нет userId в локал сторедж')
 

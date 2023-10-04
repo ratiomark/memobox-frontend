@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { USER_ID_LS_KEY } from '@/shared/const/localStorage'
+import { KEY_USER_ID_LOCAL_STORAGE } from '@/shared/const/localStorage'
 
 export const rtkApi = createApi({
 	// уникальное имя для сервиса, который будет встроенн в стор
@@ -9,7 +9,7 @@ export const rtkApi = createApi({
 		baseUrl: __API__,
 		// функция интерцептор, которая ?(будет добавлять соответствующий хедер в наш конфиг)?
 		prepareHeaders: (headers) => {
-			// const token = localStorage.getItem(USER_ID_LS_KEY) || ''
+			// const token = localStorage.getItem(KEY_USER_ID_LOCAL_STORAGE) || ''
 			// if (token) {
 			// добавляем поле Authorization в хедеры, потому что наш сервер использует этот заголовок как факт наличия авторизации
 			headers.set('Authorization', 'token')

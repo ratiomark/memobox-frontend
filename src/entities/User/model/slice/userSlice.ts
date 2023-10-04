@@ -1,5 +1,5 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
-import { USER_ID_LS_KEY, USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage'
+import { KEY_USER_ID_LOCAL_STORAGE, KEY_USER_LOCAL_STORAGE } from '@/shared/const/localStorage'
 import { User, UserSchema } from '../types/user'
 import { setFeatureFlag } from '@/shared/lib/features'
 import { saveJsonSettings } from '../services/saveJsonSettings'
@@ -34,7 +34,7 @@ const userSlice = createSlice({
 			state.authData = action.payload
 			// обновляю флаги фич
 			setFeatureFlag(action.payload.features)
-			localStorage.setItem(USER_ID_LS_KEY, action.payload.id)
+			localStorage.setItem(KEY_USER_ID_LOCAL_STORAGE, action.payload.id)
 			state._mounted = true
 		},
 		// VAR: тестирую jsonSavedData как отедльное поле
@@ -68,7 +68,7 @@ const userSlice = createSlice({
 		// setColumns
 		logout: (state) => {
 			state.authData = undefined
-			localStorage.removeItem(USER_ID_LS_KEY)
+			localStorage.removeItem(KEY_USER_ID_LOCAL_STORAGE)
 		}
 	},
 	extraReducers: (builder) => {

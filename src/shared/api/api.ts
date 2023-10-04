@@ -1,5 +1,5 @@
 // import axios from 'axios';
-// import { USER_ID_LS_KEY, USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
+// import { KEY_USER_ID_LOCAL_STORAGE, KEY_USER_LOCAL_STORAGE } from '@/shared/const/localStorage';
 
 
 
@@ -7,7 +7,7 @@
 // 	baseURL: __API__,
 // 	// изначально заголовочная часть была тут, но перенес ее в интерцептор
 // 	// headers: {
-// 	// 	authorization: localStorage.getItem(USER_LOCALSTORAGE_KEY) || ''
+// 	// 	authorization: localStorage.getItem(KEY_USER_LOCAL_STORAGE) || ''
 // 	// }
 // })
 
@@ -15,7 +15,7 @@
 
 // $api.interceptors.request.use((config) => {
 // 	if (config.headers) {
-// 		config.headers.Authorization = localStorage.getItem(USER_ID_LS_KEY) || ''
+// 		config.headers.Authorization = localStorage.getItem(KEY_USER_ID_LOCAL_STORAGE) || ''
 // 	}
 // 	return config
 // })
