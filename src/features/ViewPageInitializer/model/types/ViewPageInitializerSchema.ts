@@ -40,8 +40,8 @@ export interface ViewPageInitializerSchema {
 		[key: string]: {
 			question: string
 			answer: string
-			shelf: string
-			box: number
+			shelfId: string
+			boxIndex: number
 		}
 	}
 	selectedCardIds: string[]

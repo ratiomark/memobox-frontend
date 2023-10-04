@@ -45,7 +45,7 @@ export const getViewPageSortChecked = createSelector(
 		getViewPageSort,
 	],
 	(shelfId, sort) => {
-		if (shelfId !== 'all' && sort === 'shelf') return 'createdAt'
+		if (shelfId !== 'all' && sort === 'shelfId') return 'createdAt'
 		return sort
 	}
 )
@@ -61,10 +61,10 @@ export const getViewPageCardsFiltered = createSelector(
 		if (shelfId === 'all' && boxId === 'new') return cards?.filter(card => card.specialType === 'new')
 		if (shelfId === 'all' && boxId === 'learning') return cards?.filter(card => card.specialType === 'none')
 		if (shelfId === 'all' && boxId === 'learnt') return cards?.filter(card => card.specialType === 'learnt')
-		if (boxId === 'all') return cards?.filter(card => card.shelf === shelfId)
-		if (boxId === 'new') return cards?.filter(card => (card.shelf === shelfId && card.specialType === 'new'))
-		if (boxId === 'learnt') return cards?.filter(card => card.shelf === shelfId && card.specialType === 'learnt')
-		return cards?.filter(card => (card.shelf === shelfId && card.box == boxId)) ?? []
+		if (boxId === 'all') return cards?.filter(card => card.shelfId === shelfId)
+		if (boxId === 'new') return cards?.filter(card => (card.shelfId === shelfId && card.specialType === 'new'))
+		if (boxId === 'learnt') return cards?.filter(card => card.shelfId === shelfId && card.specialType === 'learnt')
+		return cards?.filter(card => (card.shelfId === shelfId && card.boxIndex == boxId)) ?? []
 	}
 )
 
@@ -116,6 +116,6 @@ export const getViewPageColumns = createSelector(
 		if (shelfId === 'all') {
 			return columns
 		}
-		return columns?.filter(column => column.value !== 'shelf')
+		return columns?.filter(column => column.value !== 'shelfId')
 	}
 )

@@ -2,7 +2,7 @@ import { SortColumnObject } from '../types/JsonSavedData'
 
 export const jsonSavedDataColumnsMock: SortColumnObject[] = [
 	{
-		value: 'shelf',
+		value: 'shelfId',
 		content: 'shelf',
 		enabled: true,
 		index: 0

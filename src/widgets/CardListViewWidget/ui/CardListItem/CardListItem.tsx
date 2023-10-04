@@ -121,7 +121,7 @@ export const CardListItem = (props: CardListItemProps) => {
 						text={formatDate(card[columnValue])}
 						size='s'
 					/>
-				} else if (columnValue === 'shelf') {
+				} else if (columnValue === 'shelfId') {
 					return <MyText
 						className={cls[columnValue]}
 						align='center'

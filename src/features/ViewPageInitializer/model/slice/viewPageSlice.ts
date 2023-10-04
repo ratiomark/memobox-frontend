@@ -238,8 +238,8 @@ const viewPageSlice = createSlice({
 					[cardId]: {
 						question: action.payload.question,
 						answer: action.payload.answer,
-						shelf: action.payload.shelfId,
-						box: action.payload.boxIndex,
+						shelfId: action.payload.shelfId,
+						boxIndex: action.payload.boxIndex,
 					}
 				}
 				state.cardsDataEdited = { ...state.cardsDataEdited, ...obj }
@@ -267,13 +267,13 @@ const viewPageSlice = createSlice({
 			if (!state.cardEditedListIds.includes(state.currentCardId)) {
 				state.cardEditedListIds.push(state.currentCardId)
 			}
-			state.cardsDataEdited[state.currentCardId].shelf = action.payload
+			state.cardsDataEdited[state.currentCardId].shelfId = action.payload
 		},
 		setCardBoxId: (state, action: PayloadAction<number>) => {
 			if (!state.cardEditedListIds.includes(state.currentCardId)) {
 				state.cardEditedListIds.push(state.currentCardId)
 			}
-			state.cardsDataEdited[state.currentCardId].box = action.payload
+			state.cardsDataEdited[state.currentCardId].boxIndex = action.payload
 		},
 		setMinHeighQuestion: (state, action: PayloadAction<number>) => {
 			state.cardModalHeights[state.currentCardId].minHeightQuestion = action.payload

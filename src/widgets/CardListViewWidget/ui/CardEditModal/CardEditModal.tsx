@@ -42,8 +42,8 @@ export const CardEditModal = memo(() => {
 	const cardEditedData = useSelector(getViewPageCardDataEdited)
 	const questionTextEdited = cardEditedData?.question
 	const answerTextEdited = cardEditedData?.answer
-	const editedShelf = cardEditedData?.shelf
-	const editedBox = cardEditedData?.box
+	const editedShelf = cardEditedData?.shelfId
+	const editedBox = cardEditedData?.boxIndex
 
 	// Original data
 	const cardOriginalData = useSelector(getViewPageCardDataOriginal)
@@ -51,8 +51,8 @@ export const CardEditModal = memo(() => {
 	// const questionTextOriginal = cardOriginalData?.question
 	const answerTextOriginal = cardOriginalData?.answer
 	const cardId = cardOriginalData?.id
-	const originalShelf = cardOriginalData?.shelf
-	const originalBox = cardOriginalData?.box
+	const originalShelf = cardOriginalData?.shelfId
+	const originalBox = cardOriginalData?.boxIndex
 
 
 	const onToggleShowData = () => setShowOriginalData(prev => !prev)

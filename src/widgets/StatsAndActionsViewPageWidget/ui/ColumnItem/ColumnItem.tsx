@@ -24,8 +24,9 @@ export const ColumnItem = (props: ColumnItemProps) => {
 	const [isDragging, setIsDragging] = useState(false)
 	const { t } = useTranslation()
 	const controls = useDragControls()
-	const isShelfColumn = column.value === 'shelf'
+	const isShelfColumn = column.value === 'shelfId'
 	const handleSwitchClick = () => onSwitchClick(column)
+	
 	const handleDragStart = () => {
 		setIsDragging(true);
 		document.body.classList.add('dragging');

@@ -1,6 +1,6 @@
 
 export type SortColumnValue =
-	| 'shelf'
+	| 'shelfId'
 	| 'createdAt'
 	| 'lastTraining'
 

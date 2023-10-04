@@ -57,7 +57,7 @@ const userSlice = createSlice({
 			state.jsonSavedData!.viewPageCardRowsCount = action.payload
 		},
 		reorderColumns: (state, action: PayloadAction<SortColumnObject[]>) => {
-			const shelfColumn = state.jsonSavedData!.viewPageColumns.find(column => column.value === 'shelf') as SortColumnObject
+			const shelfColumn = state.jsonSavedData!.viewPageColumns.find(column => column.value === 'shelfId') as SortColumnObject
 			const newColumns: SortColumnObject[] = []
 			newColumns.push({ ...shelfColumn, index: 0 })
 			action.payload.forEach((column, index) => newColumns.push({ ...column, index: index + 1 }))
