@@ -13,35 +13,17 @@ import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { getViewPageBoxIdChecked } from '@/features/ViewPageInitializer';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import cls from './BoxesListViewWidget.module.scss'
+import { getViewPageBoxItemsForWidget } from '@/features/ViewPageInitializer/model/selectors/getViewPageShelfAndBoxItems';
 
 export const BoxesListViewWidget = memo(() => {
 	const { t } = useTranslation()
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	const dispatch = useAppDispatch()
-	const shelfId = useSelector(getViewPageShelfId) ?? 'all'
+	const shelfId = useSelector(getViewPageShelfId)
 	const boxId = useSelector(getViewPageBoxIdChecked)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
-
-	const tabs = useMemo(() => {
-		if (viewPageIsLoading || isShelvesLoading) return
-		const tabs: TabItem[] = [
-			{ value: 'all', content: t('all cards') },
-			{ value: 'new', content: t('new cards') },
-		]
-		if (shelfId === 'all') {
-			tabs.push(
-				{ value: 'learning', content: t('learning cards') },
-				{ value: 'learnt', content: t('learnt cards') })
-			return tabs
-		} else {
-			const boxesData = shelvesData?.find(shelf => shelf.id === shelfId)?.boxesData
-			boxesData?.slice(1, boxesData?.length - 1).forEach(box => {
-				tabs.push({ value: String(box.index), content: `${t('box text')} ${box.index}` })
-			})
-			tabs.push({ value: 'learnt', content: t('learnt cards') })
-			return tabs
-		}
-	}, [isShelvesLoading, viewPageIsLoading, shelvesData, shelfId, t])
+	
+	const tabs = useSelector(getViewPageBoxItemsForWidget)
 
 	const onCancelMultiSelect = useCallback(() => {
 		dispatch(viewPageActions.cancelMultiSelect())
@@ -82,3 +64,26 @@ export const BoxesListViewWidget = memo(() => {
 		</div>
 	)
 })
+
+
+
+// const tabs = useMemo(() => {
+// 	if (viewPageIsLoading || isShelvesLoading) return
+// 	const tabs: TabItem[] = [
+// 		{ value: 'all', content: t('all cards') },
+// 		{ value: 'new', content: t('new cards') },
+// 	]
+// 	if (shelfId === 'all') {
+// 		tabs.push(
+// 			{ value: 'learning', content: t('learning cards') },
+// 			{ value: 'learnt', content: t('learnt cards') })
+// 		return tabs
+// 	} else {
+// 		const boxesData = shelvesData?.find(shelf => shelf.id === shelfId)?.boxesData
+// 		boxesData?.slice(1, boxesData?.length - 1).forEach(box => {
+// 			tabs.push({ value: String(box.index), content: `${t('box text')} ${box.index}` })
+// 		})
+// 		tabs.push({ value: 'learnt', content: t('learnt cards') })
+// 		return tabs
+// 	}
+// }, [isShelvesLoading, viewPageIsLoading, shelvesData, shelfId, t])
