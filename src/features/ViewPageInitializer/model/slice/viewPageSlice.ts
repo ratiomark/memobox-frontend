@@ -238,8 +238,8 @@ const viewPageSlice = createSlice({
 					[cardId]: {
 						question: action.payload.question,
 						answer: action.payload.answer,
-						shelf: action.payload.shelf,
-						box: action.payload.box,
+						shelf: action.payload.shelfId,
+						box: action.payload.boxIndex,
 					}
 				}
 				state.cardsDataEdited = { ...state.cardsDataEdited, ...obj }

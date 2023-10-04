@@ -22,7 +22,7 @@ export const boxApi = rtkApi.injectEndpoints({
 
 				const data: ShelfRepresentedByBoxes = {}
 				response.forEach(card => {
-					const box = card.box.toString()
+					const box = card.boxIndex.toString()
 					box in data ? data[box].push(card) : data[box] = [card]
 				})
 				return data
