@@ -14,7 +14,7 @@ import textClearFormattingIcon from '../../images/icons/textClearFormattingIcon.
 import { memo } from 'react'
 import { buttonTitles } from '../../const/buttonTitles'
 import { Icon } from '@/shared/ui/Icon'
-import { editorIconSize } from '@/shared/const/iconSizes'
+import { iconSizeEditor } from '@/shared/const/iconSizes'
 
 interface TextFormattingProps {
 	activeEditor: LexicalEditor
@@ -82,8 +82,8 @@ export const TextFormatting = memo(({
 					activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
 				}}
 				className='editorButton'
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				type={isBold ? 'main' : 'hint'}
 				Svg={textBoldIcon}
 			/>
@@ -100,8 +100,8 @@ export const TextFormatting = memo(({
 					activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
 				}}
 				className='editorButton'
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				type={isItalic ? 'main' : 'hint'}
 				Svg={textItalicIcon}
 			/>
@@ -117,8 +117,8 @@ export const TextFormatting = memo(({
 					activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
 				}}
 				className='editorButton'
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				type={isUnderline ? 'main' : 'hint'}
 				Svg={textUnderlineIcon}
 			/>
@@ -135,8 +135,8 @@ export const TextFormatting = memo(({
 					activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
 				}}
 				className='editorButton'
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				type={isStrikethrough ? 'main' : 'hint'}
 				Svg={textStrikeIcon}
 			/>
@@ -153,8 +153,8 @@ export const TextFormatting = memo(({
 					activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript');
 				}}
 				className='editorButton'
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				type={isSubscript ? 'main' : 'hint'}
 				Svg={textSubscriptIcon}
 			/>
@@ -171,8 +171,8 @@ export const TextFormatting = memo(({
 					activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript');
 				}}
 				className='editorButton'
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				type={isSuperscript ? 'main' : 'hint'}
 				Svg={textSuperscriptIcon}
 			/>
@@ -186,8 +186,8 @@ export const TextFormatting = memo(({
 				}}
 				onClick={clearFormatting}
 				className='editorButton'
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				type={'hint'}
 				Svg={textClearFormattingIcon}
 			/>

@@ -20,7 +20,7 @@ import { Root, ToastDescription, ToastTitle } from '@radix-ui/react-toast';
 import cls from './MyToast.module.scss';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { motion } from 'framer-motion';
-import { toastIconSize } from '@/shared/const/iconSizes';
+import { iconSizeToast } from '@/shared/const/iconSizes';
 import { RequestStatusType } from '@/shared/types/GeneralTypes';
 import { Button } from '../../Button';
 import { ButtonColor } from '../../Button/Button';
@@ -63,7 +63,7 @@ export const MyToast = (props: MyComponentToastsProps) => {
 			message = messageLoading
 			mainContent = (<div className={cls.content} >
 				<ToastTitle className={cls.title}>{t(message)}</ToastTitle>
-				<Spinner className={cls[status]} width={toastIconSize} height={toastIconSize} />
+				<Spinner className={cls[status]} width={iconSizeToast} height={iconSizeToast} />
 			</div>)
 			additionalMessage = contentLoading ?? contentCommon
 			break;
@@ -71,7 +71,7 @@ export const MyToast = (props: MyComponentToastsProps) => {
 			message = messageSuccess
 			mainContent = (<div className={cls.content} >
 				<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
-				<CheckIcon className={cls[status]} width={toastIconSize} height={toastIconSize} />
+				<CheckIcon className={cls[status]} width={iconSizeToast} height={iconSizeToast} />
 			</div>)
 			additionalMessage = contentSuccess ?? contentCommon
 			break;
@@ -79,7 +79,7 @@ export const MyToast = (props: MyComponentToastsProps) => {
 			message = messageError
 			mainContent = (<div className={cls.content} >
 				<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
-				<ErrorIcon className={cls[status]} width={toastIconSize} height={toastIconSize} />
+				<ErrorIcon className={cls[status]} width={iconSizeToast} height={iconSizeToast} />
 			</div>)
 			additionalMessage = contentError ?? contentCommon
 			break;
@@ -87,7 +87,7 @@ export const MyToast = (props: MyComponentToastsProps) => {
 			message = messageLoading
 			mainContent = (<div className={cls.content} >
 				<ToastTitle className={cls.title} >{t(message)}</ToastTitle>
-				<Spinner className={cls[status]} width={toastIconSize} height={toastIconSize} />
+				<Spinner className={cls[status]} width={iconSizeToast} height={iconSizeToast} />
 			</div>)
 			additionalMessage = contentLoading ?? contentCommon
 			break;

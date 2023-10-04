@@ -103,7 +103,7 @@ import { useTranslation } from 'react-i18next';
 import { buttonTitles } from '../../const/buttonTitles';
 import { $isEquationNode } from '../../nodes/EquationNode';
 import { Icon } from '@/shared/ui/Icon';
-import { editorIconSize } from '@/shared/const/iconSizes';
+import { iconSizeEditor } from '@/shared/const/iconSizes';
 import { blockTypeToBlockName, rootTypeToRootName } from './const';
 // import { BlockFormatDropDown } from './BlockFormatDropDown';
 
@@ -288,8 +288,8 @@ function BlockFormatDropDown({
 				}}
 				onClick={formatParagraph}
 				type={blockType === 'paragraph' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={paragraphIcon}
 			/>
 			<Icon
@@ -301,8 +301,8 @@ function BlockFormatDropDown({
 				onClick={formatBulletList}
 				type={blockType === 'bullet' ? 'main' : 'hint'}
 				// type={? 'main':'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={unOrderedListIcon}
 			/>
 			<Icon
@@ -314,8 +314,8 @@ function BlockFormatDropDown({
 				onClick={formatNumberedList}
 				type={blockType === 'number' ? 'main' : 'hint'}
 				// type={? 'main':'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={orderedListIcon}
 			/>
 			<Icon
@@ -327,8 +327,8 @@ function BlockFormatDropDown({
 				onClick={formatCode}
 				type={blockType === 'code' ? 'main' : 'hint'}
 				// type={? 'main':'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={codeIcon}
 			/> */}
 			<button
@@ -524,8 +524,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');
 				}}
 				type={value === 'left' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={leftAlignIcon}
 			/>
 			<Icon
@@ -539,8 +539,8 @@ function ElementFormatDropdown({
 				}}
 				type={value === 'center' ? 'main' : 'hint'}
 				// type={? 'main':'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={centerAlignIcon}
 			/>
 			<Icon
@@ -553,8 +553,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right');
 				}}
 				type={value === 'right' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={rightAlignIcon}
 			/>
 			<Icon
@@ -567,8 +567,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify');
 				}}
 				type={value === 'justify' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={middleAlignIcon}
 			/> */}
 			<button
@@ -920,7 +920,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 						blockType={blockType}
 						rootType={rootType}
 						editor={editor}
-						// activeEditor={activeEditor}
+					// activeEditor={activeEditor}
 					/>
 					<button
 						tabIndex={-1}
@@ -996,7 +996,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 						title={IS_APPLE ? 'Bold (⌘B)' : 'Bold (Ctrl+B)'}
 						type="button"
 						aria-label={`Format text as bold. Shortcut: ${IS_APPLE ? '⌘B' : 'Ctrl+B'
-						}`}>
+							}`}>
 						<i className="format bold" />
 					</button>
 					<button
@@ -1009,7 +1009,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 						title={IS_APPLE ? 'Italic (⌘I)' : 'Italic (Ctrl+I)'}
 						type="button"
 						aria-label={`Format text as italics. Shortcut: ${IS_APPLE ? '⌘I' : 'Ctrl+I'
-						}`}>
+							}`}>
 						<i className="format italic" />
 					</button>
 					<button
@@ -1022,7 +1022,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
 						title={IS_APPLE ? 'Underline (⌘U)' : 'Underline (Ctrl+U)'}
 						type="button"
 						aria-label={`Format text to underlined. Shortcut: ${IS_APPLE ? '⌘U' : 'Ctrl+U'
-						}`}>
+							}`}>
 						<i className="format underline" />
 					</button>
 

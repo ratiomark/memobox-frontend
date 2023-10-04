@@ -107,7 +107,7 @@ import { useTranslation } from 'react-i18next';
 import { buttonTitles } from '../../const/buttonTitles';
 import { $isEquationNode } from '../../nodes/EquationNode';
 import { Icon } from '@/shared/ui/Icon';
-import { editorIconSize } from '@/shared/const/iconSizes';
+import { iconSizeEditor } from '@/shared/const/iconSizes';
 import { blockTypeToBlockName, rootTypeToRootName } from './const';
 import { BlockFormatDropDown } from './BlockFormatDropDown';
 import { TextFormatting } from './TextFormatting';
@@ -216,8 +216,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');
 				}}
 				type={value === 'left' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={leftAlignIcon}
 			/>
 			<Icon
@@ -231,8 +231,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center');
 				}}
 				type={value === 'center' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={centerAlignIcon}
 			/>
 			<Icon
@@ -246,8 +246,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right');
 				}}
 				type={value === 'right' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={rightAlignIcon}
 			/>
 			<Icon
@@ -261,8 +261,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify');
 				}}
 				type={value === 'justify' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={middleAlignIcon}
 			/>
 
@@ -278,8 +278,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(OUTDENT_CONTENT_COMMAND, undefined);
 				}}
 				type='hint'
-				width={editorIconSize - 2}
-				height={editorIconSize - 2}
+				width={iconSizeEditor - 2}
+				height={iconSizeEditor - 2}
 				Svg={isRTL ? indentIcon : outdentIcon}
 			/>
 			<Icon
@@ -293,8 +293,8 @@ function ElementFormatDropdown({
 					editor.dispatchCommand(INDENT_CONTENT_COMMAND, undefined);
 				}}
 				type='hint'
-				width={editorIconSize - 2}
-				height={editorIconSize - 2}
+				width={iconSizeEditor - 2}
+				height={iconSizeEditor - 2}
 				Svg={isRTL ? outdentIcon : indentIcon}
 			/>
 		</div>

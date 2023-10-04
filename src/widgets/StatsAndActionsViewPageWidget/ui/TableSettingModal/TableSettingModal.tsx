@@ -21,7 +21,7 @@ import { updateJsonSavedData } from '@/entities/User';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 import { getAppRoot } from '@/shared/lib/helpers/DOM/getAppRoot';
-import { CSS_VARIABLE_VIEW_ROWS } from '@/shared/const/cssVariables';
+import { css_variable_view_rows } from '@/shared/const/cssVariables';
 
 interface TableSettingModalProps {
 	className?: string
@@ -45,7 +45,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 
 	useEffect(() => {
 		const root = getAppRoot()
-		root.style.setProperty(CSS_VARIABLE_VIEW_ROWS, rowsCount?.toString())
+		root.style.setProperty(css_variable_view_rows, rowsCount?.toString())
 		localDataService.setViewRows(rowsCount)
 	}, [rowsCount])
 

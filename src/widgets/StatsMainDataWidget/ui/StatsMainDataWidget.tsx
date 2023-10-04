@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion'
 import { MainDataLabelList, StatsDataBlockWithPercent } from './MainDataLabelList/MainDataLabelList';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-import { infoIconSize } from '@/shared/const/iconSizes';
+import { iconSizeInfo } from '@/shared/const/iconSizes';
 
 const data: StatsDataBlockWithPercent = {
 	all: 125,
@@ -65,8 +65,8 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 				/>
 				<Icon
 					Svg={InfoIcon}
-					width={infoIconSize}
-					height={infoIconSize}
+					width={iconSizeInfo}
+					height={iconSizeInfo}
 					buttonSameSize
 					clickable
 					onClick={() => { }}

@@ -21,7 +21,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/shared/ui/Button';
 import { obtainRouteTraining } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
-import { boxIconSize } from '@/shared/const/iconSizes';
+import { iconSizeBox } from '@/shared/const/iconSizes';
 import getBoxTimingStringRepresentation from '../utils/getTiming';
 
 interface BoxPropsBase {
@@ -131,16 +131,16 @@ export const Box = (props: BoxPropsBase) => {
 					Svg={PlusIcon}
 					clickable
 					onClick={onAddNewCardHandle}
-					width={boxIconSize}
-					height={boxIconSize}
+					width={iconSizeBox}
+					height={iconSizeBox}
 				/>
 				<Icon
 					className={cls.icon}
 					Svg={EyeIcon}
 					clickable
 					onClick={onBoxViewClickHandle}
-					width={boxIconSize}
-					height={boxIconSize}
+					width={iconSizeBox}
+					height={iconSizeBox}
 				/>
 				<Icon
 					className={cls.icon}
@@ -148,16 +148,16 @@ export const Box = (props: BoxPropsBase) => {
 					clickable
 					onClick={onOpenTimeSetterHandle}
 					// onClick={onTimerClick}
-					width={boxIconSize}
-					height={boxIconSize}
+					width={iconSizeBox}
+					height={iconSizeBox}
 				/>
 				<Icon
 					className={cls.icon}
 					Svg={SettingsIcon}
 					clickable
 					onClick={onOpenBoxSettingsHandle}
-					width={boxIconSize}
-					height={boxIconSize}
+					width={iconSizeBox}
+					height={iconSizeBox}
 				/>
 			</HStack>
 		)

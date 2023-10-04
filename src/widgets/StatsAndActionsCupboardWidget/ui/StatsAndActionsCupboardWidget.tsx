@@ -22,7 +22,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { motion } from 'framer-motion'
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CupboardMainButtonsSkeleton } from './StatsAndActionsCupboardWidgetSkeleton/CupboardMainButtonsSkeleton';
-import { infoIconSize } from '@/shared/const/iconSizes';
+import { iconSizeInfo } from '@/shared/const/iconSizes';
 import { CreateNewShelfModal } from './CreateNewShelfModal/CreateNewShelfModal';
 import { MyToast } from '@/shared/ui/Toast';
 import { getCreateNewCardRequestStatus } from '@/features/CupboardShelfList'
@@ -81,8 +81,8 @@ export const StatsAndActionsCupboardWidget = () => {
 					</Button>
 					<Icon
 						Svg={InfoIcon}
-						width={infoIconSize}
-						height={infoIconSize}
+						width={iconSizeInfo}
+						height={iconSizeInfo}
 						className={cls.info}
 						clickable
 						onClick={onOpenInfoModal}

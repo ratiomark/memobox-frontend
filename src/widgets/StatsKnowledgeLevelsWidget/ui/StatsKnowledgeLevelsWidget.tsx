@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import cls from './StatsKnowledgeLevelsWidget.module.scss';
 import { StatsKnowledgeList } from './StatsKnowledgeList/StatsKnowledgeList';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-import { infoIconSize } from '@/shared/const/iconSizes';
+import { iconSizeInfo } from '@/shared/const/iconSizes';
 import { Icon } from '@/shared/ui/Icon';
 
 export const StatsKnowledgeLevelsWidget = () => {
@@ -11,8 +11,8 @@ export const StatsKnowledgeLevelsWidget = () => {
 			<StatsKnowledgeList />
 			<Icon
 				Svg={InfoIcon}
-				width={infoIconSize}
-				height={infoIconSize}
+				width={iconSizeInfo}
+				height={iconSizeInfo}
 				clickable
 				onClick={() => { }}
 			/>

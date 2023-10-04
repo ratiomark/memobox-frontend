@@ -1,1 +1,1 @@
-export const CSS_VARIABLE_VIEW_ROWS = '--view-rows'
+export const css_variable_view_rows = '--view-rows'

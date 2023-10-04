@@ -9,7 +9,7 @@ import imageIcon from '../../images/icons/image-1-svgrepo-com.svg'
 // import imageIcon from '../../images/icons/imageIcon.svg'
 import mathIcon from '../../images/icons/mathIcon2.svg'
 import collapseIcon from '../../images/icons/triangle-right-svgrepo-com.svg'
-import { editorIconSize } from '@/shared/const/iconSizes';
+import { iconSizeEditor } from '@/shared/const/iconSizes';
 import { Icon } from '@/shared/ui/Icon';
 import { $createCodeNode } from '@lexical/code';
 import { INSERT_UNORDERED_LIST_COMMAND, REMOVE_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND } from '@lexical/list';
@@ -155,8 +155,8 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 					}}
 					onClick={button.onClick}
 					type={blockType === button.blockType ? 'main' : 'hint'}
-					width={editorIconSize}
-					height={editorIconSize}
+					width={iconSizeEditor}
+					height={iconSizeEditor}
 					Svg={button.icon}
 				/>
 			))}
@@ -178,8 +178,8 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 				}}
 				withFill={false}
 				type={'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={imageIcon}
 			/>
 			{/* <Icon
@@ -199,8 +199,8 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 				}}
 				withFill={false}
 				type={'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={imageIcon}
 			/> */}
 			<Icon
@@ -219,8 +219,8 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 					));
 				}}
 				type={'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={mathIcon}
 			/>
 			<Icon
@@ -234,8 +234,8 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 					editor.dispatchCommand(INSERT_COLLAPSIBLE_COMMAND, undefined);
 				}}
 				type={'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={collapseIcon}
 			/>
 		</div>
@@ -251,8 +251,8 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 				}}
 				onClick={formatParagraph}
 				type={blockType === 'paragraph' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={paragraphIcon}
 			/>
 			<Icon
@@ -263,8 +263,8 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 				}}
 				onClick={formatBulletList}
 				type={blockType === 'bullet' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={unOrderedListIcon}
 			/>
 			<Icon
@@ -275,8 +275,8 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 				}}
 				onClick={formatNumberedList}
 				type={blockType === 'number' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={orderedListIcon}
 			/>
 			<Icon
@@ -287,7 +287,7 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 				}}
 				onClick={formatCode}
 				type={blockType === 'code' ? 'main' : 'hint'}
-				width={editorIconSize}
-				height={editorIconSize}
+				width={iconSizeEditor}
+				height={iconSizeEditor}
 				Svg={codeIcon}
 			/> */}
