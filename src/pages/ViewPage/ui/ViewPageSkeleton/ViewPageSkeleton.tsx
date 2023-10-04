@@ -22,7 +22,9 @@ export const ViewPageSkeleton = () => (
 				</HStack>
 				<ShelvesListViewWidgetSkeleton />
 				<TabsSkeleton />
-				<Skeleton className={cls.sortingSkeleton} height={20} borderRadius='999px' />
+				<div className={cls.sortingWrapper} >
+					<Skeleton className={cls.sortingSkeleton} borderRadius='999px' />
+				</div>
 				<CardsListSkeleton />
 			</div>
 		</div >

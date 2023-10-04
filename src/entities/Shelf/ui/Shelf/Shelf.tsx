@@ -39,21 +39,22 @@ export const Shelf = memo((props: ShelfProps) => {
 	} = props
 
 	const [isDragging, setIsDragging] = useState(false)
-	const timerId = useRef<TimeoutId>()
 	const controls = useDragControls()
+	const timerId = useRef<TimeoutId>()
+
+	const handleDragEnd = () => {
+		setIsDragging(false);
+		// timerId.current = setTimeout(() => {
+		// 	clearTimeout(timerId.current)
+		// }, 30000)
+		document.body.classList.remove('dragging');
+	}
 
 	const handleDragStart = () => {
 		setIsDragging(true);
 		document.body.classList.add('dragging');
 	}
 
-	const handleDragEnd = () => {
-		timerId.current = setTimeout(() => {
-			setIsDragging(false);
-			clearTimeout(timerId.current)
-		}, 300)
-		document.body.classList.remove('dragging');
-	}
 
 	return (
 		<Reorder.Item

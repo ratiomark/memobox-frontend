@@ -14,6 +14,14 @@
   margin-right: var(--padding-right-correction-info-icon);
 }
 
+.sortingWrapper {
+  display: flex;
+  align-items: center;
+  min-width: 100%;
+  height: var(--min-height-sorting-wrapper, 40);
+}
+
 .sortingSkeleton {
   min-width: 100%;
+  height: var(--font-line-s);
 }

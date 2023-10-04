@@ -2,8 +2,15 @@
   display: flex;
   align-items: center;
   gap: 40px;
-  padding: 0 calc(var(--card-list-item-padding-left-and-right) + var(--view-page-icon-button-size)) 0 var(--card-list-item-padding-left-and-right);
+  padding:
+    0
+    calc(var(--card-list-item-padding-left-and-right) + var(--view-page-icon-button-size))
+    0
+    var(--card-list-item-padding-left-and-right);
   user-select: none;
+
+  // position: relative;
+  min-height: var(--min-height-sorting-wrapper, 40);
 
   // max-width: fit-content;
   // min-width: calc(100% - 32px);
@@ -13,8 +20,6 @@
 
 .mainContentWrapper {
   width: 100%;
-
-  // display: flex;
   display: grid;
   gap: 40px;
   grid-template-columns: 1fr 1fr;
@@ -30,10 +35,6 @@
 
 .arrow {
   transition: all 0.2s;
-
-  // &:hover {
-  //   transform: scale(2);
-  // }
 }
 
 .rotateArrow {
@@ -48,7 +49,6 @@
 }
 
 .wrapper {
-  // all: unset;
   border: none;
   background: none;
   cursor: pointer;
@@ -80,6 +80,14 @@
   text-align: center;
 }
 
+.absoluteParts {
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 calc(var(--card-list-item-padding-left-and-right) + var(--view-page-icon-button-size)) 0 var(--card-list-item-padding-left-and-right);
+}
+
 .shelf {
   text-align: center;
 }
@@ -96,4 +104,8 @@
   width: 90px;
 
   // border: 1px solid orange;
+}
+
+.sortingSkeleton {
+  min-width: 100%;
 }

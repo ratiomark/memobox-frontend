@@ -31,7 +31,7 @@ export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: s
 			}))
 			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать cardId
 			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
-			// await sleep()
+			await sleep()
 			const response = Math.random() > 0.5
 			// const response = Math.random() > 50
 			if (!response) {
