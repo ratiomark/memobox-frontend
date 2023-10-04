@@ -1,10 +1,10 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
-import { getUserSavedDataViewPageColumns } from '@/entities/User';
-// import { SortColumnObject } from '@/entities/User/model/types/JsonSavedData';
-// import { SortColumnObject } from '@/widgets/SortControllerViewPageWidget/model/types/SortControllerViewPageWidgetSchema';
-import { createSelector } from '@reduxjs/toolkit';
 
 export const getViewPageSelectedCardIds = (state: StateSchema) => state.viewPage?.selectedCardIds
 export const getViewPageMultiSelectIsActive = (state: StateSchema) => state.viewPage?.isMultiSelectActive
+
 export const getMultiSelectDeleteCardIds = (state: StateSchema) => state.viewPage?.multiSelectDeleteCardIdList ?? []
 export const getCardIdsSelectedForDeletionByRandomId = (id: string) => (state: StateSchema) => state.viewPage?.multiSelectDeleteCardIdObject[id] ?? []
+
+export const getMultiSelectMoveCardIds = (state: StateSchema) => state.viewPage?.multiSelectMoveCardIdList ?? []
+export const getCardIdsSelectedForMoveByRandomId = (id: string) => (state: StateSchema) => state.viewPage?.multiSelectMoveCardIdObject[id] ?? []

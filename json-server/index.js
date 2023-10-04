@@ -126,7 +126,7 @@ server.patch('/cards', async (req, res) => {
 			case 'moveCards':
 				const { boxIndex, shelfId } = req.body
 				cardsUpdated = cards.map(card => {
-					if (cardIds.includes(card._id)) {
+					if (cardIds.includes(card.id)) {
 						card.box = Number(boxIndex)
 						card.shelf = shelfId
 						return card
@@ -137,7 +137,7 @@ server.patch('/cards', async (req, res) => {
 				break;
 			case 'removeCards':
 				cardsUpdated = cards.map(card => {
-					if (cardIds.includes(card._id)) {
+					if (cardIds.includes(card.id)) {
 						card.deleted = true
 						return card
 					}
@@ -147,7 +147,7 @@ server.patch('/cards', async (req, res) => {
 				break
 			case 'restoreCards':
 				cardsUpdated = cards.map(card => {
-					if (cardIds.includes(card._id)) {
+					if (cardIds.includes(card.id)) {
 						card.deleted = false
 						return card
 					}
@@ -157,7 +157,7 @@ server.patch('/cards', async (req, res) => {
 				break
 			case 'removeCardsFromTrash':
 				// cardsUpdated = cards.map(card => {
-				// 	if (cardIds.includes(card._id)) {
+				// 	if (cardIds.includes(card.id)) {
 				// 		card.deleted = false
 				// 		return card
 				// 	}
@@ -200,13 +200,14 @@ server.get('/cards', async (req, res) => {
 			.forEach(shelf => {
 
 				const boxes = shelf.boxesData
-					.map(box => ({ id: box._id, index: box.index }))
+					.map(box => ({ id: box.id, index: box.index }))
 					.sort((a, b) => a.index - b.index)
 
 				shelvesAndBoxesData[shelf.id] = {
 					maxIndexBox: shelf.boxesData.length - 1,
 					boxesItems: boxes,
 					shelfTitle: shelf.title,
+					shelfIndex: shelf.index,
 				}
 
 			})
@@ -472,8 +473,8 @@ server.patch('/updateBox', (req, res) => {
 		const db = JSON.parse(data);
 		const shelfTargeted = db.shelves.find(shelf => shelf.id === shelfId)
 		const shelfTargetedIndex = db.shelves.findIndex(shelf => shelf.id === shelfId)
-		const boxTargeted = shelfTargeted.boxesData.find(boxFromDb => boxFromDb._id === box._id)
-		const boxTargetedIndex = shelfTargeted.boxesData.findIndex(boxFromDb => boxFromDb._id === box._id)
+		const boxTargeted = shelfTargeted.boxesData.find(boxFromDb => boxFromDb.id === box.id)
+		const boxTargetedIndex = shelfTargeted.boxesData.findIndex(boxFromDb => boxFromDb.id === box.id)
 		const boxUpdated = { ...boxTargeted, ...box }
 		shelfTargeted.boxesData[boxTargetedIndex] = boxUpdated
 		db.shelves[shelfTargetedIndex] = shelfTargeted

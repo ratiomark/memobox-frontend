@@ -63,6 +63,10 @@ export interface ViewPageInitializerSchema {
 	multiSelectDeleteCardIdObject: {
 		[randomId: string]: string[]
 	}
+	multiSelectMoveCardIdList: string[]
+	multiSelectMoveCardIdObject: {
+		[randomId: string]: string[]
+	}
 	// 
 	shelvesDataSaved: {
 		[shelfId: string]: {

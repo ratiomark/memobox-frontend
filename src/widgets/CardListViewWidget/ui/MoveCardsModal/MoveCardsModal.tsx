@@ -17,6 +17,7 @@ import { Dropdown, ListBox } from '@/shared/ui/Popup';
 import { ListBoxItems } from '@/shared/ui/Popup/ui/ListBox/ListBox';
 import { useUpdateCardsMutation } from '@/entities/Card';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 
 
 export const MoveCardsModal = memo(() => {
@@ -120,7 +121,7 @@ export const MoveCardsModal = memo(() => {
 		</div>)
 
 	return (
-		<HDialog
+		<HDialogHeadless
 			isOpen={isOpen}
 			onSubmit={onMoveCards}
 			onClose={onCloseMoveCards}
@@ -144,6 +145,6 @@ export const MoveCardsModal = memo(() => {
 				<Button onClick={onCloseMoveCards}>{t('back button')}</Button>
 				<Button variant='filled' onClick={onMoveCards}>{t('move cards')}</Button>
 			</div> */}
-		</HDialog>
+		</HDialogHeadless>
 	)
 })

@@ -20,10 +20,18 @@
   },
   "delete_card": {
     "messageSuccess": "Card was deleted",
-    "additional": "Card is deleting"
+    "additional": "Deleting card"
   },
   "delete_multiple_card": {
     "messageSuccess": "Cards were deleted",
-    "additional": "Cards are deleting"
+    "additional": "Deleting cards"
+  },
+  "move_multiple_card": {
+    "messageSuccess": "Cards were moved",
+    "additional": "Moving cards"
+  },
+  "update_card": {
+    "messageSuccess": "Card was saved",
+    "additional": "Saving the card"
   }
 }

@@ -29,5 +29,13 @@
   "delete_multiple_card": {
     "messageSuccess": "Карточки уделны",
     "additional": "Удаление карточек"
+  },
+  "move_multiple_card": {
+    "messageSuccess": "Карточки перемещены",
+    "additional": "Перемещение карточек"
+  },
+  "update_card": {
+    "messageSuccess": "Карточка сохранена",
+    "additional": "Сохранение карточки"
   }
 }

@@ -14,6 +14,7 @@ export const ViewPageToastsWithButtons = memo(() => {
 
 	const dispatch = useAppDispatch()
 	const multiSelectDeleteCardIdList = useSelector(getMultiSelectDeleteCardIds)
+	const multiSelectMoveCardIdList = useSelector(getMultiSelectDeleteCardIds)
 	// useEffect(() => {
 	// 	console.log(multiSelectDeleteCardIdList)
 	// }, [multiSelectDeleteCardIdList])

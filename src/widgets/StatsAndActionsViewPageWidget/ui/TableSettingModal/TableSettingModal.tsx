@@ -92,7 +92,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 			>
 
 				<Heading title={t('table settings')} />
-				<motion.div layout className={cls.contentWrapper} >
+				<motion.div className={cls.contentWrapper} >
 					{/* {columns?.map(column => <ColumnItem key={column.value} column={column} />)} */}
 					<Reorder.Group
 						// axis=''

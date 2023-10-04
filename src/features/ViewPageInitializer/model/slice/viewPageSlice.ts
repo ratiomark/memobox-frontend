@@ -38,7 +38,9 @@ const initialState: ViewPageInitializerSchema = {
 	shelvesDataSaved: {},
 	abortedThunkIds: [],
 	multiSelectDeleteCardIdList: [],
-	multiSelectDeleteCardIdObject: {}
+	multiSelectDeleteCardIdObject: {},
+	multiSelectMoveCardIdList: [],
+	multiSelectMoveCardIdObject: {},
 }
 // .addCase(
 // 	deleteShelfThunk.rejected,
@@ -104,6 +106,21 @@ const viewPageSlice = createSlice({
 			})
 			delete state.multiSelectDeleteCardIdObject[action.payload]
 		},
+		// addMultiSelectMoveIds: (state, action: PayloadAction<string>) => {
+		// 	state.multiSelectMoveCardIdList.push(action.payload)
+		// 	state.multiSelectMoveCardIdObject[action.payload] = [...state.selectedCardIds]
+		// 	state.selectedCardIds = []
+		// },
+		// removeMultiSelectMoveIds: (state, action: PayloadAction<string>) => {
+		// 	state.multiSelectMoveCardIdList = state.multiSelectMoveCardIdList.filter(id => id !== action.payload)
+		// 	const listWithCardIds = state.multiSelectMoveCardIdObject[action.payload]
+		// 	state.cards.forEach(card => {
+		// 		if (card.isDeleted && listWithCardIds.includes(card.id)) {
+		// 			card.isDeleted = false
+		// 		}
+		// 	})
+		// 	delete state.multiSelectDeleteCardIdObject[action.payload]
+		// },
 		addOrRemoveCardFromSelectedCardIds: (state, action: PayloadAction<string>) => {
 			if (state.selectedCardIds.includes(action.payload)) {
 				state.selectedCardIds = state.selectedCardIds.filter(cardId => cardId !== action.payload)

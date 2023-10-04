@@ -19,6 +19,7 @@ import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 export const CardEditModal = memo(() => {
 	const { t } = useTranslation()
 	// const cupboardError = useSelector(getCupboardError)
+	// тут нужно использовать кастомный хук, который вернет shelfItems boxItems
 	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	const [showOriginalData, setShowOriginalData] = useState(false)
 
