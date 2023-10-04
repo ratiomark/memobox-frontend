@@ -4,12 +4,13 @@
 // }
 
 export interface CardSchema {
-	id: string,
-	index: number,
-	question: string,
-	answer: string,
-	shelf: string,
-	box: number,
+	id: string
+	index: number
+	question: string
+	answer: string
+	shelfId: string
+	boxIndex: number
+	boxId: string
 	state: 'train' | 'wait'
 	specialType: 'new' | 'none' | 'learnt'
 	time: number
