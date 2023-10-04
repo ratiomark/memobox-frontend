@@ -1,12 +1,9 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './TableSettingModal.module.scss';
-import { HDialog } from '@/shared/ui/HDialog';
 import { useSelector } from 'react-redux';
 import { getViewPageColumnSettingsIsOpen, getViewPageColumns, viewPageActions } from '@/features/ViewPageInitializer';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { Button } from '@/shared/ui/Button';
-import { HStack } from '@/shared/ui/Stack';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { ColumnItem } from '../ColumnItem/ColumnItem';
 import {
@@ -17,13 +14,14 @@ import {
 } from '@/entities/User';
 import { useEffect, useState } from 'react';
 import { Reorder, motion } from 'framer-motion';
-import { ReducersList } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { Card } from '@/shared/ui/Card';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { updateJsonSavedData } from '@/entities/User';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
+import { getAppRoot } from '@/shared/lib/helpers/DOM/getAppRoot';
+import { CSS_VARIABLE_VIEW_ROWS } from '@/shared/const/cssVariables';
 
 interface TableSettingModalProps {
 	className?: string
@@ -46,8 +44,9 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 	const { t } = useTranslation()
 
 	useEffect(() => {
-		const root = document.querySelector('#root') as HTMLElement
-		root.style.setProperty('--view-rows', rowsCount?.toString())
+		const root = getAppRoot()
+		root.style.setProperty(CSS_VARIABLE_VIEW_ROWS, rowsCount?.toString())
+		localDataService.setViewRows(rowsCount)
 	}, [rowsCount])
 
 	const isOpen = useSelector(getViewPageColumnSettingsIsOpen) ?? false

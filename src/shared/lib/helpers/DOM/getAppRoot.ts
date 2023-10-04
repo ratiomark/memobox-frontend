@@ -1,0 +1,1 @@
+export const getAppRoot = () => document.querySelector('#root') as HTMLElement;

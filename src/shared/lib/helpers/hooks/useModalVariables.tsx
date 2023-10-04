@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useWindowSize } from './useWindowHeight'
+import { getAppRoot } from '../DOM/getAppRoot'
 
 interface ModalVariables {
 	paddingTextareaTopAndBottom: number
@@ -30,7 +31,7 @@ export const useModalVariables = () => {
 	const { windowHeight } = useWindowSize()
 
 	useEffect(() => {
-		const root = document.querySelector('#root') as HTMLElement
+		const root = getAppRoot()
 		const rootStyles = getComputedStyle(root)
 		const paddingTextareaTopAndBottom = parseInt(rootStyles.getPropertyValue('--padding-textarea-top-and-bottom'))
 		const paddingTextareaLeftAndRight = parseInt(rootStyles.getPropertyValue('--padding-textarea-left-and-right'))
