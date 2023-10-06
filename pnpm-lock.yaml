@@ -56,7 +56,7 @@ dependencies:
     specifier: ^1.9.4
     version: 1.9.5(react-redux@7.2.9)(react@18.2.0)
   framer-motion:
-    specifier: ^10.12.17
+    specifier: ^10.11
     version: 10.12.17(react-dom@18.2.0)(react@18.2.0)
   i18next:
     specifier: ^21.9.0

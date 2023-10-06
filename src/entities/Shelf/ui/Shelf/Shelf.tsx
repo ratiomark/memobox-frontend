@@ -8,7 +8,7 @@ import { Icon } from '@/shared/ui/Icon';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { Collapsible } from '@/shared/ui/Animations';
 import { useDragControls, Reorder } from 'framer-motion';
-import { ReactNode, memo, useRef, useState } from 'react';
+import { ReactNode, memo, useState } from 'react';
 
 export interface ShelfProps {
 	shelf: ShelfSchema

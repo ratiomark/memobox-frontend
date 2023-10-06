@@ -51,17 +51,17 @@ const userSlice = createSlice({
 			}
 		},
 		setColumns: (state, action: PayloadAction<SortColumnObject[]>) => {
-			state.jsonSavedData!.viewPageColumns = action.payload
+			state.jsonSavedData.viewPageColumns = action.payload
 		},
 		setViewPageCardRowsCount: (state, action: PayloadAction<number | string>) => {
-			state.jsonSavedData!.viewPageCardRowsCount = action.payload
+			state.jsonSavedData.viewPageCardRowsCount = action.payload
 		},
 		reorderColumns: (state, action: PayloadAction<SortColumnObject[]>) => {
-			const shelfColumn = state.jsonSavedData!.viewPageColumns.find(column => column.value === 'shelfId') as SortColumnObject
-			const newColumns: SortColumnObject[] = []
-			newColumns.push({ ...shelfColumn, index: 0 })
+			// const shelfColumn = state.jsonSavedData.viewPageColumns[0] as SortColumnObject
+			const newColumns: SortColumnObject[] = [state.jsonSavedData.viewPageColumns[0]]
+			// newColumns.push({ ...shelfColumn, index: 0 })
 			action.payload.forEach((column, index) => newColumns.push({ ...column, index: index + 1 }))
-			state.jsonSavedData!.viewPageColumns = newColumns
+			state.jsonSavedData.viewPageColumns = newColumns
 			// state.jsonSavedData!.viewPageColumns = action.payload.map((column, index) => ({ ...column, index }));
 			// return newOrder.map((id) => state.find((item) => item.id === id)!);
 		},

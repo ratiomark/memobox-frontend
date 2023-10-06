@@ -12,7 +12,7 @@ import {
 	getUserSavedDataViewPageRowsCount,
 	userActions
 } from '@/entities/User';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Reorder, motion } from 'framer-motion';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { Card } from '@/shared/ui/Card';
@@ -60,12 +60,10 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 		dispatch(updateJsonSavedData())
 	}
 
-	const onClickSwitchColumn = (column: SortColumnObject) => {
-		const columnCopy = { ...column }
-		columnCopy.enabled = !columnCopy.enabled
-		dispatch(userActions.setColumn(columnCopy))
+	const onClickSwitchColumn = useCallback((column: SortColumnObject) => {
+		dispatch(userActions.setColumn({ ...column, enabled: !column.enabled }))
 		dispatch(updateJsonSavedData())
-	}
+	}, [dispatch])
 
 	const onSetColumns = (order: SortColumnObject[]) => {
 		dispatch(userActions.reorderColumns(order))
@@ -73,12 +71,15 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 	}
 
 
-	const columnsRendered = columns?.map(column => (
-		<ColumnItem
-			key={column.value}
-			column={column}
-			onSwitchClick={onClickSwitchColumn}
-		/>))
+	const columnsRendered = useMemo(() => {
+		console.log(columns)
+		return columns?.map(column => (
+			<ColumnItem
+				key={column.value}
+				column={column}
+				onSwitchClick={onClickSwitchColumn}
+			/>))
+	}, [onClickSwitchColumn, columns])
 
 	return (
 		<HDialogHeadless
@@ -93,22 +94,26 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 			>
 
 				<Heading title={t('table settings')} />
-				<motion.div className={cls.contentWrapper} >
+				<div className={cls.contentWrapper} >
+					{/* <div > */}
+
 					{/* {columns?.map(column => <ColumnItem key={column.value} column={column} />)} */}
 					<Reorder.Group
-						// axis=''
-						values={columns!}
+						axis='y'
+						style={{ border: '1px solid red' }}
+						values={columns.slice(1,)}
 						onReorder={onSetColumns}
+					// dragConstraints={{ bottom: 10, top: 10 }}
 					>
 						{columnsRendered}
 					</Reorder.Group>
-					<Card className={cls.rowsInCardWrapper} >
+					{/* </div> */}
 
+					<Card className={cls.rowsInCardWrapper} >
 						<MyText text={t('rows count in cards')} className={cls.rowsOptionTitle} />
 						<Tabs tabs={rowItems} value={rowsCount.toString()} onTabClick={onRowValueClick} />
 					</Card>
-
-				</motion.div>
+				</div>
 				<ModalButtons
 					onClose={onClose}
 					onSubmit={() => alert('Сохраняю новые настройки таблицы')}

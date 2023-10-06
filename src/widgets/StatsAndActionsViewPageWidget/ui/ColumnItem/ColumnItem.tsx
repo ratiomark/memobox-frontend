@@ -26,7 +26,7 @@ export const ColumnItem = (props: ColumnItemProps) => {
 	const controls = useDragControls()
 	const isShelfColumn = column.value === 'shelfId'
 	const handleSwitchClick = () => onSwitchClick(column)
-	
+
 	const handleDragStart = () => {
 		setIsDragging(true);
 		document.body.classList.add('dragging');
@@ -37,6 +37,7 @@ export const ColumnItem = (props: ColumnItemProps) => {
 	}
 
 	if (isShelfColumn) {
+		console.log('@#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
 		return (
 			<li
 				className={clsx(
@@ -52,14 +53,15 @@ export const ColumnItem = (props: ColumnItemProps) => {
 
 	return (
 		<Reorder.Item
+			key={column.value}
 			value={column}
 			dragListener={false}
 			dragControls={controls}
 			onDragStart={handleDragStart}
 			onDragEnd={handleDragEnd}
-			className={clsx(
-				cls.ColumnItem,
-				className)}
+			// dragConstraints={{ bottom: 10, top: 10 }}
+			// dragElastic
+			className={cls.ColumnItem}
 		>
 
 			<Icon
