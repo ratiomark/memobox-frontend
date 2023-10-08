@@ -41,14 +41,17 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 		if (!viewPageIsMounter && !isLoading && data) {
 			// console.log('Эффект Зашел')
 			const boxIdChecked = boxId ?? 'new'
+			const boxSpecialIndexChecked = boxId ?? 'new'
 			const shelfIdChecked = shelfId ?? 'all'
-			// console.log(boxIdChecked)
-			// console.log(shelfIdChecked)
+			console.log(shelfIdChecked)
+			console.log(boxIdChecked)
 			// console.log(data)
 			dispatch(viewPageActions.setViewPageIsMounted())
 			dispatch(viewPageActions.setFetchedData(data))
 			dispatch(viewPageActions.setActiveShelfId(shelfIdChecked))
-			dispatch(viewPageActions.setActiveBoxId(boxIdChecked))
+			dispatch(viewPageActions.setActiveBoxIdAndSpecialIndex({ boxId: boxIdChecked, boxSpecialIndex: boxSpecialIndexChecked }))
+			// dispatch(viewPageActions.setActiveBoxId(boxIdChecked))
+			// dispatch(viewPageActions.setActiveBoxSpecialIndex(boxSpecialIndexChecked))
 			// dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked, data }))
 			navigate(obtainRouteViewEmpty(), { replace: true })
 		}
@@ -59,7 +62,9 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 		if (viewPageIsMounter && shelfId && boxId) {
 			// console.log('2 Эффект Зашел')
 			dispatch(viewPageActions.setActiveShelfId(shelfId))
-			dispatch(viewPageActions.setActiveBoxId(boxId))
+			dispatch(viewPageActions.setActiveBoxIdAndSpecialIndex({ boxId, boxSpecialIndex: boxId }))
+			// dispatch(viewPageActions.setActiveBoxId(boxId))
+			// dispatch(viewPageActions.setActiveBoxSpecialIndex(boxId))
 			navigate(obtainRouteViewEmpty(), { replace: true })
 		}
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])

@@ -1,14 +1,7 @@
 import clsx from 'clsx'
-import { useTranslation } from 'react-i18next'
 import cls from './HorizontalScrollerList.module.scss'
 import { MouseEvent, ReactNode, useEffect, useMemo, useRef, useState } from 'react'
-import { ListBoxItems } from '../Popup/ui/ListBox/ListBox'
-import { AppLink } from '../AppLink/AppLink'
-import { Link } from 'react-router-dom'
-import { Skeleton } from '../Skeleton'
-import { MyText } from '../Typography'
-import { HStack } from '../Stack'
-import { AnimateSkeletonLoader } from '../Animations'
+
 
 interface HorizontalScrollerListItem {
 	value: string
@@ -49,8 +42,6 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 		item.onChange()
 	}
 
-	const { t } = useTranslation()
-
 	const itemsRendered = useMemo(() => {
 		if (!items?.length || !value) return undefined
 		return items.map((item, index) => (
@@ -61,7 +52,9 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 				)}
 				// tabIndex={0}
 				key={item.value}
-				ref={el => itemRefs.current.push(el!)}
+				ref={el => {
+					itemRefs.current.push(el!)
+				}}
 				onClick={e => handleSelectItem(e, item, index + 1)}
 			>
 				{item.content}

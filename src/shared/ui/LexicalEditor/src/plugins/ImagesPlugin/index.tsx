@@ -26,10 +26,6 @@ import {
 	LexicalEditor,
 } from 'lexical';
 import { useEffect, useRef, useState } from 'react';
-import * as React from 'react';
-
-
-import yellowFlowerImage from '../../images/yellow-flower.jpg';
 import {
 	$createImageNode,
 	$isImageNode,
@@ -41,6 +37,7 @@ import { DialogActions, DialogButtonsList } from '../../ui/Dialog';
 import FileInput from '../../ui/FileInput';
 import TextInput from '../../ui/TextInput';
 import { CAN_USE_DOM } from '../../../shared/canUseDOM';
+import yellowFlowerImage from '@/shared/assets/yellow-flower.jpg';
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 

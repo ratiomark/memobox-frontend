@@ -1,14 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { fetchBoxesDataByShelfId, FetchBoxesThunkResponse } from '../services/fetchBoxesDataByShelfId'
-import { ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
-import { CardSchema } from '@/entities/Card'
-import { fetchCards, FetchCardsThunkResponse } from '../services/fetchCards'
-import { SortColumnValue } from '@/entities/User'
-import { SortOrderType } from '@/shared/types/SortOrderType'
 import { CardSchemaExtended } from '@/entities/Card'
+import { SortColumnValue } from '@/entities/User'
 import { isNumeric } from '@/shared/lib/helpers/common/isNumeric'
+import { SortOrderType } from '@/shared/types/SortOrderType'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { deleteCardThunk } from '../services/deleteCardThunk'
 import { deleteMultipleCardsThunk } from '../services/deleteMultipleCardsThunk'
+import { fetchCards, FetchCardsThunkResponse } from '../services/fetchCards'
+import { CardsFactor, ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
@@ -18,6 +16,7 @@ const initialState: ViewPageInitializerSchema = {
 	error: '',
 	// 
 	cards: [],
+	cardsFactor: {},
 	shelvesData: {},
 	cardsDataOriginal: {},
 	cardsDataEdited: {},
@@ -29,18 +28,22 @@ const initialState: ViewPageInitializerSchema = {
 	isMoveCardsModalOpen: false,
 	// 
 	shelfId: 'all',
-	boxId: 'new',
+	boxId: '',
+	boxSpecialIndex: 'new',
 	// 
 	selectedCardIds: [],
 	isMultiSelectActive: false,
 	isTableSettingsModalOpen: false,
 	// 
 	shelvesDataSaved: {},
+	shelvesDataFactor: {},
+	shelfIds: [],
 	abortedThunkIds: [],
 	multiSelectDeleteCardIdList: [],
 	multiSelectDeleteCardIdObject: {},
 	multiSelectMoveCardIdList: [],
 	multiSelectMoveCardIdObject: {},
+
 }
 // .addCase(
 // 	deleteShelfThunk.rejected,
@@ -73,14 +76,33 @@ const viewPageSlice = createSlice({
 			if (shelfId === 'all') return
 			const maxIndexForShelf = state.shelvesData[shelfId].maxIndexBox
 			// превосходит ли текущая выбранная коробка например box5 максимальную коробку у выбранной полки
-			if (isNumeric(state.boxId) && +state.boxId >= maxIndexForShelf) {
-				state.boxId = 'new'
-				return
-			}
-			if (shelfId !== 'all' && state.boxId === 'learning') {
-				state.boxId = 'new'
+			if (
+				(isNumeric(state.boxSpecialIndex) && +state.boxSpecialIndex >= maxIndexForShelf) ||
+				state.boxSpecialIndex === 'new' ||
+				state.boxSpecialIndex === 'learning'
+			) {
+				state.boxSpecialIndex = 'new'
+				state.boxId = state.shelvesDataFactor[shelfId]['new']
+			} else if (state.boxSpecialIndex === 'learnt') {
+				state.boxId = state.shelvesDataFactor[shelfId]['learnt']
+			} else {
+				state.boxId = state.shelvesDataFactor[shelfId][state.boxSpecialIndex]
 			}
 		},
+		// setActiveShelfId: (state, action: PayloadAction<string>) => {
+		// 	const shelfId = action.payload
+		// 	state.shelfId = shelfId
+		// 	if (shelfId === 'all') return
+		// 	const maxIndexForShelf = state.shelvesData[shelfId].maxIndexBox
+		// 	// превосходит ли текущая выбранная коробка например box5 максимальную коробку у выбранной полки
+		// 	if (isNumeric(state.boxId) && +state.boxId >= maxIndexForShelf) {
+		// 		state.boxId = 'new'
+		// 		return
+		// 	}
+		// 	if (shelfId !== 'all' && state.boxId === 'learning') {
+		// 		state.boxId = 'new'
+		// 	}
+		// },
 		setActiveSort: (state, action: PayloadAction<SortColumnValue>) => {
 			state.sort = action.payload
 		},
@@ -211,8 +233,15 @@ const viewPageSlice = createSlice({
 		// 	})
 		// },
 		// 
-		setActiveBoxId: (state, action: PayloadAction<string | number>) => {
+		setActiveBoxId: (state, action: PayloadAction<string>) => {
 			state.boxId = action.payload
+		},
+		setActiveBoxSpecialIndex: (state, action: PayloadAction<string>) => {
+			state.boxSpecialIndex = action.payload
+		},
+		setActiveBoxIdAndSpecialIndex: (state, action: PayloadAction<{ boxId: string, boxSpecialIndex: string, }>) => {
+			state.boxId = action.payload.boxId
+			state.boxSpecialIndex = action.payload.boxSpecialIndex
 		},
 		setViewPageIsMounted: (state) => {
 			state._viewPageMounted = true
@@ -304,7 +333,52 @@ const viewPageSlice = createSlice({
 			state.shelvesDataSaved[action.payload.shelfId]['lastBoxId'] = action.payload.boxId
 		},
 		setFetchedData: (state, action: PayloadAction<FetchCardsThunkResponse>) => {
-			state.cards = action.payload.cards
+			const cards = action.payload.cards
+			const shelvesData = action.payload.shelvesAndBoxesData
+			const shelfIds = Object.keys(shelvesData)
+			state.shelfIds = shelfIds
+			shelfIds.forEach(shelf => {
+				if (!state.shelvesDataFactor[shelf]) {
+					state.shelvesDataFactor[shelf] = {}
+				}
+				shelvesData[shelf].boxesItems.forEach(boxObject => {
+					if (boxObject.index === 0) {
+						state.shelvesDataFactor[shelf]['new'] = boxObject.id
+					} else if (boxObject.index === shelvesData[shelf].maxIndexBox) {
+						state.shelvesDataFactor[shelf]['learnt'] = boxObject.id
+					} else {
+						state.shelvesDataFactor[shelf][boxObject.index.toString()] = boxObject.id
+					}
+				})
+				// state.shelvesDataFactor[shelf] = {}
+			})
+			state.cards = cards
+			const cardsFactor: CardsFactor = {}
+			cards.forEach(card => {
+				if (cardsFactor[card.shelfId]) {
+					if (cardsFactor[card.shelfId][card.boxId]) {
+						cardsFactor[card.shelfId][card.boxId].push(card)
+					} else {
+						cardsFactor[card.shelfId][card.boxId] = [card]
+					}
+				} else {
+					cardsFactor[card.shelfId] = { [card.boxId]: [card] }
+				}
+			})
+			state.cardsFactor = cardsFactor
+			// cards.reduce((acc, card) => {
+			// 	card.shelfId
+			// 	if (state.cardsFactor[card.shelfId]) {
+			// 		if (state.cardsFactor[card.shelfId][card.boxId]) {
+			// 			state.cardsFactor[card.shelfId][card.boxId].push(card)
+			// 		} else {
+			// 			state.cardsFactor[card.shelfId][card.boxId] = [card]
+			// 		}
+			// 	} else {
+			// 		state.cardsFactor[card.shelfId][card.boxId] = [card]
+			// 	}
+
+			// }, {})
 			state.shelvesData = action.payload.shelvesAndBoxesData
 			state.isLoading = false
 			state.error = ''

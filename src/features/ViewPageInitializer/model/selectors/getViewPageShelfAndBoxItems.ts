@@ -37,26 +37,69 @@ export const getViewPageBoxItemsForWidget = createSelector(
 		getViewPageShelvesData,
 		getViewPageIsLoading,
 	],
-	(shelfId,  shelvesDataObject, isLoading) => {
+	(shelfId, shelvesDataObject, isLoading) => {
 		if (isLoading || !shelvesDataObject) return []
-		const tabs: TabItem[] = [
-			{ value: 'all', content: t('all cards') as string },
-			{ value: 'new', content: t('new cards') as string },
-		]
 		if (shelfId === 'all') {
-			tabs.push(
-				{ value: 'learning', content: t('learning cards') as string },
-				{ value: 'learnt', content: t('learnt cards') as string })
-			return tabs
+			return [
+				{ value: 'all', additional: 'all', content: t('all cards') as string },
+				{ value: 'new', additional: 'new', content: t('new cards') as string },
+				{ value: 'learning', additional: 'learning', content: t('learning cards') as string },
+				{ value: 'learnt', additional: 'learnt', content: t('learnt cards') as string }] as TabItem[]
 		}
+		const tabs: TabItem[] = [
+			{
+				value: 'all',
+				additional: 'all',
+				content: t('all cards') as string
+			},
+		]
 		const boxesData = shelvesDataObject[shelfId].boxesItems
-		boxesData?.slice(1, boxesData?.length - 1).forEach(box => {
-			tabs.push({ value: String(box.index), content: `${t('box text')} ${box.index}` })
+		tabs.push({
+			value: boxesData[0].id,
+			additional: 'new',
+			content: t('new cards') as string
 		})
-		tabs.push({ value: 'learnt', content: t('learnt cards') as string })
+		boxesData.slice(1, boxesData.length - 1).forEach(box => {
+			tabs.push({
+				value: box.id,
+				additional: box.index.toString(),
+				content: `${t('box text')} ${box.index}`
+			})
+		})
+		tabs.push({
+			value: boxesData.at(boxesData.length - 1)!.id,
+			additional: 'learnt',
+			content: t('learnt cards') as string
+		})
 		return tabs
 	}
 )
+// export const getViewPageBoxItemsForWidget = createSelector(
+// 	[
+// 		getViewPageShelfId,
+// 		getViewPageShelvesData,
+// 		getViewPageIsLoading,
+// 	],
+// 	(shelfId,  shelvesDataObject, isLoading) => {
+// 		if (isLoading || !shelvesDataObject) return []
+// 		const tabs: TabItem[] = [
+// 			{ value: 'all', content: t('all cards') as string },
+// 			{ value: 'new', content: t('new cards') as string },
+// 		]
+// 		if (shelfId === 'all') {
+// 			tabs.push(
+// 				{ value: 'learning', content: t('learning cards') as string },
+// 				{ value: 'learnt', content: t('learnt cards') as string })
+// 			return tabs
+// 		}
+// 		const boxesData = shelvesDataObject[shelfId].boxesItems
+// 		boxesData?.slice(1, boxesData?.length - 1).forEach(box => {
+// 			tabs.push({ value: String(box.index), content: `${t('box text')} ${box.index}` })
+// 		})
+// 		tabs.push({ value: 'learnt', content: t('learnt cards') as string })
+// 		return tabs
+// 	}
+// )
 
 
 // const tabs = useMemo(() => {

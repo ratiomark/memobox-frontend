@@ -1,11 +1,15 @@
 export {
+	getViewPageCardsFactor,
+	getViewPageCardsSortedFactor
+} from './model/selectors/getViewPageInitializer';
+
+export {
 	getViewPageShelfItems,
 	getViewPageBoxItemsForWidget,
-	
+
 } from './model/selectors/getViewPageShelfAndBoxItems';
 
 export { deleteCardThunk } from './model/services/deleteCardThunk';
-
 
 export { getViewPageShelvesDataDictionary } from './model/selectors/getViewPageShelvesDataDictionary';
 export {

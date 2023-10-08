@@ -18,7 +18,7 @@ import { Button } from '@/shared/ui/Button';
 import { motion } from 'framer-motion'
 import { TableSettingModal } from './TableSettingModal/TableSettingModal';
 import { BigDataLabelsSkeleton, Skeleton } from '@/shared/ui/Skeleton';
-
+import { getViewPageCardsFactor, getViewPageCardsSortedFactor } from '@/features/ViewPageInitializer';
 interface StatsData {
 	all: number
 	train: number
@@ -69,7 +69,8 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	// const shelfId = useSelector(getViewPageShelfId) ?? '1'
-	const cards = useSelector(getViewPageCardsFiltered)
+	const cards = useSelector(getViewPageCardsFactor)
+	// const cards = useSelector(getViewPageCardsFiltered)
 	const dispatch = useAppDispatch()
 	const onOpenColumnSettingsModal = () => {
 		dispatch(viewPageActions.setColumnSettingsIsOpen(true))

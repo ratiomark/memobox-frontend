@@ -16,12 +16,12 @@ import cls from './BoxesListViewWidget.module.scss'
 import { getViewPageBoxItemsForWidget } from '@/features/ViewPageInitializer';
 
 export const BoxesListViewWidget = memo(() => {
-	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
+	// const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	const dispatch = useAppDispatch()
 	// const shelfId = useSelector(getViewPageShelfId)
 	const boxId = useSelector(getViewPageBoxIdChecked)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
-	
+
 	const tabs = useSelector(getViewPageBoxItemsForWidget)
 
 	const onCancelMultiSelect = useCallback(() => {
@@ -30,7 +30,12 @@ export const BoxesListViewWidget = memo(() => {
 
 	const onBoxClick = useCallback((tabItem: TabItem) => {
 		onCancelMultiSelect()
-		dispatch(viewPageActions.setActiveBoxId(tabItem.value))
+		dispatch(viewPageActions.setActiveBoxIdAndSpecialIndex({
+			boxId: tabItem.value as string,
+			boxSpecialIndex: tabItem.additional as string
+		}))
+		// dispatch(viewPageActions.setActiveBoxSpecialIndex(tabItem.additional))
+		// dispatch(viewPageActions.setActiveBoxId(tabItem.value))
 	}, [dispatch, onCancelMultiSelect])
 
 	let tabsRendered;
@@ -46,7 +51,8 @@ export const BoxesListViewWidget = memo(() => {
 
 	const content = (
 		<AnimateSkeletonLoader
-			isLoading={isShelvesLoading || viewPageIsLoading}
+			isLoading={viewPageIsLoading}
+			// isLoading={isShelvesLoading || viewPageIsLoading}
 			noDelay={(tabs && tabs?.length > 1)}
 			skeletonComponent={<TabsSkeleton />}
 			// commonWrapper={false}

@@ -21,6 +21,7 @@ export const MultiSelectWrapper = (props: MultiSelectComponentProps) => {
 	}, [dispatch])
 
 	const onSelectAllCards = () => {
+		// VAR: тут нужно сделать selectAllCards() и изнутри слайса выбрать карточки
 		// dispatch(viewPageActions.selectAllCards([...cards.map(card => card.id)]))
 	}
 
@@ -46,10 +47,4 @@ export const MultiSelectWrapper = (props: MultiSelectComponentProps) => {
 		onMoveCardsClick={onMoveCardsClick}
 		onRemoveCards={onRemoveCards}
 	/>)
-	// const multiselect = useHotKeysCardsWidget()
-
-	// return (<>
-	// 	{multiselect}
-	// </>
-	// )
 }

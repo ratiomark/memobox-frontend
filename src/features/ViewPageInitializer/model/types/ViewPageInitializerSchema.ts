@@ -19,14 +19,22 @@ import { ShelvesDataViewPage } from '../services/fetchCards'
 // type Sort
 export interface ViewPageInitializerSchema {
 	shelfId: string
-	boxId: string | number
+	boxId: string
+	boxSpecialIndex: string
 	_viewPageMounted: boolean
 	// 
 	isLoading: boolean
 	error: string
 	// 
 	cards: CardSchemaExtended[]
+	cardsFactor: CardsFactor
+	shelvesDataFactor: {
+		[shelfId: string]: {
+			[boxSpecialIndex: string]: string
+		}
+	}
 	shelvesData: ShelvesDataViewPage
+	shelfIds: string[]
 	//
 	isTableSettingsModalOpen: boolean
 	sort: SortColumnValue
@@ -85,4 +93,10 @@ export interface ViewPageInitializerSchema {
 	// 	leftSide: boolean
 	// 	rightSide: boolean
 	// },
+}
+
+export interface CardsFactor {
+	[shelfId: string]: {
+		[boxId: string]: CardSchemaExtended[]
+	}
 }

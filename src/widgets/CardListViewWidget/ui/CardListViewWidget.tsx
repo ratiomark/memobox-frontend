@@ -19,13 +19,17 @@ import { MoveCardsModal } from './MoveCardsModal/MoveCardsModal';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CardModalSkeleton, CardsListSkeleton } from '@/shared/ui/Skeleton';
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
-import {  MultiSelectWrapper } from './MultiSelectScreen/MultiSelectWrapper';
+import { MultiSelectWrapper } from './MultiSelectScreen/MultiSelectWrapper';
+import { getViewPageCardsFactor, getViewPageCardsSortedFactor } from '@/features/ViewPageInitializer';
+import { StateSchema } from '@/app/providers/StoreProvider';
 
 export const CardListViewWidget = () => {
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	const dispatch = useAppDispatch()
-	const cards = useSelector(getViewPageCardsSorted)
+	// const cards = useSelector(getViewPageCardsSorted)
+	const cardsFactor = useSelector(getViewPageCardsSortedFactor)
+	// console.log(cardsFactor)
 
 	const onSelectCard = useCallback((cardId: string) => {
 		dispatch(viewPageActions.addOrRemoveCardFromSelectedCardIds(cardId))
@@ -40,7 +44,8 @@ export const CardListViewWidget = () => {
 
 	const content = useMemo(() => {
 		if (!viewPageIsMounted || viewPageIsLoading) return []
-		return cards?.map(item => (
+		return cardsFactor?.map(item => (
+			// return cards?.map(item => (
 			<CardListItem
 				onSelectCard={onSelectCard}
 				onOpenEditCardModal={onOpenEditCardModal}
@@ -48,14 +53,17 @@ export const CardListViewWidget = () => {
 				key={item.id}
 			/>)
 		)
-	}, [cards, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])
+	}, [cardsFactor, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])
+	// }, [cards, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])
 
 	const contentRendered = (
 		<AnimateSkeletonLoader
 			isLoading={(!viewPageIsMounted || viewPageIsLoading)}
 			skeletonComponent={<CardsListSkeleton />}
 			componentAfterLoading={content}
-			noDelay={cards.length > 0}
+			noDelay={!viewPageIsLoading}
+			// noDelay={cardsFactor && cardsFactor.length > 0}
+			// noDelay={cards.length > 0}
 			// commonWrapper={false}
 			classNameAbsoluteParts={cls.maxWidth}
 		// classNameForCommonWrapper={cls.cardsWrapper}
@@ -69,7 +77,7 @@ export const CardListViewWidget = () => {
 				{contentRendered}
 				{
 					!(!viewPageIsMounted || viewPageIsLoading)
-					&& !content.length
+					&& (content && !content.length)
 					&& <p>Кажется, тут нет карточек</p>
 				}
 

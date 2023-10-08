@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import type {
 	GridSelection,
 	LexicalEditor,
@@ -41,7 +33,6 @@ import {
 	KEY_ESCAPE_COMMAND,
 	SELECTION_CHANGE_COMMAND,
 } from 'lexical';
-import * as React from 'react';
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { useSettings } from '../context/SettingsContext';
 import { useSharedHistoryContext } from '../context/SharedHistoryContext';

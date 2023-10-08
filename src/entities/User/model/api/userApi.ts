@@ -40,6 +40,15 @@ const userApi = rtkApi.injectEndpoints({
 				url: `/users/${userId}`,
 				method: 'GET',
 			})
+		}),
+		getUserTokenValid: build.query<{token: string}, string>({
+			query: (token) => ({
+				url: '/auth',
+				method: 'POST',
+				body: {
+					token
+				}
+			})
 		})
 	}),
 })

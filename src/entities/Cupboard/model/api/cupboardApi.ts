@@ -5,10 +5,10 @@ import { RequestStatusType } from '@/shared/types/GeneralTypes';
 
 export const cupboardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
+		// NSA: готово
 		getCupboardData: build.query<CupboardSchema, void>({
 			query: () => ({
 				url: '/cupboard',
-				// url: '/cupboard',
 				method: 'GET'
 			}),
 			transformResponse: (response: CupboardSchema, meta, arg) => {
@@ -31,13 +31,6 @@ export const cupboardApi = rtkApi.injectEndpoints({
 				url: '/activeShelves',
 				method: 'GET'
 			}),
-			// transformResponse: (response: MovieList, meta, arg) => {
-			// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
-			// 		acc[current.id.toString()] = current
-			// 		return acc
-			// 	}, {})
-			// 	return data
-			// },
 		}),
 		updateShelfListOrder: build.mutation<ShelfSchema[], ShelfDndRepresentation[]>({
 			query: (arg) => ({
@@ -46,12 +39,14 @@ export const cupboardApi = rtkApi.injectEndpoints({
 				body: arg
 			}),
 		}),
+		// не нужно!
 		restoreAllShelves: build.mutation<ShelfSchema[], void>({
 			query: () => ({
 				url: '/restoreAllShelves',
 				method: 'POST',
 			}),
 		}),
+		// NSA: готово
 		createNewShelf: build.mutation<ShelfSchema, string>({
 			query: (title) => ({
 				url: '/createNewShelf',

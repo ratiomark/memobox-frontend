@@ -5,6 +5,7 @@ import { FlexDirection, FlexAlign, Flex } from '../Stack/Flex/Flex';
 
 export interface TabItem {
 	value: string | number
+	additional?: string | number
 	content: ReactNode
 }
 
