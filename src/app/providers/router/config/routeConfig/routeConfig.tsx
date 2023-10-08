@@ -13,6 +13,7 @@ import { SubscriptionPage } from '@/pages/SubscriptionPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { StatsPageSkeleton, StatsPage } from '@/pages/StatsPage';
 import { ViewPageSkeleton } from '@/pages/ViewPage';
+import { LoginPage } from '@/pages/LoginPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -23,6 +24,7 @@ export type AppRouteProps = RouteProps & {
 
 export const AppRoutes = {
 	main: 'main',
+	login: 'login',
 	view: 'view',
 	viewEmpty: 'viewEmpty',
 	settings: 'settings',
@@ -50,6 +52,7 @@ export const AppRoutes = {
 export type AppRoutes = keyof typeof AppRoutes;
 
 export const obtainRouteMain = () => '/'
+export const obtainRouteLogin = () => '/login'
 
 export const obtainRouteView = (shelfId?: string, boxId?: string | number) => {
 	if (!shelfId) return '/view/all/all'
@@ -81,6 +84,12 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	main: {
 		path: obtainRouteMain(),
 		element: <MainPage />,
+		suspense: <StatsAndActionsCupboardWidgetSkeleton />,
+		// authOnly: true,
+	},
+	login: {
+		path: obtainRouteLogin(),
+		element: <LoginPage />,
 		suspense: <StatsAndActionsCupboardWidgetSkeleton />,
 		// authOnly: true,
 	},

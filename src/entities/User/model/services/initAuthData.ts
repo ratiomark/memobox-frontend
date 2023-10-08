@@ -12,7 +12,6 @@ export const initAuthData = createAsyncThunk<UserWithToken, void, { rejectValue:
 		const { dispatch, rejectWithValue } = thunkAPI
 
 		const userToken = localDataService.getToken()
-		// const userId = localStorage.getItem(KEY_USER_ID_LOCAL_STORAGE) ?? 'some_id'
 		if (!userToken) return rejectWithValue('Нет токена')
 		try {
 			const response = await dispatch(getUserTokenValid(userToken)).unwrap() //разворачиваю в реальный результат

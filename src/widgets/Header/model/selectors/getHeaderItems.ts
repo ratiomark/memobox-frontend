@@ -6,6 +6,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import { getUserAuthData } from '@/entities/User'
 import { HeaderItemType } from '../types/items'
 import {
+	obtainRouteLogin,
 	obtainRouteMain,
 	obtainRouteSettings,
 	obtainRouteStats,
@@ -53,6 +54,11 @@ export const getHeaderItems = createSelector(
 			{
 				path: obtainRouteTrash(),
 				text: 'trash',
+				Icon: AboutIcon,
+			},
+			{
+				path: obtainRouteLogin(),
+				text: 'login/register',
 				Icon: AboutIcon,
 			},
 		]
