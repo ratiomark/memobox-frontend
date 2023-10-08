@@ -5,7 +5,7 @@ import cls from './LoginModal.module.scss'
 import clsx from 'clsx';
 import { Modal } from '@/shared/ui/Modal/Modal';
 import { Button } from '@/shared/ui/Button';
-import { RegisterForm } from '../RegisterForm/RegisterForm.lazy';
+import { RegisterForm } from '../LoginForm/RegisterForm.lazy';
 
 interface LoginModalProps {
 	className?: string;

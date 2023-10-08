@@ -49,9 +49,8 @@ const RegisterForm = memo(() => {
 		dispatch(loginActions.setPassword(value))
 	}, [dispatch])
 
-	const onClickLoginButton = useCallback(async () => {
+	const onClickRegisterButton = useCallback(async () => {
 		dispatch(registerUserByUserName({ username, password }))
-
 	}, [dispatch, username, password])
 
 	return (
@@ -87,7 +86,7 @@ const RegisterForm = memo(() => {
 						variant='outline'
 						size='size_m'
 						className={cls.loginBtn}
-						onClick={onClickLoginButton}
+						onClick={onClickRegisterButton}
 						disabled={isLoading}
 					>
 						{t('log in')}
