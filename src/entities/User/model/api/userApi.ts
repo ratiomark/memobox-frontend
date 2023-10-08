@@ -13,6 +13,7 @@ interface SetJsonSavedData {
 }
 
 
+// test comment API
 const userApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
 		// mutation потому что буду патчить изенения. Получаю юзера, аргументом SetJsonSettings
