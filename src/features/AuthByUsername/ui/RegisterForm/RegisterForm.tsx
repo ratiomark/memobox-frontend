@@ -19,7 +19,7 @@ import {
 } from '@/shared/lib/helpers/hooks/useAsyncReducer'
 import clsx from 'clsx'
 import { MyText } from '@/shared/ui/Typography'
-import { loginUserByUserName } from '@/entities/User'
+import { registerUserByUserName } from '@/entities/User'
 
 export interface LoginFormProps {
 	className?: string
@@ -27,14 +27,11 @@ export interface LoginFormProps {
 	onSuccess: () => void;
 }
 
-// Отдельно выносим редьюсеры от комопнента, чтобы лишний раз не создавать объект с редьюсерами, если так не сделать, то каждый раз при монтировании компонента LoginForm будет создаваться новый объект с редьюсерами и передаваться в хук, лучше сделать такой объект один раз
 const initialReducers: ReducersList = {
 	loginForm: loginReducer,
 }
 
-// eslint-disable-next-line
-const LoginForm = memo(() => {
-	// const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
+const RegisterForm = memo(() => {
 	const { t } = useTranslation()
 	const { dispatch, store } = useAsyncReducer({
 		reducers: initialReducers,
@@ -53,19 +50,16 @@ const LoginForm = memo(() => {
 	}, [dispatch])
 
 	const onClickLoginButton = useCallback(async () => {
-		console.log(username, password)
-		dispatch(loginUserByUserName({ username, password }))
-		// if (result.meta.requestStatus === 'fulfilled') {
-		// 	onSuccess()
-		// }
+		dispatch(registerUserByUserName({ username, password }))
+
 	}, [dispatch, username, password])
 
 	return (
 		<div className={cls.wrapper} >
 
 			<div className={clsx(cls.LoginForm)}>
-				<MyText text={t('Войти в систему')} />
-				{/* <MyText text={t('login form in modal')} /> */}
+				<MyText text={t('Регистрация в системе')} />
+				{/* <MyText text={t('regiset form in modal')} /> */}
 
 				<div className={cls.inputWrapper}>
 					{error && <MyText text={error} variant='error' />}
@@ -104,4 +98,4 @@ const LoginForm = memo(() => {
 	)
 })
 
-export default LoginForm
+export default RegisterForm

@@ -59,7 +59,7 @@ export interface UserSettings {
 	timeSleep: TimeSleepSettings
 }
 // то что возвращает бекэнд
-export interface User {
+export type User = {
 	id: string
 	username: string
 	name: string

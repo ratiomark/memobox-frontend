@@ -8,6 +8,8 @@ import { initAuthData } from '../services/initAuthData'
 import { JsonSavedData, SortColumnObject } from '../types/JsonSavedData'
 import { updateJsonSavedData } from '../..'
 import { jsonSavedDataColumnsMock } from '../mockData/jsonSavedDataMock'
+import { UserWithToken } from '../api/userApi'
+import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 const initialState: UserSchema = {
 	_mounted: false,
@@ -30,10 +32,11 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		setAuthData: (state, action: PayloadAction<User>) => {
+		setAuthData: (state, action: PayloadAction<UserWithToken>) => {
 			state.authData = action.payload
 			// обновляю флаги фич
 			setFeatureFlag(action.payload.features)
+			localDataService.setToken(action.payload.token)
 			localStorage.setItem(KEY_USER_ID_LOCAL_STORAGE, action.payload.id)
 			state._mounted = true
 		},
@@ -68,7 +71,8 @@ const userSlice = createSlice({
 		// setColumns
 		logout: (state) => {
 			state.authData = undefined
-			localStorage.removeItem(KEY_USER_ID_LOCAL_STORAGE)
+			localDataService.logout()
+			// localStorage.removeItem(KEY_USER_ID_LOCAL_STORAGE)
 		}
 	},
 	extraReducers: (builder) => {
@@ -90,13 +94,14 @@ const userSlice = createSlice({
 
 			.addCase(
 				initAuthData.fulfilled,
-				(state, action: PayloadAction<User>) => {
+				(state, action: PayloadAction<UserWithToken>) => {
 					const {
 						jsonSavedData,
 						userSettings,
 						...otherData
 					} = action.payload
 					state.authData = { ...otherData }
+					localDataService.setToken(action.payload.token)
 					setFeatureFlag(action.payload.features)
 					state._mounted = true
 					if (jsonSavedData) {

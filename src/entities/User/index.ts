@@ -1,4 +1,16 @@
-export  { updateJsonSavedData } from './model/services/updateJsonSavedData';
+export { loginUserByUserName } from './model/services/loginUserByUserName';
+export { registerUserByUserName } from './model/services/registerUserByUserName';
+
+export {
+	loginUser,
+	registerUser
+} from './model/api/userApi';
+
+export type {
+	LoginByUserNameProps
+} from './model/api/userApi';
+
+export { updateJsonSavedData } from './model/services/updateJsonSavedData';
 
 export {
 	getUserEmail,

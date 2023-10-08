@@ -66,7 +66,27 @@ server.post('/login', (req, res) => {
 		);
 
 		if (userFromBd) {
+			userFromBd.token = 'token_from_json_server'
 			return res.json(userFromBd);
+		}
+
+		return res.status(403).json({ message: 'User not found' });
+	} catch (e) {
+		console.log(e);
+		return res.status(500).json({ message: e.message });
+	}
+});
+server.post('/auth', (req, res) => {
+	try {
+		const { token } = req.body;
+		const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
+		const { users = [] } = db;
+		if (token === 'token_from_json_server') {
+			const userFromBd = users[0]
+			if (userFromBd) {
+				userFromBd.token = 'token_from_json_server'
+				return res.json(userFromBd);
+			}
 		}
 
 		return res.status(403).json({ message: 'User not found' });

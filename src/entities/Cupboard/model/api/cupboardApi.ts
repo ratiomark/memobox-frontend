@@ -18,7 +18,7 @@ export const cupboardApi = rtkApi.injectEndpoints({
 						...shelf,
 						isDeleting: false,
 						isDeleted: false,
-						deletingRequestStatus: 'idle' as RequestStatusType
+						// deletingRequestStatus: 'idle' as RequestStatusType
 					}
 				})
 				response.shelves = shelves

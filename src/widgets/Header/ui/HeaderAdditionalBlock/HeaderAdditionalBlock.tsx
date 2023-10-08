@@ -12,6 +12,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { headerActions } from '../../model/slice/headerSlice';
 import { useTranslation } from 'react-i18next';
+import { userActions } from '@/entities/User';
 
 interface HeaderAdditionalBlockProps {
 	className?: string;
@@ -41,8 +42,8 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 	}, [dispatch])
 
 	const onLogoutClick = useCallback(() => {
-		null
-	}, [])
+		dispatch(userActions.logout())
+	}, [dispatch])
 
 	const onSubscriptionClick = () => navigate(obtainRouteSubscription())
 

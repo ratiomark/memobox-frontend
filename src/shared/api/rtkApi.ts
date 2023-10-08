@@ -7,6 +7,7 @@ export const rtkApi = createApi({
 	tagTypes: ['Shelves', 'Cards'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: __API__,
+		// baseUrl: __API__BACK,
 		// функция интерцептор, которая ?(будет добавлять соответствующий хедер в наш конфиг)?
 		prepareHeaders: (headers) => {
 			// const token = localStorage.getItem(KEY_USER_ID_LOCAL_STORAGE) || ''

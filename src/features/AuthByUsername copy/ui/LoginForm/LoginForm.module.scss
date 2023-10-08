@@ -1,14 +1,9 @@
-.wrapper {
-  display: grid;
-  place-content: center;
-}
-
 .LoginForm {
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 10px 15px;
-  max-width: 300px;
+  width: 300px;
 }
 
 .inputWrapper {

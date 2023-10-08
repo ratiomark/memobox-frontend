@@ -81,51 +81,61 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	main: {
 		path: obtainRouteMain(),
 		element: <MainPage />,
-		suspense: <StatsAndActionsCupboardWidgetSkeleton />
+		suspense: <StatsAndActionsCupboardWidgetSkeleton />,
+		// authOnly: true,
 	},
 	view: {
 		path: obtainRouteView(':shelfId', ':boxId'),
 		element: <ViewPage />,
-		suspense: <ViewPageSkeleton />
+		suspense: <ViewPageSkeleton />,
+		authOnly: true,
 	},
 	viewEmpty: {
 		path: '/view',
 		element: <ViewPage />,
-		suspense: <ViewPageSkeleton />
+		suspense: <ViewPageSkeleton />,
+		authOnly: true,
 	},
 	settings: {
 		path: obtainRouteSettings(),
 		element: <SettingsPage />,
-		suspense: <SettingsPageWidgetSkeleton />
+		suspense: <SettingsPageWidgetSkeleton />,
+		authOnly: true,
 	},
 	stats: {
 		path: obtainRouteStats(),
 		// element: <StatsPageSkeleton />,
 		element: <StatsPage />,
-		suspense: <StatsPageSkeleton />
+		suspense: <StatsPageSkeleton />,
+		authOnly: true,
 	},
 	trash: {
 		path: obtainRouteTrash(),
-		element: <TrashPage />
+		element: <TrashPage />,
+		authOnly: true,
 	},
 	training: {
 		path: obtainRouteTraining(':shelfId', ':boxId'),
 		element: <TrainingPage />,
+		authOnly: true,
 		// suspense: <Susp/>
 	},
 	subscription: {
 		path: obtainRouteSubscription(),
 		element: <SubscriptionPage />,
+		authOnly: true,
 		// suspense: <Susp/>
 	},
 	profile: {
 		path: obtainRouteProfile(),
 		element: <ProfilePage />,
+		authOnly: true,
 		// suspense: <Susp/>
 	},
 	ABOUT: {
 		path: obtainRouteAbout(),
 		element: <AboutPage />,
+		authOnly: true,
 		// wrapper: Page
 	},
 	forbidden_page: {

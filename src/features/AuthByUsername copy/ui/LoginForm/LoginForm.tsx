@@ -19,7 +19,6 @@ import {
 } from '@/shared/lib/helpers/hooks/useAsyncReducer'
 import clsx from 'clsx'
 import { MyText } from '@/shared/ui/Typography'
-import { loginUserByUserName } from '@/entities/User'
 
 export interface LoginFormProps {
 	className?: string
@@ -33,8 +32,7 @@ const initialReducers: ReducersList = {
 }
 
 // eslint-disable-next-line
-const LoginForm = memo(() => {
-	// const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
+const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 	const { t } = useTranslation()
 	const { dispatch, store } = useAsyncReducer({
 		reducers: initialReducers,
@@ -44,61 +42,62 @@ const LoginForm = memo(() => {
 	const isLoading = useSelector(getLoginIsLoading)
 	const error = useSelector(getLoginError)
 
-	const onChangeUserName = useCallback((value: string) => {
-		dispatch(loginActions.setUserName(value))
-	}, [dispatch])
+	const onChangeUserName = useCallback(
+		(value: string) => {
+			dispatch(loginActions.setUserName(value))
+		},
+		[dispatch]
+	)
 
-	const onChangePassword = useCallback((value: string) => {
-		dispatch(loginActions.setPassword(value))
-	}, [dispatch])
+	const onChangePassword = useCallback(
+		(value: string) => {
+			dispatch(loginActions.setPassword(value))
+		},
+		[dispatch]
+	)
 
-	const onClickLoginButton = useCallback(async () => {
-		console.log(username, password)
-		dispatch(loginUserByUserName({ username, password }))
-		// if (result.meta.requestStatus === 'fulfilled') {
-		// 	onSuccess()
-		// }
-	}, [dispatch, username, password])
+	// const onClickLoginButton = useCallback(async () => {
+	// 	const result = await dispatch(loginUserByUserName({ username, password }))
+	// 	if (result.meta.requestStatus === 'fulfilled') {
+	// 		onSuccess()
+	// 	}
+	// }, [onSuccess, dispatch, username, password])
 
 	return (
-		<div className={cls.wrapper} >
+		<div className={clsx(cls.LoginForm, [className])}>
+			<MyText text={t('login form in modal')} />
 
-			<div className={clsx(cls.LoginForm)}>
-				<MyText text={t('Войти в систему')} />
-				{/* <MyText text={t('login form in modal')} /> */}
+			<div className={cls.inputWrapper}>
+				{error && <MyText text={error} variant='error' />}
 
-				<div className={cls.inputWrapper}>
-					{error && <MyText text={error} variant='error' />}
-
-					<label className={cls.label} htmlFor='userName'>
-						{t('enter userName')}
-					</label>
-					<Input
-						autoFocus
-						type='text'
-						id='userName'
-						value={username}
-						onChangeString={onChangeUserName}
-					/>
-					<label className={cls.label} htmlFor='password'>
-						{t('enter password')}
-					</label>
-					<Input
-						type='text'
-						id='password'
-						value={password}
-						onChangeString={onChangePassword}
-					/>
-					<Button
-						variant='outline'
-						size='size_m'
-						className={cls.loginBtn}
-						onClick={onClickLoginButton}
-						disabled={isLoading}
-					>
-						{t('log in')}
-					</Button>
-				</div>
+				<label className={cls.label} htmlFor='userName'>
+					{t('enter userName')}
+				</label>
+				<Input
+					autoFocus
+					type='text'
+					id='userName'
+					value={username}
+					onChangeString={onChangeUserName}
+				/>
+				<label className={cls.label} htmlFor='password'>
+					{t('enter password')}
+				</label>
+				<Input
+					type='text'
+					id='password'
+					value={password}
+					onChangeString={onChangePassword}
+				/>
+				<Button
+					variant='outline'
+					size='size_m'
+					className={cls.loginBtn}
+					// onClick={onClickLoginButton}
+					disabled={isLoading}
+				>
+					{t('log in')}
+				</Button>
 			</div>
 		</div>
 	)

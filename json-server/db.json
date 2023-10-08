@@ -1125,6 +1125,7 @@
     {
       "id": "1",
       "username": "mark",
+      "password": "mark",
       "name": "Mark",
       "email": "someEmail@mail.com",
       "emailVerified": false,

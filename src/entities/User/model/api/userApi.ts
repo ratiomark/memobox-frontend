@@ -12,10 +12,38 @@ interface SetJsonSavedData {
 	jsonSavedData: JsonSavedData
 }
 
+export interface UserWithToken extends User {
+	token: string
+}
+type ResponseWithToken = { token: string }
+
+export interface LoginByUserNameProps {
+	username: string
+	password: string
+}
+
 
 // test comment API
 const userApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
+		loginUser: build.mutation<UserWithToken, LoginByUserNameProps>({
+			query: (arg) => ({
+				url: '/login',
+				method: 'POST',
+				body: {
+					...arg
+				}
+			})
+		}),
+		registerUser: build.mutation<UserWithToken, LoginByUserNameProps>({
+			query: (arg) => ({
+				url: '/register',
+				method: 'POST',
+				body: {
+					...arg
+				}
+			})
+		}),
 		// mutation потому что буду патчить изенения. Получаю юзера, аргументом SetJsonSettings
 		setJsonSettings: build.mutation<User, SetJsonSettings>({
 			query: ({ userId, jsonSettings }) => ({
@@ -41,7 +69,7 @@ const userApi = rtkApi.injectEndpoints({
 				method: 'GET',
 			})
 		}),
-		getUserTokenValid: build.query<{token: string}, string>({
+		getUserTokenValid: build.query<UserWithToken, string>({
 			query: (token) => ({
 				url: '/auth',
 				method: 'POST',
@@ -58,3 +86,6 @@ const userApi = rtkApi.injectEndpoints({
 export const setJsonSettingsMutation = userApi.endpoints.setJsonSettings.initiate
 export const setJsonSavedDataMutation = userApi.endpoints.setJsonSavedData.initiate
 export const getUserDataByIdQuery = userApi.endpoints.getUserDataById.initiate
+export const loginUser = userApi.endpoints.loginUser.initiate
+export const registerUser = userApi.endpoints.registerUser.initiate
+export const getUserTokenValid = userApi.endpoints.getUserTokenValid.initiate

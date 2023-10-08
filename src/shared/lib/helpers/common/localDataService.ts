@@ -1,6 +1,13 @@
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { ShelfSchema } from '@/entities/Shelf';
-import { KEY_COMMON_SHELF_IS_COLLAPSED, KEY_SHELVES_LOCAL_STORAGE, KEY_THEME_LOCAL_STORAGE, KEY_VIEW_ROWS_LOCAL_STORAGE } from '@/shared/const/localStorage';
+import {
+	KEY_COMMON_SHELF_IS_COLLAPSED,
+	KEY_SHELVES_LOCAL_STORAGE,
+	KEY_THEME_LOCAL_STORAGE,
+	KEY_USER_TOKEN_LOCAL_STORAGE,
+	KEY_VIEW_ROWS_LOCAL_STORAGE,
+	
+} from '@/shared/const/localStorage';
 import { Theme } from '@/shared/types/Theme';
 
 interface IStorageService {
@@ -55,6 +62,9 @@ interface ILocalDataService {
 	getTheme(): Theme
 	setViewRows(viewRowsValue: string | number): void
 	getViewRows(): string
+	setToken(token: string | number): void
+	getToken(): string
+	logout(): void
 }
 
 class LocalDataService implements ILocalDataService {
@@ -88,6 +98,12 @@ class LocalDataService implements ILocalDataService {
 	getTheme(): Theme {
 		return this.getData(KEY_THEME_LOCAL_STORAGE)
 	}
+	setToken(token: string): void {
+		this.saveData(KEY_USER_TOKEN_LOCAL_STORAGE, token)
+	}
+	getToken(): string {
+		return this.getData(KEY_USER_TOKEN_LOCAL_STORAGE)
+	}
 	setViewRows(viewRows: string | number): void {
 		this.saveData(KEY_VIEW_ROWS_LOCAL_STORAGE, viewRows)
 	}
@@ -100,6 +116,9 @@ class LocalDataService implements ILocalDataService {
 	}
 	getCommonShelfCollapsed() {
 		return this.getData(KEY_COMMON_SHELF_IS_COLLAPSED) ?? true
+	}
+	logout() {
+		this.removeData(KEY_USER_TOKEN_LOCAL_STORAGE)
 	}
 }
 

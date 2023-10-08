@@ -1,25 +1,24 @@
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { KEY_USER_ID_LOCAL_STORAGE } from '@/shared/const/localStorage'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getUserDataByIdQuery } from '../api/userApi'
+import { UserWithToken, getUserDataByIdQuery, getUserTokenValid } from '../api/userApi'
 import { User } from '../types/user'
+import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const initAuthData = createAsyncThunk<User, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const initAuthData = createAsyncThunk<UserWithToken, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'user/initAuthData',
 	async (_, thunkAPI) => {
 		const { dispatch, rejectWithValue } = thunkAPI
 
-		const userId = localStorage.getItem(KEY_USER_ID_LOCAL_STORAGE) ?? 'some_id'
-
-		if (!userId) return rejectWithValue('Нет userId в локал сторедж')
-
+		const userToken = localDataService.getToken()
+		// const userId = localStorage.getItem(KEY_USER_ID_LOCAL_STORAGE) ?? 'some_id'
+		if (!userToken) return rejectWithValue('Нет токена')
 		try {
-
-			const response = await dispatch(getUserDataByIdQuery(userId)).unwrap() //разворачиваю в реальный результат
-			// console.log('ssssssssssssssssssssssssss')
-			// console.log(response)
-			// console.log('ssssssssssssssssssssssssss')
+			const response = await dispatch(getUserTokenValid(userToken)).unwrap() //разворачиваю в реальный результат
+			if (!response.token) {
+				return rejectWithValue('Токен не валидный')
+			}
 			return response
 
 		} catch (err) {
