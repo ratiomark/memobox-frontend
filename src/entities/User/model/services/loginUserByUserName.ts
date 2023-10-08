@@ -3,7 +3,6 @@ import { ThunkExtraArg } from '@/app/providers/StoreProvider'
 import i18n from '@/shared/config/i18n/i18n'
 import { LoginByUserNameProps, UserWithToken, loginUser, } from '../api/userApi'
 import { userActions } from '../slice/userSlice'
-import { User } from '../types/user'
 
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
@@ -13,22 +12,17 @@ export const loginUserByUserName = createAsyncThunk<UserWithToken, LoginByUserNa
 
 		try {
 			const { dispatch } = thunkAPI
-			// const response = await axios.post('http://localhost:8000/login', { 	username, password })
-			// делаю тоже самое. но через кастомное апи
 			const response = await dispatch(loginUser({ username, password })).unwrap()
-			// const response = await thunkAPI.extra!.api!.post<User>('/login', { username, password })
 
 			if (!response.token) {
 				throw new Error()
 			}
-			// const responseData = response.token
 
 			thunkAPI.dispatch(userActions.setAuthData(response))
 
 			return response
 
 		} catch (err) {
-			// slo
 			return thunkAPI.rejectWithValue(i18n.t('error on login'))
 		}
 	}
