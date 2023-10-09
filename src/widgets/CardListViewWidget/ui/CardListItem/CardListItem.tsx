@@ -1,50 +1,21 @@
 import clsx from 'clsx';
 import cls from './CardListItem.module.scss';
-import { useTranslation } from 'react-i18next';
 import { CardSchemaExtended, getCardMainData } from '@/entities/Card';
 import { MyText } from '@/shared/ui/Typography';
-// import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
 // import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { getViewPageCardEditedListIds, getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
-import { ChangeEvent, MouseEvent, useEffect, useMemo, useState, } from 'react';
+import { ChangeEvent, MouseEvent,  useMemo, } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
-import { AnimatePresence, motion } from 'framer-motion'
+import {  motion } from 'framer-motion'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { Collapsible } from '@/shared/ui/Animations';
-import UnsavedIcon from '@/shared/assets/icons/unsavedIcon.svg'
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
+import EyeIcon from '@/shared/assets/icons/eye2.svg'
 import { formatDate } from '@/shared/lib/helpers/common/formaters';
 import { EditorCardPresenter } from '@/shared/ui/LexicalEditor';
 import { CardDeleting } from '../CardDeleting/CardDeleting';
-
-const animations = {
-	selected: {
-		boxShadow: '0 0 3px 0px rgb(51 214 159 / 20%)',
-		// border: '1px solid var(--accent)',
-		transition: { duration: 0.7 }
-	},
-	regular: {
-		// boxShadow:  '0 1px 4px rgb(0 0 0 / 10%)'
-		// border: '1px solid var(--accent)',
-		// transition: { duration: 2 }
-	}
-}
-const liAnimations = {
-	hidden: {
-		opacity: 0.2,
-		// border: '1px solid var(--accent)',
-		// transition: { duration: 0.7 }
-	},
-	visible: {
-		opacity: 1,
-		// boxShadow:  '0 1px 4px rgb(0 0 0 / 10%)'
-		// border: '1px solid var(--accent)',
-		// transition: { duration: 2 }
-	}
-}
-
 
 interface CardListItemProps {
 	className?: string
@@ -60,21 +31,22 @@ export const CardListItem = (props: CardListItemProps) => {
 		onSelectCard,
 		onOpenEditCardModal,
 	} = props
+	const dispatch = useAppDispatch()
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
 	const shelvesDataDictionary = useSelector(getViewPageShelvesDataDictionary)
 	const cardsEditedListIds = useSelector(getViewPageCardEditedListIds)
 	const isCardEdited = cardsEditedListIds?.includes(card.id)
 	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
-	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
-	const dispatch = useAppDispatch()
-
-	// const [showEditor, setShowEditor] = useState(false)
-	// const toogleEditor = () => setShowEditor(prev => !prev)
 
 	const onDeleteCard = (e: MouseEvent) => {
 		e.stopPropagation()
 		dispatch(viewPageActions.setCardIsDeleting(card.id))
+		// dispatch(viewPageActions.setCardIsDeleting(getCardMainData(card)))
+	}
+	const onOpenCardEditModalEyeIcon = (e: MouseEvent) => {
+		e.stopPropagation()
+		onOpenEditCardModal(card)
 		// dispatch(viewPageActions.setCardIsDeleting(getCardMainData(card)))
 	}
 
@@ -85,8 +57,8 @@ export const CardListItem = (props: CardListItemProps) => {
 
 	const onSelectCardByCardClick = (e: MouseEvent<HTMLLIElement>) => {
 		if (e.target instanceof HTMLElement && (
-			e.target.tagName === 'INPUT'
-			|| e.target.tagName === 'BUTTON'
+			e.target.tagName === 'INPUT' ||
+			e.target.tagName === 'BUTTON'
 		)) {
 			return
 		}
@@ -192,7 +164,19 @@ export const CardListItem = (props: CardListItemProps) => {
 								{columnsRendered}
 							</div>
 							{isMultiSelectActive
-								? <div className={cls.icon} />
+								? (
+									<Icon
+										Svg={EyeIcon}
+										type='main'
+										clickable
+										withFill={false}
+										width={22}
+										height={22}
+										onClick={onOpenCardEditModalEyeIcon}
+										buttonSameSize={false}
+										className={clsx(cls.icon, cls.eyeIcon)} />
+								)
+								// ? <div className={cls.icon} />
 								: (
 									<Icon
 										Svg={TrashIcon}

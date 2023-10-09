@@ -17,9 +17,8 @@ import { Skeleton, TextEditorSkeleton } from '@/shared/ui/Skeleton';
 import { getCupboardIsLoading, getShelfItems } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
-import { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
-import { memo, useRef, useMemo, useCallback, Suspense, ReactNode } from 'react';
+import { memo, useRef, useMemo, useCallback, Suspense } from 'react';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
 import { EditorUniversal } from '@/shared/ui/LexicalEditor';
@@ -52,12 +51,16 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 		shelvesAndBoxesRef: shelvesAndBoxesRef.current,
 	})
 
-	const onChangeQuestion = useCallback((editorState: EditorState) => {
-		dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
+	const onChangeQuestion = useCallback((editorState: string) => {
+		// const onChangeQuestion = useCallback((editorState: EditorState) => {
+		dispatch(cupboardShelfListActions.setQuestionText(editorState))
+		// dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
 
-	const onChangeAnswer = useCallback((editorState: EditorState) => {
-		dispatch(cupboardShelfListActions.setAnswerText(JSON.stringify(editorState.toJSON())))
+	const onChangeAnswer = useCallback((editorState: string) => {
+		// const onChangeAnswer = useCallback((editorState: EditorState) => {
+		dispatch(cupboardShelfListActions.setAnswerText(editorState))
+		// dispatch(cupboardShelfListActions.setAnswerText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
 
 	const onCloseCardModal = useCallback((isOpen: boolean) => {
@@ -146,7 +149,6 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 	}, [onChangeAnswer, answerTextCardModal, editorMinHeight, t])
 
 	if (!checked) {
-		console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD')
 		return props.cardModalSkeleton
 	}
 

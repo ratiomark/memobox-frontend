@@ -54,14 +54,18 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 		shelvesAndBoxesRef: shelvesAndBoxesRef.current,
 	})
 
-	const onChangeQuestion = useCallback((editorState: EditorState) => {
-		dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
+	const onChangeQuestion = useCallback((editorState: string) => {
+		// const onChangeQuestion = useCallback((editorState: EditorState) => {
+		dispatch(cupboardShelfListActions.setQuestionText(editorState))
+		// dispatch(cupboardShelfListActions.setQuestionText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
 
-	const onChangeAnswer = useCallback((editorState: EditorState) => {
-		dispatch(cupboardShelfListActions.setAnswerText(JSON.stringify(editorState.toJSON())))
+	const onChangeAnswer = useCallback((editorState: string) => {
+		// const onChangeAnswer = useCallback((editorState: EditorState) => {
+		dispatch(cupboardShelfListActions.setAnswerText(editorState))
+		// dispatch(cupboardShelfListActions.setAnswerText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
-
+	
 	const onCloseCardModal = useCallback((isOpen: boolean) => {
 		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(isOpen))
 	}, [dispatch])

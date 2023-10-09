@@ -153,8 +153,11 @@ export const getViewPageCardsFactor = createSelector(
 )
 
 export const getViewPageCurrentCardIds = (state: StateSchema) => {
-	return getViewPageCardsFactor(state).map(card => card.id)
+	return getViewPageCardsSorted(state).map(card => card.id)
 }
+// export const getViewPageCurrentCardIds = (state: StateSchema) => {
+// 	return getViewPageCardsFactor(state).map(card => card.id)
+// }
 
 export const getViewPageSortChecked = createSelector(
 	[

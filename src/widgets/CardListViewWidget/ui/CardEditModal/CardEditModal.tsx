@@ -95,7 +95,7 @@ export const CardEditModal = memo(() => {
 	// 		})
 	// 	})
 	// }, [shelvesData, isShelvesLoading])
-
+	// VAR: тут нужно из селектора достать 
 	const boxItems = useMemo(() => {
 		if (isShelvesLoading) return []
 		const currentShelf = shelvesData?.find(shelf => shelf.id === editedShelf)
@@ -128,12 +128,16 @@ export const CardEditModal = memo(() => {
 		dispatch(viewPageActions.setCardBoxId(boxIndex))
 	}, [dispatch])
 
-	const onChangeQuestion = useCallback((editorState: EditorState) => {
-		dispatch(viewPageActions.setCardQuestionText(JSON.stringify(editorState.toJSON())))
+	const onChangeQuestion = useCallback((editorState: string) => {
+	// const onChangeQuestion = useCallback((editorState: EditorState) => {
+		dispatch(viewPageActions.setCardQuestionText(editorState))
+		// dispatch(viewPageActions.setCardQuestionText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
 
-	const onChangeAnswer = useCallback((editorState: EditorState) => {
-		dispatch(viewPageActions.setCardAnswerText(JSON.stringify(editorState.toJSON())))
+	const onChangeAnswer = useCallback((editorState: string) => {
+	// const onChangeAnswer = useCallback((editorState: EditorState) => {
+		dispatch(viewPageActions.setCardAnswerText(editorState))
+		// dispatch(viewPageActions.setCardAnswerText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
 
 	const onCloseCardModal = useCallback((isOpen: boolean) => {

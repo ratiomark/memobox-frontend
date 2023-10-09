@@ -1,21 +1,29 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { EditorState } from 'lexical';
-import { useEffect } from 'react';
+import { $getRoot, EditorState } from 'lexical';
+import { useEffect, useState } from 'react';
 
 type ChangePluginProps = {
-	onChange?: (editorState: EditorState) => void
+	onChange: (editorState: string) => void
+	// onChange: (editorState: EditorState) => void
 }
 export function ChangePlugin(props: ChangePluginProps) {
-	// Access the editor through the LexicalComposerContext
 	const [editor] = useLexicalComposerContext();
+	const [isFirstRender, setIsFirstRender] = useState(true)
 	// Wrap our listener in useEffect to handle the teardown and avoid stale references.
 	useEffect(() => {
-		// most listeners return a teardown function that can be called to clean them up.
-		return editor.registerUpdateListener(({ editorState }) => {
-			// call onChange here to pass the latest state up to the parent.
-			props.onChange && props.onChange(editorState);
-		});
-	}, [editor, props]);
+		// предотвращает моментальную отработку onChange, отработает только когда действительно будет что-то введено с помощью клавиатуры
+		if (isFirstRender) {
+			setIsFirstRender(false)
+			return
+		}
+		return editor.registerUpdateListener(({ editorState, prevEditorState }) => {
+			// без сравнения будет выделение текста(или изменение позиции курсора) считать за изменения контента
+			const state = JSON.stringify(editorState.toJSON())
+			if (state !== JSON.stringify(prevEditorState.toJSON())) {
+				props.onChange(state)
+			}
+		})
+	}, [editor, props, isFirstRender]);
 
 	return null
 }

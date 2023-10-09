@@ -148,7 +148,7 @@ function Editor(props: EditorProps) {
 				{/* {isMaxLength && <MaxLengthPlugin maxLength={30} />} */}
 				<DragDropPaste />
 				<AutoFocusPlugin />
-				<ChangePlugin onChange={onChange} />
+				{/* <ChangePlugin onChange={onChange} /> */}
 				<CommandsPlugin />
 				<>
 

@@ -60,7 +60,8 @@ import { HTMLExporterPlugin } from './plugins/HTMLExporterPlugin/HTMLExporterPlu
 // }
 
 interface EditorProps {
-	onChange?: (editorState: EditorState) => void
+	onChange?: (editorState: string) => void
+	// onChange?: (editorState: EditorState) => void
 	// initialState?: string
 	editorState?: string | null
 	editable?: boolean
