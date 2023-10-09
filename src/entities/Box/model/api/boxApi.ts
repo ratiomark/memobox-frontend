@@ -19,7 +19,6 @@ export const boxApi = rtkApi.injectEndpoints({
 				}
 			}),
 			transformResponse: (response: CardSchema[], meta, arg) => {
-
 				const data: ShelfRepresentedByBoxes = {}
 				response.forEach(card => {
 					const box = card.boxIndex.toString()

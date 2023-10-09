@@ -4,8 +4,6 @@ import { CardSchema, CardSchemaExtended, NewCardSchema } from '../types/CardSche
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { FetchCardsThunkResponse } from '@/features/ViewPageInitializer';
 
-// type 
-// type: 'moveCards' | 'removeCards'
 interface UpdateCardsRequestBase {
 	cardIds: string[]
 }
@@ -37,16 +35,7 @@ export const cardApi = rtkApi.injectEndpoints({
 				}
 			}),
 		}),
-		getCardsByShelfId: build.query<CardSchema[], string>({
-			query: (id) => ({
-				url: '/cards',
-				method: 'GET',
-				params: {
-					shelf: id,
-					// box: boxId
-				}
-			}),
-		}),
+		// NSA: это запрос для станицы /view
 		getAllCards: build.query<FetchCardsThunkResponse, void>({
 			query: () => ({
 				url: '/cards',
@@ -65,6 +54,25 @@ export const cardApi = rtkApi.injectEndpoints({
 			},
 			providesTags: ['Cards']
 		}),
+		getCardsByShelfId: build.query<CardSchema[], string>({
+			query: (shelfId) => ({
+				url: '/cards',
+				method: 'GET',
+				body: {
+					shelfId
+				}
+			}),
+		}),
+		getCardsByShelfAndBoxId: build.query<CardSchema[], {shelfId: string, boxId: string}>({
+			query: ({shelfId, boxId}) => ({
+				url: '/cards',
+				method: 'GET',
+				body: {
+					shelfId,
+					boxId
+				}
+			}),
+		}),
 		// 	transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
 		// 		const newCards = response.cards.map(card => {
 		// 			return ({
@@ -81,22 +89,15 @@ export const cardApi = rtkApi.injectEndpoints({
 		// }),
 		updateCards: build.mutation<CardSchema[], UpdateCardsRequest>({
 			query: (arg) => ({
-
 				url: '/cards',
 				method: 'PATCH',
-				body: { ...arg }
+				body: {
+					...arg
+				}
 			}),
 			invalidatesTags: ['Cards']
 		}),
-		// getAllCards: build.query<CardSchemaExtended[], void>({
-		// 	query: () => ({
-		// 		url: '/cards',
-		// 		method: 'GET',
-		// 	}),
-		// 	transformResponse: (response: CardSchema[], meta, arg) => { 
-		// 		return response.map(card=>({...card, deleted: false}))
-		// 	}
-		// }),
+
 		getBoxByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
 			query: ({ shelfId, boxId }) => ({
 				url: '/cards',
