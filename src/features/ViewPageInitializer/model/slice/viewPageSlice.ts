@@ -1,4 +1,4 @@
-import { CardSchemaExtended } from '@/entities/Card'
+import { CardMainData, CardSchemaExtended } from '@/entities/Card'
 import { SortColumnValue } from '@/entities/User'
 import { isNumeric } from '@/shared/lib/helpers/common/isNumeric'
 import { SortOrderType } from '@/shared/types/SortOrderType'
@@ -166,29 +166,42 @@ const viewPageSlice = createSlice({
 		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
 			state.isMultiSelectActive = action.payload
 		},
-		setCardIsDeleting: (state, action: PayloadAction<{ shelfId: string, boxId: string, cardId: string }>) => {
-			const { shelfId, boxId, cardId } = action.payload
-			state.cardsShelfIdBoxIdObj[shelfId][boxId]
-				.some(card => {
-					if (card.id === cardId) {
-						card.isDeleting = true
-						return true
-					}
-					return false
-				})
-			// state.cards.find(card => {
-			// 	if (card.id === action.payload) {
-			// 		card.isDeleting = true
-			// 		// return true
-			// 	}
-			// })
-		},
-		setCardIsNotDeleting: (state, action: PayloadAction<string>) => {
+		// setCardIsDeleting: (state, action: PayloadAction<CardMainData>) => {
+		// 	const { shelfId, boxId, cardId } = action.payload
+		// 	state.cardsShelfIdBoxIdObj[shelfId][boxId]
+		// 	.some(card => {
+		// 		if (card.id === cardId) {
+		// 			card.isDeleting = true
+		// 			return true
+		// 		}
+		// 		return false
+		// 	})
+		setCardIsDeleting: (state, action: PayloadAction<string>) => {
 			state.cards.find(card => {
 				if (card.id === action.payload) {
-					card.isDeleting = false
-					// return true
+					card.isDeleting = true
+					return true
 				}
+				return false
+			})
+		},
+		// setCardIsNotDeleting: (state, action: PayloadAction<CardMainData>) => {
+		// 	const { shelfId, boxId, cardId } = action.payload
+		// 	state.cardsShelfIdBoxIdObj[shelfId][boxId]
+		// 		.some(card => {
+		// 			if (card.id === cardId) {
+		// 				card.isDeleting = false
+		// 				return true
+		// 			}
+		// 			return false
+		// 		})
+		setCardIsNotDeleting: (state, action: PayloadAction<string>) => {
+			state.cards.some(card => {
+				if (card.id === action.payload) {
+					card.isDeleting = false
+					return true
+				}
+				return false
 			})
 		},
 		setCardIsDeleted: (state, action: PayloadAction<string>) => {

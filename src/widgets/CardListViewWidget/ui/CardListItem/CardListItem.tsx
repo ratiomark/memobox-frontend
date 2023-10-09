@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import cls from './CardListItem.module.scss';
 import { useTranslation } from 'react-i18next';
-import { CardSchemaExtended } from '@/entities/Card';
+import { CardSchemaExtended, getCardMainData } from '@/entities/Card';
 import { MyText } from '@/shared/ui/Typography';
 // import TrashIcon from '@/shared/assets/icons/trashIcon.svg'
 // import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { getViewPageCardEditedListIds, getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
-import { ChangeEvent, MouseEvent, useMemo, useState, } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useMemo, useState, } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
@@ -56,12 +56,10 @@ interface CardListItemProps {
 
 export const CardListItem = (props: CardListItemProps) => {
 	const {
-		className,
 		card,
 		onSelectCard,
 		onOpenEditCardModal,
 	} = props
-	// const { t } = useTranslation()
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
 	const shelvesDataDictionary = useSelector(getViewPageShelvesDataDictionary)
@@ -71,16 +69,13 @@ export const CardListItem = (props: CardListItemProps) => {
 	// const [cardsSelected, setCardsSelected] = useState<CardSchema[]>([])\
 	const dispatch = useAppDispatch()
 
-	const [showEditor, setShowEditor] = useState(false)
-	const toogleEditor = () => setShowEditor(prev => !prev)
+	// const [showEditor, setShowEditor] = useState(false)
+	// const toogleEditor = () => setShowEditor(prev => !prev)
 
 	const onDeleteCard = (e: MouseEvent) => {
 		e.stopPropagation()
-		dispatch(viewPageActions.setCardIsDeleting({
-			shelfId: card.shelfId,
-			boxId: card.boxId,
-			cardId: card.id,
-		}))
+		dispatch(viewPageActions.setCardIsDeleting(card.id))
+		// dispatch(viewPageActions.setCardIsDeleting(getCardMainData(card)))
 	}
 
 	const onSelectCardHandle = (e: ChangeEvent) => {
@@ -131,7 +126,7 @@ export const CardListItem = (props: CardListItemProps) => {
 						align='center'
 						key={column.index}
 						// text={card[columnValue]}
-						text={shelvesDataDictionary?.[card[columnValue]]?.shelfTitle ?? 'Ошибка в данных'}
+						text={shelvesDataDictionary?.[card[columnValue]]?.shelfTitle ?? '__error__'}
 						size='s'
 					/>
 				}
@@ -160,9 +155,8 @@ export const CardListItem = (props: CardListItemProps) => {
 			isOpen={!card.isDeleted}
 			className={cls.cardCollapse}
 		>
-			{card.isDeleting ?
-				<CardDeleting cardId={card.id} isCardDeleting={card.isDeleting} />
-		
+			{card.isDeleting
+				? (<CardDeleting card={card} cardId={card.id} isCardDeleting={card.isDeleting} />)
 				: (
 					<motion.li
 						// initial={{ opacity: 0 }}
@@ -180,15 +174,7 @@ export const CardListItem = (props: CardListItemProps) => {
 							isChecked={isCardSelected}
 							onClick={onSelectCardHandle}
 						/>
-						{/* {isCardEdited && <div className={cls.cardEditedLabel} >
-						<div className={cls.innerLabel} />
-					</div>} */}
-						{/* {isCardEdited && <div className={cls.cardEditedLabel} >
-						<p style={{ color: 'white' }}>Edited</p>
-					</div>} */}
-						<div
-							className={cls.CardListItem}
-						>
+						<div className={cls.CardListItem}>
 							{isCardEdited && <div className={cls.cardEditedLabel} >
 								<div className={cls.innerLabel} />
 								{/* <Icon
@@ -196,7 +182,8 @@ export const CardListItem = (props: CardListItemProps) => {
 							height={24}
 							Svg={UnsavedIcon}
 						/> */}
-							</div>}
+							</div>
+							}
 							<div className={cls.content} >
 								<div className={cls.mainContentWrapper} >
 									{question}
@@ -224,6 +211,7 @@ export const CardListItem = (props: CardListItemProps) => {
 		</Collapsible>
 	)
 }
+
 
 function prepareEditorStateOnlyFirstFourNodes(editorStateStr: string) {
 	const editorStateParsed = JSON.parse(editorStateStr)

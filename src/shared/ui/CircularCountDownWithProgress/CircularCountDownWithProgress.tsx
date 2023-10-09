@@ -8,13 +8,14 @@ interface CircularCountDownWithProgressProps {
 	size?: number
 	strokeWidth?: number
 	trailStrokeWidth?: number
+	fz?: number
 }
 
-export const CircularCountDownWithProgress = ({ duration, size, strokeWidth, trailStrokeWidth }: CircularCountDownWithProgressProps) => {
+export const CircularCountDownWithProgress = ({ duration, size, fz, strokeWidth, trailStrokeWidth }: CircularCountDownWithProgressProps) => {
 	const renderTime = ({ remainingTime }: { remainingTime: number }) => {
 		return (
 			<div className="timerInnerPart">
-				<div className="value">{remainingTime}</div>
+				<div style={{ fontSize: fz ? fz : undefined }} className="value">{remainingTime}</div>
 			</div>
 		)
 	}

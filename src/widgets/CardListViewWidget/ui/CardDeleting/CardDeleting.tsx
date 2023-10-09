@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './CardDeleting.module.scss';
-import { CardSchemaExtended } from '@/entities/Card';
+import { CardSchemaExtended, getCardMainData } from '@/entities/Card';
 import { Button } from '@/shared/ui/Button';
 import { DURATION_SHELF_DELETION_MILLISEC } from '@/shared/const/animation';
 import { CircularCountDownWithProgress } from '@/shared/ui/CircularCountDownWithProgress';
@@ -13,11 +13,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { viewPageActions } from '@/features/ViewPageInitializer';
 import { useDeleteWithCountdown } from '@/shared/lib/helpers/hooks/useDeleteWithCountdown';
 import { idPrefixCardDeletion } from '@/shared/const/idsAndDataAttributes';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
+import { size } from 'lodash';
 
 
 interface CardDeletingProps {
 	// className?: string
-	// card: CardSchemaExtended
+	card: CardSchemaExtended
 	cardId: string
 	isCardDeleting: boolean
 	// onCancelDeletion: () => void
@@ -28,30 +30,31 @@ interface CardDeletingProps {
 export const CardDeleting = (props: CardDeletingProps) => {
 	const {
 		// onCancelDeletion,
+		card,
 		cardId,
 		isCardDeleting
 	} = props
-
+	const { t } = useTranslation('viewPage')
 	const dispatch = useAppDispatch()
+	const circularCountSizes = getSizesForCircularCountDown()
+
 	const deleteCard = useCallback(() => {
 		dispatch(deleteCardThunk(cardId))
 	}, [dispatch, cardId])
+
 	const { timer } = useDeleteWithCountdown({
 		startCondition: isCardDeleting,
 		deletionFn: deleteCard,
 		duration: DURATION_SHELF_DELETION_MILLISEC,
 	})
-	// const [removeShelfMutation] = useRemoveShelfMutation()
-	// const [timer, setTimer] = useState<TimeoutId | null>(null)
 
 	const onCancelDeletion = () => {
 		if (timer) clearTimeout(timer)
+		// dispatch(viewPageActions.setCardIsNotDeleting(getCardMainData(card)))
 		dispatch(viewPageActions.setCardIsNotDeleting(cardId))
 		dispatch(viewPageActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
 		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
 	}
-
-	const { t } = useTranslation('viewPage')
 
 	return (
 		<div className={cls.item}>
@@ -63,7 +66,9 @@ export const CardDeleting = (props: CardDeletingProps) => {
 						<Button className={cls.button} fontWeight='300' onClick={onCancelDeletion}>
 							{t('cancel card deletion')}
 						</Button>
-						<CircularCountDownWithProgress duration={DURATION_SHELF_DELETION_MILLISEC / 1000} />
+						<CircularCountDownWithProgress
+							{...circularCountSizes}
+							duration={DURATION_SHELF_DELETION_MILLISEC / 1000} />
 					</div>
 
 				</div>
@@ -72,7 +77,16 @@ export const CardDeleting = (props: CardDeletingProps) => {
 		</div>
 	)
 }
-
+const getSizesForCircularCountDown = () => {
+	const viewRows = localDataService.getViewRows()
+	if (viewRows === 2) {
+		return { size: 48, strokeWidth: 4 }
+	}
+	if (viewRows === 1) {
+		return { size: 32, strokeWidth: 4 }
+	}
+	return {}
+}
 
 // useEffect(() => {
 // 	const timer = setTimeout(() => {

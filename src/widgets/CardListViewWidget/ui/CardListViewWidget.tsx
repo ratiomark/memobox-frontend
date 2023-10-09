@@ -27,8 +27,8 @@ export const CardListViewWidget = () => {
 	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	const dispatch = useAppDispatch()
-	// const cards = useSelector(getViewPageCardsSorted)
-	const cards = useSelector(getViewPageCardsSortedFactor)
+	const cards = useSelector(getViewPageCardsSorted)
+	// const cards = useSelector(getViewPageCardsSortedFactor)
 	// console.log(cards)
 
 	const onSelectCard = useCallback((cardId: string) => {

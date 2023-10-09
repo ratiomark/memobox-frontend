@@ -61,7 +61,7 @@ interface ILocalDataService {
 	setTheme(theme: Theme): void
 	getTheme(): Theme
 	setViewRows(viewRowsValue: string | number): void
-	getViewRows(): string
+	getViewRows(): number
 	setToken(token: string | number): void
 	getToken(): string
 	logout(): void
@@ -107,8 +107,8 @@ class LocalDataService implements ILocalDataService {
 	setViewRows(viewRows: string | number): void {
 		this.saveData(KEY_VIEW_ROWS_LOCAL_STORAGE, viewRows)
 	}
-	getViewRows(): string {
-		return this.getData(KEY_VIEW_ROWS_LOCAL_STORAGE)
+	getViewRows(): number {
+		return Number(this.getData(KEY_VIEW_ROWS_LOCAL_STORAGE)) ?? 2
 	}
 	setCommonShelfCollapsed(commonShelfCollapsed: boolean | undefined): void {
 		if (commonShelfCollapsed === undefined) return
