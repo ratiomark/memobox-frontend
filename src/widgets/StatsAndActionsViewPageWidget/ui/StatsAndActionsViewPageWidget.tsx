@@ -114,7 +114,14 @@ export const StatsAndActionsViewPageWidget = (props: StatsAndActionsViewPageWidg
 						cls.statsAndActionsViewPageWidget,
 						className)}
 				>
-					<CompleteBigDataLabels data={viewPageIsLoading ? undefined : data} isLoading={viewPageIsLoading ?? true} />
+					<CompleteBigDataLabels
+						data={
+							viewPageIsLoading
+								? undefined
+								: data
+						}
+						isLoading={viewPageIsLoading ?? true}
+					/>
 					<div className={cls.actions} >
 						<Button
 							onClick={onOpenColumnSettingsModal}

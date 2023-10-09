@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '@/features/CupboardShelfList';
 import { memo, useState, useMemo, useCallback, useEffect } from 'react';
-import { CardEditModal } from '../CardEditModalWithTextArea_DEPRECATED/CardEditModal';
+// import { CardEditModal } from '../CardEditModalWithTextArea_DEPRECATED/CardEditModal';
 import { Dropdown, ListBox } from '@/shared/ui/Popup';
 import { ListBoxItems } from '@/shared/ui/Popup/ui/ListBox/ListBox';
 import { useUpdateCardsMutation } from '@/entities/Card';

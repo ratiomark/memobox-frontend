@@ -4,7 +4,7 @@ import { createSelector } from '@reduxjs/toolkit';
 export const getViewPageEditModalIsOpen = (state: StateSchema) => state.viewPage?.isCardEditModalOpen
 export const getViewPageEditModalCardId = (state: StateSchema) => state.viewPage?.currentCardId
 export const getViewPageCardEditedListIds = (state: StateSchema) => state.viewPage?.cardEditedListIds
-const getViewPageCardModalHeightsAll = (state: StateSchema) => state.viewPage?.cardModalHeights
+// const getViewPageCardModalHeightsAll = (state: StateSchema) => state.viewPage?.cardModalHeights
 // export const getCardModalHeights = (state: StateSchema) => state.viewPage?.cardModalHeights
 
 
@@ -40,12 +40,12 @@ export const getViewPageIsCardInModalEdited = createSelector(
 	}
 )
 
-export const getCardModalHeights = createSelector(
-	[
-		getViewPageEditModalCardId,
-		getViewPageCardModalHeightsAll,
-	],
-	(cardId, cardModalHeights) => {
-		if (cardModalHeights && cardId) return cardModalHeights[cardId]
-	}
-)
+// export const getCardModalHeights = createSelector(
+// 	[
+// 		getViewPageEditModalCardId,
+// 		getViewPageCardModalHeightsAll,
+// 	],
+// 	(cardId, cardModalHeights) => {
+// 		if (cardModalHeights && cardId) return cardModalHeights[cardId]
+// 	}
+// )

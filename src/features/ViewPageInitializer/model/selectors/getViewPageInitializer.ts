@@ -55,8 +55,8 @@ export const getViewPageBoxSpecialIndexChecked = createSelector(
 )
 
 
-export const getViewPageSavedShelf = (shelfId: string) =>
-	(state: StateSchema) => state.viewPage?.shelvesDataSaved?.[shelfId]
+// export const getViewPageSavedShelf = (shelfId: string) =>
+// 	(state: StateSchema) => state.viewPage?.shelvesDataSaved?.[shelfId]
 export const getViewPageShelvesDataSaved = (state: StateSchema) => state.viewPage?.shelvesData ?? {}
 
 // export const getLastBoxIdByShelfId = (shelfId: string) =>
@@ -65,7 +65,7 @@ export const getViewPageCards = (state: StateSchema) => state.viewPage?.cards
 
 export const getViewPageCardsFactor = createSelector(
 	[
-		(state: StateSchema) => state.viewPage?.cardsFactor,
+		(state: StateSchema) => state.viewPage?.cardsShelfIdBoxIdObj,
 		// (state: StateSchema) => state.viewPage?.cards,
 		(state: StateSchema) => state.viewPage?.shelfIdsBoxSpecialIndexesObj,
 		getViewPageShelfId,
@@ -75,8 +75,8 @@ export const getViewPageCardsFactor = createSelector(
 		getViewPageShelfIds,
 		getViewPageShelvesDataSaved,
 	],
-	(cardsFactor, shelfIdsBoxSpecialIndexesObj, shelfId, boxId, boxSpecialIndex, shelfIds, shelvesData) => {
-		if (!cardsFactor || !shelfIdsBoxSpecialIndexesObj) return []
+	(cardsShelfIdBoxIdObj, shelfIdsBoxSpecialIndexesObj, shelfId, boxId, boxSpecialIndex, shelfIds, shelvesData) => {
+		if (!cardsShelfIdBoxIdObj || !shelfIdsBoxSpecialIndexesObj) return []
 		if (shelfId === 'all') {
 			// if (boxSpecialIndex === 'all') return cards
 			// if (boxSpecialIndex === 'new') return cards?.filter(card => card.specialType === 'new')
@@ -89,7 +89,7 @@ export const getViewPageCardsFactor = createSelector(
 					boxId: shelfIdsBoxSpecialIndexesObj[shelfIdItem]['new']
 				}))
 				Array.from(shelfIdAndNewCardBoxIdList).forEach(item => {
-					const newCards = cardsFactor[item.shelfId][item.boxId]
+					const newCards = cardsShelfIdBoxIdObj[item.shelfId][item.boxId]
 					if (newCards) {
 						resCards.push(...newCards)
 					}
@@ -103,9 +103,9 @@ export const getViewPageCardsFactor = createSelector(
 				})
 				Array.from(shelfIdAndLearningBoxIdList).forEach(item => {
 					item.boxIds.forEach(boxIdItem => {
-						const cardsItems = cardsFactor[item.shelfId][boxIdItem]
+						const cardsItems = cardsShelfIdBoxIdObj[item.shelfId][boxIdItem]
 						if (cardsItems) {
-							resCards.push(...cardsFactor[item.shelfId][boxIdItem])
+							resCards.push(...cardsShelfIdBoxIdObj[item.shelfId][boxIdItem])
 						}
 					})
 				})
@@ -115,7 +115,7 @@ export const getViewPageCardsFactor = createSelector(
 					boxId: shelfIdsBoxSpecialIndexesObj[shelfIdItem]['learnt']
 				}))
 				Array.from(shelfIdAndNewCardBoxIdList).forEach(item => {
-					const learntCards = cardsFactor[item.shelfId][item.boxId]
+					const learntCards = cardsShelfIdBoxIdObj[item.shelfId][item.boxId]
 					if (learntCards) {
 						resCards.push(...learntCards)
 					}
@@ -129,9 +129,9 @@ export const getViewPageCardsFactor = createSelector(
 				})
 				Array.from(shelfIdAndLearningBoxIdList).forEach(item => {
 					item.boxIds.forEach(boxIdItem => {
-						const cardsItems = cardsFactor[item.shelfId][boxIdItem]
+						const cardsItems = cardsShelfIdBoxIdObj[item.shelfId][boxIdItem]
 						if (cardsItems) {
-							resCards.push(...cardsFactor[item.shelfId][boxIdItem])
+							resCards.push(...cardsShelfIdBoxIdObj[item.shelfId][boxIdItem])
 						}
 					})
 				})
@@ -139,18 +139,22 @@ export const getViewPageCardsFactor = createSelector(
 			return resCards ?? []
 		}
 		if (boxSpecialIndex === 'all') {
-			const allBoxIdsInShelf = Object.keys(cardsFactor[shelfId])
-			return allBoxIdsInShelf.flatMap(boxIdKey => cardsFactor[shelfId][boxIdKey]) ?? []
+			const allBoxIdsInShelf = Object.keys(cardsShelfIdBoxIdObj[shelfId])
+			return allBoxIdsInShelf.flatMap(boxIdKey => cardsShelfIdBoxIdObj[shelfId][boxIdKey]) ?? []
 		} else if (boxSpecialIndex === 'learnt') {
 			const learntBoxId = shelfIdsBoxSpecialIndexesObj[shelfId]['learnt']
-			return cardsFactor[shelfId][learntBoxId] ?? []
+			return cardsShelfIdBoxIdObj[shelfId][learntBoxId] ?? []
 		} else if (boxSpecialIndex === 'new') {
 			const newCardsBoxId = shelfIdsBoxSpecialIndexesObj[shelfId]['new']
-			return cardsFactor[shelfId][newCardsBoxId] ?? []
+			return cardsShelfIdBoxIdObj[shelfId][newCardsBoxId] ?? []
 		}
-		return cardsFactor[shelfId][boxId] ?? []
+		return cardsShelfIdBoxIdObj[shelfId][boxId] ?? []
 	}
 )
+
+export const getViewPageCurrentCardIds = (state: StateSchema) => {
+	return getViewPageCardsFactor(state).map(card => card.id)
+}
 
 export const getViewPageSortChecked = createSelector(
 	[

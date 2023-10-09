@@ -1,7 +1,8 @@
 
 export {
 	getViewPageCardsFactor,
-	getViewPageCardsSortedFactor
+	getViewPageCardsSortedFactor,
+	getViewPageCurrentCardIds,
 } from './model/selectors/getViewPageInitializer';
 
 export {
@@ -40,7 +41,7 @@ export {
 	getViewPageCardEditedListIds,
 	getViewPageEditModalCardId,
 	getViewPageIsCardInModalEdited,
-	getCardModalHeights,
+	// getCardModalHeights,
 } from './model/selectors/getViewPageEditModal';
 
 export {
@@ -54,7 +55,7 @@ export {
 
 	getViewPageCardsSorted,
 	getViewPageColumns,
-	getViewPageSavedShelf,
+	// getViewPageSavedShelf,
 
 	getViewPageSortChecked,
 

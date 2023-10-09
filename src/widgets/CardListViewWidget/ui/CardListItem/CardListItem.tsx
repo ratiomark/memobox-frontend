@@ -76,7 +76,11 @@ export const CardListItem = (props: CardListItemProps) => {
 
 	const onDeleteCard = (e: MouseEvent) => {
 		e.stopPropagation()
-		dispatch(viewPageActions.setCardIsDeleting(card.id))
+		dispatch(viewPageActions.setCardIsDeleting({
+			shelfId: card.shelfId,
+			boxId: card.boxId,
+			cardId: card.id,
+		}))
 	}
 
 	const onSelectCardHandle = (e: ChangeEvent) => {

@@ -28,8 +28,8 @@ export const CardListViewWidget = () => {
 	const viewPageIsLoading = useSelector(getViewPageIsLoading)
 	const dispatch = useAppDispatch()
 	// const cards = useSelector(getViewPageCardsSorted)
-	const cardsFactor = useSelector(getViewPageCardsSortedFactor)
-	// console.log(cardsFactor)
+	const cards = useSelector(getViewPageCardsSortedFactor)
+	// console.log(cards)
 
 	const onSelectCard = useCallback((cardId: string) => {
 		dispatch(viewPageActions.addOrRemoveCardFromSelectedCardIds(cardId))
@@ -44,7 +44,7 @@ export const CardListViewWidget = () => {
 
 	const content = useMemo(() => {
 		if (!viewPageIsMounted || viewPageIsLoading) return []
-		return cardsFactor?.map(item => (
+		return cards?.map(item => (
 			// return cards?.map(item => (
 			<CardListItem
 				onSelectCard={onSelectCard}
@@ -53,7 +53,7 @@ export const CardListViewWidget = () => {
 				key={item.id}
 			/>)
 		)
-	}, [cardsFactor, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])
+	}, [cards, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])
 	// }, [cards, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])
 
 	const contentRendered = (
@@ -62,7 +62,7 @@ export const CardListViewWidget = () => {
 			skeletonComponent={<CardsListSkeleton />}
 			componentAfterLoading={content}
 			noDelay={!viewPageIsLoading}
-			// noDelay={cardsFactor && cardsFactor.length > 0}
+			// noDelay={cards && cards.length > 0}
 			// noDelay={cards.length > 0}
 			// commonWrapper={false}
 			classNameAbsoluteParts={cls.maxWidth}

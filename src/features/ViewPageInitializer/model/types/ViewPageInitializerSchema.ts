@@ -27,12 +27,8 @@ export interface ViewPageInitializerSchema {
 	error: string
 	// 
 	cards: CardSchemaExtended[]
-	cardsFactor: CardsFactor
-	shelfIdsBoxSpecialIndexesObj: {
-		[shelfId: string]: {
-			[boxSpecialIndex: string]: string
-		}
-	}
+	cardsShelfIdBoxIdObj: CardsShelfIdBoxIdObj
+	shelfIdsBoxSpecialIndexesObj: ShelfIdsBoxSpecialIndexesObj
 	shelvesData: ShelvesDataViewPage
 	shelfIds: string[]
 	//
@@ -42,28 +38,21 @@ export interface ViewPageInitializerSchema {
 	isMultiSelectActive: boolean
 	// 
 	cardsDataOriginal: {
-		[key: string]: CardSchemaExtended
+		[cardId: string]: CardSchemaExtended
 	}
-	cardsDataEdited: {
-		[key: string]: {
-			question: string
-			answer: string
-			shelfId: string
-			boxIndex: number
-		}
-	}
+	cardsDataEdited: CardsDataEditedObj
 	selectedCardIds: string[]
 	isCardEditModalOpen: boolean
 	currentCardId: string
 	cardEditedListIds: string[]
-	cardModalHeights: {
-		[key: string]: {
-			minHeightQuestion?: number
-			currentHeightQuestion?: number
-			minHeightAnswer?: number
-			currentHeightAnswer?: number
-		}
-	},
+	// cardModalHeights: {
+	// 	[cardId: string]: {
+	// 		minHeightQuestion?: number
+	// 		currentHeightQuestion?: number
+	// 		minHeightAnswer?: number
+	// 		currentHeightAnswer?: number
+	// 	}
+	// },
 	// 
 	isMoveCardsModalOpen: boolean
 	abortedThunkIds: string[]
@@ -75,28 +64,25 @@ export interface ViewPageInitializerSchema {
 	multiSelectMoveCardIdObject: {
 		[randomId: string]: string[]
 	}
-	// 
-	shelvesDataSaved: {
-		[shelfId: string]: {
-			data: ShelfRepresentedByBoxes,
-			isLoading: boolean
-			lastBoxId: string
-			error?: string
-		}
-	}
-	//
-	// boxesListEdges: {
-	// 	leftSide: boolean
-	// 	rightSide: boolean
-	// },
-	// shelvesListEdges: {
-	// 	leftSide: boolean
-	// 	rightSide: boolean
-	// },
 }
 
-export interface CardsFactor {
+export interface CardsShelfIdBoxIdObj {
 	[shelfId: string]: {
 		[boxId: string]: CardSchemaExtended[]
+	}
+}
+
+interface CardsDataEditedObj {
+	[cardId: string]: {
+		question: string
+		answer: string
+		shelfId: string
+		boxIndex: number
+	}
+}
+
+interface ShelfIdsBoxSpecialIndexesObj {
+	[shelfId: string]: {
+		[boxSpecialIndex: string]: string
 	}
 }

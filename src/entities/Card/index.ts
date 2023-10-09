@@ -1,3 +1,4 @@
+export { getCardMainData } from './model/helpers/getCardMainData';
 export { useGetAllCardsQuery } from './model/api/cardApi';
 
 export {
@@ -8,3 +9,4 @@ export {
 } from './model/api/cardApi';
 
 export type { CardSchema, CardSchemaExtended } from './model/types/CardSchema';
+export type { CardMainData } from './model/types/CardMainData';

@@ -1,4 +1,4 @@
-import { getViewPageMultiSelectIsActive, getViewPageMoveCardsModalIsOpen, viewPageActions, getMultiSelectIsSelectAllAllowed } from '@/features/ViewPageInitializer';
+import { getViewPageMultiSelectIsActive, getViewPageMoveCardsModalIsOpen, viewPageActions, getMultiSelectIsSelectAllAllowed, getViewPageCurrentCardIds } from '@/features/ViewPageInitializer';
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useCallback } from 'react';
@@ -16,6 +16,7 @@ export const MultiSelectWrapper = (props: MultiSelectComponentProps) => {
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const isMoveCardsModalOpen = useSelector(getViewPageMoveCardsModalIsOpen)
 	const isSelectAllAllowed = useSelector(getMultiSelectIsSelectAllAllowed)
+	const cardIds = useSelector(getViewPageCurrentCardIds)
 
 	const onCancelMultiSelect = useCallback(() => {
 		dispatch(viewPageActions.cancelMultiSelect())
@@ -23,7 +24,7 @@ export const MultiSelectWrapper = (props: MultiSelectComponentProps) => {
 
 	const onSelectAllCards = () => {
 		// VAR: тут нужно сделать selectAllCards() и изнутри слайса выбрать карточки
-		// dispatch(viewPageActions.selectAllCards([...cards.map(card => card.id)]))
+		dispatch(viewPageActions.selectAllCards(cardIds))
 	}
 
 	const onRemoveCards = useCallback(() => {

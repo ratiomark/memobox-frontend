@@ -6,7 +6,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { deleteCardThunk } from '../services/deleteCardThunk'
 import { deleteMultipleCardsThunk } from '../services/deleteMultipleCardsThunk'
 import { fetchCards, FetchCardsThunkResponse } from '../services/fetchCards'
-import { CardsFactor, ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
+import { CardsShelfIdBoxIdObj, ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
@@ -16,14 +16,14 @@ const initialState: ViewPageInitializerSchema = {
 	error: '',
 	// 
 	cards: [],
-	cardsFactor: {},
+	cardsShelfIdBoxIdObj: {},
 	shelvesData: {},
 	cardsDataOriginal: {},
 	cardsDataEdited: {},
 	isCardEditModalOpen: false,
 	currentCardId: '',
 	cardEditedListIds: [],
-	cardModalHeights: {},
+	// cardModalHeights: {},
 	// 
 	isMoveCardsModalOpen: false,
 	// 
@@ -35,7 +35,6 @@ const initialState: ViewPageInitializerSchema = {
 	isMultiSelectActive: false,
 	isTableSettingsModalOpen: false,
 	// 
-	shelvesDataSaved: {},
 	shelfIdsBoxSpecialIndexesObj: {},
 	shelfIds: [],
 	abortedThunkIds: [],
@@ -43,22 +42,8 @@ const initialState: ViewPageInitializerSchema = {
 	multiSelectDeleteCardIdObject: {},
 	multiSelectMoveCardIdList: [],
 	multiSelectMoveCardIdObject: {},
+}
 
-}
-// .addCase(
-// 	deleteShelfThunk.rejected,
-// 	(state, action) => {
-// 		if (action.meta.aborted) {
-// 			state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)
-// 			return
-// 		}
-// 		shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false } })
-// 	})
-export interface InitiateShelfPayload {
-	shelfId: string
-	boxId: string
-}
-// Можно пройти по всем карточкам и записать максимальную коробку для каждой полки. При переходе на полку чекать превышает ли текущая коробка максимальную коробку
 const viewPageSlice = createSlice({
 	name: 'viewPage',
 	initialState,
@@ -158,21 +143,21 @@ const viewPageSlice = createSlice({
 		selectAllCards: (state, action: PayloadAction<string[]>) => {
 			state.selectedCardIds = action.payload
 		},
-		selectAllCardsC: (state, action: PayloadAction<string[]>) => {
-			if (state.shelfId === 'all' && state.boxSpecialIndex === 'new') {
-				// select all new cards
-			} else if (state.shelfId === 'all' && state.boxSpecialIndex === 'learnt') {
-				// select all learnt cards
-			} else if (state.boxSpecialIndex === 'all') {
-				// select all card of shelf
-			} else if (state.boxSpecialIndex === 'new') {
-				// select all card of new cards of shelf
-			} else if (state.boxSpecialIndex === 'learnt') {
-				// select all learnt
-			} else {
-				// select all card in boxId
-			}
-		},
+		// selectAllCardsC: (state, action: PayloadAction<string[]>) => {
+		// 	if (state.shelfId === 'all' && state.boxSpecialIndex === 'new') {
+		// 		// select all new cards
+		// 	} else if (state.shelfId === 'all' && state.boxSpecialIndex === 'learnt') {
+		// 		// select all learnt cards
+		// 	} else if (state.boxSpecialIndex === 'all') {
+		// 		// select all card of shelf
+		// 	} else if (state.boxSpecialIndex === 'new') {
+		// 		// select all card of new cards of shelf
+		// 	} else if (state.boxSpecialIndex === 'learnt') {
+		// 		// select all learnt
+		// 	} else {
+		// 		// select all card in boxId
+		// 	}
+		// },
 
 		cancelMultiSelect: (state) => {
 			state.selectedCardIds = []
@@ -181,13 +166,22 @@ const viewPageSlice = createSlice({
 		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
 			state.isMultiSelectActive = action.payload
 		},
-		setCardIsDeleting: (state, action: PayloadAction<string>) => {
-			state.cards.find(card => {
-				if (card.id === action.payload) {
-					card.isDeleting = true
-					// return true
-				}
-			})
+		setCardIsDeleting: (state, action: PayloadAction<{ shelfId: string, boxId: string, cardId: string }>) => {
+			const { shelfId, boxId, cardId } = action.payload
+			state.cardsShelfIdBoxIdObj[shelfId][boxId]
+				.some(card => {
+					if (card.id === cardId) {
+						card.isDeleting = true
+						return true
+					}
+					return false
+				})
+			// state.cards.find(card => {
+			// 	if (card.id === action.payload) {
+			// 		card.isDeleting = true
+			// 		// return true
+			// 	}
+			// })
 		},
 		setCardIsNotDeleting: (state, action: PayloadAction<string>) => {
 			state.cards.find(card => {
@@ -290,12 +284,7 @@ const viewPageSlice = createSlice({
 				state.cardsDataEdited = { ...state.cardsDataEdited, ...obj }
 			}
 		},
-		setCurrentCardId: (state, action: PayloadAction<string>) => {
-			state.currentCardId = action.payload
-			if (!(action.payload in state.cardModalHeights)) {
-				state.cardModalHeights[action.payload] = {}
-			}
-		},
+
 		setCardQuestionText: (state, action: PayloadAction<string>) => {
 			if (!state.cardEditedListIds.includes(state.currentCardId)) {
 				state.cardEditedListIds.push(state.currentCardId)
@@ -320,34 +309,28 @@ const viewPageSlice = createSlice({
 			}
 			state.cardsDataEdited[state.currentCardId].boxIndex = action.payload
 		},
-		setMinHeighQuestion: (state, action: PayloadAction<number>) => {
-			state.cardModalHeights[state.currentCardId].minHeightQuestion = action.payload
+		setCurrentCardId: (state, action: PayloadAction<string>) => {
+			state.currentCardId = action.payload
 		},
-		setCurrentHeightQuestion: (state, action: PayloadAction<number>) => {
-			state.cardModalHeights[state.currentCardId].currentHeightQuestion = action.payload
-		},
-		setMinHeighAnswer: (state, action: PayloadAction<number>) => {
-			state.cardModalHeights[state.currentCardId].minHeightAnswer = action.payload
-		},
-		setCurrentHeightAnswer: (state, action: PayloadAction<number>) => {
-			state.cardModalHeights[state.currentCardId].currentHeightAnswer = action.payload
-		},
-
+		// setCurrentCardId: (state, action: PayloadAction<string>) => {
+		// 	state.currentCardId = action.payload
+		// 	if (!(action.payload in state.cardModalHeights)) {
+		// 		state.cardModalHeights[action.payload] = {}
+		// 	}
+		// },
+		// setMinHeighQuestion: (state, action: PayloadAction<number>) => {
+		// 	state.cardModalHeights[state.currentCardId].minHeightQuestion = action.payload
+		// },
+		// setCurrentHeightQuestion: (state, action: PayloadAction<number>) => {
+		// 	state.cardModalHeights[state.currentCardId].currentHeightQuestion = action.payload
+		// },
+		// setMinHeighAnswer: (state, action: PayloadAction<number>) => {
+		// 	state.cardModalHeights[state.currentCardId].minHeightAnswer = action.payload
+		// },
+		// setCurrentHeightAnswer: (state, action: PayloadAction<number>) => {
+		// 	state.cardModalHeights[state.currentCardId].currentHeightAnswer = action.payload
+		// },
 		// 
-		initiateShelf: (state, action: PayloadAction<InitiateShelfPayload>) => {
-			// if (action.payload.shelfId in state.shelvesDataSaved) {
-			// 	null
-			// } else
-			state.shelvesDataSaved[action.payload.shelfId] = {
-				data: {},
-				isLoading: true,
-				error: '',
-				lastBoxId: action.payload.boxId
-			}
-		},
-		setLastBoxId: (state, action: PayloadAction<{ shelfId: string, boxId: string }>) => {
-			state.shelvesDataSaved[action.payload.shelfId]['lastBoxId'] = action.payload.boxId
-		},
 		setFetchedData: (state, action: PayloadAction<FetchCardsThunkResponse>) => {
 			const cards = action.payload.cards
 			const shelvesData = action.payload.shelvesAndBoxesData
@@ -369,29 +352,29 @@ const viewPageSlice = createSlice({
 				// state.shelfIdsBoxSpecialIndexesObj[shelf] = {}
 			})
 			state.cards = cards
-			const cardsFactor: CardsFactor = {}
+			const cardsShelfIdBoxIdObj: CardsShelfIdBoxIdObj = {}
 			cards.forEach(card => {
-				if (cardsFactor[card.shelfId]) {
-					if (cardsFactor[card.shelfId][card.boxId]) {
-						cardsFactor[card.shelfId][card.boxId].push(card)
+				if (cardsShelfIdBoxIdObj[card.shelfId]) {
+					if (cardsShelfIdBoxIdObj[card.shelfId][card.boxId]) {
+						cardsShelfIdBoxIdObj[card.shelfId][card.boxId].push(card)
 					} else {
-						cardsFactor[card.shelfId][card.boxId] = [card]
+						cardsShelfIdBoxIdObj[card.shelfId][card.boxId] = [card]
 					}
 				} else {
-					cardsFactor[card.shelfId] = { [card.boxId]: [card] }
+					cardsShelfIdBoxIdObj[card.shelfId] = { [card.boxId]: [card] }
 				}
 			})
-			state.cardsFactor = cardsFactor
+			state.cardsShelfIdBoxIdObj = cardsShelfIdBoxIdObj
 			// cards.reduce((acc, card) => {
 			// 	card.shelfId
-			// 	if (state.cardsFactor[card.shelfId]) {
-			// 		if (state.cardsFactor[card.shelfId][card.boxId]) {
-			// 			state.cardsFactor[card.shelfId][card.boxId].push(card)
+			// 	if (state.cardsShelfIdBoxIdObj[card.shelfId]) {
+			// 		if (state.cardsShelfIdBoxIdObj[card.shelfId][card.boxId]) {
+			// 			state.cardsShelfIdBoxIdObj[card.shelfId][card.boxId].push(card)
 			// 		} else {
-			// 			state.cardsFactor[card.shelfId][card.boxId] = [card]
+			// 			state.cardsShelfIdBoxIdObj[card.shelfId][card.boxId] = [card]
 			// 		}
 			// 	} else {
-			// 		state.cardsFactor[card.shelfId][card.boxId] = [card]
+			// 		state.cardsShelfIdBoxIdObj[card.shelfId][card.boxId] = [card]
 			// 	}
 
 			// }, {})
@@ -501,3 +484,14 @@ const viewPageSlice = createSlice({
 
 export const { actions: viewPageActions } = viewPageSlice
 export const { reducer: viewPageReducer } = viewPageSlice
+
+
+// .addCase(
+// 	deleteShelfThunk.rejected,
+// 	(state, action) => {
+// 		if (action.meta.aborted) {
+// 			state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)
+// 			return
+// 		}
+// 		shelvesAdapter.updateOne(state, { id: action.payload as string, changes: { isDeleting: false } })
+// 	})
