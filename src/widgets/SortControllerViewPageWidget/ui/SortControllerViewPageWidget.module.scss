@@ -54,30 +54,30 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .createdAtWrapper {
-  // cursor: pointer;
-  gap: 8px;
-  width: 80px;
+  width: var(--width-view-page-created-at-column);
 
   // border: 1px solid red;
 }
 
 .createdAt {
-  width: 80px;
+  width: var(--width-view-page-created-at-column);
 }
 
-.shelfWrapper {
-  // cursor: pointer;
-  justify-content: center;
-  gap: 8px;
-
-  // color: blue;
-  width: 120px;
+.shelfIdWrapper {
+  max-width: var(--width-view-page-shelf-column);
+  min-width: var(--width-view-page-shelf-column);
+  text-align: center;
 
   // border: 1px solid blue;
-  text-align: center;
+}
+
+.shelfId {
+  // width: var(--width-view-page-shelf-column);
 }
 
 .absoluteParts {
@@ -93,15 +93,15 @@
 }
 
 .lastTrainingWrapper {
-  min-width: 90px;
-  max-width: 90px;
+  min-width: var(--width-view-page-last-training-at-column);
+  max-width: var(--width-view-page-last-training-at-column);
 
   // border: 1px solid orange;
 }
 
 .lastTraining {
   // color: orange;
-  width: 90px;
+  width: var(--width-view-page-last-training-at-column);
 
   // border: 1px solid orange;
 }

@@ -3,6 +3,13 @@
 
 // }
 
+export interface NewCardSchema {
+	question: string
+	answer: string
+	shelfId: string
+	boxId: string
+}
+
 export interface CardSchema {
 	id: string
 	index: number

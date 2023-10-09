@@ -1318,7 +1318,7 @@
             "index": 0,
             "value": "shelfId",
             "content": "shelf",
-            "enabled": true
+            "enabled": false
           },
           {
             "index": 1,

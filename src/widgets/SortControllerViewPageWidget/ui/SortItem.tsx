@@ -65,7 +65,12 @@ export const SortItem = (props: SortItemProps) => {
 			key={sortValue}
 			onClick={onSortClick}
 		>
-			<MyText text={t(column.content)} size='s' variant={activeSort === column.value ? 'accent' : 'primary'} className={cls[sortValue]} />
+			<MyText
+				className={cls[sortValue]}
+				text={t(column.content)}
+				size='s'
+				variant={activeSort === column.value ? 'accent' : 'primary'}
+			/>
 			<Icon
 				// clickable
 				onClick={handleDirection}

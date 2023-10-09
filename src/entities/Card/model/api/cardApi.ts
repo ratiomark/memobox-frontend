@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import { CardSchema, CardSchemaExtended } from '../types/CardSchema';
+import { CardSchema, CardSchemaExtended, NewCardSchema } from '../types/CardSchema';
 
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { FetchCardsThunkResponse } from '@/features/ViewPageInitializer';
@@ -24,6 +24,19 @@ type UpdateCardsRequest = MoveCardsRequest | RemoveCardsRequest
 
 export const cardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
+		// NSA: готово
+		createNewCard: build.query<CardSchema, NewCardSchema>({
+			query: ({ question, answer, shelfId, boxId }) => ({
+				url: '/cards',
+				method: 'POST',
+				body: {
+					question,
+					answer,
+					shelfId,
+					boxId
+				}
+			}),
+		}),
 		getCardsByShelfId: build.query<CardSchema[], string>({
 			query: (id) => ({
 				url: '/cards',
@@ -108,6 +121,7 @@ export const { useGetCardsByShelfIdQuery } = cardApi
 export const { useGetAllCardsQuery } = cardApi
 export const { useUpdateCardsMutation } = cardApi
 export const getAllCards = cardApi.endpoints.getAllCards.initiate
+export const createNewCard = cardApi.endpoints.createNewCard.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 

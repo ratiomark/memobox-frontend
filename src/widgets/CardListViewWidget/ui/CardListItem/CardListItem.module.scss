@@ -160,29 +160,32 @@
 }
 
 .createdAt {
-  min-width: 80px;
-  max-width: 80px;
+  min-width: var(--width-view-page-created-at-column);
+  max-width: var(--width-view-page-created-at-column);
   padding-left: 5px;
 
   // border: 1px solid red;
 }
 
-.shelf {
+.shelfId {
   // color: blue;
-  width: 120px;
+  max-width: var(--width-view-page-shelf-column);
+  min-width: var(--width-view-page-shelf-column);
+  white-space: nowrap;    /* Предотвращаем перенос текста на новую строку */
+  overflow: hidden;       /* Скрываем текст, выходящий за границы элемента */
+  text-overflow: ellipsis;/* Добавляем многоточие в конце, если текст не помещается */
 
   //  display: -webkit-box;
   // -webkit-line-clamp: var(--view-rows);
   // -webkit-box-orient: vertical;
-  overflow: hidden;
 
   // border: 1px solid blue;
 }
 
 .lastTraining {
   // color: orange;
-  min-width: 90px;
-  max-width: 90px;
+  min-width: var(--width-view-page-last-training-at-column);
+  max-width: var(--width-view-page-last-training-at-column);
   padding-left: 8px;
 
   // border: 1px solid orange;
@@ -293,8 +296,8 @@
 
 // .lastTraining {
 //   // color: orange;
-//   min-width: 90px;
-//   max-width: 90px;
+//   min-width: var(--width-view-page-last-training-at-column);
+//   max-width: var(--width-view-page-last-training-at-column);
 //   padding-left: 8px;
 
 //   // border: 1px solid orange;
