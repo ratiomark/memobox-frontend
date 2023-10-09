@@ -158,6 +158,22 @@ const viewPageSlice = createSlice({
 		selectAllCards: (state, action: PayloadAction<string[]>) => {
 			state.selectedCardIds = action.payload
 		},
+		selectAllCardsC: (state, action: PayloadAction<string[]>) => {
+			if (state.shelfId === 'all' && state.boxSpecialIndex === 'new') {
+				// select all new cards
+			} else if (state.shelfId === 'all' && state.boxSpecialIndex === 'learnt') {
+				// select all learnt cards
+			} else if (state.boxSpecialIndex === 'all') {
+				// select all card of shelf
+			} else if (state.boxSpecialIndex === 'new') {
+				// select all card of new cards of shelf
+			} else if (state.boxSpecialIndex === 'learnt') {
+				// select all learnt
+			} else {
+				// select all card in boxId
+			}
+		},
+	
 		cancelMultiSelect: (state) => {
 			state.selectedCardIds = []
 			state.isMultiSelectActive = false

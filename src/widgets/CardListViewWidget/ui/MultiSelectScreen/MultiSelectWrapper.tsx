@@ -1,4 +1,4 @@
-import { getViewPageMultiSelectIsActive, getViewPageMoveCardsModalIsOpen, viewPageActions } from '@/features/ViewPageInitializer';
+import { getViewPageMultiSelectIsActive, getViewPageMoveCardsModalIsOpen, viewPageActions, getMultiSelectIsSelectAllAllowed } from '@/features/ViewPageInitializer';
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useCallback } from 'react';
@@ -15,6 +15,8 @@ export const MultiSelectWrapper = (props: MultiSelectComponentProps) => {
 	const dispatch = useAppDispatch()
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const isMoveCardsModalOpen = useSelector(getViewPageMoveCardsModalIsOpen)
+	const isSelectAllAllowed = useSelector(getMultiSelectIsSelectAllAllowed)
+
 	const onCancelMultiSelect = useCallback(() => {
 		dispatch(viewPageActions.cancelMultiSelect())
 	}, [dispatch])
@@ -36,7 +38,7 @@ export const MultiSelectWrapper = (props: MultiSelectComponentProps) => {
 		dispatch(viewPageActions.setMoveCardsModalIsOpen(true))
 	}, [dispatch])
 	useHotkeys('esc', onCancelMultiSelect, { enabled: isMultiSelectActive && !isMoveCardsModalOpen })
-	useHotkeys('a', onSelectAllCards, { enabled: isMultiSelectActive })
+	useHotkeys('a', onSelectAllCards, { enabled: isMultiSelectActive && isSelectAllAllowed })
 	useHotkeys('r', onRemoveCards, { enabled: isMultiSelectActive })
 	useHotkeys('m', onMoveCardsClick, { enabled: isMultiSelectActive })
 
