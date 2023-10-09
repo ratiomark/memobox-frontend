@@ -15,7 +15,6 @@ export const MultiSelectWrapper = (props: MultiSelectComponentProps) => {
 	const dispatch = useAppDispatch()
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
 	const isMoveCardsModalOpen = useSelector(getViewPageMoveCardsModalIsOpen)
-
 	const onCancelMultiSelect = useCallback(() => {
 		dispatch(viewPageActions.cancelMultiSelect())
 	}, [dispatch])

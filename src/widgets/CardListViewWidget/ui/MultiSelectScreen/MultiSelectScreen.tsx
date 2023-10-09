@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './MultiSelectScreen.module.scss';
 import { useSelector } from 'react-redux';
-import { getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelfItems } from '@/features/ViewPageInitializer';
+import { getMultiSelectIsSelectAllAllowed, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelfItems } from '@/features/ViewPageInitializer';
 import { Button } from '@/shared/ui/Button';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useGetShelvesQuery } from '@/entities/Cupboard';
@@ -25,6 +25,7 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 		onRemoveCards
 	} = props
 	const shelfItems = useSelector(getViewPageShelfItems)
+	const isSelectAllAllowed = useSelector(getMultiSelectIsSelectAllAllowed)
 	// const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
 	// const selectedCardIds = useSelector(getViewPageSelectedCardIds)
 	// const [updateCardsMutation] = useUpdateCardsMutation()
@@ -51,7 +52,9 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 					<Button variant='cancel' color='attention' onClick={onRemoveCardsHandle}>{t('remove')}</Button>
 				</div>
 				<div className={cls.innerWrapper} >
-					<Button onClick={onSelectAllCards}>{t('select all')}</Button>
+					{isSelectAllAllowed &&
+						<Button onClick={onSelectAllCards}>{t('select all')}</Button>
+					}
 					{shelfItems
 						&& shelfItems.length > 1
 						&& <Button onClick={onMoveCardsClick}>{t('move selected cards')}</Button>

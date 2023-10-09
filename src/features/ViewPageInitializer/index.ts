@@ -1,3 +1,4 @@
+
 export {
 	getViewPageCardsFactor,
 	getViewPageCardsSortedFactor
@@ -9,7 +10,10 @@ export {
 
 } from './model/selectors/getViewPageShelfAndBoxItems';
 
-export { deleteCardThunk } from './model/services/deleteCardThunk';
+
+export {
+	deleteCardThunk
+} from './model/services/deleteCardThunk';
 
 export { getViewPageShelvesDataDictionary } from './model/selectors/getViewPageShelvesDataDictionary';
 export {
@@ -17,13 +21,15 @@ export {
 	getViewPageSort,
 	getViewPageSortOrder
 } from './model/selectors/getViewPageSorting';
+
 export {
 	getViewPageMoveCardsModalIsOpen
 } from './model/selectors/getViewPageMoveCardsModal';
 
 export {
 	getViewPageSelectedCardIds,
-	getViewPageMultiSelectIsActive
+	getViewPageMultiSelectIsActive,
+	getMultiSelectIsSelectAllAllowed,
 } from './model/selectors/getViewPageMultiSelect';
 
 
