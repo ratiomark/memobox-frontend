@@ -36,7 +36,7 @@ const initialState: ViewPageInitializerSchema = {
 	isTableSettingsModalOpen: false,
 	// 
 	shelvesDataSaved: {},
-	shelvesDataFactor: {},
+	shelfIdsBoxSpecialIndexesObj: {},
 	shelfIds: [],
 	abortedThunkIds: [],
 	multiSelectDeleteCardIdList: [],
@@ -82,11 +82,11 @@ const viewPageSlice = createSlice({
 				state.boxSpecialIndex === 'learning'
 			) {
 				state.boxSpecialIndex = 'new'
-				state.boxId = state.shelvesDataFactor[shelfId]['new']
+				state.boxId = state.shelfIdsBoxSpecialIndexesObj[shelfId]['new']
 			} else if (state.boxSpecialIndex === 'learnt') {
-				state.boxId = state.shelvesDataFactor[shelfId]['learnt']
+				state.boxId = state.shelfIdsBoxSpecialIndexesObj[shelfId]['learnt']
 			} else {
-				state.boxId = state.shelvesDataFactor[shelfId][state.boxSpecialIndex]
+				state.boxId = state.shelfIdsBoxSpecialIndexesObj[shelfId][state.boxSpecialIndex]
 			}
 		},
 		// setActiveShelfId: (state, action: PayloadAction<string>) => {
@@ -173,7 +173,7 @@ const viewPageSlice = createSlice({
 				// select all card in boxId
 			}
 		},
-	
+
 		cancelMultiSelect: (state) => {
 			state.selectedCardIds = []
 			state.isMultiSelectActive = false
@@ -354,19 +354,19 @@ const viewPageSlice = createSlice({
 			const shelfIds = Object.keys(shelvesData)
 			state.shelfIds = shelfIds
 			shelfIds.forEach(shelf => {
-				if (!state.shelvesDataFactor[shelf]) {
-					state.shelvesDataFactor[shelf] = {}
+				if (!state.shelfIdsBoxSpecialIndexesObj[shelf]) {
+					state.shelfIdsBoxSpecialIndexesObj[shelf] = {}
 				}
 				shelvesData[shelf].boxesItems.forEach(boxObject => {
 					if (boxObject.index === 0) {
-						state.shelvesDataFactor[shelf]['new'] = boxObject.id
+						state.shelfIdsBoxSpecialIndexesObj[shelf]['new'] = boxObject.id
 					} else if (boxObject.index === shelvesData[shelf].maxIndexBox) {
-						state.shelvesDataFactor[shelf]['learnt'] = boxObject.id
+						state.shelfIdsBoxSpecialIndexesObj[shelf]['learnt'] = boxObject.id
 					} else {
-						state.shelvesDataFactor[shelf][boxObject.index.toString()] = boxObject.id
+						state.shelfIdsBoxSpecialIndexesObj[shelf][boxObject.index.toString()] = boxObject.id
 					}
 				})
-				// state.shelvesDataFactor[shelf] = {}
+				// state.shelfIdsBoxSpecialIndexesObj[shelf] = {}
 			})
 			state.cards = cards
 			const cardsFactor: CardsFactor = {}

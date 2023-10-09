@@ -28,7 +28,7 @@ export interface ViewPageInitializerSchema {
 	// 
 	cards: CardSchemaExtended[]
 	cardsFactor: CardsFactor
-	shelvesDataFactor: {
+	shelfIdsBoxSpecialIndexesObj: {
 		[shelfId: string]: {
 			[boxSpecialIndex: string]: string
 		}

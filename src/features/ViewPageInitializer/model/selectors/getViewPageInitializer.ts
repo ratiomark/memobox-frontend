@@ -67,7 +67,7 @@ export const getViewPageCardsFactor = createSelector(
 	[
 		(state: StateSchema) => state.viewPage?.cardsFactor,
 		// (state: StateSchema) => state.viewPage?.cards,
-		(state: StateSchema) => state.viewPage?.shelvesDataFactor,
+		(state: StateSchema) => state.viewPage?.shelfIdsBoxSpecialIndexesObj,
 		getViewPageShelfId,
 		getViewPageBoxId,
 		// getViewPageBoxIdChecked,
@@ -75,8 +75,8 @@ export const getViewPageCardsFactor = createSelector(
 		getViewPageShelfIds,
 		getViewPageShelvesDataSaved,
 	],
-	(cardsFactor, shelvesDataFactor, shelfId, boxId, boxSpecialIndex, shelfIds, shelvesData) => {
-		if (!cardsFactor || !shelvesDataFactor) return []
+	(cardsFactor, shelfIdsBoxSpecialIndexesObj, shelfId, boxId, boxSpecialIndex, shelfIds, shelvesData) => {
+		if (!cardsFactor || !shelfIdsBoxSpecialIndexesObj) return []
 		if (shelfId === 'all') {
 			// if (boxSpecialIndex === 'all') return cards
 			// if (boxSpecialIndex === 'new') return cards?.filter(card => card.specialType === 'new')
@@ -86,7 +86,7 @@ export const getViewPageCardsFactor = createSelector(
 			if (boxSpecialIndex === 'new') {
 				const shelfIdAndNewCardBoxIdList = shelfIds.map(shelfIdItem => ({
 					shelfId: shelfIdItem,
-					boxId: shelvesDataFactor[shelfIdItem]['new']
+					boxId: shelfIdsBoxSpecialIndexesObj[shelfIdItem]['new']
 				}))
 				Array.from(shelfIdAndNewCardBoxIdList).forEach(item => {
 					const newCards = cardsFactor[item.shelfId][item.boxId]
@@ -112,7 +112,7 @@ export const getViewPageCardsFactor = createSelector(
 			} else if (boxSpecialIndex === 'learnt') {
 				const shelfIdAndNewCardBoxIdList = shelfIds.map(shelfIdItem => ({
 					shelfId: shelfIdItem,
-					boxId: shelvesDataFactor[shelfIdItem]['learnt']
+					boxId: shelfIdsBoxSpecialIndexesObj[shelfIdItem]['learnt']
 				}))
 				Array.from(shelfIdAndNewCardBoxIdList).forEach(item => {
 					const learntCards = cardsFactor[item.shelfId][item.boxId]
@@ -142,10 +142,10 @@ export const getViewPageCardsFactor = createSelector(
 			const allBoxIdsInShelf = Object.keys(cardsFactor[shelfId])
 			return allBoxIdsInShelf.flatMap(boxIdKey => cardsFactor[shelfId][boxIdKey]) ?? []
 		} else if (boxSpecialIndex === 'learnt') {
-			const learntBoxId = shelvesDataFactor[shelfId]['learnt']
+			const learntBoxId = shelfIdsBoxSpecialIndexesObj[shelfId]['learnt']
 			return cardsFactor[shelfId][learntBoxId] ?? []
 		} else if (boxSpecialIndex === 'new') {
-			const newCardsBoxId = shelvesDataFactor[shelfId]['new']
+			const newCardsBoxId = shelfIdsBoxSpecialIndexesObj[shelfId]['new']
 			return cardsFactor[shelfId][newCardsBoxId] ?? []
 		}
 		return cardsFactor[shelfId][boxId] ?? []
