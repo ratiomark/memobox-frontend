@@ -19,9 +19,9 @@ export const App = () => {
 
 	useEffect(() => {
 		dispatch(initAuthData())
-	}, [dispatch, userMounted])
+	}, [dispatch])
 
-	if (!userMounted) return <LoaderWidget />
+	// if (!userMounted) return <LoaderWidget />
 
 	return (
 		// <div className='app'>

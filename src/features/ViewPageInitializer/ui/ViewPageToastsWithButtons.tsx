@@ -51,6 +51,7 @@ const DeleteCardsToasts = () => {
 				}}
 				// onButtonClick={() => alert('CCCCCCCCC')}
 				onTimeEnd={() => {
+					console.log('Отработал конец')
 					dispatch(deleteMultipleCardsThunk(randomId))
 					// dispatch(viewPageActions.removeMultiSelectDeleteIds(id))
 				}}

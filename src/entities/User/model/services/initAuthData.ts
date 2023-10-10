@@ -15,6 +15,7 @@ export const initAuthData = createAsyncThunk<UserWithToken, void, { rejectValue:
 		if (!userToken) return rejectWithValue('Нет токена')
 		try {
 			const response = await dispatch(getUserTokenValid(userToken)).unwrap() //разворачиваю в реальный результат
+			console.log('Проверка токена. Ответ сервера:   ', response)
 			if (!response.token) {
 				return rejectWithValue('Токен не валидный')
 			}

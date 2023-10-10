@@ -13,13 +13,13 @@ export const loginUserByUserName = createAsyncThunk<UserWithToken, LoginByUserNa
 		try {
 			const { dispatch } = thunkAPI
 			const response = await dispatch(loginUser({ username, password })).unwrap()
-
+			console.log('Логин. Ответ сервера:   ', response)
 			if (!response.token) {
 				throw new Error()
 			}
 
 			thunkAPI.dispatch(userActions.setAuthData(response))
-
+			
 			return response
 
 		} catch (err) {

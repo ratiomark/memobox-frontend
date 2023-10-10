@@ -12,7 +12,7 @@ export const registerUserByUserName = createAsyncThunk<UserWithToken, LoginByUse
 		try {
 			const { dispatch } = thunkAPI
 			const response = await dispatch(registerUser({ username, password })).unwrap()
-
+			console.log('Регистрация. Ответ сервера:   ', response)
 			if (!response.token) {
 				throw new Error()
 			}
