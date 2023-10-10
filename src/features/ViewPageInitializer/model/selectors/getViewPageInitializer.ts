@@ -3,6 +3,8 @@ import { getUserSavedDataViewPageColumns } from '@/entities/User';
 import { createSelector } from '@reduxjs/toolkit';
 import { getViewPageSort, getViewPageSortOrder } from './getViewPageSorting';
 import { CardSchemaExtended } from '@/entities/Card';
+import { getViewPageCardEditedListIds } from './getViewPageEditModal';
+import { getViewPageSelectedCardIds } from './getViewPageMultiSelect';
 
 export const getViewPageIsMounted = (state: StateSchema) => state.viewPage?._viewPageMounted
 export const getViewPageIsLoading = (state: StateSchema) => state.viewPage?.isLoading
@@ -27,19 +29,6 @@ export const getViewPageBoxIdChecked = createSelector(
 	}
 )
 
-// export const getViewPageBoxIdChecked = createSelector(
-// 	[
-// 		getViewPageShelfId,
-// 		getViewPageBoxId,
-// 	],
-// 	(shelfId, boxId) => {
-// 		if (shelfId !== 'all') return boxId
-// 		if (boxId === 'new' || boxId === 'all' || boxId === 'learnt' || boxId === 'learning') {
-// 			return boxId
-// 		}
-// 		return 'new'
-// 	}
-// )
 export const getViewPageBoxSpecialIndexChecked = createSelector(
 	[
 		getViewPageShelfId,
@@ -63,6 +52,7 @@ export const getViewPageShelvesDataSaved = (state: StateSchema) => state.viewPag
 // 	(state: StateSchema) => state.viewPage?.shelvesDataSaved[shelfId].lastBoxId ?? 'new'
 export const getViewPageCards = (state: StateSchema) => state.viewPage?.cards
 
+// Это вариант для случая, если я решу карточки сохранять в объекте
 export const getViewPageCardsFactor = createSelector(
 	[
 		(state: StateSchema) => state.viewPage?.cardsShelfIdBoxIdObj,
@@ -159,6 +149,24 @@ export const getViewPageCurrentCardIds = (state: StateSchema) => {
 // 	return getViewPageCardsFactor(state).map(card => card.id)
 // }
 
+export const getViewPageCardsFiltered = createSelector(
+	[
+		getViewPageCards,
+		getViewPageShelfId,
+		getViewPageBoxSpecialIndexChecked,
+	],
+	(cards, shelfId, boxSpecialIndex) => {
+		if (shelfId === 'all' && boxSpecialIndex === 'all') return cards
+		if (shelfId === 'all' && boxSpecialIndex === 'new') return cards?.filter(card => card.specialType === 'new')
+		if (shelfId === 'all' && boxSpecialIndex === 'learning') return cards?.filter(card => card.specialType === 'none')
+		if (shelfId === 'all' && boxSpecialIndex === 'learnt') return cards?.filter(card => card.specialType === 'learnt')
+		if (boxSpecialIndex === 'all') return cards?.filter(card => card.shelfId === shelfId)
+		if (boxSpecialIndex === 'new') return cards?.filter(card => (card.shelfId === shelfId && card.specialType === 'new'))
+		if (boxSpecialIndex === 'learnt') return cards?.filter(card => card.shelfId === shelfId && card.specialType === 'learnt')
+		return cards?.filter(card => (card.shelfId === shelfId && card.boxIndex.toString() == boxSpecialIndex)) ?? []
+	}
+)
+
 export const getViewPageSortChecked = createSelector(
 	[
 		getViewPageShelfId,
@@ -169,29 +177,27 @@ export const getViewPageSortChecked = createSelector(
 		return sort
 	}
 )
-
-export const getViewPageCardsFiltered = createSelector(
-	[
-		getViewPageCards,
-		getViewPageShelfId,
-		getViewPageBoxIdChecked,
-	],
-	(cards, shelfId, boxId) => {
-		if (shelfId === 'all' && boxId === 'all') return cards
-		if (shelfId === 'all' && boxId === 'new') return cards?.filter(card => card.specialType === 'new')
-		if (shelfId === 'all' && boxId === 'learning') return cards?.filter(card => card.specialType === 'none')
-		if (shelfId === 'all' && boxId === 'learnt') return cards?.filter(card => card.specialType === 'learnt')
-		if (boxId === 'all') return cards?.filter(card => card.shelfId === shelfId)
-		if (boxId === 'new') return cards?.filter(card => (card.shelfId === shelfId && card.specialType === 'new'))
-		if (boxId === 'learnt') return cards?.filter(card => card.shelfId === shelfId && card.specialType === 'learnt')
-		return cards?.filter(card => (card.shelfId === shelfId && card.boxIndex.toString() == boxId)) ?? []
-	}
-)
+// export const getViewPageCardsFiltered = createSelector(
+// 	[
+// 		getViewPageCards,
+// 		getViewPageShelfId,
+// 		getViewPageBoxIdChecked,
+// 	],
+// 	(cards, shelfId, boxId) => {
+// 		if (shelfId === 'all' && boxId === 'all') return cards
+// 		if (shelfId === 'all' && boxId === 'new') return cards?.filter(card => card.specialType === 'new')
+// 		if (shelfId === 'all' && boxId === 'learning') return cards?.filter(card => card.specialType === 'none')
+// 		if (shelfId === 'all' && boxId === 'learnt') return cards?.filter(card => card.specialType === 'learnt')
+// 		if (boxId === 'all') return cards?.filter(card => card.shelfId === shelfId)
+// 		if (boxId === 'new') return cards?.filter(card => (card.shelfId === shelfId && card.specialType === 'new'))
+// 		if (boxId === 'learnt') return cards?.filter(card => card.shelfId === shelfId && card.specialType === 'learnt')
+// 		return cards?.filter(card => (card.shelfId === shelfId && card.boxIndex.toString() == boxId)) ?? []
+// 	}
+// )
 
 export const getViewPageCardsSorted = createSelector(
 	[
 		getViewPageCardsFiltered,
-		// VAR: использую getViewPageSortChecked вместо getViewPageSort чтобы пофискить проблему в общей полкой, когда там используется shelf как столбец сортировки
 		getViewPageSortChecked,
 		getViewPageSortOrder,
 	],
@@ -220,10 +226,11 @@ export const getViewPageCardsSorted = createSelector(
 		return []
 	}
 )
+
+// Это вариант для случая, если я решу карточки сохранять в объекте
 export const getViewPageCardsSortedFactor = createSelector(
 	[
 		getViewPageCardsFactor,
-		// VAR: использую getViewPageSortChecked вместо getViewPageSort чтобы пофискить проблему в общей полкой, когда там используется shelf как столбец сортировки
 		getViewPageSortChecked,
 		getViewPageSortOrder,
 	],
@@ -257,20 +264,33 @@ export const getViewPageColumns = createSelector(
 	[
 		getViewPageShelfId,
 		getUserSavedDataViewPageColumns,
-		// getColumns,
 	],
 	(shelfId, columns) => {
-		// const columns: SortColumnObject[] = [
-		// 	{ value: 'shelf', content: 'shelf', enabled: true, index: 0 },
-		// 	{ value: 'createdAt', content: 'creation', enabled: true, index: 1 },
-		// 	{ value: 'lastTraining', content: 'last training', enabled: true, index: 2 },
-		// ]
 		if (shelfId === 'all') {
 			return columns
 		}
 		return columns?.filter(column => column.value !== 'shelfId')
 	}
 )
+
+export const getViewPageIsCardEdited = (cardId: string) => {
+	return createSelector(
+		[
+			getViewPageCardEditedListIds,
+		],
+		(listIds) => {
+			return listIds?.includes(cardId)
+		})
+}
+export const getViewPageIsCardSelected = (cardId: string) => {
+	return createSelector(
+		[
+			getViewPageSelectedCardIds,
+		],
+		(listIds) => {
+			return listIds?.includes(cardId) ?? false
+		})
+}
 
 
 

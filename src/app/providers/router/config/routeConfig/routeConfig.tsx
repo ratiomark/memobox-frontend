@@ -10,10 +10,11 @@ import { TrashPage } from '@/pages/TrashPage';
 import { SettingsPageWidgetSkeleton } from '@/widgets/SettingsPageWidget';
 import { StatsAndActionsCupboardWidgetSkeleton } from '@/widgets/StatsAndActionsCupboardWidget';
 import { SubscriptionPage } from '@/pages/SubscriptionPage';
-import { ProfilePage } from '@/pages/ProfilePage';
+import { ProfilePage, } from '@/pages/ProfilePage';
 import { StatsPageSkeleton, StatsPage } from '@/pages/StatsPage';
 import { ViewPageSkeleton } from '@/pages/ViewPage';
 import { LoginPage } from '@/pages/LoginPage';
+import { ProfilePageWidgetSkeleton } from '@/widgets/ProfilePageWidget';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -138,6 +139,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	profile: {
 		path: obtainRouteProfile(),
 		element: <ProfilePage />,
+		suspense: <ProfilePageWidgetSkeleton />,
 		authOnly: true,
 		// suspense: <Susp/>
 	},

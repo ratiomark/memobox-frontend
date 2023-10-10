@@ -1,7 +1,9 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
-import { getViewPageShelfId, getViewPageBoxSpecialIndex } from './getViewPageInitializer';
-
+// import { getViewPageBoxSpecialIndex } from './getViewPageInitializer';
+const getViewPageShelfId = (state: StateSchema) => state.viewPage?.shelfId ?? 'all'
+const getViewPageBoxSpecialIndex = (state: StateSchema) => state.viewPage?.boxSpecialIndex ?? 'new'
+// export const getViewPageBoxId = (state: StateSchema) => state.viewPage?.boxId ?? ''
 export const getViewPageSelectedCardIds = (state: StateSchema) => state.viewPage?.selectedCardIds
 export const getViewPageMultiSelectIsActive = (state: StateSchema) => state.viewPage?.isMultiSelectActive
 

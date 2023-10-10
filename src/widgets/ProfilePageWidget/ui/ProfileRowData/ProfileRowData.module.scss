@@ -4,7 +4,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: 300px 1fr auto;
-  padding: 10px;
+  padding: var(--padding-profile-row-data);
   position: relative;
 
   // padding-bottom: 30px;

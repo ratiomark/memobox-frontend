@@ -7,28 +7,32 @@ import { Suspense, memo, useCallback, useEffect, useMemo, useRef, useState } fro
 import { Skeleton, TextEditorSkeleton } from '@/shared/ui/Skeleton';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
 import { HDialog } from '@/shared/ui/HDialog';
-import { useGetShelvesQuery } from '@/entities/Cupboard';
-import { getViewPageCardDataOriginal, getViewPageEditModalIsOpen, getViewPageCardDataEdited, getViewPageIsCardInModalEdited, viewPageActions } from '@/features/ViewPageInitializer';
+import {
+	getViewPageCardDataOriginal,
+	getViewPageEditModalIsOpen,
+	getViewPageCardDataEdited,
+	getViewPageIsCardInModalEdited,
+	viewPageActions,
+	getViewPageBoxItemsEditCardModal,
+	getViewPageIsLoading,
+} from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
-import type { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
 import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 import { getViewPageShelfItems } from '@/features/ViewPageInitializer';
 
 export const CardEditModal = memo(() => {
 	const { t } = useTranslation()
-	// const cupboardError = useSelector(getCupboardError)
-	// тут нужно использовать кастомный хук, который вернет shelfItems boxItems
-	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
-	const [showOriginalData, setShowOriginalData] = useState(false)
-
+	const dispatch = useAppDispatch()
+	const isLoading = useSelector(getViewPageIsLoading)
 	const isOpen = useSelector(getViewPageEditModalIsOpen) ?? false
 	const isCardEdited = useSelector(getViewPageIsCardInModalEdited)
-	const dispatch = useAppDispatch()
 	const shelfItems = useSelector(getViewPageShelfItems)
-	// const mainContentRef = useRef<HTMLDivElement>(null)
+	const boxItems = useSelector(getViewPageBoxItemsEditCardModal)
+	const [showOriginalData, setShowOriginalData] = useState(false)
+
 	const shelvesAndBoxesRef = useRef<HTMLDivElement>(null)
 	const modalButtonsRef = useRef<HTMLDivElement>(null)
 
@@ -43,32 +47,19 @@ export const CardEditModal = memo(() => {
 	const questionTextEdited = cardEditedData?.question
 	const answerTextEdited = cardEditedData?.answer
 	const editedShelf = cardEditedData?.shelfId
-	const editedBox = cardEditedData?.boxIndex
+	const editedBox = cardEditedData?.boxId
 
 	// Original data
-	const cardOriginalData = useSelector(getViewPageCardDataOriginal)
+	const cardOriginalData = useSelector(getViewPageCardDataOriginal)!
 	const questionTextOriginal = cardOriginalData?.question
-	// const questionTextOriginal = cardOriginalData?.question
 	const answerTextOriginal = cardOriginalData?.answer
-	const cardId = cardOriginalData?.id
 	const originalShelf = cardOriginalData?.shelfId
-	const originalBox = cardOriginalData?.boxIndex
-
+	const originalBox = cardOriginalData?.boxId
 
 	const onToggleShowData = () => setShowOriginalData(prev => !prev)
 
 	useEffect(() => {
 		const onToggleShowDataByHotKey = (e: globalThis.KeyboardEvent) => {
-			// console.log('Обработка горячки')
-			// const container = mainContentRef.current;
-			// if (container) {
-			// 	const scrollTop = container.scrollTop; // Сохраняем текущую позицию прокрутки
-
-			// 	// Восстанавливаем позицию прокрутки после того, как браузер обработает ввод
-			// 	requestAnimationFrame(() => {
-			// 		container.scrollBy(0, scrollTop) 
-			// 	});
-			// }
 			if (e.altKey && e.code === 'KeyC') {
 				onToggleShowData()
 			}
@@ -86,56 +77,27 @@ export const CardEditModal = memo(() => {
 		}
 	}, [isOpen])
 
-	// const shelfItems = useMemo(() => {
-	// 	if (isShelvesLoading) return []
-	// 	return shelvesData?.map(shelfItem => {
-	// 		return ({
-	// 			value: shelfItem.id,
-	// 			content: shelfItem.title
-	// 		})
-	// 	})
-	// }, [shelvesData, isShelvesLoading])
-	// VAR: тут нужно из селектора достать 
-	const boxItems = useMemo(() => {
-		if (isShelvesLoading) return []
-		const currentShelf = shelvesData?.find(shelf => shelf.id === editedShelf)
-		const itemsList = currentShelf?.boxesData.map(box => {
-			let content;
-			switch (box.specialType) {
-				case 'none':
-					content = `${t('box text')} ${box.index}`
-					break;
-				case 'new':
-					content = t('new cards')
-					break
-				default:
-					content = t('learnt cards')
-					break;
-			}
-			return {
-				value: box.index,
-				content,
-			}
-		})
-		return itemsList
-	}, [isShelvesLoading, shelvesData, editedShelf, t])
 
 	const onChangeShelf = useCallback((shelfId: string) => {
 		dispatch(viewPageActions.setCardShelfId(shelfId))
 	}, [dispatch])
 
-	const onChangeBox = useCallback((boxIndex: number) => {
-		dispatch(viewPageActions.setCardBoxId(boxIndex))
+	// const onChangeBox = useCallback((boxIndex: number) => {
+	// 	dispatch(viewPageActions.setCardBoxId(boxIndex))
+	// }, [dispatch])
+
+	const onChangeBox = useCallback((boxId: string) => {
+		dispatch(viewPageActions.setCardBoxId(boxId))
 	}, [dispatch])
 
 	const onChangeQuestion = useCallback((editorState: string) => {
-	// const onChangeQuestion = useCallback((editorState: EditorState) => {
+		// const onChangeQuestion = useCallback((editorState: EditorState) => {
 		dispatch(viewPageActions.setCardQuestionText(editorState))
 		// dispatch(viewPageActions.setCardQuestionText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
 
 	const onChangeAnswer = useCallback((editorState: string) => {
-	// const onChangeAnswer = useCallback((editorState: EditorState) => {
+		// const onChangeAnswer = useCallback((editorState: EditorState) => {
 		dispatch(viewPageActions.setCardAnswerText(editorState))
 		// dispatch(viewPageActions.setCardAnswerText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
@@ -198,7 +160,8 @@ export const CardEditModal = memo(() => {
 	), [])
 
 	const shelvesAndBoxesOriginal = useMemo(() => {
-		if (isShelvesLoading) return shelvesAndBoxesSkeleton
+		if (isLoading) return shelvesAndBoxesSkeleton
+		// if (isShelvesLoading) return shelvesAndBoxesSkeleton
 		return (
 			<div className={cls.grid} key='shelvesAndBoxes'>
 				<div className={cls.listBoxWrapper}>
@@ -224,10 +187,11 @@ export const CardEditModal = memo(() => {
 					/>
 				</div>
 			</div>)
-	}, [boxItems, onChangeBox, onChangeShelf, originalBox, originalShelf, shelfItems, t, isShelvesLoading, shelvesAndBoxesSkeleton])
+	}, [boxItems, onChangeBox, onChangeShelf, originalBox, originalShelf, shelfItems, t, isLoading, shelvesAndBoxesSkeleton])
 
 	const shelvesAndBoxesCurrent = useMemo(() => {
-		if (isShelvesLoading) return shelvesAndBoxesSkeleton
+		// if (isShelvesLoading) return shelvesAndBoxesSkeleton
+		if (isLoading) return shelvesAndBoxesSkeleton
 		return (
 			<div className={cls.grid} key='shelvesAndBoxes'>
 				<div className={cls.listBoxWrapper}>
@@ -251,7 +215,8 @@ export const CardEditModal = memo(() => {
 					/>
 				</div>
 			</div>)
-	}, [boxItems, onChangeBox, onChangeShelf, editedBox, editedShelf, shelfItems, t, isShelvesLoading, shelvesAndBoxesSkeleton])
+	}, [boxItems, onChangeBox, onChangeShelf, editedBox, editedShelf, shelfItems, t, isLoading, shelvesAndBoxesSkeleton])
+	// }, [boxItems, onChangeBox, onChangeShelf, editedBox, editedShelf, shelfItems, t, isShelvesLoading, shelvesAndBoxesSkeleton])
 
 	const compareButton = isCardEdited
 		? <Button onClick={onToggleShowData}>{t('compare data')}</Button>

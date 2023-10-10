@@ -70,6 +70,8 @@ const viewPageSlice = createSlice({
 				state.boxId = state.shelfIdsBoxSpecialIndexesObj[shelfId]['new']
 			} else if (state.boxSpecialIndex === 'learnt') {
 				state.boxId = state.shelfIdsBoxSpecialIndexesObj[shelfId]['learnt']
+			} else if (state.boxSpecialIndex === 'all') {
+				state.boxId = 'all'
 			} else {
 				state.boxId = state.shelfIdsBoxSpecialIndexesObj[shelfId][state.boxSpecialIndex]
 			}
@@ -294,7 +296,7 @@ const viewPageSlice = createSlice({
 						question: action.payload.question,
 						answer: action.payload.answer,
 						shelfId: action.payload.shelfId,
-						boxIndex: action.payload.boxIndex,
+						boxId: action.payload.boxId,
 					}
 				}
 				state.cardsDataEdited = { ...state.cardsDataEdited, ...obj }
@@ -322,19 +324,32 @@ const viewPageSlice = createSlice({
 				state.cardEditedListIds.push(state.currentCardId)
 			}
 		},
-		setCardBoxId: (state, action: PayloadAction<number>) => {
-			const boxIndex = action.payload
-			state.cardsDataEdited[state.currentCardId].boxIndex = boxIndex
+		setCardBoxId: (state, action: PayloadAction<string>) => {
+			const boxId = action.payload
+			state.cardsDataEdited[state.currentCardId].boxId = boxId
 			if (!state.cardEditedListIds.includes(state.currentCardId) &&
-				boxIndex !== state.cardsDataOriginal[state.currentCardId].boxIndex
+				boxId !== state.cardsDataOriginal[state.currentCardId].boxId
 			) {
 				state.cardEditedListIds.push(state.currentCardId)
 			}
 			// if (!state.cardEditedListIds.includes(state.currentCardId)) {
 			// 	state.cardEditedListIds.push(state.currentCardId)
 			// }
-			
+
 		},
+		// setCardBoxId: (state, action: PayloadAction<number>) => {
+		// 	const boxIndex = action.payload
+		// 	state.cardsDataEdited[state.currentCardId].boxIndex = boxIndex
+		// 	if (!state.cardEditedListIds.includes(state.currentCardId) &&
+		// 		boxIndex !== state.cardsDataOriginal[state.currentCardId].boxIndex
+		// 	) {
+		// 		state.cardEditedListIds.push(state.currentCardId)
+		// 	}
+		// 	// if (!state.cardEditedListIds.includes(state.currentCardId)) {
+		// 	// 	state.cardEditedListIds.push(state.currentCardId)
+		// 	// }
+
+		// },
 		setCurrentCardId: (state, action: PayloadAction<string>) => {
 			state.currentCardId = action.payload
 		},

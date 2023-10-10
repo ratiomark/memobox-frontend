@@ -8,15 +8,17 @@ export {
 export {
 	getViewPageShelfItems,
 	getViewPageBoxItemsForWidget,
-
+	getViewPageBoxItemsEditCardModal,
 } from './model/selectors/getViewPageShelfAndBoxItems';
-
 
 export {
 	deleteCardThunk
 } from './model/services/deleteCardThunk';
 
-export { getViewPageShelvesDataDictionary } from './model/selectors/getViewPageShelvesDataDictionary';
+export {
+	getViewPageShelvesDataDictionary
+} from './model/selectors/getViewPageShelvesDataDictionary';
+
 export {
 	getViewPageColumnSettingsIsOpen,
 	getViewPageSort,
@@ -59,7 +61,8 @@ export {
 
 	getViewPageSortChecked,
 
-
+	getViewPageIsCardEdited,
+	getViewPageIsCardSelected,
 	getViewPageBoxIdChecked,
 } from './model/selectors/getViewPageInitializer';
 

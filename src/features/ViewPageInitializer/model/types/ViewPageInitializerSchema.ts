@@ -77,7 +77,7 @@ interface CardsDataEditedObj {
 		question: string
 		answer: string
 		shelfId: string
-		boxIndex: number
+		boxId: string
 	}
 }
 

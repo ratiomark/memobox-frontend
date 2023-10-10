@@ -4,7 +4,12 @@ import { CardSchemaExtended, getCardMainData } from '@/entities/Card';
 import { MyText } from '@/shared/ui/Typography';
 // import ShareIcon from '@/shared/assets/icons/shareIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
-import { getViewPageCardEditedListIds, getViewPageColumns, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
+import {
+	getViewPageColumns,
+	getViewPageMultiSelectIsActive,
+	getViewPageShelvesDataDictionary,
+	viewPageActions,
+} from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { ChangeEvent, MouseEvent,  useMemo, } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
@@ -16,6 +21,7 @@ import EyeIcon from '@/shared/assets/icons/eye2.svg'
 import { formatDate } from '@/shared/lib/helpers/common/formaters';
 import { EditorCardPresenter } from '@/shared/ui/LexicalEditor';
 import { CardDeleting } from '../CardDeleting/CardDeleting';
+import { getViewPageIsCardEdited, getViewPageIsCardSelected } from '@/features/ViewPageInitializer';
 
 interface CardListItemProps {
 	className?: string
@@ -33,10 +39,12 @@ export const CardListItem = (props: CardListItemProps) => {
 	} = props
 	const dispatch = useAppDispatch()
 	const isMultiSelectActive = useSelector(getViewPageMultiSelectIsActive)
-	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
 	const shelvesDataDictionary = useSelector(getViewPageShelvesDataDictionary)
-	const cardsEditedListIds = useSelector(getViewPageCardEditedListIds)
-	const isCardEdited = cardsEditedListIds?.includes(card.id)
+	const isCardEdited = useSelector(getViewPageIsCardEdited(card.id))
+	const isCardSelected = useSelector(getViewPageIsCardSelected(card.id))
+	const columns = useSelector(getViewPageColumns)
+	// const cardsEditedListIds = useSelector(getViewPageCardEditedListIds)
+	// const isCardEdited = cardsEditedListIds?.includes(card.id)
 	// обычный клик открывает модалку редактирования. Клик в режиме мультиселекта выбирает карточку
 
 	const onDeleteCard = (e: MouseEvent) => {
@@ -75,9 +83,6 @@ export const CardListItem = (props: CardListItemProps) => {
 		}
 		onOpenEditCardModal(card)
 	}
-
-	const isCardSelected = selectedCardIds?.includes(card.id) ?? false
-	const columns = useSelector(getViewPageColumns)
 
 	const columnsRendered = useMemo(() => {
 		return columns?.map(column => {

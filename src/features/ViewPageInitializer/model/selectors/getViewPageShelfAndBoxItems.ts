@@ -5,6 +5,7 @@ import { getViewPageSort, getViewPageSortOrder } from './getViewPageSorting';
 import { getViewPageIsLoading, getViewPageShelfId } from './getViewPageInitializer';
 import { TabItem } from '@/shared/ui/Tabs/Tabs';
 import { t } from 'i18next';
+import { getViewPageCardDataEdited } from './getViewPageEditModal';
 
 const getViewPageShelvesData = (state: StateSchema) => state.viewPage?.shelvesData
 
@@ -53,6 +54,41 @@ export const getViewPageBoxItemsForWidget = createSelector(
 				content: t('all cards') as string
 			},
 		]
+		const boxesData = shelvesDataObject[shelfId].boxesItems
+		tabs.push({
+			value: boxesData[0].id,
+			additional: 'new',
+			content: t('new cards') as string
+		})
+		boxesData.slice(1, boxesData.length - 1).forEach(box => {
+			tabs.push({
+				value: box.id,
+				additional: box.index.toString(),
+				content: `${t('box text')} ${box.index}`
+			})
+		})
+		tabs.push({
+			value: boxesData.at(boxesData.length - 1)!.id,
+			additional: 'learnt',
+			content: t('learnt cards') as string
+		})
+		return tabs
+	}
+)
+
+// const editedShelf = cardEditedData?.shelfId
+export const getViewPageBoxItemsEditCardModal = createSelector(
+	[
+		getViewPageCardDataEdited,
+		getViewPageShelvesData,
+		getViewPageIsLoading,
+	],
+	(cardDataEdited, shelvesDataObject, isLoading) => {
+		if (isLoading || !shelvesDataObject ||!cardDataEdited ) {
+			return [] as TabItem[]
+		}
+		const shelfId = cardDataEdited.shelfId
+		const tabs: TabItem[] = []
 		const boxesData = shelvesDataObject[shelfId].boxesItems
 		tabs.push({
 			value: boxesData[0].id,

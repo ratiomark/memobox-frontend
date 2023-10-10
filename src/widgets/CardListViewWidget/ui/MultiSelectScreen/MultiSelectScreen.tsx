@@ -26,10 +26,6 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 	} = props
 	const shelfItems = useSelector(getViewPageShelfItems)
 	const isSelectAllAllowed = useSelector(getMultiSelectIsSelectAllAllowed)
-	// const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
-	// const selectedCardIds = useSelector(getViewPageSelectedCardIds)
-	// const [updateCardsMutation] = useUpdateCardsMutation()
-	// updateCardsMutation({ cardIds: })
 
 	const onRemoveCardsHandle = () => {
 		onRemoveCards()
