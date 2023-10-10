@@ -1,23 +1,28 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { HStack, VStack } from '@/shared/ui/Stack';
-import { MyText, TextArea } from '@/shared/ui/Typography';
-import { Button } from '@/shared/ui/Button';
-import { Skeleton } from '@/shared/ui/Skeleton';
 import cls from './MoveCardsModal.module.scss';
-import { HDialog } from '@/shared/ui/HDialog';
-import { useGetShelvesQuery } from '@/entities/Cupboard';
-import { getViewPageMoveCardsModalIsOpen, getViewPageSelectedCardIds, getViewPageShelfId, getViewPageShelvesDataDictionary, viewPageActions } from '@/features/ViewPageInitializer';
+import {
+	getViewPageBoxItemsMoveCardsModal,
+	getViewPageMoveCardsModalIsOpen,
+	getViewPageMoveCardsModalShelfIdChecked,
+	// getViewPageMoveCardsModalBoxIdChecked,
+	getViewPageMoveCardsModalBoxId,
+	getViewPageSelectedCardIds,
+	getViewPageShelfId,
+	getViewPageShelfItems,
+	getViewPageShelfItemsModal,
+	getViewPageShelvesDataDictionary,
+	viewPageActions,
+	getViewPageMoveCardsModalShelfId,
+} from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { cupboardShelfListActions } from '@/features/CupboardShelfList';
-import { memo, useState, useMemo, useCallback, useEffect } from 'react';
-// import { CardEditModal } from '../CardEditModalWithTextArea_DEPRECATED/CardEditModal';
+import { memo, useEffect } from 'react';
 import { Dropdown, ListBox } from '@/shared/ui/Popup';
-import { ListBoxItems } from '@/shared/ui/Popup/ui/ListBox/ListBox';
-import { useUpdateCardsMutation } from '@/entities/Card';
+import { ListBoxItem } from '@/shared/ui/Popup/ui/ListBox/ListBox';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
+import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 
 
 export const MoveCardsModal = memo(() => {
@@ -25,57 +30,39 @@ export const MoveCardsModal = memo(() => {
 	const { t } = useTranslation()
 	const isOpen = useSelector(getViewPageMoveCardsModalIsOpen) ?? false
 	const dispatch = useAppDispatch()
-	const [currentShelfId, setCurrentShelfId] = useState<string | undefined>()
-	const [shelvesItems, setShelvesItems] = useState<ListBoxItems<string>[]>([])
-	const [boxItems, setBoxItems] = useState<ListBoxItems<string>[]>([])
-	const [currentBoxIndex, setCurrentBoxIndex] = useState<string | undefined>()
-	const shelfId = useSelector(getViewPageShelfId)
+	// const [shelvesItems, setShelvesItems] = useState<ListBoxItems<string>[]>([])
+	// const [boxItems, setBoxItems] = useState<ListBoxItems<string>[]>([])
+	// const shelfId = useSelector(getViewPageShelfId)
 	const selectedCardIds = useSelector(getViewPageSelectedCardIds)
-	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
-	const [updateCardsMutation] = useUpdateCardsMutation()
+	const shelvesItems = useSelector(getViewPageShelfItemsModal) as ListBoxItem<string>[]
+	const shelfId = useSelector(getViewPageMoveCardsModalShelfId)
+	// const shelfId = useSelector(getViewPage)
+	// const [currentShelfId, setCurrentShelfId] = useState('')
+	const boxItems = useSelector(getViewPageBoxItemsMoveCardsModal)
+	const boxId = useSelector(getViewPageMoveCardsModalBoxId)
+	// const boxId = useSelector(getViewPageMoveCardsModalBoxId) ?? boxItems[0]?.value as string
+	// const boxId = useSelector(getViewPageMoveCardsModalBoxIdChecked)
+	// const [currentBoxId, setCurrentBoxId] = useState('')
 
 	useEffect(() => {
-		if (shelvesData) {
-			const shelvesResult: ListBoxItems<string>[] = [];
-			shelvesData?.forEach(shelfItem => {
-				if (shelfId !== shelfItem.id) {
-					shelvesResult.push({
-						value: shelfItem.id,
-						content: shelfItem.title
-					})
-				}
-			})
-			setShelvesItems(shelvesResult)
-			setCurrentShelfId(shelvesResult?.[0]?.value.toString())
+		if (boxItems.length > 0) {
+			dispatch(viewPageActions.setMoveCardsModalBoxId(boxItems[0].value as string))
 		}
-	}, [shelvesData, shelfId])
+	}, [boxItems, dispatch])
 
 	useEffect(() => {
-		if (currentShelfId && shelvesData) {
-			const currentShelf = shelvesData.find(shelf => shelf.id === currentShelfId)
-			const itemsList = currentShelf!.boxesData.map(box => {
-				let content;
-				switch (box.specialType) {
-					case 'none':
-						content = `${t('box text')} ${box.index}`
-						break;
-					case 'new':
-						content = t('new cards')
-						break
-					default:
-						content = t('learnt cards')
-						break;
-				}
-				return {
-					value: box.index.toString(),
-					// value: box.id,
-					content,
-				}
-			})
-			setBoxItems(itemsList)
-			setCurrentBoxIndex(itemsList?.[0]?.value.toString())
+		if (shelvesItems.length > 0) {
+			dispatch(viewPageActions.setMoveCardsModalShelfId(shelvesItems[0].value as string))
 		}
-	}, [t, shelvesData, currentShelfId])
+	}, [shelvesItems, dispatch])
+
+	const onChangeShelfId = (shelfId: string) => {
+		dispatch(viewPageActions.setMoveCardsModalShelfId(shelfId))
+	}
+
+	const onChangeBoxId = (boxId: string) => {
+		dispatch(viewPageActions.setMoveCardsModalBoxId(boxId))
+	}
 
 	const onCloseMoveCards = () => {
 		dispatch(viewPageActions.setMoveCardsModalIsOpen(false))
@@ -83,15 +70,24 @@ export const MoveCardsModal = memo(() => {
 	}
 
 	const onMoveCards = () => {
-		updateCardsMutation({
-			requestAction: 'moveCards',
-			cardIds: selectedCardIds!,
-			boxIndex: currentBoxIndex!,
-			shelfId: currentShelfId!,
-		})
+		console.log(shelfId)
+		console.log(boxId)
+		console.log(selectedCardIds)
+		const id = genRandomId()
+		// dispatch(viewPageActions.setSelectedCardIsDeleted())
+		dispatch(viewPageActions.setSelectedCardIsDeleted())
+		dispatch(viewPageActions.addMultiSelectMoveIds(id))
+		
 		dispatch(viewPageActions.setMoveCardsModalIsOpen(false))
-		dispatch(viewPageActions.setMultiSelectIsActive(false))
-		// alert(`${selectedCardIds} перемещены на полку с id ${currentShelfId} в коробку ${currentBoxIndex}`)
+		dispatch(viewPageActions.cancelMultiSelect())
+		// updateCardsMutation({
+		// 	requestAction: 'moveCards',
+		// 	cardIds: selectedCardIds!,
+		// 	boxIndex: currentBoxId!,
+		// 	shelfId: currentShelfId!,
+		// })
+		// dispatch(viewPageActions.setMultiSelectIsActive(false))
+		// alert(`${selectedCardIds} перемещены на полку с id ${currentShelfId} в коробку ${currentBoxId}`)
 	}
 
 	// console.log(currentShelfId, shelfItems, shelvesData)
@@ -100,9 +96,10 @@ export const MoveCardsModal = memo(() => {
 		<div className={cls.listBoxWrapper}>
 			<ListBox
 				label={t('shelf')}
-				value={currentShelfId}
+				// value={currentShelfId}
+				value={shelfId}
 				items={shelvesItems}
-				onChange={setCurrentShelfId}
+				onChange={onChangeShelfId}
 				defaultValue={t('choose shelf from list')}
 				max
 				sameWidth
@@ -112,9 +109,11 @@ export const MoveCardsModal = memo(() => {
 		<div className={cls.listBoxWrapper}>
 			<ListBox
 				label={t('box text')}
-				value={currentBoxIndex}
+				value={boxId}
+				// value={currentBoxId}
 				items={boxItems}
-				onChange={setCurrentBoxIndex}
+				// onChange={setCurrentBoxId}
+				onChange={onChangeBoxId}
 				max
 				sameWidth
 			/>
@@ -127,24 +126,76 @@ export const MoveCardsModal = memo(() => {
 			onClose={onCloseMoveCards}
 			max
 			className={cls.MoveCardsModal}
-		// lazy
 		>
 			<div className={cls.mainWrapper} >
 				{shelves}
 				{boxes}
-
-
 			</div>
 			<ModalButtons
 				onClose={onCloseMoveCards}
 				onSubmit={onMoveCards}
 				textSubmitButton='move cards'
-				className={cls.actions} />
-
-			{/* <div className={cls.actions} >
-				<Button onClick={onCloseMoveCards}>{t('back button')}</Button>
-				<Button variant='filled' onClick={onMoveCards}>{t('move cards')}</Button>
-			</div> */}
+			/>
 		</HDialogHeadless>
 	)
 })
+
+
+
+// const [updateCardsMutation] = useUpdateCardsMutation()
+// useEffect(() => {
+// 	if (currentShelfId === '' && shelvesItems.length > 0) {
+// 		setCurrentShelfId(shelvesItems[0].value as string)
+// 	}
+// }, [shelvesItems, currentShelfId])
+
+
+// useEffect(() => {
+// 	if (currentBoxId === '' && boxItems.length > 0) {
+// 		setCurrentBoxId(boxItems[0].value as string)
+// 	}
+// }, [boxItems, currentBoxId])
+
+
+// useEffect(() => {
+// 	if (shelvesData) {
+// 		const shelvesResult: ListBoxItems<string>[] = [];
+// 		shelvesData?.forEach(shelfItem => {
+// 			if (shelfId !== shelfItem.id) {
+// 				shelvesResult.push({
+// 					value: shelfItem.id,
+// 					content: shelfItem.title
+// 				})
+// 			}
+// 		})
+// 		setShelvesItems(shelvesResult)
+// 		setCurrentShelfId(shelvesResult?.[0]?.value.toString())
+// 	}
+// }, [shelvesData, shelfId])
+
+// useEffect(() => {
+// 	if (currentShelfId && shelvesData) {
+// 		const currentShelf = shelvesData.find(shelf => shelf.id === currentShelfId)
+// 		const itemsList = currentShelf!.boxesData.map(box => {
+// 			let content;
+// 			switch (box.specialType) {
+// 				case 'none':
+// 					content = `${t('box text')} ${box.index}`
+// 					break;
+// 				case 'new':
+// 					content = t('new cards')
+// 					break
+// 				default:
+// 					content = t('learnt cards')
+// 					break;
+// 			}
+// 			return {
+// 				value: box.index.toString(),
+// 				// value: box.id,
+// 				content,
+// 			}
+// 		})
+// 		setBoxItems(itemsList)
+// 		setCurrentBoxId(itemsList?.[0]?.value.toString())
+// 	}
+// }, [t, shelvesData, currentShelfId])

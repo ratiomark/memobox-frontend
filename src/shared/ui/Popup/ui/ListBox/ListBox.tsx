@@ -10,7 +10,7 @@ import { Icon } from '../../../Icon/Icon';
 import cls from './ListBox.module.scss';
 import CheckIcon from '@/shared/assets/icons/checkIcon.svg'
 
-export interface ListBoxItems<T extends number | string> {
+export interface ListBoxItem<T extends string | number> {
 	value: string | T | number
 	content: ReactNode
 	disabled?: boolean
@@ -19,7 +19,7 @@ export interface ListBoxItems<T extends number | string> {
 interface ListBoxProps<T extends number | string> {
 	className?: string
 	as?: ElementType<any>
-	items?: ListBoxItems<string | T>[]
+	items?: ListBoxItem<string | T>[]
 	value?: T
 	defaultValue?: string | T
 	onChange: (value: T) => void

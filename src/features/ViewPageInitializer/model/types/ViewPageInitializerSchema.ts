@@ -54,7 +54,11 @@ export interface ViewPageInitializerSchema {
 	// 	}
 	// },
 	// 
-	isMoveCardsModalOpen: boolean
+	moveCardsModal: {
+		isMoveCardsModalOpen: boolean
+		shelfId: string
+		boxId: string
+	}
 	abortedThunkIds: string[]
 	multiSelectDeleteCardIdList: string[]
 	multiSelectDeleteCardIdObject: {

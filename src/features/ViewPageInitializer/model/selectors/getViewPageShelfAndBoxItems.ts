@@ -6,6 +6,7 @@ import { getViewPageIsLoading, getViewPageShelfId } from './getViewPageInitializ
 import { TabItem } from '@/shared/ui/Tabs/Tabs';
 import { t } from 'i18next';
 import { getViewPageCardDataEdited } from './getViewPageEditModal';
+import { getViewPageMoveCardsModalShelfId, getViewPageMoveCardsModalShelfIdChecked } from './getViewPageMoveCardsModal';
 
 const getViewPageShelvesData = (state: StateSchema) => state.viewPage?.shelvesData
 
@@ -29,6 +30,27 @@ export const getViewPageShelfItems = createSelector(
 		}
 		shelfItems.sort((a, b) => a.index - b.index)
 		return shelfItems
+	}
+)
+export const getViewPageShelfItemsModal = createSelector(
+	[
+		getViewPageShelvesData,
+		getViewPageIsLoading,
+	],
+	(shelvesData, isLoading) => {
+		if (isLoading) return []
+		const shelfItems = []
+		for (const key in shelvesData) {
+			if (Object.prototype.hasOwnProperty.call(shelvesData, key)) {
+				shelfItems.push({
+					value: key,
+					content: shelvesData[key].shelfTitle,
+					index: shelvesData[key].shelfIndex,
+				})
+			}
+		}
+		shelfItems.sort((a, b) => a.index - b.index)
+		return shelfItems.map(item => ({ value: item.value, content: item.content }))
 	}
 )
 
@@ -84,10 +106,43 @@ export const getViewPageBoxItemsEditCardModal = createSelector(
 		getViewPageIsLoading,
 	],
 	(cardDataEdited, shelvesDataObject, isLoading) => {
-		if (isLoading || !shelvesDataObject ||!cardDataEdited ) {
+		if (isLoading || !shelvesDataObject || !cardDataEdited) {
 			return [] as TabItem[]
 		}
 		const shelfId = cardDataEdited.shelfId
+		const tabs: TabItem[] = []
+		const boxesData = shelvesDataObject[shelfId].boxesItems
+		tabs.push({
+			value: boxesData[0].id,
+			additional: 'new',
+			content: t('new cards') as string
+		})
+		boxesData.slice(1, boxesData.length - 1).forEach(box => {
+			tabs.push({
+				value: box.id,
+				additional: box.index.toString(),
+				content: `${t('box text')} ${box.index}`
+			})
+		})
+		tabs.push({
+			value: boxesData.at(boxesData.length - 1)!.id,
+			additional: 'learnt',
+			content: t('learnt cards') as string
+		})
+		return tabs
+	}
+)
+export const getViewPageBoxItemsMoveCardsModal = createSelector(
+	[
+		getViewPageMoveCardsModalShelfId,
+		getViewPageShelvesData,
+		getViewPageIsLoading,
+	],
+	(shelfId, shelvesDataObject, isLoading) => {
+		if (isLoading || !shelvesDataObject || !shelfId) {
+			return [] as TabItem[]
+		}
+		// const shelfId = shelf
 		const tabs: TabItem[] = []
 		const boxesData = shelvesDataObject[shelfId].boxesItems
 		tabs.push({

@@ -186,10 +186,6 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 
 	return (
 		<Root
-			onOpenChange={(open) => {
-				// console.log(open)
-				// onTimeEnd()
-			}}
 			duration={duration}
 			className={clsx(
 				cls.MyToastWithButton,

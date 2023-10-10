@@ -25,7 +25,11 @@ const initialState: ViewPageInitializerSchema = {
 	cardEditedListIds: [],
 	// cardModalHeights: {},
 	// 
-	isMoveCardsModalOpen: false,
+	moveCardsModal: {
+		isMoveCardsModalOpen: false,
+		shelfId: '',
+		boxId: '',
+	},
 	// 
 	shelfId: 'all',
 	boxId: '',
@@ -105,9 +109,24 @@ const viewPageSlice = createSlice({
 			state.multiSelectDeleteCardIdObject[action.payload] = [...state.selectedCardIds]
 			state.selectedCardIds = []
 		},
+		addMultiSelectMoveIds: (state, action: PayloadAction<string>) => {
+			state.multiSelectMoveCardIdList.push(action.payload)
+			state.multiSelectMoveCardIdObject[action.payload] = [...state.selectedCardIds]
+			state.selectedCardIds = []
+		},
 		removeMultiSelectDeleteIds: (state, action: PayloadAction<string>) => {
 			state.multiSelectDeleteCardIdList = state.multiSelectDeleteCardIdList.filter(id => id !== action.payload)
 			const listWithCardIds = state.multiSelectDeleteCardIdObject[action.payload]
+			state.cards.forEach(card => {
+				if (card.isDeleted && listWithCardIds.includes(card.id)) {
+					card.isDeleted = false
+				}
+			})
+			delete state.multiSelectDeleteCardIdObject[action.payload]
+		},
+		removeMultiSelectMoveIds: (state, action: PayloadAction<string>) => {
+			state.multiSelectMoveCardIdList = state.multiSelectMoveCardIdList.filter(id => id !== action.payload)
+			const listWithCardIds = state.multiSelectMoveCardIdObject[action.payload]
 			state.cards.forEach(card => {
 				if (card.isDeleted && listWithCardIds.includes(card.id)) {
 					card.isDeleted = false
@@ -273,7 +292,13 @@ const viewPageSlice = createSlice({
 		},
 		//  move cards modal
 		setMoveCardsModalIsOpen: (state, action: PayloadAction<boolean>) => {
-			state.isMoveCardsModalOpen = action.payload
+			state.moveCardsModal.isMoveCardsModalOpen = action.payload
+		},
+		setMoveCardsModalShelfId: (state, action: PayloadAction<string>) => {
+			state.moveCardsModal.shelfId = action.payload
+		},
+		setMoveCardsModalBoxId: (state, action: PayloadAction<string>) => {
+			state.moveCardsModal.boxId = action.payload
 		},
 
 		// edit cards

@@ -1,3 +1,6 @@
+export {
+	moveMultipleCardsThunk
+} from './model/services/moveMultipleCardsThunk';
 
 export {
 	getViewPageCardsFactor,
@@ -9,6 +12,8 @@ export {
 	getViewPageShelfItems,
 	getViewPageBoxItemsForWidget,
 	getViewPageBoxItemsEditCardModal,
+	getViewPageShelfItemsModal,
+	getViewPageBoxItemsMoveCardsModal,
 } from './model/selectors/getViewPageShelfAndBoxItems';
 
 export {
@@ -26,7 +31,11 @@ export {
 } from './model/selectors/getViewPageSorting';
 
 export {
-	getViewPageMoveCardsModalIsOpen
+	getViewPageMoveCardsModalIsOpen,
+	getViewPageMoveCardsModalShelfId,
+	getViewPageMoveCardsModalBoxId,
+	getViewPageMoveCardsModalShelfIdChecked,
+	// getViewPageMoveCardsModalBoxIdChecked,
 } from './model/selectors/getViewPageMoveCardsModal';
 
 export {
@@ -65,7 +74,6 @@ export {
 	getViewPageIsCardSelected,
 	getViewPageBoxIdChecked,
 } from './model/selectors/getViewPageInitializer';
-
 
 export { viewPageReducer, viewPageActions } from './model/slice/viewPageSlice';
 export type { FetchCardsThunkResponse } from './model/services/fetchCards';
