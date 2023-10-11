@@ -34,7 +34,6 @@ export {
 	getViewPageMoveCardsModalIsOpen,
 	getViewPageMoveCardsModalShelfId,
 	getViewPageMoveCardsModalBoxId,
-	getViewPageMoveCardsModalShelfIdChecked,
 	// getViewPageMoveCardsModalBoxIdChecked,
 } from './model/selectors/getViewPageMoveCardsModal';
 

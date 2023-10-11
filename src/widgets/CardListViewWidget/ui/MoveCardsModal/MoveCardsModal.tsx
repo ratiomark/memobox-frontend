@@ -4,7 +4,6 @@ import cls from './MoveCardsModal.module.scss';
 import {
 	getViewPageBoxItemsMoveCardsModal,
 	getViewPageMoveCardsModalIsOpen,
-	getViewPageMoveCardsModalShelfIdChecked,
 	// getViewPageMoveCardsModalBoxIdChecked,
 	getViewPageMoveCardsModalBoxId,
 	getViewPageSelectedCardIds,

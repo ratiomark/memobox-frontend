@@ -6,7 +6,7 @@ import { getViewPageIsLoading, getViewPageShelfId } from './getViewPageInitializ
 import { TabItem } from '@/shared/ui/Tabs/Tabs';
 import { t } from 'i18next';
 import { getViewPageCardDataEdited } from './getViewPageEditModal';
-import { getViewPageMoveCardsModalShelfId, getViewPageMoveCardsModalShelfIdChecked } from './getViewPageMoveCardsModal';
+import { getViewPageMoveCardsModalShelfId } from './getViewPageMoveCardsModal';
 
 const getViewPageShelvesData = (state: StateSchema) => state.viewPage?.shelvesData
 

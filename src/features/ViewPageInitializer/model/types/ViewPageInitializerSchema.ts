@@ -42,8 +42,10 @@ export interface ViewPageInitializerSchema {
 	}
 	cardsDataEdited: CardsDataEditedObj
 	selectedCardIds: string[]
-	isCardEditModalOpen: boolean
-	currentCardId: string
+	cardEditModal: {
+		isOpen: boolean
+		currentCardId: string
+	}
 	cardEditedListIds: string[]
 	// cardModalHeights: {
 	// 	[cardId: string]: {
@@ -55,7 +57,7 @@ export interface ViewPageInitializerSchema {
 	// },
 	// 
 	moveCardsModal: {
-		isMoveCardsModalOpen: boolean
+		isOpen: boolean
 		shelfId: string
 		boxId: string
 	}

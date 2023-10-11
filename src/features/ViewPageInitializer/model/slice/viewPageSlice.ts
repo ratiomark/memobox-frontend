@@ -20,13 +20,15 @@ const initialState: ViewPageInitializerSchema = {
 	shelvesData: {},
 	cardsDataOriginal: {},
 	cardsDataEdited: {},
-	isCardEditModalOpen: false,
-	currentCardId: '',
+	cardEditModal: {
+		isOpen: false,
+		currentCardId: '',
+	},
 	cardEditedListIds: [],
 	// cardModalHeights: {},
 	// 
 	moveCardsModal: {
-		isMoveCardsModalOpen: false,
+		isOpen: false,
 		shelfId: '',
 		boxId: '',
 	},
@@ -292,7 +294,7 @@ const viewPageSlice = createSlice({
 		},
 		//  move cards modal
 		setMoveCardsModalIsOpen: (state, action: PayloadAction<boolean>) => {
-			state.moveCardsModal.isMoveCardsModalOpen = action.payload
+			state.moveCardsModal.isOpen = action.payload
 		},
 		setMoveCardsModalShelfId: (state, action: PayloadAction<string>) => {
 			state.moveCardsModal.shelfId = action.payload
@@ -303,7 +305,7 @@ const viewPageSlice = createSlice({
 
 		// edit cards
 		setIsCardEditModalOpen: (state, action: PayloadAction<boolean>) => {
-			state.isCardEditModalOpen = action.payload
+			state.cardEditModal.isOpen = action.payload
 		},
 		checkIsCardWasEdited: (state, action: PayloadAction<boolean>) => {
 			// state.isCardEditModalOpen = action.payload
@@ -329,33 +331,36 @@ const viewPageSlice = createSlice({
 		},
 
 		setCardQuestionText: (state, action: PayloadAction<string>) => {
-			state.cardsDataEdited[state.currentCardId].question = action.payload
-			if (!state.cardEditedListIds.includes(state.currentCardId)) {
-				state.cardEditedListIds.push(state.currentCardId)
+			state.cardsDataEdited[state.cardEditModal.currentCardId].question = action.payload
+			if (!state.cardEditedListIds.includes(state.cardEditModal.currentCardId)) {
+				state.cardEditedListIds.push(state.cardEditModal.currentCardId)
 			}
 		},
 		setCardAnswerText: (state, action: PayloadAction<string>) => {
-			state.cardsDataEdited[state.currentCardId].answer = action.payload
-			if (!state.cardEditedListIds.includes(state.currentCardId)) {
-				state.cardEditedListIds.push(state.currentCardId)
+			state.cardsDataEdited[state.cardEditModal.currentCardId].answer = action.payload
+			if (!state.cardEditedListIds.includes(state.cardEditModal.currentCardId)) {
+				state.cardEditedListIds.push(state.cardEditModal.currentCardId)
 			}
 		},
 		setCardShelfId: (state, action: PayloadAction<string>) => {
 			const shelfId = action.payload
-			state.cardsDataEdited[state.currentCardId].shelfId = shelfId
-			if (!state.cardEditedListIds.includes(state.currentCardId) &&
-				shelfId !== state.cardsDataOriginal[state.currentCardId].shelfId
+			const originalShelfId = state.cardsDataOriginal[state.cardEditModal.currentCardId].shelfId
+			const originalBoxId = state.cardsDataOriginal[state.cardEditModal.currentCardId].boxId
+
+			state.cardsDataEdited[state.cardEditModal.currentCardId].shelfId = shelfId
+			if (!state.cardEditedListIds.includes(state.cardEditModal.currentCardId) &&
+				shelfId !== state.cardsDataOriginal[state.cardEditModal.currentCardId].shelfId
 			) {
-				state.cardEditedListIds.push(state.currentCardId)
+				state.cardEditedListIds.push(state.cardEditModal.currentCardId)
 			}
 		},
 		setCardBoxId: (state, action: PayloadAction<string>) => {
 			const boxId = action.payload
-			state.cardsDataEdited[state.currentCardId].boxId = boxId
-			if (!state.cardEditedListIds.includes(state.currentCardId) &&
-				boxId !== state.cardsDataOriginal[state.currentCardId].boxId
+			state.cardsDataEdited[state.cardEditModal.currentCardId].boxId = boxId
+			if (!state.cardEditedListIds.includes(state.cardEditModal.currentCardId) &&
+				boxId !== state.cardsDataOriginal[state.cardEditModal.currentCardId].boxId
 			) {
-				state.cardEditedListIds.push(state.currentCardId)
+				state.cardEditedListIds.push(state.cardEditModal.currentCardId)
 			}
 			// if (!state.cardEditedListIds.includes(state.currentCardId)) {
 			// 	state.cardEditedListIds.push(state.currentCardId)
@@ -376,7 +381,7 @@ const viewPageSlice = createSlice({
 
 		// },
 		setCurrentCardId: (state, action: PayloadAction<string>) => {
-			state.currentCardId = action.payload
+			state.cardEditModal.currentCardId = action.payload
 		},
 		// setCurrentCardId: (state, action: PayloadAction<string>) => {
 		// 	state.currentCardId = action.payload

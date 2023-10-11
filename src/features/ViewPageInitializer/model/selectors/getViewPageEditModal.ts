@@ -1,8 +1,8 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
 
-export const getViewPageEditModalIsOpen = (state: StateSchema) => state.viewPage?.isCardEditModalOpen
-export const getViewPageEditModalCardId = (state: StateSchema) => state.viewPage?.currentCardId
+export const getViewPageEditModalIsOpen = (state: StateSchema) => state.viewPage?.cardEditModal.isOpen
+export const getViewPageEditModalCardId = (state: StateSchema) => state.viewPage?.cardEditModal.currentCardId
 export const getViewPageCardEditedListIds = (state: StateSchema) => state.viewPage?.cardEditedListIds
 // const getViewPageCardModalHeightsAll = (state: StateSchema) => state.viewPage?.cardModalHeights
 // export const getCardModalHeights = (state: StateSchema) => state.viewPage?.cardModalHeights

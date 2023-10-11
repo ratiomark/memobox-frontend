@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import { Listbox as HListbox } from '@headlessui/react'
-import React, { ElementType, Fragment, MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState, } from 'react';
+import { ElementType, Fragment, MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState, } from 'react';
 import { AbsoluteListDirection } from '@/shared/types/ui';
 import { VStack, HStack } from '../../../Stack';
 import { FlexAlign, FlexGap } from '../../../Stack/Flex/Flex';
-import { Button } from '../../../Button/Button';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Icon } from '../../../Icon/Icon';
 import cls from './ListBox.module.scss';
@@ -19,7 +18,7 @@ export interface ListBoxItem<T extends string | number> {
 interface ListBoxProps<T extends number | string> {
 	className?: string
 	as?: ElementType<any>
-	items?: ListBoxItem<string | T>[]
+	items?: ListBoxItem<T>[]
 	value?: T
 	defaultValue?: string | T
 	onChange: (value: T) => void

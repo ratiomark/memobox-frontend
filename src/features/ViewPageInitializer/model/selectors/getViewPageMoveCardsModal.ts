@@ -2,7 +2,7 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
 import { getViewPageBoxItemsMoveCardsModal, getViewPageShelfItemsModal } from './getViewPageShelfAndBoxItems';
 
-export const getViewPageMoveCardsModalIsOpen = (state: StateSchema) => state.viewPage?.moveCardsModal.isMoveCardsModalOpen
+export const getViewPageMoveCardsModalIsOpen = (state: StateSchema) => state.viewPage?.moveCardsModal.isOpen
 export const getViewPageMoveCardsModalShelfId = (state: StateSchema) => state.viewPage?.moveCardsModal.shelfId
 export const getViewPageMoveCardsModalBoxId = (state: StateSchema) => state.viewPage?.moveCardsModal.boxId
 
