@@ -344,11 +344,24 @@ const viewPageSlice = createSlice({
 		},
 		setCardShelfId: (state, action: PayloadAction<string>) => {
 			const shelfId = action.payload
-			const originalShelfId = state.cardsDataOriginal[state.cardEditModal.currentCardId].shelfId
-			const originalBoxId = state.cardsDataOriginal[state.cardEditModal.currentCardId].boxId
+			const originalShelfId = state.cardsDataEdited[state.cardEditModal.currentCardId].shelfId
+			const originalBoxId = state.cardsDataEdited[state.cardEditModal.currentCardId].boxId
+			const originalBoxIndex = state.shelvesData[originalShelfId].boxesItems.find(box => box.id === originalBoxId)?.index ?? 0
+			// const originalBoxIndex = state.cardsDataEdited[state.cardEditModal.currentCardId].boxIndex
+			// const originalMaxIndexBox = state.shelvesData[originalShelfId].maxIndexBox
+			// const newBoxIndex = state.cardsDataOriginal[state.cardEditModal.currentCardId].boxIndex
+			const newMaxIndexBox = state.shelvesData[shelfId].maxIndexBox
+			if (originalBoxIndex > newMaxIndexBox) {
+				state.cardsDataEdited[state.cardEditModal.currentCardId].boxId = state.shelvesData[shelfId].boxesItems[0].id
+			} else {
+				state.cardsDataEdited[state.cardEditModal.currentCardId].boxId = state.shelvesData[shelfId].boxesItems[originalBoxIndex].id
+			}
+			// if
+			// state.ca
 
 			state.cardsDataEdited[state.cardEditModal.currentCardId].shelfId = shelfId
-			if (!state.cardEditedListIds.includes(state.cardEditModal.currentCardId) &&
+			if (
+				!state.cardEditedListIds.includes(state.cardEditModal.currentCardId) &&
 				shelfId !== state.cardsDataOriginal[state.cardEditModal.currentCardId].shelfId
 			) {
 				state.cardEditedListIds.push(state.cardEditModal.currentCardId)

@@ -37,7 +37,6 @@ const userSlice = createSlice({
 			// обновляю флаги фич
 			setFeatureFlag(action.payload.features)
 			localDataService.setToken(action.payload.token)
-			localStorage.setItem(KEY_USER_ID_LOCAL_STORAGE, action.payload.id)
 			state._mounted = true
 		},
 		// VAR: тестирую jsonSavedData как отедльное поле
@@ -103,11 +102,11 @@ const userSlice = createSlice({
 					state.authData = { ...otherData }
 					localDataService.setToken(action.payload.token)
 					setFeatureFlag(action.payload.features)
-					state._mounted = true
 					if (jsonSavedData) {
 						state.jsonSavedData = jsonSavedData
 					}
 					state.userSettings = userSettings
+					state._mounted = true
 				})
 			.addCase(
 				initAuthData.rejected,

@@ -1,4 +1,4 @@
-import { getUserAuthData, getUserRoles, UserRole } from '@/entities/User';
+import { getUserAuthData, getUserMounted, getUserRoles, UserRole } from '@/entities/User';
 import { ReactNode, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -11,6 +11,7 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute = ({ children, roles }: ProtectedRouteProps) => {
 	const auth = useSelector(getUserAuthData)
+	const userMounted = useSelector(getUserMounted)
 	const location = useLocation()
 	const userRoles = useSelector(getUserRoles)
 
@@ -23,9 +24,9 @@ export const ProtectedRoute = ({ children, roles }: ProtectedRouteProps) => {
 		})
 	}, [roles, userRoles])
 
-	
 
-	if (!auth) {
+
+	if (!auth && userMounted) {
 		return <Navigate to={obtainRouteMain()} state={{ from: location }} replace />
 	}
 

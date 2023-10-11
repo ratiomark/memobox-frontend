@@ -12,7 +12,7 @@ import { useInitialCssValuesFromLocalService } from '@/shared/lib/helpers/hooks/
 
 
 export const App = () => {
-	// const userMounted = useSelector(getUserMounted)
+	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
 	const { theme } = useTheme()
 	useInitialCssValuesFromLocalService()
@@ -22,7 +22,7 @@ export const App = () => {
 	}, [dispatch])
 
 
-	// if (!userMounted) return <LoaderWidget />
+	if (!userMounted) return <LoaderWidget />
 
 
 	return (

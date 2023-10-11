@@ -14,6 +14,7 @@ const container = document.getElementById('root')
 
 if (!container) throw new Error('Root container is not Found! Check main.tsx file')
 // let check = 0
+
 // const clearTimeoutOriginal = window.clearTimeout;
 // window.clearTimeout = function (timerId: number | undefined, customText: string) {
 // 	console.log('clearTimeout:   ', check, customText ? customText : '');
