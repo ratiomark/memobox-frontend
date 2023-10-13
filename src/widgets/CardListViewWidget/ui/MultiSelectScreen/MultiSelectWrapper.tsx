@@ -38,7 +38,7 @@ export const MultiSelectWrapper = (props: MultiSelectComponentProps) => {
 	const onMoveCardsClick = useCallback(() => {
 		dispatch(viewPageActions.setMoveCardsModalIsOpen(true))
 	}, [dispatch])
-	
+
 	useHotkeys('esc', onCancelMultiSelect, { enabled: isMultiSelectActive && !isMoveCardsModalOpen })
 	useHotkeys('a', onSelectAllCards, { enabled: isMultiSelectActive && isSelectAllAllowed })
 	useHotkeys('r', onRemoveCards, { enabled: isMultiSelectActive })

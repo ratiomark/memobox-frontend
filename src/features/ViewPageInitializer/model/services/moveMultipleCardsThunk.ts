@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
-import { toastsActions } from '@/shared/ui/Toast'
+import { getAbortedThunkIds, toastsActions } from '@/shared/ui/Toast'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { idPrefixCardDeletion } from '@/shared/const/idsAndDataAttributes'
 import { getViewPageAbortedThunkIds } from '../selectors/getViewPageInitializer'
@@ -23,8 +23,8 @@ export const moveMultipleCardsThunk = createAsyncThunk<string[], string, { rejec
 		const cardIdsSelectedForMoving = getCardIdsSelectedForMoveByRandomId(randomId)(getState())
 		// getMultiSelectMoveCardIds
 		// getCardIdsSelectedForMoveByRandomId
-		console.log(cardIdsSelectedForMoving)
-		const abortedThunkIds = getViewPageAbortedThunkIds(getState())
+		// console.log(cardIdsSelectedForMoving)
+		const abortedThunkIds = getAbortedThunkIds(getState())
 		const id = randomId
 		try {
 			// if (4 > 3) {

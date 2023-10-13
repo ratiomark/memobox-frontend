@@ -513,7 +513,7 @@ const viewPageSlice = createSlice({
 				deleteCardThunk.rejected,
 				(state, action) => {
 					if (action.meta.aborted) {
-						state.abortedThunkIds = state.abortedThunkIds.filter(id => id != action.payload)
+						// state.abortedThunkIds = state.abortedThunkIds.filter(id => id != action.payload)
 					}
 				})
 			.addCase(
@@ -533,14 +533,17 @@ const viewPageSlice = createSlice({
 				})
 			.addCase(
 				deleteMultipleCardsThunk.fulfilled,
-				(state, action) => {
-					action.payload.forEach(cardId => {
-						state.cards.find(card => {
-							if (card.id === cardId) {
-								card.isDeleted = false
-							}
-						})
+				(state, action: PayloadAction<string[]>) => {
+					state.cards = state.cards.filter(card => {
+						return !action.payload.includes(card.id)
 					})
+					// action.payload.forEach(cardId => {
+					// 	state.cards.find(card => {
+					// 		if (card.id === cardId) {
+					// 			card.isDeleted = false
+					// 		}
+					// 	})
+					// })
 				})
 		// .addCase(
 		// 	fetchCards.fulfilled,

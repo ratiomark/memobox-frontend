@@ -24,4 +24,6 @@ export interface ToastsSchema {
 		[id: string]: MyToastProps
 	}
 	toastsIds: string[]
+	abortedThunkIds: string[]
+	toastWithButtonsListIds: string[]
 }

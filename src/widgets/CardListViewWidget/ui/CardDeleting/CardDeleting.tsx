@@ -15,6 +15,7 @@ import { useDeleteWithCountdown } from '@/shared/lib/helpers/hooks/useDeleteWith
 import { idPrefixCardDeletion } from '@/shared/const/idsAndDataAttributes';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 import { size } from 'lodash';
+import { toastsActions } from '@/shared/ui/Toast';
 
 
 interface CardDeletingProps {
@@ -52,7 +53,8 @@ export const CardDeleting = (props: CardDeletingProps) => {
 		if (timer) clearTimeout(timer)
 		// dispatch(viewPageActions.setCardIsNotDeleting(getCardMainData(card)))
 		dispatch(viewPageActions.setCardIsNotDeleting(cardId))
-		dispatch(viewPageActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
+		dispatch(toastsActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
+		// dispatch(viewPageActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
 		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
 	}
 

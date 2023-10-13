@@ -2,13 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { toastsActions } from '@/shared/ui/Toast'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
-import { idPrefixCardDeletion } from '@/shared/const/idsAndDataAttributes'
 import { getViewPageAbortedThunkIds } from '../selectors/getViewPageInitializer'
 import { viewPageActions } from '../slice/viewPageSlice'
 import { t } from 'i18next'
 import { getCardIdsSelectedForDeletionByRandomId } from '../selectors/getViewPageMultiSelect'
-import { getAllCards } from '@/entities/Card'
-import { restoreAllShelves } from '@/entities/Cupboard'
 
 export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rejectValue: string[], extra: ThunkExtraArg, state: StateSchema, rejectedMeta: { aborted: boolean } }>(
 	'viewPage/deleteMultipleCardsThunk',
@@ -21,16 +18,14 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 		// если запрос failed, то сделать флаг isDeleted = false
 		// в самом конце dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
 		const cardIdsSelectedForDeletion = getCardIdsSelectedForDeletionByRandomId(randomId)(getState())
-
-		console.log(cardIdsSelectedForDeletion)
+		// console.log(cardIdsSelectedForDeletion)
 		const abortedThunkIds = getViewPageAbortedThunkIds(getState())
 		const id = randomId
 		try {
-			// if (4 > 3) {
 			if (abortedThunkIds.includes(id) || !cardIdsSelectedForDeletion.length) {
-				console.log('ABORTEDTEE')
 				throw new Error('Aborted')
 			}
+			dispatch(viewPageActions.setAbortedThunkId(id))
 			dispatch(toastsActions.addToast({
 				id,
 				toast: {
@@ -43,7 +38,7 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 			}))
 			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать cardId
 			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
-			dispatch(restoreAllShelves())
+			// dispatch(restoreAllShelves())
 			await sleep()
 			// const response = Math.random() > 0.5
 			const response = Math.random() > 50
@@ -58,6 +53,7 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 		} catch (err) {
 			const error = err as Error;
 			// dispatch(viewPageActions.removeAbortedThunkId(id))
+			dispatch(viewPageActions.removeAbortedThunkId(id))
 			dispatch(viewPageActions.setCardsIsNotDeletedByIdList(cardIdsSelectedForDeletion))
 			dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
 			return thunkAPI.rejectWithValue(cardIdsSelectedForDeletion, { aborted: true });

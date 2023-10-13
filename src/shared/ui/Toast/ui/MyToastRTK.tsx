@@ -13,7 +13,7 @@ import CheckIcon2 from '@/shared/assets/icons/done-20-20.svg'
 import ErrorIcon from '@/shared/assets/icons/errorIcon.svg'
 import { MyToastProps } from '../model/types/ToastsSchema';
 import { connect, useSelector } from 'react-redux';
-import { getToastsObject } from '../model/selectors/getToasts';
+import { getToastByToastId, getToastsListIds, getToastsObject } from '../model/selectors/getToasts';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { toastsActions, toastsReducer } from '../model/slice/toastSlice';
 import { Root, ToastDescription, ToastTitle } from '@radix-ui/react-toast';
@@ -26,6 +26,7 @@ import { Button } from '../../Button';
 import { ButtonColor } from '../../Button/Button';
 import { useDeleteWithCountdown } from '@/shared/lib/helpers/hooks/useDeleteWithCountdown';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
+import { StateSchema } from '@/app/providers/StoreProvider';
 
 interface MyComponentToastsProps extends MyToastProps {
 	onTimeEnd?: () => void
@@ -135,11 +136,6 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 	} = props
 
 	const { t } = useTranslation('toast')
-	// useDeleteWithCountdown({
-	// 	startCondition: true,
-	// 	deletionFn: onTimeEnd,
-	// 	duration,
-	// })
 	const [timer, setTimer] = useState<TimeoutId | null>(null)
 
 	useEffect(() => {
@@ -204,11 +200,15 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 }
 
 
-const MyToastWrapper = ({ id, toast }: { id: string, toast: MyToastProps }) => {
+const MyToastWrapper = ({ id }: { id: string }) => {
+	// const MyToastWrapper = ({ id, toast }: { id: string, toast: MyToastProps }) => {
 	const dispatch = useAppDispatch()
+	const toast = useSelector(getToastByToastId(id))
 	const onTimeEnd = () => {
+		// dispatch(toastsActions.updateToastById(id))
 		dispatch(toastsActions.removeToastById(id))
 	}
+
 
 	return (
 		<MyToast
@@ -223,17 +223,26 @@ const MyToastWrapper = ({ id, toast }: { id: string, toast: MyToastProps }) => {
 const reducers: ReducersList = {
 	toasts: toastsReducer
 }
-const MyToastsRTK = () => {
+
+const ToastReducer = () => {
+	useTranslation('toast')
 	useAsyncReducer({ reducers, removeAfterUnmount: false })
-	const toastsObj = useSelector(getToastsObject)
-	const { t } = useTranslation('toast')
+	return <MyToastsRTK />
+}
+const MyToastsRTK = () => {
+	// useAsyncReducer({ reducers, removeAfterUnmount: false })
+	console.log('0000000000000000000000000000000000000')
+	const toastsListIds = useSelector(getToastsListIds)
 	// useEffect(() => {
 	// 	console.log(toastsObj)
 	// }, [toastsObj])
+	useEffect(() => {
+		console.log(toastsListIds)
+	}, [toastsListIds])
 
-	const renderedToasts = Object.entries(toastsObj).map(([id, toast]) => {
+	const renderedToasts = toastsListIds.map(id => {
 		// console.log(id, toast)
-		return <MyToastWrapper key={id} id={id} toast={toast} />
+		return <MyToastWrapper key={id} id={id} />
 		// return null
 	})
 	return (
@@ -244,7 +253,8 @@ const MyToastsRTK = () => {
 		// </motion.div>
 	)
 }
-export default MyToastsRTK
+// export default MyToastsRTK
+export default ToastReducer
 // export const MyToastsRTK = () => {
 // 	useAsyncReducer({ reducers, removeAfterUnmount: false })
 // 	const toastsObj = useSelector(getToastsObject)

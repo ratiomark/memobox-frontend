@@ -8,6 +8,7 @@ import { moveMultipleCardsThunk, viewPageActions } from '..';
 import { deleteMultipleCardsThunk } from '../model/services/deleteMultipleCardsThunk';
 import { memo, useEffect } from 'react';
 import { DURATION_MULTIPLE_CARDS_DELETION_MILLISEC } from '@/shared/const/animation';
+import { toastsActions } from '@/shared/ui/Toast';
 
 
 const MoveCardsToasts = () => {
@@ -20,7 +21,7 @@ const MoveCardsToasts = () => {
 				message='Карточки будут перемещены'
 				buttonText='Отмена'
 				onButtonClick={() => {
-					dispatch(viewPageActions.setAbortedThunkId(randomId))
+					dispatch(toastsActions.setAbortedThunkId(randomId))
 					dispatch(viewPageActions.removeMultiSelectMoveIds(randomId))
 				}}
 				// onButtonClick={() => alert('CCCCCCCCC')}
@@ -46,7 +47,7 @@ const DeleteCardsToasts = () => {
 				message='Карточки будут удалены'
 				buttonText='Отмена'
 				onButtonClick={() => {
-					dispatch(viewPageActions.setAbortedThunkId(randomId))
+					dispatch(toastsActions.setAbortedThunkId(randomId))
 					dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
 				}}
 				// onButtonClick={() => alert('CCCCCCCCC')}
