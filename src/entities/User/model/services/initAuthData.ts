@@ -1,8 +1,6 @@
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
-import { KEY_USER_ID_LOCAL_STORAGE } from '@/shared/const/localStorage'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { UserWithToken, getUserDataByIdQuery, getUserTokenValid } from '../api/userApi'
-import { User } from '../types/user'
+import { UserWithToken,  getUserTokenValid } from '../api/userApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
