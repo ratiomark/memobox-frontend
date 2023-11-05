@@ -4,6 +4,8 @@ import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { useSelector } from 'react-redux'
 import { getUserMounted, initAuthData } from '@/entities/User'
+
+
 import { Header, HeaderSkeleton } from '@/widgets/Header'
 import './styles/regularStyles.css'
 import { useTheme } from '@/shared/context/useTheme'

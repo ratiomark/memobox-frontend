@@ -6,6 +6,8 @@
       "DOM.Iterable",
       "ESNext"
     ],
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
@@ -19,8 +21,8 @@
     "allowJs": true,
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     // 
     "baseUrl": ".",
