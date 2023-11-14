@@ -2,13 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { getShelfIdAndIndexesList, getShelfIdAndIndexesListInitial } from '../selectors/getCupboardShelfList'
 import { isShelvesDndRepresentationEqual } from '../slice/cupboardShelfListSlice'
-import { updateShelfListOrder } from '@/entities/Cupboard'
+import { updateShelfListOrder } from '@/entities/Shelf'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const updateShelfListOrderThunk = createAsyncThunk<boolean, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const updateShelfListOrderThunk = createAsyncThunk<boolean, void, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
 	'cupboardPage/updateShelfListOrderThunk',
 	async (_, thunkAPI) => {
-
 		const { dispatch, extra, getState } = thunkAPI
 		const shelvesIdsAndIndexesCurrent = getShelfIdAndIndexesList(getState())
 		const shelvesIdsAndIndexesInitial = getShelfIdAndIndexesListInitial(getState())

@@ -1,6 +1,7 @@
 export const KEY_USER_LOCAL_STORAGE = 'user';
 export const KEY_USER_ID_LOCAL_STORAGE = 'id';
 export const KEY_USER_TOKEN_LOCAL_STORAGE = 'token';
+export const KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE = 'refreshToken';
 export const KEY_COMMON_SHELF_IS_COLLAPSED = 'isCommonShelfCollapsed';
 export const KEY_COMMON_SHELF = 'commonShelf';
 export const KEY_SHELVES_LOCAL_STORAGE = 'shelves';

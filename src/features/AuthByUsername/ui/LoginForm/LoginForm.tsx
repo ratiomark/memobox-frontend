@@ -1,3 +1,6 @@
+import { memo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import {
 	getLoginError,
 	getLoginIsLoading,
@@ -5,21 +8,20 @@ import {
 	getLoginUsername,
 } from '../../Model/selectors/getLoginState/getLoginState'
 import { loginActions, loginReducer } from '../../Model/slice/loginSlice'
-import { memo, useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 import cls from './LoginForm.module.scss'
 // import { loginUserByUserName } from '../../Model/services/loginByUserName/loginUserByUserName'
 import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 
+import { loginUserByUserName } from '@/entities/User'
 import {
 	ReducersList,
 	useAsyncReducer,
 } from '@/shared/lib/helpers/hooks/useAsyncReducer'
-import clsx from 'clsx'
 import { MyText } from '@/shared/ui/Typography'
-import { loginUserByUserName } from '@/entities/User'
+import clsx from 'clsx'
+import { HStack } from '@/shared/ui/Stack'
+import { GetMeButton } from './GetMeButton'
 
 export interface LoginFormProps {
 	className?: string
@@ -39,13 +41,13 @@ const LoginForm = memo(() => {
 	const { dispatch, store } = useAsyncReducer({
 		reducers: initialReducers,
 	})
-	const username = useSelector(getLoginUsername)
+	const email = useSelector(getLoginUsername)
 	const password = useSelector(getLoginPassword)
 	const isLoading = useSelector(getLoginIsLoading)
 	const error = useSelector(getLoginError)
 
-	const onChangeUserName = useCallback((value: string) => {
-		dispatch(loginActions.setUserName(value))
+	const onChangeEmail = useCallback((value: string) => {
+		dispatch(loginActions.setEmail(value))
 	}, [dispatch])
 
 	const onChangePassword = useCallback((value: string) => {
@@ -53,12 +55,12 @@ const LoginForm = memo(() => {
 	}, [dispatch])
 
 	const onClickLoginButton = useCallback(async () => {
-		console.log(username, password)
-		dispatch(loginUserByUserName({ username, password }))
+		console.log(email, password)
+		dispatch(loginUserByUserName({  email, password }))
 		// if (result.meta.requestStatus === 'fulfilled') {
 		// 	onSuccess()
 		// }
-	}, [dispatch, username, password])
+	}, [dispatch, email, password])
 
 	return (
 		<div className={cls.wrapper} >
@@ -71,14 +73,14 @@ const LoginForm = memo(() => {
 					{error && <MyText text={error} variant='error' />}
 
 					<label className={cls.label} htmlFor='userName'>
-						{t('enter userName')}
+						{t('enter email')}
 					</label>
 					<Input
 						autoFocus
 						type='text'
 						id='userName'
-						value={username}
-						onChangeString={onChangeUserName}
+						value={email}
+						onChangeString={onChangeEmail}
 					/>
 					<label className={cls.label} htmlFor='password'>
 						{t('enter password')}
@@ -89,15 +91,19 @@ const LoginForm = memo(() => {
 						value={password}
 						onChangeString={onChangePassword}
 					/>
-					<Button
-						variant='outline'
-						size='size_m'
-						className={cls.loginBtn}
-						onClick={onClickLoginButton}
-						disabled={isLoading}
-					>
-						{t('log in')}
-					</Button>
+					<HStack max justify='between'>
+						
+						<GetMeButton />
+						<Button
+							variant='outline'
+							size='size_m'
+							className={cls.loginBtn}
+							onClick={onClickLoginButton}
+							disabled={isLoading}
+						>
+							{t('log in')}
+						</Button>
+					</HStack>
 				</div>
 			</div>
 		</div>

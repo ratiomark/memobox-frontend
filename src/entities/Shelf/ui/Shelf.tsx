@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import cls from './Shelf.module.scss';
 import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
-import { ShelfSchema } from '../../model/types/ShelfSchema';
+import { ShelfSchema } from '../model/types/ShelfSchema';
 import DragDotsIcon from '@/shared/assets/icons/dragDotsIcon2.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';

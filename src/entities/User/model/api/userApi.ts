@@ -14,11 +14,12 @@ interface SetJsonSavedData {
 
 export interface UserWithToken extends User {
 	token: string
+	refreshToken: string
 }
 type ResponseWithToken = { token: string }
 
-export interface LoginByUserNameProps {
-	username: string
+export interface AuthByEmailProps {
+	email: string
 	password: string
 }
 
@@ -26,18 +27,18 @@ export interface LoginByUserNameProps {
 // test comment API
 const userApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
-		loginUser: build.mutation<UserWithToken, LoginByUserNameProps>({
+		loginUser: build.mutation<UserWithToken, AuthByEmailProps>({
 			query: (arg) => ({
-				url: '/login',
+				url: '/auth/email/login',
 				method: 'POST',
 				body: {
 					...arg
 				}
 			})
 		}),
-		registerUser: build.mutation<UserWithToken, LoginByUserNameProps>({
+		registerUser: build.mutation<UserWithToken, AuthByEmailProps>({
 			query: (arg) => ({
-				url: '/register',
+				url: '/auth/email/register',
 				method: 'POST',
 				body: {
 					...arg
@@ -52,6 +53,12 @@ const userApi = rtkApi.injectEndpoints({
 				body: {
 					jsonSettings
 				}
+			})
+		}),
+		getMe: build.mutation<User, void>({
+			query: () => ({
+				url: '/auth/me',
+				method: 'GET',
 			})
 		}),
 		setJsonSavedData: build.mutation<JsonSavedData, SetJsonSavedData>({
@@ -77,6 +84,15 @@ const userApi = rtkApi.injectEndpoints({
 					token
 				}
 			})
+		}),
+		getUserRefreshToken: build.query<UserWithToken, string>({
+			query: (token) => ({
+				url: '/auth/refresh',
+				method: 'POST',
+				headers: {
+					'Authorization': `Bearer ${token}`
+				}
+			})
 		})
 	}),
 })
@@ -86,6 +102,8 @@ const userApi = rtkApi.injectEndpoints({
 export const setJsonSettingsMutation = userApi.endpoints.setJsonSettings.initiate
 export const setJsonSavedDataMutation = userApi.endpoints.setJsonSavedData.initiate
 export const getUserDataByIdQuery = userApi.endpoints.getUserDataById.initiate
-export const loginUser = userApi.endpoints.loginUser.initiate
-export const registerUser = userApi.endpoints.registerUser.initiate
+export const rtkApiLoginUser = userApi.endpoints.loginUser.initiate
+export const rtkApiRegisterUser = userApi.endpoints.registerUser.initiate
+export const rtkApiGetMe = userApi.endpoints.getMe.initiate
 export const getUserTokenValid = userApi.endpoints.getUserTokenValid.initiate
+export const getUserRefreshToken= userApi.endpoints.getUserRefreshToken.initiate

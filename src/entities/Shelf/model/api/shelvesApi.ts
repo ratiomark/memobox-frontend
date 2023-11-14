@@ -1,27 +1,35 @@
-import { rtkApi } from '@/shared/api/rtkApi';
-import { CommonShelfBackendResponse, CupboardSchema } from '@/entities/Cupboard';
-import { ShelfSchema } from '../types/ShelfSchema';
-
+import { rtkApi } from '@/shared/api/rtkApi'
+import { CommonShelfBackendResponse, CupboardSchema } from '@/entities/Cupboard'
+import { ShelfDndRepresentation, ShelfSchema } from '../types/ShelfSchema'
 
 export const memoboxApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
 		getShelves: build.query<ShelfSchema[], void>({
 			query: () => ({
 				url: '/shelves',
-				method: 'GET'
+				method: 'GET',
 			}),
-			// transformResponse: (response: MovieList, meta, arg) => {
-			// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
-			// 		acc[current.id.toString()] = current
-			// 		return acc
-			// 	}, {})
-			// 	return data
-			// },
+		}),
+		createNewShelf: build.mutation<any, string>({
+			query: (title) => ({
+				url: '/shelves',
+				method: 'POST',
+				body: {
+					title,
+				},
+			}),
+		}),
+		updateShelfListOrder: build.mutation<ShelfSchema[], ShelfDndRepresentation[]>({
+			query: (arg) => ({
+				url: '/shelves/update-order',
+				method: 'PATCH',
+				body: arg,
+			}),
 		}),
 		getCupboardData: build.query<CupboardSchema, void>({
 			query: () => ({
 				url: '/cupboard',
-				method: 'GET'
+				method: 'GET',
 			}),
 		}),
 		updateShelf: build.mutation<ShelfSchema, Partial<ShelfSchema>>({
@@ -36,8 +44,8 @@ export const memoboxApi = rtkApi.injectEndpoints({
 					// обновленные данные объекта
 					// isCollapsed: arg.isCollapsed
 					// ...arg,
-					...arg
-				}
+					...arg,
+				},
 				// body: { isCollapsed: arg.isCollapsed }
 			}),
 			// invalidatesTags: ['Shelves']
@@ -50,7 +58,7 @@ export const memoboxApi = rtkApi.injectEndpoints({
 				// headers: {
 				// 	'Content-Type': 'application/json'
 				// },
-				body: { isCollapsed: arg }
+				body: { isCollapsed: arg },
 				// обновленные данные объекта
 				// isCollapsed: arg.isCollapsed
 				// ...arg,
@@ -65,10 +73,10 @@ export const memoboxApi = rtkApi.injectEndpoints({
 				method: 'PATCH',
 				body: {
 					// ...arg,
-					...arg
-				}
+					...arg,
+				},
 			}),
-			invalidatesTags: ['Shelves']
+			invalidatesTags: ['Shelves'],
 		}),
 		removeShelf: build.mutation<string, string>({
 			query: (arg) => ({
@@ -79,20 +87,22 @@ export const memoboxApi = rtkApi.injectEndpoints({
 				// 	'Content-Type': 'application/json'
 				// },
 				body: {
-					shelfId: arg
+					shelfId: arg,
 					// обновленные данные объекта
 					// isCollapsed: arg.isCollapsed
 					// ...arg,
-				}
+				},
 				// body: { isCollapsed: arg.isCollapsed }
 			}),
-			invalidatesTags: ['Shelves']
+			invalidatesTags: ['Shelves'],
 		}),
 	}),
 })
 export const memoboxGetShelves = memoboxApi.endpoints.getShelves.initiate
 export const removeShelfByIdMutation = memoboxApi.endpoints.removeShelf.initiate
 export const updateShelfWithTag = memoboxApi.endpoints.updateShelfWithTag.initiate
+export const createNewShelf = memoboxApi.endpoints.createNewShelf.initiate
+export const updateShelfListOrder = memoboxApi.endpoints.updateShelfListOrder.initiate
 export const { useGetShelvesQuery } = memoboxApi
 export const { useUpdateShelfMutation } = memoboxApi
 export const { useUpdateShelfWithTagMutation } = memoboxApi

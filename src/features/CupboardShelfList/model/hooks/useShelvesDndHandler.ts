@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux';
-import { getShelfIdAndIndexesList, getShelfIdAndIndexesListInitial } from '../selectors/getCupboardShelfList';
-import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk';
-import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce';
-import { callbackMainDelay } from '@/shared/const/callbackDelays';
-import { useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux'
+import { getShelfIdAndIndexesList, getShelfIdAndIndexesListInitial } from '../selectors/getCupboardShelfList'
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
+import { updateShelfListOrderThunk } from '../services/updateShelfListOrderThunk'
+import { useDebounce } from '@/shared/lib/helpers/hooks/useDebounce'
+import { callbackMainDelay } from '@/shared/const/callbackDelays'
+import { useCallback, useEffect } from 'react'
 
 const useShelvesDndHandler = () => {
 	const shelvesIdsAndIndexesCurrent = useSelector(getShelfIdAndIndexesList)
@@ -16,13 +16,12 @@ const useShelvesDndHandler = () => {
 		dispatch(updateShelfListOrderThunk())
 	}, [dispatch])
 
-	const debouncedUpdate = useDebounce(sendShelvesOrderCallback, callbackMainDelay);
+	const debouncedUpdate = useDebounce(sendShelvesOrderCallback, callbackMainDelay)
 
 	useEffect(() => {
 		// if (isShelvesDndRepresentationEqual(shelvesIdsAndIndexesInitial, shelvesIdsAndIndexesCurrent)) return
-		debouncedUpdate();
-	}, [debouncedUpdate, shelvesIdsAndIndexesCurrent, shelvesIdsAndIndexesInitial]);
-
+		debouncedUpdate()
+	}, [debouncedUpdate, shelvesIdsAndIndexesCurrent, shelvesIdsAndIndexesInitial])
 
 	useEffect(() => {
 		return () => {
@@ -31,14 +30,13 @@ const useShelvesDndHandler = () => {
 		}
 	}, [dispatch])
 
-
 	useEffect(() => {
-		window.addEventListener('beforeunload', sendShelvesOrderCallback);
+		window.addEventListener('beforeunload', sendShelvesOrderCallback)
 
 		return () => {
-			window.removeEventListener('beforeunload', sendShelvesOrderCallback);
-		};
-	}, [sendShelvesOrderCallback]);
+			window.removeEventListener('beforeunload', sendShelvesOrderCallback)
+		}
+	}, [sendShelvesOrderCallback])
 }
 
 export default useShelvesDndHandler

@@ -1,5 +1,5 @@
 // export { cupboardReducer, cupboardActions } from './model/slice/cupboardSlice';
-export type { CupboardSchema, CommonShelfBackendResponse } from './model/types/CupboardSchema';
+export type { CupboardSchema, CommonShelfBackendResponse } from './model/types/CupboardSchema'
 // export { Cupboard } from './ui/Cupboard';
 
 export {
@@ -9,6 +9,6 @@ export {
 	useGetShelvesQuery,
 	// useUpdateShelvesOrderMutation,
 	createNewShelf,
-	updateShelfListOrder,
+	// updateShelfListOrder,
 	restoreAllShelves,
 } from './model/api/cupboardApi'

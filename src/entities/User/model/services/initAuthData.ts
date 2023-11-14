@@ -1,6 +1,6 @@
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { UserWithToken,  getUserTokenValid } from '../api/userApi'
+import { UserWithToken,  getUserRefreshToken,  getUserTokenValid } from '../api/userApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
@@ -9,13 +9,21 @@ export const initAuthData = createAsyncThunk<UserWithToken, void, { rejectValue:
 	async (_, thunkAPI) => {
 		const { dispatch, rejectWithValue } = thunkAPI
 
-		const userToken = localDataService.getToken()
+		const userToken = localDataService.getAccessToken()
+		// const userToken = localDataService.getToken()
 		if (!userToken) return rejectWithValue('Нет токена')
 		try {
-			const response = await dispatch(getUserTokenValid(userToken)).unwrap() //разворачиваю в реальный результат
+			const response = await dispatch(getUserRefreshToken(userToken)).unwrap() //разворачиваю в реальный результат
+			// const response = await dispatch(getUserTokenValid(userToken)).unwrap() //разворачиваю в реальный результат
 			console.log('Проверка токена. Ответ сервера:   ', response)
 			if (!response.token) {
 				return rejectWithValue('Токен не валидный')
+			}
+			if (!response.jsonSavedData) {
+				console.log('jsonSavedData не получен')
+			}
+			if (!response.jsonSettings) {
+				console.log('jsonSettings не получен')
 			}
 			return response
 

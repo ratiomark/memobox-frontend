@@ -1,7 +1,7 @@
 
 // состояние для стейта который описывает форму регистрации
 export interface LoginSchema {
-	username: string
+	email: string
 	password: string
 	isLoading?: boolean
 	error?: string

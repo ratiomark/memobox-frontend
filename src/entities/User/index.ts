@@ -1,13 +1,13 @@
-export { loginUserByUserName } from './model/services/loginUserByUserName';
-export { registerUserByUserName } from './model/services/registerUserByUserName';
+export { loginUserByEmail as loginUserByUserName } from './model/services/loginUserByUserName';
+export { registerUserByEmail as registerUserByUserName } from './model/services/registerUserByUserName';
 
 export {
-	loginUser,
-	registerUser
+	rtkApiLoginUser as loginUser,
+	rtkApiRegisterUser as registerUser
 } from './model/api/userApi';
 
 export type {
-	LoginByUserNameProps
+	AuthByEmailProps as LoginByUserNameProps
 } from './model/api/userApi';
 
 export { updateJsonSavedData } from './model/services/updateJsonSavedData';

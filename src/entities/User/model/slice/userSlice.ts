@@ -1,5 +1,5 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
-import { KEY_USER_ID_LOCAL_STORAGE, KEY_USER_LOCAL_STORAGE } from '@/shared/const/localStorage'
+import {  KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE, KEY_USER_TOKEN_LOCAL_STORAGE } from '@/shared/const/localStorage'
 import { User, UserSchema } from '../types/user'
 import { setFeatureFlag } from '@/shared/lib/features'
 import { saveJsonSettings } from '../services/saveJsonSettings'
@@ -36,7 +36,8 @@ const userSlice = createSlice({
 			state.authData = action.payload
 			// обновляю флаги фич
 			setFeatureFlag(action.payload.features)
-			localDataService.setToken(action.payload.token)
+			localDataService.setToken(action.payload[KEY_USER_TOKEN_LOCAL_STORAGE])
+			localDataService.setAccessToken(action.payload[KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE])
 			state._mounted = true
 		},
 		// VAR: тестирую jsonSavedData как отедльное поле
@@ -100,7 +101,8 @@ const userSlice = createSlice({
 						...otherData
 					} = action.payload
 					state.authData = { ...otherData }
-					localDataService.setToken(action.payload.token)
+					localDataService.setToken(action.payload[KEY_USER_TOKEN_LOCAL_STORAGE])
+					localDataService.setAccessToken(action.payload[KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE])
 					setFeatureFlag(action.payload.features)
 					if (jsonSavedData) {
 						state.jsonSavedData = jsonSavedData

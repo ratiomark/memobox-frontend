@@ -4,6 +4,7 @@ import {
 	KEY_COMMON_SHELF_IS_COLLAPSED,
 	KEY_SHELVES_LOCAL_STORAGE,
 	KEY_THEME_LOCAL_STORAGE,
+	KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE,
 	KEY_USER_TOKEN_LOCAL_STORAGE,
 	KEY_VIEW_ROWS_LOCAL_STORAGE,
 	
@@ -63,7 +64,8 @@ interface ILocalDataService {
 	setViewRows(viewRowsValue: string | number): void
 	getViewRows(): number
 	setToken(token: string | number): void
-	getToken(): string
+	setAccessToken(token: string | number): void
+	getAccessToken(): string
 	logout(): void
 }
 
@@ -103,6 +105,12 @@ class LocalDataService implements ILocalDataService {
 	}
 	getToken(): string {
 		return this.getData(KEY_USER_TOKEN_LOCAL_STORAGE)
+	}
+	setAccessToken(token: string): void {
+		this.saveData(KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE, token)
+	}
+	getAccessToken(): string {
+		return this.getData(KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE)
 	}
 	setViewRows(viewRows: string | number): void {
 		this.saveData(KEY_VIEW_ROWS_LOCAL_STORAGE, viewRows)

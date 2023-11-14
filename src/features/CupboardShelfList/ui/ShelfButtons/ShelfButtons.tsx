@@ -65,8 +65,12 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 
 	const onCollapseClickHandle = useCallback(() => {
 		onCollapseClick(shelfId, !isCollapsed)
-		updateShelfMutation({ ...props.shelf, isCollapsed: !isCollapsed })
+		// updateShelfMutation({ ...props.shelf, isCollapsed: !isCollapsed })
 	}, [onCollapseClick, shelfId, isCollapsed, updateShelfMutation, props.shelf])
+	// const onCollapseClickHandle = useCallback(() => {
+	// 	onCollapseClick(shelfId, !isCollapsed)
+	// 	updateShelfMutation({ ...props.shelf, isCollapsed: !isCollapsed })
+	// }, [onCollapseClick, shelfId, isCollapsed, updateShelfMutation, props.shelf])
 
 	const onCollapseClickHandleDebounced = useThrottle(
 		onCollapseClickHandle,

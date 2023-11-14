@@ -4,7 +4,7 @@ import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDat
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { Skeleton } from '@/shared/ui/Skeleton';
-import { ShelfButtonsSkeleton } from '../../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtonsSkeleton';
+import { ShelfButtonsSkeleton } from '../../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtonsSkeleton';
 import { BoxesBlockSkeleton } from '@/entities/Box';
 import { motion } from 'framer-motion'
 

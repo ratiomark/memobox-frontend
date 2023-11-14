@@ -1,25 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkExtraArg } from '@/app/providers/StoreProvider'
 import i18n from '@/shared/config/i18n/i18n'
-import { LoginByUserNameProps, UserWithToken, loginUser, } from '../api/userApi'
+import { AuthByEmailProps, UserWithToken, rtkApiLoginUser, } from '../api/userApi'
 import { userActions } from '../slice/userSlice'
 
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const loginUserByUserName = createAsyncThunk<UserWithToken, LoginByUserNameProps, { rejectValue: string, extra: ThunkExtraArg }>(
+export const loginUserByEmail = createAsyncThunk<UserWithToken, AuthByEmailProps, { rejectValue: string, extra: ThunkExtraArg }>(
 	'user/loginByUserName',
-	async ({ username, password }, thunkAPI) => {
+	async ({ email, password }, thunkAPI) => {
 
 		try {
 			const { dispatch } = thunkAPI
-			const response = await dispatch(loginUser({ username, password })).unwrap()
+			const response = await dispatch(rtkApiLoginUser({ email, password })).unwrap()
 			console.log('Логин. Ответ сервера:   ', response)
 			if (!response.token) {
 				throw new Error()
 			}
 
 			thunkAPI.dispatch(userActions.setAuthData(response))
-			
 			return response
 
 		} catch (err) {

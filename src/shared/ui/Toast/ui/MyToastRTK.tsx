@@ -231,7 +231,7 @@ const ToastReducer = () => {
 }
 const MyToastsRTK = () => {
 	// useAsyncReducer({ reducers, removeAfterUnmount: false })
-	console.log('0000000000000000000000000000000000000')
+	// console.log('0000000000000000000000000000000000000')
 	const toastsListIds = useSelector(getToastsListIds)
 	// useEffect(() => {
 	// 	console.log(toastsObj)
