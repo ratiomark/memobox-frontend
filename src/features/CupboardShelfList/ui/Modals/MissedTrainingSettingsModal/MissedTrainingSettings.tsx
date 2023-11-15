@@ -20,6 +20,8 @@ import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { updateMissedTrainingThunk } from '../../../model/services/updateMissedTrainingThunk';
 
+type MissedTrainingItem = { value: MissedTrainingValue, content: ReactNode }
+
 export const MissedTrainingSettingsModal = () => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
@@ -29,10 +31,10 @@ export const MissedTrainingSettingsModal = () => {
 	const currentMissedTrainingValue = useSelector(getMissedTrainingShelfValue)
 	const currentMissedTrainingValueOfBox = useSelector(getMissedTrainingBoxValue)
 	// console.log(currentMissedTrainingValueOfBox)
-	const [updateShelfMutation,] = useUpdateShelfWithTagMutation()
-	const [updateBoxMutation,] = useUpdateBoxWithTagMutation()
+	// const [updateShelfMutation,] = useUpdateShelfWithTagMutation()
+	// const [updateBoxMutation,] = useUpdateBoxWithTagMutation()
 
-	const items = useMemo<{ value: MissedTrainingValue, content: ReactNode }[]>(() => ([
+	const items = useMemo<MissedTrainingItem[]>(() => ([
 		{ value: 'none', content: t('missedTrainingSettings.none') },
 		{ value: 'additional', content: t('missedTrainingSettings.additional') },
 		{ value: 'backwards', content: t('missedTrainingSettings.backwards') }
@@ -55,7 +57,7 @@ export const MissedTrainingSettingsModal = () => {
 		setBoxValue(items.find(item => item.value === currentMissedTrainingValueOfBox) ?? items[0])
 	}, [currentMissedTrainingValueOfBox, items])
 
-	let finalValue;
+	let finalValue: MissedTrainingItem;
 	let onChangeHandle;
 	if (boxId) {
 		finalValue = boxValue
@@ -64,18 +66,6 @@ export const MissedTrainingSettingsModal = () => {
 		finalValue = value
 		onChangeHandle = setValue
 	}
-	// console.log('final Value   ', finalValue, boxId, 'currentMissedTrainingValueOfBox  ', currentMissedTrainingValueOfBox)
-	// const onSubmit = () => {
-	// 	if (boxId === '') {
-	// 		console.log('Сохраняю занчение для полки ', currentMissedTrainingValue)
-	// 	} else {
-	// 		console.log('Сохраняю занчение для коробки ', currentMissedTrainingValueOfBox)
-	// 	}
-	// }
-	// const onClose = () => {
-	// 	dispatch(cupboardShelfListActions.setMissedTrainingModalIsOpen(false))
-	// 	dispatch(cupboardShelfListActions.dropMissedTrainingShelfAndBoxId())
-	// }
 
 	const onCloseHandle = () => {
 		setValue(items.find(item => item.value === currentMissedTrainingValue) ?? items[0])
@@ -84,23 +74,8 @@ export const MissedTrainingSettingsModal = () => {
 	}
 
 	const onSaveMissedTraining = () => {
-		dispatch(updateMissedTrainingThunk({ boxId, shelfId, missedTrainingValue: boxValue.value }))
+		dispatch(updateMissedTrainingThunk({ boxId, shelfId, missedTrainingValue: finalValue.value }))
 		onCloseHandle()
-		// if (boxId) {
-		// 	// updateBoxMutation({
-		// 	// 	shelfId,
-		// 	// 	box: {
-		// 	// 		missedTrainingValue: boxValue.value as MissedTrainingValue,
-		// 	// 		_id: boxId,
-		// 	// 	}
-		// 	// })
-		// 	// onCloseHandle()
-		// }
-		// if (!boxId) {
-		// 	dispatch(updateMissedTrainingThunk({ shelfId, missedTrainingValue: boxValue.value }))
-		// 	// console.log(value.value)
-		// 	updateShelfMutation({ id: shelfId, missedTrainingValue: value.value })
-		// }
 	}
 
 	return (
