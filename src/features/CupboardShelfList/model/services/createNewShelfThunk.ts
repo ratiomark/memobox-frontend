@@ -27,10 +27,10 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 		)
 		dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('pending'))
 		try {
-			await sleep(5)
 			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(true))
 			// console.log('shelfName   ', shelfName)
 			const response = await dispatch(createNewShelf(shelfName)).unwrap()
+			// await sleep(20)
 			// const response = await dispatch(createNewShelf(shelfName)).unwrap()
 			if (!response) {
 				dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
