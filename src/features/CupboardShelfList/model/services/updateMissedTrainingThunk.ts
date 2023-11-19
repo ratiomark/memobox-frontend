@@ -18,6 +18,7 @@ export const updateMissedTrainingThunk = createAsyncThunk<UpdateMissedTrainingTh
 	'cupboardPage/updateMissedTrainingThunk',
 	async (arg, thunkAPI) => {
 		const { boxId, shelfId, missedTrainingValue } = arg
+		console.log('updateMissedTrainingThunk', arg)
 		const id = shelfId + genRandomId()
 		const { dispatch, getState } = thunkAPI
 		const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
@@ -33,16 +34,16 @@ export const updateMissedTrainingThunk = createAsyncThunk<UpdateMissedTrainingTh
 			}
 		}))
 		try {
-			await sleep(4)
+			// await sleep(4)
 			const response = boxId
-				? dispatch(updateBoxWithTag({ shelfId, box: { missedTrainingValue, id: boxId } })).unwrap()
+				? dispatch(updateBoxWithTag({ missedTrainingValue, id: boxId })).unwrap()
 				: dispatch(updateShelfWithTag({ id: shelfId, missedTrainingValue })).unwrap()
 
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error()
 			}
-
+			console.log(response)
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			return arg
 		} catch (err) {
