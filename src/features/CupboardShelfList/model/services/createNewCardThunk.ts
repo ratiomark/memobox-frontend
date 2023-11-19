@@ -6,12 +6,14 @@ import { getAnswerCardModal, getBoxIdCheckedCardModal, getQuestionCardModal, get
 import { cupboardShelfListActions } from '../slice/cupboardShelfListSlice'
 import { t } from 'i18next'
 import { createNewCard } from '@/entities/Card'
+import { rtkApi } from '@/shared/api/rtkApi'
 
 export const createNewCardThunk = createAsyncThunk<boolean, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/createNewCardThunk',
 	async (randomId, thunkAPI) => {
 
 		const { dispatch, getState } = thunkAPI
+
 		// dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('pending'))
 		dispatch(toastsActions.addToast({
 			id: randomId, toast: {
@@ -28,16 +30,20 @@ export const createNewCardThunk = createAsyncThunk<boolean, string, { rejectValu
 		const question = getQuestionCardModal(getState())
 		const answer = getAnswerCardModal(getState())
 		const shelfId = getShelfIdCardModal(getState())
-		const boxId = getBoxIdCheckedCardModal(getState())
+		const boxId = getBoxIdCheckedCardModal(getState())!
 		try {
-			await sleep()
-			const response = Math.random() > 0.5
-			// const response = await dispatch(createNewCard({ question, answer, shelfId, boxId, })).unwrap()
+			// await sleep()
+			// const response = Math.random() > 0.5
+			const response = await dispatch(createNewCard({ question, answer, shelfId, boxId, })).unwrap()
+			console.log('новая карточка   ', response)
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id: randomId, toast: { status: 'error' } }))
 				dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
 				throw new Error()
 			}
+
+			// либо можно вручную, проверить, что viewPageInitializer существует и вручную добавить карточку
+			dispatch(rtkApi.util.invalidateTags(['Cards']))
 			dispatch(toastsActions.updateToastById({ id: randomId, toast: { status: 'success' } }))
 			// dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('success'))
 			// VAR: тут нужно перделать, если ответ успешный, то нужно добавить карточку в счетчики соответвующей полки+коробки
