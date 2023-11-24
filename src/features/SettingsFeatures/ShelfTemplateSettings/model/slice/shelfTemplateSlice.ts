@@ -146,8 +146,19 @@ const settingsShelfTemplate = createSlice({
 		setIsCurrentTemplateEqualToInitial: (state, action: PayloadAction<boolean>) => {
 			state.isCurrentTemplateEqualToInitial = action.payload
 		},
+	},
+	extraReducers: (builder) => {
+		// builder
+		// 	.addCase(
+		// 		updateShelfTemplateThunk.fulfilled,
+		// 		(state, action: PayloadAction<TimingBlock[]>) => {
+		// 			state.currentShelfTemplate = action.payload as ExtendedTimingBlock[]
+
+		// 		})
+
+
 	}
 })
-
+// updateShelfTemplateThunk
 export const { actions: settingsShelfTemplateActions } = settingsShelfTemplate
 export const { reducer: settingsShelfTemplateReducer } = settingsShelfTemplate

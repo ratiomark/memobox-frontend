@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsList.module.scss';
 import { BoxSchema } from '@/entities/Box';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion'
 import { Icon } from '@/shared/ui/Icon';
 import PlusIcon from '@/shared/assets/icons/plusIcon2.svg'
@@ -15,6 +15,7 @@ import { ExtendedTimingBlock } from '@/shared/types/DataBlock';
 import { BoxSettingsItem } from '../BoxSettingsItem/BoxSettingsItem';
 import { BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
 import { DURATION_DELAY_SWITCH_MODE_SHELF_TEMPLATE_SETTINGS } from '@/shared/const/animation';
+import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock';
 
 const createBox = (index: number): ExtendedTimingBlock => {
 	return {
@@ -48,12 +49,9 @@ const animation = {
 }
 
 
-export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
-	const {
-		className,
-	} = props
+export const BoxesSettingsList = () => {
 
-	const { t } = useTranslation()
+	// const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const mode = useSelector(getSettingsShelfTemplateMode)
 	const currentShelfTemplate = useSelector(getSettingsCurrentShelfTemplate)
@@ -70,22 +68,23 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 	}, [currentShelfTemplate, dispatch])
 
 	const onAddBoxClick = useCallback((index: number) => {
+		console.log(currentShelfTemplate?.length)
 		if (!currentShelfTemplate?.length) return
 		const newBox = createBox(index)
-		console.log(newBox)
-		dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId(newBox.id.toString()))
+		// console.log(newBox)
+		dispatch(settingsShelfTemplateActions.setTimingSetterModalBoxId(newBox.id))
 		const updatedBoxesList: ExtendedTimingBlock[] = [];
 		const boxListRelevant = currentShelfTemplate.slice(0, currentShelfTemplate.length)
 
-		console.log(' INDEX   INDEX   ', index)
+		// console.log(' INDEX   INDEX   ', index)
 		if (index === 0) {
 			// updatedBoxesList.push({ ...newBox, index })
 			updatedBoxesList.push(newBox)
-			console.log(updatedBoxesList)
+			// console.log(updatedBoxesList)
 			boxListRelevant.forEach(boxItem => {
 				updatedBoxesList.push({ ...boxItem, index: boxItem.index! + 1 })
 			})
-			// console.log(updatedBoxesList)
+			console.log(updatedBoxesList)
 			// console.log('КОНЕЦЦЦЦЦЦЦ')
 		} else if (index === boxListRelevant.length) {
 			// console.log('LAST LAST LAST LAST LAST LAST LAST LAST')
@@ -170,10 +169,22 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 		// const learntCardBox = <BoxSettingsItem onRemoveBox={onRemoveBox} onAddBoxClick={onAddBoxClick} boxItem={boxItem}
 	}, [onRemoveBox, currentShelfTemplate, onAddBoxClick])
 
+	const onAddBoxWith0Index = (e: MouseEvent) => {
+		onAddBoxClick(0)
+		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
+		const coordinates = {
+			x: x + width / 2,
+			y: y + height / 2
+		}
+		dispatch(settingsShelfTemplateActions.setTimingSetterBoxCoordinates(coordinates))
+		dispatch(settingsShelfTemplateActions.setTimingSetterModalIsOpen(true))
+		dispatch(settingsShelfTemplateActions.setTimingSetterBoxTimingData(BOX_TIMING_DATA_DEFAULT))
+	}
+
 	const firstIcon = (
 		<AnimatePresence>
 			{mode === 'choosingBoxPlace' &&
-				<AddBoxIcon onClick={() => onAddBoxClick(0)} />
+				<AddBoxIcon onClick={onAddBoxWith0Index} />
 			}
 		</AnimatePresence>
 	)
@@ -185,10 +196,7 @@ export const BoxesSettingsList = (props: BoxesSettingsListProps) => {
 			<motion.div
 				layout
 				// layoutRoot
-				className={clsx(
-					cls.BoxesSettingsList,
-					className
-				)}
+				className={cls.BoxesSettingsList}
 			>
 				<BoxSettingsSpecialBox type={'new'} />
 				{firstIcon}

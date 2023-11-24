@@ -15,6 +15,9 @@ import { AnimatePresence, motion, } from 'framer-motion';
 import { HStack } from '@/shared/ui/Stack';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
+import { getUserSettingsIsLoading } from '@/entities/User';
+import { updateShelfTemplateThunk } from '../model/services/updateShelfTemplateThunk';
+import { setDefaultShelfTemplateThunk } from '../model/services/setDefaultShelfTemplateThunk';
 
 interface ShelfTemplateSettingsProps {
 	className?: string
@@ -34,9 +37,10 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 		onClose
 	} = props
 	const shelfTemplateSettingsFromUser = useSelector(getUserShelfTemplateSettings)
+	const isLoading = useSelector(getUserSettingsIsLoading)
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { t } = useTranslation()
-	
+
 	useEffect(() => {
 		if (shelfTemplateSettingsFromUser) {
 			// dispatch(settingsShelfTemplateActions.setInitialTemplate(shelfTemplateSettingsFromUser.slice(0, 1)))
@@ -49,15 +53,24 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 		onClose()
 	}
 
+	const onSubmitHandle = () => {
+		dispatch(updateShelfTemplateThunk())
+		onClose()
+	}
+
+	const onDefaultHandle = () => {
+		dispatch(setDefaultShelfTemplateThunk())
+	}
+
 	const isCurrentTemplateEqualToInitial = useSelector(getSettingsShelfTemplateChanged)
 
-	if (!shelfTemplateSettingsFromUser) return <p>Загрузка</p>
+	if (!shelfTemplateSettingsFromUser || isLoading) return null
 
 	return (
 		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseHandle}
-			onSubmit={() => alert('Сохраняю настройки')}
+			onSubmit={onSubmitHandle}
 			lazy
 			// max
 			panelWithMainPadding={false}
@@ -70,18 +83,23 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 						className)}
 				// animate={{ width: 'auto' }}
 				>
-					{/* {isAnyTimeSetterOpen && <div className={cls.overlay} />} */}
 					<BoxesSettingsContent />
 
 					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
 					<HStack max justify='between'>
-						<Button variant='empty'>{t('return to default')}</Button>
+						{/* FIXME: Тут нужно сделать модалку с подтверждением  */}
+						<Button
+							onClick={onDefaultHandle}
+							variant='empty'
+						>
+							{t('return to default')}
+						</Button>
 						<ModalButtons
 							justify='end'
 							max={false}
 							isSubmitDisabled={isCurrentTemplateEqualToInitial}
 							onClose={onCloseHandle}
-							onSubmit={() => alert('Сохраняю настройки')}
+							onSubmit={onSubmitHandle}
 						/>
 					</HStack>
 					{/* <div style={{ background: 'red', position: 'absolute', inset: 0 }} /> */}
