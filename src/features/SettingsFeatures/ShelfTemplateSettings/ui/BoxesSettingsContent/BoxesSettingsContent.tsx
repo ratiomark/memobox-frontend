@@ -24,15 +24,12 @@ interface BoxesSettingsContentProps {
 	setIsAnyTimeSetterOpen?: Dispatch<SetStateAction<boolean>>
 }
 
-
-
-
-export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
-
+// export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
+export const BoxesSettingsContent = memo(() => {
 	const dispatch = useAppDispatch()
-	const initialShelfTemplate = useSelector(getSettingsInitialShelfTemplate)
+	// const initialShelfTemplate = useSelector(getSettingsInitialShelfTemplate)
 	const mode = useSelector(getSettingsShelfTemplateMode)
-	const isTemplateChanged = useSelector(getSettingsShelfTemplateChanged)
+	// const isTemplateChanged = useSelector(getSettingsShelfTemplateChanged)
 	const { leftSide, rightSide } = useSelector(getSettingsShelfTemplateBoxesSettingsListEdges)
 
 	const onAddNewBoxClick = () => {
@@ -52,9 +49,10 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 
 	const { t } = useTranslation()
 
-	const blockTitle = mode === 'choosingBoxPlace'
-		? <Heading as='h3' className={cls.title} title={t('Нажмите + чтобы добавить коробку на указанную позицию')} />
-		: <Heading as='h3' className={cls.title} title={t('Настройки создания новых полок')} />
+	const blockTitle =
+		mode === 'choosingBoxPlace'
+			? <Heading as='h3' className={cls.title} title={t('Нажмите + чтобы добавить коробку на указанную позицию')} />
+			: <Heading as='h3' className={cls.title} title={t('Настройки создания новых полок')} />
 
 	return (
 		<VStack
@@ -63,11 +61,12 @@ export const BoxesSettingsContent = memo((props: BoxesSettingsContentProps) => {
 			gap='gap_12'
 			className={cls.mainWrapper}
 		>
-			{rightSide && <div className={clsx(cls.gradientEdge,cls.gradientEdgeRight)} />}
+			{rightSide && <div className={clsx(cls.gradientEdge, cls.gradientEdgeRight)} />}
 			{leftSide && <div className={clsx(cls.gradientEdge, cls.gradientEdgeLeft)} />}
 			{/* {isAnyTimeSetterOpen && <Overlay /> &} */}
 			{blockTitle}
 			<BoxesSettingsList />
+			
 
 			{/* </div> */}
 			{mode === 'choosingBoxPlace'
