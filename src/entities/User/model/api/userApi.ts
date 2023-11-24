@@ -1,7 +1,11 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { JsonSettings } from '../types/JsonSettings'
 import { User } from '../types/user'
+import { TimeSleepSettings, UserSettings } from '../types/userSettings'
 import { JsonSavedData } from '../types/JsonSavedData'
+import { MissedTrainingValue } from '../types/userSettings'
+import { TimingBlock } from '@/shared/types/DataBlock'
+
 
 interface SetJsonSettings {
 	userId: string
@@ -85,15 +89,56 @@ const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
-		getUserRefreshToken: build.query<UserWithToken, string>({
-			query: (token) => ({
+		getTokensByRefreshToken: build.query<UserWithToken, string>({
+			query: (refreshToken) => ({
 				url: '/auth/refresh',
 				method: 'POST',
 				headers: {
-					'Authorization': `Bearer ${token}`
+					'Authorization': `Bearer ${refreshToken}`,
+					'HEEEEEEEEEEEEEEEEEEEEEEHEHE': 'lalalalalalala'
 				}
 			})
-		})
+		}),
+		// settings
+		getUserSettings: build.query<UserSettings, void>({
+			query: () => ({
+				url: '/settings',
+				method: 'GET',
+			})
+		}),
+		updateMissedTraining: build.mutation<{ missedTraining: MissedTrainingValue }, { missedTraining: MissedTrainingValue }>({
+			query: (arg) => ({
+				url: '/settings/missed-training',
+				method: 'PATCH',
+				body: {
+					...arg
+				}
+			})
+		}),
+		updateShelfTemplate: build.mutation<{ shelfTemplate: TimingBlock[] }, TimingBlock[]>({
+			query: (arg) => ({
+				url: '/settings/shelf-template',
+				method: 'PATCH',
+				body: {
+					shelfTemplate: arg
+				}
+			})
+		}),
+		setDefaultShelfTemplate: build.mutation<{ shelfTemplate: TimingBlock[] }, void>({
+			query: () => ({
+				url: '/settings/shelf-template',
+				method: 'DELETE',
+			})
+		}),
+		updateTimeSleep: build.mutation<TimeSleepSettings, TimeSleepSettings>({
+			query: (arg) => ({
+				url: '/settings/time-sleep',
+				method: 'PATCH',
+				body: {
+					...arg
+				}
+			})
+		}),
 	}),
 })
 
@@ -106,4 +151,9 @@ export const rtkApiLoginUser = userApi.endpoints.loginUser.initiate
 export const rtkApiRegisterUser = userApi.endpoints.registerUser.initiate
 export const rtkApiGetMe = userApi.endpoints.getMe.initiate
 export const getUserTokenValid = userApi.endpoints.getUserTokenValid.initiate
-export const getUserRefreshToken= userApi.endpoints.getUserRefreshToken.initiate
+export const getTokensByRefreshToken = userApi.endpoints.getTokensByRefreshToken.initiate
+export const rtkApiUpdateShelfTemplate = userApi.endpoints.updateShelfTemplate.initiate
+export const rtkApiUpdateTimeSleep = userApi.endpoints.updateTimeSleep.initiate
+export const rtkApiSetDefaultShelfTemplate = userApi.endpoints.setDefaultShelfTemplate.initiate
+export const { useGetUserSettingsQuery } = userApi
+export const { useUpdateMissedTrainingMutation } = userApi
