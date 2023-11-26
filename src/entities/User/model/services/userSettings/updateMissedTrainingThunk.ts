@@ -1,34 +1,40 @@
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { UserWithToken,  getUserRefreshToken,  getUserTokenValid } from '../api/userApi'
-import { localDataService } from '@/shared/lib/helpers/common/localDataService'
+import { setJsonSettingsMutation } from '../api/userApi'
+import { getJsonSettings } from '../selectors/getJsonSettings'
+import { getUserAuthData } from '../selectors/getUserAuthData'
+import { JsonSettings } from '../types/JsonSettings'
+import { MissedTrainingValue } from "../../types/user"
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const initAuthData = createAsyncThunk<UserWithToken, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
-	'user/initAuthData',
-	async (_, thunkAPI) => {
-		const { dispatch, rejectWithValue } = thunkAPI
+export const updateMissedTrainingThunk = createAsyncThunk<MissedTrainingValue, MissedTrainingValue, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+	'user/updateMissedTrainingThunk',
+	async (newJsonSettings, thunkAPI) => {
 
-		const userToken = localDataService.getAccessToken()
-		// const userToken = localDataService.getToken()
-		if (!userToken) return rejectWithValue('Нет токена')
+		const { dispatch, getState, } = thunkAPI
+		const userData = getUserAuthData(getState())
+		const currentUserSettings = getJsonSettings(getState())
+
+		if (!userData) return thunkAPI.rejectWithValue('Нет userData')
+
 		try {
-			const response = await dispatch(getUserRefreshToken(userToken)).unwrap() //разворачиваю в реальный результат
-			// const response = await dispatch(getUserTokenValid(userToken)).unwrap() //разворачиваю в реальный результат
-			console.log('Проверка токена. Ответ сервера:   ', response)
-			if (!response.token) {
-				return rejectWithValue('Токен не валидный')
-			}
-			if (!response.jsonSavedData) {
-				console.log('jsonSavedData не получен')
-			}
-			if (!response.jsonSettings) {
-				console.log('jsonSettings не получен')
-			}
-			return response
+			const response = await dispatch(setJsonSettingsMutation({
+				jsonSettings: {
+					...currentUserSettings,
+					...newJsonSettings
+				},
+				userId: userData.id
+			}))
+				.unwrap() //разворачиваю в реальный результат
+
+			const jsonSettingsFromResponse = response.jsonSettings
+
+			if (!jsonSettingsFromResponse) return thunkAPI.rejectWithValue('Нет userData')
+
+			return jsonSettingsFromResponse
 
 		} catch (err) {
-			return rejectWithValue('Some Error in saveJsonSettings')
+			return thunkAPI.rejectWithValue('Some Error in saveJsonSettings')
 		}
 	}
 )

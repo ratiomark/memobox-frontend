@@ -3,6 +3,7 @@ export type SortColumnValue =
 	| 'shelfId'
 	| 'createdAt'
 	| 'lastTraining'
+	| 'nextTraining'
 
 
 export interface SortColumnObject {

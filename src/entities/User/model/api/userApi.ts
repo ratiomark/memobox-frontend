@@ -19,8 +19,11 @@ interface SetJsonSavedData {
 export interface UserWithToken extends User {
 	token: string
 	refreshToken: string
+	tokenExpires: number
+	user: Partial<User>
 }
-type ResponseWithToken = { token: string }
+
+// type ResponseWithToken = { token: string }
 
 export interface AuthByEmailProps {
 	email: string
@@ -47,6 +50,12 @@ const userApi = rtkApi.injectEndpoints({
 				body: {
 					...arg
 				}
+			})
+		}),
+		logout: build.mutation<void, void>({
+			query: () => ({
+				url: '/auth/logout',
+				method: 'POST',
 			})
 		}),
 		// mutation потому что буду патчить изенения. Получаю юзера, аргументом SetJsonSettings
@@ -89,16 +98,24 @@ const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
-		getTokensByRefreshToken: build.query<UserWithToken, string>({
-			query: (refreshToken) => ({
-				url: '/auth/refresh',
+		getTokensOnInitWithUserSettings: build.query<UserWithToken, string>({
+			query: (userId) => ({
+				url: '/auth/refresh-init',
 				method: 'POST',
-				headers: {
-					'Authorization': `Bearer ${refreshToken}`,
-					'HEEEEEEEEEEEEEEEEEEEEEEHEHE': 'lalalalalalala'
-				}
+				body: {
+					userId
+				},
 			})
 		}),
+		// getTokensByRefreshToken: build.query<UserWithToken, string>({
+		// 	query: (refreshToken) => ({
+		// 		url: '/auth/refresh',
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Authorization': `Bearer ${refreshToken}`,
+		// 		}
+		// 	})
+		// }),
 		// settings
 		getUserSettings: build.query<UserSettings, void>({
 			query: () => ({
@@ -151,9 +168,10 @@ export const rtkApiLoginUser = userApi.endpoints.loginUser.initiate
 export const rtkApiRegisterUser = userApi.endpoints.registerUser.initiate
 export const rtkApiGetMe = userApi.endpoints.getMe.initiate
 export const getUserTokenValid = userApi.endpoints.getUserTokenValid.initiate
-export const getTokensByRefreshToken = userApi.endpoints.getTokensByRefreshToken.initiate
+export const getTokensOnInitWithUserSettings = userApi.endpoints.getTokensOnInitWithUserSettings.initiate
 export const rtkApiUpdateShelfTemplate = userApi.endpoints.updateShelfTemplate.initiate
 export const rtkApiUpdateTimeSleep = userApi.endpoints.updateTimeSleep.initiate
 export const rtkApiSetDefaultShelfTemplate = userApi.endpoints.setDefaultShelfTemplate.initiate
+export const rtkApiLogout = userApi.endpoints.logout.initiate
 export const { useGetUserSettingsQuery } = userApi
 export const { useUpdateMissedTrainingMutation } = userApi

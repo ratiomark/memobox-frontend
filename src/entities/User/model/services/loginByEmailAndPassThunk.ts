@@ -1,23 +1,34 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkExtraArg } from '@/app/providers/StoreProvider'
 import i18n from '@/shared/config/i18n/i18n'
-import { AuthByEmailProps, UserWithToken, rtkApiRegisterUser, } from '../api/userApi'
+import { AuthByEmailProps, UserWithToken, rtkApiLoginUser, } from '../api/userApi'
 import { userActions } from '../slice/userSlice'
+import { isRefreshResponse } from '@/shared/api/helpers/checkResponse'
+import { KEY_USER_TOKEN_LOCAL_STORAGE, KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE } from '@/shared/const/localStorage'
+import { localDataService } from '@/shared/lib/helpers/common/localDataService'
+
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const registerUserByEmail = createAsyncThunk<UserWithToken, AuthByEmailProps, { rejectValue: string, extra: ThunkExtraArg }>(
-	'user/registerUserByUserName',
+export const loginByEmailAndPassThunk = createAsyncThunk<UserWithToken, AuthByEmailProps, { rejectValue: string, extra: ThunkExtraArg }>(
+	'user/loginByEmailAndPassThunk',
 	async ({ email, password }, thunkAPI) => {
 
 		try {
 			const { dispatch } = thunkAPI
-			const response = await dispatch(rtkApiRegisterUser({ email, password })).unwrap()
-			console.log('Регистрация. Ответ сервера:   ', response)
-			if (!response.token) {
-				throw new Error()
+			const response = await dispatch(rtkApiLoginUser({ email, password })).unwrap()
+
+			if (!isRefreshResponse(response)) {
+				return thunkAPI.rejectWithValue(i18n.t('error on login'))
 			}
-			
+
+			// console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL')
+			localDataService.setToken(response.token)
+			localDataService.setRefreshToken(response.refreshToken)
+			localDataService.setUserId(response.user.id!)
 			thunkAPI.dispatch(userActions.setAuthData(response))
+			thunkAPI.dispatch(userActions.setJsonSavedData(response.user.jsonSavedData!))
+			thunkAPI.dispatch(userActions.setJsonSettings(response.user.jsonSettings!))
+
 			return response
 
 		} catch (err) {

@@ -1,5 +1,5 @@
 import { TimingBlock } from '@/shared/types/DataBlock'
-import { NotificationSettings, TimeSleepSettings } from '../types/user'
+import { NotificationSettings, TimeSleepSettings } from '../types/userSettings'
 
 export const timeSleepMock: TimeSleepSettings = {
 	isTimeSleepEnabled: true,

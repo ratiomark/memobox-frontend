@@ -2,6 +2,7 @@ import { FeatureFlags } from '@/shared/types/FeatureFlags'
 import { JsonSettings } from './JsonSettings'
 import { JsonSavedData } from './JsonSavedData'
 import { TimingBlock } from '@/shared/types/DataBlock'
+import { UserSettings } from './userSettings'
 
 export const UserRole = {
 	ADMIN: 'ADMIN',
@@ -11,53 +12,7 @@ export const UserRole = {
 
 export type UserRole = keyof typeof UserRole
 
-interface NotificationEmails {
-	email: string
-	verified: boolean
-}
 
-export interface NotificationSettings {
-	mobilePushEnabled: boolean
-	emailNotificationsEnabled: boolean
-	minimumCardsForPush: number
-	minimumCardsForEmailNotification: number
-	notificationEmails: NotificationEmails[]
-}
-
-export interface TimeSleepDataObject {
-	up: {
-		hours: number
-		minutes: number
-	}
-	down: {
-		hours: number
-		minutes: number
-	}
-}
-
-export type DaysOfWeek =
-	| 'monday'
-	| 'tuesday'
-	| 'wednesday'
-	| 'thursday'
-	| 'friday'
-	| 'saturday'
-	| 'sunday'
-
-export interface TimeSleepSettings {
-	isTimeSleepEnabled: boolean
-	isDayByDayOptionEnabled: boolean
-	generalTimeSleepData: TimeSleepDataObject
-	dayByDayTimeSleepData?: {
-		[key in DaysOfWeek]: TimeSleepDataObject
-	}
-}
-export interface UserSettings {
-	notifications: NotificationSettings
-	missedTrainingValue: 'none' | 'additionalTraining' | 'sendBackwards'
-	shelfTemplate: TimingBlock[]
-	timeSleep: TimeSleepSettings
-}
 // то что возвращает бекэнд
 export type User = {
 	id: string
@@ -70,7 +25,7 @@ export type User = {
 	// avatar?: string
 	role?: UserRole[]
 	features?: Partial<FeatureFlags>
-	userSettings: UserSettings
+	// userSettings: UserSettings
 	jsonSettings?: JsonSettings
 	jsonSavedData?: JsonSavedData
 }
@@ -81,9 +36,15 @@ export interface UserSchema {
 	_mounted: boolean
 	help: string
 	authData?: Omit<User, 'jsonSavedData' | 'userSettings'>
-	jsonSavedData: JsonSavedData
 	userSettings?: UserSettings
+	userSettingsIsLoading?: boolean
+	jsonSavedData: JsonSavedData
+	jsonCommonSettings?: JsonSettings
 }
+// export type ExtendedTimingBlockForRealShelf = ExtendedTimingBlock & {
+// 	missedTrainingValue?: MissedTrainingValue
+// }
+// export type MissedTrainingValue = 'none' | 'additional' | 'backwards'
 // import { FeatureFlags } from '@/shared/types/FeatureFlags'
 // import { JsonSettings } from './JsonSettings'
 // import { JsonSavedData } from './JsonSavedData'

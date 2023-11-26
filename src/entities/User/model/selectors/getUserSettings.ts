@@ -3,13 +3,21 @@ import { notificationsMock, shelfTemplateMock, timeSleepMock } from '../mockData
 
 export const getUserSettings = (state: StateSchema) => state.user.userSettings
 
-export const getUserMissedTrainingSettings = (state: StateSchema) => state.user.userSettings?.missedTrainingValue ?? 'none'
+export const getUserMissedTrainingSettings = (state: StateSchema) => state.user?.userSettings?.missedTraining
 
-export const getUserNotificationSettings = (state: StateSchema) => state.user.userSettings?.notifications ?? notificationsMock
+export const getUserNotificationSettings = (state: StateSchema) => state.user?.userSettings?.notifications
 
-export const getUserShelfTemplateSettings = (state: StateSchema) => state.user.userSettings?.shelfTemplate ?? shelfTemplateMock
+export const getUserShelfTemplateSettings = (state: StateSchema) => state.user?.userSettings?.shelfTemplate
 
-export const getUserTimeSleepSettings = (state: StateSchema) => state.user.userSettings?.timeSleep ?? timeSleepMock
+export const getUserTimeSleepSettings = (state: StateSchema) => state.user.userSettings?.timeSleep
+export const getUserSettingsIsLoading = (state: StateSchema) => state.user.userSettingsIsLoading
+
+
+
+// export const getUserMissedTrainingSettings = (state: StateSchema) => state.user.userSettings?.missedTrainingValue ?? 'none'
+// export const getUserNotificationSettings = (state: StateSchema) => state.user.userSettings?.notifications ?? notificationsMock
+// export const getUserShelfTemplateSettings = (state: StateSchema) => state.user.userSettings?.shelfTemplate ?? shelfTemplateMock
+// export const getUserTimeSleepSettings = (state: StateSchema) => state.user.userSettings?.timeSleep ?? timeSleepMock
 
 // export const getUserShelfTemplateSettings = (state: StateSchema) => state.user.authData?.userSetting.shelfTemplate
 // export const getUserMissedTrainingSettings = (state: StateSchema) => state.user.authData?.userSetting.missedTrainingValue

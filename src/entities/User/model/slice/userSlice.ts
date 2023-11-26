@@ -1,15 +1,17 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
-import {  KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE, KEY_USER_TOKEN_LOCAL_STORAGE } from '@/shared/const/localStorage'
-import { User, UserSchema } from '../types/user'
+import { KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE, KEY_USER_TOKEN_LOCAL_STORAGE } from '@/shared/const/localStorage'
 import { setFeatureFlag } from '@/shared/lib/features'
 import { saveJsonSettings } from '../services/saveJsonSettings'
 import { JsonSettings } from '../types/JsonSettings'
-import { initAuthData } from '../services/initAuthData'
+import { initAuthData } from '../services/initAuthDataThunk'
 import { JsonSavedData, SortColumnObject } from '../types/JsonSavedData'
-import { updateJsonSavedData } from '../..'
+import { UserSchema } from '../types/user'
+import { DayByDayTimeSleepData, MissedTrainingValue, TimeSleepDataObject, UserSettings } from '../types/userSettings'
 import { jsonSavedDataColumnsMock } from '../mockData/jsonSavedDataMock'
 import { UserWithToken } from '../api/userApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
+import { TimingBlock } from '@/shared/types/DataBlock'
+import { daysOfWeek } from '../const/daysOfWeek'
 
 const initialState: UserSchema = {
 	_mounted: false,
@@ -36,9 +38,16 @@ const userSlice = createSlice({
 			state.authData = action.payload
 			// обновляю флаги фич
 			setFeatureFlag(action.payload.features)
-			localDataService.setToken(action.payload[KEY_USER_TOKEN_LOCAL_STORAGE])
-			localDataService.setAccessToken(action.payload[KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE])
+			// localDataService.setToken(action.payload[KEY_USER_TOKEN_LOCAL_STORAGE])
+			// localDataService.setRefreshToken(action.payload[KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE])
 			state._mounted = true
+		},
+		// 
+		setJsonSavedData: (state, action: PayloadAction<JsonSavedData>) => {
+			state.jsonSavedData = action.payload
+		},
+		setJsonSettings: (state, action: PayloadAction<JsonSettings>) => {
+			state.jsonCommonSettings = action.payload
 		},
 		// VAR: тестирую jsonSavedData как отедльное поле
 		setColumn: (state, action: PayloadAction<SortColumnObject>) => {
@@ -69,6 +78,32 @@ const userSlice = createSlice({
 			// return newOrder.map((id) => state.find((item) => item.id === id)!);
 		},
 		// setColumns
+		setSettingsIsLoading: (state, action: PayloadAction<boolean>) => {
+			state.userSettingsIsLoading = action.payload
+		},
+		setSettings: (state, action: PayloadAction<UserSettings>) => {
+			state.userSettings = action.payload
+		},
+		setDayByDayTimeSleepDataInitial: (state, action: PayloadAction<TimeSleepDataObject>) => {
+			if (state.userSettings?.timeSleep && !state.userSettings?.timeSleep.dayByDayTimeSleepData) {
+				const dayByDayTimeSleepData = {} as DayByDayTimeSleepData
+				daysOfWeek.forEach(day => {
+					dayByDayTimeSleepData[day] = action.payload
+				})
+				state.userSettings.timeSleep.dayByDayTimeSleepData = dayByDayTimeSleepData
+			}
+		},
+		setSettingsMissedTraining: (state, action: PayloadAction<MissedTrainingValue>) => {
+			if (state.userSettings) {
+				state.userSettings.missedTraining = action.payload
+			}
+		},
+		setSettingsShelfTemplate: (state, action: PayloadAction<TimingBlock[]>) => {
+			if (state.userSettings) {
+				state.userSettings.shelfTemplate = action.payload
+			}
+		},
+		// 
 		logout: (state) => {
 			state.authData = undefined
 			localDataService.logout()
@@ -96,18 +131,13 @@ const userSlice = createSlice({
 				initAuthData.fulfilled,
 				(state, action: PayloadAction<UserWithToken>) => {
 					const {
-						jsonSavedData,
-						userSettings,
+						user,
 						...otherData
 					} = action.payload
 					state.authData = { ...otherData }
-					localDataService.setToken(action.payload[KEY_USER_TOKEN_LOCAL_STORAGE])
-					localDataService.setAccessToken(action.payload[KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE])
-					setFeatureFlag(action.payload.features)
-					if (jsonSavedData) {
-						state.jsonSavedData = jsonSavedData
-					}
-					state.userSettings = userSettings
+					// setFeatureFlag(action.payload.features)
+					state.jsonSavedData = user.jsonSavedData!
+					state.jsonCommonSettings = user.jsonSettings!
 					state._mounted = true
 				})
 			.addCase(

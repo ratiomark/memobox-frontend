@@ -1,10 +1,29 @@
-export { loginUserByEmail as loginUserByUserName } from './model/services/loginUserByUserName';
-export { registerUserByEmail as registerUserByUserName } from './model/services/registerUserByUserName';
+export { logoutThunk } from './model/services/logoutThunk';
+
+
+export { daysOfWeek } from './model/const/daysOfWeek';
+
+export { loginByEmailAndPassThunk as loginUserByUserName } from './model/services/loginByEmailAndPassThunk';
+export { registerByEmailThunk as registerUserByUserName } from './model/services/registerByEmailThunk';
 
 export {
-	rtkApiLoginUser as loginUser,
-	rtkApiRegisterUser as registerUser
+	rtkApiLoginUser,
+	rtkApiRegisterUser,
+	useGetUserSettingsQuery,
+	useUpdateMissedTrainingMutation,
+	rtkApiUpdateShelfTemplate,
+	rtkApiUpdateTimeSleep,
+	rtkApiSetDefaultShelfTemplate
 } from './model/api/userApi';
+
+export type {
+	UserSettings,
+	MissedTrainingValue,
+	TimeSleepSettings,
+	DaysOfWeek,
+	TimeSleepDataObject,
+} from './model/types/userSettings';
+
 
 export type {
 	AuthByEmailProps as LoginByUserNameProps
@@ -20,7 +39,7 @@ export {
 	getUserSubscriptionExpiresAt,
 } from './model/selectors/getUserProfileData';
 
-export type { TimeSleepSettings, DaysOfWeek, TimeSleepDataObject, } from './model/types/user';
+// export type { TimeSleepSettings, DaysOfWeek, TimeSleepDataObject, } from './model/types/user';
 // export { DaysOfWeek, TimeSleepDataObject } from '@/features/SettingsFeatures/TimeSleepSettings/TimeSleepSettings';
 export type { SortColumnObject, SortColumnValue } from './model/types/JsonSavedData';
 export {
@@ -29,6 +48,7 @@ export {
 	getUserNotificationSettings,
 	getUserShelfTemplateSettings,
 	getUserTimeSleepSettings,
+	getUserSettingsIsLoading,
 } from './model/selectors/getUserSettings';
 
 export {
@@ -38,7 +58,7 @@ export {
 	getUserSavedDataViewPageColumns,
 	getUserSavedDataViewPageRowsCount,
 } from './model/selectors/getJsonSavedData';
-export { initAuthData } from './model/services/initAuthData';
+export { initAuthData } from './model/services/initAuthDataThunk';
 
 export { saveJsonSettings } from './model/services/saveJsonSettings';
 export { useJsonSettings } from './model/selectors/getJsonSettings';
