@@ -115,10 +115,7 @@ const userSlice = createSlice({
 			.addCase(
 				saveJsonSettings.fulfilled,
 				(state, action: PayloadAction<JsonSettings>) => {
-					if (state.authData) {
-						state.authData.jsonSettings = action.payload
-					}
-
+					state.jsonCommonSettings = action.payload
 				})
 			// .addCase(
 			// 	updateJsonSavedData.fulfilled,

@@ -1,10 +1,9 @@
+import i18n from '@/shared/config/i18n/i18n'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkExtraArg } from '@/app/providers/StoreProvider'
-import i18n from '@/shared/config/i18n/i18n'
 import { AuthByEmailProps, UserWithToken, rtkApiLoginUser, } from '../api/userApi'
 import { userActions } from '../slice/userSlice'
 import { isRefreshResponse } from '@/shared/api/helpers/checkResponse'
-import { KEY_USER_TOKEN_LOCAL_STORAGE, KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE } from '@/shared/const/localStorage'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 

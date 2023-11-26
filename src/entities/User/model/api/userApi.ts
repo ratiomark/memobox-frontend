@@ -74,13 +74,11 @@ const userApi = rtkApi.injectEndpoints({
 				method: 'GET',
 			})
 		}),
-		setJsonSavedData: build.mutation<JsonSavedData, SetJsonSavedData>({
+		updateJsonSavedData: build.mutation<JsonSavedData, SetJsonSavedData>({
 			query: ({ userId, jsonSavedData }) => ({
-				url: `/users/${userId}`,
+				url: `/users/${userId}/json-saved-data`,
 				method: 'PATCH',
-				body: {
-					jsonSavedData
-				}
+				body: jsonSavedData
 			})
 		}),
 		getUserDataById: build.query<User, string>({
@@ -162,8 +160,8 @@ const userApi = rtkApi.injectEndpoints({
 // позволяет получить определенный эндпоинт и использовать его. К примеру я юзаю его в thunk saveJsonSetting так:
 // dispatch(setJsonSettingsMutation({ jsonSettings, userId: userData.id }))
 export const setJsonSettingsMutation = userApi.endpoints.setJsonSettings.initiate
-export const setJsonSavedDataMutation = userApi.endpoints.setJsonSavedData.initiate
 export const getUserDataByIdQuery = userApi.endpoints.getUserDataById.initiate
+export const rtkApiUpdateJsonSavedData = userApi.endpoints.updateJsonSavedData.initiate
 export const rtkApiLoginUser = userApi.endpoints.loginUser.initiate
 export const rtkApiRegisterUser = userApi.endpoints.registerUser.initiate
 export const rtkApiGetMe = userApi.endpoints.getMe.initiate
