@@ -17,18 +17,11 @@ import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
 
-interface ShelfButtonsProps {
-	className?: string
-}
-
 // function trainHotKey(event: KeyboardEvent) {
 // 	if (event.code === 'Digit1' && event.code === 'KeyN')
 // }
 
-export const CommonShelfButtons = (props: ShelfButtonsProps) => {
-	const {
-		className,
-	} = props
+export const CommonShelfButtons = () => {
 	const [updateCommonShelfMutation] = useUpdateCommonShelfMutation()
 
 	const navigate = useNavigate()
@@ -57,10 +50,7 @@ export const CommonShelfButtons = (props: ShelfButtonsProps) => {
 	const { t } = useTranslation()
 
 	return (
-		<div className={clsx(
-			cls.ShelfButtons,
-			[className])}
-		>
+		<div className={cls.ShelfButtons}>
 			<Button
 				className={cls.button}
 				onClick={onViewClick}
