@@ -1,5 +1,4 @@
-import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
-import { KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE, KEY_USER_TOKEN_LOCAL_STORAGE } from '@/shared/const/localStorage'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { setFeatureFlag } from '@/shared/lib/features'
 import { saveJsonSettings } from '../services/saveJsonSettings'
 import { JsonSettings } from '../types/JsonSettings'
@@ -12,6 +11,7 @@ import { UserWithToken } from '../api/userApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { TimingBlock } from '@/shared/types/DataBlock'
 import { daysOfWeek } from '../const/daysOfWeek'
+import { updateJsonSavedDataThunk } from '../services/updateJsonSavedData'
 
 const initialState: UserSchema = {
 	_mounted: false,
@@ -45,6 +45,17 @@ const userSlice = createSlice({
 		// 
 		setJsonSavedData: (state, action: PayloadAction<JsonSavedData>) => {
 			state.jsonSavedData = action.payload
+		},
+		updateJsonSavedData: (state, action: PayloadAction<Partial<JsonSavedData>>) => {
+			state.jsonSavedData = { ...state.jsonSavedData, ...action.payload }
+		},
+		createCopyOfJsonSavedData: (state) => {
+			state.jsonSavedDataOriginal = state.jsonSavedData
+		},
+		returnJsonSavedDataToOriginalState: (state) => {
+			if (state.jsonSavedDataOriginal) {
+				state.jsonSavedData = state.jsonSavedDataOriginal
+			}
 		},
 		setJsonSettings: (state, action: PayloadAction<JsonSettings>) => {
 			state.jsonCommonSettings = action.payload
@@ -116,6 +127,13 @@ const userSlice = createSlice({
 				saveJsonSettings.fulfilled,
 				(state, action: PayloadAction<JsonSettings>) => {
 					state.jsonCommonSettings = action.payload
+				})
+			.addCase(
+				updateJsonSavedDataThunk.fulfilled,
+				(state, action: PayloadAction<JsonSavedData>) => {
+					// if(action.payload)
+					state.jsonSavedData = action.payload
+					state.jsonSavedDataOriginal = action.payload
 				})
 			// .addCase(
 			// 	updateJsonSavedData.fulfilled,
