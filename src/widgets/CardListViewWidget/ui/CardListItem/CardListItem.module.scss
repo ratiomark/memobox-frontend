@@ -171,6 +171,14 @@
   // border: 1px solid red;
 }
 
+.nextTraining {
+  min-width: var(--width-view-page-created-at-column);
+  max-width: var(--width-view-page-created-at-column);
+  padding-left: 5px;
+
+  // border: 1px solid red;
+}
+
 .shelfId {
   // color: blue;
   max-width: var(--width-view-page-shelf-column);

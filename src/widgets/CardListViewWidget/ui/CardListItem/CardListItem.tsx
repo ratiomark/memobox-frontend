@@ -18,10 +18,11 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { Collapsible } from '@/shared/ui/Animations';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
-import { formatDate } from '@/shared/lib/helpers/common/formaters';
+import { formatDate, timeLeft } from '@/shared/lib/helpers/common/formaters';
 import { EditorCardPresenter } from '@/shared/ui/LexicalEditor';
 import { CardDeleting } from '../CardDeleting/CardDeleting';
 import { getViewPageIsCardEdited, getViewPageIsCardSelected } from '@/features/ViewPageInitializer';
+import { EditorState } from 'lexical';
 
 interface CardListItemProps {
 	className?: string
@@ -88,13 +89,22 @@ export const CardListItem = (props: CardListItemProps) => {
 		return columns?.map(column => {
 			if (column.enabled) { // VAR: отрисовываю данные, только для активных стобцов
 				const columnValue = column.value
-				const isColumnDate = columnValue === 'createdAt' || columnValue === 'lastTraining'
+				const isColumnDate =
+					   columnValue === 'createdAt'
+					|| columnValue === 'lastTraining'
+					|| columnValue === 'nextTraining'
 				if (isColumnDate) {
 					return <MyText
 						className={cls[columnValue]}
 						key={column.index}
 						saveOriginal
-						text={formatDate(card[columnValue])}
+
+						text={
+							columnValue === 'nextTraining'
+								? card[columnValue]
+								// ? timeLeft(card[columnValue])
+								: formatDate(card[columnValue])
+						}
 						size='s'
 					/>
 				} else if (columnValue === 'shelfId') {
@@ -112,7 +122,6 @@ export const CardListItem = (props: CardListItemProps) => {
 
 	}, [card, columns, shelvesDataDictionary])
 
-	// VAR: Тут нужно следить за изменениями которые юзер вносит в карточку. Например, если пользвоатеьль изменит текст вопроса, а потом сохранит карточку, то это нужно будет отобразить
 	const question = useMemo(() => {
 		return <EditorCardPresenter
 			editorState={prepareEditorStateOnlyFirstFourNodes(card.question)}
@@ -202,13 +211,14 @@ export const CardListItem = (props: CardListItemProps) => {
 }
 
 
-function prepareEditorStateOnlyFirstFourNodes(editorStateStr: string) {
+function prepareEditorStateOnlyFirstFourNodes(editorStateStr: string | null) {
+	if(!editorStateStr) return null
 	const editorStateParsed = JSON.parse(editorStateStr)
 	editorStateParsed.root.children = editorStateParsed.root.children.slice(0, 4)
 	return JSON.stringify(editorStateParsed)
 		.replace(/"format":"center"/g, '"format":""')
 		.replace(/"format":"right"/g, '"format":""')
-}
+} 
 // import clsx from 'clsx';
 // import cls from './CardListItem.module.scss';
 // import { useTranslation } from 'react-i18next';
