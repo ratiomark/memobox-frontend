@@ -16,14 +16,11 @@ import { useUpdateCommonShelfMutation } from '@/entities/Shelf';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
+import { userActions } from '@/entities/User';
+import { updateJsonSavedDataThunk } from '@/entities/User';
 
-// function trainHotKey(event: KeyboardEvent) {
-// 	if (event.code === 'Digit1' && event.code === 'KeyN')
-// }
 
 export const CommonShelfButtons = () => {
-	const [updateCommonShelfMutation] = useUpdateCommonShelfMutation()
-
 	const navigate = useNavigate()
 	const startTraining = () => {
 		navigate(obtainRouteTraining('all', 'all'))
@@ -37,9 +34,12 @@ export const CommonShelfButtons = () => {
 
 	const onCollapseClick = useCallback(() => {
 		// console.log('commonShelfCollapsed   ', commonShelfCollapsed)
-		updateCommonShelfMutation(!commonShelfCollapsed)
+		// updateCommonShelfMutation(!commonShelfCollapsed)
 		dispatch(cupboardShelfListActions.setCommonShelfCollapsed(!commonShelfCollapsed))
-	}, [dispatch, updateCommonShelfMutation, commonShelfCollapsed,])
+		dispatch(userActions.updateJsonSavedData({ commonShelfCollapsed: !commonShelfCollapsed }))
+		dispatch(updateJsonSavedDataThunk())
+	}, [dispatch, commonShelfCollapsed,])
+	// }, [dispatch, updateCommonShelfMutation, commonShelfCollapsed,])
 
 	const onCollapseClickHandle = useThrottle(
 		onCollapseClick,
@@ -73,12 +73,6 @@ export const CommonShelfButtons = () => {
 				Svg={ArrowBottomIcon}
 				onClick={onCollapseClickHandle}
 			/>
-			{/* <ButtonIcon
-				className={cls.buttonIcon}
-				iconVariant='arrowDown'
-				iconColor='grey'
-				buttonColor='grey'
-			/> */}
 		</div>
 	)
 }
