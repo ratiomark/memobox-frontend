@@ -8,7 +8,7 @@ import { t } from 'i18next'
 import { createNewCard } from '@/entities/Card'
 import { rtkApi } from '@/shared/api/rtkApi'
 
-export const createNewCardThunk = createAsyncThunk<boolean, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const createNewCardThunk = createAsyncThunk<{ shelfId: string, boxId: string }, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/createNewCardThunk',
 	async (randomId, thunkAPI) => {
 
@@ -43,11 +43,13 @@ export const createNewCardThunk = createAsyncThunk<boolean, string, { rejectValu
 			}
 
 			// либо можно вручную, проверить, что viewPageInitializer существует и вручную добавить карточку
-			dispatch(rtkApi.util.invalidateTags(['Cards']))
+			dispatch(rtkApi.util.invalidateTags(['ViewPage']))
 			dispatch(toastsActions.updateToastById({ id: randomId, toast: { status: 'success' } }))
 			// dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('success'))
 			// VAR: тут нужно перделать, если ответ успешный, то нужно добавить карточку в счетчики соответвующей полки+коробки
-			return true
+			console.log('shelfId, boxId', shelfId, boxId)
+			return { shelfId, boxId }
+			// return true
 
 		} catch (err) {
 			return thunkAPI.rejectWithValue('some error in fetchCupboardData')

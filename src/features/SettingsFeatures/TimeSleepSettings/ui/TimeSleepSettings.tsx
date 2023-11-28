@@ -8,13 +8,14 @@ import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsy
 import { settingsTimeSleepActions, settingsTimeSleepReducer } from '../model/slice/timeSleepSlice';
 import { WheelEvent, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserTimeSleepSettings } from '@/entities/User';
+import { getUserSettingsIsLoading, getUserTimeSleepSettings } from '@/entities/User';
 import { getTimeSleepEnabled, getDayByDayOptionEnabled, getGeneralTimeSleepData, getDayByDayTimeSleepData } from '../model/selectors/settingsTimeSleep';
 import { GeneralHoursMinutesComponent } from './GeneralHoursMinutesComponent/GeneralHoursMinutesComponent copy';
 import { DayByDayHoursMinutesComponent } from './DayByDayHoursMinutesComponent/DayByDayHoursMinutesComponent';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
+import { updateTimeSleepThunk } from '../model/services/updateTimeSleepThunk';
 
 
 
@@ -36,17 +37,31 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 	} = props
 	const { t } = useTranslation('settings')
 	const timeSleepSettingsFromUser = useSelector(getUserTimeSleepSettings)
+	const isLoading = useSelector(getUserSettingsIsLoading)
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const isTimeSleepEnabled = useSelector(getTimeSleepEnabled)
 	const isDayByDayTimeSleepEnabled = useSelector(getDayByDayOptionEnabled)
 
 	useEffect(() => {
-		dispatch(settingsTimeSleepActions.setInitialData(timeSleepSettingsFromUser!))
+		if (timeSleepSettingsFromUser) {
+			dispatch(settingsTimeSleepActions.setInitialData(timeSleepSettingsFromUser))
+		}
 	}, [dispatch, timeSleepSettingsFromUser])
 
-	const onCloseHandle = () => onClose()
+	const onCloseHandle = () => {
+		if (timeSleepSettingsFromUser) {
+			dispatch(settingsTimeSleepActions.setInitialData(timeSleepSettingsFromUser))
+		}
+		onClose()
+	}
 	const onToggleTimeSleepEnabled = () => dispatch(settingsTimeSleepActions.toggleTimeSleepEnabled())
 	const onToggleDayByDayEnabled = () => dispatch(settingsTimeSleepActions.toggleDayByDayTimeSleepEnabled())
+
+	if (!timeSleepSettingsFromUser || isLoading) return null
+
+	const onSubmitHandle = () => {
+		dispatch(updateTimeSleepThunk())
+	}
 
 	const dayActivator = (<div className={cls.dayByDayActivator} >
 		<MyText text={t('enable day by day')} variant={isTimeSleepEnabled ? 'primary' : 'hint'} />
@@ -61,8 +76,8 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 	return (
 		<HDialogHeadless
 			isOpen={isOpen}
-			onClose={onClose}
-			onSubmit={() => alert('Сохраняю настройки')}
+			onClose={onCloseHandle}
+			onSubmit={onSubmitHandle}
 		>
 			<div className={clsx(
 				cls.TimeSleepSettings,
@@ -134,7 +149,7 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 				</motion.div>
 				<ModalButtons
 					onClose={onCloseHandle}
-					onSubmit={() => alert('Сохраняю настройки')}
+					onSubmit={onSubmitHandle}
 				/>
 				{/* <HStack justify='between' max>
 					<Button onClick={onCloseHandle}>{t('cancel')}</Button>

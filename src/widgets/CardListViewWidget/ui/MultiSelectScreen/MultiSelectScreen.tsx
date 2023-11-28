@@ -4,9 +4,6 @@ import cls from './MultiSelectScreen.module.scss';
 import { useSelector } from 'react-redux';
 import { getMultiSelectIsSelectAllAllowed, getViewPageMultiSelectIsActive, getViewPageSelectedCardIds, getViewPageShelfItems } from '@/features/ViewPageInitializer';
 import { Button } from '@/shared/ui/Button';
-import { useHotkeys } from 'react-hotkeys-hook';
-import { useGetShelvesQuery } from '@/entities/Cupboard';
-import { useUpdateCardsMutation } from '@/entities/Card';
 
 interface MultiSelectScreenProps {
 	className?: string

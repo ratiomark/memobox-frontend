@@ -3,12 +3,9 @@ export type { CupboardSchema, CommonShelfBackendResponse } from './model/types/C
 // export { Cupboard } from './ui/Cupboard';
 
 export {
-	cupboardGetShelves,
-	cupboardGetData,
+	rtkApiGetCupboard,
 	useGetCupboardDataQuery,
-	useGetShelvesQuery,
 	// useUpdateShelvesOrderMutation,
-	createNewShelf,
 	// updateShelfListOrder,
-	restoreAllShelves,
+	// restoreAllShelves,
 } from './model/api/cupboardApi'

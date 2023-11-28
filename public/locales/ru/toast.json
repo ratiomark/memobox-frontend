@@ -14,6 +14,14 @@
     "messageSuccess": "Полка удалена",
     "additional": "Удаление полки"
   },
+  "rename_shelf": {
+    "messageSuccess": "Новое имя полки сохранено",
+    "additional": "Новое имя полки"
+  },
+  "update_shelf_boxes": {
+    "messageSuccess": "Полка обновлена",
+    "additional": "Обновление полки"
+  },
   "update_box_time": {
     "messageSuccess": "Время коробки сохраненно",
     "additional": "Сохраняем новое время для коробки"

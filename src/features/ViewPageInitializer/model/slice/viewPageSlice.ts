@@ -7,12 +7,14 @@ import { deleteCardThunk } from '../services/deleteCardThunk'
 import { deleteMultipleCardsThunk } from '../services/deleteMultipleCardsThunk'
 import { fetchCards, FetchCardsThunkResponse } from '../services/fetchCards'
 import { CardsShelfIdBoxIdObj, ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
+import { localDataService } from '@/shared/lib/helpers/common/localDataService'
+import { ShelfIdBoxIdCardIdType, ShelfIdBoxIdCardExtendedType } from '../types/ActionTypes'
 
 const initialState: ViewPageInitializerSchema = {
 	_viewPageMounted: false,
 	isLoading: true,
-	sort: 'createdAt',
-	sortOrder: 'asc',
+	sort: localDataService.getSortValueViewPage(),
+	sortOrder: localDataService.getSortOrderViewPage(),
 	error: '',
 	// 
 	cards: [],
@@ -218,6 +220,16 @@ const viewPageSlice = createSlice({
 		// 			}
 		// 			return false
 		// 		})
+		// FIXME: Это вообще не работающий код, тут нужно переключать карточку в состояние updating, и делать так, что нельзя изменять карточку в этот момент. 
+		setCardIsUpdating: (state, action: PayloadAction<string>) => {
+			// state.cards.some(card => {
+			// 	if (card.id === action.payload) {
+			// 		card.isDeleting = false
+			// 		return true
+			// 	}
+			// 	return false
+			// })
+		},
 		setCardIsNotDeleting: (state, action: PayloadAction<string>) => {
 			state.cards.some(card => {
 				if (card.id === action.payload) {
@@ -314,6 +326,13 @@ const viewPageSlice = createSlice({
 			if (action.payload.id in state.cardsDataOriginal) null
 			else state.cardsDataOriginal[action.payload.id] = action.payload
 		},
+		updateCardDataOriginal: (state, action: PayloadAction<CardSchemaExtended>) => {
+			// if (action.payload.id in state.cardsDataOriginal) null
+			if (action.payload.id in state.cardsDataOriginal) {
+				delete state.cardsDataOriginal[action.payload.id]
+			}
+			// state.cardsDataOriginal[action.payload.id] = action.payload
+		},
 		setCardDataEdited: (state, action: PayloadAction<CardSchemaExtended>) => {
 			const cardId = action.payload.id
 			if (cardId in state.cardsDataEdited) null
@@ -328,6 +347,12 @@ const viewPageSlice = createSlice({
 				}
 				state.cardsDataEdited = { ...state.cardsDataEdited, ...obj }
 			}
+		},
+		removeCardDataEditedByCardId: (state, action: PayloadAction<string>) => {
+			if (action.payload in state.cardsDataEdited) {
+				delete state.cardsDataEdited[action.payload]
+			}
+			state.cardEditedListIds = state.cardEditedListIds.filter(id => id !== action.payload)
 		},
 
 		setCardQuestionText: (state, action: PayloadAction<string>) => {
@@ -415,53 +440,68 @@ const viewPageSlice = createSlice({
 		// 	state.cardModalHeights[state.currentCardId].currentHeightAnswer = action.payload
 		// },
 		// 
+		// 		isDeleting(pin): false
+		// boxIndex(pin): 0
+		// specialType(pin): "new"
+		// state(pin): "train"
+		setNewCardData: (state, action: PayloadAction<CardSchemaExtended>) => {
+			state.cards = state.cards.map(card => {
+				if (card.id === action.payload.id) {
+					return action.payload
+				}
+				return card
+			})
+		},
+		removeCardFromShelfIdBoxIdObj: (state, action: PayloadAction<ShelfIdBoxIdCardIdType>) => {
+			const { boxId, cardId, shelfId } = action.payload
+			state.cardsShelfIdBoxIdObj[shelfId][boxId] = state.cardsShelfIdBoxIdObj[shelfId][boxId].filter(card => card.id !== cardId)
+		},
+		addCardToShelfIdBoxIdObj: (state, action: PayloadAction<ShelfIdBoxIdCardExtendedType>) => {
+			const { boxId, card, shelfId } = action.payload
+			state.cardsShelfIdBoxIdObj[shelfId][boxId].push(card)
+		},
+		updateCardDataInShelfIdBoxIdObj: (state, action: PayloadAction<ShelfIdBoxIdCardExtendedType>) => {
+			const { boxId, card, shelfId } = action.payload
+			state.cardsShelfIdBoxIdObj[shelfId][boxId] = state.cardsShelfIdBoxIdObj[shelfId][boxId].map(cardItem => {
+				if (cardItem.id === card.id) {
+					return card
+				}
+				return cardItem
+			})
+		},
+		// 
 		setFetchedData: (state, action: PayloadAction<FetchCardsThunkResponse>) => {
 			const cards = action.payload.cards
-			const shelvesData = action.payload.shelvesAndBoxesData
-			const shelfIds = Object.keys(shelvesData)
+			const shelvesAndBoxesData = action.payload.shelvesAndBoxesData
+			const shelfIds = Object.keys(shelvesAndBoxesData)
+			// const shelfDataValues = Object.values(shelvesAndBoxesData)
+			const cardsShelfIdBoxIdObj: CardsShelfIdBoxIdObj = {}
+			state.cards = cards
 			state.shelfIds = shelfIds
-			shelfIds.forEach(shelf => {
-				if (!state.shelfIdsBoxSpecialIndexesObj[shelf]) {
-					state.shelfIdsBoxSpecialIndexesObj[shelf] = {}
+			shelfIds.forEach(shelfId => {
+				if (!cardsShelfIdBoxIdObj[shelfId]) {
+					cardsShelfIdBoxIdObj[shelfId] = {};
 				}
-				shelvesData[shelf].boxesItems.forEach(boxObject => {
+				if (!state.shelfIdsBoxSpecialIndexesObj[shelfId]) {
+					state.shelfIdsBoxSpecialIndexesObj[shelfId] = {}
+				}
+				shelvesAndBoxesData[shelfId].boxesItems.forEach(boxObject => {
+					cardsShelfIdBoxIdObj[shelfId][boxObject.id] = []
 					if (boxObject.index === 0) {
-						state.shelfIdsBoxSpecialIndexesObj[shelf]['new'] = boxObject.id
-					} else if (boxObject.index === shelvesData[shelf].maxIndexBox) {
-						state.shelfIdsBoxSpecialIndexesObj[shelf]['learnt'] = boxObject.id
+						state.shelfIdsBoxSpecialIndexesObj[shelfId]['new'] = boxObject.id
+					} else if (boxObject.index === shelvesAndBoxesData[shelfId].maxIndexBox) {
+						state.shelfIdsBoxSpecialIndexesObj[shelfId]['learnt'] = boxObject.id
 					} else {
-						state.shelfIdsBoxSpecialIndexesObj[shelf][boxObject.index.toString()] = boxObject.id
+						state.shelfIdsBoxSpecialIndexesObj[shelfId][boxObject.index.toString()] = boxObject.id
 					}
 				})
-				// state.shelfIdsBoxSpecialIndexesObj[shelf] = {}
 			})
-			state.cards = cards
-			const cardsShelfIdBoxIdObj: CardsShelfIdBoxIdObj = {}
+
 			cards.forEach(card => {
-				if (cardsShelfIdBoxIdObj[card.shelfId]) {
-					if (cardsShelfIdBoxIdObj[card.shelfId][card.boxId]) {
-						cardsShelfIdBoxIdObj[card.shelfId][card.boxId].push(card)
-					} else {
-						cardsShelfIdBoxIdObj[card.shelfId][card.boxId] = [card]
-					}
-				} else {
-					cardsShelfIdBoxIdObj[card.shelfId] = { [card.boxId]: [card] }
-				}
+				cardsShelfIdBoxIdObj[card.shelfId][card.boxId].push(card)
 			})
 			state.cardsShelfIdBoxIdObj = cardsShelfIdBoxIdObj
-			// cards.reduce((acc, card) => {
-			// 	card.shelfId
-			// 	if (state.cardsShelfIdBoxIdObj[card.shelfId]) {
-			// 		if (state.cardsShelfIdBoxIdObj[card.shelfId][card.boxId]) {
-			// 			state.cardsShelfIdBoxIdObj[card.shelfId][card.boxId].push(card)
-			// 		} else {
-			// 			state.cardsShelfIdBoxIdObj[card.shelfId][card.boxId] = [card]
-			// 		}
-			// 	} else {
-			// 		state.cardsShelfIdBoxIdObj[card.shelfId][card.boxId] = [card]
-			// 	}
 
-			// }, {})
 			state.shelvesData = action.payload.shelvesAndBoxesData
 			state.isLoading = false
 			state.error = ''

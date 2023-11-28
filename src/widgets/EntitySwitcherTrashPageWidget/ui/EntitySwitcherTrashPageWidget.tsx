@@ -30,6 +30,7 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 
 	const items: TabItem[] = useMemo(() => {
 		if (!data) return []
+		console.log(data)
 		return [
 			{
 				content: t('shelves') + (data?.shelves.length ? ` (${data?.shelves.length})` : ' (0)'),

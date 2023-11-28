@@ -3,7 +3,7 @@ import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback} from 'react';
+import { memo, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
@@ -65,8 +65,9 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 
 	const onCollapseClickHandle = useCallback(() => {
 		onCollapseClick(shelfId, !isCollapsed)
-		// updateShelfMutation({ ...props.shelf, isCollapsed: !isCollapsed })
-	}, [onCollapseClick, shelfId, isCollapsed, updateShelfMutation, props.shelf])
+		updateShelfMutation({ id: shelfId, isCollapsed: !isCollapsed })
+	}, [onCollapseClick, shelfId, isCollapsed, updateShelfMutation])
+	// }, [onCollapseClick, shelfId, isCollapsed, updateShelfMutation, props.shelf])
 	// const onCollapseClickHandle = useCallback(() => {
 	// 	onCollapseClick(shelfId, !isCollapsed)
 	// 	updateShelfMutation({ ...props.shelf, isCollapsed: !isCollapsed })

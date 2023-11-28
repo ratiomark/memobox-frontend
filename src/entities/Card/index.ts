@@ -6,6 +6,11 @@ export {
 	createNewCard,
 	useGetCardsByShelfIdQuery,
 	useUpdateCardsMutation,
+	rtkApiUpdateCard,
+	rtkApiMoveCards,
+	rtkApiDeleteCard,
+	rtkApiDeleteCards,
+	useGetTrainingCardsQuery,
 } from './model/api/cardApi';
 
 export type { CardSchema, CardSchemaExtended } from './model/types/CardSchema';

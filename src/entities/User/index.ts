@@ -1,5 +1,8 @@
-export { logoutThunk } from './model/services/logoutThunk';
+export { updateJsonSavedDataThunk } from './model/services/updateJsonSavedData';
 
+export { updateMissedTrainingThunk } from './model/services/userSettings/updateMissedTrainingThunk';
+
+export { logoutThunk } from './model/services/logoutThunk';
 
 export { daysOfWeek } from './model/const/daysOfWeek';
 
@@ -29,7 +32,7 @@ export type {
 	AuthByEmailProps as LoginByUserNameProps
 } from './model/api/userApi';
 
-export { updateJsonSavedData } from './model/services/updateJsonSavedData';
+export { updateJsonSavedDataThunk as updateJsonSavedData } from './model/services/updateJsonSavedData';
 
 export {
 	getUserEmail,

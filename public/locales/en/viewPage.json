@@ -4,5 +4,10 @@
   "select all": "Select all (a)",
   "move selected cards": "Move selected cards (m)",
   "card will be deleted": "The card will be moved to the trash",
-  "cancel card deletion": "Cancel deletion"
+  "cancel card deletion": "Cancel deletion",
+  "columns": "Columns",
+  "COLUMN_shelf": "Shelf",
+  "COLUMN_creation": "Creation",
+  "COLUMN_last_training": "Last training",
+  "COLUMN_next_training": "Next training"
 }

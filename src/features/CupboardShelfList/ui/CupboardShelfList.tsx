@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
-import { fetchCupboardData } from '../model/services/fetchCupboardData';
+import { fetchCupboardDataThunk } from '../model/services/fetchCupboardDataThunk';
 import { useSelector } from 'react-redux';
 import {
 	getCupboardData,
@@ -35,9 +35,10 @@ import { CupboardInfoModal } from './Modals/CupboardInfoModal/CupboardInfoModal'
 import { Reorder } from 'framer-motion';
 import { ShelfBoxesTemplateModal } from './BoxesSettingsModal/ShelfTemplateSettingsLazy';
 import useShelvesDndHandler from '../model/hooks/useShelvesDndHandler';
-import  useShelvesLocalSaver from '../model/hooks/useShelvesLocalSaver';
+import useShelvesLocalSaver from '../model/hooks/useShelvesLocalSaver';
 import useCupboardButtonsSizes from '../model/hooks/useCupboardButtonsSizes';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
+import { RenameShelfModal } from './Modals/RenameShelfModal/RenameShelfModal';
 
 export const CupboardShelfList = () => {
 	const dispatch = useAppDispatch()
@@ -137,6 +138,7 @@ export const CupboardShelfList = () => {
 				<HiddenTemplates />
 				<BoxTimeSetterModal />
 			</div>
+			<RenameShelfModal />
 			<CreateNewCardModal />
 			{/* <ShelvesDeletionToasts/> */}
 			{/* <ToastShelfDeletion /> */}

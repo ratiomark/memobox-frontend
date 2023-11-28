@@ -69,9 +69,6 @@
     "additional": "Leave it for an additional round",
     "backwards": "Move it back to the previous box"
   },
-  "shelf": "Shelf",
-  "creation": "Creation",
-  "last training": "Last training",
   "columns": "Columns",
   "answer": "Answer",
   "question": "Question",
@@ -84,3 +81,4 @@
   "compare data": "Compare (alt + c)",
   "remove box": "Remove box"
 }
+

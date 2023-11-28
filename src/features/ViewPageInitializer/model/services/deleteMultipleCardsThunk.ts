@@ -25,6 +25,8 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 		const id = randomId
 		try {
 			if (abortedThunkIds.includes(id) || !cardIdsSelectedForDeletion.length) {
+				dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
+				dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
 				throw new Error('Aborted')
 			}
 			dispatch(viewPageActions.setAbortedThunkId(id))
@@ -47,12 +49,14 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
+			dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
 			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			return cardIdsSelectedForDeletion
 
 		} catch (err) {
 			const error = err as Error;
+			
 			// dispatch(viewPageActions.removeAbortedThunkId(id))
 			dispatch(viewPageActions.removeAbortedThunkId(id))
 			dispatch(viewPageActions.setCardsIsNotDeletedByIdList(cardIdsSelectedForDeletion))

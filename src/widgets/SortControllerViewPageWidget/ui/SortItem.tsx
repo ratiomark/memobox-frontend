@@ -9,6 +9,7 @@ import { SortColumnObject, SortColumnValue } from '@/entities/User';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { viewPageActions } from '@/features/ViewPageInitializer';
 import { SortOrderType } from '@/shared/types/SortOrderType';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 interface SortItemProps {
 	className?: string
@@ -18,14 +19,13 @@ interface SortItemProps {
 
 export const SortItem = (props: SortItemProps) => {
 	const {
-		className,
 		column,
 		activeSort,
 	} = props
 
-	const [sortOrder, setSortOrder] = useState<SortOrderType>('asc')
+	const [sortOrder, setSortOrder] = useState<SortOrderType>(localDataService.getSortOrderViewPage())
 	const dispatch = useAppDispatch()
-	const { t } = useTranslation()
+	const { t } = useTranslation('viewPage')
 
 	const onSortClick = () => {
 		// console.log('SORT')
@@ -33,11 +33,15 @@ export const SortItem = (props: SortItemProps) => {
 			setSortOrder('desc')
 			dispatch(viewPageActions.setActiveSort(column.value))
 			dispatch(viewPageActions.setSortOrder('desc'))
+			localDataService.setSortOrderViewPage('desc')
+			localDataService.setSortValueViewPage(column.value)
 			return
 		}
 		setSortOrder('asc')
 		dispatch(viewPageActions.setActiveSort(column.value))
 		dispatch(viewPageActions.setSortOrder('asc'))
+		localDataService.setSortOrderViewPage('asc')
+		localDataService.setSortValueViewPage(column.value)
 		// dispatch(viewPageActions.setActiveSort(column.value))
 		// dispatch(viewPageActions.setSortOrder(sortOrder))
 	}
@@ -49,11 +53,15 @@ export const SortItem = (props: SortItemProps) => {
 			setSortOrder('desc')
 			dispatch(viewPageActions.setActiveSort(column.value))
 			dispatch(viewPageActions.setSortOrder('desc'))
+			localDataService.setSortOrderViewPage('desc')
+			localDataService.setSortValueViewPage(column.value)
 			return
 		}
 		setSortOrder('asc')
 		dispatch(viewPageActions.setActiveSort(column.value))
 		dispatch(viewPageActions.setSortOrder('asc'))
+		localDataService.setSortOrderViewPage('asc')
+		localDataService.setSortValueViewPage(column.value)
 	}
 
 

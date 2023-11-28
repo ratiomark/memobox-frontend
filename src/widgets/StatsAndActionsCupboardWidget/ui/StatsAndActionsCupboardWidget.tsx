@@ -24,9 +24,6 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CupboardMainButtonsSkeleton } from './StatsAndActionsCupboardWidgetSkeleton/CupboardMainButtonsSkeleton';
 import { iconSizeInfo } from '@/shared/const/iconSizes';
 import { CreateNewShelfModal } from './CreateNewShelfModal/CreateNewShelfModal';
-import { MyToast } from '@/shared/ui/Toast';
-import { getCreateNewCardRequestStatus } from '@/features/CupboardShelfList'
-import { restoreAllShelves } from '@/entities/Cupboard';
 import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 import { dataAttrButtonTypeAddCardButtonGeneral } from '@/shared/const/idsAndDataAttributes';
 
@@ -66,7 +63,7 @@ export const StatsAndActionsCupboardWidget = () => {
 			// animateComponentAfterLoadingFadeInTime={DURA}
 			componentAfterLoading={
 				<HStack gap='gap_14' className={cls.actions}>
-					<Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button>
+					{/* <Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button> */}
 					<Button
 						disabled={createNewShelfRequestStatus === 'pending'}
 						onClick={onAddNewShelfClick}
@@ -77,7 +74,7 @@ export const StatsAndActionsCupboardWidget = () => {
 						onClick={onAddNewCardClick}
 						data-button-type={dataAttrButtonTypeAddCardButtonGeneral}
 					>
-						{t('add card with hot key')}
+						{t('add card with hot key') + ' (n)'}
 					</Button>
 					<Icon
 						Svg={InfoIcon}

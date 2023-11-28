@@ -49,30 +49,40 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 		localDataService.setViewRows(rowsCount)
 	}, [rowsCount])
 
+	useEffect(() => {
+		console.log('121312313123123131231313')
+		dispatch(userActions.createCopyOfJsonSavedData())
+	}, [dispatch])
+
 	const isOpen = useSelector(getViewPageColumnSettingsIsOpen) ?? false
 	const onClose = () => {
 		dispatch(viewPageActions.setColumnSettingsIsOpen(false))
+		dispatch(userActions.returnJsonSavedDataToOriginalState())
 	}
 
 	const onRowValueClick = (tab: TabItem) => {
 		localDataService.setViewRows(tab.value)
 		dispatch(userActions.setViewPageCardRowsCount(tab.value))
-		dispatch(updateJsonSavedData())
+		// dispatch(updateJsonSavedData())
 	}
 
 	const onClickSwitchColumn = useCallback((column: SortColumnObject) => {
 		dispatch(userActions.setColumn({ ...column, enabled: !column.enabled }))
-		dispatch(updateJsonSavedData())
+		// dispatch(updateJsonSavedData())
 	}, [dispatch])
 
 	const onSetColumns = (order: SortColumnObject[]) => {
 		dispatch(userActions.reorderColumns(order))
-		dispatch(updateJsonSavedData())
+		// dispatch(updateJsonSavedData())
 	}
 
+	const onSubmitHandle= () => {
+		dispatch(updateJsonSavedData())
+		dispatch(viewPageActions.setColumnSettingsIsOpen(false))
+	}
 
 	const columnsRendered = useMemo(() => {
-		console.log(columns)
+		// console.log(columns)
 		return columns?.map(column => (
 			<ColumnItem
 				key={column.value}
@@ -85,7 +95,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onClose}
-			onSubmit={() => alert('Сохраняю новые настройки таблицы')}
+			onSubmit={onSubmitHandle}
 			panelWithMainPadding={false}
 		>
 			<div className={clsx(
@@ -116,7 +126,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 				</div>
 				<ModalButtons
 					onClose={onClose}
-					onSubmit={() => alert('Сохраняю новые настройки таблицы')}
+					onSubmit={onSubmitHandle}
 				/>
 			</div>
 		</HDialogHeadless>

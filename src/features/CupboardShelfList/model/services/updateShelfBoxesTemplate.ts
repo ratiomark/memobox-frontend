@@ -8,44 +8,61 @@ import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
 import { updateShelfWithTag } from '@/entities/Shelf'
 import { updateBoxWithTag } from '@/entities/Box'
 import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
+import { idPrefixShelfBoxesTemplateUpdating } from '@/shared/const/idsAndDataAttributes'
+import { getBoxesTemplateModalCurrentShelfTemplate } from '../selectors/getShelfBoxesTemplateModal'
 
-export interface UpdateMissedTrainingThunkArg {
+export interface UpdateShelfBoxesTemplate {
 	missedTrainingValue: MissedTrainingValue
 	boxId?: string
 	shelfId: string
 }
-export const updateMissedTrainingThunk = createAsyncThunk<UpdateMissedTrainingThunkArg, UpdateMissedTrainingThunkArg, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
-	'cupboardPage/updateMissedTrainingThunk',
-	async (arg, thunkAPI) => {
-		const { boxId, shelfId, missedTrainingValue } = arg
-		console.log('updateMissedTrainingThunk', arg)
-		const id = shelfId + genRandomId()
+export const updateShelfBoxesTemplate = createAsyncThunk<string, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+	'cupboardPage/updateShelfBoxesTemplate',
+	async (shelfId, thunkAPI) => {
+		// const { boxId, shelfId, missedTrainingValue } = arg
+		// console.log('updateShelfBoxesTemplate', arg)
+		const id = idPrefixShelfBoxesTemplateUpdating + shelfId
 		const { dispatch, getState } = thunkAPI
 		const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
+		const currentShelfTemplate = getBoxesTemplateModalCurrentShelfTemplate(getState())!
+		const requestTemplate = currentShelfTemplate.map((box) => ({
+			index: box.index,
+			id: box.id,
+			timing: {
+				minutes: box.minutes ?? 0,
+				hours: box.hours ?? 0,
+				days: box.days ?? 0,
+				weeks: box.weeks ?? 0,
+				months: box.months ?? 0,
+			}
+		}))
+		// где-то тут нужно переключить глобальный флаг, который не позволит открывать модалку с шаблонами, пока не придет ответ от сервера
 		dispatch(toastsActions.addToast({
 			id,
 			toast: {
 				status: 'pending',
 				messageLoading: t('toast:messageLoading'),
 				messageError: t('toast:messageError'),
-				messageSuccess: t('toast:update_missed_training.messageSuccess'),
-				contentCommon: `${t('toast:update_missed_training.additional')} ${shelfTitle}`,
+				messageSuccess: t('toast:update_shelf_boxes.messageSuccess'),
+				contentCommon: `${t('toast:update_shelf_boxes.additional')} ${shelfTitle}`,
 				// duration: 1000000,
 			}
 		}))
 		try {
 			// await sleep(4)
-			const response = boxId
-				? dispatch(updateBoxWithTag({ missedTrainingValue, id: boxId })).unwrap()
-				: dispatch(updateShelfWithTag({ id: shelfId, missedTrainingValue })).unwrap()
+			// console.log(currentShelfTemplate)
+			console.log(requestTemplate)
+			// const response = boxId
+			// 	? dispatch(updateBoxWithTag({ shelfId, box: { missedTrainingValue, id: boxId } })).unwrap()
+			// 	: dispatch(updateShelfWithTag({ id: shelfId, missedTrainingValue })).unwrap()
 
-			if (!response) {
-				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
-				throw new Error()
-			}
-			console.log(response)
+			// if (!response) {
+			// 	dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
+			// 	throw new Error()
+			// }
+
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
-			return arg
+			return shelfId
 		} catch (err) {
 			return thunkAPI.rejectWithValue('some error in fetchCupboardData')
 		}

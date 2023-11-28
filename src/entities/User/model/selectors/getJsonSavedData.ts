@@ -1,9 +1,10 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { jsonSavedDataColumnsMock, jsonSavedDataViewPageRowsCountMock } from '../mockData/jsonSavedDataMock';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 export const getJsonSavedData = (state: StateSchema) => state.user.jsonSavedData
 export const getUserShelfNamesList = (state: StateSchema) => state.user.jsonSavedData?.shelfNamesList
-export const getUserSavedDataCommonShelfCollapsed = (state: StateSchema) => state.user.jsonSavedData?.commonShelfCollapsed ?? true
+export const getUserSavedDataCommonShelfCollapsed = (state: StateSchema) => state.user.jsonSavedData?.commonShelfCollapsed ?? localDataService.getCommonShelfCollapsed()
 // export const getJsonSavedData = (state: StateSchema) => state.user.authData?.jsonSavedData
 // export const getUserShelfNamesList = (state: StateSchema) => state.user.authData?.jsonSavedData?.shelfNamesList
 // export const getUserSavedDataCommonShelfCollapsed = (state: StateSchema) => state.user.authData?.jsonSavedData?.commonShelfCollapsed

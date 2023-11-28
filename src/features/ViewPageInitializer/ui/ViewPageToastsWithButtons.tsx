@@ -22,6 +22,7 @@ const MoveCardsToasts = () => {
 				buttonText='Отмена'
 				onButtonClick={() => {
 					dispatch(toastsActions.setAbortedThunkId(randomId))
+					dispatch(viewPageActions.setAbortedThunkId(randomId))
 					dispatch(viewPageActions.removeMultiSelectMoveIds(randomId))
 				}}
 				// onButtonClick={() => alert('CCCCCCCCC')}
@@ -48,6 +49,7 @@ const DeleteCardsToasts = () => {
 				buttonText='Отмена'
 				onButtonClick={() => {
 					dispatch(toastsActions.setAbortedThunkId(randomId))
+					dispatch(viewPageActions.setAbortedThunkId(randomId))
 					dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
 				}}
 				// onButtonClick={() => alert('CCCCCCCCC')}

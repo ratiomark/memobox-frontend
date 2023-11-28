@@ -7,8 +7,8 @@ import { getJsonSavedData } from '../selectors/getJsonSavedData'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const updateJsonSavedData = createAsyncThunk<JsonSavedData, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
-	'user/updateJsonSavedData',
+export const updateJsonSavedDataThunk = createAsyncThunk<JsonSavedData, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+	'user/updateJsonSavedDataThunk',
 	async (_, thunkAPI) => {
 
 		const { dispatch, getState, } = thunkAPI
@@ -26,11 +26,10 @@ export const updateJsonSavedData = createAsyncThunk<JsonSavedData, void, { rejec
 			}))
 				.unwrap() //разворачиваю в реальный результат
 
-			const jsonSavedDataFromResponse = response
 
-			if (!jsonSavedDataFromResponse) return thunkAPI.rejectWithValue('Нет userData')
+			if (!response) return thunkAPI.rejectWithValue('Нет userData')
 
-			return jsonSavedDataFromResponse
+			return response
 
 		} catch (err) {
 			return thunkAPI.rejectWithValue('Some Error in saveJsonSettings')

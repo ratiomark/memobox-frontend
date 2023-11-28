@@ -17,22 +17,27 @@ export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const boxesBlockRef = useRef<HTMLUListElement>(null)
-	const boxesBlockWrapperRef = useRef<HTMLDivElement>(null)
-	const commonWrapperRef = useRef() as MutableRefObject<HTMLDivElement>
-	const [shouldBeScrollable, setShouldBeScrollable] = useState(false)
-	const [leftSide, setLeftSide] = useState(false)
-	const [rightSide, setRightSide] = useState(false)
-	const [left, setLeft] = useState(0)
+	// const boxesBlockWrapperRef = useRef<HTMLDivElement>(null)
+	// const commonWrapperRef = useRef() as MutableRefObject<HTMLDivElement>
+	// const [shouldBeScrollable, setShouldBeScrollable] = useState(false)
+	// const [leftSide, setLeftSide] = useState(false)
+	// const [rightSide, setRightSide] = useState(false)
+	// const [left, setLeft] = useState(0)
 	
 	const onViewClick = useCallback((shelfId: string, boxIndex: number | string) => {
 		navigate(obtainRouteView(shelfId, boxIndex.toString()))
 	}, [navigate])
 
-	const onAddNewCardClick = useCallback((shelfId: string, boxIndex: number) => {
+	const onAddNewCardClick = useCallback((shelfId: string, boxId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
-		dispatch(cupboardShelfListActions.setBoxIndexAndBoxIdCardModal(boxIndex))
+		dispatch(cupboardShelfListActions.setBoxIdCardModal(boxId))
 		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
 	}, [dispatch])
+	// const onAddNewCardClick = useCallback((shelfId: string, boxIndex: number) => {
+	// 	dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
+	// 	dispatch(cupboardShelfListActions.setBoxIndexAndBoxIdCardModal(boxIndex))
+	// 	dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
+	// }, [dispatch])
 
 	const onOpenTimeSetter = useCallback((coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string, shelfId: string) => {
 		dispatch(cupboardShelfListActions.setTimingSetterBoxCoordinates(coordinates))

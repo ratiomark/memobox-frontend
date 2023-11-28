@@ -64,7 +64,17 @@
   // border: 1px solid red;
 }
 
+.nextTrainingWrapper {
+  width: var(--width-view-page-created-at-column);
+
+  // border: 1px solid red;
+}
+
 .createdAt {
+  width: var(--width-view-page-created-at-column);
+}
+
+.nextTraining {
   width: var(--width-view-page-created-at-column);
 }
 

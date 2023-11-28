@@ -4,5 +4,10 @@
   "select all": "Выбрать все (a)",
   "move selected cards": "Переместить выбранные (m)",
   "card will be deleted": "Карточка будет удалена в корзину",
-  "cancel card deletion": "Отменить удаление"
+  "cancel card deletion": "Отменить удаление",
+  "columns": "Столбцы",
+  "COLUMN_shelf": "Полка",
+  "COLUMN_creation": "Создание",
+  "COLUMN_last_training": "Последнее повторение",
+  "COLUMN_next_training": "Следующая тренировка"
 }

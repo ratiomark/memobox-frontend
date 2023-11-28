@@ -13,14 +13,14 @@ import {
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfListSlice';
 import { useUpdateShelfWithTagMutation } from '@/entities/Shelf';
-import { MissedTrainingValue } from '@/shared/types/DataBlock';
 import { useUpdateBoxWithTagMutation } from '@/entities/Box';
 import { Heading } from '@/shared/ui/Typography';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { updateMissedTrainingThunk } from '../../../model/services/updateMissedTrainingThunk';
+import { MissedTrainingItem } from '@/shared/types/MissedTrainingItemType';
 
-type MissedTrainingItem = { value: MissedTrainingValue, content: ReactNode }
+
 
 export const MissedTrainingSettingsModal = () => {
 	const { t } = useTranslation()

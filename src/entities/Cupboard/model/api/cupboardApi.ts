@@ -1,72 +1,38 @@
-import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf'
+import { ShelfSchema } from '@/entities/Shelf'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { CupboardSchema } from '../types/CupboardSchema'
-import { RequestStatusType } from '@/shared/types/GeneralTypes'
+import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags'
 
 export const cupboardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
-		// NSA: готово
 		getCupboardData: build.query<CupboardSchema, void>({
 			query: () => ({
-				url: '/cupboard',
+				url: '/aggregate/cupboard',
 				method: 'GET',
 			}),
-			transformResponse: (response: CupboardSchema, meta, arg) => {
-				// console.log(response)
-				const shelves = response.shelves.map((shelf) => {
-					return {
-						...shelf,
-						isDeleting: false,
-						isDeleted: false,
-						// deletingRequestStatus: 'idle' as RequestStatusType
-					}
-				})
-				response.shelves = shelves
-				return response
-			},
-			providesTags: ['Shelves'],
+			// transformResponse: (response: CupboardSchema, meta, arg) => {
+			// 	// console.log(response)
+			// 	const shelves = response.shelves.map((shelf) => {
+			// 		return {
+			// 			...shelf,
+			// 			isDeleting: false,
+			// 			isDeleted: false,
+			// 			// deletingRequestStatus: 'idle' as RequestStatusType
+			// 		}
+			// 	})
+			// 	response.shelves = shelves
+			// 	return response
+			// },
+			providesTags: [TAG_CUPBOARD_PAGE],
 		}),
-		getShelves: build.query<ShelfSchema[], void>({
-			query: () => ({
-				url: '/activeShelves',
-				method: 'GET',
-			}),
-		}),
-		// updateShelfListOrder: build.mutation<ShelfSchema[], ShelfDndRepresentation[]>({
-		// 	query: (arg) => ({
-		// 		url: '/shelves/update-order',
-		// 		method: 'PATCH',
-		// 		body: arg,
-		// 	}),
-		// }),
-		// не нужно!
 		restoreAllShelves: build.mutation<ShelfSchema[], void>({
 			query: () => ({
 				url: '/restoreAllShelves',
 				method: 'POST',
 			}),
 		}),
-		// NSA: готово
-		createNewShelf: build.mutation<ShelfSchema, string>({
-			query: (title) => ({
-				url: '/createNewShelf',
-				method: 'POST',
-				body: { title },
-			}),
-		}),
-		getShelvesViewPage: build.query<ShelfSchema[], void>({
-			query: () => ({
-				url: '/shelves',
-				method: 'GET',
-			}),
-			// transformResponse: (response: MovieList, meta, arg) => {
-			// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
-			// 		acc[current.id.toString()] = current
-			// 		return acc
-			// 	}, {})
-			// 	return data
-			// },
-		}),
+
+
 		// updateShelvesOrder: build.mutation<ShelfSchema, ShelfSchema[]>({
 		// 	query: (arg) => ({
 		// 		url: '/shelves',
@@ -95,11 +61,8 @@ export const cupboardApi = rtkApi.injectEndpoints({
 		// }),
 	}),
 })
-export const cupboardGetData = cupboardApi.endpoints.getCupboardData.initiate
+export const rtkApiGetCupboard = cupboardApi.endpoints.getCupboardData.initiate
 export const { useGetCupboardDataQuery } = cupboardApi
-export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 // export const updateShelfListOrder = cupboardApi.endpoints.updateShelfListOrder.initiate
-export const createNewShelf = cupboardApi.endpoints.createNewShelf.initiate
-export const restoreAllShelves = cupboardApi.endpoints.restoreAllShelves.initiate
-export const { useGetShelvesQuery } = cupboardApi
+// export const restoreAllShelves = cupboardApi.endpoints.restoreAllShelves.initiate
 // export const { useUpdateShelvesOrderMutation } = cupboardApi

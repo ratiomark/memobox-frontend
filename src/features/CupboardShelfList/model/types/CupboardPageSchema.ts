@@ -41,6 +41,7 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 		shelfId: string
 		isOpen: boolean
 	},
+	renameShelfModal: RenameShelfModal
 	cupboardData: DataBlock
 	isCupboardInfoModalOpen: boolean
 	abortedThunkIds: string[]
@@ -76,4 +77,11 @@ interface CreateNewCardModal {
 	shelfId: string
 	boxId: string
 	boxIndex: number
+}
+
+interface RenameShelfModal {
+	isOpen: boolean
+	requestStatus: RequestStatusType
+	title: string
+	shelfId: string
 }

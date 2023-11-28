@@ -53,9 +53,9 @@ export const CardDeleting = (props: CardDeletingProps) => {
 		if (timer) clearTimeout(timer)
 		// dispatch(viewPageActions.setCardIsNotDeleting(getCardMainData(card)))
 		dispatch(viewPageActions.setCardIsNotDeleting(cardId))
-		dispatch(toastsActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
-		// dispatch(viewPageActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
-		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
+		dispatch(viewPageActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
+		// dispatch(toastsActions.setAbortedThunkId(idPrefixCardDeletion + cardId))
+		
 	}
 
 	return (
@@ -65,7 +65,11 @@ export const CardDeleting = (props: CardDeletingProps) => {
 					<MyText className={cls.description} text={t('card will be deleted')} />
 					<div className={cls.buttonAndProgressBar} >
 
-						<Button className={cls.button} fontWeight='300' onClick={onCancelDeletion}>
+						<Button
+							className={cls.button}
+							fontWeight='300'
+							onClick={onCancelDeletion}
+						>
 							{t('cancel card deletion')}
 						</Button>
 						<CircularCountDownWithProgress

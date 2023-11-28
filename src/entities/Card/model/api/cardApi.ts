@@ -3,15 +3,16 @@ import { CardSchema, CardSchemaExtended, NewCardSchema } from '../types/CardSche
 
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { FetchCardsThunkResponse } from '@/features/ViewPageInitializer';
+import { TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags';
 
 interface UpdateCardsRequestBase {
 	cardIds: string[]
 }
 
 interface MoveCardsRequest extends UpdateCardsRequestBase {
-	requestAction: 'moveCards'
+	cardIds: string[]
 	shelfId: string
-	boxIndex: number | string
+	boxId: string
 }
 
 interface RemoveCardsRequest extends UpdateCardsRequestBase {
@@ -23,7 +24,7 @@ type UpdateCardsRequest = MoveCardsRequest | RemoveCardsRequest
 export const cardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
 		// NSA: готово
-		createNewCard: build.query<CardSchema, NewCardSchema>({
+		createNewCard: build.mutation<CardSchema, NewCardSchema>({
 			query: ({ question, answer, shelfId, boxId }) => ({
 				url: '/cards',
 				method: 'POST',
@@ -34,25 +35,19 @@ export const cardApi = rtkApi.injectEndpoints({
 					boxId
 				}
 			}),
+			invalidatesTags: []
 		}),
-		// NSA: это запрос для станицы /view
+
 		getAllCards: build.query<FetchCardsThunkResponse, void>({
 			query: () => ({
-				url: '/cards',
+				url: '/aggregate/view',
 				method: 'GET',
 			}),
-			transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
-				response.cards.forEach(card => (
-					{
-						...card,
-						// id: card._id,
-						deleted: false,
-						isDeleting: false,
-					}
-				))
-				return response
-			},
-			providesTags: ['Cards']
+			// transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
+			// 	const newCards = response.shelvesAndBoxesData
+			// 	return response
+			// },
+			providesTags: [TAG_VIEW_PAGE]
 		}),
 		getCardsByShelfId: build.query<CardSchema[], string>({
 			query: (shelfId) => ({
@@ -63,8 +58,8 @@ export const cardApi = rtkApi.injectEndpoints({
 				}
 			}),
 		}),
-		getCardsByShelfAndBoxId: build.query<CardSchema[], {shelfId: string, boxId: string}>({
-			query: ({shelfId, boxId}) => ({
+		getCardsByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
+			query: ({ shelfId, boxId }) => ({
 				url: '/cards',
 				method: 'GET',
 				body: {
@@ -85,7 +80,7 @@ export const cardApi = rtkApi.injectEndpoints({
 		// 		response.cards = newCards
 		// 		return response
 		// 	},
-		// 	providesTags: ['Cards']
+		// 	providesTags: []
 		// }),
 		updateCards: build.mutation<CardSchema[], UpdateCardsRequest>({
 			query: (arg) => ({
@@ -95,36 +90,113 @@ export const cardApi = rtkApi.injectEndpoints({
 					...arg
 				}
 			}),
-			invalidatesTags: ['Cards']
+			invalidatesTags: []
 		}),
 
-		getBoxByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
-			query: ({ shelfId, boxId }) => ({
-				url: '/cards',
-				method: 'GET',
-				params: {
-					shelf: Number(shelfId),
-					box: Number(boxId)
+
+
+
+
+		moveCards: build.mutation<CardSchema[], MoveCardsRequest>({
+			query: (arg) => ({
+				url: '/cards/move-cards',
+				method: 'PATCH',
+				body: arg
+			}),
+			invalidatesTags: [TAG_CUPBOARD_PAGE]
+		}),
+		removeSoftCards: build.mutation<{ count: number }, UpdateCardsRequestBase>({
+			query: (arg) => ({
+				url: '/cards/remove-cards',
+				method: 'DELETE',
+				body: arg
+			}),
+			invalidatesTags: [TAG_CUPBOARD_PAGE]
+		}),
+		removeSoftCard: build.mutation<CardSchema, string>({
+			query: (cardId) => ({
+				url: `/cards/${cardId}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: [TAG_CUPBOARD_PAGE]
+		}),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		updateCard: build.mutation<CardSchema, Partial<CardSchema>>({
+			query: (card) => ({
+				url: `/cards/${card.id}`,
+				method: 'PATCH',
+				body: {
+					...card
 				}
 			}),
-			// transformResponse: (response: MovieList, meta, arg) => {
-			// 	const data = response.reduce((acc: MovieListIdMovie, current) => {
-			// 		acc[current.id.toString()] = current
-			// 		return acc
-			// 	}, {})
-			// 	return data
-			// },
 		}),
+
+		getTrainingCards: build.query<CardSchema[], { shelfId: string, boxId: string }>({
+			query: (arg) => ({
+				url: `/cards/training/${arg.shelfId}/${arg.boxId}`,
+				method: 'GET',
+			}),
+		}),
+
+		// getBoxByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
+		// 	query: ({ shelfId, boxId }) => ({
+		// 		url: '/cards',
+		// 		method: 'GET',
+		// 		params: {
+		// 			shelf: Number(shelfId),
+		// 			box: Number(boxId)
+		// 		}
+		// 	}),
+		// }),
 	}),
 })
 
 export const { useGetCardsByShelfIdQuery } = cardApi
 export const { useGetAllCardsQuery } = cardApi
 export const { useUpdateCardsMutation } = cardApi
+export const { useGetTrainingCardsQuery } = cardApi
 export const getAllCards = cardApi.endpoints.getAllCards.initiate
 export const createNewCard = cardApi.endpoints.createNewCard.initiate
+export const rtkApiUpdateCard = cardApi.endpoints.updateCard.initiate
+export const rtkApiMoveCards = cardApi.endpoints.moveCards.initiate
+export const rtkApiDeleteCards = cardApi.endpoints.removeSoftCards.initiate
+export const rtkApiDeleteCard = cardApi.endpoints.removeSoftCard.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 
 // export const { useGetBoxByShelfAndBoxIdQuery } = boxApi
 // export const { useGetMovieByIdBeatFilmQuery } = beatFilmMoviesApi
+
+
+// getAllCards: build.query<FetchCardsThunkResponse, void>({
+// 	query: () => ({
+// 		url: '/cards',
+// 		method: 'GET',
+// 	}),
+// 	transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
+// 		response.cards.forEach(card => (
+// 			{
+// 				...card,
+// 				// id: card._id,
+// 				deleted: false,
+// 				isDeleting: false,
+// 			}
+// 		))
+// 		return response
+// 	},
+// 	providesTags: []
+// }),

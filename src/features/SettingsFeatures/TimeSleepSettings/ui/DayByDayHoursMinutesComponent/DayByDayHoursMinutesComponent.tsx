@@ -3,27 +3,21 @@ import cls from './DayByDayHoursMinutesComponent.module.scss'
 import { useSelector } from 'react-redux';
 import { getDayByDayTimeSleepData, getGeneralTimeSleepData } from '../../model/selectors/settingsTimeSleep';
 import { HoursMinutesWrapper } from '../HoursMinutesWrapper/HoursMinutesWrapper';
-import { DaysOfWeek } from '@/entities/User';
 import { MyText } from '@/shared/ui/Typography';
 import { useTranslation } from 'react-i18next';
+import { daysOfWeek } from '@/entities/User';
 
-interface GeneralHoursMinutesProps {
-	className?: string;
-}
-const daysOfWeek: DaysOfWeek[] = [
-	'monday',
-	'tuesday',
-	'wednesday',
-	'thursday',
-	'friday',
-	'saturday',
-	'sunday'
-];
-export const DayByDayHoursMinutesComponent = (props: GeneralHoursMinutesProps) => {
-	const {
-		className,
-	} = props
+// interface GeneralHoursMinutesProps {
+// 	className?: string;
+// }
 
+// export const DayByDayHoursMinutesComponent = (props: GeneralHoursMinutesProps) => {
+// const {
+// 	className,
+// } = props
+		
+export const DayByDayHoursMinutesComponent = () => {
+	const generalTimeSleepData = useSelector(getGeneralTimeSleepData)
 	const dayByDayTimeSleepData = useSelector(getDayByDayTimeSleepData)
 	const { t } = useTranslation('settings')
 

@@ -2,7 +2,7 @@ import { rtkApi } from '@/shared/api/rtkApi'
 import { CommonShelfBackendResponse, CupboardSchema } from '@/entities/Cupboard'
 import { ShelfDndRepresentation, ShelfSchema } from '../types/ShelfSchema'
 
-export const memoboxApi = rtkApi.injectEndpoints({
+export const shelvesApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
 		getShelves: build.query<ShelfSchema[], void>({
 			query: () => ({
@@ -26,12 +26,12 @@ export const memoboxApi = rtkApi.injectEndpoints({
 				body: arg,
 			}),
 		}),
-		getCupboardData: build.query<CupboardSchema, void>({
-			query: () => ({
-				url: '/cupboard',
-				method: 'GET',
-			}),
-		}),
+		// getCupboardData: build.query<CupboardSchema, void>({
+		// 	query: () => ({
+		// 		url: '/aggregate/cupboard',
+		// 		method: 'GET',
+		// 	}),
+		// }),
 		updateShelf: build.mutation<ShelfSchema, Partial<ShelfSchema>>({
 			query: (arg) => ({
 				url: `/shelves/${arg.id}`,
@@ -78,16 +78,17 @@ export const memoboxApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Shelves'],
 		}),
-		removeShelf: build.mutation<string, string>({
-			query: (arg) => ({
-				url: '/shelves',
+		removeShelf: build.mutation<string, { shelfId: string, index: number }>({
+			query: ({ shelfId, index }) => ({
+				url: `/shelves/${shelfId}`,
 				// params: { id: arg.id },
 				method: 'DELETE',
 				// headers: {
 				// 	'Content-Type': 'application/json'
 				// },
 				body: {
-					shelfId: arg,
+					index,
+					// shelfId: arg,
 					// обновленные данные объекта
 					// isCollapsed: arg.isCollapsed
 					// ...arg,
@@ -98,13 +99,13 @@ export const memoboxApi = rtkApi.injectEndpoints({
 		}),
 	}),
 })
-export const memoboxGetShelves = memoboxApi.endpoints.getShelves.initiate
-export const removeShelfByIdMutation = memoboxApi.endpoints.removeShelf.initiate
-export const updateShelfWithTag = memoboxApi.endpoints.updateShelfWithTag.initiate
-export const createNewShelf = memoboxApi.endpoints.createNewShelf.initiate
-export const updateShelfListOrder = memoboxApi.endpoints.updateShelfListOrder.initiate
-export const { useGetShelvesQuery } = memoboxApi
-export const { useUpdateShelfMutation } = memoboxApi
-export const { useUpdateShelfWithTagMutation } = memoboxApi
-export const { useUpdateCommonShelfMutation } = memoboxApi
-export const { useRemoveShelfMutation } = memoboxApi
+export const memoboxGetShelves = shelvesApi.endpoints.getShelves.initiate
+export const removeShelfByIdMutation = shelvesApi.endpoints.removeShelf.initiate
+export const updateShelfWithTag = shelvesApi.endpoints.updateShelfWithTag.initiate
+export const createNewShelf = shelvesApi.endpoints.createNewShelf.initiate
+export const updateShelfListOrder = shelvesApi.endpoints.updateShelfListOrder.initiate
+export const { useGetShelvesQuery } = shelvesApi
+export const { useUpdateShelfMutation } = shelvesApi
+export const { useUpdateShelfWithTagMutation } = shelvesApi
+export const { useUpdateCommonShelfMutation } = shelvesApi
+export const { useRemoveShelfMutation } = shelvesApi

@@ -21,6 +21,7 @@ export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: s
 		// console.log('=================================================')
 		try {
 			if (abortedThunkIds.includes(id)) {
+				dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
 				throw new Error('Aborted')
 			}
 			dispatch(viewPageActions.setAbortedThunkId(id))

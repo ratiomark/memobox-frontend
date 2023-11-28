@@ -17,6 +17,10 @@ export {
 } from './model/selectors/getViewPageShelfAndBoxItems';
 
 export {
+	updateCardThunk
+} from './model/services/updateCardThunk';
+
+export {
 	deleteCardThunk
 } from './model/services/deleteCardThunk';
 

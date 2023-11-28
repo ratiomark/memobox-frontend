@@ -87,15 +87,6 @@ const userApi = rtkApi.injectEndpoints({
 				method: 'GET',
 			})
 		}),
-		getUserTokenValid: build.query<UserWithToken, string>({
-			query: (token) => ({
-				url: '/auth',
-				method: 'POST',
-				body: {
-					token
-				}
-			})
-		}),
 		getTokensOnInitWithUserSettings: build.query<UserWithToken, string>({
 			query: (userId) => ({
 				url: '/auth/refresh-init',
@@ -165,9 +156,9 @@ export const rtkApiUpdateJsonSavedData = userApi.endpoints.updateJsonSavedData.i
 export const rtkApiLoginUser = userApi.endpoints.loginUser.initiate
 export const rtkApiRegisterUser = userApi.endpoints.registerUser.initiate
 export const rtkApiGetMe = userApi.endpoints.getMe.initiate
-export const getUserTokenValid = userApi.endpoints.getUserTokenValid.initiate
 export const getTokensOnInitWithUserSettings = userApi.endpoints.getTokensOnInitWithUserSettings.initiate
 export const rtkApiUpdateShelfTemplate = userApi.endpoints.updateShelfTemplate.initiate
+export const rtkApiUpdateMissedTraining = userApi.endpoints.updateMissedTraining.initiate
 export const rtkApiUpdateTimeSleep = userApi.endpoints.updateTimeSleep.initiate
 export const rtkApiSetDefaultShelfTemplate = userApi.endpoints.setDefaultShelfTemplate.initiate
 export const rtkApiLogout = userApi.endpoints.logout.initiate

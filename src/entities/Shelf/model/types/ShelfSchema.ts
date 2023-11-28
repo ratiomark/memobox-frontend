@@ -1,5 +1,6 @@
 import { BoxSchema } from '@/entities/Box';
-import { DataBlock, MissedTrainingValue } from '@/shared/types/DataBlock';
+import { DataBlock } from '@/shared/types/DataBlock';
+import { MissedTrainingValue } from '@/entities/User';
 import { RequestStatusType } from '@/shared/types/GeneralTypes';
 
 // type OnlyDefaultBoxes = [NewCardsBox, LearntCardBox]
@@ -18,6 +19,7 @@ export interface ShelfSchema {
 	missedTrainingValue?: MissedTrainingValue
 	notificationEnabled?: boolean
 	boxesData: BoxSchema[]
+	box: BoxSchema[]
 }
 
 export interface ShelfDndRepresentation {

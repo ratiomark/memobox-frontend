@@ -1,45 +1,57 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
-import { TimingBlock } from '@/shared/types/DataBlock'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
+import { updateShelfWithTag } from '@/entities/Shelf'
 import { updateBoxWithTag } from '@/entities/Box'
+import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
+import { cupboardShelfListActions } from '../slice/cupboardShelfListSlice'
+import { TAG_VIEW_PAGE } from '@/shared/api/const/tags'
+import { rtkApi } from '@/shared/api/rtkApi'
 
-export interface UpdateBoxTimeThunkArg {
-	timeObject: TimingBlock
-	boxId: string
+export interface RenameShelfThunkArg {
+	// missedTrainingValue: MissedTrainingValue
+	title: string
 	shelfId: string
+	currentShelfTitle: string
 }
-export const updateBoxTimeThunk = createAsyncThunk<UpdateBoxTimeThunkArg, UpdateBoxTimeThunkArg, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
-	'cupboardPage/updateBoxTimeThunk',
+export const renameShelfThunk = createAsyncThunk<RenameShelfThunkArg, RenameShelfThunkArg, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+	'cupboardPage/renameShelfThunk',
 	async (arg, thunkAPI) => {
-		const { boxId, timeObject } = arg
-		const id = boxId + genRandomId()
-		const { dispatch } = thunkAPI
-		// const shelfTitle = getShelfTitleByShelfId(arg.shelfId)(getState())
-		// console.log(shelfTitle)
+		const { shelfId, title, currentShelfTitle } = arg
+		// console.log('updateMissedTrainingThunk', arg)
+		const id = shelfId + genRandomId()
+		const { dispatch, getState } = thunkAPI
+		// const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
+		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { title } }))
+		dispatch(cupboardShelfListActions.addShelfTitle(title))
 		dispatch(toastsActions.addToast({
 			id,
 			toast: {
 				status: 'pending',
 				messageLoading: t('toast:messageLoading'),
 				messageError: t('toast:messageError'),
-				messageSuccess: t('toast:update_box_time.messageSuccess'),
-				contentCommon: t('toast:update_box_time.additional'),
+				messageSuccess: t('toast:rename_shelf.messageSuccess'),
+				contentCommon: `${t('toast:rename_shelf.additional')} "${currentShelfTitle}"`,
+				// duration: 1000000,
 			}
 		}))
 		try {
-			// await sleep()
-			const response = await dispatch(updateBoxWithTag({ timing: timeObject, id: boxId })).unwrap()
+			// await sleep(4)
+			const response = dispatch(updateShelfWithTag({ id: shelfId, title })).unwrap()
+
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error()
 			}
-
+			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
+			dispatch(cupboardShelfListActions.removeShelfTitle(currentShelfTitle))
 			return arg
 		} catch (err) {
+			dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { title: currentShelfTitle } }))
+			dispatch(cupboardShelfListActions.removeShelfTitle(title))
 			return thunkAPI.rejectWithValue('some error in fetchCupboardData')
 		}
 	}

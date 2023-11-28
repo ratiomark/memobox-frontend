@@ -5,6 +5,7 @@ import { getViewPageSort, getViewPageSortOrder } from './getViewPageSorting';
 import { CardSchemaExtended } from '@/entities/Card';
 import { getViewPageCardEditedListIds } from './getViewPageEditModal';
 import { getViewPageSelectedCardIds } from './getViewPageMultiSelect';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 export const getViewPageIsMounted = (state: StateSchema) => state.viewPage?._viewPageMounted
 export const getViewPageIsLoading = (state: StateSchema) => state.viewPage?.isLoading
@@ -74,16 +75,18 @@ export const getViewPageCardsFactor = createSelector(
 			// if (boxSpecialIndex === 'learnt') return cards?.filter(card => card.specialType === 'learnt')
 			const resCards: CardSchemaExtended[] = []
 			if (boxSpecialIndex === 'new') {
+				// console.log(`if (boxSpecialIndex === 'new') начало`)
 				const shelfIdAndNewCardBoxIdList = shelfIds.map(shelfIdItem => ({
 					shelfId: shelfIdItem,
 					boxId: shelfIdsBoxSpecialIndexesObj[shelfIdItem]['new']
 				}))
-				Array.from(shelfIdAndNewCardBoxIdList).forEach(item => {
+				shelfIdAndNewCardBoxIdList.forEach(item => {
 					const newCards = cardsShelfIdBoxIdObj[item.shelfId][item.boxId]
 					if (newCards) {
 						resCards.push(...newCards)
 					}
 				})
+				// console.log(`if (boxSpecialIndex === 'new') конец`)
 			} else if (boxSpecialIndex === 'learning') {
 				const shelfIdAndLearningBoxIdList = shelfIds.map(shelfIdItem => {
 					return ({
@@ -93,8 +96,8 @@ export const getViewPageCardsFactor = createSelector(
 				})
 				Array.from(shelfIdAndLearningBoxIdList).forEach(item => {
 					item.boxIds.forEach(boxIdItem => {
-						const cardsItems = cardsShelfIdBoxIdObj[item.shelfId][boxIdItem]
-						if (cardsItems) {
+						const cardItems = cardsShelfIdBoxIdObj[item.shelfId][boxIdItem]
+						if (cardItems) {
 							resCards.push(...cardsShelfIdBoxIdObj[item.shelfId][boxIdItem])
 						}
 					})
@@ -119,8 +122,8 @@ export const getViewPageCardsFactor = createSelector(
 				})
 				Array.from(shelfIdAndLearningBoxIdList).forEach(item => {
 					item.boxIds.forEach(boxIdItem => {
-						const cardsItems = cardsShelfIdBoxIdObj[item.shelfId][boxIdItem]
-						if (cardsItems) {
+						const cardItems = cardsShelfIdBoxIdObj[item.shelfId][boxIdItem]
+						if (cardItems) {
 							resCards.push(...cardsShelfIdBoxIdObj[item.shelfId][boxIdItem])
 						}
 					})

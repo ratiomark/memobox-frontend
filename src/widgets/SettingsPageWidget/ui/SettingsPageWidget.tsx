@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { ShelfTemplateSettings, TimeSleepSettings } from '@/features/SettingsFeatures';
 import { Heading } from '@/shared/ui/Typography';
-import { KeyboardEvent, MouseEvent, useState } from 'react';
+import { KeyboardEvent, MouseEvent, useEffect, useState } from 'react';
 import { Card } from '@/shared/ui/Card';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import './SettingsPageWidget.css';
@@ -9,6 +9,8 @@ import { Icon } from '@/shared/ui/Icon';
 import { MissedTrainingSettings } from '@/features/SettingsFeatures';
 import { NotificationSettings } from '@/features/SettingsFeatures'
 import { BoxTimeSetterSettingsPageModal } from '@/features/SettingsFeatures';
+import { useGetUserSettingsQuery, userActions } from '@/entities/User';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 
 
 interface SettingsPageWidgetProps {
@@ -17,6 +19,25 @@ interface SettingsPageWidgetProps {
 
 export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 	const { t } = useTranslation('settings')
+	// запросить настройки и сохранить в стейт редакса
+	const { isLoading, data, error } = useGetUserSettingsQuery()
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		if (data) {
+			console.log('data', data)
+			dispatch(userActions.setSettings(data))
+			if (!data.timeSleep.dayByDayTimeSleepData) {
+				const d = data.timeSleep.generalTimeSleepData
+				dispatch(userActions.setDayByDayTimeSleepDataInitial(d))
+			}
+			// console.log(data)
+		}
+	}, [data, dispatch])
+
+	useEffect(() => {
+		dispatch(userActions.setSettingsIsLoading(isLoading))
+	}, [isLoading, dispatch])
 
 	const [settingModalStates, setSettingModalStates] = useState({
 		shelfTemplateModal: false,
@@ -72,7 +93,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			tabIndex={0}
 			className={'card'}
 			onKeyDown={onEnterToggleShelfTemplateModal}
-			onClick={toggleShelfTemplateModal}>
+			onClick={toggleShelfTemplateModal}
+			isLoading={isLoading}>
 			<Heading
 				className={'settingTitle'}
 				as='h2'
@@ -92,7 +114,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			tabIndex={0}
 			className={'card'}
 			onKeyDown={onEnterToggleTimeSleepModal}
-			onClick={toggleTimeSleepModal}>
+			onClick={toggleTimeSleepModal}
+			isLoading={isLoading}>
 			<Heading
 				className={'settingTitle'}
 				as='h2'
@@ -112,7 +135,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			tabIndex={0}
 			className={'card'}
 			onKeyDown={onEnterToggleNotificationModal}
-			onClick={toggleNotificationModal}>
+			onClick={toggleNotificationModal}
+			isLoading={isLoading}>
 			<Heading
 				className={'settingTitle'}
 				as='h2'
@@ -132,7 +156,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 			tabIndex={0}
 			className={'card'}
 			onKeyDown={onEnterToggleMissedTrainingModal}
-			onClick={toggleMissedTrainingModal}>
+			onClick={toggleMissedTrainingModal}
+			isLoading={isLoading}>
 			{/* onClick={openMissedTraining}> */}
 			<Heading
 				className={'settingTitle'}

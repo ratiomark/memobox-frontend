@@ -80,8 +80,8 @@ export interface CardsShelfIdBoxIdObj {
 
 interface CardsDataEditedObj {
 	[cardId: string]: {
-		question: string
-		answer: string
+		question: string | null
+		answer: string | null
 		shelfId: string
 		boxId: string
 	}

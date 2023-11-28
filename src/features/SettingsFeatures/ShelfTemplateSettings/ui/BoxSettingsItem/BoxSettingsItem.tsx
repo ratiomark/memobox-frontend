@@ -68,7 +68,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 	}, [isBoxSaved, id, dispatch])
 
 	const onAddNewBoxClickHandle = (e: MouseEvent) => {
-		onAddBoxClick(boxIndex! + 1)
+		onAddBoxClick(boxIndex + 1)
 		const { x, y, width, height } = e.currentTarget.getBoundingClientRect()
 		// console.log(x, y)
 		const coordinates = {
@@ -106,7 +106,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 	const onRemoveClick = () => {
 		setIsRemoved(true)
 		setTimeout(() => {
-			onRemoveBox(boxIndex!)
+			onRemoveBox(boxIndex)
 		}, DURATION_MILLISEC)
 	}
 
@@ -118,7 +118,7 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 
 		: (<Heading as='h5'
 			className={cls.title}
-			title={`${t('box text')} ${boxIndex! + 1}`} />
+			title={`${t('box text')} ${boxIndex + 1}`} />
 		)
 
 	const timerIcon = (<Icon

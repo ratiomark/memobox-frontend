@@ -44,17 +44,28 @@ export const boxApi = rtkApi.injectEndpoints({
 			// 	return data
 			// },
 		}),
-		updateBoxWithTag: build.mutation<CupboardSchema, { shelfId: string, box: Partial<BoxSchema> }>({
-			query: (arg) => ({
-				url: '/updateBox',
+		updateBoxWithTag: build.mutation<BoxSchema, Partial<BoxSchema>>({
+			query: (box) => ({
+				url: `/boxes/${box.id}`,
 				method: 'PATCH',
 				body: {
-					// ...arg,
-					...arg
+					// ...box,
+					...box
 				}
 			}),
-			invalidatesTags: ['Shelves']
+			// invalidatesTags: ['Shelves']
 		}),
+		// updateBoxWithTag: build.mutation<CupboardSchema, { shelfId: string, box: Partial<BoxSchema> }>({
+		// 	query: (arg) => ({
+		// 		url: `/boxes/${arg.box.id}`,
+		// 		method: 'PATCH',
+		// 		body: {
+		// 			// ...arg,
+		// 			...arg.box
+		// 		}
+		// 	}),
+		// 	// invalidatesTags: ['Shelves']
+		// }),
 	}),
 })
 export const getBoxesByShelfId = boxApi.endpoints.getBoxesByShelfId.initiate

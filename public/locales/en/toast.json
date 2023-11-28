@@ -14,6 +14,14 @@
     "messageSuccess": "Shelf was deleted",
     "additional": "Shelf is deleting"
   },
+  "rename_shelf": {
+    "messageSuccess": "Shelf was renamed",
+    "additional": "Renaming shelf"
+  },
+  "update_shelf_boxes": {
+    "messageSuccess": "Shelf was updated",
+    "additional": "Updating shelf"
+  },
   "update_box_time": {
     "messageSuccess": "Time successfully updated",
     "additional": "Updating box time"

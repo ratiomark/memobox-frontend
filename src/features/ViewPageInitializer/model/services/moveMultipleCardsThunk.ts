@@ -26,11 +26,15 @@ export const moveMultipleCardsThunk = createAsyncThunk<string[], string, { rejec
 		const shelfId = getViewPageMoveCardsModalShelfId(getState())!
 		const boxId = getViewPageMoveCardsModalBoxId(getState())!
 
-		const abortedThunkIds = getAbortedThunkIds(getState())
+		const abortedThunkIds = getViewPageAbortedThunkIds(getState())
+		// const abortedThunkIds = getAbortedThunkIds(getState())
+		console.log('randomId,   ', randomId)
 		const id = randomId
 		try {
 
 			if (abortedThunkIds.includes(id) || !cardIdsSelectedForMoving.length) {
+				viewPageActions.removeMultiSelectMoveIds(randomId)
+				dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
 				// console.log(' АБОРТ АБОРТ АБОРТ')
 				throw new Error('Aborted')
 			}
@@ -51,12 +55,14 @@ export const moveMultipleCardsThunk = createAsyncThunk<string[], string, { rejec
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
+			dispatch(viewPageActions.removeMultiSelectMoveIds(randomId))
 			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			return cardIdsSelectedForMoving
 
 		} catch (err) {
 			const error = err as Error;
+			// dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
 			// dispatch(viewPageActions.removeAbortedThunkId(id))
 			dispatch(viewPageActions.setCardsIsNotDeletedByIdList(cardIdsSelectedForMoving))
 			dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))

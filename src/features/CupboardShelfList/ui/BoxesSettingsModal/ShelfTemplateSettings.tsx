@@ -16,6 +16,7 @@ import {
 } from '../../model/selectors/getShelfBoxesTemplateModal'
 import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice'
 import { Skeleton } from '@/shared/ui/Skeleton';
+import { updateShelfBoxesTemplate } from '../../model/services/updateShelfBoxesTemplate';
 
 const reducers: ReducersList = {
 	shelfBoxesTemplateSettings: shelfBoxesTemplateSettingsReducer
@@ -43,13 +44,18 @@ const ShelfBoxesTemplateModal = () => {
 	}
 
 
+	const onSubmitHandle = () => {
+		dispatch(updateShelfBoxesTemplate(shelfId))
+		// const currentShelfTemplate = useSelector(getBoxesTemplateModalCurrentShelfTemplate)
+	}
+
 	// if (!shelf) return <p>Загрузка</p>
 
 	return (
 		<HDialogHeadless
 			isOpen={isOpen}
 			onClose={onCloseHandle}
-			onSubmit={() => alert('Сохраняю настройки')}
+			onSubmit={onSubmitHandle}
 			lazy
 			// max
 			panelWithMainPadding={false}
@@ -68,7 +74,7 @@ const ShelfBoxesTemplateModal = () => {
 						// max={false}
 						isSubmitDisabled={isCurrentTemplateEqualToInitial}
 						onClose={onCloseHandle}
-						onSubmit={() => alert('Сохраняю настройки')}
+						onSubmit={onSubmitHandle}
 					/>
 				</motion.div>
 			</AnimatePresence>

@@ -12,7 +12,7 @@ export const trashApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
 		getTrash: build.query<TrashResponse, void>({
 			query: () => ({
-				url: '/trash',
+				url: '/aggregate/trash',
 				method: 'GET',
 			}),
 		}),

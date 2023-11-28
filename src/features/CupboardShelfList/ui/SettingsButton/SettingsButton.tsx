@@ -1,6 +1,6 @@
 import { Button } from '@/shared/ui/Button';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback, useMemo} from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { Dropdown } from '@/shared/ui/Popup';
 import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
@@ -34,9 +34,11 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 		dispatch(cupboardShelfListActions.setNotificationModalIsOpen(true))
 	}, [dispatch, shelfId])
 
-	// const onRenameShelf = useCallback((shelfId: string) => {
-	// 	dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
-	// }, [dispatch])
+	const onRenameShelf = useCallback(() => {
+		dispatch(cupboardShelfListActions.setRenameShelfModalShelfId(shelfId))
+		dispatch(cupboardShelfListActions.setIsRenameShelfModalOpen(true))
+		// dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: true } }))
+	}, [dispatch, shelfId])
 
 
 	const settingItems: DropdownItem[] = useMemo(() => {
@@ -44,7 +46,7 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 		return [
 			{
 				content: t('settingsItems.rename'),
-				onClick: () => alert(`изменение имени ${shelfId}`)
+				onClick: onRenameShelf
 			},
 			{
 				content: t('settingsItems.notifications'),
@@ -74,7 +76,7 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 			}
 
 		]
-	}, [t, shelfId, isOnlyOneShelfLeftInCupboard, onNotificationClick, onDeleteClick, onMissedTrainingClick, onBoxesSettingsClick])
+	}, [t, isOnlyOneShelfLeftInCupboard, onNotificationClick, onDeleteClick, onMissedTrainingClick, onBoxesSettingsClick, onRenameShelf])
 
 	return (
 		<>

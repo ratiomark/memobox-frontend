@@ -7,9 +7,7 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { TabsSkeleton } from '@/shared/ui/Skeleton';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { memo, useCallback, useMemo, } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useGetShelvesQuery } from '@/entities/Cupboard';
 import { getViewPageBoxIdChecked } from '@/features/ViewPageInitializer';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import cls from './BoxesListViewWidget.module.scss'

@@ -30,9 +30,16 @@ export const TrainingContent = (props: TrainingContentProps) => {
 	const [currIndex, setCurrIndex] = useState(0)
 	const [answerObj, setAnswerObj] = useState<{ [key: string]: AnswerType }>({})
 	const [showAnswer, setShowAnswer] = useState(false)
-	const { t } = useTranslation()
+	// const { t } = useTranslation()
 	const navigate = useNavigate()
 	const onShowAnswerClick = () => setShowAnswer(true)
+
+	const onEndTraining = () => navigate(obtainRouteMain())
+
+	const checkEndOfTraining = () => {
+		if (currIndex === cardsLength - 1) onEndTraining()
+	}
+
 
 	const onAnswerClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const answer = e && e.currentTarget.getAttribute('data-answer-type') as AnswerType
@@ -40,6 +47,7 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		setAnswerObj(prev => ({ ...prev, [cardId]: answer! }))
 		setCurrIndex(prev => prev + 1)
 		setShowAnswer(false)
+		checkEndOfTraining()
 	}
 
 	const onAnswerHotKeyHandle = (answerValue: AnswerType) => {
@@ -47,17 +55,16 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		setAnswerObj(prev => ({ ...prev, [cardId]: answerValue }))
 		setCurrIndex(prev => prev + 1)
 		setShowAnswer(false)
+		checkEndOfTraining()
+		// if (currIndex === cardsLength) onEndTraining()
 	}
 
-	const onEndTraining = () => {
-		// navigate('/view')
-		navigate(obtainRouteMain())
-	}
+
 
 	const onNextCardClick = () => {
-		if (currIndex === cardsLength) onEndTraining()
 		setCurrIndex(prev => prev + 1)
 		setShowAnswer(false)
+		checkEndOfTraining()
 	}
 
 	const onPreviousCardClick = () => {
@@ -66,7 +73,12 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		setCurrIndex(prev => prev - 1)
 	}
 
+
 	console.log(answerObj)
+	// if (cardsLength === 0) {
+	// 	alert('No cards you redirected to main page')
+	// 	onEndTraining()
+	// }
 
 	return (
 		<div className={clsx(
@@ -80,32 +92,16 @@ export const TrainingContent = (props: TrainingContentProps) => {
 				</div>
 			</div>
 			<div className={cls.contentWrapper} >
-				<main className={clsx(cls.content, 'container')} >
+				<main className={clsx(cls.content, 'container')}>
+
 					<MyText
 						variant='accent'
-						text={dataObj[String(currIndex)].index}
+						text={'Question'}
+					// text={dataObj[String(currIndex)].question ?? 'No question'}
 					/>
 					{showAnswer && <div>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
-						<p>{dataObj[String(currIndex)].answer}</p>
+						ANSWER
+						{/* <p>{dataObj[String(currIndex)].answer ?? 'No answer'}</p> */}
 					</div>}
 				</main>
 			</div>
@@ -123,7 +119,7 @@ export const TrainingContent = (props: TrainingContentProps) => {
 				<ActionButtons
 					onNextCardClick={onNextCardClick}
 					onPreviousCardClick={onPreviousCardClick}
-					onCloseTraining={onEndTraining }
+					onCloseTraining={onEndTraining}
 				/>
 			</div>
 

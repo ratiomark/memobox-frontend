@@ -3,6 +3,8 @@ import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { getShelfIdAndIndexesList, getShelfIdAndIndexesListInitial } from '../selectors/getCupboardShelfList'
 import { isShelvesDndRepresentationEqual } from '../slice/cupboardShelfListSlice'
 import { updateShelfListOrder } from '@/entities/Shelf'
+import { TAG_VIEW_PAGE } from '@/shared/api/const/tags'
+import { rtkApi } from '@/shared/api/rtkApi'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
 export const updateShelfListOrderThunk = createAsyncThunk<boolean, void, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
@@ -16,11 +18,12 @@ export const updateShelfListOrderThunk = createAsyncThunk<boolean, void, { rejec
 			if (!isShelvesDndRepresentationEqual(shelvesIdsAndIndexesInitial, shelvesIdsAndIndexesCurrent)) {
 				// VAR: сделать запрос на обновление порядка полок, если ответ успешный, то заменить shelvesIdsAndIndexesInitial в шкафу.
 				const response = await dispatch(updateShelfListOrder(shelvesIdsAndIndexesCurrent))
-				console.log('!!!!!!!!!!!!', response)
+				dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE]))
+				// console.log('!!!!!!!!!!!!', response)
 				// console.log('!!!!!!!!!!!!!!!!!!')
 				return true
 			}
-			console.log('ОНИ РАВНЫЕ@@@@@@@@@@')
+			// console.log('ОНИ РАВНЫЕ@@@@@@@@@@')
 			// просто выйти из функции, ничего не нужно менять порядок полок фронта === беку.
 			return false
 		} catch (err) {

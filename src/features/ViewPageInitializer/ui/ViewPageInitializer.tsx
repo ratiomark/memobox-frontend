@@ -34,11 +34,11 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	const { isLoading, data } = useGetAllCardsQuery()
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { shelfId, boxId } = useParams<{ shelfId: string, boxId: string }>()
-	const viewPageIsMounter = useSelector(getViewPageIsMounted)
+	const viewPageIsMounted = useSelector(getViewPageIsMounted)
 
 	useEffect(() => {
 		// console.log('Эффект')
-		if (!viewPageIsMounter && !isLoading && data) {
+		if (!viewPageIsMounted && !isLoading && data) {
 			// console.log('Эффект Зашел')
 			const boxIdChecked = boxId ?? 'new'
 			const boxSpecialIndexChecked = boxId ?? 'new'
@@ -55,25 +55,26 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 			// dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked, data }))
 			navigate(obtainRouteViewEmpty(), { replace: true })
 		}
-	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter, isLoading, data])
+	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounted, isLoading, data])
 
 	useEffect(() => {
 		// console.log('2 Эффект')
-		if (viewPageIsMounter && shelfId && boxId) {
+		if (viewPageIsMounted && shelfId && boxId) {
 			// console.log('2 Эффект Зашел')
 			dispatch(viewPageActions.setActiveShelfId(shelfId))
+			// console.log('boxID   ====   ', boxId)
 			dispatch(viewPageActions.setActiveBoxIdAndSpecialIndex({ boxId, boxSpecialIndex: boxId }))
 			// dispatch(viewPageActions.setActiveBoxId(boxId))
 			// dispatch(viewPageActions.setActiveBoxSpecialIndex(boxId))
 			navigate(obtainRouteViewEmpty(), { replace: true })
 		}
-	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounter])
+	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounted])
 
 	useEffect(() => {
-		if (viewPageIsMounter && !isLoading && data) {
+		if (viewPageIsMounted && !isLoading && data) {
 			dispatch(viewPageActions.setFetchedData(data))
 		}
-	}, [isLoading, data, dispatch, viewPageIsMounter])
+	}, [isLoading, data, dispatch, viewPageIsMounted])
 
 	return (
 		<div className={cls.viewPageInitializer}>

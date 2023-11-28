@@ -39,7 +39,9 @@ export interface UserSchema {
 	userSettings?: UserSettings
 	userSettingsIsLoading?: boolean
 	jsonSavedData: JsonSavedData
+	jsonSavedDataOriginal?: JsonSavedData
 	jsonCommonSettings?: JsonSettings
+	jsonCommonSettingsOriginal?: JsonSettings
 }
 // export type ExtendedTimingBlockForRealShelf = ExtendedTimingBlock & {
 // 	missedTrainingValue?: MissedTrainingValue

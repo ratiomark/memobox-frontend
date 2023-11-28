@@ -1,8 +1,10 @@
-import { DataBlock, MissedTrainingValue, TimingBlock } from '@/shared/types/DataBlock'
+import { DataBlock, TimingBlock } from '@/shared/types/DataBlock'
+import { MissedTrainingValue } from '@/entities/User'
 
 interface BoxBaseSchema {
 	id: string
 	index: number
+	missedTrainingValue?: MissedTrainingValue
 }
 
 export interface NewCardsBox extends BoxBaseSchema {
@@ -16,7 +18,6 @@ export interface RegularAndLearntCardsBox extends BoxBaseSchema {
 	specialType: 'none' | 'learnt',
 	data: DataBlock
 	timing: TimingBlock
-	missedTrainingValue?: MissedTrainingValue
 }
 
 export interface BoxCoordinates {
@@ -24,13 +25,6 @@ export interface BoxCoordinates {
 	y: number
 }
 
-// export interface LearntCardBox extends BoxBaseSchema {
-// 	specialType: 'learnt',
-// 	data: DataBlock
-// 	timing: TimingBlock
-// }
-
 export type BoxSchema =
 	| NewCardsBox
 	| RegularAndLearntCardsBox
-// | LearntCardBox

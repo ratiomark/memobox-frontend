@@ -10,6 +10,7 @@ import {
 	getShelfIdCardModal,
 	getShelfBoxesItems,
 	getCreateNewCardRequestStatus,
+	getBoxIdCheckedCardModal,
 } from '../../../model/selectors/getCreateNewCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
@@ -17,14 +18,13 @@ import { Skeleton, TextEditorSkeleton } from '@/shared/ui/Skeleton';
 import { getCupboardIsLoading, getShelfItems } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
-import { EditorState } from 'lexical';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
 import { memo, useRef, useMemo, useCallback, Suspense } from 'react';
 import { StateSchema } from '@/app/providers/StoreProvider';
-import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
 import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 import { createNewCardThunk } from '../../../model/services/createNewCardThunk';
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
+import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
 
 interface CreateNewCardModalProps {
 	cardModalSkeleton: JSX.Element
@@ -42,6 +42,7 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 	const answerTextCardModal = useSelector(getAnswerCardModal)
 	const shelfIdCardModal = useSelector(getShelfIdCardModal) ?? cupboardShelves[0].id
 	const boxIndexCardModal = useSelector(getBoxIndexCardModal)
+	const boxIdChecked = useSelector(getBoxIdCheckedCardModal)!
 	const createNewCardRequestStatus = useSelector(getCreateNewCardRequestStatus)
 	const shelfItems = useSelector((state: StateSchema) => getShelfItems(state))
 	const boxItems = useSelector((state: StateSchema) => getShelfBoxesItems(state))
@@ -65,7 +66,7 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 		dispatch(cupboardShelfListActions.setAnswerText(editorState))
 		// dispatch(cupboardShelfListActions.setAnswerText(JSON.stringify(editorState.toJSON())))
 	}, [dispatch])
-	
+
 	const onCloseCardModal = useCallback((isOpen: boolean) => {
 		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(isOpen))
 	}, [dispatch])
@@ -74,6 +75,9 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
 	}, [dispatch])
 
+	// const onChangeBox = useCallback((boxId: string) => {
+	// 	dispatch(cupboardShelfListActions.setBoxIdCardModal(boxId))
+	// }, [dispatch])
 	const onChangeBox = useCallback((boxIndex: number) => {
 		dispatch(cupboardShelfListActions.setBoxIndexAndBoxIdCardModal(boxIndex))
 	}, [dispatch])
@@ -104,8 +108,9 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 					/>
 				</div>
 				<div className={cls.listBoxWrapper}>
-					<ListBox
+					<ListBox<number>
 						label={t('box text')}
+						// value={boxIdChecked}
 						value={boxIndexCardModal}
 						items={boxItems}
 						onChange={onChangeBox}
@@ -114,6 +119,7 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 					/>
 				</div>
 			</div>)
+		// }, [cupboardIsLoading, t, boxIdChecked, boxItems, onChangeBox, onChangeShelf, shelfIdCardModal, shelfItems])
 	}, [cupboardIsLoading, t, boxIndexCardModal, boxItems, onChangeBox, onChangeShelf, shelfIdCardModal, shelfItems])
 
 	const editorBlockQuestion = useMemo(() => {

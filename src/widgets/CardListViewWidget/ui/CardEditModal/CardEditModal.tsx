@@ -22,6 +22,7 @@ import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
 import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 import { getViewPageShelfItems } from '@/features/ViewPageInitializer';
+import { updateCardThunk } from '@/features/ViewPageInitializer';
 
 export const CardEditModal = memo(() => {
 	const { t } = useTranslation()
@@ -51,6 +52,7 @@ export const CardEditModal = memo(() => {
 
 	// Original data
 	const cardOriginalData = useSelector(getViewPageCardDataOriginal)!
+	const cardId = cardOriginalData?.id
 	const questionTextOriginal = cardOriginalData?.question
 	const answerTextOriginal = cardOriginalData?.answer
 	const originalShelf = cardOriginalData?.shelfId
@@ -109,7 +111,14 @@ export const CardEditModal = memo(() => {
 
 	const onSaveCardData = () => {
 		// VAR: тут сохранение новых даннных
-		alert('Сохраняю новые даннные для карточки')
+		// alert('Сохраняю новые даннные для карточки')
+		dispatch(updateCardThunk({
+			cardId,
+			question: questionTextEdited ?? null,
+			answer: answerTextEdited ?? null,
+			shelfId: editedShelf ?? '',
+			boxId: editedBox ?? '',
+		}))
 		dispatch(viewPageActions.setIsCardEditModalOpen(false))
 	}
 	// console.log('questionTextOriginal   ', questionTextOriginal?.length)

@@ -22,7 +22,7 @@ export const ColumnItem = (props: ColumnItemProps) => {
 		onSwitchClick
 	} = props
 	const [isDragging, setIsDragging] = useState(false)
-	const { t } = useTranslation()
+	const { t } = useTranslation('viewPage')
 	const controls = useDragControls()
 	const isShelfColumn = column.value === 'shelfId'
 	const handleSwitchClick = () => onSwitchClick(column)

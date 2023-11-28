@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './NotificationSettings.module.scss';
 import { useSelector } from 'react-redux';
-import { getUserNotificationSettings } from '@/entities/User';
+import { getUserNotificationSettings, getUserSettingsIsLoading } from '@/entities/User';
 import { Card } from '@/shared/ui/Card';
 import { Heading } from '@/shared/ui/Typography';
 import { Switcher } from '@/shared/ui/Switcher';
@@ -27,6 +27,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 	} = props
 	const { t } = useTranslation()
 	// const { minimumCardsForEmailNotification } = useSelector(getUserNotificationSettings)
+	const isLoading = useSelector(getUserSettingsIsLoading)
 	const notificationsSettings = useSelector(getUserNotificationSettings)
 	const {
 		emailNotificationsEnabled,
@@ -34,7 +35,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 		minimumCardsForPush,
 		mobilePushEnabled,
 		notificationEmails
-	} = notificationsSettings!
+	} = notificationsSettings ?? {}
 
 	const [emailMinNotifications, setEmailMinNotifications] = useState(minimumCardsForEmailNotification ?? 15)
 	const [pushMinNotifications, setPushMinNotifications] = useState(minimumCardsForPush ?? 15)
@@ -77,7 +78,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 		if (e.deltaY > 0) onPushDownClick()
 		else onPushUpClick()
 	}
-
+	if (isLoading) return null
 	// console.log(notificationsSettings)
 	return (
 		<HDialogHeadless
@@ -93,7 +94,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 					<Card className={cls.notificationCard} >
 						<Heading size='s' title={'Email'} />
 						<Switcher
-							isChecked={emailEnabled}
+							isChecked={emailEnabled ?? true}
 							onClickSwitcher={onToggleEmailEnabled}
 						/>
 					</Card>
@@ -120,7 +121,7 @@ export const NotificationSettings = (props: NotificationSettingsProps) => {
 					<Card className={cls.notificationCard} >
 						<Heading size='s' title={'Push notification'} />
 						<Switcher
-							isChecked={pushEnabled}
+							isChecked={pushEnabled ?? false}
 							onClickSwitcher={onTogglePushEnabled}
 						/>
 					</Card>
