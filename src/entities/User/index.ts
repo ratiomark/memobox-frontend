@@ -32,7 +32,6 @@ export type {
 	AuthByEmailProps as LoginByUserNameProps
 } from './model/api/userApi';
 
-export { updateJsonSavedDataThunk as updateJsonSavedData } from './model/services/updateJsonSavedData';
 
 export {
 	getUserEmail,
