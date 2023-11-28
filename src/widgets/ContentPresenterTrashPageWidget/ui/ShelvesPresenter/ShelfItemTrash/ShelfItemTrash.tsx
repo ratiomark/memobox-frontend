@@ -23,7 +23,7 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 		shelf,
 	} = props
 	const { t } = useTranslation('trash-page')
-	const boxesCount = shelf.boxesData.length
+	const boxesCount = shelf.box.length
 	const [isCollapsed, setIsCollapsed] = useState(true)
 	const onCollapse = () => setIsCollapsed(prev => !prev)
 	const buttons = (
