@@ -18,6 +18,7 @@ import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
 import { userActions } from '@/entities/User';
 import { updateJsonSavedDataThunk } from '@/entities/User';
+import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 
 export const CommonShelfButtons = () => {
@@ -33,12 +34,11 @@ export const CommonShelfButtons = () => {
 	const dispatch = useAppDispatch()
 
 	const onCollapseClick = useCallback(() => {
-		// console.log('commonShelfCollapsed   ', commonShelfCollapsed)
-		// updateCommonShelfMutation(!commonShelfCollapsed)
 		dispatch(cupboardShelfListActions.setCommonShelfCollapsed(!commonShelfCollapsed))
 		dispatch(userActions.updateJsonSavedData({ commonShelfCollapsed: !commonShelfCollapsed }))
+		localDataService.setCommonShelfCollapsed(!commonShelfCollapsed)
 		dispatch(updateJsonSavedDataThunk())
-	}, [dispatch, commonShelfCollapsed,])
+	}, [dispatch, commonShelfCollapsed])
 	// }, [dispatch, updateCommonShelfMutation, commonShelfCollapsed,])
 
 	const onCollapseClickHandle = useThrottle(
