@@ -64,8 +64,15 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 						/>
 					</HStack>
 				</div>
-				<Button onClick={startTrainingNewCards} variant='filledBox' disabled={commonShelf!.new.all < 1} className={cls.trainButton} >{t('train')}</Button>
-			</li>	
+				<Button
+					className={cls.trainButton}
+					variant='filledBox'
+					onClick={startTrainingNewCards}
+					disabled={commonShelf && commonShelf.new.all < 1}
+				>
+					{t('train')}
+				</Button>
+			</li>
 
 			<li className={clsx(cls.Box, [className])} >
 				<div className={cls.boxInnerWrapper} >
@@ -91,7 +98,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 				<Button
 					onClick={startTrainingLearningCards}
 					variant='filledBox'
-					disabled={commonShelf!.learning.train < 1}
+					disabled={commonShelf && commonShelf.learning.train < 1}
 					className={cls.trainButton}
 				>
 					{t('train')}
@@ -120,12 +127,12 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 					</HStack>
 				</div>
 				<Button
-					onClick={startTrainingLearntCards}
-					variant='filledBox'
-					disabled={commonShelf!.learnt.train < 1}
 					className={cls.trainButton}
-				>{
-						t('train')}
+					variant='filledBox'
+					onClick={startTrainingLearntCards}
+					disabled={commonShelf && commonShelf.learnt.train < 1}
+				>
+					{t('train')}
 				</Button>
 			</li>
 
