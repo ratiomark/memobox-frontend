@@ -9,6 +9,7 @@ export {
 	updateShelfWithTag,
 	createNewShelf,
 	updateShelfListOrder,
+	useGetShelvesQuery,
 } from './model/api/shelvesApi'
 
 export { ShelfButtons } from '../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons'
