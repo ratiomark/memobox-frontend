@@ -17,7 +17,7 @@ import { Reorder, motion } from 'framer-motion';
 import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
 import { Card } from '@/shared/ui/Card';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
-import { updateJsonSavedData } from '@/entities/User';
+import { updateJsonSavedDataThunk } from '@/entities/User';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 import { getAppRoot } from '@/shared/lib/helpers/DOM/getAppRoot';
@@ -77,7 +77,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 	}
 
 	const onSubmitHandle= () => {
-		dispatch(updateJsonSavedData())
+		dispatch(updateJsonSavedDataThunk())
 		dispatch(viewPageActions.setColumnSettingsIsOpen(false))
 	}
 
