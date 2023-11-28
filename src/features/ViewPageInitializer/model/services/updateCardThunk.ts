@@ -1,56 +1,102 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { toastsActions } from '@/shared/ui/Toast'
-import { sleep } from '@/shared/lib/helpers/common/sleep'
-import { idPrefixCardDeletion } from '@/shared/const/idsAndDataAttributes'
+import { idPrefixCardUpdating } from '@/shared/const/idsAndDataAttributes'
 import { getViewPageAbortedThunkIds } from '../selectors/getViewPageInitializer'
-import { viewPageActions } from '../slice/viewPageSlice'
 import { t } from 'i18next'
+import { rtkApiUpdateCard } from '@/entities/Card'
+import { viewPageActions } from '../..'
 
-export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema, rejectedMeta: { aborted: boolean } }>(
-	'viewPage/deleteCardThunk',
-	async (cardId, thunkAPI) => {
+interface UpdateCardThunkArg {
+	cardId: string
+	question: string | null
+	answer: string | null
+	shelfId: string
+	boxId: string
+}
+
+export const updateCardThunk = createAsyncThunk<string, UpdateCardThunkArg, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+	// export const updateCardThunk = createAsyncThunk<string, UpdateCardThunkArg, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema, rejectedMeta: { aborted: boolean } }>(
+	'viewPage/updateCardThunk',
+	async (card, thunkAPI) => {
 
 		const { dispatch, getState } = thunkAPI
-		const id = idPrefixCardDeletion + cardId
+		const { cardId, ...restCardData } = card
+		const id = idPrefixCardUpdating + cardId
 		const abortedThunkIds = getViewPageAbortedThunkIds(getState())
 		try {
 			if (abortedThunkIds.includes(id)) {
 				throw new Error('Aborted')
 			}
-			dispatch(viewPageActions.setCardIsDeleted(cardId))
+			// dispatch(viewPageActions.setCardIsDeleted(cardId))
 			dispatch(toastsActions.addToast({
 				id,
 				toast: {
 					status: 'pending',
 					messageLoading: t('toast:messageLoading'),
 					messageError: t('toast:messageError'),
-					messageSuccess: t('toast:delete_card.messageSuccess'),
-					contentCommon: t('toast:delete_card.additional'),
+					messageSuccess: t('toast:update_card.messageSuccess'),
+					contentCommon: t('toast:update_card.additional'),
 				}
 			}))
+			const cardUpdated = await dispatch(rtkApiUpdateCard({ id: cardId, ...restCardData })).unwrap()
+			// console.log('обнова   ', cardUpdated)
 			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать cardId
 			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
-			await sleep()
-			const response = Math.random() > 0.5
+			// await sleep()
+			// const response = Math.random() > 0.5
 			// const response = Math.random() > 50
-			if (!response) {
+			if (!cardUpdated) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
 
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
+
+			dispatch(viewPageActions.setNewCardData(cardUpdated))
+
+			const cardOriginal = getState().viewPage!.cardsDataOriginal[cardId]!
+			const originalShelfId = cardOriginal.shelfId!
+			const originalBoxId = cardOriginal.boxId!
+
+			if (originalShelfId !== cardUpdated.shelfId || originalBoxId !== cardUpdated.boxId) {
+				dispatch(viewPageActions.removeCardFromShelfIdBoxIdObj({
+					shelfId: originalShelfId,
+					boxId: originalBoxId,
+					cardId: cardId
+				}))
+				dispatch(viewPageActions.addCardToShelfIdBoxIdObj({
+					boxId: cardUpdated.boxId,
+					shelfId: cardUpdated.shelfId,
+					card: cardUpdated
+				}))
+			} else {
+				dispatch(viewPageActions.updateCardDataInShelfIdBoxIdObj({
+					boxId: cardUpdated.boxId,
+					shelfId: cardUpdated.shelfId,
+					card: cardUpdated
+				}))
+			}
+			dispatch(viewPageActions.removeCardDataEditedByCardId(cardId))
+			dispatch(viewPageActions.updateCardDataOriginal(cardUpdated))
+			// if (cardOriginal?.boxId !== cardUpdated.boxId) {
+			// 	console.log('Поменялась коробка')
+			// }
+			// console.log(cardOriginal)
+			// console.log(cardUpdated)
+			// FIXME: тут я должен возвращать данные в таком виде, чтобы дропнуть у карточки состояние updating + edited. Убедиться, что карточка перестилась в другое место(если было перемещение) и что подсчет карточек работает корректно.
 			return cardId
 
 		} catch (err) {
-			const error = err as Error;
-			dispatch(viewPageActions.removeAbortedThunkId(id))
-			dispatch(viewPageActions.setCardIsNotDeleted(cardId))
-			if (error.message === 'Aborted') {
-				return thunkAPI.rejectWithValue(id, { aborted: true });
-			}
-			dispatch(viewPageActions.setCardIsNotDeleting(cardId))
-			return thunkAPI.rejectWithValue(cardId, { aborted: false });
+			return thunkAPI.rejectWithValue('fail')
+			// const error = err as Error;
+			// dispatch(viewPageActions.removeAbortedThunkId(id))
+			// dispatch(viewPageActions.setCardIsNotupdated(cardId))
+			// if (error.message === 'Aborted') {
+			// 	return thunkAPI.rejectWithValue(id, { aborted: true });
+			// }
+			// dispatch(viewPageActions.setCardIsNotDeleting(cardId))
+			// return thunkAPI.rejectWithValue(cardId, { aborted: false });
 		}
 	}
 )

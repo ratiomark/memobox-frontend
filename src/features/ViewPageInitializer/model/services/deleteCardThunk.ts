@@ -6,6 +6,8 @@ import { idPrefixCardDeletion } from '@/shared/const/idsAndDataAttributes'
 import { getViewPageAbortedThunkIds } from '../selectors/getViewPageInitializer'
 import { viewPageActions } from '../slice/viewPageSlice'
 import { t } from 'i18next'
+import { TAG_VIEW_PAGE, TAG_TRASH_PAGE } from '@/shared/api/const/tags'
+import { rtkApi } from '@/shared/api/rtkApi'
 let test = 0
 export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema, rejectedMeta: { aborted: boolean } }>(
 	'viewPage/deleteCardThunk',
@@ -32,17 +34,13 @@ export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: s
 					contentCommon: t('toast:delete_card.additional'),
 				}
 			}))
-			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать cardId
-			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
-			// await sleep()
 			const response = Math.random() > 0
-			// const response = Math.random() > 0.5
-			// const response = Math.random() > 50
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
 
+			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			return cardId
 

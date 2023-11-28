@@ -1,11 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { toastsActions } from '@/shared/ui/Toast'
-import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { getViewPageAbortedThunkIds } from '../selectors/getViewPageInitializer'
 import { viewPageActions } from '../slice/viewPageSlice'
 import { t } from 'i18next'
 import { getCardIdsSelectedForDeletionByRandomId } from '../selectors/getViewPageMultiSelect'
+import { rtkApiDeleteCards } from '@/entities/Card'
+import { TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE, TAG_VIEW_PAGE, } from '@/shared/api/const/tags'
+import { rtkApi } from '@/shared/api/rtkApi'
 
 export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rejectValue: string[], extra: ThunkExtraArg, state: StateSchema, rejectedMeta: { aborted: boolean } }>(
 	'viewPage/deleteMultipleCardsThunk',
@@ -39,14 +41,13 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать cardId
 			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
 			// dispatch(restoreAllShelves())
-			await sleep()
-			// const response = Math.random() > 0.5
-			const response = Math.random() > 50
+			const response = await dispatch(rtkApiDeleteCards({ cardIds: cardIdsSelectedForDeletion })).unwrap()
+
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
-
+			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			return cardIdsSelectedForDeletion
 
