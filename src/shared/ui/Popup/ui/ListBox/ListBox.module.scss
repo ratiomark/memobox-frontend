@@ -66,6 +66,12 @@
   max-height: 200px;
   overflow-y: auto;
 
+  &:focus-visible,
+  &:focus-within {
+    box-shadow: none;
+    border: none;
+  }
+
   // &::-webkit-scrollbar-thumb {
   //   /* Укажи цвет скроллбара */
   //   background: #e42e3a;

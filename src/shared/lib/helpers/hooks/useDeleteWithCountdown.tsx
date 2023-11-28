@@ -40,19 +40,18 @@ export const useDeleteWithCountdown = (props: useDeleteWithCountdownProps) => {
 
 	// удаляет полку сразу, если перезагружает или закрывает вкладку
 	useEffect(() => {
-		const deleteCard = () => {
+		const deleteCallBack = () => {
 			if (startCondition) {
 				console.log('FIRE')
 				deletionFn()
 			}
 		}
 
-		window.addEventListener('beforeunload', deleteCard)
+		window.addEventListener('beforeunload', deleteCallBack)
 		return () => {
-			window.removeEventListener('beforeunload', deleteCard)
+			window.removeEventListener('beforeunload', deleteCallBack)
 		}
 	}, [deletionFn, startCondition])
-	// }, [condition, deletionFn])
-	return { timer }
 	// return { timer, condition, setCondition }
+	return { timer }
 }

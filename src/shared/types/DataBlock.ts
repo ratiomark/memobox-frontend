@@ -1,3 +1,7 @@
+
+// eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
+import { MissedTrainingValue } from '@/entities/User'
+
 export interface DataBlock {
 	wait: number
 	all: number
@@ -19,6 +23,5 @@ export type ExtendedTimingBlock = TimingBlock & {
 	keyId: 'initial' | 'unsaved'
 	id: string
 	isOpen: boolean
+	missedTrainingValue?: MissedTrainingValue
 }
-
-export type MissedTrainingValue = 'none' | 'additional' | 'backwards'

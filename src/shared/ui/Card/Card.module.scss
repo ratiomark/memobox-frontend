@@ -6,6 +6,15 @@
   box-shadow: var(--entities-box-shadow-main);
 }
 
+.isLoading {
+  opacity: 0.8;
+  cursor: wait;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 .horizontal {
   display: flex;
 }

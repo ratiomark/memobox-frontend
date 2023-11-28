@@ -34,11 +34,11 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 
 
 	const handleSelectItem = (e: MouseEvent, item: HorizontalScrollerListItem, indexPlus1: number) => {
-		itemRefs.current[indexPlus1 - 1].scrollIntoView({
-			behavior: 'smooth',
-			block: 'nearest',
-			inline: 'center'
-		})
+		// itemRefs.current[indexPlus1 - 1].scrollIntoView({
+		// 	behavior: 'smooth',
+		// 	block: 'nearest',
+		// 	inline: 'center'
+		// })
 		item.onChange()
 	}
 

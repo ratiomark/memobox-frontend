@@ -32,6 +32,9 @@ interface CardProps extends HTMLMotionProps<'div'> {
 	horizontal?: boolean
 	max?: boolean
 	withHover?: boolean
+	isLoading?: boolean
+	pointer?: boolean
+	skeleton?: ReactNode
 }
 
 export const Card = memo((props: CardProps) => {
@@ -43,11 +46,16 @@ export const Card = memo((props: CardProps) => {
 		horizontal,
 		padding = '8',
 		withHover,
+		isLoading,
+		skeleton,
+		pointer,
+		onClick,
 		...otherProps
 	} = props
-	const paddingClass = mapPaddingClass[padding]
-	return (
 
+	const paddingClass = mapPaddingClass[padding]
+
+	return (
 		<motion.div
 			whileHover={{ scale: withHover ? 1.03 : 1 }}
 			transition={{ duration: 0.3 }}
@@ -58,9 +66,12 @@ export const Card = memo((props: CardProps) => {
 				{
 					[cls.max]: max,
 					[cls.horizontal]: horizontal,
+					[cls.isLoading]: isLoading,
+					[cls.pointer]: pointer && !isLoading
 				},
 				className
 			)}
+			onClick={isLoading ? undefined : onClick}
 			{...otherProps}
 		>
 			{children}

@@ -1,14 +1,20 @@
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { ShelfSchema } from '@/entities/Shelf';
+// eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
+import { SortColumnValue } from '@/entities/User';
 import {
 	KEY_COMMON_SHELF_IS_COLLAPSED,
 	KEY_SHELVES_LOCAL_STORAGE,
 	KEY_THEME_LOCAL_STORAGE,
+	KEY_USER_ID_LOCAL_STORAGE,
 	KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE,
 	KEY_USER_TOKEN_LOCAL_STORAGE,
 	KEY_VIEW_ROWS_LOCAL_STORAGE,
-	
+	KEY_VIEW_SORT_ORDER_LOCAL_STORAGE,
+	KEY_VIEW_SORT_VALUE_LOCAL_STORAGE,
+
 } from '@/shared/const/localStorage';
+import { SortOrderType } from '@/shared/types/SortOrderType';
 import { Theme } from '@/shared/types/Theme';
 
 interface IStorageService {
@@ -64,9 +70,16 @@ interface ILocalDataService {
 	setViewRows(viewRowsValue: string | number): void
 	getViewRows(): number
 	setToken(token: string | number): void
-	setAccessToken(token: string | number): void
-	getAccessToken(): string
+	setRefreshToken(token: string | number): void
+	getRefreshToken(): string
+	setUserId(userId: string): void
+	getUserId(): string
 	logout(): void
+	// 
+	setSortOrderViewPage(sortOrder: SortOrderType): void
+	getSortOrderViewPage(): SortOrderType
+	setSortValueViewPage(sortValue: SortColumnValue): void
+	getSortValueViewPage(): SortColumnValue
 }
 
 class LocalDataService implements ILocalDataService {
@@ -106,11 +119,17 @@ class LocalDataService implements ILocalDataService {
 	getToken(): string {
 		return this.getData(KEY_USER_TOKEN_LOCAL_STORAGE)
 	}
-	setAccessToken(token: string): void {
+	setRefreshToken(token: string): void {
 		this.saveData(KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE, token)
 	}
-	getAccessToken(): string {
+	getRefreshToken(): string {
 		return this.getData(KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE)
+	}
+	setUserId(userId: string): void {
+		this.saveData(KEY_USER_ID_LOCAL_STORAGE, userId)
+	}
+	getUserId(): string {
+		return this.getData(KEY_USER_ID_LOCAL_STORAGE)
 	}
 	setViewRows(viewRows: string | number): void {
 		this.saveData(KEY_VIEW_ROWS_LOCAL_STORAGE, viewRows)
@@ -127,6 +146,21 @@ class LocalDataService implements ILocalDataService {
 	}
 	logout() {
 		this.removeData(KEY_USER_TOKEN_LOCAL_STORAGE)
+		this.removeData(KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE)
+		this.removeData(KEY_USER_ID_LOCAL_STORAGE)
+	}
+	// 
+	setSortOrderViewPage(sortOrder: SortOrderType) {
+		this.saveData(KEY_VIEW_SORT_ORDER_LOCAL_STORAGE, sortOrder)
+	}
+	getSortOrderViewPage(): SortOrderType {
+		return this.getData(KEY_VIEW_SORT_ORDER_LOCAL_STORAGE) ?? 'asc'
+	}
+	setSortValueViewPage(sortValue: SortColumnValue) {
+		this.saveData(KEY_VIEW_SORT_VALUE_LOCAL_STORAGE, sortValue)
+	}
+	getSortValueViewPage(): SortColumnValue {
+		return this.getData(KEY_VIEW_SORT_VALUE_LOCAL_STORAGE) ?? 'createdAt'
 	}
 }
 

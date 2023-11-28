@@ -10,3 +10,5 @@ export const dataAttrButtonTypeAddCardButtonGeneral = 'shelf-add-card-general'
 // -- js const
 export const idPrefixShelfDeletion = 'shelfDeletion'
 export const idPrefixCardDeletion = 'cardDeletion'
+export const idPrefixCardUpdating = 'cardUpdating'
+export const idPrefixShelfBoxesTemplateUpdating = 'shelfBoxesTemplateUpdating'

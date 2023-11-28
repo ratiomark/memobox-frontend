@@ -1,5 +1,4 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { EditorState } from 'lexical';
 import { useEffect } from 'react';
 
 type EditorStateSetterProps = {

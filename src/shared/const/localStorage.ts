@@ -7,3 +7,5 @@ export const KEY_COMMON_SHELF = 'commonShelf';
 export const KEY_SHELVES_LOCAL_STORAGE = 'shelves';
 export const KEY_THEME_LOCAL_STORAGE = 'theme';
 export const KEY_VIEW_ROWS_LOCAL_STORAGE = 'viewRows';
+export const KEY_VIEW_SORT_ORDER_LOCAL_STORAGE = 'sortOrder';
+export const KEY_VIEW_SORT_VALUE_LOCAL_STORAGE = 'sortValue';

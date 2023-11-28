@@ -1,8 +1,10 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { localDataService } from '../lib/helpers/common/localDataService'
 import { isRefreshResponse } from './helpers/checkResponse';
+import { TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE, TAG_VIEW_PAGE } from './const/tags';
 
 const getAuthToken = () => localDataService.getToken();
+const getUserLang = () => localStorage.getItem('i18nextLng') ?? 'en'
 
 const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = fetchBaseQuery({
 	baseUrl: __API__,
@@ -11,6 +13,8 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =
 		if (token) {
 			headers.set('Authorization', `Bearer ${token}`);
 		}
+		headers.set('Accept-Language', getUserLang());
+		headers.set('x-custom-lang', getUserLang());
 		return headers;
 	}
 });
@@ -41,7 +45,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 export const rtkApi = createApi({
 	baseQuery: baseQueryWithReAuth,
-	tagTypes: ['Shelves', 'Cards'],
+	tagTypes: ['Shelves', TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE, TAG_TRASH_PAGE],
 	endpoints: builder => ({})
 });
 

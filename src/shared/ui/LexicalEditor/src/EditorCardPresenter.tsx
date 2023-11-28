@@ -5,30 +5,34 @@ import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import ContentEditable from './ui/ContentEditable';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import PlaygroundNodes from './nodes/PlaygroundNodes';
+import { lexicalEmptyEditorState } from '@/shared/const/lexical';
+import { EditorStateSetterPlugin } from './plugins/EditorStateSetterPlugin/EditorStateSetterPlugin';
 
 interface EditorProps {
-	editorState?: string
+	editorState: string | null
 	namespace?: string
 }
 
 function Editor() {
 	return (
-		<PlainTextPlugin
-			contentEditable={
-				<div className="editor-scroller-card-presenter">
-					<ContentEditable className='ContentEditable__card-presenter' />
-				</div>
-			}
-			placeholder={null}
-			ErrorBoundary={LexicalErrorBoundary}
-		/>
+		<>
+			<PlainTextPlugin
+				contentEditable={
+					<div className="editor-scroller-card-presenter">
+						<ContentEditable className='ContentEditable__card-presenter' />
+					</div>
+				}
+				placeholder={null}
+				ErrorBoundary={LexicalErrorBoundary}
+			/>
+		</>
 	);
 }
 
 export const EditorCardPresenter = (props: EditorProps) => {
 	const initialConfig = {
-		editable: false,
-		editorState: props.editorState,
+		editable: true,
+		editorState: props.editorState ?? lexicalEmptyEditorState,
 		namespace: props.namespace ? props.namespace : 'Playground',
 		nodes: [...PlaygroundNodes],
 		onError: (error: Error) => {
@@ -39,6 +43,7 @@ export const EditorCardPresenter = (props: EditorProps) => {
 
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
+			<EditorStateSetterPlugin editorState={props.editorState ?? lexicalEmptyEditorState} />
 			<Editor />
 		</LexicalComposer>
 	)
