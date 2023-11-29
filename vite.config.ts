@@ -60,8 +60,8 @@ export default defineConfig({
 	},
 	define: {
 		__IS_DEV__: JSON.stringify(true),
-		__API__: JSON.stringify('https://memobox-backend.onrender.com/api/v1'),
-		// __API__: JSON.stringify('http://localhost:3000/api/v1'),
+		// __API__: JSON.stringify('https://memobox-backend.onrender.com/api/v1'),
+		__API__: JSON.stringify('http://localhost:3000/api/v1'),
 		// __API__: JSON.stringify('http://localhost:8000'),
 		// NSA: укажи тут адрес сервера
 		// __API__BACK: JSON.stringify('http://localhost:3000'),

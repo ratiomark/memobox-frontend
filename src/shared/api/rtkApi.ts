@@ -7,7 +7,10 @@ const getAuthToken = () => localDataService.getToken();
 const getUserLang = () => localStorage.getItem('i18nextLng') ?? 'en'
 
 const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = fetchBaseQuery({
-	baseUrl: __API__,
+	baseUrl:
+		import.meta.env.DEV
+			? __API__
+			: __API__BACK,
 	prepareHeaders: (headers) => {
 		const token = getAuthToken();
 		if (token) {
