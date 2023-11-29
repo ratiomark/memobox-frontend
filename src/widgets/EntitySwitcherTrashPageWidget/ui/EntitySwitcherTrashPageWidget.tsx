@@ -33,15 +33,15 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 		console.log(data)
 		return [
 			{
-				content: t('shelves') + (data?.shelves.length ? ` (${data?.shelves.length})` : ' (0)'),
+				content: t('shelves') + (` (${data?.shelves.length})` ?? ' (0)'),
 				value: 'shelves'
 			},
 			{
-				content: t('boxes') + (data?.boxes.length ? ` (${data?.boxes.length})` : ' (0)'),
+				content: t('boxes') + (` (${data?.boxes.length})` ?? ' (0)'),
 				value: 'boxes'
 			},
 			{
-				content: t('cards') + (data?.cards.length ? ` (${data?.cards.length})` : ' (0)'),
+				content: t('cards') + (` (${data?.cards.length})` ?? ' (0)'),
 				value: 'cards'
 			},
 		]
