@@ -7,28 +7,28 @@ import { ShelvesPresenter } from './ShelvesPresenter/ShelvesPresenter';
 import { CardsPresenter } from './CardsPresenter/CardsPresenter';
 import { BoxesPresenter } from './BoxesPresenter/BoxesPresenter';
 
-interface ContentPresenterTrashPageWidgetProps {
-	className?: string
-	
-}
 
-export const ContentPresenterTrashPageWidget = (props: ContentPresenterTrashPageWidgetProps) => {
-	const {
-		className
-	} = props
+
+export const ContentPresenterTrashPageWidget = () => {
 	const activeEntityValue = useSelector(getTrashPageActiveEntity)
-	const { t } = useTranslation()
-
-	return (
-		// <div className={clsx(
-		// 	cls.contentPresenterTrashPageWidget,
-		// 	className)}
-		// >
-		<>
-			{activeEntityValue === 'shelves' && <ShelvesPresenter />}
-			{activeEntityValue === 'boxes' && <BoxesPresenter />}
-			{activeEntityValue === 'cards' && <CardsPresenter />}
-		</>
-		//</div> 
-	)
+	switch (activeEntityValue) {
+		case 'shelves':
+			return <ShelvesPresenter />
+		case 'boxes':
+			return <BoxesPresenter />
+		default:
+			return <CardsPresenter />
+	}
+	// return (
+	// 	// <div className={clsx(
+	// 	// 	cls.contentPresenterTrashPageWidget,
+	// 	// 	className)}
+	// 	// >
+	// 	<>
+	// 		{activeEntityValue === 'shelves' && <ShelvesPresenter />}
+	// 		{activeEntityValue === 'boxes' && <BoxesPresenter />}
+	// 		{activeEntityValue === 'cards' && <CardsPresenter />}
+	// 	</>
+	// 	//</div> 
+	// )
 }

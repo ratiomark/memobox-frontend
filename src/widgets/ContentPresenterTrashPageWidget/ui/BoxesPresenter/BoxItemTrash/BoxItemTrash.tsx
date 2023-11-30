@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import cls from './ShelfItemTrash.module.scss'
-import { BoxSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash';
+import cls from './BoxItemTrash.module.scss'
+import { ShelfSchemaDeleted } from '@/entities/Trash';
 import { Card } from '@/shared/ui/Card';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { HStack } from '@/shared/ui/Stack';
@@ -13,18 +13,17 @@ import { useTranslation } from 'react-i18next';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
-import { Collapsible } from '@/shared/ui/Animations';
+import { BoxSchemaDeleted } from '@/entities/Trash';
 import { ButtonsBlockTrashEntity } from '../../ButtonsBlock/ButtonsBlockTrashEntity';
-interface ShelfItemProps {
+interface BoxItemTrashProps {
 	className?: string;
-	shelf: ShelfSchemaDeleted
+	box: BoxSchemaDeleted
 }
 
-export const ShelfItemTrash = (props: ShelfItemProps) => {
+export const BoxItemTrash = (props: BoxItemTrashProps) => {
 	const {
 		className,
-		shelf,
+		box,
 	} = props
 	const { t } = useTranslation('trash-page')
 	const dispatch = useAppDispatch()
@@ -35,34 +34,37 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 
 	const onCollapse = () => setIsCollapsed(prev => !prev)
 
-	// const buttons = (
-	// 	<div className={cls.buttons} >
-	// 		<Button>{t('restore')}</Button>
-	// 		<Icon
-	// 			Svg={TrashIcon}
-	// 			type='cancel'
-	// 			clickable
-	// 			withFill={false}
-	// 			width={22}
-	// 			height={22}
-	// 			onClick={() => { }}
-	// 			buttonSameSize={false}
-	// 			className={clsx(cls.icon, cls.removeIcon)}
-	// 		/>
-	// 		<Icon
-	// 			className={
-	// 				clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
-	// 			clickable
-	// 			type='hint'
-	// 			Svg={ArrowBottomIcon}
-	// 			onClick={onCollapse}
-	// 		/>
-	// 	</div>)
+	const buttons = (
+		<div className={cls.buttons} >
+			<Icon
+				className={
+					clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
+				clickable
+				type='hint'
+				Svg={ArrowBottomIcon}
+				onClick={onCollapse}
+			/>
+			<Button>{t('restore')}</Button>
+			<Icon
+				Svg={TrashIcon}
+				type='cancel'
+				clickable
+				withFill={false}
+				width={22}
+				height={22}
+				onClick={() => { }}
+				buttonSameSize={false}
+				className={clsx(cls.icon, cls.removeIcon)}
+			/>
+		</div>)
 
 	const boxes = (
-		<div >
-			{shelf.box.map(box => <BoxItemTrash key={box.id} box={box as BoxSchemaDeleted} />)}
-		</div>
+		<>
+			{/* {box.card} */}
+			{/* <div>new cards</div> */}
+			{/* {Array.from({ length: shelf.boxCount - 2 }, (_, i) => <div>{i}</div>)} */}
+			{/* <div>learnt</div> */}
+		</>
 	)
 
 	return (
@@ -70,23 +72,23 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 
 			<HStack
 				max
-				className={clsx(cls.ShelfItem, [className])}
+				className={clsx(cls.BoxItem, [className])}
 			>
 				<Heading className={cls.title}
 					as={'h3'}
-					title={shelf.title} />
+					title={box.index} />
 				<MyText
 					size='s'
-					text={shelf.boxesCount ?? 'кол-во коробок'}
+					text={box.cardsCount ?? 'xxx'}
 				/>
 				<MyText
 					size='s'
-					text={shelf.cardsCount ?? 'кол-во карточек'}
+					text={'?'}
 				/>
 				<MyText
 					saveOriginal
 					size='s'
-					text={shelf.deletedAt ?? formatDate('2022-03-27T08:36:08.269Z')}
+					text={box.deletedAt ?? formatDate('2022-03-27T08:36:08.269Z')}
 				/>
 				<ButtonsBlockTrashEntity
 					isCollapsed={isCollapsed}
@@ -95,13 +97,7 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 				// onRemoveClick={() => { }}
 				/>
 			</HStack>
-			{/* <Collapsible
-				isOpen={!isCollapsed}
-			>
-
-				{boxes}
-			</Collapsible> */}
-			{!isCollapsed && boxes}
+			{boxes}
 		</div>
 	)
 }

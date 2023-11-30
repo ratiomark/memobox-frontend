@@ -1,0 +1,20 @@
+.contentPresenter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.contentListWrapper {
+  position: relative;
+}
+
+.labelsWrapper {
+  min-height: 20px;
+  border: 1px solid red;
+}
+
+.absolute {
+  left: 0;
+  min-width: 100%;
+}

@@ -7,6 +7,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { useUpdateCardsMutation } from '@/entities/Card';
 import { getTrashPageIsMultiSelectActive, getTrashPageSelectedCardIds } from '@/features/TrashPageInitializer';
 import { useGetShelvesQuery } from '@/entities/Shelf';
+import { useGetTrashQuery } from '@/entities/Trash';
 
 interface MultiSelectScreenProps {
 	className?: string
@@ -25,7 +26,8 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 		onMoveCardsClick,
 		onRemoveCards
 	} = props
-	const { data: shelvesData, isLoading: isShelvesLoading } = useGetShelvesQuery()
+	const { isLoading, data, isError } = useGetTrashQuery()
+	const { shelvesAndBoxesData } = data || {};
 	const selectedCardIds = useSelector(getTrashPageSelectedCardIds)
 	const [updateCardsMutation] = useUpdateCardsMutation()
 	const isMultiSelectActive = useSelector(getTrashPageIsMultiSelectActive)
@@ -52,10 +54,10 @@ export const MultiSelectScreen = (props: MultiSelectScreenProps) => {
 				</div>
 				<div className={cls.innerWrapper} >
 					<Button onClick={onSelectAllCards}>{t('select all')}</Button>
-					{shelvesData
+					{/* {shelvesData
 						&& shelvesData.length > 1
 						&& <Button onClick={onMoveCardsClick}>{t('move selected cards')}</Button>
-					}
+					} */}
 				</div>
 
 

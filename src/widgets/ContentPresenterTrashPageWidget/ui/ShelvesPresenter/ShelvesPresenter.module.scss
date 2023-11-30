@@ -1,5 +1,5 @@
 .ShelvesPresenter {
-  border: 1px solid olivedrab;
+  // border: 1px solid olivedrab;
 }
 
 .shelfListWrapper {
@@ -9,4 +9,8 @@
 .absolute {
   left: 0;
   min-width: 100%;
+}
+
+.shelvesPresenterLabelsWrapper {
+  min-height: 20px;
 }

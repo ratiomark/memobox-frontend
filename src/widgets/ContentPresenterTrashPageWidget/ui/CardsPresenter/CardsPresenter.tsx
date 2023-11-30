@@ -10,6 +10,7 @@ import {
 } from '@/features/TrashPageInitializer';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useSelector } from 'react-redux';
+import { Suspense } from 'react';
 
 interface CardsPresenterProps {
 	className?: string
@@ -41,12 +42,14 @@ export const CardsPresenter = (props: CardsPresenterProps) => {
 			className)}
 		>
 			{cards}
-			<MultiSelectScreen
-				onCancelMultiSelect={onCancelMultiSelect}
-				onSelectAllCards={onSelectAllCards}
-				onMoveCardsClick={onMoveCardsClick}
-				onRemoveCards={onRemoveCards}
-			/>
+			<Suspense fallback={null}>
+				<MultiSelectScreen
+					onCancelMultiSelect={onCancelMultiSelect}
+					onSelectAllCards={onSelectAllCards}
+					onMoveCardsClick={onMoveCardsClick}
+					onRemoveCards={onRemoveCards}
+				/>
+			</Suspense>
 		</div>
 	)
 }
