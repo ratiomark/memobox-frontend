@@ -7,8 +7,9 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { ShelfItemTrash } from './ShelfItemTrash/ShelfItemTrash';
 import { HStack } from '@/shared/ui/Stack';
-import { ContentPresenterWrapper } from '../common/ContentPresenterWrapper';
+import { ContentPresenterWrapper } from '../ContentPresenterWrapper/ContentPresenterWrapper';
 import { MyText } from '@/shared/ui/Typography';
+import { ButtonsBlockTrashEntity } from '../ButtonsBlock/ButtonsBlockTrashEntity';
 
 interface ShelvesPresenterProps {
 	className?: string
@@ -34,7 +35,7 @@ export const ShelvesPresenter = (props: ShelvesPresenterProps) => {
 	// 	/>
 	// )
 	const labelsList = (
-		<>
+		<div className={cls.labelsListWrapper} >
 			<MyText
 				size='s'
 				text={t('shelf')}
@@ -51,7 +52,15 @@ export const ShelvesPresenter = (props: ShelvesPresenterProps) => {
 				size='s'
 				text={t('deletedAt')}
 			/>
-		</>
+			<div className={cls.labelsListButtonsBlock} >
+				<ButtonsBlockTrashEntity
+					isCollapsed={true}
+					onCollapseClick={() => { }}
+					onRestoreClick={() => { }}
+					onRemoveClick={() => { }}
+				/>
+			</div>
+		</div>
 	)
 
 	return (

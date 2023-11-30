@@ -14,3 +14,13 @@
 .shelvesPresenterLabelsWrapper {
   min-height: 20px;
 }
+
+.labelsListWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.labelsListButtonsBlock {
+  opacity: 0;
+}

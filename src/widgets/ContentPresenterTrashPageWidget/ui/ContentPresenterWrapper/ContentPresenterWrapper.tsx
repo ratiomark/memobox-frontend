@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import cls from '../common/styles.module.scss';
+import cls from './ContentPresenterWrapper.module.scss';
 import { useGetTrashQuery } from '@/entities/Trash';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
-import { HStack } from '@/shared/ui/Stack';
+import { HStack, VStack } from '@/shared/ui/Stack';
 import { ReactNode } from 'react';
 
 interface ShelvesPresenterProps {
@@ -26,7 +26,11 @@ export const ContentPresenterWrapper = (props: ShelvesPresenterProps) => {
 		<AnimateSkeletonLoader
 			isLoading={isLoading}
 			skeletonComponent={<Skeleton width={1000} height={35} />}
-			componentAfterLoading={contentList}
+			componentAfterLoading={
+				<ul className={cls.contentWrapper}>
+					{contentList}
+				</ul>
+			}
 			commonWrapper={false}
 			classNameAbsoluteParts={cls.absolute}
 		/>
@@ -40,9 +44,9 @@ export const ContentPresenterWrapper = (props: ShelvesPresenterProps) => {
 			>
 				{labelsList}
 			</HStack>
-			<ul className={cls.contentListWrapper} >
+			<div className={cls.contentListWrapper} >
 				{content}
-			</ul>
+			</div>
 		</div>
 	)
 }

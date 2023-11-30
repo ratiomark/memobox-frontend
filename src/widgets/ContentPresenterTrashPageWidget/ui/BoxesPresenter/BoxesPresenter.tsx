@@ -6,7 +6,7 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { ShelfItemTrash } from '../ShelvesPresenter/ShelfItemTrash/ShelfItemTrash';
 import { BoxItemTrash } from './BoxItemTrash/BoxItemTrash';
-import { ContentPresenterWrapper } from '../common/ContentPresenterWrapper';
+import { ContentPresenterWrapper } from '../ContentPresenterWrapper/ContentPresenterWrapper';
 import { MyText } from '@/shared/ui/Typography';
 
 interface BoxesPresenterProps {

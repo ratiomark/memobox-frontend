@@ -17,13 +17,11 @@ import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
 import { Collapsible } from '@/shared/ui/Animations';
 import { ButtonsBlockTrashEntity } from '../../ButtonsBlock/ButtonsBlockTrashEntity';
 interface ShelfItemProps {
-	className?: string;
 	shelf: ShelfSchemaDeleted
 }
 
 export const ShelfItemTrash = (props: ShelfItemProps) => {
 	const {
-		className,
 		shelf,
 	} = props
 	const { t } = useTranslation('trash-page')
@@ -31,46 +29,20 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 
 	// const boxesCount = shelf.box.length
 
-	const [isCollapsed, setIsCollapsed] = useState(true)
+	const [isCollapsed, setIsCollapsed] = useState(false)
 
 	const onCollapse = () => setIsCollapsed(prev => !prev)
 
-	// const buttons = (
-	// 	<div className={cls.buttons} >
-	// 		<Button>{t('restore')}</Button>
-	// 		<Icon
-	// 			Svg={TrashIcon}
-	// 			type='cancel'
-	// 			clickable
-	// 			withFill={false}
-	// 			width={22}
-	// 			height={22}
-	// 			onClick={() => { }}
-	// 			buttonSameSize={false}
-	// 			className={clsx(cls.icon, cls.removeIcon)}
-	// 		/>
-	// 		<Icon
-	// 			className={
-	// 				clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
-	// 			clickable
-	// 			type='hint'
-	// 			Svg={ArrowBottomIcon}
-	// 			onClick={onCollapse}
-	// 		/>
-	// 	</div>)
-
 	const boxes = (
-		<div >
+		<ul className={cls.boxListWrapper} >
 			{shelf.box.map(box => <BoxItemTrash key={box.id} box={box as BoxSchemaDeleted} />)}
-		</div>
+		</ul>
 	)
 
 	return (
-		<div>
-
-			<HStack
-				max
-				className={clsx(cls.ShelfItem, [className])}
+		<li>
+			<div
+				className={cls.ShelfItem}
 			>
 				<Heading className={cls.title}
 					as={'h3'}
@@ -94,7 +66,7 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 				// onRestoreClick={() => { }}
 				// onRemoveClick={() => { }}
 				/>
-			</HStack>
+			</div>
 			{/* <Collapsible
 				isOpen={!isCollapsed}
 			>
@@ -102,6 +74,6 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 				{boxes}
 			</Collapsible> */}
 			{!isCollapsed && boxes}
-		</div>
+		</li>
 	)
 }

@@ -11,7 +11,7 @@ import { Button } from '@/shared/ui/Button';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxSchemaDeleted } from '@/entities/Trash';
 import { ButtonsBlockTrashEntity } from '../../ButtonsBlock/ButtonsBlockTrashEntity';
@@ -28,47 +28,51 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 	const { t } = useTranslation('trash-page')
 	const dispatch = useAppDispatch()
 
-	// const boxesCount = shelf.box.length
-
 	const [isCollapsed, setIsCollapsed] = useState(true)
 
 	const onCollapse = () => setIsCollapsed(prev => !prev)
+	const boxTitle = useMemo(() => {
+		switch (box.specialType) {
+			case 'none':
+				return `${t('box text')} ${box.index}`
+			case 'new':
+				return t('new cards')
+			default:
+				return t('learnt cards')
+		}
+	}, [box.index, box.specialType, t])
+	// const buttons = (
+	// 	<div className={cls.buttons} >
+	// 		<Icon
+	// 			className={
+	// 				clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
+	// 			clickable
+	// 			type='hint'
+	// 			Svg={ArrowBottomIcon}
+	// 			onClick={onCollapse}
+	// 		/>
+	// 		<Button>{t('restore')}</Button>
+	// 		<Icon
+	// 			Svg={TrashIcon}
+	// 			type='cancel'
+	// 			clickable
+	// 			withFill={false}
+	// 			width={22}
+	// 			height={22}
+	// 			onClick={() => { }}
+	// 			buttonSameSize={false}
+	// 			className={clsx(cls.icon, cls.removeIcon)}
+	// 		/>
+	// 	</div>)
 
-	const buttons = (
-		<div className={cls.buttons} >
-			<Icon
-				className={
-					clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
-				clickable
-				type='hint'
-				Svg={ArrowBottomIcon}
-				onClick={onCollapse}
-			/>
-			<Button>{t('restore')}</Button>
-			<Icon
-				Svg={TrashIcon}
-				type='cancel'
-				clickable
-				withFill={false}
-				width={22}
-				height={22}
-				onClick={() => { }}
-				buttonSameSize={false}
-				className={clsx(cls.icon, cls.removeIcon)}
-			/>
-		</div>)
-
-	const boxes = (
-		<>
-			{/* {box.card} */}
-			{/* <div>new cards</div> */}
-			{/* {Array.from({ length: shelf.boxCount - 2 }, (_, i) => <div>{i}</div>)} */}
-			{/* <div>learnt</div> */}
-		</>
+	const cards = (
+		<ul>
+		{/* {box.cards} */}
+		</ul>
 	)
 
 	return (
-		<div>
+		<li>
 
 			<HStack
 				max
@@ -76,7 +80,7 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 			>
 				<Heading className={cls.title}
 					as={'h3'}
-					title={box.index} />
+					title={boxTitle} />
 				<MyText
 					size='s'
 					text={box.cardsCount ?? 'xxx'}
@@ -97,7 +101,7 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 				// onRemoveClick={() => { }}
 				/>
 			</HStack>
-			{boxes}
-		</div>
+			{cards}
+		</li>
 	)
 }

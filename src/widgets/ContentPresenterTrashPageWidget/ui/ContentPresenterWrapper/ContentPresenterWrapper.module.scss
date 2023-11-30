@@ -1,0 +1,39 @@
+.contentPresenter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.contentListWrapper {
+  position: relative;
+
+  // display: flex;
+  // flex-direction: column;
+  // gap: 20px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 100%;
+  align-items: stretch;
+}
+
+.labelsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 calc(var(--card-list-item-padding-left-and-right) + var(--view-page-icon-button-size)) 0 var(--card-list-item-padding-left-and-right);
+  user-select: none;
+  min-height: var(--min-height-sorting-wrapper, 40);
+
+  // min-height: 20px;
+  border: 1px solid red;
+}
+
+.absolute {
+  left: 0;
+  min-width: 100%;
+}
