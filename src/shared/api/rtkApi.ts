@@ -4,7 +4,7 @@ import { isRefreshResponse } from './helpers/checkResponse';
 import { TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE, TAG_VIEW_PAGE } from './const/tags';
 
 const getAuthToken = () => localDataService.getToken();
-const getUserLang = () => localStorage.getItem('i18nextLng') ?? 'en'
+const getUserLang = () => localDataService.getLanguage()
 
 const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = fetchBaseQuery({
 	baseUrl:
@@ -12,7 +12,7 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =
 			? __API__
 			: __API__BACK,
 	prepareHeaders: (headers) => {
-		const token = getAuthToken();
+		const token = getAuthToken(); // вызываю так, чтобы не было замыкания
 		if (token) {
 			headers.set('Authorization', `Bearer ${token}`);
 		}

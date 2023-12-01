@@ -1,8 +1,7 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import { CardSchema, CardSchemaExtended, NewCardSchema } from '../types/CardSchema';
+import { CardSchema, CardSchemaExtended, FetchCardsThunkResponse, NewCardSchema } from '../types/CardSchema';
 
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
-import { FetchCardsThunkResponse } from '@/features/ViewPageInitializer';
 import { TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags';
 
 interface UpdateCardsRequestBase {

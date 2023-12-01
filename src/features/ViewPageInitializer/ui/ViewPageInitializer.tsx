@@ -43,13 +43,15 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 			const boxIdChecked = boxId ?? 'new'
 			const boxSpecialIndexChecked = boxId ?? 'new'
 			const shelfIdChecked = shelfId ?? 'all'
-			console.log(shelfIdChecked)
+			// console.log(shelfIdChecked)
 			console.log(boxIdChecked)
+			console.log(boxSpecialIndexChecked)
+			console.log(shelfIdChecked)
 			// console.log(data)
 			dispatch(viewPageActions.setViewPageIsMounted())
 			dispatch(viewPageActions.setFetchedData(data))
 			dispatch(viewPageActions.setActiveShelfId(shelfIdChecked))
-			dispatch(viewPageActions.setActiveBoxIdAndSpecialIndex({ boxId: boxIdChecked, boxSpecialIndex: boxSpecialIndexChecked }))
+			dispatch(viewPageActions.setActiveBoxIdAndSpecialIndexInitial({ boxId: boxIdChecked, boxSpecialIndex: boxSpecialIndexChecked }))
 			// dispatch(viewPageActions.setActiveBoxId(boxIdChecked))
 			// dispatch(viewPageActions.setActiveBoxSpecialIndex(boxSpecialIndexChecked))
 			// dispatch(fetchCards({ shelfId: shelfIdChecked, boxId: boxIdChecked, data }))
@@ -58,19 +60,14 @@ export const ViewPageInitializer = memo((props: ViewPageInitializerProps) => {
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounted, isLoading, data])
 
 	useEffect(() => {
-		// console.log('2 Эффект')
 		if (viewPageIsMounted && shelfId && boxId) {
-			// console.log('2 Эффект Зашел')
 			dispatch(viewPageActions.setActiveShelfId(shelfId))
-			// console.log('boxID   ====   ', boxId)
-			dispatch(viewPageActions.setActiveBoxIdAndSpecialIndex({ boxId, boxSpecialIndex: boxId }))
-			// dispatch(viewPageActions.setActiveBoxId(boxId))
-			// dispatch(viewPageActions.setActiveBoxSpecialIndex(boxId))
+			dispatch(viewPageActions.setActiveBoxIdAndSpecialIndexInitial({ boxId, boxSpecialIndex: boxId }))
 			navigate(obtainRouteViewEmpty(), { replace: true })
 		}
 	}, [shelfId, navigate, boxId, dispatch, viewPageIsMounted])
 
-	useEffect(() => {
+	useEffect(() => {	
 		if (viewPageIsMounted && !isLoading && data) {
 			dispatch(viewPageActions.setFetchedData(data))
 		}

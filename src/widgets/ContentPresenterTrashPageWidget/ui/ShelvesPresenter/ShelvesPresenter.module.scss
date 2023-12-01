@@ -18,9 +18,42 @@
 .labelsListWrapper {
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
+  min-width: 100%;
+
+  // gap: 20px;
+  gap: 40px;
 }
 
 .labelsListButtonsBlock {
   opacity: 0;
+}
+
+.labelsListContent {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: space-around;
+  width: calc(100% - 240px);
+}
+
+.mainLabel {
+  min-width: var(--width-trash-page-shelf-title, 300px);
+}
+
+// .item {
+//   display: flex;
+//   gap: 20px;
+//   cursor: pointer;
+//   position: relative;
+//   margin-bottom: 8px;
+
+//   // z-index: 1;
+
+//   // border: 1px solid red;
+// }
+
+.title {
+  font-size: 15px;
+  width: 500px;
 }

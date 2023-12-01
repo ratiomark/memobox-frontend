@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { cupboardShelfListActions, getCupboardState } from '../slice/cupboardShelfListSlice'
 // import { createNewShelf } from '@/entities/Cupboard'
-import { ShelfSchema, createNewShelf } from '@/entities/Shelf'
+import { ShelfSchema, rtkCreateNewShelf } from '@/entities/Shelf'
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
 import { toastsActions } from '@/shared/ui/Toast'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
@@ -31,7 +31,7 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 		try {
 			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalAwaitingResponse(true))
 			// console.log('shelfName   ', shelfName)
-			const response = await dispatch(createNewShelf(shelfName)).unwrap()
+			const response = await dispatch(rtkCreateNewShelf(shelfName)).unwrap()
 			// await sleep(20)
 			// const response = await dispatch(createNewShelf(shelfName)).unwrap()
 			if (!response) {

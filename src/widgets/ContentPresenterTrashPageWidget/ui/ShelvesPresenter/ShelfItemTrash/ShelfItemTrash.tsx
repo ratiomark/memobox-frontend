@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
 import { Collapsible } from '@/shared/ui/Animations';
-import { ButtonsBlockTrashEntity } from '../../ButtonsBlock/ButtonsBlockTrashEntity';
+import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
 interface ShelfItemProps {
 	shelf: ShelfSchemaDeleted
 }
@@ -35,7 +35,7 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 
 	const boxes = (
 		<ul className={cls.boxListWrapper} >
-			{shelf.box.map(box => <BoxItemTrash key={box.id} box={box as BoxSchemaDeleted} />)}
+			{shelf.box.map(box => <BoxItemTrash key={box.id} cards={shelf.card.filter(card => card.boxId === box.id)} box={box as BoxSchemaDeleted} />)}
 		</ul>
 	)
 
@@ -47,19 +47,21 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 				<Heading className={cls.title}
 					as={'h3'}
 					title={shelf.title} />
-				<MyText
-					size='s'
-					text={shelf.boxesCount ?? 'кол-во коробок'}
-				/>
-				<MyText
-					size='s'
-					text={shelf.cardsCount ?? 'кол-во карточек'}
-				/>
-				<MyText
-					saveOriginal
-					size='s'
-					text={shelf.deletedAt ?? formatDate('2022-03-27T08:36:08.269Z')}
-				/>
+				<div className={cls.shelfItemContent} >
+					<MyText
+						size='s'
+						text={shelf.boxesCount ?? 'кол-во коробок'}
+					/>
+					<MyText
+						size='s'
+						text={shelf.cardsCount ?? 'кол-во карточек'}
+					/>
+					<MyText
+						saveOriginal
+						size='s'
+						text={shelf.deletedAt ?? formatDate('2022-03-27T08:36:08.269Z')}
+					/>
+				</div>
 				<ButtonsBlockTrashEntity
 					isCollapsed={isCollapsed}
 					onCollapseClick={onCollapse}

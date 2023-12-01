@@ -1,8 +1,8 @@
 import { ShelfRepresentedByBoxes } from '@/entities/Box'
 import { CardSchemaExtended } from '@/entities/Card'
+import { ShelvesDataViewPage } from '@/entities/Shelf'
 import { SortColumnValue } from '@/entities/User'
 import { SortOrderType } from '@/shared/types/SortOrderType'
-import { ShelvesDataViewPage } from '../services/fetchCards'
 
 
 // export interface CardSchemaExtended extends CardSchema {

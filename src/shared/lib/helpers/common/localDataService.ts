@@ -3,6 +3,7 @@ import { ShelfSchema } from '@/entities/Shelf';
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { SortColumnValue } from '@/entities/User';
 import {
+	KEY_APP_LANG_LOCAL_STORAGE,
 	KEY_COMMON_SHELF_IS_COLLAPSED,
 	KEY_SHELVES_LOCAL_STORAGE,
 	KEY_THEME_LOCAL_STORAGE,
@@ -61,6 +62,7 @@ interface ILocalDataService {
 	saveData(key: string, value: any): void
 	getData(key: string): any
 	removeData(key: string): void
+	// 
 	getShelves(): ShelfSchema[] | []
 	setShelves(shelves: ShelfSchema[]): void
 	setCommonShelfCollapsed(commonShelfCollapsed: boolean): void
@@ -74,6 +76,8 @@ interface ILocalDataService {
 	getRefreshToken(): string
 	setUserId(userId: string): void
 	getUserId(): string
+	setLanguage(language: string): void
+	getLanguage(): string
 	logout(): void
 	// 
 	setSortOrderViewPage(sortOrder: SortOrderType): void
@@ -143,6 +147,12 @@ class LocalDataService implements ILocalDataService {
 	}
 	getCommonShelfCollapsed() {
 		return this.getData(KEY_COMMON_SHELF_IS_COLLAPSED) ?? true
+	}
+	setLanguage(language: string): void {
+		this.saveData(KEY_APP_LANG_LOCAL_STORAGE, language)
+	}
+	getLanguage(): string {
+		return this.getData(KEY_APP_LANG_LOCAL_STORAGE) ?? 'en'
 	}
 	logout() {
 		this.removeData(KEY_USER_TOKEN_LOCAL_STORAGE)

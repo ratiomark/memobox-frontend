@@ -8,20 +8,18 @@ import { LoginScreen } from '@/features/AuthByUsername'
 const MainPage = () => {
 	const auth = useSelector(getUserAuthData)
 	if (!auth) {
-
 		return (
 			<Page data-testid='MainPage'>
 				<LoginScreen />
 			</Page>
 		)
 	}
+	
 	return (
-		<>
-			<Page data-testid='MainPage'>
-				<StatsAndActionsCupboardWidget />
-				<CupboardShelfListWrapper />
-			</Page>
-		</>
+		<Page data-testid='MainPage'>
+			<StatsAndActionsCupboardWidget />
+			<CupboardShelfListWrapper />
+		</Page>
 	)
 }
 export default MainPage

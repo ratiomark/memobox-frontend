@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import cls from './BoxItemTrash.module.scss'
-import { ShelfSchemaDeleted } from '@/entities/Trash';
+import { CardSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash';
 import { Card } from '@/shared/ui/Card';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { HStack } from '@/shared/ui/Stack';
@@ -14,16 +14,19 @@ import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { useMemo, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxSchemaDeleted } from '@/entities/Trash';
-import { ButtonsBlockTrashEntity } from '../../ButtonsBlock/ButtonsBlockTrashEntity';
+import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
+import { CardItemTrash } from '../../CardsPresenter/CardItemTrash/CardItemTrash';
 interface BoxItemTrashProps {
 	className?: string;
 	box: BoxSchemaDeleted
+	cards?: CardSchemaDeleted[]
 }
 
 export const BoxItemTrash = (props: BoxItemTrashProps) => {
 	const {
 		className,
 		box,
+		cards,
 	} = props
 	const { t } = useTranslation('trash-page')
 	const dispatch = useAppDispatch()
@@ -65,9 +68,9 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 	// 		/>
 	// 	</div>)
 
-	const cards = (
-		<ul>
-		{/* {box.cards} */}
+	const cardsBlock = (
+		<ul style={{ paddingLeft: 30 }}>
+			{cards?.map(card => <CardItemTrash key={card.id} card={card} />)}
 		</ul>
 	)
 
@@ -101,7 +104,7 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 				// onRemoveClick={() => { }}
 				/>
 			</HStack>
-			{cards}
+			{cardsBlock}
 		</li>
 	)
 }

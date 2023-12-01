@@ -1,6 +1,13 @@
 {
   "shelves": "Полки",
+  "shelf title": "Полка",
+  "boxes count": "Коробки",
+  "cards count": "Карточки",
+  "deletedAt": "Удалено",
   "boxes": "Коробки",
   "cards": "Карточки",
-  "restore": "Восстановить"
+  "restore": "Восстановить",
+  "box text": "Коробка",
+  "new cards": "Новые карточки",
+  "learnt cards": "Изученные"
 }

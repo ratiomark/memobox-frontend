@@ -40,9 +40,7 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 					contentCommon: t('toast:delete_multiple_card.additional'),
 				}
 			}))
-			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать cardId
-			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
-			// dispatch(restoreAllShelves())
+
 			const response = await dispatch(rtkApiDeleteCards({ cardIds: cardIdsSelectedForDeletion })).unwrap()
 
 			if (!response) {

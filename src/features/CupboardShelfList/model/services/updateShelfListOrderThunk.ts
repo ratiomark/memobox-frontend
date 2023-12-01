@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { getShelfIdAndIndexesList, getShelfIdAndIndexesListInitial } from '../selectors/getCupboardShelfList'
 import { isShelvesDndRepresentationEqual } from '../slice/cupboardShelfListSlice'
-import { updateShelfListOrder } from '@/entities/Shelf'
+import { rtkUpdateShelfListOrder } from '@/entities/Shelf'
 import { TAG_VIEW_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
 
@@ -13,11 +13,10 @@ export const updateShelfListOrderThunk = createAsyncThunk<boolean, void, { rejec
 		const { dispatch, extra, getState } = thunkAPI
 		const shelvesIdsAndIndexesCurrent = getShelfIdAndIndexesList(getState())
 		const shelvesIdsAndIndexesInitial = getShelfIdAndIndexesListInitial(getState())
-		// updateShelfListOrder
 		try {
 			if (!isShelvesDndRepresentationEqual(shelvesIdsAndIndexesInitial, shelvesIdsAndIndexesCurrent)) {
 				// VAR: сделать запрос на обновление порядка полок, если ответ успешный, то заменить shelvesIdsAndIndexesInitial в шкафу.
-				const response = await dispatch(updateShelfListOrder(shelvesIdsAndIndexesCurrent))
+				const response = await dispatch(rtkUpdateShelfListOrder(shelvesIdsAndIndexesCurrent))
 				dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE]))
 				// console.log('!!!!!!!!!!!!', response)
 				// console.log('!!!!!!!!!!!!!!!!!!')

@@ -30,8 +30,8 @@ interface BoxPropsBase {
 	className?: string
 	boxItem: BoxSchema
 	shelfId: string
-	onAddNewCard: (shelfId: string, boxId: string) => void
-	// onAddNewCard: (shelfId: string, boxIndex: number) => void
+	// onAddNewCard: (shelfId: string, boxId: string) => void
+	onAddNewCard: (shelfId: string, boxIndex: number) => void
 	onBoxViewClick: (shelfId: string, boxIndex: number | string) => void
 	onOpenTimeSetter: (coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string, shelfId: string) => void
 	onOpenBoxSettings: (coordinates: BoxCoordinates, boxId: string, shelfId: string) => void
@@ -72,24 +72,24 @@ export const Box = (props: BoxPropsBase) => {
 	const navigate = useNavigate()
 
 	const onBoxViewClickHandle = useCallback(() => {
-		// VAR: Это нужно переделать!!! boxId должен быть id бокса, а тут нунжо использвать specti
-		let boxId: string | number;
-		if (boxItem.specialType === 'none') {
-			boxId = boxItem.index
-		} else if (boxItem.specialType === 'learnt') {
-			boxId = 'learnt'
-		} else {
-			boxId = 'new'
-		}
-		onBoxViewClick(shelfId, boxId)
-	}, [onBoxViewClick, shelfId, boxItem.index, boxItem.specialType])
 
-	const onAddNewCardHandle = useCallback(() => {
-		onAddNewCard(shelfId, boxItem.id)
-	}, [onAddNewCard, shelfId, boxItem.id])
+		let boxSpecialId: string | number;
+		if (specialType === 'none') {
+			boxSpecialId = boxItem.index
+		} else if (specialType === 'learnt') {
+			boxSpecialId = 'learnt'
+		} else {
+			boxSpecialId = 'new'
+		}
+		onBoxViewClick(shelfId, boxSpecialId)
+	}, [onBoxViewClick, shelfId, boxItem.index, specialType])
+
 	// const onAddNewCardHandle = useCallback(() => {
-	// 	onAddNewCard(shelfId, boxItem.index)
-	// }, [onAddNewCard, shelfId, boxItem.index])
+	// 	onAddNewCard(shelfId, boxItem.id)
+	// }, [onAddNewCard, shelfId, boxItem.id])
+	const onAddNewCardHandle = useCallback(() => {
+		onAddNewCard(shelfId, boxItem.index)
+	}, [onAddNewCard, shelfId, boxItem.index])
 
 	const startTraining = () => {
 		navigate(obtainRouteTraining(shelfId, boxItem.id))
@@ -221,7 +221,8 @@ export const Box = (props: BoxPropsBase) => {
 				onClick={startTraining}
 				variant='filledBox'
 				disabled={data.all < 1}
-				className={cls.trainButton} >
+				className={cls.trainButton}
+			>
 				{t('train')}
 			</Button>
 		</li>

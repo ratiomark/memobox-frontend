@@ -4,7 +4,7 @@ import { toastsActions } from '@/shared/ui/Toast'
 import { getAbortedThunkIds, getShelfById, getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { t } from 'i18next'
-import { ShelfSchema, removeShelfByIdMutation } from '@/entities/Shelf'
+import { ShelfSchema, rtkRemoveShelfById } from '@/entities/Shelf'
 import { idPrefixShelfDeletion } from '@/shared/const/idsAndDataAttributes'
 import { TAG_TRASH_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
@@ -44,7 +44,7 @@ export const deleteShelfThunk = createAsyncThunk<DeleShelfThunkArg, string, { re
 
 			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать shelfId
 
-			const response = await dispatch(removeShelfByIdMutation({ shelfId, index: shelf.index })).unwrap()
+			const response = await dispatch(rtkRemoveShelfById({ shelfId, index: shelf.index })).unwrap()
 
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))

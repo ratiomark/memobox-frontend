@@ -1,11 +1,11 @@
-import { CardMainData, CardSchemaExtended } from '@/entities/Card'
+import { CardMainData, CardSchemaExtended, FetchCardsThunkResponse } from '@/entities/Card'
 import { SortColumnValue } from '@/entities/User'
 import { isNumeric } from '@/shared/lib/helpers/common/isNumeric'
 import { SortOrderType } from '@/shared/types/SortOrderType'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { deleteCardThunk } from '../services/deleteCardThunk'
 import { deleteMultipleCardsThunk } from '../services/deleteMultipleCardsThunk'
-import { fetchCards, FetchCardsThunkResponse } from '../services/fetchCards'
+import { fetchCards } from '../services/fetchCards'
 import { CardsShelfIdBoxIdObj, ViewPageInitializerSchema } from '../types/ViewPageInitializerSchema'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { ShelfIdBoxIdCardIdType, ShelfIdBoxIdCardExtendedType } from '../types/ActionTypes'
@@ -296,6 +296,16 @@ const viewPageSlice = createSlice({
 		},
 		setActiveBoxSpecialIndex: (state, action: PayloadAction<string>) => {
 			state.boxSpecialIndex = action.payload
+		},
+		setActiveBoxIdAndSpecialIndexInitial: (state, action: PayloadAction<{ boxId: string, boxSpecialIndex: string, }>) => {
+			const { boxId, boxSpecialIndex } = action.payload
+			if (boxSpecialIndex !== 'all' && state.shelfId !== 'all') {
+				// if ((boxId === 'new' || boxId === 'learnt') && state.shelfId !== 'all') {
+				state.boxId = state.shelfIdsBoxSpecialIndexesObj[state.shelfId][boxId]
+			} else {
+				state.boxId = boxId
+			}
+			state.boxSpecialIndex = boxSpecialIndex
 		},
 		setActiveBoxIdAndSpecialIndex: (state, action: PayloadAction<{ boxId: string, boxSpecialIndex: string, }>) => {
 			state.boxId = action.payload.boxId

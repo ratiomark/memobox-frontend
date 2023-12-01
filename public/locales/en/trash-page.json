@@ -1,6 +1,13 @@
 {
   "shelves": "Shelves",
+  "shelf title": "Shelf title",
+  "boxes count": "Boxes",
+  "cards count": "Cards",
+  "deletedAt": "Deleted at",
   "boxes": "Boxes",
   "cards": "Cards",
-  "restore": "Restore"
+  "restore": "Restore",
+  "box text": "Box",
+  "new cards": "New cards",
+  "learnt cards": "Learnt cards"
 }

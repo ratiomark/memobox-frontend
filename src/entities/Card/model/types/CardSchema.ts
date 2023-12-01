@@ -1,7 +1,4 @@
-
-// export interface CardSchema {
-
-// }
+import { ShelvesDataViewPage } from '@/entities/Shelf'
 
 export interface NewCardSchema {
 	question: string | null
@@ -35,4 +32,9 @@ export interface CardSchema {
 
 export interface CardSchemaExtended extends CardSchema {
 	isDeleting?: boolean
+}
+
+export interface FetchCardsThunkResponse {
+	cards: CardSchemaExtended[]
+	shelvesAndBoxesData: ShelvesDataViewPage
 }

@@ -28,16 +28,16 @@ export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 		navigate(obtainRouteView(shelfId, boxIndex.toString()))
 	}, [navigate])
 
-	const onAddNewCardClick = useCallback((shelfId: string, boxId: string) => {
-		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
-		dispatch(cupboardShelfListActions.setBoxIdCardModal(boxId))
-		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
-	}, [dispatch])
-	// const onAddNewCardClick = useCallback((shelfId: string, boxIndex: number) => {
+	// const onAddNewCardClick = useCallback((shelfId: string, boxId: string) => {
 	// 	dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
-	// 	dispatch(cupboardShelfListActions.setBoxIndexAndBoxIdCardModal(boxIndex))
+	// 	dispatch(cupboardShelfListActions.setBoxIdCardModal(boxId))
 	// 	dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
 	// }, [dispatch])
+	const onAddNewCardClick = useCallback((shelfId: string, boxIndex: number) => {
+		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
+		dispatch(cupboardShelfListActions.setBoxIndexAndBoxIdCardModal(boxIndex))
+		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
+	}, [dispatch])
 
 	const onOpenTimeSetter = useCallback((coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string, shelfId: string) => {
 		dispatch(cupboardShelfListActions.setTimingSetterBoxCoordinates(coordinates))

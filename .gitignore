@@ -28,3 +28,5 @@ DndShelfListWrapper.tsx
 *.njsproj
 *.sln
 *.sw?
+# 
+ignore

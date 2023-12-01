@@ -40,12 +40,7 @@ export const updateCardThunk = createAsyncThunk<string, UpdateCardThunkArg, { re
 				}
 			}))
 			const cardUpdated = await dispatch(rtkApiUpdateCard({ id: cardId, ...restCardData })).unwrap()
-			// console.log('обнова   ', cardUpdated)
-			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать cardId
-			// const response = await dispatch(removeShelfByIdMutation(shelfId)).unwrap()
-			// await sleep()
-			// const response = Math.random() > 0.5
-			// const response = Math.random() > 50
+
 			if (!cardUpdated) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')

@@ -2,31 +2,31 @@ import { ShelfRepresentedByBoxes, getBoxesByShelfId } from '@/entities/Box'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { viewPageActions } from '../slice/viewPageSlice'
-import { CardSchemaExtended, getAllCards } from '@/entities/Card'
+import {  FetchCardsThunkResponse } from '@/entities/Card'
 
 interface FetchBoxesThunkArg {
 	shelfId: string
 	boxId: string
 	data: FetchCardsThunkResponse
 }
-interface ShelfData {
-	maxIndexBox: number
-	boxesItems: { index: number, id: string }[]
-	shelfTitle: string
-	shelfIndex: number
-}
-export interface FetchBoxesThunkResponse {
-	[shelfId: string]: ShelfRepresentedByBoxes
-}
+// interface ShelfData {
+// 	maxIndexBox: number
+// 	boxesItems: { index: number, id: string }[]
+// 	shelfTitle: string
+// 	shelfIndex: number
+// }
+// export interface FetchBoxesThunkResponse {
+// 	[shelfId: string]: ShelfRepresentedByBoxes
+// }
 
-export interface ShelvesDataViewPage {
-	[shelfId: string]: ShelfData
-}
+// export interface ShelvesDataViewPage {
+// 	[shelfId: string]: ShelfData
+// }
 
-export interface FetchCardsThunkResponse {
-	cards: CardSchemaExtended[]
-	shelvesAndBoxesData: ShelvesDataViewPage
-}
+// export interface FetchCardsThunkResponse {
+// 	cards: CardSchemaExtended[]
+// 	shelvesAndBoxesData: ShelvesDataViewPage
+// }
 
 export interface ErrorTextAndShelfIdObj {
 	error: string

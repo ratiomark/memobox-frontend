@@ -99,11 +99,10 @@ export const shelvesApi = rtkApi.injectEndpoints({
 		}),
 	}),
 })
-export const memoboxGetShelves = shelvesApi.endpoints.getShelves.initiate
-export const removeShelfByIdMutation = shelvesApi.endpoints.removeShelf.initiate
+export const rtkRemoveShelfById = shelvesApi.endpoints.removeShelf.initiate
 export const updateShelfWithTag = shelvesApi.endpoints.updateShelfWithTag.initiate
-export const createNewShelf = shelvesApi.endpoints.createNewShelf.initiate
-export const updateShelfListOrder = shelvesApi.endpoints.updateShelfListOrder.initiate
+export const rtkCreateNewShelf = shelvesApi.endpoints.createNewShelf.initiate
+export const rtkUpdateShelfListOrder = shelvesApi.endpoints.updateShelfListOrder.initiate
 export const { useGetShelvesQuery } = shelvesApi
 export const { useUpdateShelfMutation } = shelvesApi
 export const { useUpdateShelfWithTagMutation } = shelvesApi

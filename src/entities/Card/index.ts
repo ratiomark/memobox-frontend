@@ -13,5 +13,5 @@ export {
 	useGetTrainingCardsQuery,
 } from './model/api/cardApi';
 
-export type { CardSchema, CardSchemaExtended } from './model/types/CardSchema';
+export type { CardSchema, CardSchemaExtended, FetchCardsThunkResponse } from './model/types/CardSchema';
 export type { CardMainData } from './model/types/CardMainData';

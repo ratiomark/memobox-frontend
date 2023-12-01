@@ -39,7 +39,7 @@
     "src",
     "vite-env.d.ts",
     "src/features/SettingsFeatures/TimeSleepSettings/ui/GeneralHoursMinutesComponent/.tsx",
-    "parser.mjs"
+    "ignore/parser.mjs"
   ],
   "exclude": [
     "./.fttemplates"

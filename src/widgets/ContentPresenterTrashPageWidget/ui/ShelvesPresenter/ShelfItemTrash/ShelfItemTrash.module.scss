@@ -1,6 +1,7 @@
 .ShelfItem {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 40px;
   min-width: 100%;
   padding: var(--card-list-item-padding-top-and-bottom) var(--card-list-item-padding-left-and-right);
@@ -11,23 +12,29 @@
   // border: 1px solid red;
 }
 
-.item {
+.shelfItemContent {
   display: flex;
-  gap: 20px;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 8px;
-
-  // z-index: 1;
-
-  // border: 1px solid red;
+  align-items: center;
+  gap: 40px;
+  justify-content: space-around;
+  width: calc(100% - 240px);
 }
+
+// .item {
+//   display: flex;
+//   gap: 20px;
+//   cursor: pointer;
+//   position: relative;
+//   margin-bottom: 8px;
+
+//   // z-index: 1;
+
+//   // border: 1px solid red;
+// }
 
 .title {
   font-size: 15px;
-  width: 340px;
-
-  // font: var(--font-m);
+  min-width: var(--width-trash-page-shelf-title, 300px);
 }
 
 .checkBox {

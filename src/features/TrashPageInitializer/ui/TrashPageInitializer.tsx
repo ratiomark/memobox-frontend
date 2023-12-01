@@ -21,15 +21,15 @@ export const TrashPageInitializer = (props: TrashPageInitializerProps) => {
 		entitySwitcherWidget,
 		contentPresenterWidget,
 	} = props
-	const { isLoading, data, isError } = useGetTrashQuery()
+	// const { isLoading, data, isError } = useGetTrashQuery()
 
-	useEffect(() => {
-		if (data) {
-			console.log(data)
-		}
+	// useEffect(() => {
+	// 	if (data) {
+	// 		console.log(data)
+	// 	}
 
 
-	}, [data])
+	// }, [data])
 
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 

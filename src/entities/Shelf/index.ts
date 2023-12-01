@@ -1,14 +1,14 @@
 // export { shelfReducer, shelfActions } from './model/slice/shelfSlice';
-export type { ShelfDndRepresentation } from './model/types/ShelfSchema'
+export type { ShelfDndRepresentation, ShelvesDataViewPage } from './model/types/ShelfSchema'
 export {
 	useUpdateShelfWithTagMutation,
 	useUpdateShelfMutation,
 	useUpdateCommonShelfMutation,
 	useRemoveShelfMutation,
-	removeShelfByIdMutation,
 	updateShelfWithTag,
-	createNewShelf,
-	updateShelfListOrder,
+	rtkRemoveShelfById,
+	rtkCreateNewShelf,
+	rtkUpdateShelfListOrder,
 	useGetShelvesQuery,
 } from './model/api/shelvesApi'
 

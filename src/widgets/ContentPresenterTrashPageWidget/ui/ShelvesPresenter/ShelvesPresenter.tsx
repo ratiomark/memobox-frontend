@@ -9,7 +9,7 @@ import { ShelfItemTrash } from './ShelfItemTrash/ShelfItemTrash';
 import { HStack } from '@/shared/ui/Stack';
 import { ContentPresenterWrapper } from '../ContentPresenterWrapper/ContentPresenterWrapper';
 import { MyText } from '@/shared/ui/Typography';
-import { ButtonsBlockTrashEntity } from '../ButtonsBlock/ButtonsBlockTrashEntity';
+import { ButtonsBlockTrashEntity } from '../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
 
 interface ShelvesPresenterProps {
 	className?: string
@@ -20,7 +20,7 @@ export const ShelvesPresenter = (props: ShelvesPresenterProps) => {
 		className
 	} = props
 	const { isLoading, data, isError } = useGetTrashQuery()
-	const { t } = useTranslation()
+	const { t } = useTranslation('trash-page')
 
 
 	const shelves = data?.shelves.map(shelf => <ShelfItemTrash key={shelf.id} shelf={shelf} />)
@@ -38,20 +38,24 @@ export const ShelvesPresenter = (props: ShelvesPresenterProps) => {
 		<div className={cls.labelsListWrapper} >
 			<MyText
 				size='s'
-				text={t('shelf')}
+				text={t('shelf title')}
+				className={cls.mainLabel}
 			/>
-			<MyText
-				size='s'
-				text={t('boxes count')}
-			/>
-			<MyText
-				size='s'
-				text={t('cards count')}
-			/>
-			<MyText
-				size='s'
-				text={t('deletedAt')}
-			/>
+			<div className={cls.labelsListContent} >
+
+				<MyText
+					size='s'
+					text={t('boxes')}
+				/>
+				<MyText
+					size='s'
+					text={t('cards')}
+				/>
+				<MyText
+					size='s'
+					text={t('deletedAt')}
+				/>
+			</div>
 			<div className={cls.labelsListButtonsBlock} >
 				<ButtonsBlockTrashEntity
 					isCollapsed={true}
