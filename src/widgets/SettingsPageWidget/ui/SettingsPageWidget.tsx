@@ -91,7 +91,7 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 	const shelfTemplateSettings = (
 		<Card
 			tabIndex={0}
-			className={'card'}
+			className={'card '}
 			onKeyDown={onEnterToggleShelfTemplateModal}
 			onClick={toggleShelfTemplateModal}
 			isLoading={isLoading}>

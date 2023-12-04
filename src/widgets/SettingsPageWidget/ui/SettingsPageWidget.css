@@ -6,15 +6,22 @@
   column-gap: 20px;
 }
 
+@media (max-width: 768px) {
+  .settingsPageWidget {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 .card {
   padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* cursor: pointer; */
+  cursor: pointer;
   position: relative;
   z-index: 1;
+
+  /* user-select: none; */
 }
 
 .settingTitle {
