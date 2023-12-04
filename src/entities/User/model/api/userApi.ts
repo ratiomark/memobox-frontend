@@ -1,7 +1,7 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { JsonSettings } from '../types/JsonSettings'
 import { User } from '../types/user'
-import { TimeSleepSettings, UserSettings } from '../types/userSettings'
+import { NotificationSettings, TimeSleepSettings, UserSettings } from '../types/userSettings'
 import { JsonSavedData } from '../types/JsonSavedData'
 import { MissedTrainingValue } from '../types/userSettings'
 import { TimingBlock } from '@/shared/types/DataBlock'
@@ -145,6 +145,15 @@ const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
+		updateNotificationSettings: build.mutation<NotificationSettings, NotificationSettings>({
+			query: (arg) => ({
+				url: '/settings/notification',
+				method: 'PATCH',
+				body: {
+					...arg
+				}
+			})
+		}),
 	}),
 })
 
@@ -160,6 +169,7 @@ export const getTokensOnInitWithUserSettings = userApi.endpoints.getTokensOnInit
 export const rtkApiUpdateShelfTemplate = userApi.endpoints.updateShelfTemplate.initiate
 export const rtkApiUpdateMissedTraining = userApi.endpoints.updateMissedTraining.initiate
 export const rtkApiUpdateTimeSleep = userApi.endpoints.updateTimeSleep.initiate
+export const rtkApiUpdateNotifications = userApi.endpoints.updateNotificationSettings.initiate
 export const rtkApiSetDefaultShelfTemplate = userApi.endpoints.setDefaultShelfTemplate.initiate
 export const rtkApiLogout = userApi.endpoints.logout.initiate
 export const { useGetUserSettingsQuery } = userApi

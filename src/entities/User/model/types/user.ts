@@ -38,6 +38,9 @@ export interface UserSchema {
 	authData?: Omit<User, 'jsonSavedData' | 'userSettings'>
 	userSettings?: UserSettings
 	userSettingsIsLoading?: boolean
+	userSettingsAwaitingResponseObject: {
+		[key in keyof UserSettings]: boolean
+	}
 	jsonSavedData: JsonSavedData
 	jsonSavedDataOriginal?: JsonSavedData
 	jsonCommonSettings?: JsonSettings

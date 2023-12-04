@@ -1,3 +1,8 @@
+export { getUserSettingsAwaitingResponse } from './model/selectors/getUserSettings';
+
+export type { NotificationSettings } from './model/types/userSettings';
+
+export { updateNotificationSettingsThunk } from './model/services/userSettings/updateNotificationThunk';
 export { updateJsonSavedDataThunk } from './model/services/updateJsonSavedData';
 
 export { updateMissedTrainingThunk } from './model/services/userSettings/updateMissedTrainingThunk';
@@ -16,7 +21,8 @@ export {
 	useUpdateMissedTrainingMutation,
 	rtkApiUpdateShelfTemplate,
 	rtkApiUpdateTimeSleep,
-	rtkApiSetDefaultShelfTemplate
+	rtkApiSetDefaultShelfTemplate,
+	rtkApiUpdateNotifications,
 } from './model/api/userApi';
 
 export type {

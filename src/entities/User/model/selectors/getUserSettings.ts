@@ -11,6 +11,7 @@ export const getUserShelfTemplateSettings = (state: StateSchema) => state.user?.
 
 export const getUserTimeSleepSettings = (state: StateSchema) => state.user.userSettings?.timeSleep
 export const getUserSettingsIsLoading = (state: StateSchema) => state.user.userSettingsIsLoading
+export const getUserSettingsAwaitingResponse = (state: StateSchema) => state.user.userSettingsAwaitingResponseObject
 
 
 
