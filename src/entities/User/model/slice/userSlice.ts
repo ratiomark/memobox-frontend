@@ -5,16 +5,24 @@ import { JsonSettings } from '../types/JsonSettings'
 import { initAuthData } from '../services/initAuthDataThunk'
 import { JsonSavedData, SortColumnObject } from '../types/JsonSavedData'
 import { UserSchema } from '../types/user'
-import { DayByDayTimeSleepData, MissedTrainingValue, TimeSleepDataObject, UserSettings } from '../types/userSettings'
+import { DayByDayTimeSleepData, MissedTrainingValue, NotificationSettings, TimeSleepDataObject, UserSettings } from '../types/userSettings'
 import { jsonSavedDataColumnsMock } from '../mockData/jsonSavedDataMock'
 import { UserWithToken } from '../api/userApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { TimingBlock } from '@/shared/types/DataBlock'
 import { daysOfWeek } from '../const/daysOfWeek'
 import { updateJsonSavedDataThunk } from '../services/updateJsonSavedData'
+import { updateNotificationSettingsThunk } from '../services/userSettings/updateNotificationThunk'
+import { updateMissedTrainingThunk } from '../..'
 
 const initialState: UserSchema = {
 	_mounted: false,
+	userSettingsAwaitingResponseObject: {
+		notifications: false,
+		timeSleep: false,
+		missedTraining: false,
+		shelfTemplate: false,
+	},
 	jsonSavedData: {
 		viewPageCardRowsCount: 2,
 		commonShelfCollapsed: true,
@@ -88,7 +96,13 @@ const userSlice = createSlice({
 			// state.jsonSavedData!.viewPageColumns = action.payload.map((column, index) => ({ ...column, index }));
 			// return newOrder.map((id) => state.find((item) => item.id === id)!);
 		},
-		// setColumns
+		// settings
+		setSettingsAwaitingResponse(state, action: PayloadAction<{
+			settings: keyof UserSettings,
+			isLoading: boolean
+		}>) {
+			state.userSettingsAwaitingResponseObject[action.payload.settings] = action.payload.isLoading
+		},
 		setSettingsIsLoading: (state, action: PayloadAction<boolean>) => {
 			state.userSettingsIsLoading = action.payload
 		},
@@ -131,9 +145,18 @@ const userSlice = createSlice({
 			.addCase(
 				updateJsonSavedDataThunk.fulfilled,
 				(state, action: PayloadAction<JsonSavedData>) => {
-					// if(action.payload)
 					state.jsonSavedData = action.payload
 					state.jsonSavedDataOriginal = action.payload
+				})
+			.addCase(
+				updateNotificationSettingsThunk.fulfilled,
+				(state, action: PayloadAction<NotificationSettings>) => {
+					state.userSettings!.notifications = action.payload
+				})
+			.addCase(
+				updateMissedTrainingThunk.fulfilled,
+				(state, action: PayloadAction<MissedTrainingValue>) => {
+					state.userSettings!.missedTraining = action.payload
 				})
 			// .addCase(
 			// 	updateJsonSavedData.fulfilled,
