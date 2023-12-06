@@ -151,6 +151,14 @@ export const cardApi = rtkApi.injectEndpoints({
 			}),
 		}),
 
+		sendTrainingAnswers: build.mutation<CardSchema[], { [key: string]: string }>({
+			query: (body) => ({
+				url: '/cards/training/answers',
+				method: 'POST',
+				body
+			}),
+		}),
+
 		// getBoxByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
 		// 	query: ({ shelfId, boxId }) => ({
 		// 		url: '/cards',
@@ -174,6 +182,7 @@ export const rtkApiUpdateCard = cardApi.endpoints.updateCard.initiate
 export const rtkApiMoveCards = cardApi.endpoints.moveCards.initiate
 export const rtkApiDeleteCards = cardApi.endpoints.removeSoftCards.initiate
 export const rtkApiDeleteCard = cardApi.endpoints.removeSoftCard.initiate
+export const rtkApiSendTrainingAnswers = cardApi.endpoints.sendTrainingAnswers.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 

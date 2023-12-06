@@ -11,6 +11,7 @@ export {
 	rtkApiDeleteCard,
 	rtkApiDeleteCards,
 	useGetTrainingCardsQuery,
+	rtkApiSendTrainingAnswers,
 } from './model/api/cardApi';
 
 export type { CardSchema, CardSchemaExtended, FetchCardsThunkResponse } from './model/types/CardSchema';
