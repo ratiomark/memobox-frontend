@@ -82,7 +82,8 @@ const initialState: CupboardPageSchema = {
 		shelfTitle: '',
 		isOpen: false,
 		isAwaitingResponse: false,
-		requestStatus: 'idle'
+		requestStatus: 'idle',
+		shelvesCreated: 0,
 	},
 	renameShelfModal: {
 		isOpen: false,
@@ -110,7 +111,7 @@ const shelvesAdapter = createEntityAdapter<ShelfSchema>({
 })
 
 export const getCupboardState = shelvesAdapter.getSelectors<StateSchema>(
-	(state) => state.cupboard
+	(state) => state.cupboard ? state.cupboard : initialState
 )
 export const getAllShelvesIds = (state: StateSchema) => getCupboardState.selectIds(state)
 export const getAllShelves = (state: StateSchema) => getCupboardState.selectAll(state)
@@ -172,6 +173,9 @@ const cupboardShelfList = createSlice({
 		setCreateNewShelfModalRequestStatus: (state, action: PayloadAction<RequestStatusType>) => {
 			state.createNewShelfModal.requestStatus = action.payload
 		},
+		// setCreateShelfCounter: (state) => {
+		// 	state.createNewShelfModal.shelvesCreated++
+		// },
 		// create new card
 		setIsCreateNewCardModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.createNewCardModal.isOpen = action.payload
@@ -455,6 +459,7 @@ const cupboardShelfList = createSlice({
 					state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 					state.shelvesTitles.push(action.payload[0].title)
 					state.createNewShelfModal.shelfTitle = ''
+					state.createNewShelfModal.shelvesCreated++
 				})
 			.addCase(
 				createNewShelfThunk.rejected,
