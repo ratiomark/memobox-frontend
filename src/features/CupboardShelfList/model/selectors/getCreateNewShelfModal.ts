@@ -9,3 +9,5 @@ export const getCreateNewShelfModalIsAwaitingResponse = (state: StateSchema) => 
 export const getCreateNewShelfModalIsResponseSuccessful = (state: StateSchema) => state.cupboard.createNewShelfModal.isResponseSuccessful
 
 export const getCreateNewShelfModalRequestStatus = (state: StateSchema) => state.cupboard.createNewShelfModal.requestStatus
+
+export const getCreateNewShelfCounter = (state: StateSchema) => state.cupboard.createNewShelfModal.shelvesCreated
