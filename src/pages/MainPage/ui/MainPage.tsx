@@ -14,7 +14,8 @@ const MainPage = () => {
 			</Page>
 		)
 	}
-	
+
+	// без StatsAndActionsCupboardWidget не будет работать CupboardShelfListWrapper из-за перерасчета ширины кнопок
 	return (
 		<Page data-testid='MainPage'>
 			<StatsAndActionsCupboardWidget />
