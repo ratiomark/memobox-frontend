@@ -1,16 +1,26 @@
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { useCustomTranslate } from '@/features/LanguageSwitcher'
 import { dataAttrButtonTypeAddCard, dataAttrButtonTypeAddCardButtonGeneral, dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
-import { useEffect} from 'react'
-let lastLang: string;
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { getCreateNewShelfCounter } from '../selectors/getCreateNewShelfModal';
 
 const useCupboardButtonsSizes = (isLoading: boolean) => {
 	const { currentLang } = useCustomTranslate()
+	const createNewShelfCounter = useSelector(getCreateNewShelfCounter)
 
 	useEffect(() => {
+		const resetButtonSizes = () => {
+			const trainButtons = document.querySelectorAll(`[data-button-type="${dataAttrButtonTypeTrain}"]`) as NodeListOf<HTMLButtonElement>
+			const addCardButtons = document.querySelectorAll(`[data-button-type="${dataAttrButtonTypeAddCard}"]`) as NodeListOf<HTMLButtonElement>
+			const addCardButtonGeneral = document.querySelector(`[data-button-type="${dataAttrButtonTypeAddCardButtonGeneral}"]`) as HTMLButtonElement
+			trainButtons.forEach(button => button.style.minWidth = 'auto');
+			addCardButtons.forEach(button => button.style.minWidth = 'auto');
+			addCardButtonGeneral.style.minWidth = 'auto';
+		};
 		const updateSizes = () => {
 			if (isLoading) return
-			if (lastLang === currentLang) return
+			resetButtonSizes(); // reset button sizes before update 
 			const trainButtons = document.querySelectorAll(`[data-button-type="${dataAttrButtonTypeTrain}"]`) as NodeListOf<HTMLButtonElement>
 			const addCardButtons = document.querySelectorAll(`[data-button-type="${dataAttrButtonTypeAddCard}"]`) as NodeListOf<HTMLButtonElement>
 			const addCardButtonGeneral = document.querySelector(`[data-button-type="${dataAttrButtonTypeAddCardButtonGeneral}"]`) as HTMLButtonElement
@@ -31,6 +41,6 @@ const useCupboardButtonsSizes = (isLoading: boolean) => {
 			window.addEventListener('load', updateSizes);
 			return () => window.removeEventListener('load', updateSizes);
 		}
-	}, [isLoading, currentLang])
+	}, [isLoading, currentLang, createNewShelfCounter])
 }
 export default useCupboardButtonsSizes
