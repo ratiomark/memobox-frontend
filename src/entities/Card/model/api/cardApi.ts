@@ -4,6 +4,7 @@ import { CardSchema, CardSchemaExtended, FetchCardsThunkResponse, NewCardSchema 
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags';
 
+
 interface UpdateCardsRequestBase {
 	cardIds: string[]
 }
@@ -151,14 +152,26 @@ export const cardApi = rtkApi.injectEndpoints({
 			}),
 		}),
 
-		sendTrainingAnswers: build.mutation<CardSchema[], { [key: string]: string }>({
+		sendTrainingAnswers: build.mutation<CardSchema[], { [key: string]: { answer: string, card: Partial<CardSchema> } }>({
 			query: (body) => ({
 				url: '/cards/training/answers',
 				method: 'POST',
-				body
+				body: {
+					responses: [
+						...Object.entries(body).map(([cardId, value]) => ({
+							...body[cardId].card,
+							answer: body[cardId].answer,
+						}))
+					]
+				}
 			}),
 		}),
-
+		dropCards: build.query<void, void>({
+			query: () => ({
+				url: '/cards/drop',
+				method: 'POST',
+			}),
+		}),
 		// getBoxByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
 		// 	query: ({ shelfId, boxId }) => ({
 		// 		url: '/cards',
@@ -183,6 +196,7 @@ export const rtkApiMoveCards = cardApi.endpoints.moveCards.initiate
 export const rtkApiDeleteCards = cardApi.endpoints.removeSoftCards.initiate
 export const rtkApiDeleteCard = cardApi.endpoints.removeSoftCard.initiate
 export const rtkApiSendTrainingAnswers = cardApi.endpoints.sendTrainingAnswers.initiate
+export const rtkApiDropCards = cardApi.endpoints.dropCards.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 
