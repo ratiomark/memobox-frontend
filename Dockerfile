@@ -4,11 +4,12 @@ FROM node:16 as build-stage
 WORKDIR /app
 
 # Копирование файлов package.json и установка зависимостей
-COPY package*.json ./
+# Убедитесь, что пути соответствуют вашей структуре каталогов
+COPY app/package*.json ./
 RUN npm install
 
 # Копирование остальных файлов проекта
-COPY . .
+COPY app/ ./
 
 # Сборка приложения
 RUN npm run build
