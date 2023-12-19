@@ -23,7 +23,7 @@ type UpdateCardsRequest = MoveCardsRequest | RemoveCardsRequest
 
 export const cardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
-		// NSA: готово
+
 		createNewCard: build.mutation<CardSchema, NewCardSchema>({
 			query: ({ question, answer, shelfId, boxId }) => ({
 				url: '/cards',
@@ -44,11 +44,13 @@ export const cardApi = rtkApi.injectEndpoints({
 				method: 'GET',
 			}),
 			// transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
-			// 	const newCards = response.shelvesAndBoxesData
+			// 	const cardsUpdated = response.cards.map(card => ({ ...card, isDeleting: false }))
+			// 	response.cards = cardsUpdated
 			// 	return response
 			// },
 			providesTags: [TAG_VIEW_PAGE]
 		}),
+
 		getCardsByShelfId: build.query<CardSchema[], string>({
 			query: (shelfId) => ({
 				url: '/cards',
@@ -68,20 +70,6 @@ export const cardApi = rtkApi.injectEndpoints({
 				}
 			}),
 		}),
-		// 	transformResponse: (response: FetchCardsThunkResponse, meta, arg) => {
-		// 		const newCards = response.cards.map(card => {
-		// 			return ({
-		// 				...card,
-		// 				question: `{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":${card.question},"type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}`,
-		// 				answer: `{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":${card.answer},"type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}`,
-		// 				deleted: false,
-		// 			})
-		// 		})
-		// 		response.cards = newCards
-		// 		return response
-		// 	},
-		// 	providesTags: []
-		// }),
 		updateCards: build.mutation<CardSchema[], UpdateCardsRequest>({
 			query: (arg) => ({
 				url: '/cards',
@@ -92,11 +80,6 @@ export const cardApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: []
 		}),
-
-
-
-
-
 		moveCards: build.mutation<CardSchema[], MoveCardsRequest>({
 			query: (arg) => ({
 				url: '/cards/move-cards',
@@ -120,21 +103,6 @@ export const cardApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: [TAG_CUPBOARD_PAGE]
 		}),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		updateCard: build.mutation<CardSchema, Partial<CardSchema>>({
 			query: (card) => ({
 				url: `/cards/${card.id}`,
@@ -197,6 +165,12 @@ export const rtkApiDeleteCards = cardApi.endpoints.removeSoftCards.initiate
 export const rtkApiDeleteCard = cardApi.endpoints.removeSoftCard.initiate
 export const rtkApiSendTrainingAnswers = cardApi.endpoints.sendTrainingAnswers.initiate
 export const rtkApiDropCards = cardApi.endpoints.dropCards.initiate
+
+
+
+
+
+
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const cupboardGetShelves = cupboardApi.endpoints.getShelves.initiate
 
