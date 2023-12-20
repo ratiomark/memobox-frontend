@@ -68,7 +68,7 @@ export default defineConfig({
 		// NSA: укажи тут адрес сервера
 		// __API__BACK: JSON.stringify('http://localhost:3000'),
 		// __API__BACK: JSON.stringify('https://memobox-backend.onrender.com/api/v1'),
-		__API__BACK: JSON.stringify('http://173.212.194.217:3000'),
+		__API__BACK: JSON.stringify('http://173.212.194.217:3000/api/v1'),
 		__PROJECT__: JSON.stringify('frontend')
 	}
 })
