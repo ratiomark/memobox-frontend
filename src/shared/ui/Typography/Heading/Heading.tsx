@@ -72,7 +72,8 @@ export const Heading = memo(
 				)}
 				data-testid={`${dataTestId}.Heading`}
 			>
-				{title ?? 'Что-то пошло не так(нет текста в компоненте Heading), обновите пожалуйста страницу'}
+				{title ?? '?'}
+				{/* {title ?? 'Что-то пошло не так(нет текста в компоненте Heading), обновите пожалуйста страницу'} */}
 			</TagName>
 		)
 	})
