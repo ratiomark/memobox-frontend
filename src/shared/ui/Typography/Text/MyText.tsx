@@ -57,7 +57,7 @@ export const MyText = memo(
 		} = props;
 
 		if (drop) {
-			return <TagName className={className}>{text ?? 'Что-то пошло не так(нет текста в компоненте Heading), обновите пожалуйста страницу'}</TagName>
+			return <TagName className={className}>{text ?? '?'}</TagName>
 		}
 
 		const sizeClass = mapSizeToClass[size];
@@ -78,7 +78,8 @@ export const MyText = memo(
 				data-testid={`${dataTestId}.Paragraph`}
 				{...otherProps}
 			>
-				{text ?? 'Что-то пошло не так(нет текста в компоненте Heading), обновите пожалуйста страницу'}
+				{text ?? '?'}
+				{/* {text ?? 'Что-то пошло не так(нет текста в компоненте Heading), обновите пожалуйста страницу'} */}
 			</TagName>
 		)
 	})
