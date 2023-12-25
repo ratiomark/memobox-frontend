@@ -2,6 +2,7 @@ version: '3.8'
 services:
   web:
     build: .
+    container_name: frontend-prod
     ports:
       - '8080:80'
     restart: unless-stopped
