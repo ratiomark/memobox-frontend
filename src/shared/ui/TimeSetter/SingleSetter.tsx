@@ -1,12 +1,9 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './SingleSetter.module.scss';
-import { WheelEvent, useEffect, useRef, useState } from 'react';
+import { WheelEvent, useEffect, useRef } from 'react';
 import { Icon } from '../Icon';
 import { MyText } from '../Typography';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
-import { Button } from '../Button';
-import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { dataAttrTimeSetterSingle } from '@/shared/const/idsAndDataAttributes';
 
 
@@ -26,7 +23,6 @@ interface TimeSetterProps {
 
 export const SingleSetter = (props: TimeSetterProps) => {
 	const {
-		className,
 		time,
 		maxTime,
 		minTime = 0,
