@@ -283,4 +283,4 @@ export const EditorUniversal = (props: EditorProps) => {
 		</SettingsContext>
 	)
 }
-// export default EditorUniversal
+export default EditorUniversal

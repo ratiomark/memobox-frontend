@@ -48,3 +48,5 @@ export const EditorCardPresenter = (props: EditorProps) => {
 		</LexicalComposer>
 	)
 }
+
+export default EditorCardPresenter;
