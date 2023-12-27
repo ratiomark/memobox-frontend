@@ -33,8 +33,8 @@ export default defineConfig({
 		]
 	},
 	build: {
-		sourcemap: 'inline',
-		// sourcemap: 'hidden',
+		// sourcemap: 'inline',
+		sourcemap: 'hidden',
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
