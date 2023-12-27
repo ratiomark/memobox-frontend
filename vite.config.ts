@@ -33,7 +33,7 @@ export default defineConfig({
 		]
 	},
 	build: {
-		sourcemap: 'hidden',
+		sourcemap: 'inline',
 		// sourcemap: 'hidden',
 		rollupOptions: {
 			output: {
