@@ -6,7 +6,7 @@ import visualizer from 'rollup-plugin-visualizer'
 // https://vitejs.dev/config/
 // https://stackoverflow.com/questions/73273017/when-i-run-vite-preview-i-get-the-bundle-size-of-300kb-and-when-i-run-vite-build
 export default defineConfig({
-	base: 'http://memobox.tech/',
+	base: 'https://memobox.tech/',
 	plugins: [
 		visualizer(),
 		react(),
