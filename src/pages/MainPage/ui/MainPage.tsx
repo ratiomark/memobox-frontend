@@ -1,4 +1,6 @@
 import { Page } from '@/widgets/Page'
+import { StatsAndActionsCupboardWidget } from '@/widgets/StatsAndActionsCupboardWidget'
+import { CupboardShelfListWrapper } from '@/features/CupboardShelfList'
 import { getUserAuthData } from '@/entities/User'
 import { useSelector } from 'react-redux'
 import { LoginScreen } from '@/features/AuthByUsername'
@@ -13,8 +15,11 @@ const MainPage = () => {
 		)
 	}
 
+	// без StatsAndActionsCupboardWidget не будет работать CupboardShelfListWrapper из-за перерасчета ширины кнопок
 	return (
 		<Page data-testid='MainPage'>
+			<StatsAndActionsCupboardWidget />
+			<CupboardShelfListWrapper />
 		</Page>
 	)
 }
