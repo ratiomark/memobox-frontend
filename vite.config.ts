@@ -36,14 +36,14 @@ export default defineConfig({
 		// sourcemap: 'hidden',
 		rollupOptions: {
 			output: {
-				// manualChunks(id) {
-				// 	if (id.includes('/LexicalEditor/')) {
-				// 		return 'lexical-editor-chunk';
-				// 	}
-				// 	// 	// if (id.includes(path.resolve(__dirname, 'src/shared/ui/LexicalEditor/'))) {
-				// 	// 	// 	return 'lexical-playground-chunk';
-				// 	// 	// }
-				// }
+				manualChunks(id) {
+					if (id.includes('/LexicalEditor/')) {
+						return 'lexical-editor-chunk';
+					}
+					// 	// if (id.includes(path.resolve(__dirname, 'src/shared/ui/LexicalEditor/'))) {
+					// 	// 	return 'lexical-playground-chunk';
+					// 	// }
+				}
 			}
 		}
 		// rollupOptions: {
