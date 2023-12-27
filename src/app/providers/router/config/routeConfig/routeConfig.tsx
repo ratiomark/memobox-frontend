@@ -26,12 +26,12 @@ export type AppRouteProps = RouteProps & {
 export const AppRoutes = {
 	main: 'main',
 	login: 'login',
-	view: 'view',
-	viewEmpty: 'viewEmpty',
+	// view: 'view',
+	// viewEmpty: 'viewEmpty',
 	settings: 'settings',
 	stats: 'stats',
-	trash: 'trash',
-	training: 'training',
+	// trash: 'trash',
+	// training: 'training',
 	subscription: 'subscription',
 	profile: 'profile',
 	ABOUT: 'about',
@@ -94,18 +94,18 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 		suspense: <StatsAndActionsCupboardWidgetSkeleton />,
 		// authOnly: true,
 	},
-	view: {
-		path: obtainRouteView(':shelfId', ':boxId'),
-		element: <ViewPage />,
-		suspense: <ViewPageSkeleton />,
-		authOnly: true,
-	},
-	viewEmpty: {
-		path: '/view',
-		element: <ViewPage />,
-		suspense: <ViewPageSkeleton />,
-		authOnly: true,
-	},
+	// view: {
+	// 	path: obtainRouteView(':shelfId', ':boxId'),
+	// 	element: <ViewPage />,
+	// 	suspense: <ViewPageSkeleton />,
+	// 	authOnly: true,
+	// },
+	// viewEmpty: {
+	// 	path: '/view',
+	// 	element: <ViewPage />,
+	// 	suspense: <ViewPageSkeleton />,
+	// 	authOnly: true,
+	// },
 	settings: {
 		path: obtainRouteSettings(),
 		element: <SettingsPage />,
@@ -119,17 +119,17 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 		suspense: <StatsPageSkeleton />,
 		authOnly: true,
 	},
-	trash: {
-		path: obtainRouteTrash(),
-		element: <TrashPage />,
-		authOnly: true,
-	},
-	training: {
-		path: obtainRouteTraining(':shelfId', ':boxId'),
-		element: <TrainingPage />,
-		authOnly: true,
-		// suspense: <Susp/>
-	},
+	// trash: {
+	// 	path: obtainRouteTrash(),
+	// 	element: <TrashPage />,
+	// 	authOnly: true,
+	// },
+	// training: {
+	// 	path: obtainRouteTraining(':shelfId', ':boxId'),
+	// 	element: <TrainingPage />,
+	// 	authOnly: true,
+	// 	// suspense: <Susp/>
+	// },
 	subscription: {
 		path: obtainRouteSubscription(),
 		element: <SubscriptionPage />,
