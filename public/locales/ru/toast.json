@@ -2,6 +2,10 @@
   "messageLoading": "Ожидаем ответ от сервера",
   "messageError": "Ошибка сервера",
   "messageSuccess": "Успешно",
+  "update_settings": {
+    "messageSuccess": "Настройки обновлены",
+    "additional": "Обновление настроек"
+  },
   "create_new_card": {
     "messageSuccess": "Карточка создана",
     "additional": "Добавление новой карточки"

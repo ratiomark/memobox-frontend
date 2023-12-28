@@ -2,6 +2,10 @@
   "messageLoading": "Awaiting response",
   "messageError": "Server-side error",
   "messageSuccess": "Success",
+  "update_settings": {
+    "messageSuccess": "Settings were updated",
+    "additional": "Updating settings"
+  },
   "create_new_card": {
     "messageSuccess": "Card created",
     "additional": "Creating new card"
