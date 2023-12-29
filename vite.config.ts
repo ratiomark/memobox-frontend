@@ -2,14 +2,40 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 import visualizer from 'rollup-plugin-visualizer'
+import { VitePWA } from 'vite-plugin-pwa';
 // import path from 'path'
 // https://vitejs.dev/config/
 // https://stackoverflow.com/questions/73273017/when-i-run-vite-preview-i-get-the-bundle-size-of-300kb-and-when-i-run-vite-build
+
+
 export default defineConfig({
 	// base: 'https://memobox.tech/',
 	plugins: [
-		visualizer(),
+		// visualizer(),
 		react(),
+		VitePWA({
+			registerType: 'autoUpdate',
+			manifest: {
+				'name': 'Memobox App',
+				'short_name': 'Memobox',
+				description: 'My Awesome App description',
+				theme_color: '#ffffff',
+				'icons': [
+					{
+						'src': 'images/favicon_io/android-chrome-192x192.png',
+						'sizes': '192x192',
+						'type': 'image/png'
+					},
+					{
+						'src': 'images/favicon_io/android-chrome-512x512.png',
+						'sizes': '512x512',
+						'type': 'image/png'
+					}
+				],
+				'background_color': '#ffffff',
+				'display': 'standalone'
+			}
+		}),
 		svgr({
 			exportAsDefault: true,
 			svgrOptions: {
