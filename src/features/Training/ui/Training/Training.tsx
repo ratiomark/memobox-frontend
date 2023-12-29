@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './Training.module.scss';
-import { useGetCardsByShelfIdQuery, useGetTrainingCardsQuery } from '@/entities/Card';
+import { useGetTrainingCardsQuery } from '@/entities/Card';
 import { TrainingContentSkeleton } from '../TrainingContent/TrainingContentSkeleton';
 import { TrainingContent } from '../TrainingContent/TrainingContent';
-import { useGetAllCardsQuery } from '@/entities/Card';
 import { obtainRouteMain } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,7 +25,7 @@ export const Training = (props: TrainingProps) => {
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 	if (isLoading) return <TrainingContentSkeleton />
-	if (isError) return <p> Some error in training</p>
+	if (isError) return <p> {t('Some error in training')}</p>
 	if (data && data.length === 0) {
 		alert('No cards you redirected to main page')
 		navigate(obtainRouteMain())
