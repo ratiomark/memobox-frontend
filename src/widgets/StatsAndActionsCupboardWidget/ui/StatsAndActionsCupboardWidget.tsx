@@ -26,6 +26,9 @@ import { iconSizeInfo } from '@/shared/const/iconSizes';
 import { CreateNewShelfModal } from './CreateNewShelfModal/CreateNewShelfModal';
 import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 import { dataAttrButtonTypeAddCardButtonGeneral } from '@/shared/const/idsAndDataAttributes';
+import { rtkApiDropCards } from '@/entities/Card';
+import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags';
+import { rtkApi } from '@/shared/api/rtkApi';
 
 export const StatsAndActionsCupboardWidget = () => {
 	const cupboardIsLoading = useSelector(getCupboardIsLoading)
@@ -43,6 +46,11 @@ export const StatsAndActionsCupboardWidget = () => {
 	// const onTimeEndCreateNewCard = useCallback(() => {
 	// 	dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('idle'))
 	// }, [dispatch])
+
+	const onDropCards = async () => {
+		dispatch(rtkApiDropCards())
+		dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
+	}
 
 	const onAddNewShelfClick = () => {
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(true))
@@ -65,14 +73,21 @@ export const StatsAndActionsCupboardWidget = () => {
 				<HStack gap='gap_14' className={cls.actions}>
 					{/* <Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button> */}
 					<Button
+						onClick={onDropCards}
+					>
+						{t('drop')}
+					</Button>
+					<Button
 						disabled={createNewShelfRequestStatus === 'pending'}
 						onClick={onAddNewShelfClick}
+						name='new shelf'
 					>
 						{t('new shelf')}
 					</Button>
 					<Button
 						onClick={onAddNewCardClick}
 						data-button-type={dataAttrButtonTypeAddCardButtonGeneral}
+						name='new card'
 					>
 						{t('add card with hot key') + ' (n)'}
 					</Button>
@@ -82,6 +97,7 @@ export const StatsAndActionsCupboardWidget = () => {
 						height={iconSizeInfo}
 						className={cls.info}
 						clickable
+						name='info'
 						onClick={onOpenInfoModal}
 					/>
 				</HStack >
