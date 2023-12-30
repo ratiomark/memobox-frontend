@@ -83,7 +83,7 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 				listDirection='bottom_left'
 				items={additionalItems}
 				trigger={
-					<div
+					<menu
 						className={cls.dropDownTrigger}
 					// onClick={toggleIsAdditionalOpen}
 					>
@@ -95,7 +95,7 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 							Svg={ArrowBottomIcon}
 						/>
 
-					</div>
+					</menu>
 				}
 			/>
 		</div>
