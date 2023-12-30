@@ -24,7 +24,7 @@ export const App = () => {
 	}, [dispatch])
 
 
-	if (!userMounted) return <LoaderWidget />
+	// if (!userMounted) return <LoaderWidget />
 
 
 	return (
