@@ -24,7 +24,17 @@ export const App = () => {
 	}, [dispatch])
 
 
-	// if (!userMounted) return <LoaderWidget />
+	if (!userMounted) {
+		return (
+			<div className={`app ${theme}`}>
+				<Suspense fallback={<HeaderSkeleton />}>
+					<Header />
+				</Suspense>
+				<LoaderWidget />
+			</div>
+		)
+
+	}
 
 
 	return (
