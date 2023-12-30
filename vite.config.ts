@@ -13,32 +13,32 @@ export default defineConfig({
 	plugins: [
 		// visualizer(),
 		react(),
-		VitePWA({
-			registerType: 'autoUpdate',
-			// devOptions: {
-			// enabled: true
-			// },
-			manifest: {
-				name: 'Memobox App',
-				short_name: 'Memobox',
-				description: 'Memobox App memorize everything!',
-				theme_color: '#ffffff',
-				icons: [
-					{
-						src: 'images/favicon_io/android-chrome-192x192.png',
-						sizes: '192x192',
-						type: 'image/png'
-					},
-					{
-						src: 'images/favicon_io/android-chrome-512x512.png',
-						sizes: '512x512',
-						type: 'image/png'
-					}
-				],
-				background_color: '#ffffff',
-				display: 'standalone'
-			}
-		}),
+		// VitePWA({
+		// 	registerType: 'autoUpdate',
+		// 	// devOptions: {
+		// 	// enabled: true
+		// 	// },
+		// 	manifest: {
+		// 		name: 'Memobox App',
+		// 		short_name: 'Memobox',
+		// 		description: 'Memobox App memorize everything!',
+		// 		theme_color: '#ffffff',
+		// 		icons: [
+		// 			{
+		// 				src: 'images/favicon_io/android-chrome-192x192.png',
+		// 				sizes: '192x192',
+		// 				type: 'image/png'
+		// 			},
+		// 			{
+		// 				src: 'images/favicon_io/android-chrome-512x512.png',
+		// 				sizes: '512x512',
+		// 				type: 'image/png'
+		// 			}
+		// 		],
+		// 		background_color: '#ffffff',
+		// 		display: 'standalone'
+		// 	}
+		// }),
 		svgr({
 			exportAsDefault: true,
 			svgrOptions: {
@@ -62,8 +62,8 @@ export default defineConfig({
 		]
 	},
 	build: {
-		// sourcemap: 'inline',
-		sourcemap: 'hidden',
+		sourcemap: 'inline',
+		// sourcemap: 'hidden',
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
