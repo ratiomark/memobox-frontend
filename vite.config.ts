@@ -19,10 +19,14 @@ export default defineConfig({
 			// enabled: true
 			// },
 			manifest: {
-				name: 'Memobox App',
+				name: 'Memobox',
 				short_name: 'Memobox',
-				description: 'Memobox App memorize everything!',
-				theme_color: '#ffffff',
+				description: 'Memobox - memorize everything!',
+				theme_color: 'blue',
+				// theme_color: '#ffffff',
+				background_color: 'blue',
+				// background_color: '#ffffff',
+				display: 'standalone',
 				icons: [
 					{
 						src: 'images/favicon_io/android-chrome-192x192.png',
@@ -47,8 +51,6 @@ export default defineConfig({
 						purpose: 'maskable'
 					}
 				],
-				background_color: '#ffffff',
-				display: 'standalone'
 			}
 		}),
 		svgr({
