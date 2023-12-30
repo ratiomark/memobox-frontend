@@ -72,6 +72,7 @@ export const CommonShelfButtons = () => {
 				type='hint'
 				Svg={ArrowBottomIcon}
 				onClick={onCollapseClickHandle}
+				name='show/hide'
 			/>
 		</div>
 	)
