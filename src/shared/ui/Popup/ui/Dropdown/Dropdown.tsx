@@ -21,6 +21,8 @@ interface DropdownProps {
 	trigger: ReactNode
 	items: DropdownItem[]
 	listDirection?: AbsoluteListDirection
+	asMainWrapper?: 'ul' | 'div' | 'ul'
+	asListWrapper?: 'ul' | 'div' | 'ul'
 }
 
 
@@ -29,12 +31,14 @@ export const Dropdown = (props: DropdownProps) => {
 		className,
 		trigger,
 		items,
+		asMainWrapper,
+		asListWrapper,
 		listDirection = 'bottom_right',
 	} = props
 
 	return (
 		<Menu
-			as='ul'
+			as={asMainWrapper ?? 'div'}
 			className={clsx(
 				cls.Dropdown,
 				[className])}
@@ -43,7 +47,7 @@ export const Dropdown = (props: DropdownProps) => {
 				{trigger}
 			</Menu.Button>
 
-			<Menu.Items className={clsx(cls.menu, listDirection)}>
+			<Menu.Items as={asListWrapper ?? 'div'} className={clsx(cls.menu, listDirection)}>
 
 				{items.map((item, index) => {
 					const content = ({ active }: { active: boolean }) => (
