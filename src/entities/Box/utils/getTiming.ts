@@ -15,11 +15,13 @@ const timeUnits = {
 		hours: 'ч',
 		minutes: 'мин'
 	}
-	
+
 };
 
+import i18n from 'i18next'
 export default function formatTiming(timing: TimingBlock, lang: keyof typeof timeUnits = 'en'): string {
-	const langChecked = lang in timeUnits ? lang : 'en';
+	// const lang i18n.resolvedLanguage
+	const langChecked = i18n.resolvedLanguage in timeUnits ? i18n.resolvedLanguage : 'en';
 	const { months, weeks, days, hours, minutes } = timing;
 	let result = '';
 
