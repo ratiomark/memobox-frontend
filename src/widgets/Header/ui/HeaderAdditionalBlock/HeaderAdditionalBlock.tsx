@@ -82,6 +82,8 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 			<Dropdown
 				listDirection='bottom_left'
 				items={additionalItems}
+				asMainWrapper='div'
+				asListWrapper='ul'
 				trigger={
 					<menu
 						className={cls.dropDownTrigger}
