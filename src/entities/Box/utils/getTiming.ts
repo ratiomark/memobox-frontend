@@ -2,31 +2,32 @@ import { TimingBlock } from '@/shared/types/DataBlock';
 
 const timeUnits = {
 	en: {
-		months: 'mo',
+		months: 'm',
 		weeks: 'w',
 		days: 'd',
 		hours: 'h',
-		minutes: 'm'
+		minutes: 'min'
 	},
 	ru: {
-		months: 'мес',
+		months: 'м',
 		weeks: 'н',
 		days: 'д',
 		hours: 'ч',
-		minutes: 'м'
+		minutes: 'мин'
 	}
 	
 };
 
 export default function formatTiming(timing: TimingBlock, lang: keyof typeof timeUnits = 'en'): string {
+	const langChecked = lang in timeUnits ? lang : 'en';
 	const { months, weeks, days, hours, minutes } = timing;
 	let result = '';
 
-	if (months > 0) result += `${months}${timeUnits[lang]['months']} `;
-	if (weeks > 0) result += `${weeks}${timeUnits[lang]['weeks']} `;
-	if (days > 0) result += `${days}${timeUnits[lang]['days']} `;
-	if (hours > 0) result += `${hours}${timeUnits[lang]['hours']} `;
-	if (minutes > 0) result += `${minutes}${timeUnits[lang]['minutes']} `;
+	if (months > 0) result += `${months}${timeUnits[langChecked]['months']} `;
+	if (weeks > 0) result += `${weeks}${timeUnits[langChecked]['weeks']} `;
+	if (days > 0) result += `${days}${timeUnits[langChecked]['days']} `;
+	if (hours > 0) result += `${hours}${timeUnits[langChecked]['hours']} `;
+	if (minutes > 0) result += `${minutes}${timeUnits[langChecked]['minutes']} `;
 
 	return result.trim();
 }
