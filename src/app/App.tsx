@@ -27,9 +27,7 @@ export const App = () => {
 	if (!userMounted) {
 		return (
 			<div className={`app ${theme}`}>
-				<Suspense fallback={<HeaderSkeleton />}>
-					<Header />
-				</Suspense>
+				<HeaderSkeleton />
 				<LoaderWidget />
 			</div>
 		)
