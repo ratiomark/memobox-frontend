@@ -5,7 +5,19 @@ import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 const loadLanguages = import.meta.env.DEV ? 'all' : 'currentOnly';
+const detectorOptions = {
+	// Настройки для определения языка
+	order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
+	lookupLocalStorage: 'i18nextLng',
+	// Функция проверки, которая обрезает региональный код
+	checkWhitelist: true,
+	lookupFromPathIndex: 0
+};
 
+i18n.use(LanguageDetector).init({
+	detection: detectorOptions,
+	// ... другие опции i18n
+});
 i18n
 	// use это подключение плагинов, их можно писать самому. 
 	.use(Backend)
@@ -26,6 +38,7 @@ i18n
 			loadPath: '/locales/{{lng}}/{{ns}}.json' // путь из которого будут подтягиваться переводы
 		},
 		load: 'languageOnly', // Загружать все языки в режиме разработки, иначе только текущий
+		detection: detectorOptions,
 	});
 
 
