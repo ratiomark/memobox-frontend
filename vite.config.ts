@@ -22,10 +22,8 @@ export default defineConfig({
 				name: 'Memobox',
 				short_name: 'Memobox',
 				description: 'Memobox - memorize everything!',
-				theme_color: 'blue',
-				// theme_color: '#ffffff',
-				background_color: 'blue',
-				// background_color: '#ffffff',
+				theme_color: '#33d69f',
+				background_color: '#33d69f',
 				display: 'standalone',
 				icons: [
 					{
