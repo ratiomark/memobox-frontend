@@ -4,31 +4,19 @@ import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { useSelector } from 'react-redux'
 import { getUserMounted, initAuthData } from '@/entities/User'
-
-
 import { Header, HeaderSkeleton } from '@/widgets/Header'
-import './styles/regularStyles.css'
 import { useTheme } from '@/shared/context/useTheme'
 import { ToastViewport } from '@radix-ui/react-toast'
 import { useInitialCssValuesFromLocalService } from '@/shared/lib/helpers/hooks/useInitialCssValuesFromLocalService'
-import { AppRouterMobile } from './providers/router/AppRouter/ui/AppRouterMobile'
+import { useIsMobileObserver } from '@/shared/lib/helpers/hooks/useIsMobileObserver'
+import './styles/regularStyles.css'
 
-const useIsMobile = () => {
-	const [isMobile, setIsMobile] = useState(false);
-
-	useEffect(() => {
-		const userAgent = navigator.userAgent.toLowerCase();
-		setIsMobile(/mobile/i.test(userAgent));
-	}, []);
-
-	return isMobile;
-};
 
 export const App = () => {
 	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
 	const { theme } = useTheme()
-	const isMobile = useIsMobile()
+	useIsMobileObserver()
 	useInitialCssValuesFromLocalService()
 
 	useEffect(() => {
