@@ -1,16 +1,16 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
-import { getUIScrollByPath, uiActions } from '@/features/ScrollSave';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useInfiniteScroll } from '@/shared/lib/helpers/hooks/useInfiniteScroll';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { TestProps } from '@/shared/types/TestProps';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import { MutableRefObject, ReactNode,  UIEvent,  memo,  useEffect, useRef } from 'react';
+import { MutableRefObject, ReactNode, UIEvent, memo, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import cls from './Page.module.scss';
 import { useInitialEffect } from '@/shared/lib/helpers/hooks/useInitialEffect';
+import { getUIScrollByPath, uiActions } from '@/entities/UI';
 
 interface PageProps extends TestProps {
 	className?: string
