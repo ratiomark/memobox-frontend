@@ -4,7 +4,6 @@ import { TimeSleepSettings, UserSchema } from '@/entities/User';
 import { IReducerManager } from './reducerManager';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { LoginSchema } from '@/features/AuthByUsername';
-import { UISchema } from '@/features/ScrollSave';
 // import { CardModalSchema } from '@/features/CardModal';
 import { ViewPageInitializerSchema } from '@/features/ViewPageInitializer';
 import { CupboardPageSchema } from '@/features/CupboardShelfList';
@@ -14,6 +13,7 @@ import { ProfilePageWidgetSchema } from '@/widgets/ProfilePageWidget';
 import { HeaderSchema } from '@/widgets/Header';
 import { ShelfBoxesTemplateSchema } from '@/features/CupboardShelfList';
 import { ToastsSchema } from '@/shared/ui/Toast';
+import { UISchema } from '@/entities/UI';
 
 // loginForm делаю не обязательным, таким образом я могу подружать его позже с помощью асинхронна и ТС не будет ругаться на то что я не объявил его в rootReducers
 export interface StateSchema {
