@@ -39,7 +39,7 @@ export const App = () => {
 	if (!userMounted) {
 		return (
 			<div className={`app ${theme}`}>
-				{!isMobile && <HeaderSkeleton />}
+				<HeaderSkeleton />
 				<LoaderWidget />
 			</div>
 		)
@@ -50,18 +50,10 @@ export const App = () => {
 	return (
 		// <div className='app'>
 		<div className={`app ${theme}`}>
-			{
-				!isMobile && (
-					<Suspense fallback={<HeaderSkeleton />}>
-						<Header />
-					</Suspense>
-				)
-			}
-			{
-				isMobile
-					? <AppRouterMobile />
-					: <AppRouter />
-			}
+			<Suspense fallback={<HeaderSkeleton />}>
+				<Header />
+			</Suspense>
+			<AppRouter />
 			<ToastViewport className='toastViewport' />
 			{/* <img src="https://i.pinimg.com/originals/e5/e8/30/e5e830f89f89f0259e1d705e14a5de93.gif" alt="Your GIF" id="my-gif" /> */}
 			{/* <Toast.Viewport className='viewport' /> */}
