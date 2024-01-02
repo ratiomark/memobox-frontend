@@ -3,12 +3,11 @@ import { createReducerManager } from './reducerManager';
 import { StateSchema } from './StateSchema';
 import { userReducer } from '@/entities/User';
 // import { $api } from '@/shared/api/api';
-import { uiReducer } from '@/features/ScrollSave';
 import { rtkApi } from '@/shared/api/rtkApi';
-// import { cardModalReducer } from '@/features/CardModal';
 import { cupboardShelfListReducer } from '@/features/CupboardShelfList';
 import { headerReducer } from '@/widgets/Header';
 import { toastsReducer } from '@/shared/ui/Toast';
+import { uiReducer } from '@/entities/UI';
 
 export function createReduxStore(
 	initialState?: StateSchema,
