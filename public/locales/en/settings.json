@@ -8,6 +8,8 @@
   "save": "Save",
   "start sleep": "Beginning of sleep",
   "end sleep": "End of sleep",
+  "add notification email": "Add email",
+  "write new notification email": "Specify a new email to send notifications",
   "days": {
     "monday": "Mon",
     "tuesday": "Tue",

@@ -8,6 +8,8 @@
   "save": "Сохранить",
   "start sleep": "Начало сна",
   "end sleep": "Конец сна",
+  "add notification email": "Добавить email",
+  "write new notification email": "Укажите новый email для отправки уведомлений",
   "days": {
     "monday": "Пн",
     "tuesday": "Вт",
