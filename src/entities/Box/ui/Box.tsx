@@ -1,8 +1,7 @@
 import clsx from 'clsx'
 import cls from './Box.module.scss'
-// import { Card } from '@/shared/ui/Card';
 import { Heading, MyText } from '@/shared/ui/Typography';
-import { DataBlock, TimingBlock } from '@/shared/types/DataBlock';
+import { TimingBlock } from '@/shared/types/DataBlock';
 import { SmallDataLabel } from '@/shared/ui/DataLabels';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
 import { Icon } from '@/shared/ui/Icon';
@@ -12,12 +11,9 @@ import TimeIcon from '@/shared/assets/icons/timeIcon.svg'
 import SettingsIcon from '@/shared/assets/icons/settingsIcon2.svg'
 // import SettingsIcon from '@/shared/assets/icons/settingsIcon.svg'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
-import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
 import { MouseEvent, useCallback, useState } from 'react';
-import { TimeSetter } from '@/shared/ui/TimeSetter';
 import { BoxCoordinates, BoxSchema } from '../model/types/BoxSchema';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/shared/ui/Button';
 import { obtainRouteTraining } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +21,8 @@ import { iconSizeBox } from '@/shared/const/iconSizes';
 import getBoxTimingStringRepresentation from '../utils/getTiming';
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { useSelector } from 'react-redux';
 
 interface BoxPropsBase {
 	className?: string
@@ -35,6 +33,7 @@ interface BoxPropsBase {
 	onBoxViewClick: (shelfId: string, boxIndex: number | string) => void
 	onOpenTimeSetter: (coordinates: BoxCoordinates, timingData: TimingBlock, boxId: string, shelfId: string) => void
 	onOpenBoxSettings: (coordinates: BoxCoordinates, boxId: string, shelfId: string) => void
+	isRefetchingSelectorFn: (state: StateSchema) => boolean
 }
 
 const timeSetterAnimation = {
@@ -66,8 +65,10 @@ export const Box = (props: BoxPropsBase) => {
 		onBoxViewClick,
 		onOpenTimeSetter,
 		onOpenBoxSettings,
+		isRefetchingSelectorFn
 	} = props
 	const { data, specialType } = boxItem
+	const isRefetching = useSelector(isRefetchingSelectorFn)
 	const { t, currentLang: lang } = useCustomTranslate()
 	const navigate = useNavigate()
 
@@ -102,7 +103,7 @@ export const Box = (props: BoxPropsBase) => {
 
 		const completeSmallDataLabels = <CompleteSmallDataLabels
 			className={cls.dataLabels}
-			isLoading={false}
+			isLoading={isRefetching}
 			data={data}
 		/>
 
@@ -125,7 +126,7 @@ export const Box = (props: BoxPropsBase) => {
 			}
 			onOpenBoxSettings(coordinates, boxItem.id, shelfId)
 		}
-
+		const isButtonDisabled = data.train < 1 || isRefetching
 		const buttons = (
 			<HStack
 				className={cls.buttonsBlock}
@@ -153,7 +154,6 @@ export const Box = (props: BoxPropsBase) => {
 					Svg={TimeIcon}
 					clickable
 					onClick={onOpenTimeSetterHandle}
-					// onClick={onTimerClick}
 					width={iconSizeBox}
 					height={iconSizeBox}
 				/>
@@ -179,11 +179,19 @@ export const Box = (props: BoxPropsBase) => {
 						text={getBoxTimingStringRepresentation(boxItem.timing, lang) ?? 'ERROR'}
 					/>
 				</div>
-				<Button onClick={startTraining} variant='filledBox' disabled={data.train < 1} className={cls.trainButton} >{t('train')}</Button>
+				<Button
+					className={cls.trainButton}
+					onClick={startTraining}
+					variant='filledBox'
+					disabled={isButtonDisabled}
+				>
+					{t('train')}
+				</Button>
 			</li>
 		)
 	}
-
+	
+	const isButtonDisabled = data.all < 1 || isRefetching
 	const title = <Heading as='h5' className={cls.title} title={t('new cards')} />
 	return (
 		<li className={clsx(cls.Box, [className])} >
@@ -192,7 +200,7 @@ export const Box = (props: BoxPropsBase) => {
 				<SmallDataLabel
 					className={cls.dataLabels}
 					type='all'
-					isLoading={false}
+					isLoading={isRefetching}
 					cardsCount={data.all}
 				/>
 				<HStack
@@ -220,7 +228,7 @@ export const Box = (props: BoxPropsBase) => {
 			<Button
 				onClick={startTraining}
 				variant='filledBox'
-				disabled={data.all < 1}
+				disabled={isButtonDisabled}
 				className={cls.trainButton}
 			>
 				{t('train')}
