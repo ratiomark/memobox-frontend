@@ -1,0 +1,56 @@
+.ManageEmailsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  // min-width: 350px;
+
+  // width: min(100%, 800px);
+}
+
+.notificationBlock{
+
+}
+
+.icon {
+  transition: all 0.3s;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--border-radius-main);
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.removeIcon {
+  background-color: var(--cancel-rgb-2);
+  border: 1px solid transparent;
+}
+
+.emailCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 60px;
+  padding: 8px 8px 8px 12px;
+}
+
+.detailsBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 20px 0;
+}
+
+.detailsBlock_last {
+  justify-content: start;
+}
+
+.notificationCard {
+  display: flex;
+  min-width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
