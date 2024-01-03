@@ -32,8 +32,8 @@ export const Switcher = (props: SwitcherProps) => {
 				className
 			)}
 			onClick={disabled ? undefined : onClickSwitcher}
-			// onKeyDown={onEnterDown}
-			tabIndex={0}
+		// onKeyDown={onEnterDown}
+		// tabIndex={0}
 		>
 			{title && <label className={cls.label}>{title}</label >}
 			<Switch.Root
