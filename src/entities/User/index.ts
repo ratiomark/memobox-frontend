@@ -57,6 +57,7 @@ export {
 	getUserShelfTemplateSettings,
 	getUserTimeSleepSettings,
 	getUserSettingsIsLoading,
+	getUserNotificationEmailList,
 } from './model/selectors/getUserSettings';
 
 export {

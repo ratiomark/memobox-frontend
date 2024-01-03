@@ -6,6 +6,7 @@ export const getUserSettings = (state: StateSchema) => state.user.userSettings
 export const getUserMissedTrainingSettings = (state: StateSchema) => state.user?.userSettings?.missedTraining
 
 export const getUserNotificationSettings = (state: StateSchema) => state.user?.userSettings?.notifications
+export const getUserNotificationEmailList = (state: StateSchema) => state.user?.userSettings?.notifications.notificationEmails
 
 export const getUserShelfTemplateSettings = (state: StateSchema) => state.user?.userSettings?.shelfTemplate
 
