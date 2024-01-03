@@ -13,6 +13,8 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	isNeedRefetch: boolean
 	isNeedStop: boolean
 	isLoading: boolean
+	isMounted?: boolean
+	isRefetching: boolean
 	error: string
 	commonShelf?: CommonShelfBackendResponse
 	shelvesTitles: string[]
@@ -54,6 +56,7 @@ interface CreateNewShelfModal {
 	isAwaitingResponse: boolean
 	isResponseSuccessful?: boolean
 	requestStatus: RequestStatusType
+	shelvesCreated: number // выполняет роль триггера для useEffect в useCupboardButtonsSizes
 }
 interface BoxTimeSetterModal {
 	isOpen: boolean
