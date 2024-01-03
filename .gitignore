@@ -30,3 +30,4 @@ DndShelfListWrapper.tsx
 *.sw?
 # 
 ignore
+src/widgets/ContentPresenterTrashPageWidget/ui/ContentPresenterWrapper_copy
