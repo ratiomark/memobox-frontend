@@ -2,7 +2,7 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
 import { getAllShelvesEntities, getAllShelvesIds, getCupboardState } from '../slice/cupboardShelfListSlice';
 import { BoxSchema } from '@/entities/Box';
-import { getCupboardIsLoading } from './getCupboardShelfList';
+import { getIsCupboardLoading } from './getCupboardShelfList';
 import { t } from 'i18next';
 
 export const getQuestionCardModal = (state: StateSchema) => state.cupboard.createNewCardModal.questionText
@@ -31,7 +31,7 @@ export const getBoxIdCheckedCardModal = createSelector(
 export const getShelfBoxesItems = createSelector(
 	[
 		getShelfIdCardModal,
-		getCupboardIsLoading,
+		getIsCupboardLoading,
 		getAllShelvesIds,
 		getAllShelvesEntities,
 	],
