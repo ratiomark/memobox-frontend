@@ -10,6 +10,7 @@ import { Box, BoxCoordinates } from '@/entities/Box';
 import cls from './BoxesBlock.module.scss';
 import { TimingBlock } from '@/shared/types/DataBlock';
 import { idBoxesBlockCommonWrapper } from '@/shared/const/idsAndDataAttributes';
+import { getIsCupboardRefetching } from '../..';
 
 // `#${idBoxesBlockCommonWrapper}`
 export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
@@ -55,6 +56,21 @@ export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 		dispatch(cupboardShelfListActions.setMissedTrainingBoxId(boxId))
 	}, [dispatch])
 
+	// const boxesData = [...shelf.boxesData].sort((a, b) => a.index - b.index)
+	// const boxList =  boxesData.map(boxItem => {
+	// 	return (
+	// 		<Box
+	// 			key={boxItem.id}
+	// 			boxItem={boxItem}
+	// 			shelfId={shelf.id}
+	// 			onOpenTimeSetter={onOpenTimeSetter}
+	// 			onOpenBoxSettings={onOpenBoxSettings}
+	// 			onAddNewCard={onAddNewCardClick}
+	// 			onBoxViewClick={onViewClick}
+	// 			isRefetchingSelectorFn={getIsCupboardRefetching}
+	// 		/>
+	// 	)
+	// })
 	const boxList = useMemo(() => {
 		const boxesData = [...shelf.boxesData].sort((a, b) => a.index - b.index)
 		return boxesData.map(boxItem => {
@@ -67,6 +83,7 @@ export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 					onOpenBoxSettings={onOpenBoxSettings}
 					onAddNewCard={onAddNewCardClick}
 					onBoxViewClick={onViewClick}
+					isRefetchingSelectorFn={getIsCupboardRefetching}
 				/>
 			)
 		})
