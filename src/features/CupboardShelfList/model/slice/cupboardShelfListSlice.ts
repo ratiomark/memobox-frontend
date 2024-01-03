@@ -25,6 +25,7 @@ const initialState: CupboardPageSchema = {
 	isNeedStop: true,
 	isFirstRender: true,
 	isLoading: true,
+	isRefetching: true,
 	error: '',
 	entities: {},
 	ids: [],
@@ -278,8 +279,11 @@ const cupboardShelfList = createSlice({
 			state.isCupboardInfoModalOpen = action.payload
 		},
 		// 
-		setFetchedCupboardDataIsLoading: (state, action: PayloadAction<boolean>) => {
+		setIsCupboardDataLoading: (state, action: PayloadAction<boolean>) => {
 			state.isLoading = action.payload
+		},
+		setIsCupboardRefetching: (state, action: PayloadAction<boolean>) => {
+			state.isRefetching = action.payload
 		},
 		setIsDataAlreadyInStore: (state, action: PayloadAction<boolean>) => {
 			state.isDataAlreadyInStore = action.payload
@@ -320,6 +324,8 @@ const cupboardShelfList = createSlice({
 			state.shelvesTitles = allShelves.map(shelf => shelf.title)
 			state.isDataAlreadyInStore = true
 			state.isNeedRefetch = true
+			state.isFirstRender = false
+			state.isRefetching = false
 			state.cupboardData = {
 				all: commonShelf.data.all,
 				train: commonShelf.data.train,
@@ -330,6 +336,7 @@ const cupboardShelfList = createSlice({
 			const commonShelf = action.payload.commonShelf
 			const allShelves = action.payload.shelves
 			state.isLoading = false
+			state.isRefetching = false
 			state.commonShelf = commonShelf
 			state.createNewCardModal.shelfId = allShelves[0].id
 			shelvesAdapter.setAll(state, allShelves)
@@ -386,6 +393,8 @@ const cupboardShelfList = createSlice({
 					const commonShelf = action.payload.commonShelf
 					const allShelves = action.payload.shelves
 					state.isLoading = false
+					state.isRefetching = false
+					state.isFirstRender = false
 					state.commonShelf = commonShelf
 					state.createNewCardModal.shelfId = allShelves[0].id
 					if (state.isDataAlreadyInStore) {
@@ -425,11 +434,13 @@ const cupboardShelfList = createSlice({
 				fetchCupboardDataThunk.rejected,
 				(state) => {
 					state.isLoading = false
+					state.isRefetching = false
 				})
 			.addCase(
 				fetchCupboardDataThunk.pending,
 				(state) => {
 					state.isLoading = true
+					state.isRefetching = true
 				}
 			)
 			.addCase(
