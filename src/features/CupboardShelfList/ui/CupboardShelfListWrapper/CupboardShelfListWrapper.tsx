@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CupboardShelfList } from '../CupboardShelfList';
-import { getCupboard, getCupboardIsDataAlreadyInStore, getCupboardIsFirstRender, getCupboardIsLoading } from '../../model/selectors/getCupboardShelfList';
+import { getCupboard, getIsCupboardDataAlreadyInStore, getIsCupboardFirstRender, getIsCupboardLoading } from '../../model/selectors/getCupboardShelfList';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { Suspense, useEffect } from 'react';
 import { useGetCupboardDataQuery } from '@/entities/Cupboard';
@@ -21,8 +21,8 @@ export const CupboardShelfListWrapper = () => {
 	// useAsyncReducer({ reducers, removeAfterUnmount: false })
 	// const cupboardIsLoading = useSelector(getCupboardIsLoading)
 	const { data, isLoading, error, refetch, isFetching, currentData, } = useGetCupboardDataQuery()
-	const isDataAlreadyInStore = useSelector(getCupboardIsDataAlreadyInStore)
-	const isFirstRender = useSelector(getCupboardIsFirstRender)
+	const isDataAlreadyInStore = useSelector(getIsCupboardDataAlreadyInStore)
+	const isFirstRender = useSelector(getIsCupboardFirstRender)
 	// const isNeedRefetch = useSelector(getCupboardIsNeedRefetch)
 	// const isNeedStop = useSelector(getCupboardIsNeedStop)
 	const dispatch = useAppDispatch()
@@ -41,8 +41,16 @@ export const CupboardShelfListWrapper = () => {
 	}, [data, isLoading, isFetching, dispatch])
 
 	useEffect(() => {
-		dispatch(cupboardShelfListActions.setFetchedCupboardDataIsLoading(isLoading))
-	}, [isLoading, dispatch])
+		if (isLoading || isFetching) {
+			dispatch(cupboardShelfListActions.setIsCupboardRefetching(true))
+		} else {
+			// dispatch(cupboardShelfListActions.setIsCupboardRefetching(false))
+		}
+	}, [isLoading, isFetching, dispatch])
+
+	// useEffect(() => {
+	// 	dispatch(cupboardShelfListActions.setIsCupboardDataLoading(isLoading))
+	// }, [isLoading, dispatch])
 
 	// useEffect(() => {
 	// 	if (!isFirstRender && isDataAlreadyInStore) {

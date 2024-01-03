@@ -9,7 +9,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getCupboardCommonShelfCollapsed } from '../../model/selectors/getCupboardShelfList';
+import { getCupboardCommonShelfCollapsed, getIsAnyCardsToTrain, getIsCupboardRefetching } from '../../model/selectors/getCupboardShelfList';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions } from '../..';
 import { useUpdateCommonShelfMutation } from '@/entities/Shelf';
@@ -22,6 +22,8 @@ import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 
 export const CommonShelfButtons = () => {
+	const isRefetching = useSelector(getIsCupboardRefetching)
+	const isAnyCardsToTrainExist = useSelector(getIsAnyCardsToTrain)
 	const navigate = useNavigate()
 	const startTraining = () => {
 		navigate(obtainRouteTraining('all', 'all'))
@@ -29,7 +31,7 @@ export const CommonShelfButtons = () => {
 	const onViewClick = () => {
 		navigate(obtainRouteView('all', 'all'))
 	}
-	useHotkeys('t', startTraining, { keyup: true })
+	useHotkeys('t', startTraining, { keyup: true, enabled: !isRefetching })
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
 	const dispatch = useAppDispatch()
 
@@ -62,6 +64,7 @@ export const CommonShelfButtons = () => {
 				variant='filled'
 				data-button-type={dataAttrButtonTypeTrain}
 				onClick={startTraining}
+				disabled={isRefetching || !isAnyCardsToTrainExist}
 			>
 				{t('train') + ' (t)'}
 			</Button>

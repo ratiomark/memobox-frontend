@@ -6,12 +6,12 @@ import { fetchCupboardDataThunk } from '../model/services/fetchCupboardDataThunk
 import { useSelector } from 'react-redux';
 import {
 	getCupboardData,
-	getCupboardIsLoading,
+	getIsCupboardLoading,
 	getCupboardError,
 	getCupboardShelves,
 	getCupboardCommonShelfCollapsed,
-	getCupboardIsDataAlreadyInStore,
-	getCupboardIsFirstRender,
+	getIsCupboardDataAlreadyInStore,
+	getIsCupboardFirstRender,
 	// getShelvesFromStorOrLocalSaver,
 } from '../model/selectors/getCupboardShelfList';
 import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
@@ -43,10 +43,10 @@ import { RenameShelfModal } from './Modals/RenameShelfModal/RenameShelfModal';
 export const CupboardShelfList = () => {
 	const dispatch = useAppDispatch()
 	const cupboardData = useSelector(getCupboardData)
-	const cupboardIsLoading = useSelector(getCupboardIsLoading)
+	const cupboardIsLoading = useSelector(getIsCupboardLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
-	const isFirstRender = useSelector(getCupboardIsFirstRender)
+	const isFirstRender = useSelector(getIsCupboardFirstRender)
 	useShelvesDndHandler()
 	useShelvesLocalSaver({ cupboardShelves })
 	useCupboardButtonsSizes(cupboardIsLoading)
@@ -89,10 +89,13 @@ export const CupboardShelfList = () => {
 						onCollapseClick={onCollapseClick}
 					/>}
 					noDelay={!cupboardIsLoading}
-					isLoading={cupboardIsLoading}
+					isLoading={cupboardIsLoading && isFirstRender}
 				/>
 			)
-			const boxesBlock = <BoxesBlockWrapper isLoading={cupboardIsLoading} shelf={shelf} />
+			const boxesBlock = <BoxesBlockWrapper
+				isLoading={cupboardIsLoading && isFirstRender}
+				shelf={shelf}
+			/>
 
 			return (
 				<ShelfItem
@@ -118,7 +121,7 @@ export const CupboardShelfList = () => {
 				className={cls.cupboardShelfList}
 				id={idCupboardShelfList}
 			>
-				<CommonShelf data={cupboardData} isLoading={cupboardIsLoading} />
+				<CommonShelf data={cupboardData} isLoading={cupboardIsLoading && isFirstRender} />
 				<Reorder.Group
 					// layoutScroll
 					// layout

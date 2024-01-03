@@ -13,6 +13,8 @@ import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { dataAttrButtonTypeAddCard, dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
 import cls from './ShelfButtons.module.scss';
+import { useSelector } from 'react-redux';
+import { getIsCupboardRefetching } from '../..';
 
 interface ShelfButtonsProps {
 	className?: string
@@ -36,6 +38,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		onCollapseClick,
 	} = props
 	const [updateShelfMutation] = useUpdateShelfMutation()
+	const isRefetching = useSelector(getIsCupboardRefetching)
 
 	const shelfIndexEdited = shelfIndex + 1
 	let positionTextCard = '';
@@ -55,7 +58,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 	}, [onAddNewCardClick, shelfId])
 
 	useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true, preventDefault: true, })
-	useHotkeys(positionTextTrain, startTraining,)
+	useHotkeys(positionTextTrain, startTraining, { enabled: !isRefetching })
 
 
 	const onViewClick = () => {
@@ -110,7 +113,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 					// className={cls.button}
 					onClick={startTraining}
 					variant='filled'
-					disabled={trainCardsCount === 0}
+					disabled={trainCardsCount === 0 || isRefetching}
 					data-button-type={dataAttrButtonTypeTrain}
 				>
 					{t('train') + ` (${positionTextTrain})`}

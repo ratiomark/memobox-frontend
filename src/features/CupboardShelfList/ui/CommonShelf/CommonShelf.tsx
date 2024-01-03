@@ -6,7 +6,7 @@ import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getCupboardCommonShelfCollapsed, getCupboardIsFirstRender } from '../../model/selectors/getCupboardShelfList';
+import { getCupboardCommonShelfCollapsed, getIsCupboardFirstRender, getIsCupboardRefetching } from '../../model/selectors/getCupboardShelfList';
 import { BoxesBlockSkeleton } from '@/entities/Box';
 import { CommonShelfBoxes } from '../CommonShelfBoxes/CommonShelfBoxes';
 import { CommonShelfButtonsSkeleton } from '../CommonShelfButtons/CommonShelfButtonsSkeleton';
@@ -37,7 +37,8 @@ export const CommonShelf = memo((props: CommonShelfProps) => {
 		isLoading,
 	} = props
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
-	const isFirstRender = useSelector(getCupboardIsFirstRender)
+	const isFirstRender = useSelector(getIsCupboardFirstRender)
+	const isRefetching = useSelector(getIsCupboardRefetching)
 	// useEffect(() => {
 	// 	localDataService.setCommonShelfCollapsed(commonShelfCollapsed)
 	// }, [commonShelfCollapsed])
@@ -70,7 +71,6 @@ export const CommonShelf = memo((props: CommonShelfProps) => {
 
 
 	return (
-
 		<motion.div
 			layout
 			// transition={{ type: 'spring', stiffness: 80, duration: 0.3 }}
@@ -81,7 +81,7 @@ export const CommonShelf = memo((props: CommonShelfProps) => {
 			<div className={cls.topShelfPart}>
 				<VStack align='start' gap='gap_8'>
 					<Heading as='h3' size='s' title={t('common shelf name')} noSelect />
-					<CompleteSmallDataLabels data={data} isLoading={isLoading} />
+					<CompleteSmallDataLabels data={data} isLoading={isLoading || isRefetching} />
 				</VStack>
 				<div>
 					{buttons}

@@ -68,7 +68,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 					className={cls.trainButton}
 					variant='filledBox'
 					onClick={startTrainingNewCards}
-					disabled={commonShelf && commonShelf.new.all < 1}
+					disabled={commonShelf && commonShelf.new.all < 1 || isRefetching}
 				>
 					{t('train')}
 				</Button>
@@ -98,7 +98,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 				<Button
 					onClick={startTrainingLearningCards}
 					variant='filledBox'
-					disabled={commonShelf && commonShelf.learning.train < 1}
+					disabled={commonShelf && commonShelf.learning.train < 1 || isRefetching}
 					className={cls.trainButton}
 				>
 					{t('train')}
@@ -130,7 +130,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 					className={cls.trainButton}
 					variant='filledBox'
 					onClick={startTrainingLearntCards}
-					disabled={commonShelf && commonShelf.learnt.train < 1}
+					disabled={commonShelf && commonShelf.learnt.train < 1 ||  isRefetching}
 				>
 					{t('train')}
 				</Button>
