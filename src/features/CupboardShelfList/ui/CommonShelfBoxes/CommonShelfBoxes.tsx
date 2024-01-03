@@ -10,7 +10,7 @@ import cls from './CommonShelfBoxes.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useSelector } from 'react-redux';
-import { getCupboardCommonShelf } from '../../model/selectors/getCupboardShelfList';
+import { getCupboardCommonShelf, getIsCupboardRefetching } from '../../model/selectors/getCupboardShelfList';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
 import { Button } from '@/shared/ui/Button';
 
@@ -24,7 +24,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 	} = props
 	const navigate = useNavigate()
 	const commonShelf = useSelector(getCupboardCommonShelf)
-
+	const isRefetching = useSelector(getIsCupboardRefetching)
 	const onNewCardsClick = () => {
 		navigate(obtainRouteView('all', 'new'))
 	}
@@ -48,7 +48,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 					<SmallDataLabel
 						className={cls.dataLabels}
 						type='all'
-						isLoading={false}
+						isLoading={isRefetching}
 						cardsCount={commonShelf?.new.all}
 					/>
 					<HStack
@@ -79,7 +79,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 					<Heading as='h5' className={cls.title} title={t('learning cards')} />
 					<CompleteSmallDataLabels
 						className={cls.dataLabels}
-						isLoading={false}
+						isLoading={isRefetching}
 						data={commonShelf?.learning}
 					/>
 					<HStack
@@ -110,7 +110,7 @@ export const CommonShelfBoxes = (props: CommonShelfBoxesProps) => {
 					<Heading as='h5' className={cls.title} title={t('learnt cards')} />
 					<CompleteSmallDataLabels
 						className={cls.dataLabels}
-						isLoading={false}
+						isLoading={isRefetching}
 						data={commonShelf?.learnt}
 					/>
 					<HStack
