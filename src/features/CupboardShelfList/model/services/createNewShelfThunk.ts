@@ -8,7 +8,7 @@ import { toastsActions } from '@/shared/ui/Toast'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { t } from 'i18next'
 import { rtkApi } from '@/shared/api/rtkApi'
-import { TAG_VIEW_PAGE } from '@/shared/api/const/tags'
+import { TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags'
 
 export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
 	'cupboardPage/createNewShelfThunk',
@@ -46,14 +46,8 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 				index: shelf.index + 1,
 			}))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
-
-			// if (shelves) {
-			// 	throw new Error()
-			// }
-			// console.log(shelves)
-			// dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
-			// dispatch(cupboardShelfListActions.setIsCreateNewShelfModalSuccessfulResponse(true))
 			return [response, ...shelves]
+
 		} catch (err) {
 			return thunkAPI.rejectWithValue('some error in fetchCupboardData')
 		}
