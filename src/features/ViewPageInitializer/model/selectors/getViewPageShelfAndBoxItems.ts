@@ -142,15 +142,19 @@ export const getViewPageBoxItemsMoveCardsModal = createSelector(
 		if (isLoading || !shelvesDataObject || !shelfId) {
 			return [] as TabItem[]
 		}
-		// const shelfId = shelf
 		const tabs: TabItem[] = []
-		const boxesData = shelvesDataObject[shelfId].boxesItems
+		const boxesData = shelvesDataObject[shelfId]
+		if (!boxesData) {
+			return [] as TabItem[]
+		}
+		const boxItems = boxesData.boxesItems
+
 		tabs.push({
-			value: boxesData[0].id,
+			value: boxItems[0].id,
 			additional: 'new',
 			content: t('new cards') as string
 		})
-		boxesData.slice(1, boxesData.length - 1).forEach(box => {
+		boxItems.slice(1, boxItems.length - 1).forEach(box => {
 			tabs.push({
 				value: box.id,
 				additional: box.index.toString(),
@@ -158,7 +162,7 @@ export const getViewPageBoxItemsMoveCardsModal = createSelector(
 			})
 		})
 		tabs.push({
-			value: boxesData.at(boxesData.length - 1)!.id,
+			value: boxItems.at(boxItems.length - 1)!.id,
 			additional: 'learnt',
 			content: t('learnt cards') as string
 		})
