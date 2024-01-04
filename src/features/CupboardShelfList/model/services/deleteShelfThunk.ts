@@ -42,8 +42,6 @@ export const deleteShelfThunk = createAsyncThunk<DeleShelfThunkArg, string, { re
 				})
 			)
 
-			// VAR: Тут нужно проверять response и если ответ на свервера успешный, то возвращать shelfId
-
 			const response = await dispatch(rtkRemoveShelfById({ shelfId, index: shelf.index })).unwrap()
 
 			if (!response) {
