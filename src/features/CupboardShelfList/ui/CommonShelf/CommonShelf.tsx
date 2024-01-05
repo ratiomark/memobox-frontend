@@ -6,7 +6,7 @@ import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getCupboardCommonShelfCollapsed, getIsCupboardFirstRender, getIsCupboardRefetching } from '../../model/selectors/getCupboardShelfList';
+import { getCupboardCommonShelfCollapsed, getCupboardData, getIsCupboardFirstRender, getIsCupboardLoading, getIsCupboardRefetching } from '../../model/selectors/getCupboardShelfList';
 import { BoxesBlockSkeleton } from '@/entities/Box';
 import { CommonShelfBoxes } from '../CommonShelfBoxes/CommonShelfBoxes';
 import { CommonShelfButtonsSkeleton } from '../CommonShelfButtons/CommonShelfButtonsSkeleton';
@@ -30,24 +30,21 @@ interface CommonShelfProps {
 	className?: string
 }
 
-export const CommonShelf = memo((props: CommonShelfProps) => {
-	const {
-		className,
-		data,
-		isLoading,
-	} = props
+// export const CommonShelf = memo((props: CommonShelfProps) => {
+export const CommonShelf = memo(() => {
+	// const {
+	// 	className,
+	// 	data,
+	// 	isLoading,
+	// } = props
+	const data = useSelector(getCupboardData)
+	const isCupboardLoading = useSelector(getIsCupboardLoading)
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
 	const isFirstRender = useSelector(getIsCupboardFirstRender)
 	const isRefetching = useSelector(getIsCupboardRefetching)
-	// useEffect(() => {
-	// 	localDataService.setCommonShelfCollapsed(commonShelfCollapsed)
-	// }, [commonShelfCollapsed])
-	// const { isSuccess, isLoading, data } = useGetCupboardDataQuery()
-	const { t } = useTranslation()
+	const isLoading = isCupboardLoading && isFirstRender
 
-	// useEffect(() => {
-	// console.log('Common shelf ', isLoading)
-	// }, [isLoading])
+	const { t } = useTranslation()
 
 	const boxesBlock = (
 		<AnimateSkeletonLoader
@@ -74,14 +71,12 @@ export const CommonShelf = memo((props: CommonShelfProps) => {
 		<motion.div
 			layout
 			// transition={{ type: 'spring', stiffness: 80, duration: 0.3 }}
-			className={clsx(
-				cls.shelf,
-				[className])}
+			className={cls.shelf}
 		>
 			<div className={cls.topShelfPart}>
 				<VStack align='start' gap='gap_8'>
 					<Heading as='h3' size='s' title={t('common shelf name')} noSelect />
-					<CompleteSmallDataLabels data={data} isLoading={isLoading || isRefetching} />
+					<CompleteSmallDataLabels data={data} isLoading={isRefetching} />
 				</VStack>
 				<div>
 					{buttons}
