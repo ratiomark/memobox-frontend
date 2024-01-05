@@ -1,12 +1,14 @@
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
-import { useCustomTranslate } from '@/features/LanguageSwitcher'
+import { useCustomTranslate, } from '@/features/LanguageSwitcher'
 import { dataAttrButtonTypeAddCard, dataAttrButtonTypeAddCardButtonGeneral, dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { getCreateNewShelfCounter } from '../selectors/getCreateNewShelfModal';
+import { getIsCupboardLoading } from '../selectors/getCupboardShelfList';
 
-const useCupboardButtonsSizes = (isLoading: boolean) => {
+const useCupboardButtonsSizes = () => {
 	const { currentLang } = useCustomTranslate()
+	const isLoading = useSelector(getIsCupboardLoading)
 	const createNewShelfCounter = useSelector(getCreateNewShelfCounter)
 
 	useEffect(() => {
