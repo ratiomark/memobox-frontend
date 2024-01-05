@@ -9,26 +9,31 @@ import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { Collapsible } from '@/shared/ui/Animations';
 import { useDragControls, Reorder } from 'framer-motion';
 import { ReactNode, memo, useState } from 'react';
+import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
+import { StateSchema } from '@/app/providers/StoreProvider';
 
 export interface ShelfProps {
 	shelf: ShelfSchema
-	completeSmallDataLabelsBlock: ReactNode
+	completeSmallDataLabelsBlock?: ReactNode
 	shelfButtonsBlock: ReactNode
 	boxesBlock?: ReactNode
 	className?: string
 	isFirstRender: boolean
+	isRefetchingSelectorFn: (state: StateSchema) => boolean
 }
 
 export const Shelf = memo((props: ShelfProps) => {
 	const {
 		className,
-		completeSmallDataLabelsBlock,
+		completeSmallDataLabelsBlock: completeSmallDataLabelsBlockOriginal,
 		shelfButtonsBlock,
 		boxesBlock,
 		isFirstRender,
+		isRefetchingSelectorFn,
 		shelf: {
 			title,
 			isCollapsed,
+			data,
 		}
 	} = props
 
@@ -81,7 +86,12 @@ export const Shelf = memo((props: ShelfProps) => {
 				<div className={cls.topShelfPart}>
 					<VStack align='start' gap='gap_8'>
 						<Heading as='h3' noSelect size='s' title={title} />
-						{completeSmallDataLabelsBlock}
+						<CompleteSmallDataLabels
+							data={data}
+							isRefetchingSelectorFn={isRefetchingSelectorFn}
+						/>
+						{/* {completeSmallDataLabels} */}
+						{/* {completeSmallDataLabelsBlock} */}
 					</VStack>
 					{shelfButtonsBlock}
 				</div>
