@@ -18,6 +18,7 @@ export const CupboardShelfListWrapper = () => {
 
 	useEffect(() => {
 		if (!isLoading && !isFetching && data) {
+			console.log('УСТАНОВИЛ данные в стор!')
 			dispatch(fetchCupboardDataThunk(data))
 		}
 	}, [data, isLoading, isFetching, dispatch])
