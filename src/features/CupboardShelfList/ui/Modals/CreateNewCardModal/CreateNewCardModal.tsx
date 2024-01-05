@@ -15,7 +15,7 @@ import {
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
 import { Skeleton, TextEditorSkeleton } from '@/shared/ui/Skeleton';
-import { getCupboardIsLoading, getShelfItems } from '../../../model/selectors/getCupboardShelfList';
+import { getIsCupboardLoading, getShelfItems } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { useEditorMinHeight } from '@/shared/lib/helpers/hooks/useEditorMinHeight';
@@ -36,7 +36,7 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const isOpen = useSelector(getIsOpenCardModal)
-	const cupboardIsLoading = useSelector(getCupboardIsLoading)
+	const cupboardIsLoading = useSelector(getIsCupboardLoading)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 	const questionTextCardModal = useSelector(getQuestionCardModal)
 	const answerTextCardModal = useSelector(getAnswerCardModal)
