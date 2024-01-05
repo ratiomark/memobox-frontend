@@ -7,7 +7,7 @@ import {
 } from '@/features/ViewPageInitializer'
 import { useSelector } from 'react-redux';
 import { CardSchemaExtended, } from '@/entities/Card';
-import { useCallback, useMemo, } from 'react';
+import { Suspense, useCallback, useMemo, } from 'react';
 import { getViewPageIsLoading } from '@/features/ViewPageInitializer';
 import { CardListItem } from './CardListItem/CardListItem';
 import { getViewPageCardsSorted } from '@/features/ViewPageInitializer'
@@ -57,6 +57,7 @@ export const CardListViewWidget = () => {
 	// }, [cards, viewPageIsLoading, onSelectCard, onOpenEditCardModal, viewPageIsMounted])
 
 	const contentRendered = (
+
 		<AnimateSkeletonLoader
 			isLoading={(!viewPageIsMounted || viewPageIsLoading)}
 			skeletonComponent={<CardsListSkeleton />}
