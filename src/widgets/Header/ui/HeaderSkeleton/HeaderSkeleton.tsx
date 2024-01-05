@@ -2,10 +2,13 @@ import cls from './HeaderSkeleton.module.scss'
 import { useLocation } from 'react-router-dom'
 import { Skeleton } from '@/shared/ui/Skeleton'
 import { memo } from 'react'
+import { useSelector } from 'react-redux'
+import { getIsMobile } from '@/entities/UI'
 
 export const HeaderSkeleton = memo(() => {
 	const location = useLocation()
-	if (location.pathname.split('/')[1] === 'training') return null
+	const isMobile = useSelector(getIsMobile)
+	if (isMobile || location.pathname.split('/')[1] === 'training') return null
 
 	return (
 		<header

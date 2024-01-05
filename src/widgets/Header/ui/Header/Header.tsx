@@ -6,10 +6,12 @@ import cls from './Header.module.scss'
 import { useLocation } from 'react-router-dom'
 import { HeaderAdditionalBlock } from '../HeaderAdditionalBlock/HeaderAdditionalBlock'
 import { WriteToUsModal } from '../Modals/WriteToUsModal/WriteToUsModalLazy'
+import { getIsMobile } from '@/entities/UI'
 
 export const Header = memo(() => {
 	const headerItemsList = useSelector(getHeaderItems)
 	const location = useLocation()
+	const isMobile = useSelector(getIsMobile)
 	const HeaderItemsListRendered = useMemo(() => {
 		return headerItemsList.map(item => (
 			<HeaderItem
@@ -19,7 +21,8 @@ export const Header = memo(() => {
 		))
 	}, [headerItemsList])
 
-	if (location.pathname.split('/')[1] === 'training') return null
+	if (isMobile || location.pathname.split('/')[1] === 'training') return null
+	// if (location.pathname.split('/')[1] === 'training') return null
 
 	return (
 		<>
