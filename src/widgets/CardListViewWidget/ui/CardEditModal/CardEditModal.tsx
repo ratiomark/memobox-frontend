@@ -118,6 +118,7 @@ export const CardEditModal = memo(() => {
 			answer: answerTextEdited ?? null,
 			shelfId: editedShelf ?? '',
 			boxId: editedBox ?? '',
+			previousBoxId: originalBox,
 		}))
 		dispatch(viewPageActions.setIsCardEditModalOpen(false))
 	}
