@@ -154,6 +154,15 @@ const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
+		addNotificationEmail: build.mutation<NotificationSettings, string>({
+			query: (arg) => ({
+				url: '/settings/notification/add-email',
+				method: 'POST',
+				body: {
+					email: arg
+				}
+			})
+		}),
 	}),
 })
 
@@ -170,6 +179,7 @@ export const rtkApiUpdateShelfTemplate = userApi.endpoints.updateShelfTemplate.i
 export const rtkApiUpdateMissedTraining = userApi.endpoints.updateMissedTraining.initiate
 export const rtkApiUpdateTimeSleep = userApi.endpoints.updateTimeSleep.initiate
 export const rtkApiUpdateNotifications = userApi.endpoints.updateNotificationSettings.initiate
+export const rtkApiAddNotificationEmail = userApi.endpoints.addNotificationEmail.initiate
 export const rtkApiSetDefaultShelfTemplate = userApi.endpoints.setDefaultShelfTemplate.initiate
 export const rtkApiLogout = userApi.endpoints.logout.initiate
 export const { useGetUserSettingsQuery } = userApi
