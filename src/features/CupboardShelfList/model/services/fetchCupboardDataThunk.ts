@@ -2,6 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { CupboardSchema, rtkApiGetCupboard } from '@/entities/Cupboard'
 import { getUserSavedDataCommonShelfCollapsed } from '@/entities/User'
+import { sleep } from '@/shared/lib/helpers/common/sleep'
+import { cupboardShelfListActions } from '../..'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
 export const fetchCupboardDataThunk = createAsyncThunk<CupboardSchema, CupboardSchema, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
@@ -12,10 +14,10 @@ export const fetchCupboardDataThunk = createAsyncThunk<CupboardSchema, CupboardS
 
 		try {
 			// const response = await dispatch(rtkApiGetCupboard()).unwrap()
-
-
+			// dispatch(cupboardShelfListActions.setIsCupboardRefetching(true))
+			// await sleep(1)
 			const isCommonShelfCollapsed = getUserSavedDataCommonShelfCollapsed(getState())
-
+			// console.log('cupboardData', cupboardData)
 			const commonShelf = { ...cupboardData.commonShelf }
 			commonShelf.isCollapsed = isCommonShelfCollapsed
 
