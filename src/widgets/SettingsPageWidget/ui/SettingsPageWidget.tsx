@@ -1,27 +1,37 @@
-import { useTranslation } from 'react-i18next';
-import { ShelfTemplateSettings, TimeSleepSettings } from '@/features/SettingsFeatures';
+import { TFunction, useTranslation } from 'react-i18next';
+import { ShelfTemplateSettingsModal, TimeSleepSettingsModal, settingsFeaturesActions, settingsFeaturesReducer } from '@/features/SettingsFeatures';
 import { Heading } from '@/shared/ui/Typography';
-import { KeyboardEvent, MouseEvent, useEffect, useState } from 'react';
 import { Card } from '@/shared/ui/Card';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
 import './SettingsPageWidget.css';
 import { Icon } from '@/shared/ui/Icon';
-import { MissedTrainingSettings } from '@/features/SettingsFeatures';
-import { NotificationSettings } from '@/features/SettingsFeatures'
-import { BoxTimeSetterSettingsPageModal } from '@/features/SettingsFeatures';
+import { MissedTrainingSettingsModal } from '@/features/SettingsFeatures';
+import { NotificationSettingsModal } from '@/features/SettingsFeatures'
 import { useGetUserSettingsQuery, userActions } from '@/entities/User';
-import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { useSelector } from 'react-redux';
+import {
+	getIsTimeSleepModalOpen,
+	getIsMissedTrainingModalOpen,
+	getIsNotificationModalOpen,
+	getIsShelfTemplateModalOpen,
+} from '@/features/SettingsFeatures';
+import { useEffect, ReactNode, KeyboardEvent, MouseEvent } from 'react';
 
 
 interface SettingsPageWidgetProps {
 	className?: string
 }
 
+const reducers: ReducersList = {
+	settingsFeatures: settingsFeaturesReducer,
+}
+
 export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 	const { t } = useTranslation('settings')
-	// запросить настройки и сохранить в стейт редакса
+	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { isLoading, data, error } = useGetUserSettingsQuery()
-	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		if (data) {
@@ -31,7 +41,6 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 				const d = data.timeSleep.generalTimeSleepData
 				dispatch(userActions.setDayByDayTimeSleepDataInitial(d))
 			}
-			// console.log(data)
 		}
 	}, [data, dispatch])
 
@@ -39,168 +48,109 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 		dispatch(userActions.setSettingsIsLoading(isLoading))
 	}, [isLoading, dispatch])
 
-	const [settingModalStates, setSettingModalStates] = useState({
-		shelfTemplateModal: false,
-		notificationModal: false,
-		timeSleepModal: false,
-		missedTrainingModal: false
-	})
 
-	const toggleShelfTemplateModal = () => {
-		setSettingModalStates(prev => ({ ...prev, shelfTemplateModal: !prev.shelfTemplateModal }))
-	}
-	const toggleMissedTrainingModal = () => {
-		setSettingModalStates(prev => ({ ...prev, missedTrainingModal: !prev.missedTrainingModal }))
-	}
-	const toggleTimeSleepModal = () => {
-		setSettingModalStates(prev => ({ ...prev, timeSleepModal: !prev.timeSleepModal }))
-	}
-	const toggleNotificationModal = () => {
-		setSettingModalStates(prev => ({ ...prev, notificationModal: !prev.notificationModal }))
-	}
-	const onEnterToggleShelfTemplateModal = (e: KeyboardEvent<HTMLDivElement>) => {
-		if (e.key === 'Enter') toggleShelfTemplateModal()
-	}
-	const onEnterToggleTimeSleepModal = (e: KeyboardEvent<HTMLDivElement>) => {
-		if (e.key === 'Enter') toggleTimeSleepModal()
-	}
-	const onEnterToggleNotificationModal = (e: KeyboardEvent<HTMLDivElement>) => {
-		if (e.key === 'Enter') toggleNotificationModal()
-	}
-	const onEnterToggleMissedTrainingModal = (e: KeyboardEvent<HTMLDivElement>) => {
-		if (e.key === 'Enter') toggleMissedTrainingModal()
-	}
-
-	const onMissedTrainingInfoClick = (e: MouseEvent<HTMLElement>) => {
-		e.stopPropagation()
-		// show info
-	}
-	const onNotificationInfoClick = (e: MouseEvent<HTMLElement>) => {
-		e.stopPropagation()
-		// show info
-	}
-	const onTimeSleepInfoClick = (e: MouseEvent<HTMLElement>) => {
-		e.stopPropagation()
-		// show info
-	}
-	const onShelfTemplateInfoClick = (e: MouseEvent<HTMLElement>) => {
-		e.stopPropagation()
-		// show info
-	}
-
-	const shelfTemplateSettings = (
-		<Card
-			tabIndex={0}
-			className={'card '}
-			onKeyDown={onEnterToggleShelfTemplateModal}
-			onClick={toggleShelfTemplateModal}
-			isLoading={isLoading}>
-			<Heading
-				className={'settingTitle'}
-				as='h2'
-				title={t('shelf template')}
-			/>
-			<Icon
-				Svg={InfoIcon}
-				clickable
-				onClick={onShelfTemplateInfoClick}
-				width={28}
-				height={28}
-				className={'info'}
-			/>
-		</Card>)
-	const timeSleepSettings = (
-		<Card
-			tabIndex={0}
-			className={'card'}
-			onKeyDown={onEnterToggleTimeSleepModal}
-			onClick={toggleTimeSleepModal}
-			isLoading={isLoading}>
-			<Heading
-				className={'settingTitle'}
-				as='h2'
-				title={t('time sleep')}
-			/>
-			<Icon
-				Svg={InfoIcon}
-				clickable
-				onClick={onTimeSleepInfoClick}
-				width={28}
-				height={28}
-				className={'info'}
-			/>
-		</Card>)
-	const notificationSettings = (
-		<Card
-			tabIndex={0}
-			className={'card'}
-			onKeyDown={onEnterToggleNotificationModal}
-			onClick={toggleNotificationModal}
-			isLoading={isLoading}>
-			<Heading
-				className={'settingTitle'}
-				as='h2'
-				title={t('notifications')}
-			/>
-			<Icon
-				Svg={InfoIcon}
-				clickable
-				onClick={onNotificationInfoClick}
-				width={28}
-				height={28}
-				className={'info'}
-			/>
-		</Card>)
-	const missedTrainingSettings = (
-		<Card
-			tabIndex={0}
-			className={'card'}
-			onKeyDown={onEnterToggleMissedTrainingModal}
-			onClick={toggleMissedTrainingModal}
-			isLoading={isLoading}>
-			{/* onClick={openMissedTraining}> */}
-			<Heading
-				className={'settingTitle'}
-				as='h2'
-				title={t('missed training')}
-			/>
-			<Icon
-				Svg={InfoIcon}
-				clickable
-				onClick={onMissedTrainingInfoClick}
-				width={28}
-				height={28}
-				className={'info'}
-			/>
-		</Card>)
+	const settingsDataBlocks = [
+		{
+			title: t('shelf template'),
+			toggleModalFn: (isOpen: boolean) => dispatch(settingsFeaturesActions.setIsShelfTemplateModalOpen(isOpen)),
+			ModalComponent: <ShelfTemplateSettingsModal />,
+			isOpenSelectorFn: getIsShelfTemplateModalOpen,
+		},
+		{
+			title: t('time sleep'),
+			toggleModalFn: (isOpen: boolean) => dispatch(settingsFeaturesActions.setIsTimeSleepModalOpen(isOpen)),
+			ModalComponent: <TimeSleepSettingsModal />,
+			isOpenSelectorFn: getIsTimeSleepModalOpen,
+		},
+		{
+			title: t('notifications'),
+			toggleModalFn: (isOpen: boolean) => dispatch(settingsFeaturesActions.setIsNotificationModalOpen(isOpen)),
+			ModalComponent: <NotificationSettingsModal />,
+			isOpenSelectorFn: getIsNotificationModalOpen,
+		},
+		{
+			title: t('missed training'),
+			toggleModalFn: (isOpen: boolean) => dispatch(settingsFeaturesActions.setIsMissedTrainingModalOpen(isOpen)),
+			ModalComponent: <MissedTrainingSettingsModal />,
+			isOpenSelectorFn: getIsMissedTrainingModalOpen,
+		},
+	]
 
 	return (
 		<div className={'settingsPageWidget'} >
-			{shelfTemplateSettings}
-			{timeSleepSettings}
-			{notificationSettings}
-			{missedTrainingSettings}
-			<ShelfTemplateSettings
-				isOpen={settingModalStates.shelfTemplateModal}
-				onClose={toggleShelfTemplateModal}
-			/>
-			<NotificationSettings
-				isOpen={settingModalStates.notificationModal}
-				onClose={toggleNotificationModal}
-			/>
-			<MissedTrainingSettings
-				isOpen={settingModalStates.missedTrainingModal}
-				onClose={toggleMissedTrainingModal}
-			// lazy={true}
-			/>
-			<TimeSleepSettings
-				isOpen={settingModalStates.timeSleepModal}
-				onClose={toggleTimeSleepModal}
-			/>
-			{/* <BoxTimeSetterSettingsPageModal /> */}
+			{settingsDataBlocks.map((block, i) => (
+				<SettingsCardSlot
+					key={i}
+					isLoading={isLoading}
+					isOpenSelectorFn={block.isOpenSelectorFn}
+					toggleModalFn={block.toggleModalFn}
+					title={block.title}
+					ModalComponent={block.ModalComponent}
+				/>)
+			)}
 		</div>
 	)
 }
+
+interface SettingsCardSlotProps {
+	isLoading: boolean
+	isOpenSelectorFn: (state: StateSchema) => boolean | undefined
+	toggleModalFn: (isOpen: boolean) => void
+	title: string
+	ModalComponent: ReactNode
+}
+
+const SettingsCardSlot = (props: SettingsCardSlotProps) => {
+	const {
+		isOpenSelectorFn,
+		toggleModalFn,
+		isLoading,
+		title,
+		ModalComponent,
+	} = props
+	const isOpen = useSelector(isOpenSelectorFn)
+	const toggleModalIsOpen = () => {
+		toggleModalFn(!isOpen)
+	}
+
+	const onEnterToggleModalIsOpen = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === 'Enter') toggleModalIsOpen()
+	}
+
+	const onSettingInfoClick = (e: MouseEvent<HTMLElement>) => {
+		e.stopPropagation()
+		// show info
+	}
+
+	return (
+		<>
+			<Card
+				tabIndex={0}
+				className={'card'}
+				onKeyDown={onEnterToggleModalIsOpen}
+				onClick={toggleModalIsOpen}
+				isLoading={isLoading}>
+				<Heading
+					className={'settingTitle'}
+					as='h2'
+					title={title}
+				/>
+				<Icon
+					Svg={InfoIcon}
+					clickable
+					onClick={onSettingInfoClick}
+					width={28}
+					height={28}
+					className={'info'}
+				/>
+			</Card>
+			{ModalComponent}
+		</>
+	)
+}
+
+
+
 // import { useTranslation } from 'react-i18next';
 // import { ShelfTemplateSettings, TimeSleepSettings } from '@/features/SettingsFeatures';
 // import { Heading, MyText } from '@/shared/ui/Typography';
