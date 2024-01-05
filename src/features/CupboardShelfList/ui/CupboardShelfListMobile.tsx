@@ -6,12 +6,13 @@ import { fetchCupboardDataThunk } from '../model/services/fetchCupboardDataThunk
 import { useSelector } from 'react-redux';
 import {
 	getCupboardData,
-	getCupboardIsLoading,
+	getIsCupboardLoading,
 	getCupboardError,
 	getCupboardShelves,
 	getCupboardCommonShelfCollapsed,
-	getCupboardIsDataAlreadyInStore,
-	getCupboardIsFirstRender,
+	getIsCupboardDataAlreadyInStore,
+	getIsCupboardFirstRender,
+	getIsCupboardRefetching,
 	// getShelvesFromStorOrLocalSaver,
 } from '../model/selectors/getCupboardShelfList';
 import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
@@ -41,75 +42,75 @@ import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore
 import { RenameShelfModal } from './Modals/RenameShelfModal/RenameShelfModal';
 
 export const CupboardShelfListMobile = () => {
-	const dispatch = useAppDispatch()
-	const cupboardData = useSelector(getCupboardData)
-	const cupboardIsLoading = useSelector(getCupboardIsLoading)
-	const cupboardError = useSelector(getCupboardError)
-	const cupboardShelves = useSelector(getCupboardState.selectAll)
-	const isFirstRender = useSelector(getCupboardIsFirstRender)
-	useShelvesDndHandler()
-	useShelvesLocalSaver({ cupboardShelves })
-	useCupboardButtonsSizes(cupboardIsLoading)
+	// const dispatch = useAppDispatch()
+	// const cupboardData = useSelector(getCupboardData)
+	// const cupboardIsLoading = useSelector(getCupboardIsLoading)
+	// const cupboardError = useSelector(getCupboardError)
+	// const cupboardShelves = useSelector(getCupboardState.selectAll)
+	// const isFirstRender = useSelector(getCupboardIsFirstRender)
+	// useShelvesDndHandler()
+	// useShelvesLocalSaver({ cupboardShelves })
+	// useCupboardButtonsSizes(cupboardIsLoading)
 
-	useEffect(() => {
-		dispatch(setLocalShelvesToStore())
-	}, [dispatch])
+	// useEffect(() => {
+	// 	dispatch(setLocalShelvesToStore())
+	// }, [dispatch])
 
-	const onAddNewCardClick = useCallback((shelfId: string) => {
-		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
-		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
-	}, [dispatch])
+	// const onAddNewCardClick = useCallback((shelfId: string) => {
+	// 	dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
+	// 	dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
+	// }, [dispatch])
 
-	const onCollapseClick = useCallback((shelfId: string, isCollapsed: boolean) => {
-		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isCollapsed } }))
-	}, [dispatch])
+	// const onCollapseClick = useCallback((shelfId: string, isCollapsed: boolean) => {
+	// 	dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isCollapsed } }))
+	// }, [dispatch])
 
-	const reorderShelves = useCallback((shelves: ShelfSchema[]) => {
-		// console.log('reorder ', shelves)
-		dispatch(cupboardShelfListActions.reorderShelves(shelves))
-		// VAR: нужно показать плашку "новый порядок полок будет сохранен через 5 секунд". По прошествии 5-ти секунд отправить запрос на сервер
-	}, [dispatch])
+	// const reorderShelves = useCallback((shelves: ShelfSchema[]) => {
+	// 	// console.log('reorder ', shelves)
+	// 	dispatch(cupboardShelfListActions.reorderShelves(shelves))
+	// 	// VAR: нужно показать плашку "новый порядок полок будет сохранен через 5 секунд". По прошествии 5-ти секунд отправить запрос на сервер
+	// }, [dispatch])
 
 
-	const shelvesList = useMemo(() => {
+	// const shelvesList = useMemo(() => {
 
-		return cupboardShelves.map(shelf => {
-			const completeSmallDataLabels =
-				<CompleteSmallDataLabels
-					data={shelf.data}
-					isLoading={cupboardIsLoading}
-				/>
-			const buttons = (
-				<AnimateSkeletonLoader
-					classNameForCommonWrapper={cls.commonWrapper}
-					skeletonComponent={<ShelfButtonsSkeleton />}
-					componentAfterLoading={<ShelfButtons
-						shelf={shelf}
-						onAddNewCardClick={onAddNewCardClick}
-						onCollapseClick={onCollapseClick}
-					/>}
-					noDelay={!cupboardIsLoading}
-					isLoading={cupboardIsLoading}
-				/>
-			)
-			const boxesBlock = <BoxesBlockWrapper isLoading={cupboardIsLoading} shelf={shelf} />
+	// 	return cupboardShelves.map(shelf => {
+	// 		const completeSmallDataLabels =
+	// 			<CompleteSmallDataLabels
+	// 				data={shelf.data}
+	// 				isLoading={cupboardIsLoading}
+	// 			/>
+	// 		const buttons = (
+	// 			<AnimateSkeletonLoader
+	// 				classNameForCommonWrapper={cls.commonWrapper}
+	// 				skeletonComponent={<ShelfButtonsSkeleton />}
+	// 				componentAfterLoading={<ShelfButtons
+	// 					shelf={shelf}
+	// 					onAddNewCardClick={onAddNewCardClick}
+	// 					onCollapseClick={onCollapseClick}
+	// 				/>}
+	// 				noDelay={!cupboardIsLoading}
+	// 				isLoading={cupboardIsLoading}
+	// 			/>
+	// 		)
+	// 		const boxesBlock = <BoxesBlockWrapper isLoading={cupboardIsLoading} shelf={shelf} />
 
-			return (
-				<ShelfItem
-					isFirstRender={isFirstRender}
-					key={shelf.id}
-					shelf={shelf}
-					boxesBlock={boxesBlock}
-					// moveShelf={moveShelf}
-					completeSmallDataLabelsBlock={
-						completeSmallDataLabels
-					}
-					shelfButtonsBlock={buttons}
-				/>
-			)
-		})
+	// 		return (
+	// 			<ShelfItem
+	// 				isFirstRender={isFirstRender}
+	// 				key={shelf.id}
+	// 				shelf={shelf}
+	// 				boxesBlock={boxesBlock}
+	// 				// moveShelf={moveShelf}
+	// 				completeSmallDataLabelsBlock={
+	// 					completeSmallDataLabels
+	// 				}
+	// 				shelfButtonsBlock={buttons}
+	// 			/>
+	// 		)
+	// 	})
 
-	}, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick])
+	// }, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick])
 	// }, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick, moveShelf])
 
 	return (
