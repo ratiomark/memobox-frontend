@@ -433,13 +433,13 @@ const cupboardShelfList = createSlice({
 			.addCase(
 				fetchCupboardDataThunk.rejected,
 				(state) => {
-					state.isLoading = false
+					// state.isLoading = false
 					state.isRefetching = false
 				})
 			.addCase(
 				fetchCupboardDataThunk.pending,
 				(state) => {
-					state.isLoading = true
+					// state.isLoading = true
 					state.isRefetching = true
 				}
 			)
