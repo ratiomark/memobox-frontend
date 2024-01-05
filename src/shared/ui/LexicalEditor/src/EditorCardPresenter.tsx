@@ -11,14 +11,15 @@ import { EditorStateSetterPlugin } from './plugins/EditorStateSetterPlugin/Edito
 interface EditorProps {
 	editorState: string | null
 	namespace?: string
+	isTraining?: boolean
 }
 
-function Editor() {
+function Editor({ isTraining }: { isTraining: boolean }) {
 	return (
 		<>
 			<PlainTextPlugin
 				contentEditable={
-					<div className="editor-scroller-card-presenter">
+					<div className={isTraining ? '' : 'editor-scroller-card-presenter'}>
 						<ContentEditable className='ContentEditable__card-presenter' />
 					</div>
 				}
@@ -44,7 +45,7 @@ export const EditorCardPresenter = (props: EditorProps) => {
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
 			<EditorStateSetterPlugin editorState={props.editorState ?? lexicalEmptyEditorState} />
-			<Editor />
+			<Editor isTraining={props.isTraining ?? false} />
 		</LexicalComposer>
 	)
 }
