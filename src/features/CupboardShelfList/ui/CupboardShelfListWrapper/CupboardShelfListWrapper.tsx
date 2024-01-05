@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CupboardShelfList } from '../CupboardShelfList';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useGetCupboardDataQuery } from '@/entities/Cupboard';
 import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice';
 import { fetchCupboardDataThunk } from '../../model/services/fetchCupboardDataThunk';
@@ -9,16 +9,24 @@ import { getIsMobile } from '@/entities/UI';
 import { CupboardShelfListMobile } from '../CupboardShelfListMobile';
 
 
-
 export const CupboardShelfListWrapper = () => {
-	const { data, isLoading, isFetching } = useGetCupboardDataQuery()
-	const dispatch = useAppDispatch()
+	useCupboardLogic()
 	const isMobile = useSelector(getIsMobile)
 
+	if (isMobile) {
+		return <CupboardShelfListMobile />
+	}
+
+	return <CupboardShelfList />
+}
+
+
+const useCupboardLogic = () => {
+	const { data, isLoading, isFetching } = useGetCupboardDataQuery()
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		if (!isLoading && !isFetching && data) {
-			console.log('УСТАНОВИЛ данные в стор!')
 			dispatch(fetchCupboardDataThunk(data))
 		}
 	}, [data, isLoading, isFetching, dispatch])
@@ -28,10 +36,4 @@ export const CupboardShelfListWrapper = () => {
 			dispatch(cupboardShelfListActions.setIsCupboardRefetching(true))
 		}
 	}, [isLoading, isFetching, dispatch])
-
-	if (isMobile) {
-		return <CupboardShelfListMobile />
-	}
-
-	return <CupboardShelfList />
 }
