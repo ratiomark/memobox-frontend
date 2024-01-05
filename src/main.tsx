@@ -10,8 +10,10 @@ import '@/shared/config/i18n/i18n'
 import './app/styles/index.scss'
 import { MyToastsRTK } from './shared/ui/Toast/ui/MyToastRTKLazy'
 
-const container = document.getElementById('root')
+// import posthog from 'posthog-js'
+// posthog.init('phc_n1lURzDBW3hd64MQIjv1eFphRgcpOK5rsNwpJ6Kg3ou', { api_host: 'https://us.posthog.com' })
 
+const container = document.getElementById('root')
 if (!container) throw new Error('Root container is not Found! Check main.tsx file')
 // let check = 0
 
@@ -26,6 +28,7 @@ if (!container) throw new Error('Root container is not Found! Check main.tsx fil
 // 	console.log('setTimeout:  ', check);
 // 	return originalSetTimeout(fn, delay);
 // };
+
 const root = ReactDOM.createRoot(container)
 root.render(
 	<BrowserRouter>
