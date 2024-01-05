@@ -9,6 +9,7 @@ import { idPrefixShelfDeletion } from '@/shared/const/idsAndDataAttributes'
 import { TAG_TRASH_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
+import { setLocalShelvesToStore } from './setLocalShelvesToStore'
 
 type DeleShelfThunkArg = {
 	id: string
@@ -54,6 +55,7 @@ export const deleteShelfThunk = createAsyncThunk<DeleShelfThunkArg, string, { re
 			const localShelves = localDataService.getShelves()
 			const newLocalShelves = localShelves.filter((shelf) => shelf.id !== shelfId)
 			localDataService.setShelves(newLocalShelves)
+			dispatch(setLocalShelvesToStore())
 			return { id: shelfId, title: shelf.title }
 
 		} catch (err) {
