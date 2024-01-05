@@ -8,6 +8,7 @@ import { ShelfSchema, rtkRemoveShelfById } from '@/entities/Shelf'
 import { idPrefixShelfDeletion } from '@/shared/const/idsAndDataAttributes'
 import { TAG_TRASH_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
+import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 type DeleShelfThunkArg = {
 	id: string
@@ -50,6 +51,9 @@ export const deleteShelfThunk = createAsyncThunk<DeleShelfThunkArg, string, { re
 			}
 			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
+			const localShelves = localDataService.getShelves()
+			const newLocalShelves = localShelves.filter((shelf) => shelf.id !== shelfId)
+			localDataService.setShelves(newLocalShelves)
 			return { id: shelfId, title: shelf.title }
 
 		} catch (err) {
