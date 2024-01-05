@@ -9,7 +9,8 @@ import { useCallback, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import cls from './StatsAndActionsCupboardWidget.module.scss';
 import {
-	getCupboardIsLoading,
+	getIsCupboardLoading,
+	getIsCupboardRefetching,
 	getCupboardError,
 	getCupboardData,
 	cupboardShelfListActions,
@@ -29,11 +30,14 @@ import { dataAttrButtonTypeAddCardButtonGeneral } from '@/shared/const/idsAndDat
 import { rtkApiDropCards } from '@/entities/Card';
 import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags';
 import { rtkApi } from '@/shared/api/rtkApi';
+import { getIsCupboardFirstRender } from '@/features/CupboardShelfList';
 
 export const StatsAndActionsCupboardWidget = () => {
-	const cupboardIsLoading = useSelector(getCupboardIsLoading)
+	const cupboardIsLoading = useSelector(getIsCupboardLoading)
+	const cupboardIsRefetching = useSelector(getIsCupboardRefetching)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
+	const isFirstRender = useSelector(getIsCupboardFirstRender)
 	const createNewShelfRequestStatus = useSelector(getCreateNewShelfModalRequestStatus)
 	// const createNewCardRequestStatus = useSelector(getCreateNewCardRequestStatus)
 	const { t } = useTranslation()
@@ -72,6 +76,21 @@ export const StatsAndActionsCupboardWidget = () => {
 			componentAfterLoading={
 				<HStack gap='gap_14' className={cls.actions}>
 					{/* <Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button> */}
+					{/* <Button
+						onClick={() => { dispatch(cupboardShelfListActions.setIsCupboardRefetching(!cupboardIsRefetching)) }}
+					>
+						toggle refetching
+					</Button>
+					<Button
+						onClick={() => { dispatch(cupboardShelfListActions.setIsCupboardDataLoading(!cupboardIsLoading)) }}
+					>
+						toggle isLoading
+					</Button>
+					<Button
+						onClick={() => { dispatch(cupboardShelfListActions.setIsFirstRender(!isFirstRender)) }}
+					>
+						toggle isFirstRender
+					</Button> */}
 					<Button
 						onClick={onDropCards}
 					>
@@ -102,8 +121,8 @@ export const StatsAndActionsCupboardWidget = () => {
 					/>
 				</HStack >
 			}
-			noDelay={!cupboardIsLoading}
-			isLoading={cupboardIsLoading}
+			noDelay={!cupboardIsLoading && !isFirstRender}
+			isLoading={cupboardIsLoading && isFirstRender}
 		/>
 	)
 
@@ -117,7 +136,7 @@ export const StatsAndActionsCupboardWidget = () => {
 		>
 			<HStack max className={cls.statsAndActionsCupboardWidget}>
 				<div>
-					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsLoading} />
+					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsRefetching} />
 					<ThemeSwitcher />
 					{/* <Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button> */}
 				</div>

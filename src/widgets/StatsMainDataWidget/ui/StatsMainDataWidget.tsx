@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from '@/shared/ui/Icon';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { getCupboardIsLoading, getCupboardError, getCupboardData } from '@/features/CupboardShelfList';
+import { getIsCupboardLoading, getCupboardError, getCupboardData } from '@/features/CupboardShelfList';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion'
 import { MainDataLabelList, StatsDataBlockWithPercent } from './MainDataLabelList/MainDataLabelList';
@@ -32,7 +32,7 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 		className
 	} = props
 	const [isLoading, setIsLoading] = useState(true)
-	const cupboardIsLoading = useSelector(getCupboardIsLoading)
+	const cupboardIsLoading = useSelector(getIsCupboardLoading)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
 	const { t } = useTranslation()
