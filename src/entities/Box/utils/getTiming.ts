@@ -21,7 +21,10 @@ const timeUnits = {
 import i18n from 'i18next'
 export default function formatTiming(timing: TimingBlock, lang: keyof typeof timeUnits = 'en'): string {
 	// const lang i18n.resolvedLanguage
-	const langChecked = i18n.resolvedLanguage in timeUnits ? i18n.resolvedLanguage : 'en';
+	const langChecked = (i18n.resolvedLanguage in timeUnits
+		? i18n.resolvedLanguage
+		: 'en'
+	) as keyof typeof timeUnits;
 	const { months, weeks, days, hours, minutes } = timing;
 	let result = '';
 
