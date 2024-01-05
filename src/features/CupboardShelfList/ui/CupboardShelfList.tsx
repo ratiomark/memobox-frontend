@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
-import { fetchCupboardDataThunk } from '../model/services/fetchCupboardDataThunk';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
 	getCupboardData,
@@ -18,7 +17,6 @@ import {
 import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
 import { ShelfItem } from './ShelfItem/ShelfItem';
 import { ShelfButtons } from './ShelfButtons/ShelfButtons';
-import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
 import { ShelfSchema } from '@/entities/Shelf';
 import { CommonShelf } from './CommonShelf/CommonShelf';
 import { BoxesBlockWrapper } from './BoxesBlock/BoxesBlockWrapper';
@@ -26,7 +24,6 @@ import { MissedTrainingSettingsModal } from './Modals/MissedTrainingSettingsModa
 import { NotificationSettingsModal } from './Modals/NotificationSettingsModal/NotificationSettingsModal';
 import { BoxTimeSetterModal } from './Modals/BoxTimeSetterModal/BoxTimeSetterModal';
 import { CreateNewCardModal } from './Modals/CreateNewCardModal/CreateNewCardModalLazy';
-// import CreateNewCardModal  from './Modals/CreateNewCardModal/CreateNewCardModal';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { ShelfButtonsSkeleton } from './ShelfButtons/ShelfButtonsSkeleton';
 import { BoxSettingsDropdownModal } from './Modals/BoxSettingsDropdownModal/BoxSettingsDropdownModal';
