@@ -5,17 +5,30 @@ import { store } from '@/app/providers/StoreProvider'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
 export const getCupboard = (state: StateSchema) => state.cupboard
+// export const getCupboard = (state: StateSchema) => state.cupboard?.isMounted
 export const getAbortedThunkIds = (state: StateSchema) => state.cupboard.abortedThunkIds
-export const getCupboardIsDataAlreadyInStore = (state: StateSchema) => state.cupboard.isDataAlreadyInStore
-export const getCupboardIsNeedRefetch = (state: StateSchema) => state.cupboard.isNeedRefetch
+export const getIsCupboardDataAlreadyInStore = (state: StateSchema) => state.cupboard.isDataAlreadyInStore
+export const getIsCupboardNeedRefetch = (state: StateSchema) => state.cupboard.isNeedRefetch
 export const getCupboardIsNeedStop = (state: StateSchema) => state.cupboard.isNeedStop
-export const getCupboardIsFirstRender = (state: StateSchema) => state.cupboard.isFirstRender
+export const getIsCupboardFirstRender = (state: StateSchema) => state.cupboard.isFirstRender
 export const getCupboardCommonShelfCollapsed = (state: StateSchema) => state.cupboard.commonShelf?.isCollapsed
 export const getCupboardCommonShelf = (state: StateSchema) => state.cupboard.commonShelf
 export const getCupboardData = (state: StateSchema) => state.cupboard.cupboardData
-export const getCupboardIsLoading = (state: StateSchema) => state.cupboard.isLoading
+export const getIsCupboardLoading = (state: StateSchema) => state.cupboard.isLoading
+export const getIsCupboardRefetching = (state: StateSchema) => state.cupboard.isRefetching
 export const getCupboardError = (state: StateSchema) => state.cupboard.error
 export const getCupboardShelves = (state: StateSchema) => state.cupboard
+export const getIsAnyCardsToTrain = createSelector(
+	[
+		(state: StateSchema) => state.cupboard.commonShelf
+	],
+	(commonShelf) => {
+		const newCards = commonShelf?.new.all ?? 0
+		const learntCards = commonShelf?.learnt.train ?? 0
+		const learningCards = commonShelf?.learning.train ?? 0
+		return Boolean(newCards + learntCards + learningCards)
+	}
+)
 export const getIsOnlyOneShelfLeftInCupboard = (state: StateSchema) => state.cupboard.ids.length < 2
 // export const getCupboardShelves = (state: StateSchema) => state.cupboard.shelves
 // export const getShelfIsDeleting = createSelector(
@@ -45,7 +58,7 @@ export const getShelfTitleByShelfId = (shelfId: string | EntityId) => {
 export const getShelfItems = createSelector(
 	[
 		(state: StateSchema) => getCupboardState.selectAll(state),
-		getCupboardIsLoading,
+		getIsCupboardLoading,
 	],
 	(shelves, isLoading) => {
 		if (isLoading) return []
