@@ -19,10 +19,13 @@ export { getCupboardState } from './model/slice/cupboardShelfListSlice';
 export {
 	getCupboard,
 	getCupboardData,
-	getCupboardIsLoading,
+	getIsCupboardLoading,
 	getCupboardError,
-	getCupboardShelves
+	getCupboardShelves,
+	getIsCupboardRefetching,
+	getIsCupboardFirstRender,
 } from './model/selectors/getCupboardShelfList';
+
 export { cupboardShelfListReducer, cupboardShelfListActions } from './model/slice/cupboardShelfListSlice';
 
 export type { CupboardPageSchema } from './model/types/CupboardPageSchema';
