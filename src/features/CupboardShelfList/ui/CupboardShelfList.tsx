@@ -12,6 +12,7 @@ import {
 	getCupboardCommonShelfCollapsed,
 	getIsCupboardDataAlreadyInStore,
 	getIsCupboardFirstRender,
+	getIsCupboardRefetching,
 	// getShelvesFromStorOrLocalSaver,
 } from '../model/selectors/getCupboardShelfList';
 import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
@@ -39,20 +40,74 @@ import useShelvesLocalSaver from '../model/hooks/useShelvesLocalSaver';
 import useCupboardButtonsSizes from '../model/hooks/useCupboardButtonsSizes';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
 import { RenameShelfModal } from './Modals/RenameShelfModal/RenameShelfModal';
+import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags';
+import { rtkApi } from '@/shared/api/rtkApi';
 
 export const CupboardShelfList = () => {
 	const dispatch = useAppDispatch()
-	const cupboardData = useSelector(getCupboardData)
-	const cupboardIsLoading = useSelector(getIsCupboardLoading)
 	const cupboardError = useSelector(getCupboardError)
+	useCupboardButtonsSizes()
+
+	useEffect(() => {
+		return () => {
+			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
+		}
+	}, [dispatch])
+
+
+	return (
+		<>
+			<div
+				className={cls.cupboardShelfList}
+				id={idCupboardShelfList}
+			>
+				<CommonShelf />
+				<ShelvesRendered/>
+				{/* <CommonShelf data={cupboardData} isLoading={cupboardIsLoading && isFirstRender} /> */}
+				{/* <Reorder.Group
+					// layoutScroll
+					// layout
+					// layoutRoot
+					values={cupboardShelves}
+					// принимает массив с элементами в текущем порядке
+					onReorder={reorderShelves}
+				>
+					{shelvesList}
+				</Reorder.Group> */}
+				<ShelfBoxesTemplateModal />
+				<MissedTrainingSettingsModal />
+				<NotificationSettingsModal />
+				<BoxSettingsDropdownModal />
+				<CupboardInfoModal />
+				{/* Важно HiddenTemplates должен стоять выше BoxTimeSetterModal там происходят определенные вычисления*/}
+				<HiddenTemplates />
+				<BoxTimeSetterModal />
+			</div>
+			<RenameShelfModal />
+			<CreateNewCardModal />
+			{/* <ShelvesDeletionToasts/> */}
+			{/* <ToastShelfDeletion /> */}
+		</>
+	)
+}
+
+
+export const ShelvesRendered = () => {
+	const dispatch = useAppDispatch()
+	const cupboardIsLoading = useSelector(getIsCupboardLoading)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 	const isFirstRender = useSelector(getIsCupboardFirstRender)
 	useShelvesDndHandler()
 	useShelvesLocalSaver({ cupboardShelves })
-	useCupboardButtonsSizes(cupboardIsLoading)
 
 	useEffect(() => {
 		dispatch(setLocalShelvesToStore())
+	}, [dispatch])
+
+	useEffect(() => {
+		return () => {
+			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
+		}
 	}, [dispatch])
 
 	const onAddNewCardClick = useCallback((shelfId: string) => {
@@ -72,13 +127,7 @@ export const CupboardShelfList = () => {
 
 
 	const shelvesList = useMemo(() => {
-
 		return cupboardShelves.map(shelf => {
-			const completeSmallDataLabels =
-				<CompleteSmallDataLabels
-					data={shelf.data}
-					isLoading={cupboardIsLoading}
-				/>
 			const buttons = (
 				<AnimateSkeletonLoader
 					classNameForCommonWrapper={cls.commonWrapper}
@@ -92,6 +141,7 @@ export const CupboardShelfList = () => {
 					isLoading={cupboardIsLoading && isFirstRender}
 				/>
 			)
+
 			const boxesBlock = <BoxesBlockWrapper
 				isLoading={cupboardIsLoading && isFirstRender}
 				shelf={shelf}
@@ -103,48 +153,20 @@ export const CupboardShelfList = () => {
 					key={shelf.id}
 					shelf={shelf}
 					boxesBlock={boxesBlock}
-					// moveShelf={moveShelf}
-					completeSmallDataLabelsBlock={
-						completeSmallDataLabels
-					}
+					isRefetchingSelectorFn={getIsCupboardRefetching}
 					shelfButtonsBlock={buttons}
 				/>
 			)
 		})
 
 	}, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick])
-	// }, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick, moveShelf])
 
 	return (
-		<>
-			<div
-				className={cls.cupboardShelfList}
-				id={idCupboardShelfList}
-			>
-				<CommonShelf data={cupboardData} isLoading={cupboardIsLoading && isFirstRender} />
-				<Reorder.Group
-					// layoutScroll
-					// layout
-					// layoutRoot
-					values={cupboardShelves}
-					// принимает массив с элементами в текущем порядке
-					onReorder={reorderShelves}
-				>
-					{shelvesList}
-				</Reorder.Group>
-				<ShelfBoxesTemplateModal />
-				<MissedTrainingSettingsModal />
-				<NotificationSettingsModal />
-				<BoxSettingsDropdownModal />
-				<CupboardInfoModal />
-				{/* Важно HiddenTemplates должен стоять выше BoxTimeSetterModal там происходят определенные вычисления*/}
-				<HiddenTemplates />
-				<BoxTimeSetterModal />
-			</div>
-			<RenameShelfModal />
-			<CreateNewCardModal />
-			{/* <ShelvesDeletionToasts/> */}
-			{/* <ToastShelfDeletion /> */}
-		</>
+		<Reorder.Group
+			values={cupboardShelves}
+			onReorder={reorderShelves}
+		>
+			{shelvesList}
+		</Reorder.Group>
 	)
 }
