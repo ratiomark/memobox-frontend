@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 import {
 	MissedTrainingValue,
 	getUserMissedTrainingSettings,
+	getUserSettingsAwaitingResponse,
 	getUserSettingsIsLoading,
+	updateMissedTrainingThunk,
 	useUpdateMissedTrainingMutation,
 	userActions
 } from '@/entities/User';
@@ -16,25 +18,19 @@ import { Heading } from '@/shared/ui/Typography';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { MissedTrainingItem } from '@/shared/types/MissedTrainingItemType';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-
-interface MissedTrainingSettingsProps {
-	className?: string
-	isOpen: boolean
-	onClose: () => void,
-	onSubmit?: () => void
-}
+import { Skeleton } from '@/shared/ui/Skeleton';
+import { toastsActions } from '@/shared/ui/Toast';
+import { settingsFeaturesActions } from '../model/slice/settingsFeaturesSlice';
+import { getIsMissedTrainingModalOpen } from '../model/selectors/getModals';
 
 
-
-export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
-	const {
-		className,
-		isOpen,
-		onClose,
-	} = props
-
+export const MissedTrainingSettingsModal = () => {
+	const isOpen = useSelector(getIsMissedTrainingModalOpen)
 	const missedTrainingSetting = useSelector(getUserMissedTrainingSettings)
-	const [updateMissedTraining, { isLoading: isLoadingMutation, data }] = useUpdateMissedTrainingMutation()
+	const settingsAwaitingResponseObj = useSelector(getUserSettingsAwaitingResponse)
+	// const [updateMissedTraining, { isLoading: isLoadingMutation, data, isSuccess, isError }] = useUpdateMissedTrainingMutation()
+	// useMissedTrainingSettingsStatusUpdate({ isSuccess, isError })
+
 	const isLoading = useSelector(getUserSettingsIsLoading)
 	const dispatch = useAppDispatch()
 	const { t } = useTranslation()
@@ -52,15 +48,19 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 		}
 	}, [missedTrainingSetting, items])
 
-	useEffect(() => {
-		if (data) {
-			dispatch(userActions.setSettingsMissedTraining(data.missedTraining))
-		}
-	}, [data, dispatch])
+	// useEffect(() => {
+	// 	if (data) {
+	// 		dispatch(userActions.setSettingsMissedTraining(data.missedTraining))
+	// 	}
+	// }, [data, dispatch])
 
 	const [value, setValue] = useState(
 		items.find(item => item.value === missedTrainingSetting) ?? items[0]
 	)
+
+	const onClose = () => {
+		dispatch(settingsFeaturesActions.setIsMissedTrainingModalOpen(false))
+	}
 
 	const onCloseHandle = () => {
 		setValue(items.find(item => item.value === missedTrainingSetting) ?? items[0])
@@ -68,11 +68,19 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 	}
 
 	const onSubmitHandle = () => {
-		updateMissedTraining({ missedTraining: value.value })
-		onCloseHandle()
+		dispatch(updateMissedTrainingThunk({ missedTraining: value.value }))
+		onClose()
 	}
 
-	if (isLoading || isLoadingMutation || !missedTrainingSetting) return null
+	if (isLoading || !missedTrainingSetting) return (
+		null
+		// <div className={clsx(
+		// 	cls.MissedTrainingSettings,
+		// 	className)}
+		// >
+		// 	<Skeleton width={1000} height={399}/>
+		// </div>
+	)
 
 	return (
 		<HDialogHeadless
@@ -80,9 +88,7 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 			onClose={onCloseHandle}
 			onSubmit={onSubmitHandle}
 		>
-			<div className={clsx(
-				cls.MissedTrainingSettings,
-				className)}
+			<div className={cls.MissedTrainingSettings}
 			>
 				<Heading
 					align='center'
@@ -98,8 +104,11 @@ export const MissedTrainingSettings = (props: MissedTrainingSettingsProps) => {
 				<ModalButtons
 					onClose={onCloseHandle}
 					onSubmit={onSubmitHandle}
+					isSubmitDisabled={settingsAwaitingResponseObj['missedTraining']}
 				/>
 			</div>
 		</HDialogHeadless>
 	)
 }
+
+

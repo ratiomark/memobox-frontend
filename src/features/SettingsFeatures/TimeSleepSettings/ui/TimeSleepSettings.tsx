@@ -16,6 +16,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { updateTimeSleepThunk } from '../model/services/updateTimeSleepThunk';
+import { getIsTimeSleepModalOpen } from '../../model/selectors/getModals';
+import { settingsFeaturesActions } from '../../model/slice/settingsFeaturesSlice';
 
 
 
@@ -29,15 +31,16 @@ const reducers: ReducersList = {
 	settingsTimeSleep: settingsTimeSleepReducer,
 }
 
-export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
-	const {
-		className,
-		isOpen,
-		onClose
-	} = props
-	const { t } = useTranslation('settings')
-	const timeSleepSettingsFromUser = useSelector(getUserTimeSleepSettings)
+export const TimeSleepSettingsModal = () => {
+	// const {
+	// 	className,
+	// 	isOpen,
+	// 	onClose
+	// } = props
+	const isOpen = useSelector(getIsTimeSleepModalOpen)
 	const isLoading = useSelector(getUserSettingsIsLoading)
+	const timeSleepSettingsFromUser = useSelector(getUserTimeSleepSettings)
+	const { t } = useTranslation('settings')
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const isTimeSleepEnabled = useSelector(getTimeSleepEnabled)
 	const isDayByDayTimeSleepEnabled = useSelector(getDayByDayOptionEnabled)
@@ -47,6 +50,10 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 			dispatch(settingsTimeSleepActions.setInitialData(timeSleepSettingsFromUser))
 		}
 	}, [dispatch, timeSleepSettingsFromUser])
+
+	const onClose = () => {
+		dispatch(settingsFeaturesActions.setIsTimeSleepModalOpen(false))
+	}
 
 	const onCloseHandle = () => {
 		if (timeSleepSettingsFromUser) {
@@ -75,13 +82,11 @@ export const TimeSleepSettings = (props: TimeSleepSettingsProps) => {
 
 	return (
 		<HDialogHeadless
-			isOpen={isOpen}
+			isOpen={!!isOpen}
 			onClose={onCloseHandle}
 			onSubmit={onSubmitHandle}
 		>
-			<div className={clsx(
-				cls.TimeSleepSettings,
-				className)}
+			<div className={cls.TimeSleepSettings}
 			>
 				<motion.div
 					// layout

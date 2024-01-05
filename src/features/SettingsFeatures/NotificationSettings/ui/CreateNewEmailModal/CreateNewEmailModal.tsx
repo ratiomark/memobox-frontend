@@ -91,12 +91,6 @@ export const CreateNewEmailModal = () => {
 					onValidate={onValidate}
 				/>
 
-				{/* <Toast.Root open={open} duration={5000}>
-
-
-					<Toast.Title>Заголовок Тоста</Toast.Title>
-					<Toast.Description>Описание Тоста</Toast.Description>
-				</Toast.Root> */}
 				<ModalButtons
 					onClose={onClose}
 					onSubmit={onCreateNewEmail}

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './ShelfTemplateSettings.module.scss';
 import { HDialog } from '@/shared/ui/HDialog';
-import { getUserShelfTemplateSettings } from '@/entities/User';
+import { getUserSettingsAwaitingResponse, getUserShelfTemplateSettings } from '@/entities/User';
 import { useSelector } from 'react-redux';
 import { BoxesSettingsContent } from './BoxesSettingsContent/BoxesSettingsContent';
 import { Overlay } from '@/shared/ui/Overlay/Overlay';
@@ -18,6 +18,8 @@ import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { getUserSettingsIsLoading } from '@/entities/User';
 import { updateShelfTemplateThunk } from '../model/services/updateShelfTemplateThunk';
 import { setDefaultShelfTemplateThunk } from '../model/services/setDefaultShelfTemplateThunk';
+import { getIsShelfTemplateModalOpen } from '../../model/selectors/getModals';
+import { settingsFeaturesActions } from '../..';
 
 interface ShelfTemplateSettingsProps {
 	className?: string
@@ -30,16 +32,17 @@ const reducers: ReducersList = {
 }
 
 
-export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
-	const {
-		className,
-		isOpen,
-		onClose
-	} = props
+export const ShelfTemplateSettingsModal = () => {
+	const isOpen = useSelector(getIsShelfTemplateModalOpen)
 	const shelfTemplateSettingsFromUser = useSelector(getUserShelfTemplateSettings)
+	const settingsAwaitingResponseObj = useSelector(getUserSettingsAwaitingResponse)
 	const isLoading = useSelector(getUserSettingsIsLoading)
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { t } = useTranslation()
+
+	const onClose = () => {
+		dispatch(settingsFeaturesActions.setIsShelfTemplateModalOpen(false))
+	}
 
 	useEffect(() => {
 		if (shelfTemplateSettingsFromUser) {
@@ -64,6 +67,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 
 	const isCurrentTemplateEqualToInitial = useSelector(getSettingsShelfTemplateChanged)
 
+	// FIXME: Придумать как сделать лоадер
 	if (!shelfTemplateSettingsFromUser || isLoading) return null
 
 	return (
@@ -78,9 +82,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 			<AnimatePresence initial={false} mode='wait'>
 				<motion.div
 					layout
-					className={clsx(
-						cls.ShelfTemplateSettings,
-						className)}
+					className={cls.ShelfTemplateSettings}
 				// animate={{ width: 'auto' }}
 				>
 					<BoxesSettingsContent />
@@ -97,7 +99,7 @@ export const ShelfTemplateSettings = (props: ShelfTemplateSettingsProps) => {
 						<ModalButtons
 							justify='end'
 							max={false}
-							isSubmitDisabled={isCurrentTemplateEqualToInitial}
+							isSubmitDisabled={isCurrentTemplateEqualToInitial || settingsAwaitingResponseObj['shelfTemplate']}
 							onClose={onCloseHandle}
 							onSubmit={onSubmitHandle}
 						/>
