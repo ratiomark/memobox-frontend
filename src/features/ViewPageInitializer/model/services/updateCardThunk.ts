@@ -13,6 +13,7 @@ interface UpdateCardThunkArg {
 	answer: string | null
 	shelfId: string
 	boxId: string
+	previousBoxId: string
 }
 
 export const updateCardThunk = createAsyncThunk<string, UpdateCardThunkArg, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
