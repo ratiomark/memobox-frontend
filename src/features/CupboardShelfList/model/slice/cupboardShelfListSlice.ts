@@ -26,7 +26,7 @@ const initialState: CupboardPageSchema = {
 	isFirstRender: true,
 	isLoading: true,
 	isRefetching: true,
-	lastRequestId: null,
+	// lastRequestId: null,
 	error: '',
 	entities: {},
 	ids: [],
@@ -303,9 +303,9 @@ const cupboardShelfList = createSlice({
 		setIsNeedRefetch: (state, action: PayloadAction<boolean>) => {
 			state.isNeedRefetch = action.payload
 		},
-		setLastRequestId: (state, action: PayloadAction<string>) => {
-			state.lastRequestId = action.payload
-		},
+		// setLastRequestId: (state, action: PayloadAction<string>) => {
+		// 	state.lastRequestId = action.payload
+		// },
 		setIsNeedStop: (state, action: PayloadAction<boolean>) => {
 			state.isNeedStop = action.payload
 		},
