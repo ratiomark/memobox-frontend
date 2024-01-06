@@ -95,7 +95,7 @@ export const ShelvesRendered = () => {
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 	const isFirstRender = useSelector(getIsCupboardFirstRender)
 	useShelvesDndHandler()
-	useShelvesLocalSaver({ cupboardShelves })
+	useShelvesLocalSaver()
 
 	useEffect(() => {
 		dispatch(setLocalShelvesToStore())
