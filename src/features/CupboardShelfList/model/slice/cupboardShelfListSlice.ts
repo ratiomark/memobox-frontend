@@ -1,6 +1,6 @@
 import { StateSchema } from '@/app/providers/StoreProvider'
 import { BoxCoordinates } from '@/entities/Box'
-import { CupboardSchema } from '@/entities/Cupboard'
+import { CommonShelfBackendResponse, CupboardSchema } from '@/entities/Cupboard'
 import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf'
 import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock'
 import { TimingBlock } from '@/shared/types/DataBlock'
@@ -26,6 +26,7 @@ const initialState: CupboardPageSchema = {
 	isFirstRender: true,
 	isLoading: true,
 	isRefetching: true,
+	lastRequestId: null,
 	error: '',
 	entities: {},
 	ids: [],
@@ -285,6 +286,14 @@ const cupboardShelfList = createSlice({
 		setIsCupboardRefetching: (state, action: PayloadAction<boolean>) => {
 			state.isRefetching = action.payload
 		},
+		setCommonShelf: (state, action: PayloadAction<CommonShelfBackendResponse>) => {
+			state.commonShelf = action.payload
+			state.cupboardData = {
+				all: action.payload.data.all,
+				train: action.payload.data.train,
+				wait: action.payload.data.wait,
+			}
+		},
 		setIsDataAlreadyInStore: (state, action: PayloadAction<boolean>) => {
 			state.isDataAlreadyInStore = action.payload
 		},
@@ -293,6 +302,9 @@ const cupboardShelfList = createSlice({
 		},
 		setIsNeedRefetch: (state, action: PayloadAction<boolean>) => {
 			state.isNeedRefetch = action.payload
+		},
+		setLastRequestId: (state, action: PayloadAction<string>) => {
+			state.lastRequestId = action.payload
 		},
 		setIsNeedStop: (state, action: PayloadAction<boolean>) => {
 			state.isNeedStop = action.payload
@@ -412,35 +424,18 @@ const cupboardShelfList = createSlice({
 						train: commonShelf.data.train,
 						wait: commonShelf.data.wait,
 					}
-					// // const cupboard = action.payload
-					// const commonShelf = action.payload.commonShelf
-					// const allShelves = action.payload.shelves
-					// // state.isDataAlreadyInStore = true
-					// state.commonShelf = commonShelf
-					// state.createNewCardModal.shelfId = allShelves[0].id
-					// shelvesAdapter.setAll(state, allShelves)
-					// const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
-					// state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
-					// state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
-					// state.shelvesTitles = allShelves.map(shelf => shelf.title)
-					// state.cupboardData = {
-					// 	all: commonShelf.data.all,
-					// 	train: commonShelf.data.train,
-					// 	wait: commonShelf.data.wait,
-					// }
-					// state.isLoading = false
 				})
 			.addCase(
 				fetchCupboardDataThunk.rejected,
 				(state) => {
-					// state.isLoading = false
+					state.isLoading = false
 					state.isRefetching = false
 				})
 			.addCase(
 				fetchCupboardDataThunk.pending,
 				(state) => {
 					// state.isLoading = true
-					state.isRefetching = true
+					// state.isRefetching = true
 				}
 			)
 			.addCase(
