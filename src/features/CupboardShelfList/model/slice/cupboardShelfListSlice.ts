@@ -477,6 +477,9 @@ const cupboardShelfList = createSlice({
 				(state, action: PayloadAction<{ id: string, title: string }>) => {
 					state.shelvesTitles = state.shelvesTitles.filter(title => title !== action.payload.title)
 					shelvesAdapter.removeOne(state, action.payload.id)
+					if (state.createNewCardModal.shelfId === action.payload.id) {
+						state.createNewCardModal.shelfId = state.ids[0] as string
+					}
 				})
 			.addCase(
 				deleteShelfThunk.rejected,
