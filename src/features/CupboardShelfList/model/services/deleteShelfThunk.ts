@@ -52,10 +52,12 @@ export const deleteShelfThunk = createAsyncThunk<DeleShelfThunkArg, string, { re
 			}
 			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
+
 			const localShelves = localDataService.getShelves()
-			const newLocalShelves = localShelves.filter((shelf) => shelf.id !== shelfId)
-			localDataService.setShelves(newLocalShelves)
+			const localShelvesFiltered = localShelves.filter((shelf) => shelf.id !== shelfId)
+			localDataService.setShelves(localShelvesFiltered.map((shelf, i) => ({ ...shelf, index: i })))
 			dispatch(setLocalShelvesToStore())
+			
 			return { id: shelfId, title: shelf.title }
 
 		} catch (err) {
