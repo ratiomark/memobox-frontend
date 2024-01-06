@@ -45,11 +45,11 @@ export const CupboardShelfList = () => {
 	const cupboardError = useSelector(getCupboardError)
 	useCupboardButtonsSizes()
 
-	useEffect(() => {
-		return () => {
-			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
-		}
-	}, [dispatch])
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
+	// 	}
+	// }, [dispatch])
 
 
 	return (
@@ -59,7 +59,7 @@ export const CupboardShelfList = () => {
 				id={idCupboardShelfList}
 			>
 				<CommonShelf />
-				<ShelvesRendered/>
+				<ShelvesRendered />
 				{/* <CommonShelf data={cupboardData} isLoading={cupboardIsLoading && isFirstRender} /> */}
 				{/* <Reorder.Group
 					// layoutScroll
@@ -101,11 +101,11 @@ export const ShelvesRendered = () => {
 		dispatch(setLocalShelvesToStore())
 	}, [dispatch])
 
-	useEffect(() => {
-		return () => {
-			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
-		}
-	}, [dispatch])
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
+	// 	}
+	// }, [dispatch])
 
 	const onAddNewCardClick = useCallback((shelfId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
