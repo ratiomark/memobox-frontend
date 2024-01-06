@@ -16,7 +16,7 @@ export default defineConfig({
 		VitePWA({
 			registerType: 'autoUpdate',
 			devOptions: {
-				// enabled: true
+				enabled: false
 			},
 			manifest: {
 				name: 'Memobox',
@@ -74,8 +74,8 @@ export default defineConfig({
 		]
 	},
 	build: {
-		sourcemap: 'inline',
-		// sourcemap: 'hidden',
+		// sourcemap: 'inline',
+		sourcemap: 'hidden',
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
