@@ -101,11 +101,11 @@ export const ShelvesRendered = () => {
 		dispatch(setLocalShelvesToStore())
 	}, [dispatch])
 
-	// useEffect(() => {
-	// 	return () => {
-	// 		dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
-	// 	}
-	// }, [dispatch])
+	useEffect(() => {
+		return () => {
+			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
+		}
+	}, [dispatch])
 
 	const onAddNewCardClick = useCallback((shelfId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
