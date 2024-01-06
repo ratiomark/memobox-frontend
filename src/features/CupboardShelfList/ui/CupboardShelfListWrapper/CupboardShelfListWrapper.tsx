@@ -26,7 +26,7 @@ const useCupboardLogic = () => {
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		if (!isLoading && !isFetching && data) {
+		if (!isFetching && !isLoading && data) {
 			dispatch(fetchCupboardDataThunk(data))
 		}
 	}, [data, isLoading, isFetching, dispatch])
