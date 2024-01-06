@@ -3,23 +3,44 @@ import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { CupboardSchema, rtkApiGetCupboard } from '@/entities/Cupboard'
 import { getUserSavedDataCommonShelfCollapsed } from '@/entities/User'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
-import { cupboardShelfListActions } from '../..'
+import { cupboardShelfListActions } from '../slice/cupboardShelfListSlice'
+import { getIsCupboardFirstRender } from '../selectors/getCupboardShelfList'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const fetchCupboardDataThunk = createAsyncThunk<CupboardSchema, CupboardSchema, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const fetchCupboardDataThunk = createAsyncThunk<CupboardSchema,  CupboardSchema, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/fetchCupboardDataThunk',
 	async (cupboardData, thunkAPI) => {
-
+		// const { cupboard: cupboardData, requestId } = arg
 		const { dispatch, getState } = thunkAPI
-
+		const isFirstRender = getIsCupboardFirstRender(getState())
 		try {
-			// const response = await dispatch(rtkApiGetCupboard()).unwrap()
-			// dispatch(cupboardShelfListActions.setIsCupboardRefetching(true))
-			// await sleep(1)
+			// console.log(requestId === getState().cupboard?.lastRequestId)
+			// console.log(requestId)
+			// console.log(getState().cupboard?.lastRequestId)
+
 			const isCommonShelfCollapsed = getUserSavedDataCommonShelfCollapsed(getState())
 			// console.log('cupboardData', cupboardData)
 			const commonShelf = { ...cupboardData.commonShelf }
 			commonShelf.isCollapsed = isCommonShelfCollapsed
+			// dispatch(cupboardShelfListActions.setCommonShelf(commonShelf))
+
+			const arrayOfIds = cupboardData.shelves.map((shelf) => shelf.id)
+			const entities = getState().cupboard?.entities
+			console.log(entities)
+			const allIdsMatch = arrayOfIds.every(id => id in entities);
+			if (!isFirstRender && allIdsMatch) {
+				dispatch(cupboardShelfListActions.setCommonShelf(commonShelf))
+				throw new Error('Aborted - shelves data is already in store')
+			}
+			// dispatch(cupboardShelfListActions.setLastRequestId(requestId))
+			// const response = await dispatch(rtkApiGetCupboard()).unwrap()
+			// dispatch(cupboardShelfListActions.setIsCupboardRefetching(true))
+			// await sleep(1)
+			// const isCommonShelfCollapsed = getUserSavedDataCommonShelfCollapsed(getState())
+			// // console.log('cupboardData', cupboardData)
+			// const commonShelf = { ...cupboardData.commonShelf }
+			// commonShelf.isCollapsed = isCommonShelfCollapsed
+			// dispatch(cupboardShelfListActions.setCommonShelf(commonShelf))
 
 			return { ...cupboardData, commonShelf }
 
