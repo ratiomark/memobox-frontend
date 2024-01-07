@@ -5,7 +5,10 @@ export {
 
 export { BoxesBlockSkeleton } from './ui/BoxesBlockSkeleton';
 
-export { getBoxesByShelfId, } from './model/api/boxApi';
+export {
+	getBoxesByShelfId,
+	rtkApiDeleteBoxFromShelf
+} from './model/api/boxApi';
 export type { ShelfRepresentedByBoxes, } from './model/api/boxApi';
 export type {
 	NewCardsBox,
