@@ -52,6 +52,7 @@ export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 		dispatch(cupboardShelfListActions.setBoxSettingsBoxCoordinates(coordinates))
 		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(true))
 		dispatch(cupboardShelfListActions.setBoxSettingsModalBoxId(boxId))
+		dispatch(cupboardShelfListActions.setBoxSettingsModalShelfId(shelfId))
 		dispatch(cupboardShelfListActions.setMissedTrainingShelfId(shelfId))
 		dispatch(cupboardShelfListActions.setMissedTrainingBoxId(boxId))
 	}, [dispatch])
