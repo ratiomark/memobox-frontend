@@ -70,6 +70,7 @@ interface BoxSettingsDropdownModal {
 	isOpen: boolean
 	requestStatus: RequestStatusType
 	boxId: string
+	shelfId: string
 	boxCoordinates: BoxCoordinates
 }
 interface CreateNewCardModal {
