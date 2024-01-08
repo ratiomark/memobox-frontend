@@ -508,7 +508,7 @@ const viewPageSlice = createSlice({
 			})
 
 			cards.forEach(card => {
-				if (cardsShelfIdBoxIdObj[card.shelfId]) {
+				if (cardsShelfIdBoxIdObj[card.shelfId] && cardsShelfIdBoxIdObj[card.shelfId][card.boxId]) {
 					cardsShelfIdBoxIdObj[card.shelfId][card.boxId].push(card)
 				}
 			})
