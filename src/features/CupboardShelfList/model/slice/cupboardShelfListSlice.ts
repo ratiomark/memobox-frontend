@@ -1,5 +1,5 @@
 import { StateSchema } from '@/app/providers/StoreProvider'
-import { BoxCoordinates } from '@/entities/Box'
+import { BoxCoordinates, BoxSchema } from '@/entities/Box'
 import { CommonShelfBackendResponse, CupboardSchema } from '@/entities/Cupboard'
 import { ShelfDndRepresentation, ShelfSchema } from '@/entities/Shelf'
 import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock'
@@ -18,6 +18,7 @@ import { updateMissedTrainingThunk, UpdateMissedTrainingThunkArg } from '../serv
 import { createNewCardThunk } from '../services/createNewCardThunk'
 import { NEW_CARDS_COUNTS_AS_TRAIN } from '@/shared/const/flags'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
+import { deleteBoxThunk, DeleteBoxThunkResponse } from '../services/deleteBoxThunk'
 
 const initialState: CupboardPageSchema = {
 	isDataAlreadyInStore: false,
@@ -60,6 +61,7 @@ const initialState: CupboardPageSchema = {
 	boxSettingsDropdownModal: {
 		isOpen: false,
 		boxId: '',
+		shelfId: '',
 		boxCoordinates: {
 			x: 0,
 			y: 0,
@@ -239,6 +241,9 @@ const cupboardShelfList = createSlice({
 		},
 		setBoxSettingsModalBoxId: (state, action: PayloadAction<string>) => {
 			state.boxSettingsDropdownModal.boxId = action.payload
+		},
+		setBoxSettingsModalShelfId: (state, action: PayloadAction<string>) => {
+			state.boxSettingsDropdownModal.shelfId = action.payload
 		},
 		setBoxSettingsBoxCoordinates: (state, action: PayloadAction<BoxCoordinates>) => {
 			state.boxSettingsDropdownModal.boxCoordinates = {
@@ -563,6 +568,12 @@ const cupboardShelfList = createSlice({
 							state.commonShelf!.learning.wait += 1
 						}
 					}
+				})
+			.addCase(
+				deleteBoxThunk.fulfilled,
+				(state, action: PayloadAction<DeleteBoxThunkResponse>) => {
+					const { boxes, shelfId } = action.payload
+					shelvesAdapter.updateOne(state, { id: shelfId, changes: { boxesData: boxes } })
 				})
 		// .addCase(
 		// 	createNewCardThunk.fulfilled,
