@@ -136,7 +136,8 @@ export const cardApi = rtkApi.injectEndpoints({
 		}),
 		dropCards: build.query<void, void>({
 			query: () => ({
-				url: '/cards/drop',
+				url: '/aggregate/restore-db',
+				// url: '/cards/drop',
 				method: 'POST',
 			}),
 		}),
