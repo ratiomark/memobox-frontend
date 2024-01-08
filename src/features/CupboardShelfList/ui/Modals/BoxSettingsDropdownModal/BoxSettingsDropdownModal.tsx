@@ -6,6 +6,7 @@ import {
 	getBoxSettingsDropdownModalIsOpen,
 	getBoxSettingsDropdownCoordinates,
 	getBoxSettingsDropdownBoxId,
+	getBoxSettingsDropdownIsLearntBox,
 } from '../../../model/selectors/getBoxSettingDropdownModal'
 import { MyText } from '@/shared/ui/Typography';
 import { dropDownLocalTextSize } from '@/shared/const/fontSizes';
@@ -14,6 +15,7 @@ import { DropdownLocalList } from './DropdownLocalList';
 import { idCupboardShelfList, idDropDownLocalTemplateHidden } from '@/shared/const/idsAndDataAttributes';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { useRef, useState, useEffect, useCallback } from 'react';
+import { deleteBoxThunk } from '../../../model/services/deleteBoxThunk';
 
 export const BoxSettingsDropdownModal = () => {
 	const { t } = useTranslation()
@@ -21,6 +23,7 @@ export const BoxSettingsDropdownModal = () => {
 	const isOpen = useSelector(getBoxSettingsDropdownModalIsOpen)
 	const coordinates = useSelector(getBoxSettingsDropdownCoordinates)
 	const boxId = useSelector(getBoxSettingsDropdownBoxId)
+	const isLearntBox = useSelector(getBoxSettingsDropdownIsLearntBox)
 	const headerHeight = useRef(0)
 	const cupboardShelfListRects = useRef({ x: 0, y: 0, width: 0 })
 	const dropdownHiddenSizes = useRef({ height: 0, width: 0 })
@@ -95,30 +98,78 @@ export const BoxSettingsDropdownModal = () => {
 		dispatch(cupboardShelfListActions.setMissedTrainingModalIsOpen(true))
 	}, [dispatch])
 
-	const dropDownLocal = <DropdownLocalList
-		items={[
+	const onDeleteBoxClick = useCallback(() => {
+		// написать тесты для бекенда по удалению коробки
+		// убедиться, что тесты проходят
+		// ДАЛЕЕ
+		// переключить состояние коробки у полки на isDeleting
+		// добавить такую же логику как удаление полки
+		// добавить анимацию удаления коробки
+		// dispatch(cupboardShelfListActions.setMissedTrainingShelfId())
+		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(false))
+		dispatch(deleteBoxThunk())
+		// dispatch(cupboardShelfListActions.setMissedTrainingModalIsOpen(true))
+	}, [dispatch])
+
+	// const dropDownLocal = <DropdownLocalList
+	// 	items={[
+	// 		{
+	// 			content: (
+	// 				<MyText
+	// 					style={{ fontSize: dropDownLocalTextSize }}
+	// 					text={t(missedTrainingDropdownLocalKey)} />
+	// 			),
+	// 			onClick: onMissedTrainingClick
+	// 		},
+	// 		{
+	// 			content: (
+	// 				<MyText
+	// 					style={{ fontSize: dropDownLocalTextSize }}
+	// 					variant='error'
+	// 					text={t(removeBoxDropdownLocalKey)} />
+	// 			),
+	// 			onClick: onDeleteBoxClick
+	// 		},
+	// 	]}
+	// />
+	const dropDownItems = []
+	if (isLearntBox) {
+		dropDownItems.push({
+			content: (
+				<MyText
+					style={{ fontSize: dropDownLocalTextSize }}
+					text={t(missedTrainingDropdownLocalKey)}
+				/>
+			),
+			onClick: onMissedTrainingClick
+		})
+	} else {
+		dropDownItems.push(
 			{
 				content: (
 					<MyText
 						style={{ fontSize: dropDownLocalTextSize }}
-						text={t(missedTrainingDropdownLocalKey)} />
+						text={t(missedTrainingDropdownLocalKey)}
+					/>
 				),
 				onClick: onMissedTrainingClick
-				// onClick: () => alert('настрокйки коробки')
 			},
 			{
 				content: (
 					<MyText
 						style={{ fontSize: dropDownLocalTextSize }}
 						variant='error'
-						text={t(removeBoxDropdownLocalKey)} />
+						text={t(removeBoxDropdownLocalKey)}
+					/>
 				),
-				onClick: () => alert('удаляю коробку')
+				onClick: onDeleteBoxClick
 			},
-		]}
-	/>
+		)
+	}
 
 
+
+	const dropDownLocal = <DropdownLocalList items={dropDownItems} />;
 	return (
 		<HDialogHeadless
 			isOpen={(isOpen && checked)}
