@@ -3,6 +3,8 @@ export {
 	updateBoxWithTag
 } from './model/api/boxApi';
 
+export type { BoxPropsBase } from './ui/Box';
+
 export { BoxesBlockSkeleton } from './ui/BoxesBlockSkeleton';
 
 export {

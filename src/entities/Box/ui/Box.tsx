@@ -24,7 +24,7 @@ import { useCustomTranslate } from '@/features/LanguageSwitcher';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { useSelector } from 'react-redux';
 
-interface BoxPropsBase {
+export interface BoxPropsBase {
 	className?: string
 	boxItem: BoxSchema
 	shelfId: string
