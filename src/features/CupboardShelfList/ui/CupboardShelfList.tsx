@@ -60,6 +60,7 @@ export const CupboardShelfList = () => {
 			>
 				<CommonShelf />
 				<ShelvesRendered />
+				<div style={{ width: '100%', height: 20, background: 'transparent' }}></div>
 				{/* <CommonShelf data={cupboardData} isLoading={cupboardIsLoading && isFirstRender} /> */}
 				{/* <Reorder.Group
 					// layoutScroll
