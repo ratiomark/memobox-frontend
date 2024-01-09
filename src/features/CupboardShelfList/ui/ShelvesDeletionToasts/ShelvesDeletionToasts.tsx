@@ -5,7 +5,7 @@ import { MyToast } from '@/shared/ui/Toast'
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { cupboardShelfListActions, getAllShelvesIds } from '../../model/slice/cupboardShelfListSlice'
-import { getShelfDeletionRequestStatus } from '../../model/selectors/getShelfDeletionProcess'
+import { getShelfDeletionRequestStatus } from '../../model/selectors/getDeletionProcess'
 import { EntityId } from '@reduxjs/toolkit'
 import { getShelfTitleByShelfId } from '../../model/selectors/getCupboardShelfList'
 
