@@ -251,7 +251,24 @@ const cupboardShelfList = createSlice({
 				y: action.payload.y
 			}
 		},
-
+		// box deletion process
+		setIsBoxDeleting2: (state, action: PayloadAction<{ shelfId: string, boxesData: BoxSchema[] }>) => {
+			shelvesAdapter.updateOne(state, { id: action.payload.shelfId, changes: { boxesData: action.payload.boxesData } })
+			// ?.boxesData.find(box => box.id === action.payload.boxId)!.isDeleting = action.payload.isDeleting
+		},
+		setIsBoxDeleting: (state, action: PayloadAction<{ shelfId: string, boxId: string, isDeleting: boolean}>) => {
+			const { shelfId, boxId, isDeleting } = action.payload;
+			const shelf = state.entities[shelfId];
+			if (shelf) {
+				const boxIndex = shelf.boxesData.findIndex(box => box.id === boxId);
+				if (boxIndex !== -1) {
+					shelf.boxesData[boxIndex] = { ...shelf.boxesData[boxIndex], isDeleting };
+				}
+			}
+		},
+		// setIsShelfDeleting: (state, action: PayloadAction<{ shelfId: string, isDeleting: boolean }>) => {
+		// 	shelvesAdapter.updateOne(state, { id: action.payload.shelfId, changes: { isDeleting: action.payload.isDeleting } })
+		// },
 		// boxes settings modal 
 		setShelfBoxesTemplateModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.shelfBoxesTemplateModal.isOpen = action.payload
@@ -572,8 +589,22 @@ const cupboardShelfList = createSlice({
 			.addCase(
 				deleteBoxThunk.fulfilled,
 				(state, action: PayloadAction<DeleteBoxThunkResponse>) => {
-					const { boxes, shelfId } = action.payload
-					shelvesAdapter.updateOne(state, { id: shelfId, changes: { boxesData: boxes } })
+					const { boxes, shelfId, boxCardsData, shelfCardsData } = action.payload
+					const shelfCardsDataUpdated = {
+						all: shelfCardsData.all - boxCardsData.all,
+						wait: shelfCardsData.wait - boxCardsData.wait,
+						train: shelfCardsData.train - boxCardsData.train,
+					}
+					shelvesAdapter.updateOne(state, { id: shelfId, changes: { boxesData: boxes, data: shelfCardsDataUpdated } })
+					state.cupboardData.all -= boxCardsData.all
+					state.cupboardData.wait -= boxCardsData.wait
+					state.cupboardData.train -= boxCardsData.train
+					state.commonShelf!.data.all -= boxCardsData.all
+					state.commonShelf!.data.wait -= boxCardsData.wait
+					state.commonShelf!.data.train -= boxCardsData.train
+					state.commonShelf!.learning.all -= boxCardsData.all
+					state.commonShelf!.learning.wait -= boxCardsData.wait
+					state.commonShelf!.learning.train -= boxCardsData.train
 				})
 		// .addCase(
 		// 	createNewCardThunk.fulfilled,
