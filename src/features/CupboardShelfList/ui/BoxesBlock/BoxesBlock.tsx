@@ -1,18 +1,15 @@
-import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import { ShelfSchema } from '@/entities/Shelf';
-import { MouseEvent, MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
-import { Box, BoxCoordinates } from '@/entities/Box';
-import cls from './BoxesBlock.module.scss';
+import {  BoxCoordinates } from '@/entities/Box';
 import { TimingBlock } from '@/shared/types/DataBlock';
-import { idBoxesBlockCommonWrapper } from '@/shared/const/idsAndDataAttributes';
-import { getIsCupboardRefetching } from '../..';
+import { getIsCupboardRefetching } from '../../model/selectors/getCupboardShelfList';
+import { BoxItem } from '../BoxItem/BoxItem';
+import cls from './BoxesBlock.module.scss';
 
-// `#${idBoxesBlockCommonWrapper}`
 export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 
 	const dispatch = useAppDispatch()
@@ -57,26 +54,11 @@ export const BoxesBlock = ({ shelf }: {shelf: ShelfSchema}) => {
 		dispatch(cupboardShelfListActions.setMissedTrainingBoxId(boxId))
 	}, [dispatch])
 
-	// const boxesData = [...shelf.boxesData].sort((a, b) => a.index - b.index)
-	// const boxList =  boxesData.map(boxItem => {
-	// 	return (
-	// 		<Box
-	// 			key={boxItem.id}
-	// 			boxItem={boxItem}
-	// 			shelfId={shelf.id}
-	// 			onOpenTimeSetter={onOpenTimeSetter}
-	// 			onOpenBoxSettings={onOpenBoxSettings}
-	// 			onAddNewCard={onAddNewCardClick}
-	// 			onBoxViewClick={onViewClick}
-	// 			isRefetchingSelectorFn={getIsCupboardRefetching}
-	// 		/>
-	// 	)
-	// })
 	const boxList = useMemo(() => {
 		const boxesData = [...shelf.boxesData].sort((a, b) => a.index - b.index)
 		return boxesData.map(boxItem => {
 			return (
-				<Box
+				<BoxItem
 					key={boxItem.id}
 					boxItem={boxItem}
 					shelfId={shelf.id}
