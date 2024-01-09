@@ -252,10 +252,6 @@ const cupboardShelfList = createSlice({
 			}
 		},
 		// box deletion process
-		setIsBoxDeleting2: (state, action: PayloadAction<{ shelfId: string, boxesData: BoxSchema[] }>) => {
-			shelvesAdapter.updateOne(state, { id: action.payload.shelfId, changes: { boxesData: action.payload.boxesData } })
-			// ?.boxesData.find(box => box.id === action.payload.boxId)!.isDeleting = action.payload.isDeleting
-		},
 		setIsBoxDeleting: (state, action: PayloadAction<{ shelfId: string, boxId: string, isDeleting: boolean}>) => {
 			const { shelfId, boxId, isDeleting } = action.payload;
 			const shelf = state.entities[shelfId];
@@ -266,10 +262,6 @@ const cupboardShelfList = createSlice({
 				}
 			}
 		},
-		// setIsShelfDeleting: (state, action: PayloadAction<{ shelfId: string, isDeleting: boolean }>) => {
-		// 	shelvesAdapter.updateOne(state, { id: action.payload.shelfId, changes: { isDeleting: action.payload.isDeleting } })
-		// },
-		// boxes settings modal 
 		setShelfBoxesTemplateModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.shelfBoxesTemplateModal.isOpen = action.payload
 		},
