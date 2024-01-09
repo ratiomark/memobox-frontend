@@ -5,6 +5,7 @@ interface BoxBaseSchema {
 	id: string
 	index: number
 	missedTrainingValue?: MissedTrainingValue
+	isDeleting?: boolean
 }
 
 export interface NewCardsBox extends BoxBaseSchema {
