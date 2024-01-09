@@ -15,7 +15,7 @@ import { DropdownLocalList } from './DropdownLocalList';
 import { idCupboardShelfList, idDropDownLocalTemplateHidden } from '@/shared/const/idsAndDataAttributes';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { deleteBoxThunk } from '../../../model/services/deleteBoxThunk';
+import { setIsBoxDeletingThunk } from '../../../model/services/setIsBoxDeletingThunk';
 
 export const BoxSettingsDropdownModal = () => {
 	const { t } = useTranslation()
@@ -77,7 +77,6 @@ export const BoxSettingsDropdownModal = () => {
 	const onCloseHandle = () => {
 		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(false))
 		setChecked(false)
-		// alert('ЗАКРЫЛ')
 		// dispatch(cupboardShelfListActions.dropMissedTrainingShelfAndBoxId())
 	}
 
@@ -106,8 +105,9 @@ export const BoxSettingsDropdownModal = () => {
 		// добавить такую же логику как удаление полки
 		// добавить анимацию удаления коробки
 		// dispatch(cupboardShelfListActions.setMissedTrainingShelfId())
+		dispatch(setIsBoxDeletingThunk(true))
 		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(false))
-		dispatch(deleteBoxThunk())
+		// dispatch(deleteBoxThunk())
 		// dispatch(cupboardShelfListActions.setMissedTrainingModalIsOpen(true))
 	}, [dispatch])
 
