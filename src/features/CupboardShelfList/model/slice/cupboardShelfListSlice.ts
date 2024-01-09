@@ -262,6 +262,7 @@ const cupboardShelfList = createSlice({
 				}
 			}
 		},
+		// shelf boxes template
 		setShelfBoxesTemplateModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.shelfBoxesTemplateModal.isOpen = action.payload
 		},
