@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Shelf } from '@/entities/Shelf';
 import { ShelfDeleting } from '../ShelfDeleting/ShelfDeleting';
 import { ShelfProps } from '@/entities/Shelf';
-import { getShelfIsDeleting } from '../../model/selectors/getShelfDeletionProcess';
+import { getShelfIsDeleting } from '../../model/selectors/getDeletionProcess';
 
 // тут будет переключаться состояние полки в зависимости от того лежит она в стейте или нет. Вместо полки будет отрисован объект удаления с кнопкой "отменить удаление"
 export const ShelfItem = (props: ShelfProps) => {
