@@ -118,9 +118,7 @@ export const ShelvesRendered = () => {
 	}, [dispatch])
 
 	const reorderShelves = useCallback((shelves: ShelfSchema[]) => {
-		// console.log('reorder ', shelves)
 		dispatch(cupboardShelfListActions.reorderShelves(shelves))
-		// VAR: нужно показать плашку "новый порядок полок будет сохранен через 5 секунд". По прошествии 5-ти секунд отправить запрос на сервер
 	}, [dispatch])
 
 
@@ -147,12 +145,12 @@ export const ShelvesRendered = () => {
 
 			return (
 				<ShelfItem
-					isFirstRender={isFirstRender}
 					key={shelf.id}
 					shelf={shelf}
 					boxesBlock={boxesBlock}
-					isRefetchingSelectorFn={getIsCupboardRefetching}
 					shelfButtonsBlock={buttons}
+					isFirstRender={isFirstRender}
+					isRefetchingSelectorFn={getIsCupboardRefetching}
 				/>
 			)
 		})
