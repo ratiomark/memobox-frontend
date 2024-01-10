@@ -15,9 +15,9 @@ export default defineConfig({
 		react(),
 		VitePWA({
 			registerType: 'autoUpdate',
-			devOptions: {
-				enabled: false
-			},
+			// devOptions: {
+			// 	enabled: false
+			// },
 			manifest: {
 				name: 'Memobox',
 				short_name: 'Memobox',
