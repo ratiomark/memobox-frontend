@@ -48,10 +48,10 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 			const shelfCardsData = shelf.data
 			let boxesData = shelf.boxesData
 			const boxTargeted = boxesData.find((box) => box.id === boxId)
-
+			
 			if (!boxTargeted) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
-				console.log('No box with such id')
+				console.warn('No box with such id')
 				throw new Error('No box with such id')
 			}
 
