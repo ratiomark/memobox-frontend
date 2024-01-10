@@ -15,40 +15,40 @@ dependencies:
     specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/code':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/file':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/headless':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/html':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/link':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/list':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/plain-text':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(@lexical/clipboard@0.12.5)(@lexical/selection@0.12.5)(@lexical/utils@0.12.5)(lexical@0.12.5)
   '@lexical/react':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)(react-dom@18.2.0)(react@18.2.0)(yjs@13.6.7)
   '@lexical/rich-text':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(@lexical/clipboard@0.12.5)(@lexical/selection@0.12.5)(@lexical/utils@0.12.5)(lexical@0.12.5)
   '@lexical/selection':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/table':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@lexical/utils':
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5(lexical@0.12.5)
   '@radix-ui/react-dialog':
     specifier: ^1.0.5
@@ -65,9 +65,6 @@ dependencies:
   framer-motion:
     specifier: ^10.11
     version: 10.12.17(react-dom@18.2.0)(react@18.2.0)
-  fs-extra:
-    specifier: ^11.2.0
-    version: 11.2.0
   i18next:
     specifier: ^21.9.0
     version: 21.10.0
@@ -81,7 +78,7 @@ dependencies:
     specifier: ^0.15.6
     version: 0.15.6
   lexical:
-    specifier: ^0.12.5
+    specifier: 0.12.5
     version: 0.12.5
   posthog-js:
     specifier: ^1.96.1
@@ -4580,15 +4577,6 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /fs-extra@11.2.0:
-    resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
-    engines: {node: '>=14.14'}
-    dependencies:
-      graceful-fs: 4.2.11
-      jsonfile: 6.1.0
-      universalify: 2.0.1
-    dev: false
-
   /fs-extra@9.1.0:
     resolution: {integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==}
     engines: {node: '>=10'}
@@ -4789,6 +4777,7 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+    dev: true
 
   /grapheme-splitter@1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
@@ -5362,6 +5351,7 @@ packages:
       universalify: 2.0.1
     optionalDependencies:
       graceful-fs: 4.2.11
+    dev: true
 
   /jsonpointer@5.0.1:
     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
@@ -7307,6 +7297,7 @@ packages:
   /universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
+    dev: true
 
   /unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
