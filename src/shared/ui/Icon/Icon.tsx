@@ -64,7 +64,7 @@ export const Icon = (props: IconProps) => {
 			</button>
 		)
 	}
-
+	const { buttonSameSize = false, ...restProps } = { ...otherProps }
 	return (
 		<Svg
 			className={clsx(
@@ -75,6 +75,6 @@ export const Icon = (props: IconProps) => {
 			)}
 			width={width}
 			height={height}
-			{...otherProps}
+			{...restProps}
 		/>)
 }
