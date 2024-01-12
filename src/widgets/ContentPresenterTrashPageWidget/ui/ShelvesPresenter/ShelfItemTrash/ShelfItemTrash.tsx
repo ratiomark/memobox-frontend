@@ -35,7 +35,19 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 
 	const boxes = (
 		<ul className={cls.boxListWrapper} >
-			{shelf.box.map(box => <BoxItemTrash key={box.id} cards={shelf.card.filter(card => card.boxId === box.id)} box={box as BoxSchemaDeleted} />)}
+			{shelf.box.map(box => (
+				<BoxItemTrash
+					key={box.id}
+					box={box as BoxSchemaDeleted}
+					cards={shelf.card.filter(card => card.boxId === box.id)}
+					buttonsBlockProps={{
+						isCollapsed: true,
+						showRemoveButton: false,
+						showRestoreButton: false,
+					}}
+				/>)
+			)
+			}
 		</ul>
 	)
 
@@ -59,12 +71,12 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 					<MyText
 						saveOriginal
 						size='s'
-						text={shelf.deletedAt ?? formatDate('2022-03-27T08:36:08.269Z')}
+						text={formatDate(shelf.deletedAt) ?? ''}
 					/>
 				</div>
 				<ButtonsBlockTrashEntity
 					isCollapsed={isCollapsed}
-					onCollapseClick={onCollapse}
+					onToggleCollapse={onCollapse}
 				// onRestoreClick={() => { }}
 				// onRemoveClick={() => { }}
 				/>
