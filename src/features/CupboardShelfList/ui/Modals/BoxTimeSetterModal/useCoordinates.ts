@@ -17,7 +17,7 @@ const useHeaderCupboardTimeSetterSizes = () => {
 			const timeSetterRect = timeSetter.getBoundingClientRect()
 			timeSetterSizes.current.height = timeSetterRect.height
 			timeSetterSizes.current.width = timeSetterRect.width
-			console.log(timeSetterSizes.current)
+			// console.log(timeSetterSizes.current)
 			const cupboardShelfList = document.querySelector(`#${idCupboardShelfList}`) as HTMLDivElement
 			const cupboardShelfListSizes = cupboardShelfList.getBoundingClientRect()
 			cupboardShelfListRects.current.x = cupboardShelfListSizes.x
