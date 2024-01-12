@@ -54,7 +54,6 @@ export const BoxSettingsDropdownModal = () => {
 		const coordinatesWidthCorrection = dropdownHiddenSizes.current.width / 2
 		const viewPortHeight = window.innerHeight
 		let actualX = coordinates.x - coordinatesWidthCorrection
-		// let actualX = coordinates.x 
 		const containerEdge = cupboardShelfListRects.current.x + cupboardShelfListRects.current.width
 		if (actualX + dropdownHiddenSizes.current.width > containerEdge) {
 			actualX = (containerEdge - dropdownHiddenSizes.current.width)
@@ -62,7 +61,6 @@ export const BoxSettingsDropdownModal = () => {
 			actualX = cupboardShelfListRects.current.x
 		}
 
-		// let actualY = coordinates.y - coordinatesHeightCorrection
 		let actualY = coordinates.y
 		if (actualY < headerHeight.current) {
 			actualY = headerHeight.current
@@ -77,61 +75,18 @@ export const BoxSettingsDropdownModal = () => {
 	const onCloseHandle = () => {
 		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(false))
 		setChecked(false)
-		// dispatch(cupboardShelfListActions.dropMissedTrainingShelfAndBoxId())
 	}
 
-	const onSaveTime = () => {
-		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(false))
-		setChecked(false)
-		// if (!boxId) {
-		// 	// console.log(value.value)
-		// 	updateShelfMutation({ id: shelfId, missedTrainingValue: value.value as MissedTrainingValue })
-		// 	onCloseHandle()
-		// }
-	}
-
-	// const onMissedTraining
 	const onMissedTrainingClick = useCallback(() => {
-		// dispatch(cupboardShelfListActions.setMissedTrainingShelfId())
 		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(false))
 		dispatch(cupboardShelfListActions.setMissedTrainingModalIsOpen(true))
 	}, [dispatch])
 
-	const onDeleteBoxClick = useCallback(() => {
-		// написать тесты для бекенда по удалению коробки
-		// убедиться, что тесты проходят
-		// ДАЛЕЕ
-		// переключить состояние коробки у полки на isDeleting
-		// добавить такую же логику как удаление полки
-		// добавить анимацию удаления коробки
-		// dispatch(cupboardShelfListActions.setMissedTrainingShelfId())
-		dispatch(setIsBoxDeletingThunk(true))
+	const onDeleteBoxClick = () => {
+		dispatch(setIsBoxDeletingThunk({ boxId, isDeleting: true }))
 		dispatch(cupboardShelfListActions.setBoxSettingsModalIsOpen(false))
-		// dispatch(deleteBoxThunk())
-		// dispatch(cupboardShelfListActions.setMissedTrainingModalIsOpen(true))
-	}, [dispatch])
+	}
 
-	// const dropDownLocal = <DropdownLocalList
-	// 	items={[
-	// 		{
-	// 			content: (
-	// 				<MyText
-	// 					style={{ fontSize: dropDownLocalTextSize }}
-	// 					text={t(missedTrainingDropdownLocalKey)} />
-	// 			),
-	// 			onClick: onMissedTrainingClick
-	// 		},
-	// 		{
-	// 			content: (
-	// 				<MyText
-	// 					style={{ fontSize: dropDownLocalTextSize }}
-	// 					variant='error'
-	// 					text={t(removeBoxDropdownLocalKey)} />
-	// 			),
-	// 			onClick: onDeleteBoxClick
-	// 		},
-	// 	]}
-	// />
 	const dropDownItems = []
 	if (isLearntBox) {
 		dropDownItems.push({
