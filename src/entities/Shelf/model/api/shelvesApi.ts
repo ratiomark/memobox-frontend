@@ -78,22 +78,22 @@ export const shelvesApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Shelves'],
 		}),
+		
+		restoreShelfById: build.mutation<CupboardSchema, string>({
+			query: (id) => ({
+				url: `/shelves/restore/${id}`,
+				method: 'PATCH',
+			}),
+			invalidatesTags: ['Shelves'],
+		}),
+
 		removeShelf: build.mutation<string, { shelfId: string, index: number }>({
 			query: ({ shelfId, index }) => ({
 				url: `/shelves/${shelfId}`,
-				// params: { id: arg.id },
 				method: 'DELETE',
-				// headers: {
-				// 	'Content-Type': 'application/json'
-				// },
 				body: {
 					index,
-					// shelfId: arg,
-					// обновленные данные объекта
-					// isCollapsed: arg.isCollapsed
-					// ...arg,
 				},
-				// body: { isCollapsed: arg.isCollapsed }
 			}),
 			invalidatesTags: ['Shelves'],
 		}),
@@ -103,6 +103,7 @@ export const rtkRemoveShelfById = shelvesApi.endpoints.removeShelf.initiate
 export const updateShelfWithTag = shelvesApi.endpoints.updateShelfWithTag.initiate
 export const rtkCreateNewShelf = shelvesApi.endpoints.createNewShelf.initiate
 export const rtkUpdateShelfListOrder = shelvesApi.endpoints.updateShelfListOrder.initiate
+export const rtkRestoreShelfById = shelvesApi.endpoints.restoreShelfById.initiate
 export const { useGetShelvesQuery } = shelvesApi
 export const { useUpdateShelfMutation } = shelvesApi
 export const { useUpdateShelfWithTagMutation } = shelvesApi
