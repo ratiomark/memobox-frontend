@@ -59,9 +59,9 @@ export const ShelvesPresenter = (props: ShelvesPresenterProps) => {
 			<div className={cls.labelsListButtonsBlock} >
 				<ButtonsBlockTrashEntity
 					isCollapsed={true}
-					onCollapseClick={() => { }}
-					onRestoreClick={() => { }}
-					onRemoveClick={() => { }}
+					// onCollapseClick={() => { }}
+					// onRestoreClick={() => { }}
+					// onRemoveClick={() => { }}
 				/>
 			</div>
 		</div>
