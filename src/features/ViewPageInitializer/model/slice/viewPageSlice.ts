@@ -65,8 +65,12 @@ const viewPageSlice = createSlice({
 		// 
 		setActiveShelfId: (state, action: PayloadAction<string>) => {
 			const shelfId = action.payload
+			if (shelfId === 'all') {
+				state.shelfId = shelfId
+				return
+			}
+			if (!state.shelvesData[shelfId]?.maxIndexBox) return
 			state.shelfId = shelfId
-			if (shelfId === 'all') return
 			const maxIndexForShelf = state.shelvesData[shelfId].maxIndexBox
 			// превосходит ли текущая выбранная коробка например box5 максимальную коробку у выбранной полки
 			if (
