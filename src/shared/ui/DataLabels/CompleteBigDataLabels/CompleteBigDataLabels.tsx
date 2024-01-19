@@ -6,8 +6,6 @@ import { DataBlock } from '@/shared/types/DataBlock';
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
 import langIcon from '../../../assets/icons/langIcon.svg'
 import { Icon } from '../../Icon';
-import { LangComponent } from './LangComponent';
-
 
 interface CompleteBigDataLabelsProps {
 	className?: string
@@ -33,7 +31,6 @@ export const CompleteBigDataLabels = (props: CompleteBigDataLabelsProps) => {
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.all} type='all' />
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.train} type='train' />
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.wait} type='wait' />
-			{/* <LangComponent size={32}/> */}
 			<Icon
 				clickable
 				onClick={() => setLang(currentLang === 'ru' ? 'en' : 'ru')}
