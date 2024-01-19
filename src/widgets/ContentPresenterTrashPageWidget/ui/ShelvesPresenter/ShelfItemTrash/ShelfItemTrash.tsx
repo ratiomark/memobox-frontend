@@ -1,21 +1,15 @@
 import clsx from 'clsx'
 import cls from './ShelfItemTrash.module.scss'
 import { BoxSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash';
-import { Card } from '@/shared/ui/Card';
 import { Heading, MyText } from '@/shared/ui/Typography';
-import { HStack } from '@/shared/ui/Stack';
 import { formatDate } from '@/shared/lib/helpers/common/formaters';
-import { Icon } from '@/shared/ui/Icon';
-import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
-import { Button } from '@/shared/ui/Button';
-import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
-import { Collapsible } from '@/shared/ui/Animations';
 import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
+import { rtkRestoreShelfById } from '@/entities/Shelf';
 interface ShelfItemProps {
 	shelf: ShelfSchemaDeleted
 }
@@ -26,7 +20,10 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 	} = props
 	const { t } = useTranslation('trash-page')
 	const dispatch = useAppDispatch()
-
+	const onRestoreClick = async () => {
+		const response = await dispatch(rtkRestoreShelfById(shelf.id)).unwrap()
+		console.log(response)
+	}
 	// const boxesCount = shelf.box.length
 
 	const [isCollapsed, setIsCollapsed] = useState(false)
@@ -63,10 +60,12 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 					<MyText
 						size='s'
 						text={shelf.boxesCount ?? 'кол-во коробок'}
+						className={cls.boxesCardsText}
 					/>
 					<MyText
 						size='s'
 						text={shelf.cardsCount ?? 'кол-во карточек'}
+						className={cls.boxesCardsText}
 					/>
 					<MyText
 						saveOriginal
@@ -77,7 +76,7 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 				<ButtonsBlockTrashEntity
 					isCollapsed={isCollapsed}
 					onToggleCollapse={onCollapse}
-				// onRestoreClick={() => { }}
+					onRestore={onRestoreClick}
 				// onRemoveClick={() => { }}
 				/>
 			</div>

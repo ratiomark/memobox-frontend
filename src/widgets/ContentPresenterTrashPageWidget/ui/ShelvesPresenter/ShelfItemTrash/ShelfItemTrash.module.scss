@@ -32,6 +32,10 @@
 //   // border: 1px solid red;
 // }
 
+.boxesCardsText {
+  min-width: var(--trash-page-boxes-cards-text-width, 20px);
+}
+
 .title {
   font-size: 15px;
   min-width: var(--width-trash-page-shelf-title, 300px);
@@ -82,7 +86,7 @@
 
 .boxListWrapper {
   padding-top: 8px;
-  padding-left: 20px;
+  padding-left: var(--trash-page-entity-left-padding, 20);
   display: flex;
   flex-direction: column;
   gap: 8px;
