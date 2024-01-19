@@ -1,25 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { toastsActions } from '@/shared/ui/Toast'
-import { getAbortedThunkIds, getShelfById, getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
-import { sleep } from '@/shared/lib/helpers/common/sleep'
+import { getAbortedThunkIds, getShelfById, } from '../selectors/getCupboardShelfList'
 import { t } from 'i18next'
-import { ShelfSchema, rtkRemoveShelfById } from '@/entities/Shelf'
+import { ShelfSchema, } from '@/entities/Shelf'
 import { idPrefixBoxDeletion } from '@/shared/const/idsAndDataAttributes'
 import { TAG_TRASH_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
-import { localDataService } from '@/shared/lib/helpers/common/localDataService'
-import { setLocalShelvesToStore } from './setLocalShelvesToStore'
 import { BoxSchema, rtkApiDeleteBoxFromShelf } from '@/entities/Box'
-import { getBoxSettingsDropdownBoxId, getBoxSettingsDropdownShelfId } from '../selectors/getBoxSettingDropdownModal'
+import { getBoxSettingsDropdownShelfId } from '../selectors/getBoxSettingDropdownModal'
 import { DataBlock } from '@/shared/types/DataBlock'
-import { cupboardShelfListActions } from '../..'
 
-type DeleteBoxThunkArg = {
-	shelfId: string
-	boxId: string
-	index: number
-}
 export type DeleteBoxThunkResponse = {
 	shelfId: string,
 	boxes: BoxSchema[]
@@ -34,8 +25,6 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 	async (boxId, thunkAPI) => {
 		const { dispatch, getState } = thunkAPI
 
-		// const boxId = getBoxSettingsDropdownBoxId(getState())
-
 		const id = idPrefixBoxDeletion + boxId
 		const abortedThunkIds = getAbortedThunkIds(getState())
 		try {
@@ -48,7 +37,7 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 			const shelfCardsData = shelf.data
 			let boxesData = shelf.boxesData
 			const boxTargeted = boxesData.find((box) => box.id === boxId)
-			
+
 			if (!boxTargeted) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				console.warn('No box with such id')
@@ -71,7 +60,6 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 			)
 
 			const response = await dispatch(rtkApiDeleteBoxFromShelf({ shelfId, boxId, index })).unwrap()
-			// await sleep(1000)
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
