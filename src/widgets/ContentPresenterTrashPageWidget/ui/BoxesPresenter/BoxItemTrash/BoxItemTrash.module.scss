@@ -8,6 +8,14 @@
   gap: 40px;
 }
 
+.boxItemContent {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: space-around;
+  width: calc(100% - 240px);
+}
+
 .item {
   display: flex;
   gap: 20px;
@@ -20,10 +28,21 @@
   // border: 1px solid red;
 }
 
+.boxesCardsText {
+  min-width: var(--trash-page-boxes-cards-text-width, 20px);
+}
+
 .title {
   font-size: 15px;
-  width: 300px;
 
+  // width: 300px;
+  min-width: calc(var(--width-trash-page-shelf-title, 300px) - var(--trash-page-entity-left-padding));
+
+  // Я делаю страницу корзины, на странице 2 виджета:
+  // -EntitySwitcherTrashPageWidget
+  // -ContentPresenterTrashPageWidget
+
+  // Первый виджет - переключает сущности отображающиеся в корзине.
   // font: var(--font-m);
 }
 

@@ -14,12 +14,13 @@ import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { useMemo, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxSchemaDeleted } from '@/entities/Trash';
-import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
+import { ButtonsBlockTrashEntity, ButtonsBlockTrashEntityProps } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
 import { CardItemTrash } from '../../CardsPresenter/CardItemTrash/CardItemTrash';
 interface BoxItemTrashProps {
 	className?: string;
 	box: BoxSchemaDeleted
 	cards?: CardSchemaDeleted[]
+	buttonsBlockProps?: ButtonsBlockTrashEntityProps
 }
 
 export const BoxItemTrash = (props: BoxItemTrashProps) => {
@@ -27,11 +28,12 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 		className,
 		box,
 		cards,
+		buttonsBlockProps,
 	} = props
 	const { t } = useTranslation('trash-page')
 	const dispatch = useAppDispatch()
 
-	const [isCollapsed, setIsCollapsed] = useState(true)
+	const [isCollapsed, setIsCollapsed] = useState(buttonsBlockProps?.isCollapsed ?? true)
 
 	const onCollapse = () => setIsCollapsed(prev => !prev)
 	const boxTitle = useMemo(() => {
@@ -79,27 +81,34 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 
 			<HStack
 				max
+				justify='between'
 				className={clsx(cls.BoxItem, [className])}
 			>
 				<Heading className={cls.title}
 					as={'h3'}
 					title={boxTitle} />
-				<MyText
-					size='s'
-					text={box.cardsCount ?? 'xxx'}
-				/>
-				<MyText
-					size='s'
-					text={'?'}
-				/>
-				<MyText
-					saveOriginal
-					size='s'
-					text={box.deletedAt ?? formatDate('2022-03-27T08:36:08.269Z')}
-				/>
+				<div className={cls.boxItemContent} >
+					<MyText
+						size='s'
+						text={' '}
+						className={cls.boxesCardsText}
+					/>
+					<MyText
+						size='s'
+						text={box.cardsCount ?? '2'}
+						className={cls.boxesCardsText}
+					/>
+					<MyText
+						saveOriginal
+						size='s'
+						text={formatDate(box.deletedAt) ?? ''}
+					/>
+				</div>
 				<ButtonsBlockTrashEntity
+
+					{...buttonsBlockProps}
 					isCollapsed={isCollapsed}
-					onCollapseClick={onCollapse}
+					onToggleCollapse={onCollapse}
 				// onRestoreClick={() => { }}
 				// onRemoveClick={() => { }}
 				/>
