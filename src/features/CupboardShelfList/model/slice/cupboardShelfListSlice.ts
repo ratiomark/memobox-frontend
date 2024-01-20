@@ -489,11 +489,14 @@ const cupboardShelfList = createSlice({
 				})
 			.addCase(
 				deleteShelfThunk.fulfilled,
-				(state, action: PayloadAction<{ id: string, title: string }>) => {
+				(state, action: PayloadAction<{ id: string, title: string, shelves: ShelfSchema[] }>) => {
 					state.shelvesTitles = state.shelvesTitles.filter(title => title !== action.payload.title)
-					shelvesAdapter.removeOne(state, action.payload.id)
+					shelvesAdapter.setAll(state, action.payload.shelves)
+					const shelvesDndRepresentation = action.payload.shelves.map((shelf, index) => ({ id: shelf.id, index }))
+					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
+					state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 					if (state.createNewCardModal.shelfId === action.payload.id) {
-						state.createNewCardModal.shelfId = state.ids[0] as string
+						state.createNewCardModal.shelfId = action.payload.shelves[0].id
 					}
 				})
 			.addCase(
