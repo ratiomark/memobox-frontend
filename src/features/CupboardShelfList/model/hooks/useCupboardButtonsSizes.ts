@@ -4,11 +4,11 @@ import { dataAttrButtonTypeAddCard, dataAttrButtonTypeAddCardButtonGeneral, data
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { getCreateNewShelfCounter } from '../selectors/getCreateNewShelfModal';
-import { getIsCupboardLoading } from '../selectors/getCupboardShelfList';
+import { getIsCupboardLoading, getIsCupboardRefetching } from '../selectors/getCupboardShelfList';
 
 const useCupboardButtonsSizes = () => {
 	const { currentLang } = useCustomTranslate()
-	const isLoading = useSelector(getIsCupboardLoading)
+	const isLoading = useSelector(getIsCupboardRefetching)
 	const createNewShelfCounter = useSelector(getCreateNewShelfCounter)
 
 	useEffect(() => {
