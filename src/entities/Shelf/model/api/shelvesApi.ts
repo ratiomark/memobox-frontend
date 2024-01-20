@@ -10,7 +10,7 @@ export const shelvesApi = rtkApi.injectEndpoints({
 				method: 'GET',
 			}),
 		}),
-		createNewShelf: build.mutation<any, string>({
+		createNewShelf: build.mutation<ShelfSchema, string>({
 			query: (title) => ({
 				url: '/shelves',
 				method: 'POST',
@@ -78,13 +78,13 @@ export const shelvesApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Shelves'],
 		}),
-		
+
 		restoreShelfById: build.mutation<CupboardSchema, string>({
 			query: (id) => ({
 				url: `/shelves/restore/${id}`,
 				method: 'PATCH',
 			}),
-			invalidatesTags: ['Shelves'],
+			invalidatesTags: ['Shelves', 'TrashPage'],
 		}),
 
 		removeShelf: build.mutation<string, { shelfId: string, index: number }>({
