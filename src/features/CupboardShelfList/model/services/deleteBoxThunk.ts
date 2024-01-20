@@ -10,6 +10,7 @@ import { rtkApi } from '@/shared/api/rtkApi'
 import { BoxSchema, rtkApiDeleteBoxFromShelf } from '@/entities/Box'
 import { getBoxSettingsDropdownShelfId } from '../selectors/getBoxSettingDropdownModal'
 import { DataBlock } from '@/shared/types/DataBlock'
+import { cupboardShelfListActions } from '../..'
 
 export type DeleteBoxThunkResponse = {
 	shelfId: string,
@@ -24,7 +25,7 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 	'cupboardPage/deleteBoxThunk',
 	async (boxId, thunkAPI) => {
 		const { dispatch, getState } = thunkAPI
-
+		console.log('boxId', boxId)
 		const id = idPrefixBoxDeletion + boxId
 		const abortedThunkIds = getAbortedThunkIds(getState())
 		try {
@@ -36,7 +37,9 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 			const shelf = getShelfById(shelfId)(getState()) as ShelfSchema
 			const shelfCardsData = shelf.data
 			let boxesData = shelf.boxesData
+			console.log('boxesData', boxesData)
 			const boxTargeted = boxesData.find((box) => box.id === boxId)
+			console.log('boxTargeted', boxTargeted)
 
 			if (!boxTargeted) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
@@ -64,6 +67,7 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
+			dispatch(cupboardShelfListActions.setAbortedThunkId(id))
 			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			boxesData = boxesData.filter((box) => box.id !== boxId).map((box, i) => ({ ...box, index: i }))
