@@ -44,7 +44,6 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 	const onCancelDeletion = async () => {
 		if (timer) clearTimeout(timer)
-		// dispatch(toastsActions.setAbortedThunkId(idPrefixShelfDeletion + shelfId))
 		dispatch(cupboardShelfListActions.setAbortedThunkId(idPrefixShelfDeletion + shelfId))
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }))
 	}
