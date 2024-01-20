@@ -252,7 +252,7 @@ const cupboardShelfList = createSlice({
 			}
 		},
 		// box deletion process
-		setIsBoxDeleting: (state, action: PayloadAction<{ shelfId: string, boxId: string, isDeleting: boolean}>) => {
+		setIsBoxDeleting: (state, action: PayloadAction<{ shelfId: string, boxId: string, isDeleting: boolean }>) => {
 			const { shelfId, boxId, isDeleting } = action.payload;
 			const shelf = state.entities[shelfId];
 			if (shelf) {
