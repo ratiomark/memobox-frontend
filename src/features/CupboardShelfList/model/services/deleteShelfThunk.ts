@@ -11,14 +11,15 @@ import { rtkApi } from '@/shared/api/rtkApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { setLocalShelvesToStore } from './setLocalShelvesToStore'
 
-type DeleShelfThunkArg = {
+type DeleteShelfThunkResponse = {
 	id: string
 	title: string
+	shelves: ShelfSchema[]
 }
 
 const AbortedError = 'Aborted'
 
-export const deleteShelfThunk = createAsyncThunk<DeleShelfThunkArg, string, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema; rejectedMeta: { aborted: boolean } }>(
+export const deleteShelfThunk = createAsyncThunk<DeleteShelfThunkResponse, string, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema; rejectedMeta: { aborted: boolean } }>(
 	'cupboardPage/deleteShelfThunk',
 	async (shelfId, thunkAPI) => {
 		const { dispatch, getState } = thunkAPI
@@ -56,9 +57,9 @@ export const deleteShelfThunk = createAsyncThunk<DeleShelfThunkArg, string, { re
 			const localShelves = localDataService.getShelves()
 			const localShelvesFiltered = localShelves.filter((shelf) => shelf.id !== shelfId)
 			localDataService.setShelves(localShelvesFiltered.map((shelf, i) => ({ ...shelf, index: i })))
-			dispatch(setLocalShelvesToStore())
-			
-			return { id: shelfId, title: shelf.title }
+			// dispatch(setLocalShelvesToStore())
+
+			return { id: shelfId, title: shelf.title, shelves: localShelvesFiltered }
 
 		} catch (err) {
 			const error = err as Error
