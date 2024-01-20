@@ -18,4 +18,6 @@ export type {
 	BoxSchema,
 	BoxCoordinates,
 } from './model/types/BoxSchema'
-export { Box } from './ui/Box'; 
+export { Box } from './ui/Box';
+
+export { default as getTiming } from './utils/getTiming';
