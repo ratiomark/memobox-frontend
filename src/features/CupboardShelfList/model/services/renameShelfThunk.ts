@@ -20,10 +20,8 @@ export const renameShelfThunk = createAsyncThunk<RenameShelfThunkArg, RenameShel
 	'cupboardPage/renameShelfThunk',
 	async (arg, thunkAPI) => {
 		const { shelfId, title, currentShelfTitle } = arg
-		// console.log('updateMissedTrainingThunk', arg)
 		const id = shelfId + genRandomId()
 		const { dispatch, getState } = thunkAPI
-		// const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { title } }))
 		dispatch(cupboardShelfListActions.addShelfTitle(title))
 		dispatch(toastsActions.addToast({

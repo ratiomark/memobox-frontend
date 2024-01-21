@@ -482,11 +482,11 @@ const cupboardShelfList = createSlice({
 					state.createNewShelfModal.shelfTitle = ''
 					state.createNewShelfModal.shelvesCreated++
 				})
-			.addCase(
-				createNewShelfThunk.rejected,
-				(state) => {
-					state.createNewShelfModal.requestStatus = 'error'
-				})
+			// .addCase(
+			// 	createNewShelfThunk.rejected,
+			// 	(state) => {
+			// 		state.createNewShelfModal.requestStatus = 'error'
+			// 	})
 			.addCase(
 				deleteShelfThunk.fulfilled,
 				(state, action: PayloadAction<{ id: string, title: string, shelves: ShelfSchema[] }>) => {
