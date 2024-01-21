@@ -4,7 +4,8 @@ import { CardSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash';
 import { Card } from '@/shared/ui/Card';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { HStack } from '@/shared/ui/Stack';
-import { formatDate } from '@/shared/lib/helpers/common/formaters';
+import { getTiming } from '@/entities/Box';
+import { formatDate, } from '@/shared/lib/helpers/common/formaters';
 import { Icon } from '@/shared/ui/Icon';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { Button } from '@/shared/ui/Button';
@@ -20,7 +21,9 @@ interface BoxItemTrashProps {
 	className?: string;
 	box: BoxSchemaDeleted
 	cards?: CardSchemaDeleted[]
+	cardsCount?: number
 	buttonsBlockProps?: ButtonsBlockTrashEntityProps
+	showShelfTitle?: boolean
 }
 
 export const BoxItemTrash = (props: BoxItemTrashProps) => {
@@ -28,7 +31,9 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 		className,
 		box,
 		cards,
+		cardsCount,
 		buttonsBlockProps,
+		showShelfTitle,
 	} = props
 	const { t } = useTranslation('trash-page')
 	const dispatch = useAppDispatch()
@@ -39,36 +44,14 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 	const boxTitle = useMemo(() => {
 		switch (box.specialType) {
 			case 'none':
-				return `${t('box text')} ${box.index}`
+				return `${t('box text')} ${box.index} - ${getTiming(box.timing)}`
 			case 'new':
 				return t('new cards')
 			default:
-				return t('learnt cards')
+				return `${t('learnt cards')} - ${getTiming(box.timing)}`
 		}
-	}, [box.index, box.specialType, t])
-	// const buttons = (
-	// 	<div className={cls.buttons} >
-	// 		<Icon
-	// 			className={
-	// 				clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
-	// 			clickable
-	// 			type='hint'
-	// 			Svg={ArrowBottomIcon}
-	// 			onClick={onCollapse}
-	// 		/>
-	// 		<Button>{t('restore')}</Button>
-	// 		<Icon
-	// 			Svg={TrashIcon}
-	// 			type='cancel'
-	// 			clickable
-	// 			withFill={false}
-	// 			width={22}
-	// 			height={22}
-	// 			onClick={() => { }}
-	// 			buttonSameSize={false}
-	// 			className={clsx(cls.icon, cls.removeIcon)}
-	// 		/>
-	// 	</div>)
+	}, [box.index, box.specialType, t, box.timing])
+
 
 	const cardsBlock = (
 		<ul style={{ paddingLeft: 30 }}>
@@ -90,12 +73,12 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 				<div className={cls.boxItemContent} >
 					<MyText
 						size='s'
-						text={' '}
+						text={showShelfTitle ? box.shelf.title : ' '}
 						className={cls.boxesCardsText}
 					/>
 					<MyText
 						size='s'
-						text={box.cardsCount ?? '2'}
+						text={cardsCount}
 						className={cls.boxesCardsText}
 					/>
 					<MyText
@@ -105,7 +88,6 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 					/>
 				</div>
 				<ButtonsBlockTrashEntity
-
 					{...buttonsBlockProps}
 					isCollapsed={isCollapsed}
 					onToggleCollapse={onCollapse}
@@ -113,7 +95,7 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 				// onRemoveClick={() => { }}
 				/>
 			</HStack>
-			{cardsBlock}
+			{!isCollapsed && cardsBlock}
 		</li>
 	)
 }
