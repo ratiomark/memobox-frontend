@@ -1,0 +1,78 @@
+.BoxSettingsItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 170px;
+  min-width: 125px;
+
+  // margin-right: 20px;
+
+  // flex-shrink: 0;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 10%) 0 4px 6px -1px, rgb(0 0 0 / 6%) 0 2px 4px -1px;
+  position: relative;
+
+  // margin-right: 20px;
+}
+
+.marginRight {
+  margin-right: 20px;
+}
+
+.BoxSettingsItem:last-of-type {
+  // margin-right: 10px;
+  // margin-left: 10px;
+
+  // margin-right: 0;
+  // margin-right: 150px;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgb(22 22 22 / 68.3%);
+
+  // word-wrap: none;
+  // word-break: keep-all;
+}
+
+.icon {
+  transition: all 0.3s;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--border-radius-main);
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.removeIcon {
+  background-color: var(--cancel-rgb-2);
+  border: 1px solid transparent;
+
+  &:hover {
+    // border: 1px solid var(--cancel);
+  }
+
+  // background-color: ccc(--cancel-rgb);
+
+  // background-color: rgb(var(--cancel-rgb) / 30%);
+}
+
+.timerIcon {
+  background-color: var(--accent-rgb-2);
+  border: 1px solid transparent;
+
+  &:hover {
+    // border: 1px solid var(--accent);
+  }
+}
+
+.timeSetter {
+  position: absolute;
+  z-index: 101;
+  top: -30px;
+}
