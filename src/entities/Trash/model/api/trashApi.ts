@@ -2,7 +2,7 @@ import { BoxSchema } from '@/entities/Box'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { BoxSchemaDeleted, CardSchemaDeleted, ShelfSchemaDeleted } from '../types/EntitySchemasDeleted'
 import { TAG_TRASH_PAGE } from '@/shared/api/const/tags'
-import { ShelvesDataViewPage } from '@/entities/Shelf'
+import { ShelfSchema, ShelvesDataViewPage } from '@/entities/Shelf'
 
 interface TrashResponse {
 	cards: CardSchemaDeleted[]
@@ -13,7 +13,7 @@ interface TrashResponse {
 		shelves: number
 		boxes: number
 	}
-	shelvesAndBoxesData: ShelvesDataViewPage
+	shelvesAndBoxesData: ShelfSchema[]
 }
 
 export const trashApi = rtkApi.injectEndpoints({
