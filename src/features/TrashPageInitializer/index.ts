@@ -1,6 +1,14 @@
 export {
+	restoreShelfByIdThunk,
+} from './model/services/restoreShelfByIdThunk';
+
+export {
 	getTrashPageIsCardEditModalOpen,
 	getTrashPageIsMoveCardsModalOpen,
+	getTrashPageIsRestoreBoxModalOpen,
+	getTrashPageRestoreBoxModalShelfId,
+	getTrashPageRestoreBoxModalBoxId,
+	getTrashPageRestoreBoxModalBoxIndex,
 } from './model/selectors/getTrashPageModals';
 
 export {
@@ -13,7 +21,6 @@ export {
 	getTrashPageIsMounted,
 	getTrashPageIsLoading,
 } from './model/selectors/getTrashPage';
-
 
 export type {
 	TrashPageInitializerSchema,
