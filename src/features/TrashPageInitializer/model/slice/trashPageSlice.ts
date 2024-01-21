@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TrashPageEntityType, TrashPageInitializerSchema } from '../types/TrashPageInitializerSchema'
-import { CardSchema } from '@/entities/Card'
-import { SortColumnValue } from '@/entities/User'
-import { SortOrderType } from '@/shared/types/SortOrderType'
-import { CardSchemaExtended } from '@/entities/Card'
-import { isNumeric } from '@/shared/lib/helpers/common/isNumeric'
 
 const initialState: TrashPageInitializerSchema = {
 	activeEntity: 'shelves',
@@ -15,21 +10,27 @@ const initialState: TrashPageInitializerSchema = {
 	isCardEditModalOpen: false,
 	isMoveCardsModalOpen: false,
 	selectedCardIds: [],
-	// 
-	// cards: [],
-	// shelvesData: {},
+	abortedThunkIds: [],
+	restoreBoxModal: {
+		shelfId: '',
+		boxId: '',
+		boxIndex: 0,
+		isOpen: false
+	},
 
 }
 
-// export interface InitiateShelfPayload {
-// 	shelfId: string
-// 	boxId: string
-// }
-// Можно пройти по всем карточкам и записать максимальную коробку для каждой полки. При переходе на полку чекать превышает ли текущая коробка максимальную коробку
+
 const trashPageSlice = createSlice({
 	name: 'trashPage',
 	initialState,
 	reducers: {
+		setAbortedThunkId: (state, action: PayloadAction<string>) => {
+			state.abortedThunkIds.push(action.payload)
+		},
+		removeAbortedThunkId: (state, action: PayloadAction<string>) => {
+			state.abortedThunkIds = state.abortedThunkIds.filter(id => id !== action.payload)
+		},
 		setActiveEntity: (state, action: PayloadAction<TrashPageEntityType>) => {
 			state.activeEntity = action.payload
 		},
@@ -59,6 +60,16 @@ const trashPageSlice = createSlice({
 		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
 			state.isMultiSelectActive = action.payload
 		},
+		setIsRestoreBoxModalOpen: (state, action: PayloadAction<boolean>) => {
+			state.restoreBoxModal.isOpen = action.payload
+		},
+		setRestoreBoxModalData: (state, action: PayloadAction<{ boxId: string, boxIndex: number, shelfId: string }>) => {
+			const { boxId, boxIndex, shelfId } = action.payload
+			state.restoreBoxModal.boxId = boxId
+			state.restoreBoxModal.boxIndex = boxIndex
+			state.restoreBoxModal.shelfId = shelfId
+		},
+		
 		// setActiveShelfId: (state, action: PayloadAction<string>) => {
 		// 	const shelfId = action.payload
 		// 	state.shelfId = shelfId
