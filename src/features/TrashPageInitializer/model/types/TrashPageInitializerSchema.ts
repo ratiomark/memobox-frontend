@@ -27,5 +27,11 @@ export interface TrashPageInitializerSchema {
 	isCardEditModalOpen: boolean
 	isMoveCardsModalOpen: boolean
 	selectedCardIds: string[]
-
+	abortedThunkIds: string[]
+	restoreBoxModal: {
+		shelfId: string
+		boxId: string
+		boxIndex: number
+		isOpen: boolean
+	},
 }

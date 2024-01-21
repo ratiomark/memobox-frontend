@@ -17,6 +17,10 @@ export type BoxSchemaDeleted = BoxSchema & {
 		card: number
 	}
 	timing: TimingBlock
+	shelf: {
+		id: string
+		title: string
+	}
 	// specialType: 'new' | 'none' | 'learnt'
 	// cards: CardSchemaDeleted[]
 }
