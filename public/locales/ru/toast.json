@@ -49,5 +49,13 @@
   "update_card": {
     "messageSuccess": "Карточка сохранена",
     "additional": "Сохранение карточки"
+  },
+  "restore_shelf": {
+    "messageSuccess": "Полка восстановлена",
+    "additional": "Восстанавливаем полку"
+  },
+  "restore_box": {
+    "messageSuccess": "Коробка восстановлена",
+    "additional": "Восстанавливаем коробку"
   }
 }

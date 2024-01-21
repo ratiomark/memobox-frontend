@@ -45,5 +45,13 @@
   "update_card": {
     "messageSuccess": "Card was saved",
     "additional": "Saving the card"
+  },
+  "restore_shelf": {
+    "messageSuccess": "Shelf was restored",
+    "additional": "Restoring shelf"
+  },
+  "restore_box": {
+    "messageSuccess": "Box was restored",
+    "additional": "Restoring box"
   }
 }
