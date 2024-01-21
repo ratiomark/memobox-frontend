@@ -10,6 +10,8 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
 import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
 import { rtkRestoreShelfById } from '@/entities/Shelf';
+import { restoreShelfByIdThunk } from '@/features/TrashPageInitializer';
+
 interface ShelfItemProps {
 	shelf: ShelfSchemaDeleted
 }
@@ -20,13 +22,13 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 	} = props
 	const { t } = useTranslation('trash-page')
 	const dispatch = useAppDispatch()
+
 	const onRestoreClick = async () => {
-		const response = await dispatch(rtkRestoreShelfById(shelf.id)).unwrap()
+		const response = await dispatch(restoreShelfByIdThunk({ shelfId: shelf.id, title: shelf.title }))
 		console.log(response)
 	}
-	// const boxesCount = shelf.box.length
 
-	const [isCollapsed, setIsCollapsed] = useState(false)
+	const [isCollapsed, setIsCollapsed] = useState(true)
 
 	const onCollapse = () => setIsCollapsed(prev => !prev)
 
@@ -36,11 +38,13 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 				<BoxItemTrash
 					key={box.id}
 					box={box as BoxSchemaDeleted}
-					cards={shelf.card.filter(card => card.boxId === box.id)}
+					cardsCount={box._count.card}
+					cards={box.card}
 					buttonsBlockProps={{
 						isCollapsed: true,
 						showRemoveButton: false,
 						showRestoreButton: false,
+						showCollapseArrow: box._count.card > 0,
 					}}
 				/>)
 			)
