@@ -13,7 +13,7 @@ import { TimingBlock } from '@/shared/types/DataBlock'
 import { daysOfWeek } from '../const/daysOfWeek'
 import { updateJsonSavedDataThunk } from '../services/updateJsonSavedData'
 import { updateNotificationSettingsThunk } from '../services/userSettings/updateNotificationThunk'
-import { updateMissedTrainingThunk } from '../..'
+import { updateMissedTrainingThunk } from '../services/userSettings/updateMissedTrainingThunk'
 
 const initialState: UserSchema = {
 	_mounted: false,
