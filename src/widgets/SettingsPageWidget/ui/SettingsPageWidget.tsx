@@ -33,6 +33,7 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const { isLoading, data, error } = useGetUserSettingsQuery()
 
+	// сетает старые значения при повторном заходе в настройки, если не инвалидировать кэш
 	useEffect(() => {
 		if (data) {
 			console.log('data', data)
@@ -97,7 +98,7 @@ interface SettingsCardSlotProps {
 	isOpenSelectorFn: (state: StateSchema) => boolean | undefined
 	toggleModalFn: (isOpen: boolean) => void
 	title: string
-	ModalComponent: ReactNode
+	ModalComponent: ReactNode 
 }
 
 const SettingsCardSlot = (props: SettingsCardSlotProps) => {
