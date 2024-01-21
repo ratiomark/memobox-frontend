@@ -17,14 +17,13 @@ export const ContentPresenterWrapper = (props: ShelvesPresenterProps) => {
 		labelsList,
 		contentList
 	} = props
-	const { isLoading, isError } = useGetTrashQuery()
+	const { isLoading, isError, data } = useGetTrashQuery()
 
-
-	// const shelves = data?.shelves.map(shelf => <ShelfItemTrash key={shelf.id} shelf={shelf} />)
 
 	const content = (
 		<AnimateSkeletonLoader
 			isLoading={isLoading}
+			noDelay={Boolean(data)}
 			skeletonComponent={<Skeleton width={1000} height={35} />}
 			componentAfterLoading={
 				<ul className={cls.contentWrapper}>
@@ -35,9 +34,9 @@ export const ContentPresenterWrapper = (props: ShelvesPresenterProps) => {
 			classNameAbsoluteParts={cls.absolute}
 		/>
 	)
+
 	return (
-		<div className={cls.contentPresenter}
-		>
+		<div className={cls.contentPresenter}>
 			<HStack
 				className={clsx(cls.labelsWrapper)}
 				max
