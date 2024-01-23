@@ -19,16 +19,4 @@ export const ContentPresenterTrashPageWidget = () => {
 		default:
 			return <CardsPresenter />
 	}
-	// return (
-	// 	// <div className={clsx(
-	// 	// 	cls.contentPresenterTrashPageWidget,
-	// 	// 	className)}
-	// 	// >
-	// 	<>
-	// 		{activeEntityValue === 'shelves' && <ShelvesPresenter />}
-	// 		{activeEntityValue === 'boxes' && <BoxesPresenter />}
-	// 		{activeEntityValue === 'cards' && <CardsPresenter />}
-	// 	</>
-	// 	//</div> 
-	// )
 }
