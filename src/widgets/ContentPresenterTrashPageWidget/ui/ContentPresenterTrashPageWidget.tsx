@@ -1,6 +1,3 @@
-import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
-import cls from './ContentPresenterTrashPageWidget.module.scss';
 import { getTrashPageActiveEntity } from '@/features/TrashPageInitializer';
 import { useSelector } from 'react-redux';
 import { ShelvesPresenter } from './ShelvesPresenter/ShelvesPresenter';
