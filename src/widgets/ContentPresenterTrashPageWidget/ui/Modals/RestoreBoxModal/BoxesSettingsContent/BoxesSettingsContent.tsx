@@ -20,15 +20,7 @@ export const BoxesSettingsContent = (props: BoxesRenderedProps) => {
 	// 	// dispatch(shelfBoxesTemplateSettingsActions.setChanged(true))
 	// }
 
-	// const onCancelAddNewBox = () => {
-	// 	dispatch(shelfBoxesTemplateSettingsActions.setMode('initial'))
-	// }
 
-	// useEffect(() => {
-	// 	return () => {
-	// 		dispatch(shelfBoxesTemplateSettingsActions.setMode('initial'))
-	// 	}
-	// }, [dispatch])
 
 	const { t } = useTranslation()
 
