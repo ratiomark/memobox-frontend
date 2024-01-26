@@ -15,13 +15,6 @@ export const BoxesSettingsContent = (props: BoxesRenderedProps) => {
 	// const isTemplateChanged = useSelector(getBoxesTemplateModalChanged)
 	// const { leftSide, rightSide } = useSelector(getBoxesTemplateModalListEdges)
 
-	// const onAddNewBoxClick = () => {
-	// 	dispatch(shelfBoxesTemplateSettingsActions.setMode('choosingBoxPlace'))
-	// 	// dispatch(shelfBoxesTemplateSettingsActions.setChanged(true))
-	// }
-
-
-
 	const { t } = useTranslation()
 
 	const blockTitle = <Heading as='h3' className={cls.title} title={t('Нажмите + чтобы добавить ВОССТАНОВИТЬ коробку на указанную позицию')} />
