@@ -15,6 +15,7 @@ export const BoxesSettingsContent = (props: BoxesRenderedProps) => {
 	// const isTemplateChanged = useSelector(getBoxesTemplateModalChanged)
 	// const { leftSide, rightSide } = useSelector(getBoxesTemplateModalListEdges)
 
+
 	const { t } = useTranslation()
 
 	const blockTitle = <Heading as='h3' className={cls.title} title={t('Нажмите + чтобы добавить ВОССТАНОВИТЬ коробку на указанную позицию')} />
@@ -37,30 +38,3 @@ export const BoxesSettingsContent = (props: BoxesRenderedProps) => {
 		</VStack>
 	)
 }
-
-// <AnimatePresence mode = 'wait' >
-// 	{ mode === 'choosingBoxPlace' &&
-
-// 	<motion.h3
-// 		initial={{ opacity: 0 }}
-// 		animate={{ opacity: 1 }}
-// 		exit={{ opacity: 0 }}
-// 		className={cls.title}
-// 	>
-// 		{t('Нажмите + чтобы добавить коробку на указанную позицию')}
-// 	</motion.h3>
-// 			}
-// 		</AnimatePresence >
-// <AnimatePresence mode='wait'>
-// 	{mode !== 'choosingBoxPlace' &&
-
-// 		<motion.h3
-// 			initial={{ opacity: 0 }}
-// 			animate={{ opacity: 1 }}
-// 			exit={{ opacity: 0 }}
-// 			className={cls.title}
-// 		>
-// 			{t('Настройки создания новых полок')}
-// 		</motion.h3>
-// 	}
-// </AnimatePresence>
