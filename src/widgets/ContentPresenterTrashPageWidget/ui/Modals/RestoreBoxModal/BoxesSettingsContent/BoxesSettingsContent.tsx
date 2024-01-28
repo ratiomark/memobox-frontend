@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import cls from './BoxesSettingsContent.module.scss';
 import { useTranslation } from 'react-i18next';
 import { BoxesSettingsList } from '../BoxesSettingsList/BoxesSettingsList';
@@ -7,18 +6,9 @@ import { VStack } from '@/shared/ui/Stack';
 import { BoxesRenderedProps } from '../BoxesRendered';
 
 
-
 export const BoxesSettingsContent = (props: BoxesRenderedProps) => {
 
-	// const dispatch = useAppDispatch()
-	// const mode = useSelector(getBoxesTemplateModalMode)
-	// const isTemplateChanged = useSelector(getBoxesTemplateModalChanged)
-	// const { leftSide, rightSide } = useSelector(getBoxesTemplateModalListEdges)
-
-
 	const { t } = useTranslation()
-
-	const blockTitle = <Heading as='h3' className={cls.title} title={t('Нажмите + чтобы добавить ВОССТАНОВИТЬ коробку на указанную позицию')} />
 
 	return (
 		<VStack
@@ -27,14 +17,12 @@ export const BoxesSettingsContent = (props: BoxesRenderedProps) => {
 			gap='gap_12'
 			className={cls.mainWrapper}
 		>
-			{/* {rightSide && <div className={clsx(cls.gradientEdge, cls.gradientEdgeRight)} />} */}
-			{/* {leftSide && <div className={clsx(cls.gradientEdge, cls.gradientEdgeLeft)} />} */}
-			{blockTitle}
+			<Heading
+				className={cls.title}
+				as='h3'
+				title={t('Нажмите + чтобы добавить ВОССТАНОВИТЬ коробку на указанную позицию')}
+			/>
 			<BoxesSettingsList {...props} />
-			{/* {mode === 'choosingBoxPlace'
-				? <Button variant='cancel' onClick={onCancelAddNewBox}>{t('cancel no keys')}</Button>
-				: <Button variant='filled' onClick={onAddNewBoxClick}>{t('add box')}</Button>
-			} */}
 		</VStack>
 	)
 }
