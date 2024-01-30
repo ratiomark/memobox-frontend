@@ -66,6 +66,15 @@ export const boxApi = rtkApi.injectEndpoints({
 			}),
 			// invalidatesTags: ['Shelves']
 		}),
+		deleteBoxFromTrash: build.mutation<string, { boxId: string }>({
+			query: ({ boxId }) => ({
+				url: `shelves/final/${boxId}`,
+				method: 'DELETE',
+				body: {
+					boxId,
+				},
+			}),
+		}),
 		// updateBoxWithTag: build.mutation<CupboardSchema, { shelfId: string, box: Partial<BoxSchema> }>({
 		// 	query: (arg) => ({
 		// 		url: `/boxes/${arg.box.id}`,
@@ -83,6 +92,7 @@ export const getBoxesByShelfId = boxApi.endpoints.getBoxesByShelfId.initiate
 export const { useUpdateBoxWithTagMutation } = boxApi
 export const updateBoxWithTag = boxApi.endpoints.updateBoxWithTag.initiate
 export const rtkApiDeleteBoxFromShelf = boxApi.endpoints.deleteBoxFromShelf.initiate
+export const rtkApiDeleteBoxFromTrash = boxApi.endpoints.deleteBoxFromTrash.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const { useGetBoxByShelfAndBoxIdQuery } = boxApi
 // export const { useGetMovieByIdBeatFilmQuery } = beatFilmMoviesApi
