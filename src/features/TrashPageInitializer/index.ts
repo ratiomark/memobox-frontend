@@ -1,6 +1,6 @@
-export {
-	restoreShelfByIdThunk,
-} from './model/services/restoreShelfByIdThunk';
+export { restoreShelfByIdThunk } from './model/services/restoreShelfByIdThunk'
+
+export { removeShelfByIdThunk } from './model/services/removeShelfByIdThunk'
 
 export {
 	getTrashPageIsCardEditModalOpen,
@@ -9,23 +9,13 @@ export {
 	getTrashPageRestoreBoxModalShelfId,
 	getTrashPageRestoreBoxModalBoxId,
 	getTrashPageRestoreBoxModalBoxIndex,
-} from './model/selectors/getTrashPageModals';
+} from './model/selectors/getTrashPageModals'
 
-export {
-	getTrashPageIsMultiSelectActive,
-	getTrashPageSelectedCardIds
-} from './model/selectors/getTrashPageMultiSelect';
+export { getTrashPageIsMultiSelectActive, getTrashPageSelectedCardIds } from './model/selectors/getTrashPageMultiSelect'
 
-export {
-	getTrashPageActiveEntity,
-	getTrashPageIsMounted,
-	getTrashPageIsLoading,
-} from './model/selectors/getTrashPage';
+export { getTrashPageActiveEntity, getTrashPageIsMounted, getTrashPageIsLoading } from './model/selectors/getTrashPage'
 
-export type {
-	TrashPageInitializerSchema,
-	TrashPageEntityType
-} from './model/types/TrashPageInitializerSchema'
+export type { TrashPageInitializerSchema, TrashPageEntityType } from './model/types/TrashPageInitializerSchema'
 
-export { TrashPageInitializer } from './ui/TrashPageInitializer';
-export { trashPageActions } from './model/slice/trashPageSlice';
+export { TrashPageInitializer } from './ui/TrashPageInitializer'
+export { trashPageActions } from './model/slice/trashPageSlice'
