@@ -9,7 +9,8 @@ export { BoxesBlockSkeleton } from './ui/BoxesBlockSkeleton';
 
 export {
 	getBoxesByShelfId,
-	rtkApiDeleteBoxFromShelf
+	rtkApiDeleteBoxFromShelf,
+	rtkApiDeleteBoxFromTrash,
 } from './model/api/boxApi';
 export type { ShelfRepresentedByBoxes, } from './model/api/boxApi';
 export type {
