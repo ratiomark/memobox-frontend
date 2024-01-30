@@ -87,12 +87,22 @@ export const shelvesApi = rtkApi.injectEndpoints({
 			invalidatesTags: ['Shelves', 'TrashPage'],
 		}),
 
-		removeShelf: build.mutation<string, { shelfId: string, index: number }>({
+		removeShelf: build.mutation<string, { shelfId: string; index: number }>({
 			query: ({ shelfId, index }) => ({
 				url: `/shelves/${shelfId}`,
 				method: 'DELETE',
 				body: {
 					index,
+				},
+			}),
+			invalidatesTags: ['Shelves'],
+		}),
+		removeShelfFinal: build.mutation<string, { shelfId: string }>({
+			query: ({ shelfId }) => ({
+				url: `shelves/final/${shelfId}`,
+				method: 'DELETE',
+				body: {
+					shelfId,
 				},
 			}),
 			invalidatesTags: ['Shelves'],
@@ -104,6 +114,7 @@ export const updateShelfWithTag = shelvesApi.endpoints.updateShelfWithTag.initia
 export const rtkCreateNewShelf = shelvesApi.endpoints.createNewShelf.initiate
 export const rtkUpdateShelfListOrder = shelvesApi.endpoints.updateShelfListOrder.initiate
 export const rtkRestoreShelfById = shelvesApi.endpoints.restoreShelfById.initiate
+export const rtkRemoveShelfFinal = shelvesApi.endpoints.removeShelfFinal.initiate
 export const { useGetShelvesQuery } = shelvesApi
 export const { useUpdateShelfMutation } = shelvesApi
 export const { useUpdateShelfWithTagMutation } = shelvesApi

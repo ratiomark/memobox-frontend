@@ -10,6 +10,7 @@ export {
 	rtkCreateNewShelf,
 	rtkUpdateShelfListOrder,
 	rtkRestoreShelfById,
+	rtkRemoveShelfFinal,
 	useGetShelvesQuery,
 } from './model/api/shelvesApi'
 
