@@ -5,46 +5,25 @@ import { Heading } from '@/shared/ui/Typography';
 import { AnimatePresence, Box } from 'framer-motion';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
-import { getTiming } from '@/entities/Box';
+import { RegularAndLearntCardsBox, getTiming } from '@/entities/Box';
 
 import { useState, useCallback, MouseEvent, useEffect, useRef } from 'react';
 import { BoxSchema } from '@/entities/Box';
 
 interface BoxSettingsItemProps {
-	className?: string
 	boxItem: BoxSchema
-	onRemoveBox: (boxId: number) => void
-	onAddBoxClick: (index: number) => void
+	onRestoreClick: () => void
 	isLastBox: boolean
-}
-
-
-const animateIconsAndDataOnBox = {
-	initial: { opacity: 0 },
-	animate: { opacity: 1, transition: { duration: 0.4, delay: 0.25 } },
-	exit: { opacity: 0, transition: { duration: 0.4 } },
 }
 
 
 export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 	const {
-		className,
 		boxItem,
-		onRemoveBox,
-		onAddBoxClick,
+		onRestoreClick,
 		isLastBox = false,
 	} = props
 	const { t } = useTranslation()
-	const dispatch = useAppDispatch()
-
-	const isAddBoxModeActive = true
-
-
-	const onAddNewBoxClickHandle = (e: MouseEvent<HTMLDivElement>) => {
-		const addNewBoxToPosition = boxItem.index + 1
-		onAddBoxClick(addNewBoxToPosition)
-	}
-
 
 	const title = isLastBox
 		? (
@@ -58,25 +37,22 @@ export const BoxSettingsItem = (props: BoxSettingsItemProps) => {
 				title={`${t('box text')} ${boxItem.index}`}
 			/>)
 
-
-
-
 	return (
 		<AnimatePresence>
 
 			<div className={clsx(
 				cls.BoxSettingsItem,
 				cls.marginRight,
-				className)}
+			)}
 			>
 				{title}
 				<div style={{ height: 24 }}>
-					<p>{getTiming(boxItem.timing!)}</p>
+					<p>{getTiming((boxItem as RegularAndLearntCardsBox).timing)}</p>
 				</div>
 			</div>
 
 			<AnimatePresence mode='wait'>
-				{isAddBoxModeActive && !isLastBox && <AddBoxIcon onClick={onAddNewBoxClickHandle} />}
+				{!isLastBox && <AddBoxIcon onClick={onRestoreClick} />}
 			</AnimatePresence >
 		</AnimatePresence >
 	)
