@@ -46,14 +46,6 @@ export const restoreBoxThunk = createAsyncThunk<string, { shelfId: string, index
 			return boxId
 
 		} catch (err) {
-			// const error = err as Error;
-			// dispatch(viewPageActions.removeAbortedThunkId(id))
-			// dispatch(viewPageActions.setCardIsNotDeleted(cardId))
-			// if (error.message === 'Aborted') {
-			// 	return thunkAPI.rejectWithValue(id, { aborted: true });
-			// }
-			// dispatch(viewPageActions.setCardIsNotDeleting(cardId))
-			// return thunkAPI.rejectWithValue(cardId, { aborted: false });
 			return thunkAPI.rejectWithValue('Something went wrong');
 		}
 	}
