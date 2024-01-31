@@ -7,13 +7,14 @@ import { TAG_VIEW_PAGE, TAG_TRASH_PAGE, TAG_CUPBOARD_PAGE } from '@/shared/api/c
 import { rtkApi } from '@/shared/api/rtkApi'
 import { rtkRestoreShelfById } from '@/entities/Shelf'
 import { getAbortedThunkIds } from '../selectors/getTrashPage'
+import { rtkApiRestoreBoxFromTrash } from '@/entities/Box'
 
-export const restoreBoxThunk = createAsyncThunk<string, { shelfId: string, index: number, boxId: string, shelfTitle: string}, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const restoreBoxThunk = createAsyncThunk<string, { shelfId: string, index: number, boxId: string, shelfTitle: string }, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'trashPage/restoreBoxThunk',
 	async ({ shelfId, shelfTitle, boxId, index }, thunkAPI) => {
 		const { dispatch, getState } = thunkAPI
 		// const abortedThunkIds = getAbortedThunkIds(getState())
-		const id = 'restoreShelfById' + shelfId
+		const id = 'restoreShelfById' + boxId
 		try {
 			// if (abortedThunkIds.includes(id)) {
 			// dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
@@ -31,15 +32,18 @@ export const restoreBoxThunk = createAsyncThunk<string, { shelfId: string, index
 					contentCommon: t('toast:restore_box.additional') + ` => "${shelfTitle}"`,
 				}
 			}))
-			const response = await dispatch(rtkRestoreShelfById(shelfId)).unwrap()
+			const response = await dispatch(rtkApiRestoreBoxFromTrash({ shelfId, boxId, index })).unwrap()
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
-
-			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_CUPBOARD_PAGE]))
+			console.log('response after restore box', response)
+			console.log('response after restore box', response)
+			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
-			return shelfId
+
+			// do nothing
+			return boxId
 
 		} catch (err) {
 			// const error = err as Error;

@@ -36,8 +36,8 @@ export const restoreShelfByIdThunk = createAsyncThunk<string, { shelfId: string,
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
-
-			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_CUPBOARD_PAGE]))
+			// dispatch(rtkApi.util.invalidateTags([TAG_TRASH_PAGE]))
+			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			return shelfId
 

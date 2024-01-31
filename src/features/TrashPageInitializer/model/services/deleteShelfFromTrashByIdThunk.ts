@@ -3,17 +3,16 @@ import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { toastsActions } from '@/shared/ui/Toast'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { t } from 'i18next'
-import { TAG_VIEW_PAGE, TAG_TRASH_PAGE, TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { rtkRemoveShelfFinal, rtkRestoreShelfById } from '@/entities/Shelf'
-import { getAbortedThunkIds } from '../selectors/getTrashPage'
+import { TAG_TRASH_PAGE } from '@/shared/api/const/tags'
 
-export const deleteFinalShelfByIdThunk = createAsyncThunk<string, { shelfId: string; title: string }, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
-	'trashPage/deleteFinalShelfByIdThunk',
+export const deleteShelfFromTrashByIdThunk = createAsyncThunk<string, { shelfId: string; title: string }, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
+	'trashPage/deleteShelfFromTrashByIdThunk',
 	async ({ shelfId, title }, thunkAPI) => {
 		const { dispatch, getState } = thunkAPI
 		// const abortedThunkIds = getAbortedThunkIds(getState())
-		const id = 'deleteFinalShelfByIdThunk' + shelfId
+		const id = 'deleteShelfFromTrashByIdThunk' + shelfId
 		try {
 			// if (abortedThunkIds.includes(id)) {
 			// dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
@@ -39,8 +38,7 @@ export const deleteFinalShelfByIdThunk = createAsyncThunk<string, { shelfId: str
 				throw new Error('Request failed')
 			}
 			console.log('response after final deletion', response)
-
-			// dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_CUPBOARD_PAGE]))
+			dispatch(rtkApi.util.invalidateTags([TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			return shelfId
 		} catch (err) {
