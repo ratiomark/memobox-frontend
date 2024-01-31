@@ -20,7 +20,7 @@ export const BoxesSettingsContent = (props: BoxesRenderedProps) => {
 			<Heading
 				className={cls.title}
 				as='h3'
-				title={t('Нажмите + чтобы добавить ВОССТАНОВИТЬ коробку на указанную позицию')}
+				title={t('Нажмите + чтобы ВОССТАНОВИТЬ коробку на указанную позицию')}
 			/>
 			<BoxesSettingsList {...props} />
 		</VStack>
