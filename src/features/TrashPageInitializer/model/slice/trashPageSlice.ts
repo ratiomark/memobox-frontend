@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TrashPageEntityType, TrashPageInitializerSchema } from '../types/TrashPageInitializerSchema'
+import { RestoreBoxModal, TrashPageEntityType, TrashPageInitializerSchema } from '../types/TrashPageInitializerSchema'
 
 const initialState: TrashPageInitializerSchema = {
 	activeEntity: 'shelves',
@@ -9,10 +9,14 @@ const initialState: TrashPageInitializerSchema = {
 	isMultiSelectActive: false,
 	isCardEditModalOpen: false,
 	isMoveCardsModalOpen: false,
+	shelves: [],
+	boxes: [],
+	cards: [],
 	selectedCardIds: [],
 	abortedThunkIds: [],
 	restoreBoxModal: {
 		shelfId: '',
+		shelfTitle: '',
 		boxId: '',
 		boxIndex: 0,
 		isOpen: false
@@ -63,13 +67,20 @@ const trashPageSlice = createSlice({
 		setIsRestoreBoxModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.restoreBoxModal.isOpen = action.payload
 		},
-		setRestoreBoxModalData: (state, action: PayloadAction<{ boxId: string, boxIndex: number, shelfId: string }>) => {
-			const { boxId, boxIndex, shelfId } = action.payload
+		setRestoreBoxModalData: (state, action: PayloadAction<RestoreBoxModal>) => {
+			const { boxId, boxIndex, shelfId, shelfTitle } = action.payload
 			state.restoreBoxModal.boxId = boxId
 			state.restoreBoxModal.boxIndex = boxIndex
 			state.restoreBoxModal.shelfId = shelfId
+			state.restoreBoxModal.shelfTitle = shelfTitle
 		},
-		
+		setRestoreBoxModalShelfId: (state, action: PayloadAction<string>) => {
+			state.restoreBoxModal.shelfId = action.payload
+		}, 
+		setRestoreBoxModalShelfTitle: (state, action: PayloadAction<string>) => {
+			state.restoreBoxModal.shelfTitle = action.payload
+		}
+
 		// setActiveShelfId: (state, action: PayloadAction<string>) => {
 		// 	const shelfId = action.payload
 		// 	state.shelfId = shelfId
