@@ -1,41 +1,5 @@
-.wrapper {
-  // width: min(1200px, 100%);
-  width: 100%;
-  white-space: nowrap;
-  overflow-x: scroll;
-  perspective: 150px;
-
-  // -ms-overflow-style: none;
-  // scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-// .wrapper {
-//   width: min(1200px, 100%);
-//   white-space: nowrap;
-//   overflow-x: scroll;
-//   perspective: 150px;
-//   -ms-overflow-style: none;
-//   scrollbar-width: none;
-
-//   &::-webkit-scrollbar {
-//     display: none;
-//   }
-// }
-.justifyCenter {
-  justify-content: center;
-}
-
 .BoxesSettingsList {
   max-width: 1200px;
-
-  // width: auto;
-
-  // width: 100%;
-
   width: fit-content;
   display: flex;
   margin: 0 auto;
@@ -51,12 +15,3 @@
     display: none;
   }
 }
-
-// .BoxesSettingsList {
-//   display: flex;
-//   align-items: center;
-//   padding: 20px;
-//   margin: 0 auto;
-//   position: relative;
-//   width: 100%;
-// }
