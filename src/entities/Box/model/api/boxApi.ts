@@ -68,11 +68,8 @@ export const boxApi = rtkApi.injectEndpoints({
 		}),
 		deleteBoxFromTrash: build.mutation<string, { boxId: string }>({
 			query: ({ boxId }) => ({
-				url: `shelves/final/${boxId}`,
+				url: `boxes/final/${boxId}`,
 				method: 'DELETE',
-				body: {
-					boxId,
-				},
 			}),
 		}),
 		// updateBoxWithTag: build.mutation<CupboardSchema, { shelfId: string, box: Partial<BoxSchema> }>({
