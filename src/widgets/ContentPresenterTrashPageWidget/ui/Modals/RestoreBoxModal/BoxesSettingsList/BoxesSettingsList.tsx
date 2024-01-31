@@ -18,9 +18,9 @@ import { useRef } from 'react';
 
 export const BoxesSettingsList = (props: BoxesRenderedProps) => {
 	const dispatch = useAppDispatch()
-	const shelfId = useSelector(getTrashPageRestoreBoxModalShelfId)!
-	const shelfTitle = useSelector(getTrashPageRestoreBoxModalShelfTitle)!
-	const boxId = useSelector(getTrashPageRestoreBoxModalBoxId)!
+	const shelfId = useSelector(getTrashPageRestoreBoxModalShelfId)
+	const shelfTitle = useSelector(getTrashPageRestoreBoxModalShelfTitle)
+	const boxId = useSelector(getTrashPageRestoreBoxModalBoxId)
 
 	const boxesRendered = props.boxes.slice(1,).map((boxItem, index) => {
 		return (
