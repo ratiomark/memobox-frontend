@@ -1,6 +1,8 @@
 export { restoreShelfByIdThunk } from './model/services/restoreShelfByIdThunk'
+export { restoreBoxThunk } from './model/services/restoreBoxThunk'
 
-export { removeShelfByIdThunk } from './model/services/removeShelfByIdThunk'
+export { deleteShelfFromTrashByIdThunk as deleteFinalShelfByIdThunk  } from './model/services/deleteShelfFromTrashByIdThunk'
+export { deleteBoxFromTrashByIdThunk } from './model/services/deleteBoxFromTrashByIdThunk'
 
 export {
 	getTrashPageIsCardEditModalOpen,
@@ -9,6 +11,7 @@ export {
 	getTrashPageRestoreBoxModalShelfId,
 	getTrashPageRestoreBoxModalBoxId,
 	getTrashPageRestoreBoxModalBoxIndex,
+	getTrashPageRestoreBoxModalShelfTitle,
 } from './model/selectors/getTrashPageModals'
 
 export { getTrashPageIsMultiSelectActive, getTrashPageSelectedCardIds } from './model/selectors/getTrashPageMultiSelect'
