@@ -9,6 +9,7 @@ export { BoxesBlockSkeleton } from './ui/BoxesBlockSkeleton';
 
 export {
 	getBoxesByShelfId,
+	rtkApiRestoreBoxFromTrash,
 	rtkApiDeleteBoxFromShelf,
 	rtkApiDeleteBoxFromTrash,
 } from './model/api/boxApi';

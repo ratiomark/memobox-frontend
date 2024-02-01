@@ -72,6 +72,16 @@ export const boxApi = rtkApi.injectEndpoints({
 				method: 'DELETE',
 			}),
 		}),
+		restoreBoxFromTrash: build.mutation<string, { boxId: string, shelfId: string, index: number }>({
+			query: ({ boxId, shelfId, index }) => ({
+				url: `boxes/restore/${boxId}`,
+				method: 'PATCH',
+				body: {
+					shelfId,
+					index,
+				}
+			}),
+		}),
 		// updateBoxWithTag: build.mutation<CupboardSchema, { shelfId: string, box: Partial<BoxSchema> }>({
 		// 	query: (arg) => ({
 		// 		url: `/boxes/${arg.box.id}`,
@@ -88,6 +98,7 @@ export const boxApi = rtkApi.injectEndpoints({
 export const getBoxesByShelfId = boxApi.endpoints.getBoxesByShelfId.initiate
 export const { useUpdateBoxWithTagMutation } = boxApi
 export const updateBoxWithTag = boxApi.endpoints.updateBoxWithTag.initiate
+export const rtkApiRestoreBoxFromTrash = boxApi.endpoints.restoreBoxFromTrash.initiate
 export const rtkApiDeleteBoxFromShelf = boxApi.endpoints.deleteBoxFromShelf.initiate
 export const rtkApiDeleteBoxFromTrash = boxApi.endpoints.deleteBoxFromTrash.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
