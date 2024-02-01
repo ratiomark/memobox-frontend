@@ -14,6 +14,8 @@
 // }
 // type Sort
 
+import { BoxSchemaDeleted, CardSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash'
+
 export type TrashPageEntityType = 'shelves' | 'boxes' | 'cards'
 
 export interface TrashPageInitializerSchema {
@@ -28,10 +30,16 @@ export interface TrashPageInitializerSchema {
 	isMoveCardsModalOpen: boolean
 	selectedCardIds: string[]
 	abortedThunkIds: string[]
-	restoreBoxModal: {
-		shelfId: string
-		boxId: string
-		boxIndex: number
-		isOpen: boolean
-	},
+	shelves: ShelfSchemaDeleted[]
+	boxes: BoxSchemaDeleted[]
+	cards: CardSchemaDeleted[]
+	restoreBoxModal: RestoreBoxModal
+}
+
+export interface RestoreBoxModal {
+	shelfId: string
+	boxId: string
+	boxIndex: number
+	isOpen: boolean
+	shelfTitle: string
 }

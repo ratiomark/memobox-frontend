@@ -67,7 +67,7 @@ const trashPageSlice = createSlice({
 		setIsRestoreBoxModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.restoreBoxModal.isOpen = action.payload
 		},
-		setRestoreBoxModalData: (state, action: PayloadAction<RestoreBoxModal>) => {
+		setRestoreBoxModalData: (state, action: PayloadAction<Omit<RestoreBoxModal, 'isOpen'>>) => {
 			const { boxId, boxIndex, shelfId, shelfTitle } = action.payload
 			state.restoreBoxModal.boxId = boxId
 			state.restoreBoxModal.boxIndex = boxIndex
@@ -76,7 +76,7 @@ const trashPageSlice = createSlice({
 		},
 		setRestoreBoxModalShelfId: (state, action: PayloadAction<string>) => {
 			state.restoreBoxModal.shelfId = action.payload
-		}, 
+		},
 		setRestoreBoxModalShelfTitle: (state, action: PayloadAction<string>) => {
 			state.restoreBoxModal.shelfTitle = action.payload
 		}
