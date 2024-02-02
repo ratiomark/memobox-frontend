@@ -1,31 +1,16 @@
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './RestoreBoxModal.module.scss';
 import {
-	getViewPageBoxItemsMoveCardsModal,
-	getViewPageMoveCardsModalIsOpen,
-	// getViewPageMoveCardsModalBoxIdChecked,
-	getViewPageMoveCardsModalBoxId,
-	getViewPageSelectedCardIds,
-	getViewPageShelfId,
-	getViewPageShelfItems,
-	getViewPageShelfItemsModal,
-	getViewPageShelvesDataDictionary,
 	viewPageActions,
-	getViewPageMoveCardsModalShelfId,
 } from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { memo, useEffect, useState } from 'react';
-import { Dropdown, ListBox } from '@/shared/ui/Popup';
-import { ListBoxItem } from '@/shared/ui/Popup/ui/ListBox/ListBox';
-import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { memo, useState } from 'react';
+import { ListBox } from '@/shared/ui/Popup';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
-import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
-import { getTrashPageIsRestoreBoxModalOpen, getTrashPageRestoreBoxModalShelfId, getTrashPageRestoreBoxModalBoxId, getTrashPageRestoreBoxModalBoxIndex, trashPageActions } from '@/features/TrashPageInitializer';
+import { getTrashPageIsRestoreBoxModalOpen, trashPageActions } from '@/features/TrashPageInitializer';
 import { useGetTrashQuery } from '@/entities/Trash';
 import { BoxesRendered } from './BoxesRendered';
-import { max } from 'lodash';
 import { MyText } from '@/shared/ui/Typography';
 
 
@@ -38,9 +23,9 @@ export const RestoreBoxModal = memo(() => {
 	const [activeShelfId, setActiveShelfId] = useState(shelvesAndBoxesData[0].id ?? '')
 
 	const isOpen = useSelector(getTrashPageIsRestoreBoxModalOpen) ?? false
-	const shelfId = useSelector(getTrashPageRestoreBoxModalShelfId)
-	const boxId = useSelector(getTrashPageRestoreBoxModalBoxId)
-	const boxIndex = useSelector(getTrashPageRestoreBoxModalBoxIndex)
+	// const shelfId = useSelector(getTrashPageRestoreBoxModalShelfId)
+	// const boxId = useSelector(getTrashPageRestoreBoxModalBoxId)
+	// const boxIndex = useSelector(getTrashPageRestoreBoxModalBoxIndex)
 
 
 
@@ -51,6 +36,8 @@ export const RestoreBoxModal = memo(() => {
 
 	const onChangeShelfId = (shelfId: string) => {
 		setActiveShelfId(shelfId)
+		dispatch(trashPageActions.setRestoreBoxModalShelfId(shelfId))
+		dispatch(trashPageActions.setRestoreBoxModalShelfTitle(shelvesItems.find(shelf => shelf.value === shelfId)?.content ?? '???'))
 	}
 
 	const onChangeBoxId = (boxId: string) => {
@@ -76,20 +63,8 @@ export const RestoreBoxModal = memo(() => {
 				sameWidth
 			/>
 		</div>)
+
 	const boxes = <BoxesRendered boxes={shelvesAndBoxesData.find(shelf => shelf.id === activeShelfId)!.box} />
-	// const boxes = (
-	// 	<div className={cls.listBoxWrapper}>
-	// 		<ListBox
-	// 			// label={t('box text')}
-	// 			value={boxId}
-	// 			// value={currentBoxId}
-	// 			items={boxItems}
-	// 			// onChange={setCurrentBoxId}
-	// 			onChange={onChangeBoxId}
-	// 			max
-	// 			sameWidth
-	// 		/>
-	// 	</div>)
 
 	return (
 		<HDialogHeadless
@@ -102,18 +77,7 @@ export const RestoreBoxModal = memo(() => {
 			{/* <div style={{ margin: 'auto', width: '90%' }}> */}
 			<MyText className={cls.modalTitle} text={t('Выберите полку на которую нужно восстановить коробку')} align='center' />
 			{shelves}
-			{/* </div> */}
 			{boxes}
-			{/* <BoxesRendered boxes={shelvesAndBoxesData[0].box} /> */}
-			{/* <div className={cls.mainWrapper} >
-				{shelves}
-				{boxes}
-			</div>
-			<ModalButtons
-				onClose={onCloseMoveCards}
-				onSubmit={onMoveCards}
-				textSubmitButton='move cards'
-			/> */}
 		</HDialogHeadless>
 	)
 })
