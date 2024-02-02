@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import cls from './AddBoxIcon.module.scss';
-import { MouseEvent } from 'react';
 import { Icon } from '@/shared/ui/Icon';
 import AddIcon from '@/shared/assets/icons/addIcon.svg'
+
 interface AddBoxIconProps {
-	onClick?: (e: MouseEvent<HTMLDivElement>) => void
+	onClick: () => void
 }
 
 export const AddBoxIcon = (props: AddBoxIconProps) => {
@@ -23,7 +23,6 @@ export const AddBoxIcon = (props: AddBoxIconProps) => {
 				transition: {
 					opacity: {
 						delay: 0.3
-						// delay: 0.42
 					},
 					duration: 0.4
 				}
@@ -49,8 +48,6 @@ export const AddBoxIcon = (props: AddBoxIconProps) => {
 			<Icon
 				Svg={AddIcon}
 			/>
-			{/* <motion.div className={cls.lineX} /> */}
-			{/* <motion.div className={cls.lineY} /> */}
 		</motion.div>
 	)
 }
