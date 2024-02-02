@@ -4,13 +4,12 @@ import { BoxSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { formatDate } from '@/shared/lib/helpers/common/formaters';
 import { useTranslation } from 'react-i18next';
-import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
 import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
-import { rtkRestoreShelfById } from '@/entities/Shelf';
 import { restoreShelfByIdThunk } from '@/features/TrashPageInitializer';
+import { deleteFinalShelfByIdThunk } from '@/features/TrashPageInitializer';
 
 interface ShelfItemProps {
 	shelf: ShelfSchemaDeleted
@@ -25,6 +24,11 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 
 	const onRestoreClick = async () => {
 		const response = await dispatch(restoreShelfByIdThunk({ shelfId: shelf.id, title: shelf.title }))
+		console.log(response)
+	}
+
+	const onDeleteClick = async () => {
+		const response = await dispatch(deleteFinalShelfByIdThunk({ shelfId: shelf.id, title: shelf.title }))
 		console.log(response)
 	}
 
@@ -81,15 +85,9 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 					isCollapsed={isCollapsed}
 					onToggleCollapse={onCollapse}
 					onRestore={onRestoreClick}
-				// onRemoveClick={() => { }}
+					onRemove={onDeleteClick}
 				/>
 			</div>
-			{/* <Collapsible
-				isOpen={!isCollapsed}
-			>
-
-				{boxes}
-			</Collapsible> */}
 			{!isCollapsed && boxes}
 		</li>
 	)
