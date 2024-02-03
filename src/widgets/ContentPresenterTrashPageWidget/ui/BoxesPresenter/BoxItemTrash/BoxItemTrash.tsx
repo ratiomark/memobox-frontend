@@ -1,22 +1,18 @@
 import clsx from 'clsx'
 import cls from './BoxItemTrash.module.scss'
 import { CardSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash';
-import { Card } from '@/shared/ui/Card';
 import { Heading, MyText } from '@/shared/ui/Typography';
 import { HStack } from '@/shared/ui/Stack';
 import { getTiming } from '@/entities/Box';
 import { formatDate, } from '@/shared/lib/helpers/common/formaters';
-import { Icon } from '@/shared/ui/Icon';
-import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
-import { Button } from '@/shared/ui/Button';
-import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
-import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { useMemo, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxSchemaDeleted } from '@/entities/Trash';
 import { ButtonsBlockTrashEntity, ButtonsBlockTrashEntityProps } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
 import { CardItemTrash } from '../../CardsPresenter/CardItemTrash/CardItemTrash';
+import { deleteBoxFromTrashByIdThunk } from '@/features/TrashPageInitializer';
+
 interface BoxItemTrashProps {
 	className?: string;
 	box: BoxSchemaDeleted
@@ -39,6 +35,11 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 	const dispatch = useAppDispatch()
 
 	const [isCollapsed, setIsCollapsed] = useState(buttonsBlockProps?.isCollapsed ?? true)
+
+	const onDeleteClick = async () => {
+		const response = await dispatch(deleteBoxFromTrashByIdThunk({ boxId: box.id, index: box.index }))
+		console.log(response)
+	}
 
 	const onCollapse = () => setIsCollapsed(prev => !prev)
 	const boxTitle = useMemo(() => {
@@ -91,8 +92,7 @@ export const BoxItemTrash = (props: BoxItemTrashProps) => {
 					{...buttonsBlockProps}
 					isCollapsed={isCollapsed}
 					onToggleCollapse={onCollapse}
-				// onRestoreClick={() => { }}
-				// onRemoveClick={() => { }}
+					onRemove={buttonsBlockProps?.onRemove ?? onDeleteClick}
 				/>
 			</HStack>
 			{!isCollapsed && cardsBlock}

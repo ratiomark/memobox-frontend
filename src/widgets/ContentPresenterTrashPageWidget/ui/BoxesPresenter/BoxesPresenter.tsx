@@ -29,6 +29,7 @@ export const BoxesPresenter = () => {
 					shelfId: box.shelf.id,
 					boxId: box.id,
 					boxIndex: box.index,
+					shelfTitle: box.shelf.title,
 				}))
 				dispatch(trashPageActions.setIsRestoreBoxModalOpen(true))
 			},
@@ -49,5 +50,3 @@ export const BoxesPresenter = () => {
 		</>
 	)
 }
-// Мне нужно упорядочить коробки.Допустим у меня есть удаленные коробки из трех полок: a, b, c.
-// Нужно вернуть массив коробок, так чтобы вначале шли все коробки полки а(или b\c), далее коробки следующей полки, далее следующей. 
