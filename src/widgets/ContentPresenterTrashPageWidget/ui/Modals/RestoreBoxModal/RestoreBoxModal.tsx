@@ -1,8 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import cls from './RestoreBoxModal.module.scss';
-import {
-	viewPageActions,
-} from '@/features/ViewPageInitializer';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { memo, useState } from 'react';
@@ -40,7 +37,6 @@ export const RestoreBoxModal = memo(() => {
 		dispatch(trashPageActions.setRestoreBoxModalShelfTitle(shelvesItems.find(shelf => shelf.value === shelfId)?.content ?? '???'))
 	}
 
-
 	const shelves = (
 		<div className={cls.listBoxWrapper}>
 			{/* <MyText text={t('Выберите полку на которую нужно восстановить коробку')} align='center' /> */}
@@ -61,6 +57,7 @@ export const RestoreBoxModal = memo(() => {
 	return (
 		<HDialogHeadless
 			isOpen={isOpen}
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			onSubmit={() => { }}
 			onClose={() => dispatch(trashPageActions.setIsRestoreBoxModalOpen(false))}
 			max
