@@ -50,7 +50,7 @@ export const ButtonsBlockTrashEntity: React.FC<ButtonsBlockTrashEntityProps> = (
 					withFill={false}
 					width={22}
 					height={22}
-					onClick={showRemoveButton ? () => { } : onRemove}
+					onClick={showRemoveButton ? onRemove : () => { }}
 					buttonSameSize={false}
 					className={clsx(cls.icon, showRemoveButton ? cls.removeIcon : '')}
 					style={{ visibility: showRemoveButton ? 'visible' : 'hidden' }}
