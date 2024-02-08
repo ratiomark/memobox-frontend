@@ -48,3 +48,5 @@ export const getShelfDeletionRequestStatus = (id: string | EntityId) => {
 	)
 }
 
+export const getIsAnyBoxAwaitingDeletionResponse = (state: StateSchema) => state.cupboard.boxDeletionProcess.isAnyBoxInDeletionProcess ?? false
+
