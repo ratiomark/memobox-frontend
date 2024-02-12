@@ -9,5 +9,13 @@
   "restore": "Restore",
   "box text": "Box",
   "new cards": "New cards",
-  "learnt cards": "Learnt cards"
+  "learnt cards": "Learnt cards",
+  "restore all new cards title": "Restore All New Cards",
+  "restore all new cards description": "You can restore all new cards associated with this box. The box itself cannot be restored as it is special and always present on the shelf.",
+  "restore all learnt cards title": "Restore All Learnt Cards",
+  "restore all learnt cards description": "You can restore all learnt cards associated with this box. The box itself cannot be restored as it is special and always present on the shelf.",
+  "remove all new cards title": "Remove All New Cards",
+  "remove all new cards description": "You can remove all new cards associated with this box. The box itself cannot be removed as it is special and always present on the shelf.",
+  "remove all learnt cards title": "Remove All Learnt Cards",
+  "remove all learnt cards description": "You can remove all learnt cards associated with this box. The box itself cannot be removed as it is special and always present on the shelf."
 }
