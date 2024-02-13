@@ -12,6 +12,7 @@ export {
 	rtkApiRestoreBoxFromTrash,
 	rtkApiDeleteBoxFromShelf,
 	rtkApiDeleteBoxFromTrash,
+	rtkApiMoveAllCardsFromBoxToBox,
 } from './model/api/boxApi';
 export type { ShelfRepresentedByBoxes, } from './model/api/boxApi';
 export type {
