@@ -82,6 +82,17 @@ export const boxApi = rtkApi.injectEndpoints({
 				}
 			}),
 		}),
+		moveAllCardsFromBoxToBox: build.mutation<string, { fromBoxId: string, toBoxId: string, toShelfId: string }>({
+			query: ({ fromBoxId, toBoxId, toShelfId }) => ({
+				url: 'boxes/move-all-cards-and-restore',
+				method: 'PATCH',
+				body: {
+					fromBoxId,
+					toBoxId,
+					toShelfId,
+				}
+			}),
+		}),
 		// updateBoxWithTag: build.mutation<CupboardSchema, { shelfId: string, box: Partial<BoxSchema> }>({
 		// 	query: (arg) => ({
 		// 		url: `/boxes/${arg.box.id}`,
@@ -101,6 +112,7 @@ export const updateBoxWithTag = boxApi.endpoints.updateBoxWithTag.initiate
 export const rtkApiRestoreBoxFromTrash = boxApi.endpoints.restoreBoxFromTrash.initiate
 export const rtkApiDeleteBoxFromShelf = boxApi.endpoints.deleteBoxFromShelf.initiate
 export const rtkApiDeleteBoxFromTrash = boxApi.endpoints.deleteBoxFromTrash.initiate
+export const rtkApiMoveAllCardsFromBoxToBox = boxApi.endpoints.moveAllCardsFromBoxToBox.initiate
 // export const { useGetBoxesByShelfIdQuery } = boxApi
 // export const { useGetBoxByShelfAndBoxIdQuery } = boxApi
 // export const { useGetMovieByIdBeatFilmQuery } = beatFilmMoviesApi
