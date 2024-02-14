@@ -83,6 +83,7 @@
   background-color: var(--bg);
   box-shadow: var(--entities-box-shadow-main);
   border-radius: var(--border-radius-main);
+  gap: var(--card-list-item-padding-left-and-right);
 }
 
 .content {
@@ -120,10 +121,15 @@
   background-color: var(--cancel-rgb-2);
 }
 
+.restoreIcon {
+  background-color: var(--accent-rgb-2);
+}
+
 .eyeIcon {
   background-color: var(--accent-rgb-2);
 }
 
+.restoreIcon,
 .eyeIcon,
 .removeIcon {
   border-radius: var(--border-radius-main);

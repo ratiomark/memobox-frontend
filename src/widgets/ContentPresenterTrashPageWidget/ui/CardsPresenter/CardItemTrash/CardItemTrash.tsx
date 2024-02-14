@@ -10,6 +10,7 @@ import { useMemo } from 'react';
 import { CheckBox } from '@/shared/ui/CheckBox';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
+import RestoreIcon from '@/shared/assets/icons/restoreIcon.svg'
 interface CardItemTrashProps {
 	className?: string;
 	card: CardSchemaDeleted
@@ -79,16 +80,28 @@ export const CardItemTrash = (props: CardItemTrashProps) => {
 					)
 					// ? <div className={cls.icon} />
 					: (
-						<Icon
-							Svg={TrashIcon}
-							type='cancel'
-							clickable
-							withFill={false}
-							width={22}
-							height={22}
-							onClick={onDeleteCard}
-							buttonSameSize={false}
-							className={clsx(cls.icon, cls.removeIcon)} />
+						<>
+							<Icon
+								Svg={RestoreIcon}
+								type='main'
+								clickable
+								withFill={false}
+								width={22}
+								height={22}
+								onClick={() => { }}
+								buttonSameSize={false}
+								className={clsx(cls.icon, cls.restoreIcon)} />
+							<Icon
+								Svg={TrashIcon}
+								type='cancel'
+								clickable
+								withFill={false}
+								width={22}
+								height={22}
+								onClick={onDeleteCard}
+								buttonSameSize={false}
+								className={clsx(cls.icon, cls.removeIcon)} />
+						</>
 					)}
 			</div>
 		</motion.li>
