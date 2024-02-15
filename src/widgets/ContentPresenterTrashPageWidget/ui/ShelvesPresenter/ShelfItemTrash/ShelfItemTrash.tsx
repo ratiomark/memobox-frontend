@@ -8,8 +8,10 @@ import { useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
 import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
-import { restoreShelfByIdThunk } from '@/features/TrashPageInitializer';
+import { restoreShelfByIdThunk, trashPageActions } from '@/features/TrashPageInitializer';
 import { deleteFinalShelfByIdThunk } from '@/features/TrashPageInitializer';
+import { BoxItemTrashLearnt } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrashLearnt';
+import { BoxItemTrashNew } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrashNew';
 
 interface ShelfItemProps {
 	shelf: ShelfSchemaDeleted
@@ -37,24 +39,62 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 	const onCollapse = () => setIsCollapsed(prev => !prev)
 
 	const boxes = (
-		<ul className={cls.boxListWrapper} >
-			{shelf.box.map(box => (
-				<BoxItemTrash
-					key={box.id}
-					box={box as BoxSchemaDeleted}
-					cardsCount={box._count.card}
-					cards={box.card}
-					buttonsBlockProps={{
-						isCollapsed: true,
-						showRemoveButton: false,
-						showRestoreButton: false,
-						showCollapseArrow: box._count.card > 0,
-					}}
-				/>)
-			)
+		<ul className={cls.boxListWrapper}>
+			{shelf.box.map(box => {
+				const propsObject = {
+					box: box,
+					cards: box.card,
+					cardsCount: box._count.card,
+				}
+				const buttonsBlockProps = {
+					isCollapsed: true,
+					showCollapseArrow: box._count.card > 0,
+					showRemoveButton: false,
+					showRestoreButton: false,
+				}
+				switch (box.specialType) {
+					case 'none':
+						return <BoxItemTrash
+							key={box.id}
+							{...propsObject}
+							buttonsBlockProps={{ ...buttonsBlockProps }}
+						/>
+					case 'new':
+						return <BoxItemTrashNew
+							key={box.id}
+							{...propsObject}
+							buttonsBlockProps={{ ...buttonsBlockProps }}
+						/>
+					case 'learnt':
+						return <BoxItemTrashLearnt
+							key={box.id}
+							{...propsObject}
+							buttonsBlockProps={{ ...buttonsBlockProps }}
+						/>
+				}
 			}
+			)}
 		</ul>
 	)
+	// const boxes = (
+	// 	<ul className={cls.boxListWrapper} >
+	// 		{shelf.box.map(box => (
+	// 			<BoxItemTrash
+	// 				key={box.id}
+	// 				box={box as BoxSchemaDeleted}
+	// 				cardsCount={box._count.card}
+	// 				cards={box.card}
+	// 				buttonsBlockProps={{
+	// 					isCollapsed: true,
+	// 					showRemoveButton: false,
+	// 					showRestoreButton: false,
+	// 					showCollapseArrow: box._count.card > 0,
+	// 				}}
+	// 			/>)
+	// 		)
+	// 		}
+	// 	</ul>
+	// )
 
 	return (
 		<li>
