@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { cupboardShelfListActions } from '../../..';
+import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfListSlice';
 import {
 	getBoxSettingsDropdownModalIsOpen,
 	getBoxSettingsDropdownCoordinates,
@@ -29,7 +29,7 @@ export const BoxSettingsDropdownModal = () => {
 	const dropdownHiddenSizes = useRef({ height: 0, width: 0 })
 	const [coordinatesChecked, setCoordinatesChecked] = useState({ x: 0, y: 0 })
 	const [checked, setChecked] = useState(false)
-
+	// const isAnyBoxInAwaitingDeletionResponse = useSelector(getIsAnyBoxAwaitingDeletionResponse)
 	// VAR: Тут нужно рефакторить в кастомные хуки
 	useEffect(() => {
 		setTimeout(() => {
@@ -112,6 +112,7 @@ export const BoxSettingsDropdownModal = () => {
 			{
 				content: (
 					<MyText
+
 						style={{ fontSize: dropDownLocalTextSize }}
 						variant='error'
 						text={t(removeBoxDropdownLocalKey)}
