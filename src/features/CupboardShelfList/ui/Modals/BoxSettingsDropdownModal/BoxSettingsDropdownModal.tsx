@@ -29,7 +29,7 @@ export const BoxSettingsDropdownModal = () => {
 	const dropdownHiddenSizes = useRef({ height: 0, width: 0 })
 	const [coordinatesChecked, setCoordinatesChecked] = useState({ x: 0, y: 0 })
 	const [checked, setChecked] = useState(false)
-	// const isAnyBoxInAwaitingDeletionResponse = useSelector(getIsAnyBoxAwaitingDeletionResponse)
+
 	// VAR: Тут нужно рефакторить в кастомные хуки
 	useEffect(() => {
 		setTimeout(() => {
