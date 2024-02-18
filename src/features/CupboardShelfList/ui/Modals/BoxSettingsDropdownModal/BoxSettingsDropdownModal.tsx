@@ -45,7 +45,6 @@ export const BoxSettingsDropdownModal = () => {
 			cupboardShelfListRects.current.x = cupboardShelfListSizes.x
 			cupboardShelfListRects.current.y = cupboardShelfListSizes.y
 			cupboardShelfListRects.current.width = cupboardShelfListSizes.width
-			// checked.current = true
 		}, 200)
 	}, [])
 
@@ -122,8 +121,6 @@ export const BoxSettingsDropdownModal = () => {
 			},
 		)
 	}
-
-
 
 	const dropDownLocal = <DropdownLocalList items={dropDownItems} />;
 	return (
