@@ -1,10 +1,16 @@
-import { getUserAuthData } from '@/entities/User';
-import { LoginScreen } from '@/features/AuthByUsername';
+import { LoginScreen, loginReducer } from '@/features/AuthByUsername';
+import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { Page } from '@/widgets/Page';
-import { useSelector } from 'react-redux';
+
+const initialReducers: ReducersList = {
+	loginForm: loginReducer,
+}
 
 export const LoginPage = () => {
-	// const auth = useSelector(getUserAuthData)
+	useAsyncReducer({
+		reducers: initialReducers,
+		removeAfterUnmount: false,
+	})
 
 	return (
 		<Page data-testid='MainPage'>
