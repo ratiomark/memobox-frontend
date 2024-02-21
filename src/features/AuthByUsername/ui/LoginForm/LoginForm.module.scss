@@ -19,10 +19,35 @@
 
 .label {
   margin-top: 10px;
-  color: var(--primary-color);
 }
 
 .loginBtn {
-  margin-top: 15px;
-  margin-left: auto;
+  // margin-top: 15px;
+  // margin-left: auto;
+  margin: 15px auto;
+}
+
+.textBeforeLinkButton,
+.linkButton {
+  font-size: 14px;
+  margin-right: 4px;
+}
+
+.forgetLink,
+.linkButton {
+  color: var(--accent);
+  cursor: pointer;
+
+  // text-decoration: none;
+}
+
+.forgetLink {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.linkButton:hover {
+  text-decoration: underline;
+
+  // display: contents;
 }
