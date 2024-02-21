@@ -5,7 +5,10 @@ import { LoginSchema } from '../types/loginSchema';
 const initialState: LoginSchema = {
 	isLoading: false,
 	email: 'john.doe@example.com',
-	password: 'secret'
+	password: 'secret',
+	name: 'John Doe',
+	isLoginProcess: false,
+	isForgotModalOpen: false,
 }
 
 
@@ -18,6 +21,15 @@ export const loginSlice = createSlice({
 		},
 		setPassword: (state, action: PayloadAction<string>) => {
 			state.password = action.payload
+		},
+		setUserName: (state, action: PayloadAction<string>) => {
+			state.name = action.payload
+		},
+		setIsLoginProcess: (state, action: PayloadAction<boolean>) => {
+			state.isLoginProcess = action.payload
+		},
+		setIsForgotPasswordModal: (state, action: PayloadAction<boolean>) => {
+			state.isForgotModalOpen = action.payload
 		}
 	},
 	// extraReducers: (builder) => {
