@@ -5,15 +5,14 @@ import {
 	getLoginError,
 	getLoginIsLoading,
 	getLoginPassword,
-	getLoginUsername,
+	getLoginEmail,
 } from '../../Model/selectors/getLoginState/getLoginState'
 import { loginActions, loginReducer } from '../../Model/slice/loginSlice'
 import cls from './LoginForm.module.scss'
-// import { loginUserByUserName } from '../../Model/services/loginByUserName/loginUserByUserName'
 import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 
-import { loginUserByUserName } from '@/entities/User'
+import { loginUserByEmailThunk } from '@/entities/User'
 import {
 	ReducersList,
 	useAsyncReducer,
@@ -21,7 +20,10 @@ import {
 import { MyText } from '@/shared/ui/Typography'
 import clsx from 'clsx'
 import { HStack } from '@/shared/ui/Stack'
-import { GetMeButton } from './GetMeButton'
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
+import EyeIcon from '@/shared/assets/icons/eye2.svg'
+import { Icon } from '@/shared/ui/Icon'
+import { ForgotPasswordModal } from '../ForgotPasswordModal/ForgotPasswordModal'
 
 export interface LoginFormProps {
 	className?: string
@@ -30,18 +32,20 @@ export interface LoginFormProps {
 }
 
 // Отдельно выносим редьюсеры от комопнента, чтобы лишний раз не создавать объект с редьюсерами, если так не сделать, то каждый раз при монтировании компонента LoginForm будет создаваться новый объект с редьюсерами и передаваться в хук, лучше сделать такой объект один раз
-const initialReducers: ReducersList = {
-	loginForm: loginReducer,
-}
+// const initialReducers: ReducersList = {
+// 	loginForm: loginReducer,
+// }
 
 // eslint-disable-next-line
 const LoginForm = memo(() => {
 	// const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 	const { t } = useTranslation()
-	const { dispatch, store } = useAsyncReducer({
-		reducers: initialReducers,
-	})
-	const email = useSelector(getLoginUsername)
+	const dispatch = useAppDispatch()
+	// const { dispatch, store } = useAsyncReducer({
+	// 	reducers: initialReducers,
+	// 	removeAfterUnmount: false,
+	// })
+	const email = useSelector(getLoginEmail)
 	const password = useSelector(getLoginPassword)
 	const isLoading = useSelector(getLoginIsLoading)
 	const error = useSelector(getLoginError)
@@ -54,59 +58,104 @@ const LoginForm = memo(() => {
 		dispatch(loginActions.setPassword(value))
 	}, [dispatch])
 
+	const onSwitchToRegister = useCallback(() => {
+		dispatch(loginActions.setIsLoginProcess(false))
+	}, [dispatch])
+
 	const onClickLoginButton = useCallback(async () => {
 		console.log(email, password)
-		dispatch(loginUserByUserName({  email, password }))
-		// if (result.meta.requestStatus === 'fulfilled') {
-		// 	onSuccess()
-		// }
+		dispatch(loginUserByEmailThunk({ email, password }))
 	}, [dispatch, email, password])
 
+	const onForgotPasswordClick = useCallback(() => {
+		dispatch(loginActions.setIsForgotPasswordModal(true))
+	}, [dispatch])
+
+	const onClickShowPassword = useCallback(() => { }, [])
+
+	const togglePasswordVisibilityIcon = <Icon
+		// className={cls.icon}
+		Svg={EyeIcon}
+		clickable
+		onClick={onClickShowPassword}
+	// width={iconSizeBox}
+	// height={iconSizeBox}
+	/>
+
+
 	return (
-		<div className={cls.wrapper} >
+		<>
 
-			<div className={clsx(cls.LoginForm)}>
-				<MyText text={t('Войти в систему')} />
-				{/* <MyText text={t('login form in modal')} /> */}
+			<div className={cls.wrapper} >
 
-				<div className={cls.inputWrapper}>
-					{error && <MyText text={error} variant='error' />}
+				<div className={clsx(cls.LoginForm)}>
+					{/* <MyText align='center' text={t('Вход')} /> */}
+					{/* <MyText text={t('Войти в систему')} /> */}
+					{/* <MyText text={t('login form in modal')} /> */}
 
-					<label className={cls.label} htmlFor='userName'>
-						{t('enter email')}
-					</label>
-					<Input
-						autoFocus
-						type='text'
-						id='userName'
-						value={email}
-						onChangeString={onChangeEmail}
-					/>
-					<label className={cls.label} htmlFor='password'>
-						{t('enter password')}
-					</label>
-					<Input
-						type='text'
-						id='password'
-						value={password}
-						onChangeString={onChangePassword}
-					/>
-					<HStack max justify='between'>
-						
-						<GetMeButton />
+					<div className={cls.inputWrapper}>
+						{error && <MyText text={error} variant='error' />}
+
+						<label className={cls.label} htmlFor='email'>
+							{t('email')}
+						</label>
+						<Input
+							autoFocus
+							type='text'
+							id='email'
+							value={email}
+							onChangeString={onChangeEmail}
+						/>
+						<label className={cls.label} htmlFor='password'>
+							{t('password')}
+						</label>
+						<Input
+							type='password'
+
+							id='password'
+							value={password}
+							onChangeString={onChangePassword}
+						// addonRight={togglePasswordVisibilityIcon}
+						/>
+						{/* <HStack max align='center' justify='center'> */}
+
+						{/* <GetMeButton /> */}
 						<Button
-							variant='outline'
+							variant='filled'
 							size='size_m'
 							className={cls.loginBtn}
 							onClick={onClickLoginButton}
 							disabled={isLoading}
 						>
-							{t('log in')}
+							{t('sign in')}
 						</Button>
-					</HStack>
+						{/* </HStack> */}
+						<div>
+							<MyText
+								className={cls.forgetLink}
+								as={'span'}
+								onClick={onForgotPasswordClick}
+								text={t('Забыли пароль?')}
+							/>
+						</div>
+						<div>
+							<MyText
+								className={cls.textBeforeLinkButton}
+								as={'span'}
+								text={t('do not have account')}
+							/>
+							<MyText
+								className={cls.linkButton}
+								as={'span'}
+								onClick={onSwitchToRegister}
+								text={t('go to sign in')}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+			<ForgotPasswordModal />
+		</>
 	)
 })
 
