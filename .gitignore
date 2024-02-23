@@ -33,3 +33,4 @@ DndShelfListWrapper.tsx
 ignore
 src/widgets/ContentPresenterTrashPageWidget/ui/ContentPresenterWrapper_copy
 src/shared/ui/LexicalEditor/src/utils/createLexicalEditorStateFromMultilineText.ts
+src/features/AuthByUsername copy
