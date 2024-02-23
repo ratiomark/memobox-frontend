@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RestoreBoxModal, TrashPageEntityType, TrashPageInitializerSchema } from '../types/TrashPageInitializerSchema'
+import { RestoreBoxModal, RestoreNewOrLearnModal, TrashPageEntityType, TrashPageInitializerSchema } from '../types/TrashPageInitializerSchema'
 
 const initialState: TrashPageInitializerSchema = {
 	activeEntity: 'shelves',
@@ -15,10 +15,17 @@ const initialState: TrashPageInitializerSchema = {
 	selectedCardIds: [],
 	abortedThunkIds: [],
 	restoreBoxModal: {
-		shelfId: '',
+		originalShelfId: '',
 		shelfTitle: '',
 		boxId: '',
 		boxIndex: 0,
+		isOpen: false
+	},
+	restoreNewOrLearntModal: {
+		shelfId: '',
+		shelfTitle: '',
+		boxId: '',
+		boxType: 'new',
 		isOpen: false
 	},
 
@@ -64,23 +71,32 @@ const trashPageSlice = createSlice({
 		setMultiSelectIsActive: (state, action: PayloadAction<boolean>) => {
 			state.isMultiSelectActive = action.payload
 		},
+		setRestoreBoxModalData: (state, action: PayloadAction<Omit<RestoreBoxModal, 'isOpen'>>) => {
+			const { boxId, boxIndex, originalShelfId, shelfTitle } = action.payload
+			state.restoreBoxModal.boxId = boxId
+			state.restoreBoxModal.boxIndex = boxIndex
+			state.restoreBoxModal.originalShelfId = originalShelfId
+			state.restoreBoxModal.shelfTitle = shelfTitle
+		},
 		setIsRestoreBoxModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.restoreBoxModal.isOpen = action.payload
 		},
-		setRestoreBoxModalData: (state, action: PayloadAction<Omit<RestoreBoxModal, 'isOpen'>>) => {
-			const { boxId, boxIndex, shelfId, shelfTitle } = action.payload
-			state.restoreBoxModal.boxId = boxId
-			state.restoreBoxModal.boxIndex = boxIndex
-			state.restoreBoxModal.shelfId = shelfId
-			state.restoreBoxModal.shelfTitle = shelfTitle
-		},
-		setRestoreBoxModalShelfId: (state, action: PayloadAction<string>) => {
-			state.restoreBoxModal.shelfId = action.payload
+		setRestoreBoxModalSelectedShelfId: (state, action: PayloadAction<string>) => {
+			state.restoreBoxModal.selectedShelfId = action.payload
 		},
 		setRestoreBoxModalShelfTitle: (state, action: PayloadAction<string>) => {
 			state.restoreBoxModal.shelfTitle = action.payload
-		}
-
+		},
+		setRestoreNewOrLearnModalData: (state, action: PayloadAction<Omit<RestoreNewOrLearnModal, 'isOpen'>>) => {
+			const { boxId, boxType, shelfId, shelfTitle } = action.payload
+			state.restoreNewOrLearntModal.boxId = boxId
+			state.restoreNewOrLearntModal.shelfId = shelfId
+			state.restoreNewOrLearntModal.shelfTitle = shelfTitle
+			state.restoreNewOrLearntModal.boxType = boxType
+		},
+		setIsRestoreNewOrLearnModalOpen: (state, action: PayloadAction<boolean>) => {
+			state.restoreNewOrLearntModal.isOpen = action.payload
+		},
 		// setActiveShelfId: (state, action: PayloadAction<string>) => {
 		// 	const shelfId = action.payload
 		// 	state.shelfId = shelfId

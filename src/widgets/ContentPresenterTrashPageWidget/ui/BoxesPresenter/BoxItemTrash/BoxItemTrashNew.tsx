@@ -81,12 +81,12 @@ export const BoxItemTrashNew = (props: BoxItemTrashProps) => {
 						text={formatDate(box.deletedAt) ?? ''}
 					/>
 				</div>
-				{/* <ButtonsBlockTrashEntity
+				<ButtonsBlockTrashEntity
 					{...buttonsBlockProps}
 					isCollapsed={isCollapsed}
 					onToggleCollapse={onCollapse}
 					onRemove={buttonsBlockProps?.onRemove ?? onDeleteClick}
-				/> */}
+				/>
 			</HStack>
 			{!isCollapsed && cardsBlock}
 		</li>

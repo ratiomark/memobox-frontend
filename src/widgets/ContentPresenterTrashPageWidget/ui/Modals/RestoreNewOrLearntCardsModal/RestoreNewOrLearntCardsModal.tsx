@@ -87,7 +87,8 @@ export const RestoreNewOrLearntCardsModal = memo(() => {
 
 	const onRestoreCards = () => {
 		if (!boxIdToRestore || !activeBoxId) return
-		dispatch(restoreNewOrLearntBoxThunk({ boxIdToRestore, activeBoxId }))
+		dispatch(restoreNewOrLearntBoxThunk({ boxIdToRestore, activeBoxId, toShelfId: activeShelfId }))
+		dispatch(trashPageActions.setIsRestoreNewOrLearnModalOpen(false))
 	}
 
 	const shelvesList = (

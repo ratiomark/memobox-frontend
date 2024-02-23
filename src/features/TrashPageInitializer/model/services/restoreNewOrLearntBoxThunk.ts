@@ -9,9 +9,9 @@ import { rtkRestoreShelfById } from '@/entities/Shelf'
 import { getAbortedThunkIds } from '../selectors/getTrashPage'
 import { rtkApiMoveAllCardsFromBoxToBox } from '@/entities/Box'
 
-export const restoreNewOrLearntBoxThunk = createAsyncThunk<string, { boxIdToRestore: string, activeBoxId: string }, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const restoreNewOrLearntBoxThunk = createAsyncThunk<string, { boxIdToRestore: string, activeBoxId: string, toShelfId: string }, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'trashPage/restoreNewOrLearntBoxThunk',
-	async ({ boxIdToRestore, activeBoxId }, thunkAPI) => {
+	async ({ boxIdToRestore, activeBoxId , toShelfId}, thunkAPI) => {
 		const { dispatch, getState } = thunkAPI
 		// const abortedThunkIds = getAbortedThunkIds(getState())
 		const id = 'restoreShelfById' + boxIdToRestore
@@ -27,7 +27,7 @@ export const restoreNewOrLearntBoxThunk = createAsyncThunk<string, { boxIdToRest
 					// contentCommon: t('toast:restore_shelf.additional') + ` "${boxIdToRestore}"`,
 				}
 			}))
-			const response = await dispatch(rtkApiMoveAllCardsFromBoxToBox({ fromBoxId: boxIdToRestore, toBoxId: activeBoxId })).unwrap()
+			const response = await dispatch(rtkApiMoveAllCardsFromBoxToBox({ fromBoxId: boxIdToRestore, toBoxId: activeBoxId , toShelfId})).unwrap()
 
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))

@@ -34,12 +34,23 @@ export interface TrashPageInitializerSchema {
 	boxes: BoxSchemaDeleted[]
 	cards: CardSchemaDeleted[]
 	restoreBoxModal: RestoreBoxModal
+	restoreNewOrLearntModal: RestoreNewOrLearnModal
 }
 
 export interface RestoreBoxModal {
-	shelfId: string
+	originalShelfId: string
+	selectedShelfId?: string
 	boxId: string
 	boxIndex: number
+	isOpen: boolean
+	shelfTitle: string
+}
+
+export interface RestoreNewOrLearnModal {
+	shelfId: string
+	boxId: string
+	boxType: 'new' | 'learnt'
+	// boxIndex: number
 	isOpen: boolean
 	shelfTitle: string
 }

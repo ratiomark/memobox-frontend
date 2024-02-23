@@ -99,6 +99,9 @@ const initialState: CupboardPageSchema = {
 		shelfId: '',
 		requestStatus: 'idle',
 	},
+	boxDeletionProcess: {
+		isAnyBoxInDeletionProcess: false,
+	},
 	cupboardData: {
 		train: 0,
 		all: 0,
@@ -261,6 +264,9 @@ const cupboardShelfList = createSlice({
 					shelf.boxesData[boxIndex] = { ...shelf.boxesData[boxIndex], isDeleting };
 				}
 			}
+		},
+		setIsAwaitingForBoxDeletion: (state, action: PayloadAction<boolean>) => {
+			state.boxDeletionProcess.isAnyBoxInDeletionProcess = action.payload
 		},
 		// shelf boxes template
 		setShelfBoxesTemplateModalIsOpen: (state, action: PayloadAction<boolean>) => {

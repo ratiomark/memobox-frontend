@@ -43,7 +43,7 @@ export const BoxItemTrashLearnt = (props: BoxItemTrashProps) => {
 	}
 
 	const onCollapse = () => setIsCollapsed(prev => !prev)
-	const boxTitle = t('new cards')
+	const boxTitle = `${t('learnt cards')} - ${getTiming(box.timing)}`
 
 
 	const cardsBlock = (
@@ -81,12 +81,12 @@ export const BoxItemTrashLearnt = (props: BoxItemTrashProps) => {
 						text={formatDate(box.deletedAt) ?? ''}
 					/>
 				</div>
-				{/* <ButtonsBlockTrashEntity
+				<ButtonsBlockTrashEntity
 					{...buttonsBlockProps}
 					isCollapsed={isCollapsed}
 					onToggleCollapse={onCollapse}
 					onRemove={buttonsBlockProps?.onRemove ?? onDeleteClick}
-				/> */}
+				/>
 			</HStack>
 			{!isCollapsed && cardsBlock}
 		</li>

@@ -11,6 +11,7 @@ import { BoxSchema, rtkApiDeleteBoxFromShelf } from '@/entities/Box'
 import { getBoxSettingsDropdownShelfId } from '../selectors/getBoxSettingDropdownModal'
 import { DataBlock } from '@/shared/types/DataBlock'
 import { cupboardShelfListActions } from '../..'
+import { getIsAnyBoxAwaitingDeletionResponse } from '../selectors/getDeletionProcess'
 
 export type DeleteBoxThunkResponse = {
 	shelfId: string,
@@ -32,23 +33,27 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 			if (abortedThunkIds.includes(id)) {
 				throw new Error(AbortedError)
 			}
+			// обеспечивает удаление коробки, только после того, как завершится удаление других коробок
+			while (getIsAnyBoxAwaitingDeletionResponse(getState())) {
+				console.log('Waiting for unlock');
+				await new Promise((resolve) => setTimeout(resolve, 200));
+			}
+			dispatch(cupboardShelfListActions.setIsAwaitingForBoxDeletion(true))
 
 			const shelfId = getBoxSettingsDropdownShelfId(getState())
 			const shelf = getShelfById(shelfId)(getState()) as ShelfSchema
 			const shelfCardsData = shelf.data
 			let boxesData = shelf.boxesData
-			console.log('boxesData', boxesData)
 			const boxTargeted = boxesData.find((box) => box.id === boxId)
-			console.log('boxTargeted', boxTargeted)
 
 			if (!boxTargeted) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
-				console.warn('No box with such id')
 				throw new Error('No box with such id')
 			}
 
 			const index = boxTargeted.index
 			const boxCardsData = boxTargeted.data as DataBlock
+			// dispatch(cupboardShelfListActions.setIsAwaitingForBoxDeletion(true))
 			dispatch(
 				toastsActions.addToast({
 					id,
@@ -71,10 +76,11 @@ export const deleteBoxThunk = createAsyncThunk<DeleteBoxThunkResponse, string, {
 			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			boxesData = boxesData.filter((box) => box.id !== boxId).map((box, i) => ({ ...box, index: i }))
-
+			dispatch(cupboardShelfListActions.setIsAwaitingForBoxDeletion(false))
 			return { shelfId, boxes: boxesData, boxCardsData, shelfCardsData }
 
 		} catch (err) {
+			dispatch(cupboardShelfListActions.setIsAwaitingForBoxDeletion(false))
 			const error = err as Error
 			if (error.message === AbortedError) {
 				return thunkAPI.rejectWithValue(id, { aborted: true })

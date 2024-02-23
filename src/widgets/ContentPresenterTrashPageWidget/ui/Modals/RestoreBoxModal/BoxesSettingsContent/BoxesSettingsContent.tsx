@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { BoxesSettingsList } from '../BoxesSettingsList/BoxesSettingsList';
 import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
-import { BoxesRenderedProps } from '../BoxesRendered';
+import { BoxesRenderedProps } from '../BoxesRendered/BoxesRendered';
 
 
 export const BoxesSettingsContent = (props: BoxesRenderedProps) => {

@@ -6,7 +6,13 @@ export const getTrashPageIsMoveCardsModalOpen = (state: StateSchema) => state.tr
 
 
 export const getTrashPageIsRestoreBoxModalOpen = (state: StateSchema) => state.trashPage?.restoreBoxModal.isOpen
-export const getTrashPageRestoreBoxModalShelfId = (state: StateSchema) => state.trashPage?.restoreBoxModal.shelfId ?? ''
+export const getTrashPageRestoreBoxModalSelectedShelfId = (state: StateSchema) => state.trashPage?.restoreBoxModal.selectedShelfId?? ''
+export const getTrashPageRestoreBoxModalOriginalShelfId = (state: StateSchema) => state.trashPage?.restoreBoxModal.originalShelfId ?? ''
 export const getTrashPageRestoreBoxModalShelfTitle = (state: StateSchema) => state.trashPage?.restoreBoxModal.shelfTitle ?? ''
 export const getTrashPageRestoreBoxModalBoxId = (state: StateSchema) => state.trashPage?.restoreBoxModal.boxId ?? ''
 export const getTrashPageRestoreBoxModalBoxIndex = (state: StateSchema) => state.trashPage?.restoreBoxModal.boxIndex
+
+export const getTrashPageIsRestoreNewOrLearntModalOpen = (state: StateSchema) => state.trashPage?.restoreNewOrLearntModal?.isOpen ?? false
+export const getTrashPageRestoreNewOrLearntModalShelfId = (state: StateSchema) => state.trashPage?.restoreNewOrLearntModal?.shelfId
+export const getTrashPageRestoreNewOrLearntModalBoxType = (state: StateSchema) => state.trashPage?.restoreNewOrLearntModal?.boxType
+export const getTrashPageRestoreNewOrLearntModalBoxId = (state: StateSchema) => state.trashPage?.restoreNewOrLearntModal?.boxId

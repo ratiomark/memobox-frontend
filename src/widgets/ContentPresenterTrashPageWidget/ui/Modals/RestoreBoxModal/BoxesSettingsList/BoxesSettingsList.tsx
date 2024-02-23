@@ -5,11 +5,12 @@ import { useSelector } from 'react-redux';
 import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
 import { BoxSettingsItem } from '../BoxSettingsItem/BoxSettingsItem';
 import { BoxSettingsSpecialBox } from '../BoxSettingsItem/BoxSettingsItemNewCardsBox';
-import { BoxesRenderedProps } from '../BoxesRendered';
+import { BoxesRenderedProps } from '../BoxesRendered/BoxesRendered';
 import {
 	getTrashPageRestoreBoxModalBoxId,
 	getTrashPageRestoreBoxModalShelfTitle,
-	getTrashPageRestoreBoxModalShelfId,
+	getTrashPageRestoreBoxModalSelectedShelfId,
+	getTrashPageRestoreBoxModalOriginalShelfId,
 	restoreBoxThunk,
 	trashPageActions
 } from '@/features/TrashPageInitializer';
@@ -18,7 +19,7 @@ import { useRef } from 'react';
 
 export const BoxesSettingsList = (props: BoxesRenderedProps) => {
 	const dispatch = useAppDispatch()
-	const shelfId = useSelector(getTrashPageRestoreBoxModalShelfId)
+	const shelfId = useSelector(getTrashPageRestoreBoxModalSelectedShelfId)
 	const shelfTitle = useSelector(getTrashPageRestoreBoxModalShelfTitle)
 	const boxId = useSelector(getTrashPageRestoreBoxModalBoxId)
 
@@ -28,7 +29,7 @@ export const BoxesSettingsList = (props: BoxesRenderedProps) => {
 				onRestoreClick={() => {
 					dispatch(restoreBoxThunk({
 						boxId,
-						shelfId,
+						selectedShelfId: shelfId,
 						index: index + 2,
 						shelfTitle,
 					}))
@@ -45,7 +46,7 @@ export const BoxesSettingsList = (props: BoxesRenderedProps) => {
 			<AddBoxIcon onClick={() => {
 				dispatch(restoreBoxThunk({
 					boxId,
-					shelfId,
+					selectedShelfId: shelfId,
 					index: 1,
 					shelfTitle,
 				}))

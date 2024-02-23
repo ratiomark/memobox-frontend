@@ -5,13 +5,11 @@ import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { t } from 'i18next'
 import { TAG_VIEW_PAGE, TAG_TRASH_PAGE, TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
-import { rtkRestoreShelfById } from '@/entities/Shelf'
-import { getAbortedThunkIds } from '../selectors/getTrashPage'
 import { rtkApiRestoreBoxFromTrash } from '@/entities/Box'
 
-export const restoreBoxThunk = createAsyncThunk<string, { shelfId: string, index: number, boxId: string, shelfTitle: string }, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const restoreBoxThunk = createAsyncThunk<string, { selectedShelfId: string, index: number, boxId: string, shelfTitle: string }, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'trashPage/restoreBoxThunk',
-	async ({ shelfId, shelfTitle, boxId, index }, thunkAPI) => {
+	async ({ selectedShelfId: shelfId, shelfTitle, boxId, index }, thunkAPI) => {
 		const { dispatch, getState } = thunkAPI
 		// const abortedThunkIds = getAbortedThunkIds(getState())
 		const id = 'restoreShelfById' + boxId
@@ -37,8 +35,8 @@ export const restoreBoxThunk = createAsyncThunk<string, { shelfId: string, index
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
 			}
-			console.log('response after restore box', response)
-			console.log('response after restore box', response)
+			// console.log('response after restore box', response)
+			// console.log('response after restore box', response)
 			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 
