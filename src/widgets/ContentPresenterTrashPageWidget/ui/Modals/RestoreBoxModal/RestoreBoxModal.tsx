@@ -3,12 +3,8 @@ import cls from './RestoreBoxModal.module.scss';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { memo, useEffect, useMemo, useState } from 'react';
-import { ListBox } from '@/shared/ui/Popup';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
 import { getTrashPageIsRestoreBoxModalOpen, trashPageActions } from '@/features/TrashPageInitializer';
-import { useGetTrashQuery } from '@/entities/Trash';
-import { BoxesRendered } from './BoxesRendered/BoxesRendered';
-import { MyText } from '@/shared/ui/Typography';
 import { RestoreBoxModalContent } from './RestoreBoxModalContent/RestoreBoxModal';
 
 
