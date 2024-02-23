@@ -1,30 +1,28 @@
-import clsx from 'clsx'
-import cls from './LoginForm.module.scss'
-import { registerUserByUserName } from '@/entities/User';
-import { Button } from '@/shared/ui/Button';
-import { useCallback } from 'react';
-import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { rtkApiGetMe } from '@/entities/User/model/api/userApi';
+// import cls from './LoginForm.module.scss'
+// import { Button } from '@/shared/ui/Button';
+// import { useCallback } from 'react';
+// import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+// import { rtkApiGetMe } from '@/entities/User/model/api/userApi';
 
-interface GetMeButtonProps {
-	className?: string;
-}
+// interface GetMeButtonProps {
+// 	className?: string;
+// }
 
-export const GetMeButton = (props: GetMeButtonProps) => {
-	const dispatch = useAppDispatch()
-	
-	const onMeClick = useCallback(async () => {
-		dispatch(rtkApiGetMe())
-	}, [dispatch])
+// export const GetMeButton = (props: GetMeButtonProps) => {
+// 	const dispatch = useAppDispatch()
 
-	return (
-		<Button
-			variant='outline'
-			size='size_m'
-			className={cls.loginBtn}
-			onClick={onMeClick}
-		>
-			Me
-		</Button>
-	)
-}
+// 	const onMeClick = useCallback(async () => {
+// 		dispatch(rtkApiGetMe())
+// 	}, [dispatch])
+
+// 	return (
+// 		<Button
+// 			variant='outline'
+// 			size='size_m'
+// 			className={cls.loginBtn}
+// 			onClick={onMeClick}
+// 		>
+// 			Me
+// 		</Button>
+// 	)
+// }

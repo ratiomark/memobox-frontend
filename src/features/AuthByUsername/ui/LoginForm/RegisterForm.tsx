@@ -2,26 +2,20 @@ import {
 	getLoginError,
 	getLoginIsLoading,
 	getLoginPassword,
-	getLoginUsername,
+	getLoginEmail,
+	getLoginUserName,
 } from '../../Model/selectors/getLoginState/getLoginState'
-import { loginActions, loginReducer } from '../../Model/slice/loginSlice'
+import { loginActions } from '../../Model/slice/loginSlice'
 import { memo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import cls from './LoginForm.module.scss'
-// import { loginUserByUserName } from '../../Model/services/loginByUserName/loginUserByUserName'
 import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
-
-import {
-	ReducersList,
-	useAsyncReducer,
-} from '@/shared/lib/helpers/hooks/useAsyncReducer'
 import clsx from 'clsx'
 import { MyText } from '@/shared/ui/Typography'
-import { registerUserByUserName } from '@/entities/User'
-import { HStack } from '@/shared/ui/Stack'
-import { GetMeButton } from './GetMeButton'
+import { registerByEmailThunk } from '@/entities/User'
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 
 export interface LoginFormProps {
 	className?: string
@@ -29,16 +23,11 @@ export interface LoginFormProps {
 	onSuccess: () => void;
 }
 
-const initialReducers: ReducersList = {
-	loginForm: loginReducer,
-}
-
 const RegisterForm = memo(() => {
 	const { t } = useTranslation()
-	const { dispatch, store } = useAsyncReducer({
-		reducers: initialReducers,
-	})
-	const email = useSelector(getLoginUsername)
+	const dispatch = useAppDispatch()
+	const email = useSelector(getLoginEmail)
+	const userName = useSelector(getLoginUserName)
 	const password = useSelector(getLoginPassword)
 	const isLoading = useSelector(getLoginIsLoading)
 	const error = useSelector(getLoginError)
@@ -51,56 +40,87 @@ const RegisterForm = memo(() => {
 		dispatch(loginActions.setPassword(value))
 	}, [dispatch])
 
+	const onChangeUserName = useCallback((value: string) => {
+		dispatch(loginActions.setUserName(value))
+	}, [dispatch])
+
+	const onSwitchToLogin = useCallback(() => {
+		dispatch(loginActions.setIsLoginProcess(true))
+	}, [dispatch])
+
 	const onClickRegisterButton = useCallback(async () => {
-		dispatch(registerUserByUserName({ email, password }))
-	}, [dispatch, email, password])
+		dispatch(registerByEmailThunk({ email, password, name: userName }))
+	}, [dispatch, email, password, userName])
 
 	// const onMeClick = useCallback(async () => {
-	// 	dispatch(registerUserByUserName({ email, password }))
+	// 	dispatch(registerByEmailThunk({ email, password }))
 	// }, [dispatch, email, password])
 
 	return (
 		<div className={cls.wrapper} >
 
 			<div className={clsx(cls.LoginForm)}>
-				<MyText text={t('Регистрация в системе')} />
+				{/* <MyText align='center' text={t('Регистрация')} /> */}
 				{/* <MyText text={t('regiset form in modal')} /> */}
 
 				<div className={cls.inputWrapper}>
 					{error && <MyText text={error} variant='error' />}
 
 					<label className={cls.label} htmlFor='userName'>
-						{t('enter email')}
+						{t('name')}
 					</label>
 					<Input
 						autoFocus
 						type='text'
 						id='userName'
+						value={userName}
+						onChangeString={onChangeUserName}
+					/>
+					<label className={cls.label} htmlFor='email'>
+						{t('email')}
+					</label>
+					<Input
+						autoFocus
+						type='text'
+						id='email'
 						value={email}
 						onChangeString={onChangeEmail}
 					/>
 					<label className={cls.label} htmlFor='password'>
-						{t('enter password')}
+						{t('password')}
 					</label>
 					<Input
-						type='text'
+						type='password'
 						id='password'
 						value={password}
 						onChangeString={onChangePassword}
 					/>
-					<HStack max justify='between'>
+					{/* <HStack className={cls.class}  max justify='center'> */}
 
-						<GetMeButton />
-						<Button
-							variant='outline'
-							size='size_m'
-							className={cls.loginBtn}
-							onClick={onClickRegisterButton}
-							disabled={isLoading}
-						>
-							{t('log in')}
-						</Button>
-					</HStack>
+					{/* <GetMeButton /> */}
+					<Button
+						variant='filled'
+						size='size_m'
+						className={cls.loginBtn}
+						onClick={onClickRegisterButton}
+						disabled={isLoading}
+					>
+						{t('sign up')}
+					</Button>
+					{/* </HStack> */}
+					<div>
+						<MyText
+							className={cls.textBeforeLinkButton}
+							as={'span'}
+							text={t('have account')}
+						/>
+						<MyText
+							className={cls.linkButton}
+							as={'span'}
+							onClick={onSwitchToLogin}
+							text={t('go to sign up')}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
