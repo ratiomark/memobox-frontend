@@ -15,6 +15,7 @@ import { StatsPageSkeleton, StatsPage } from '@/pages/StatsPage';
 import { ViewPageSkeleton } from '@/pages/ViewPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { ProfilePageWidgetSkeleton } from '@/widgets/ProfilePageWidget';
+import { ConfirmEmailPage } from '@/pages/ConfirmEmailPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -35,6 +36,7 @@ export const AppRoutes = {
 	subscription: 'subscription',
 	profile: 'profile',
 	ABOUT: 'about',
+	confirmEmail: 'confirmEmail',
 	forbidden_page: 'forbidden_page',
 	PAGE_NOT_FOUND: 'PAGE_NOT_FOUND',
 } as const;
@@ -79,6 +81,7 @@ export const obtainRouteArticles = () => '/articles'
 export const obtainRouteArticlesDetails = (id: string | number) => `/articles/${id}`
 export const obtainRouteAdminPanel = () => '/admin'
 export const obtainForbiddenPage = () => '/forbidden'
+export const obtainConfirmEmailPage = () => '/confirm-email'
 
 
 export const routeConfig: Record<AppRoutes, AppRouteProps> = {
@@ -148,6 +151,11 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 		element: <AboutPage />,
 		authOnly: true,
 		// wrapper: Page
+	},
+	confirmEmail: {
+		path: obtainConfirmEmailPage(),
+		element: <ConfirmEmailPage />,
+		// suspense: <LoadingSkeleton />, // Подставьте компонент загрузки, соответствующий вашему приложению
 	},
 	forbidden_page: {
 		path: obtainForbiddenPage(),
