@@ -11,6 +11,7 @@ export type ButtonVariant =
 	| 'filledBox'
 	| 'cancel'
 	| 'back'
+	| 'link'
 // | 'listBox'
 
 export type ButtonColor =

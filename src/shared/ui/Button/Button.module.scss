@@ -167,6 +167,17 @@
   }
 }
 
+.link {
+  all: unset;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--accent);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .empty {
   background-color: transparent;
 
