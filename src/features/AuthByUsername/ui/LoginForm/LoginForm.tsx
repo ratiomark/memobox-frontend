@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import {
@@ -49,6 +49,7 @@ const LoginForm = memo(() => {
 	const password = useSelector(getLoginPassword)
 	const isLoading = useSelector(getLoginIsLoading)
 	const error = useSelector(getLoginError)
+	const [isShowPassword, setIsShowPassword] = useState(false)
 
 	const onChangeEmail = useCallback((value: string) => {
 		dispatch(loginActions.setEmail(value))
@@ -71,10 +72,10 @@ const LoginForm = memo(() => {
 		dispatch(loginActions.setIsForgotPasswordModal(true))
 	}, [dispatch])
 
-	const onClickShowPassword = useCallback(() => { }, [])
+	const onClickShowPassword = () => setIsShowPassword(prev => !prev)
 
 	const togglePasswordVisibilityIcon = <Icon
-		// className={cls.icon}
+		className={cls.icon}
 		Svg={EyeIcon}
 		clickable
 		onClick={onClickShowPassword}
@@ -109,14 +110,17 @@ const LoginForm = memo(() => {
 						<label className={cls.label} htmlFor='password'>
 							{t('password')}
 						</label>
-						<Input
-							type='password'
+						<div className={cls.passwordWrapper} >
+							<Input
+								type={isShowPassword ? 'text' : 'password'}
 
-							id='password'
-							value={password}
-							onChangeString={onChangePassword}
-						// addonRight={togglePasswordVisibilityIcon}
-						/>
+								id='password'
+								value={password}
+								onChangeString={onChangePassword}
+							// addonRight={togglePasswordVisibilityIcon}
+							/>
+							{togglePasswordVisibilityIcon}
+						</div>
 						{/* <HStack max align='center' justify='center'> */}
 
 						{/* <GetMeButton /> */}

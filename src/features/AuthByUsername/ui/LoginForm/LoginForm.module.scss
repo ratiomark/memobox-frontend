@@ -21,6 +21,21 @@
   margin-top: 10px;
 }
 
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  color: var(--accent);
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
 .loginBtn {
   // margin-top: 15px;
   // margin-left: auto;

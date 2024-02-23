@@ -6,7 +6,7 @@ import {
 	getLoginUserName,
 } from '../../Model/selectors/getLoginState/getLoginState'
 import { loginActions } from '../../Model/slice/loginSlice'
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import cls from './LoginForm.module.scss'
@@ -16,6 +16,8 @@ import clsx from 'clsx'
 import { MyText } from '@/shared/ui/Typography'
 import { registerByEmailThunk } from '@/entities/User'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
+import { Icon } from '@/shared/ui/Icon'
+import EyeIcon from '@/shared/assets/icons/eye2.svg'
 
 export interface LoginFormProps {
 	className?: string
@@ -31,7 +33,7 @@ const RegisterForm = memo(() => {
 	const password = useSelector(getLoginPassword)
 	const isLoading = useSelector(getLoginIsLoading)
 	const error = useSelector(getLoginError)
-
+	const [isShowPassword, setIsShowPassword] = useState(false)
 	const onChangeEmail = useCallback((value: string) => {
 		dispatch(loginActions.setEmail(value))
 	}, [dispatch])
@@ -55,7 +57,16 @@ const RegisterForm = memo(() => {
 	// const onMeClick = useCallback(async () => {
 	// 	dispatch(registerByEmailThunk({ email, password }))
 	// }, [dispatch, email, password])
+	const onClickShowPassword = () => setIsShowPassword(prev => !prev)
 
+	const togglePasswordVisibilityIcon = <Icon
+		className={cls.icon}
+		Svg={EyeIcon}
+		clickable
+		onClick={onClickShowPassword}
+	// width={iconSizeBox}
+	// height={iconSizeBox}
+	/>
 	return (
 		<div className={cls.wrapper} >
 
@@ -89,12 +100,17 @@ const RegisterForm = memo(() => {
 					<label className={cls.label} htmlFor='password'>
 						{t('password')}
 					</label>
-					<Input
-						type='password'
-						id='password'
-						value={password}
-						onChangeString={onChangePassword}
-					/>
+					<div className={cls.passwordWrapper} >
+						<Input
+							type={isShowPassword ? 'text' : 'password'}
+
+							id='password'
+							value={password}
+							onChangeString={onChangePassword}
+						// addonRight={togglePasswordVisibilityIcon}
+						/>
+						{togglePasswordVisibilityIcon}
+					</div>
 					{/* <HStack className={cls.class}  max justify='center'> */}
 
 					{/* <GetMeButton /> */}
