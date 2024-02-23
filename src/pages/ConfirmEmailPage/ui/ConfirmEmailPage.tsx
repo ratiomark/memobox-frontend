@@ -6,6 +6,7 @@ import confirmedImage from '@/shared/assets/images/emailConfirmed.png'
 import { useConfirmEmailMutation } from '@/entities/User'
 import cls from './ConfirmEmail.module.scss'
 import clsx from 'clsx'
+import { HStack } from '@/shared/ui/Stack'
 
 const RectangleToSquare = ({ content }) => {
 	const [isExpanded, setIsExpanded] = useState(true);
@@ -36,19 +37,27 @@ const ConfirmEmailPage = () => {
 	if (isLoading) {
 		content = <Loader />
 	} else if (isError) {
-		content = <RectangleToSquare content={<p>Кажется, этот почта уже подтверждена</p>} />
+		// content = <RectangleToSquare content={<p>Кажется, этот почта уже подтверждена</p>} />
+		content = <RectangleToSquare content={(
+			<div >
+				<p>Почта подтверждена</p >
+				<img width={340} src={confirmedImage} />
+			</div >
+		)} />
 	} else {
 		content = <RectangleToSquare content={(
 			<div >
 				<p>Почта подтверждена</p >
-				<img src={confirmedImage} />
+				<img width={340} src={confirmedImage} />
 			</div >
 		)} />
 	}
 
 	return (
 		<Page>
-			{content}
+			<HStack max justify='center'>
+				{content}
+			</HStack>
 		</Page>
 	);
 	// const auth = useSelector(getUserAuthData)
