@@ -25,7 +25,13 @@ export interface UserWithToken extends User {
 
 // type ResponseWithToken = { token: string }
 
-export interface AuthByEmailProps {
+export interface RegisterByEmailProps {
+	email: string
+	password: string
+	name: string
+}
+
+export interface LoginByEmailProps {
 	email: string
 	password: string
 }
@@ -34,21 +40,23 @@ export interface AuthByEmailProps {
 // test comment API
 const userApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
-		loginUser: build.mutation<UserWithToken, AuthByEmailProps>({
+		loginUser: build.mutation<UserWithToken, LoginByEmailProps>({
 			query: (arg) => ({
 				url: '/auth/email/login',
 				method: 'POST',
 				body: {
-					...arg
+					...arg,
+					// userName: arg.name,
 				}
 			})
 		}),
-		registerUser: build.mutation<UserWithToken, AuthByEmailProps>({
+		registerUser: build.mutation<UserWithToken, RegisterByEmailProps>({
 			query: (arg) => ({
 				url: '/auth/email/register',
 				method: 'POST',
 				body: {
-					...arg
+					...arg,
+					firstName: arg.name,
 				}
 			})
 		}),
@@ -163,6 +171,15 @@ const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
+		confirmEmail: build.mutation<{ email_confirmed: boolean }, { hash: string }>({
+			query: ({ hash }) => ({
+				url: '/auth/email/confirm',
+				method: 'POST',
+				body: {
+					hash
+				}
+			})
+		}),
 	}),
 })
 
@@ -184,3 +201,4 @@ export const rtkApiSetDefaultShelfTemplate = userApi.endpoints.setDefaultShelfTe
 export const rtkApiLogout = userApi.endpoints.logout.initiate
 export const { useGetUserSettingsQuery } = userApi
 export const { useUpdateMissedTrainingMutation } = userApi
+export const { useConfirmEmailMutation } = userApi

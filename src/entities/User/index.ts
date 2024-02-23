@@ -11,8 +11,8 @@ export { logoutThunk } from './model/services/logoutThunk';
 
 export { daysOfWeek } from './model/const/daysOfWeek';
 
-export { loginByEmailAndPassThunk as loginUserByUserName } from './model/services/loginByEmailAndPassThunk';
-export { registerByEmailThunk as registerUserByUserName } from './model/services/registerByEmailThunk';
+export { loginUserByEmailThunk } from './model/services/loginByEmailAndPassThunk';
+export { registerByEmailThunk  } from './model/services/registerByEmailThunk';
 
 export {
 	rtkApiLoginUser,
@@ -23,6 +23,7 @@ export {
 	rtkApiUpdateTimeSleep,
 	rtkApiSetDefaultShelfTemplate,
 	rtkApiUpdateNotifications,
+	useConfirmEmailMutation,
 } from './model/api/userApi';
 
 export type {
@@ -35,7 +36,7 @@ export type {
 
 
 export type {
-	AuthByEmailProps as LoginByUserNameProps
+	RegisterByEmailProps as LoginByUserNameProps
 } from './model/api/userApi';
 
 
