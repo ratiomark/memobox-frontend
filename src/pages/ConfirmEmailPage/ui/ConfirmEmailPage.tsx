@@ -1,6 +1,6 @@
 import { Page } from '@/widgets/Page'
 import { useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { Loader } from '@/shared/ui/Loader/Loader'
 import confirmedImage from '@/shared/assets/images/emailConfirmed.png'
 import { useConfirmEmailMutation } from '@/entities/User'
@@ -8,7 +8,7 @@ import cls from './ConfirmEmail.module.scss'
 import clsx from 'clsx'
 import { HStack } from '@/shared/ui/Stack'
 
-const RectangleToSquare = ({ content }) => {
+const RectangleToSquare = ({ content }: { content: ReactNode }) => {
 	const [isExpanded, setIsExpanded] = useState(true);
 	// `container ${isExpanded ? 'expanded' : 'collapsed'}`
 	return (
