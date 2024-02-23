@@ -4,14 +4,29 @@ import { CupboardShelfListWrapper } from '@/features/CupboardShelfList'
 import { getUserAuthData } from '@/entities/User'
 import { useSelector } from 'react-redux'
 import { LoginScreen } from '@/features/AuthByUsername'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+// eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
+import { LoginPage } from '@/pages/LoginPage'
 
 const MainPage = () => {
 	const auth = useSelector(getUserAuthData)
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!auth) {
+			navigate('/login')
+		}
+	}, [auth, navigate])
+	// if (!auth) {
+	// 	navigate('/login'); // Перенаправление на страницу логина
+	// }
 	if (!auth) {
 		return (
-			<Page data-testid='MainPage'>
-				<LoginScreen />
-			</Page>
+			<LoginPage />
+			// 		<Page data-testid='MainPage'>
+			// 			<LoginScreen />
+			// 		</Page>
 		)
 	}
 
