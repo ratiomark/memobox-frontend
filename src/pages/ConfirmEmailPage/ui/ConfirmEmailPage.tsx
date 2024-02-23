@@ -37,20 +37,20 @@ const ConfirmEmailPage = () => {
 	if (isLoading) {
 		content = <Loader />
 	} else if (isError) {
-		// content = <RectangleToSquare content={<p>Кажется, этот почта уже подтверждена</p>} />
-		content = <RectangleToSquare content={(
-			<div >
-				<p>Почта подтверждена</p >
-				<img width={340} src={confirmedImage} />
-			</div >
-		)} />
+		content = <RectangleToSquare content={<p>Кажется, этот почта уже подтверждена</p>} />
+		// content = <RectangleToSquare content={(
+		// 	<div >
+		// 		<p>Почта подтверждена</p >
+		// 		<img width={340} src={confirmedImage} />
+		// 	</div >
+		// )} />
 	} else {
-		content = <RectangleToSquare content={(
+		content = (
 			<div >
 				<p>Почта подтверждена</p >
 				<img width={340} src={confirmedImage} />
-			</div >
-		)} />
+			</div >)
+
 	}
 
 	return (
