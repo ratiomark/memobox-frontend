@@ -14,10 +14,11 @@ import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 import clsx from 'clsx'
 import { MyText } from '@/shared/ui/Typography'
-import { registerByEmailThunk } from '@/entities/User'
+import { getUserAuthData, registerByEmailThunk } from '@/entities/User'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { Icon } from '@/shared/ui/Icon'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
+import { AlreadyAuthScreen } from './AlreadyAuthScreen'
 
 export interface LoginFormProps {
 	className?: string
@@ -33,7 +34,9 @@ const RegisterForm = memo(() => {
 	const password = useSelector(getLoginPassword)
 	const isLoading = useSelector(getLoginIsLoading)
 	const error = useSelector(getLoginError)
+	const auth = useSelector(getUserAuthData)
 	const [isShowPassword, setIsShowPassword] = useState(false)
+
 	const onChangeEmail = useCallback((value: string) => {
 		dispatch(loginActions.setEmail(value))
 	}, [dispatch])
@@ -67,6 +70,12 @@ const RegisterForm = memo(() => {
 	// width={iconSizeBox}
 	// height={iconSizeBox}
 	/>
+
+
+	// if (auth) {
+	// 	return <AlreadyAuthScreen />
+	// }
+
 	return (
 		<div className={cls.wrapper} >
 

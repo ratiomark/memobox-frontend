@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import {
@@ -12,7 +12,7 @@ import cls from './LoginForm.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 
-import { loginUserByEmailThunk } from '@/entities/User'
+import { getUserAuthData, loginUserByEmailThunk } from '@/entities/User'
 import {
 	ReducersList,
 	useAsyncReducer,
@@ -24,6 +24,8 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
 import { Icon } from '@/shared/ui/Icon'
 import { ForgotPasswordModal } from '../ForgotPasswordModal/ForgotPasswordModal'
+import { useNavigate } from 'react-router-dom'
+import { AlreadyAuthScreen } from './AlreadyAuthScreen'
 
 export interface LoginFormProps {
 	className?: string
@@ -45,6 +47,15 @@ const LoginForm = memo(() => {
 	// 	reducers: initialReducers,
 	// 	removeAfterUnmount: false,
 	// })
+	const auth = useSelector(getUserAuthData)
+	// const navigate = useNavigate();
+
+	// useEffect(() => {
+	// 	if (auth) {
+	// 		navigate('/')
+	// 	}
+	// }, [auth, navigate])
+
 	const email = useSelector(getLoginEmail)
 	const password = useSelector(getLoginPassword)
 	const isLoading = useSelector(getLoginIsLoading)
@@ -83,15 +94,15 @@ const LoginForm = memo(() => {
 	// height={iconSizeBox}
 	/>
 
+	// if (auth) {
+	// 	return <AlreadyAuthScreen />
+	// }
 
 	return (
 		<>
 
 			<div className={cls.wrapper} >
-
 				<div className={clsx(cls.LoginForm)}>
-					{/* <MyText align='center' text={t('Вход')} /> */}
-					{/* <MyText text={t('Войти в систему')} /> */}
 					{/* <MyText text={t('login form in modal')} /> */}
 
 					<div className={cls.inputWrapper}>
