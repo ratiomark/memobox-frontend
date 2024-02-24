@@ -6,6 +6,7 @@ import { DataBlock } from '@/shared/types/DataBlock';
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
 import langIcon from '../../../assets/icons/langIcon.svg'
 import { Icon } from '../../Icon';
+import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 
 interface CompleteBigDataLabelsProps {
 	className?: string
@@ -36,6 +37,7 @@ export const CompleteBigDataLabels = (props: CompleteBigDataLabelsProps) => {
 				onClick={() => setLang(currentLang === 'ru' ? 'en' : 'ru')}
 				Svg={langIcon}
 			/>
+			<ThemeSwitcher />
 		</div>
 	)
 }

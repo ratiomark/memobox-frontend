@@ -23,7 +23,7 @@ export const initAuthData = createAsyncThunk<UserWithToken, void, { rejectValue:
 			if (!isRefreshResponse(response)) {
 				return rejectWithValue('Токен не валидный')
 			}
-
+			console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL', response.user)
 			// console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL')
 			localDataService.setToken(response.token)
 			localDataService.setRefreshToken(response.refreshToken)

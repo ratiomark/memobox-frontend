@@ -91,11 +91,11 @@ export const StatsAndActionsCupboardWidget = () => {
 					>
 						toggle isFirstRender
 					</Button> */}
-					<Button
+					{/* <Button
 						onClick={onDropCards}
 					>
 						{t('drop')}
-					</Button>
+					</Button> */}
 					<Button
 						disabled={createNewShelfRequestStatus === 'pending'}
 						onClick={onAddNewShelfClick}
@@ -137,7 +137,7 @@ export const StatsAndActionsCupboardWidget = () => {
 			<HStack max className={cls.statsAndActionsCupboardWidget}>
 				<div>
 					<CompleteBigDataLabels data={cupboardData} isLoading={cupboardIsRefetching} />
-					<ThemeSwitcher />
+					{/* <ThemeSwitcher /> */}
 					{/* <Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button> */}
 				</div>
 				{buttons}

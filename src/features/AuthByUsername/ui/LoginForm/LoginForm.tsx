@@ -26,6 +26,8 @@ import { Icon } from '@/shared/ui/Icon'
 import { ForgotPasswordModal } from '../ForgotPasswordModal/ForgotPasswordModal'
 import { useNavigate } from 'react-router-dom'
 import { AlreadyAuthScreen } from './AlreadyAuthScreen'
+import { KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE } from '@/shared/const/localStorage'
+import { isRefreshResponse } from '@/shared/api/helpers/checkResponse'
 
 export interface LoginFormProps {
 	className?: string
@@ -47,8 +49,8 @@ const LoginForm = memo(() => {
 	// 	reducers: initialReducers,
 	// 	removeAfterUnmount: false,
 	// })
-	const auth = useSelector(getUserAuthData)
-	// const navigate = useNavigate();
+	// const auth = useSelector(getUserAuthData)
+	const navigate = useNavigate();
 
 	// useEffect(() => {
 	// 	if (auth) {
@@ -75,9 +77,13 @@ const LoginForm = memo(() => {
 	}, [dispatch])
 
 	const onClickLoginButton = useCallback(async () => {
-		console.log(email, password)
-		dispatch(loginUserByEmailThunk({ email, password }))
-	}, [dispatch, email, password])
+		// console.log(email, password)
+		const res = await dispatch(loginUserByEmailThunk({ email, password }))
+		// console.log(res)
+		if (res && res.payload && isRefreshResponse(res.payload) && res.meta.requestStatus === 'fulfilled') {
+			navigate('/')
+		}
+	}, [dispatch, email, password, navigate])
 
 	const onForgotPasswordClick = useCallback(() => {
 		dispatch(loginActions.setIsForgotPasswordModal(true))

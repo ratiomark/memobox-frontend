@@ -29,6 +29,10 @@ const initialState: UserSchema = {
 		shelfNamesList: [],
 		viewPageColumns: jsonSavedDataColumnsMock,
 	},
+	userData: {
+		email: '',
+		firstName: '',
+	},
 	help: `jsonCommonSettings - общие данные, например была ли посещена страница Х, видел ли окно Y
 userSettings - настройки системы, время сна, уведомления и т.д. В общем, все что живет на странице "настройки"
 jsonSavedData - данные по UI:
@@ -172,7 +176,10 @@ const userSlice = createSlice({
 						user,
 						...otherData
 					} = action.payload
-					state.authData = { ...otherData }
+					state.authData = {
+						...otherData, email: user.email!,
+						firstName: user.firstName!
+					}
 					// setFeatureFlag(action.payload.features)
 					state.jsonSavedData = user.jsonSavedData!
 					state.jsonCommonSettings = user.jsonSettings!

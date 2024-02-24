@@ -16,8 +16,8 @@ export type UserRole = keyof typeof UserRole
 // то что возвращает бекэнд
 export type User = {
 	id: string
-	username: string
-	name: string
+	// username: string
+	firstName: string
 	email: string
 	emailVerified: boolean
 	subscriptionType: 'none' | 'trial' | 'paid' | 'canceled'
@@ -36,6 +36,10 @@ export interface UserSchema {
 	_mounted: boolean
 	help: string
 	authData?: Omit<User, 'jsonSavedData' | 'userSettings'>
+	userData: {
+		email: string
+		firstName: string
+	}
 	userSettings?: UserSettings
 	userSettingsIsLoading?: boolean
 	userSettingsAwaitingResponseObject: {

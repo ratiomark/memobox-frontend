@@ -2,7 +2,7 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 
 export const getUserEmail = (state: StateSchema) => state.user.authData?.email
 export const getUserEmailVerified = (state: StateSchema) => state.user.authData?.emailVerified
-export const getUserName = (state: StateSchema) => state.user.authData?.name
+export const getUserName = (state: StateSchema) => state.user.authData?.firstName
 
 //
 export const getUserSubscriptionType = (state: StateSchema) => state.user.authData?.subscriptionType ?? 'trial'
