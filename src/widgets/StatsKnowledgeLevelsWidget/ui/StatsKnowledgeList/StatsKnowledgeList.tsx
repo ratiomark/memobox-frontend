@@ -36,7 +36,7 @@ export const StatsKnowledgeList = () => {
 	useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false)
-		}, 3000)
+		}, 1000)
 	}, [])
 
 	const listRendered = useMemo(() => {

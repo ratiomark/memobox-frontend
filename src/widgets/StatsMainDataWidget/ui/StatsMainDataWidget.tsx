@@ -42,7 +42,7 @@ export const StatsMainDataWidget = (props: StatsMainDataWidgetProps) => {
 		setTimeout(() => {
 			setIsLoading(false)
 			// }, 30000000)
-		}, 3000)
+		}, 1000)
 	}, [])
 
 
