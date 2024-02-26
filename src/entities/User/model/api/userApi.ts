@@ -16,11 +16,12 @@ interface SetJsonSavedData {
 	jsonSavedData: JsonSavedData
 }
 
-export interface UserWithToken extends User {
+export interface UserWithToken {
 	token: string
 	refreshToken: string
 	tokenExpires: number
-	user: Partial<User>
+	// user: Pick<User, 'id'>
+	user: User
 }
 
 // type ResponseWithToken = { token: string }
@@ -50,7 +51,7 @@ const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
-		registerUser: build.mutation<UserWithToken, RegisterByEmailProps>({
+		registerUser: build.mutation<null, RegisterByEmailProps>({
 			query: (arg) => ({
 				url: '/auth/email/register',
 				method: 'POST',

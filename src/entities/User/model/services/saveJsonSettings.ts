@@ -4,6 +4,7 @@ import { setJsonSettingsMutation } from '../api/userApi'
 import { getJsonSettings } from '../selectors/getJsonSettings'
 import { getUserAuthData } from '../selectors/getUserAuthData'
 import { JsonSettings } from '../types/JsonSettings'
+import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
 export const saveJsonSettings = createAsyncThunk<JsonSettings, JsonSettings, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
@@ -22,7 +23,7 @@ export const saveJsonSettings = createAsyncThunk<JsonSettings, JsonSettings, { r
 					...currentUserSettings,
 					...newJsonSettings
 				},
-				userId: userData.id
+				userId: localDataService.getUserId(),
 			}))
 				.unwrap() //разворачиваю в реальный результат
 

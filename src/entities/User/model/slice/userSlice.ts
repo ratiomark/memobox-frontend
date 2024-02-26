@@ -29,9 +29,13 @@ const initialState: UserSchema = {
 		shelfNamesList: [],
 		viewPageColumns: jsonSavedDataColumnsMock,
 	},
-	userData: {
+	userProfileData: {
 		email: '',
 		firstName: '',
+		emailVerified: false,
+		id: '',
+		subscriptionExpiresAt: 0,
+		subscriptionType: 'none',
 	},
 	help: `jsonCommonSettings - общие данные, например была ли посещена страница Х, видел ли окно Y
 userSettings - настройки системы, время сна, уведомления и т.д. В общем, все что живет на странице "настройки"
@@ -47,12 +51,15 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setAuthData: (state, action: PayloadAction<UserWithToken>) => {
-			state.authData = action.payload
+			state.authData = { id: action.payload.user.id }
 			// обновляю флаги фич
-			setFeatureFlag(action.payload.features)
+			setFeatureFlag(action.payload.user.features)
 			// localDataService.setToken(action.payload[KEY_USER_TOKEN_LOCAL_STORAGE])
 			// localDataService.setRefreshToken(action.payload[KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE])
 			state._mounted = true
+		},
+		setProfileData: (state, action: PayloadAction<UserWithToken['user']>) => {
+			state.userProfileData = action.payload
 		},
 		// 
 		setJsonSavedData: (state, action: PayloadAction<JsonSavedData>) => {
@@ -176,15 +183,29 @@ const userSlice = createSlice({
 						user,
 						...otherData
 					} = action.payload
-					state.authData = {
-						...otherData, email: user.email!,
-						firstName: user.firstName!
-					}
+					state.authData = { id: user.id }
 					// setFeatureFlag(action.payload.features)
 					state.jsonSavedData = user.jsonSavedData!
 					state.jsonCommonSettings = user.jsonSettings!
 					state._mounted = true
 				})
+			// .addCase(
+			// 	initAuthData.fulfilled,
+			// 	(state, action: PayloadAction<UserWithToken>) => {
+			// 		const {
+			// 			user,
+			// 			...otherData
+			// 		} = action.payload
+			// 		state.authData = {
+			// 			...otherData,
+			// 			email: user.email!,
+			// 			firstName: user.firstName!
+			// 		}
+			// 		// setFeatureFlag(action.payload.features)
+			// 		state.jsonSavedData = user.jsonSavedData!
+			// 		state.jsonCommonSettings = user.jsonSettings!
+			// 		state._mounted = true
+			// 	})
 			.addCase(
 				initAuthData.rejected,
 				(state) => {

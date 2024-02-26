@@ -16,30 +16,24 @@ export type UserRole = keyof typeof UserRole
 // то что возвращает бекэнд
 export type User = {
 	id: string
-	// username: string
 	firstName: string
 	email: string
 	emailVerified: boolean
 	subscriptionType: 'none' | 'trial' | 'paid' | 'canceled'
 	subscriptionExpiresAt: string | number
-	// avatar?: string
-	role?: UserRole[]
+	// role?: UserRole[]
 	features?: Partial<FeatureFlags>
-	// userSettings: UserSettings
-	jsonSettings?: JsonSettings
-	jsonSavedData?: JsonSavedData
+	jsonSettings: JsonSettings
+	jsonSavedData: JsonSavedData
 }
 
-// а это интрефейс для стейта, чтобы описать кусок стора?
-// если authData пустая, то юзер не авторизован, а если не пуст, то значит авторизован
+export type UserProfileData = Omit<User, 'jsonSavedData' | 'jsonSettings'>
+
 export interface UserSchema {
 	_mounted: boolean
 	help: string
-	authData?: Omit<User, 'jsonSavedData' | 'userSettings'>
-	userData: {
-		email: string
-		firstName: string
-	}
+	authData?: { id: string }
+	userProfileData?: UserProfileData
 	userSettings?: UserSettings
 	userSettingsIsLoading?: boolean
 	userSettingsAwaitingResponseObject: {
