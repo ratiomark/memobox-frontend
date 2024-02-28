@@ -6,25 +6,28 @@
       "DOM.Iterable",
       "ESNext"
     ],
+    "types": [
+      "cypress",
+      "@testing-library/cypress"
+    ],
+    "sourceMap": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "module": "ESNext",
     "skipLibCheck": true,
-    /* Bundler mode */
+    "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    // "resolveJsonModule": true,
+    // "composite": true,
+    // "module": "esnext",
+    // "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    /* Linting */
     "strict": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    // 
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -32,14 +35,17 @@
       ]
     },
     "forceConsistentCasingInFileNames": true,
-    // позваоляет работать с пакетами которые используют common js как с обычнми пакетами, используя import. common js это require() module.export 
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "include": [
     "src",
     "vite-env.d.ts",
-    "src/features/SettingsFeatures/TimeSleepSettings/ui/GeneralHoursMinutesComponent/.tsx",
-    "ignore/parser.mjs"
+    "ignore/parser.mjs",
+    "vite.config.ts",
+    "*.json",
+    "cypress/**/*.ts",
+    "cypress/support/index.d.ts",
+    "cypress/support/commands.ts"
   ],
   "exclude": [
     "./.fttemplates"
@@ -50,3 +56,55 @@
     }
   ]
 }
+// {
+//   "compilerOptions": {
+//     "target": "ESNext",
+//     "lib": [
+//       "DOM",
+//       "DOM.Iterable",
+//       "ESNext"
+//     ],
+//     "noUnusedLocals": false,
+//     "noUnusedParameters": false,
+//     "module": "ESNext",
+//     "skipLibCheck": true,
+//     /* Bundler mode */
+//     "moduleResolution": "bundler",
+//     "allowImportingTsExtensions": true,
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "noEmit": true,
+//     "jsx": "react-jsx",
+//     "allowSyntheticDefaultImports": true,
+//     "allowJs": true,
+//     /* Linting */
+//     "strict": true,
+//     // "noUnusedLocals": true,
+//     // "noUnusedParameters": true,
+//     "noFallthroughCasesInSwitch": true,
+//     // 
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/*": [
+//         "./src/*"
+//       ]
+//     },
+//     "forceConsistentCasingInFileNames": true,
+//     // позваоляет работать с пакетами которые используют common js как с обычнми пакетами, используя import. common js это require() module.export 
+//     "esModuleInterop": true,
+//   },
+//   "include": [
+//     "src",
+//     "vite-env.d.ts",
+//     "src/features/SettingsFeatures/TimeSleepSettings/ui/GeneralHoursMinutesComponent/.tsx",
+//     "ignore/parser.mjs"
+//   ],
+//   "exclude": [
+//     "./.fttemplates"
+//   ],
+//   "references": [
+//     {
+//       "path": "./tsconfig.node.json"
+//     }
+//   ]
+// }

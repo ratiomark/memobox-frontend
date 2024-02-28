@@ -15,6 +15,10 @@ export default defineConfig({
 		react(),
 		VitePWA({
 			registerType: 'autoUpdate',
+			workbox: {
+				maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+				sourcemap: true,
+			},
 			// devOptions: {
 			// 	enabled: false
 			// },
@@ -74,8 +78,10 @@ export default defineConfig({
 		]
 	},
 	build: {
-		// sourcemap: 'inline',
-		sourcemap: 'hidden',
+		sourcemap: 'inline',
+		// sourcemap: 'hidden',
+		// sourcemap: true,
+
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
