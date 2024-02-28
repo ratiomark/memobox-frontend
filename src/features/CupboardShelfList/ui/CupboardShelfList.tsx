@@ -41,8 +41,8 @@ import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags';
 import { rtkApi } from '@/shared/api/rtkApi';
 
 export const CupboardShelfList = () => {
-	const dispatch = useAppDispatch()
-	const cupboardError = useSelector(getCupboardError)
+	// const dispatch = useAppDispatch()
+	// const cupboardError = useSelector(getCupboardError)
 	useCupboardButtonsSizes()
 
 	// useEffect(() => {
