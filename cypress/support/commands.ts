@@ -1,23 +1,16 @@
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
+import { generateDataTestIdSelector } from '#/helpers';
+import '@4tw/cypress-drag-drop';
 // https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-export const generateDataTestIdSelector = (testId) => `[data-testid="${testId}"]`;
 
 Cypress.Commands.add('getByTestId', (testId, ...args) => {
 	return cy.get(generateDataTestIdSelector(testId), ...args);
+});
+
+// @ts-ignore
+Cypress.Commands.add('findByTestId', { prevSubject: ['element'] }, (subject, testId, ...args) => {
+	// @ts-ignore
+	return subject.find(generateDataTestIdSelector(testId), ...args);
 });
 
 Cypress.Commands.add('clickByTestId', (testId, ...args) => {
