@@ -5,7 +5,7 @@ import { getViewPageAbortedThunkIds } from '../selectors/getViewPageInitializer'
 import { viewPageActions } from '../slice/viewPageSlice'
 import { t } from 'i18next'
 import { getCardIdsSelectedForDeletionByRandomId } from '../selectors/getViewPageMultiSelect'
-import { rtkApiDeleteCards } from '@/entities/Card'
+import { rtkApiDeleteCardsSoft } from '@/entities/Card'
 import { TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE, TAG_VIEW_PAGE, } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
 
@@ -41,7 +41,7 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 				}
 			}))
 
-			const response = await dispatch(rtkApiDeleteCards({ cardIds: cardIdsSelectedForDeletion })).unwrap()
+			const response = await dispatch(rtkApiDeleteCardsSoft({ cardIds: cardIdsSelectedForDeletion })).unwrap()
 
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))

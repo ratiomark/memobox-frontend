@@ -8,7 +8,7 @@ import { viewPageActions } from '../slice/viewPageSlice'
 import { t } from 'i18next'
 import { TAG_VIEW_PAGE, TAG_TRASH_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
-import { rtkApiDeleteCard } from '@/entities/Card'
+import { rtkApiDeleteCardSoft } from '@/entities/Card'
 let test = 0
 export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema, rejectedMeta: { aborted: boolean } }>(
 	'viewPage/deleteCardThunk',
@@ -36,7 +36,7 @@ export const deleteCardThunk = createAsyncThunk<string, string, { rejectValue: s
 					contentCommon: t('toast:delete_card.additional'),
 				}
 			}))
-			const response = await dispatch(rtkApiDeleteCard(cardId)).unwrap()
+			const response = await dispatch(rtkApiDeleteCardSoft(cardId)).unwrap()
 			if (!response) {
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error('Request failed')
