@@ -46,7 +46,7 @@
     "cypress/**/*.ts",
     "cypress/support/index.d.ts",
     "cypress/support/commands.ts"
-  ],
+, ".vscode/2-advanced-examples.log/2-view-page.cy.ts"  ],
   "exclude": [
     "./.fttemplates"
   ],
