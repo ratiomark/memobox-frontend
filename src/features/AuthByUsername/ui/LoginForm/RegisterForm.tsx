@@ -18,7 +18,9 @@ import { getUserAuthData, registerByEmailThunk } from '@/entities/User'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { Icon } from '@/shared/ui/Icon'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
-import { AlreadyAuthScreen } from './AlreadyAuthScreen'
+import { TEST_BUTTONS_IDS, TEST_INPUTS_IDS } from '@/shared/const/testConsts'
+import { EmailAndPassword } from './EmailAndPassword'
+// import { AlreadyAuthScreen } from './AlreadyAuthScreen'
 
 export interface LoginFormProps {
 	className?: string
@@ -30,20 +32,20 @@ const RegisterForm = memo(() => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 	const email = useSelector(getLoginEmail)
-	const userName = useSelector(getLoginUserName)
+	const firstName = useSelector(getLoginUserName)
 	const password = useSelector(getLoginPassword)
 	const isLoading = useSelector(getLoginIsLoading)
 	const error = useSelector(getLoginError)
-	const auth = useSelector(getUserAuthData)
-	const [isShowPassword, setIsShowPassword] = useState(false)
 
-	const onChangeEmail = useCallback((value: string) => {
-		dispatch(loginActions.setEmail(value))
-	}, [dispatch])
+	// const [isShowPassword, setIsShowPassword] = useState(false)
 
-	const onChangePassword = useCallback((value: string) => {
-		dispatch(loginActions.setPassword(value))
-	}, [dispatch])
+	// const onChangeEmail = useCallback((value: string) => {
+	// 	dispatch(loginActions.setEmail(value))
+	// }, [dispatch])
+
+	// const onChangePassword = useCallback((value: string) => {
+	// 	dispatch(loginActions.setPassword(value))
+	// }, [dispatch])
 
 	const onChangeUserName = useCallback((value: string) => {
 		dispatch(loginActions.setUserName(value))
@@ -54,23 +56,13 @@ const RegisterForm = memo(() => {
 	}, [dispatch])
 
 	const onClickRegisterButton = useCallback(async () => {
-		dispatch(registerByEmailThunk({ email, password, name: userName }))
-	}, [dispatch, email, password, userName])
+		dispatch(registerByEmailThunk({ email, password, name: firstName }))
+	}, [dispatch, email, password, firstName])
 
 	// const onMeClick = useCallback(async () => {
 	// 	dispatch(registerByEmailThunk({ email, password }))
 	// }, [dispatch, email, password])
-	const onClickShowPassword = () => setIsShowPassword(prev => !prev)
-
-	const togglePasswordVisibilityIcon = <Icon
-		className={cls.icon}
-		Svg={EyeIcon}
-		clickable
-		onClick={onClickShowPassword}
-	// width={iconSizeBox}
-	// height={iconSizeBox}
-	/>
-
+	// const onClickShowPassword = () => setIsShowPassword(prev => !prev)
 
 	// if (auth) {
 	// 	return <AlreadyAuthScreen />
@@ -79,30 +71,33 @@ const RegisterForm = memo(() => {
 	return (
 		<div className={cls.wrapper} >
 
-			<div className={clsx(cls.LoginForm)}>
+			<form className={clsx(cls.LoginForm)}>
 				{/* <MyText align='center' text={t('Регистрация')} /> */}
 				{/* <MyText text={t('regiset form in modal')} /> */}
 
 				<div className={cls.inputWrapper}>
 					{error && <MyText text={error} variant='error' />}
 
-					<label className={cls.label} htmlFor='userName'>
+					<label className={cls.label} htmlFor='firstName'>
 						{t('name')}
 					</label>
 					<Input
 						autoFocus
 						type='text'
-						id='userName'
-						value={userName}
+						id='firstName'
+						data-testid={TEST_INPUTS_IDS.registerInputFirstName}
+						value={firstName}
 						onChangeString={onChangeUserName}
 					/>
-					<label className={cls.label} htmlFor='email'>
+					<EmailAndPassword />
+					{/* <label className={cls.label} htmlFor='email'>
 						{t('email')}
 					</label>
 					<Input
 						autoFocus
 						type='text'
 						id='email'
+						data-testid={TEST_INPUTS_IDS.registerInputEmail}
 						value={email}
 						onChangeString={onChangeEmail}
 					/>
@@ -112,14 +107,13 @@ const RegisterForm = memo(() => {
 					<div className={cls.passwordWrapper} >
 						<Input
 							type={isShowPassword ? 'text' : 'password'}
-
 							id='password'
+							data-testid={TEST_INPUTS_IDS.registerInputPassword}
 							value={password}
 							onChangeString={onChangePassword}
-						// addonRight={togglePasswordVisibilityIcon}
 						/>
 						{togglePasswordVisibilityIcon}
-					</div>
+					</div> */}
 					{/* <HStack className={cls.class}  max justify='center'> */}
 
 					{/* <GetMeButton /> */}
@@ -129,6 +123,7 @@ const RegisterForm = memo(() => {
 						className={cls.loginBtn}
 						onClick={onClickRegisterButton}
 						disabled={isLoading}
+						data-testid={TEST_BUTTONS_IDS.registerButton}
 					>
 						{t('sign up')}
 					</Button>
@@ -143,11 +138,12 @@ const RegisterForm = memo(() => {
 							className={cls.linkButton}
 							as={'span'}
 							onClick={onSwitchToLogin}
-							text={t('go to sign up')}
+							data-testid={TEST_BUTTONS_IDS.goToLogin}
+							text={t('go to sign in')}
 						/>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	)
 })

@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction, } from '@reduxjs/toolkit';
 // import { loginUserByUserName } from '../services/loginByUserName/loginUserByUserName';
 import { LoginSchema } from '../types/loginSchema';
+import { TEST_USER_DATA } from '@/shared/const/testConsts';
 
 const initialState: LoginSchema = {
 	isLoading: false,
-	email: 'john.doe@example.com',
-	password: 'secret',
-	name: 'John Doe',
+	email: TEST_USER_DATA.email,
+	password: TEST_USER_DATA.password,
+	name: TEST_USER_DATA.name,
 	isLoginProcess: false,
 	isForgotModalOpen: false,
 }

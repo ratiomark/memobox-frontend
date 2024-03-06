@@ -7,27 +7,21 @@ import {
 	getLoginPassword,
 	getLoginEmail,
 } from '../../Model/selectors/getLoginState/getLoginState'
-import { loginActions, loginReducer } from '../../Model/slice/loginSlice'
+import { loginActions } from '../../Model/slice/loginSlice'
 import cls from './LoginForm.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
-
-import { getUserAuthData, loginUserByEmailThunk } from '@/entities/User'
-import {
-	ReducersList,
-	useAsyncReducer,
-} from '@/shared/lib/helpers/hooks/useAsyncReducer'
 import { MyText } from '@/shared/ui/Typography'
 import clsx from 'clsx'
-import { HStack } from '@/shared/ui/Stack'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
 import { Icon } from '@/shared/ui/Icon'
 import { ForgotPasswordModal } from '../ForgotPasswordModal/ForgotPasswordModal'
 import { useNavigate } from 'react-router-dom'
-import { AlreadyAuthScreen } from './AlreadyAuthScreen'
-import { KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE } from '@/shared/const/localStorage'
 import { isRefreshResponse } from '@/shared/api/helpers/checkResponse'
+import { TEST_BUTTONS_IDS, TEST_INPUTS_IDS } from '@/shared/const/testConsts'
+import { loginUserByEmailThunk } from '@/entities/User'
+import { EmailAndPassword } from './EmailAndPassword'
 
 export interface LoginFormProps {
 	className?: string
@@ -64,13 +58,13 @@ const LoginForm = memo(() => {
 	const error = useSelector(getLoginError)
 	const [isShowPassword, setIsShowPassword] = useState(false)
 
-	const onChangeEmail = useCallback((value: string) => {
-		dispatch(loginActions.setEmail(value))
-	}, [dispatch])
+	// const onChangeEmail = useCallback((value: string) => {
+	// 	dispatch(loginActions.setEmail(value))
+	// }, [dispatch])
 
-	const onChangePassword = useCallback((value: string) => {
-		dispatch(loginActions.setPassword(value))
-	}, [dispatch])
+	// const onChangePassword = useCallback((value: string) => {
+	// 	dispatch(loginActions.setPassword(value))
+	// }, [dispatch])
 
 	const onSwitchToRegister = useCallback(() => {
 		dispatch(loginActions.setIsLoginProcess(false))
@@ -91,14 +85,14 @@ const LoginForm = memo(() => {
 
 	const onClickShowPassword = () => setIsShowPassword(prev => !prev)
 
-	const togglePasswordVisibilityIcon = <Icon
-		className={cls.icon}
-		Svg={EyeIcon}
-		clickable
-		onClick={onClickShowPassword}
-	// width={iconSizeBox}
-	// height={iconSizeBox}
-	/>
+	// const togglePasswordVisibilityIcon = <Icon
+	// 	className={cls.icon}
+	// 	Svg={EyeIcon}
+	// 	clickable
+	// 	onClick={onClickShowPassword}
+	// // width={iconSizeBox}
+	// // height={iconSizeBox}
+	// />
 
 	// if (auth) {
 	// 	return <AlreadyAuthScreen />
@@ -113,14 +107,15 @@ const LoginForm = memo(() => {
 
 					<div className={cls.inputWrapper}>
 						{error && <MyText text={error} variant='error' />}
-
-						<label className={cls.label} htmlFor='email'>
+						<EmailAndPassword />
+						{/* <label className={cls.label} htmlFor='email'>
 							{t('email')}
 						</label>
 						<Input
 							autoFocus
 							type='text'
 							id='email'
+							data-testid={TEST_INPUTS_IDS.loginInputEmail}
 							value={email}
 							onChangeString={onChangeEmail}
 						/>
@@ -132,12 +127,13 @@ const LoginForm = memo(() => {
 								type={isShowPassword ? 'text' : 'password'}
 
 								id='password'
+								data-testid={TEST_INPUTS_IDS.loginInputPassword}
 								value={password}
 								onChangeString={onChangePassword}
 							// addonRight={togglePasswordVisibilityIcon}
 							/>
 							{togglePasswordVisibilityIcon}
-						</div>
+						</div> */}
 						{/* <HStack max align='center' justify='center'> */}
 
 						{/* <GetMeButton /> */}
@@ -147,6 +143,7 @@ const LoginForm = memo(() => {
 							className={cls.loginBtn}
 							onClick={onClickLoginButton}
 							disabled={isLoading}
+							data-testid={TEST_BUTTONS_IDS.loginButton}
 						>
 							{t('sign in')}
 						</Button>
@@ -157,6 +154,7 @@ const LoginForm = memo(() => {
 								as={'span'}
 								onClick={onForgotPasswordClick}
 								text={t('Забыли пароль?')}
+								data-testid={TEST_BUTTONS_IDS.forgotPasswordLink}
 							/>
 						</div>
 						<div>
@@ -168,8 +166,9 @@ const LoginForm = memo(() => {
 							<MyText
 								className={cls.linkButton}
 								as={'span'}
+								data-testid={TEST_BUTTONS_IDS.goToRegister}
 								onClick={onSwitchToRegister}
-								text={t('go to sign in')}
+								text={t('go to sign up')}
 							/>
 						</div>
 					</div>
