@@ -19,8 +19,9 @@ import { createNewCardThunk } from '../services/createNewCardThunk'
 import { NEW_CARDS_COUNTS_AS_TRAIN } from '@/shared/const/flags'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { deleteBoxThunk, DeleteBoxThunkResponse } from '../services/deleteBoxThunk'
+import { mapShelvesToDndRepresentation } from '@/shared/lib/helpers/mappers/mapShelves'
 
-const initialState: CupboardPageSchema = {
+export const cupboardInitialState: CupboardPageSchema = {
 	isDataAlreadyInStore: false,
 	isNeedRefetch: false,
 	isNeedStop: true,
@@ -108,21 +109,22 @@ const initialState: CupboardPageSchema = {
 		wait: 0
 	},
 	isCupboardInfoModalOpen: false,
-	abortedThunkIds: []
+	abortedThunkIds: [],
+	skipTrainingHotKey: false
 }
 
-const shelvesAdapter = createEntityAdapter<ShelfSchema>({
+export const shelvesAdapter = createEntityAdapter<ShelfSchema>({
 	selectId: (shelf) => shelf.id,
 	// Сортирую по индексу
 	sortComparer: (a, b) => a.index - b.index,
 })
 
-export const getCupboardState = shelvesAdapter.getSelectors<StateSchema>(
-	(state) => state.cupboard ? state.cupboard : initialState
-)
-export const getAllShelvesIds = (state: StateSchema) => getCupboardState.selectIds(state)
-export const getAllShelves = (state: StateSchema) => getCupboardState.selectAll(state)
-export const getAllShelvesEntities = (state: StateSchema) => getCupboardState.selectEntities(state)
+// export const getCupboardState = shelvesAdapter.getSelectors<StateSchema>(
+// 	(state) => state.cupboard ? state.cupboard : initialState
+// )
+// export const getAllShelvesIds = (state: StateSchema) => getCupboardState.selectIds(state)
+// export const getAllShelves = (state: StateSchema) => getCupboardState.selectAll(state)
+// export const getAllShelvesEntities = (state: StateSchema) => getCupboardState.selectEntities(state)
 // export const getOneShelfById = (id: string) => getCupboardState.selectById(store.getState(), id)
 // const booksSelectors = booksAdapter.getSelectors<RootState>(
 // 	(state) => state.books
@@ -139,8 +141,11 @@ export const isShelvesDndRepresentationEqual = (initialShelves: ShelfDndRepresen
 
 const cupboardShelfList = createSlice({
 	name: 'cupboardShelfList',
-	initialState,
+	initialState: cupboardInitialState,
 	reducers: {
+		setSkipTrainingHotKey: (state, action: PayloadAction<boolean>) => {
+			state.skipTrainingHotKey = action.payload
+		},
 		setAbortedThunkId: (state, action: PayloadAction<string>) => {
 			state.abortedThunkIds.push(action.payload)
 		},
@@ -351,7 +356,8 @@ const cupboardShelfList = createSlice({
 			// const shelves = allShelves.map(shelf => ({ ...shelf, isLoading: true }))
 			// shelvesAdapter.setAll(state, shelves)
 			shelvesAdapter.setAll(state, allShelves)
-			const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
+			const shelvesDndRepresentation = mapShelvesToDndRepresentation(allShelves)
+			// const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
 			state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
 			state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 			state.shelvesTitles = allShelves.map(shelf => shelf.title)
@@ -373,7 +379,8 @@ const cupboardShelfList = createSlice({
 			state.commonShelf = commonShelf
 			state.createNewCardModal.shelfId = allShelves[0].id
 			shelvesAdapter.setAll(state, allShelves)
-			const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
+			const shelvesDndRepresentation = mapShelvesToDndRepresentation(allShelves)
+			// const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
 			state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
 			state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 			state.shelvesTitles = allShelves.map(shelf => shelf.title)
@@ -434,7 +441,9 @@ const cupboardShelfList = createSlice({
 						state.isFirstRender = false
 					}
 					shelvesAdapter.setAll(state, allShelves)
-					const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
+
+					const shelvesDndRepresentation = mapShelvesToDndRepresentation(allShelves)
+					// const shelvesDndRepresentation = allShelves.map((shelf, index) => ({ id: shelf.id, index }))
 					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
 					state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 					state.shelvesTitles = allShelves.map(shelf => shelf.title)
@@ -471,7 +480,8 @@ const cupboardShelfList = createSlice({
 				(state, action: PayloadAction<ShelfSchema[]>) => {
 					if (action.payload.length > 0) {
 						shelvesAdapter.setAll(state, action.payload)
-						const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
+						const shelvesDndRepresentation = mapShelvesToDndRepresentation(action.payload)
+						// const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
 						state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
 						state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 					}
@@ -481,7 +491,8 @@ const cupboardShelfList = createSlice({
 				(state, action: PayloadAction<ShelfSchema[]>) => {
 					shelvesAdapter.setAll(state, action.payload)
 					state.createNewShelfModal.requestStatus = 'success'
-					const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
+					const shelvesDndRepresentation = mapShelvesToDndRepresentation(action.payload)
+					// const shelvesDndRepresentation = action.payload.map((shelf, index) => ({ id: shelf.id, index }))
 					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
 					state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
 					state.shelvesTitles.push(action.payload[0].title)
@@ -495,12 +506,16 @@ const cupboardShelfList = createSlice({
 			// 	})
 			.addCase(
 				deleteShelfThunk.fulfilled,
-				(state, action: PayloadAction<{ id: string, title: string, shelves: ShelfSchema[] }>) => {
+				(state, action: PayloadAction<{
+					id: string,
+					title: string,
+					shelves: ShelfSchema[],
+					shelvesDndRepresentation: ShelfDndRepresentation[]
+				}>) => {
 					state.shelvesTitles = state.shelvesTitles.filter(title => title !== action.payload.title)
 					shelvesAdapter.setAll(state, action.payload.shelves)
-					const shelvesDndRepresentation = action.payload.shelves.map((shelf, index) => ({ id: shelf.id, index }))
-					state.shelvesIdsAndIndexesInitial = shelvesDndRepresentation
-					state.shelvesIdsAndIndexesCurrent = shelvesDndRepresentation
+					state.shelvesIdsAndIndexesInitial = action.payload.shelvesDndRepresentation
+					state.shelvesIdsAndIndexesCurrent = action.payload.shelvesDndRepresentation
 					if (state.createNewCardModal.shelfId === action.payload.id) {
 						state.createNewCardModal.shelfId = action.payload.shelves[0].id
 					}
