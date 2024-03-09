@@ -18,18 +18,24 @@ export const fetchCupboardDataThunk = createAsyncThunk<CupboardSchema, CupboardS
 			commonShelf.isCollapsed = isCommonShelfCollapsed
 			// dispatch(cupboardShelfListActions.setCommonShelf(commonShelf))
 
-			const arrayOfShelfIds = cupboardData.shelves.map((shelf) => shelf.id)
-			const shelfEntitiesIds = getState().cupboard?.ids
-			const arraysHaveSameLength = arrayOfShelfIds.length === shelfEntitiesIds.length;
-			const allIdsMatch = arraysHaveSameLength && arrayOfShelfIds.every(id => shelfEntitiesIds.includes(id));
+			// const arrayOfShelfIdsFromFetch = cupboardData.shelves.map((shelf) => shelf.id)
+			// const shelfEntitiesIds = getState().cupboard?.ids
 
+			// const arraysHaveSameLength = arrayOfShelfIdsFromFetch.length === shelfEntitiesIds.length;
+			// const allIdsMatch = arraysHaveSameLength && arrayOfShelfIdsFromFetch.every(id => shelfEntitiesIds.includes(id));
+
+
+			// console.log('fetchCupboardDataThunk:  arrayOfShelfIdsFromFetch', arrayOfShelfIdsFromFetch)
+			// console.log('fetchCupboardDataThunk:  shelfEntitiesIds', shelfEntitiesIds)
+			// console.log('fetchCupboardDataThunk:  arraysHaveSameLength', arraysHaveSameLength)
+			// console.log('fetchCupboardDataThunk:  allIdsMatch', allIdsMatch)
 			// const shelfEntities = getState().cupboard?.entities
 			// const allIdsMatch = arrayOfShelfIds.every(id => id in shelfEntities);
 
-			if (!isFirstRender && allIdsMatch) {
-				dispatch(cupboardShelfListActions.setCommonShelf(commonShelf))
-				throw new Error('Aborted - shelves data is already in store')
-			}
+			// if (!isFirstRender && allIdsMatch) {
+			// 	dispatch(cupboardShelfListActions.setCommonShelf(commonShelf))
+			// 	throw new Error('Aborted - shelves data is already in store')
+			// }
 
 			return { ...cupboardData, commonShelf }
 

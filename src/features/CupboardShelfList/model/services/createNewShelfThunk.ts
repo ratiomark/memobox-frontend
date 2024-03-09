@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
-import { cupboardShelfListActions, getCupboardState } from '../slice/cupboardShelfListSlice'
+import { cupboardShelfListActions } from '../slice/cupboardShelfListSlice'
 import { ShelfSchema, rtkCreateNewShelf } from '@/entities/Shelf'
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
 import { toastsActions } from '@/shared/ui/Toast'
@@ -8,6 +8,7 @@ import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { t } from 'i18next'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { TAG_TRASH_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags'
+import { getCupboardState } from '../selectors/getCupboardCommon';
 
 export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
 	'cupboardPage/createNewShelfThunk',

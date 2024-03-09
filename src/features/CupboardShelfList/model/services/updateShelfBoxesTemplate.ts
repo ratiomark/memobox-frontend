@@ -5,7 +5,7 @@ import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId'
-import { updateShelfWithTag } from '@/entities/Shelf'
+import { rtkShelfUpdateBoxesList, updateShelfWithTag } from '@/entities/Shelf'
 import { updateBoxWithTag } from '@/entities/Box'
 import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 import { idPrefixShelfBoxesTemplateUpdating } from '@/shared/const/idsAndDataAttributes'
@@ -25,7 +25,7 @@ export const updateShelfBoxesTemplate = createAsyncThunk<string, string, { rejec
 		const { dispatch, getState } = thunkAPI
 		const shelfTitle = getShelfTitleByShelfId(shelfId)(getState())
 		const currentShelfTemplate = getBoxesTemplateModalCurrentShelfTemplate(getState())!
-		const requestTemplate = currentShelfTemplate.map((box) => ({
+		const boxesList = currentShelfTemplate.map((box) => ({
 			index: box.index,
 			id: box.id,
 			timing: {
@@ -50,8 +50,10 @@ export const updateShelfBoxesTemplate = createAsyncThunk<string, string, { rejec
 		}))
 		try {
 			// await sleep(4)
-			// console.log(currentShelfTemplate)
-			console.log(requestTemplate)
+			console.log('-------------------------  ', currentShelfTemplate)
+			console.log('+++++++++++++++++++++++  ', boxesList)
+			const response = await dispatch(rtkShelfUpdateBoxesList({ shelfId, boxesList })).unwrap()
+			console.log('response===================  ', response)
 			// const response = boxId
 			// 	? dispatch(updateBoxWithTag({ shelfId, box: { missedTrainingValue, id: boxId } })).unwrap()
 			// 	: dispatch(updateShelfWithTag({ id: shelfId, missedTrainingValue })).unwrap()

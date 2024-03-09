@@ -4,17 +4,19 @@ import { toastsActions } from '@/shared/ui/Toast'
 import { getAbortedThunkIds, getShelfById, getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 import { sleep } from '@/shared/lib/helpers/common/sleep'
 import { t } from 'i18next'
-import { ShelfSchema, rtkRemoveShelfById } from '@/entities/Shelf'
+import { ShelfDndRepresentation, ShelfSchema, rtkRemoveShelfById } from '@/entities/Shelf'
 import { idPrefixShelfDeletion } from '@/shared/const/idsAndDataAttributes'
 import { TAG_TRASH_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { setLocalShelvesToStore } from './setLocalShelvesToStore'
+import { mapShelvesToDndRepresentation } from '@/shared/lib/helpers/mappers/mapShelves'
 
 type DeleteShelfThunkResponse = {
 	id: string
 	title: string
 	shelves: ShelfSchema[]
+	shelvesDndRepresentation: ShelfDndRepresentation[]
 }
 
 const AbortedError = 'Aborted'
@@ -54,12 +56,21 @@ export const deleteShelfThunk = createAsyncThunk<DeleteShelfThunkResponse, strin
 			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 
+
+
 			const localShelves = localDataService.getShelves()
 			const localShelvesFiltered = localShelves.filter((shelf) => shelf.id !== shelfId)
-			localDataService.setShelves(localShelvesFiltered.map((shelf, i) => ({ ...shelf, index: i })))
-			// dispatch(setLocalShelvesToStore())
+			const shelvesDndRepresentation = mapShelvesToDndRepresentation(localShelvesFiltered)
+			localDataService.setShelves(shelvesDndRepresentation)
 
-			return { id: shelfId, title: shelf.title, shelves: localShelvesFiltered }
+			return { id: shelfId, title: shelf.title, shelves: localShelvesFiltered, shelvesDndRepresentation }
+
+			// const localShelves = localDataService.getShelves()
+			// const localShelvesFiltered = localShelves.filter((shelf) => shelf.id !== shelfId)
+			// localDataService.setShelves(localShelvesFiltered.map((shelf, i) => ({ ...shelf, index: i })))
+			// // dispatch(setLocalShelvesToStore())
+
+			// return { id: shelfId, title: shelf.title, shelves: localShelvesFiltered }
 
 		} catch (err) {
 			const error = err as Error
