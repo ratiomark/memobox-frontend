@@ -1,6 +1,6 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
-import { getCupboardState } from '../slice/cupboardShelfListSlice';
+import { getCupboardState } from '../selectors/getCupboardCommon';
 
 export const getNotificationModalIsOpen = (state: StateSchema) => state.cupboard.notificationShelfModal.isOpen
 export const getNotificationModalShelfId = (state: StateSchema) => state.cupboard.notificationShelfModal.shelfId

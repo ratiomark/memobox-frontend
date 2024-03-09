@@ -1,6 +1,6 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
-import { getCupboardState } from '../..';
+import { getCupboardState } from '../selectors/getCupboardCommon';
 
 export const getBoxSettingsDropdownModalIsOpen = (state: StateSchema) => state.cupboard.boxSettingsDropdownModal.isOpen
 export const getBoxSettingsDropdownCoordinates = (state: StateSchema) => state.cupboard.boxSettingsDropdownModal.boxCoordinates
@@ -15,7 +15,7 @@ export const getBoxSettingsDropdownIsLearntBox = createSelector(
 	],
 	(state, boxId, shelfId) => {
 		const shelf = getCupboardState.selectById(state, shelfId)
-		if(!shelf) return false
+		if (!shelf) return false
 		const boxesData = shelf.boxesData
 		return boxesData.find((box) => box.id === boxId)?.specialType === 'learnt'
 	}

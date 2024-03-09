@@ -1,6 +1,6 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { EntityId, createSelector } from '@reduxjs/toolkit';
-import { getAllShelves, getCupboardState } from '../slice/cupboardShelfListSlice';
+import { getCupboardState } from '../selectors/getCupboardCommon';
 import { store } from '@/app/providers/StoreProvider'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 
@@ -30,6 +30,7 @@ export const getIsAnyCardsToTrain = createSelector(
 	}
 )
 export const getIsOnlyOneShelfLeftInCupboard = (state: StateSchema) => state.cupboard.ids.length < 2
+export const getIsSkipTrainingByHotKeyPress = (state: StateSchema) => state.cupboard.skipTrainingHotKey
 // export const getCupboardShelves = (state: StateSchema) => state.cupboard.shelves
 // export const getShelfIsDeleting = createSelector(
 // 	[

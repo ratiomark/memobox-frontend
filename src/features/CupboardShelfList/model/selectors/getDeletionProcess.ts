@@ -1,6 +1,6 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { EntityId, createSelector } from '@reduxjs/toolkit';
-import { getCupboardState } from '../..';
+import { getCupboardState } from '../selectors/getCupboardCommon';
 import { RequestStatusType } from '@/shared/types/GeneralTypes';
 
 // export const getShelfDeletionRequestStatus = (state: StateSchema) => state.cupboard.shelfDeletionProcess.requestStatus

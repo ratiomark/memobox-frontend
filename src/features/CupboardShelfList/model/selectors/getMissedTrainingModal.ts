@@ -1,6 +1,6 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
-import { getCupboardState } from '../slice/cupboardShelfListSlice';
+import { getCupboardState } from '../selectors/getCupboardCommon';
 
 export const getMissedTrainingModalIsOpen = (state: StateSchema) => state.cupboard.missedTrainingModal.isOpen
 export const getMissedTrainingModalShelfId = (state: StateSchema) => state.cupboard.missedTrainingModal.shelfId
