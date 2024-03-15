@@ -1,10 +1,10 @@
-import { ChangeEvent, FocusEvent, InputHTMLAttributes, KeyboardEvent, ReactNode, memo, useRef, useState, } from 'react';
-import { ValidationErrorText } from '@/shared/lib/helpers/validation/validationErrorTexts';
+import { ChangeEvent, FocusEvent, InputHTMLAttributes, KeyboardEvent, ReactNode, memo, useRef, useState } from 'react'
+import { ValidationErrorText } from '@/shared/lib/helpers/validation/validationErrorTexts'
 import cls from './Input.module.scss'
-import clsx from 'clsx';
-import { HStack } from '../Stack';
-import { MyText } from '../Typography/Text/MyText';
-
+import clsx from 'clsx'
+import { HStack } from '../Stack'
+import { MyText } from '../Typography/Text/MyText'
+import { TEST_INPUTS_IDS } from '@/shared/const/testConsts'
 
 // Omit позволяет сконструировать тип, который будет включять в себя все пропсы, кроме некоторых указанных отдельно
 // Это нужно для того, чтобы в InputProps можно было без проблем определить пропсы которые уже существуют в InputHTMLAttributes<HTMLInputElement>
@@ -12,23 +12,23 @@ type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onC
 
 // Расширяю стандартные пропсы которые принимает инпут, тут использую результат Omit с выпилиенными value, onChange
 interface InputProps extends HTMLInputProps {
-	className?: string;
-	classNameInputError?: string;
-	value?: string;
-	autoFocus?: boolean;
-	readonly?: boolean;
+	className?: string
+	classNameInputError?: string
+	value?: string | number
+	autoFocus?: boolean
+	readonly?: boolean
 	inputErrors?: ValidationErrorText[] | string[]
 	// onChange?: (value: string | ChangeEvent<HTMLInputElement>) => void;
-	onChangeEvent?: (event: ChangeEvent<HTMLInputElement>) => void;
-	onChangeString?: (value: string) => void;
-	onBlur?: (value: string) => void;
+	onChangeEvent?: (event: ChangeEvent<HTMLInputElement>) => void
+	onChangeString?: (value: string) => void
+	onBlur?: (value: string) => void
 	onValidate?: (value: any) => void
-	onKeyPress?: (event: KeyboardEvent<HTMLInputElement>) => void;
-	addonLeft?: ReactNode;
-	addonRight?: ReactNode;
+	onKeyPress?: (event: KeyboardEvent<HTMLInputElement>) => void
+	addonLeft?: ReactNode
+	addonRight?: ReactNode
 	label?: string
-
 }
+
 //eslint-disable-next-line
 export const Input = memo((props: InputProps) => {
 	const {
@@ -37,7 +37,6 @@ export const Input = memo((props: InputProps) => {
 		onChangeEvent,
 		onChangeString,
 		onBlur,
-		max,
 		onValidate,
 		onKeyPress,
 		type = 'text',
@@ -77,19 +76,19 @@ export const Input = memo((props: InputProps) => {
 		onBlur?.(e.target.value)
 	}
 
-	let inputErrorsRendered;
+	let inputErrorsRendered
 	if (hasErrors) {
-		inputErrorsRendered = inputErrors.map(i => (
+		inputErrorsRendered = inputErrors.map((i) => (
 			<MyText
 				text={i}
 				align='left'
 				key={i}
 				variant='error'
+				data-testid={TEST_INPUTS_IDS.common.inputShowError}
 				className={clsx(cls.inputError, cls.inputErrorActive, classNameInputError)}
 			/>
 		))
 	}
-
 
 	if (addonLeft || addonRight) {
 		const mods: Record<string, boolean | undefined> = {
@@ -97,21 +96,18 @@ export const Input = memo((props: InputProps) => {
 			[cls.readonly]: readonly,
 			[cls.focused]: isFocus,
 			[cls.hasErrors]: hasErrors,
-			[cls.paddingWithBothAddon]: (Boolean(addonLeft) && Boolean(addonRight)),
-			[cls.paddingWithLeftAddon]: (Boolean(addonLeft) && !addonRight),
-			[cls.paddingWithRightAddon]: (!addonLeft && Boolean(addonRight))
-
+			[cls.paddingWithBothAddon]: Boolean(addonLeft) && Boolean(addonRight),
+			[cls.paddingWithLeftAddon]: Boolean(addonLeft) && !addonRight,
+			[cls.paddingWithRightAddon]: !addonLeft && Boolean(addonRight),
 		}
 
 		const input = (
 			<input
 				// ref={myRef}
 				// autoFocus
-				className={clsx(cls.inputInWrapper,
-					{
-						// [cls.hasErrors]: hasErrors,
-					}
-				)}
+				className={clsx(cls.inputInWrapper, {
+					// [cls.hasErrors]: hasErrors,
+				})}
 				type={type}
 				onChange={onChangeHandler}
 				value={value}
@@ -125,7 +121,10 @@ export const Input = memo((props: InputProps) => {
 		)
 
 		return (
-			<HStack max className={clsx(cls.InputWrapper, mods, className)}>
+			<HStack
+				max
+				className={clsx(cls.InputWrapper, mods, className)}
+			>
 				{addonLeft && <div className={cls.addonLeft}>{addonLeft}</div>}
 				{input}
 				{inputErrorsRendered}
@@ -165,4 +164,3 @@ export const Input = memo((props: InputProps) => {
 	)
 })
 Input.displayName = 'Input'
-
