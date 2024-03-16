@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, } from '@reduxjs/toolkit'
 import { DaysOfWeek, TimeSleepSettings } from '@/entities/User'
-import { SetTimePayloadAction } from '../types/TimeSleepTypes'
+import { DayType, SetDurationMinutesPayloadAction, SetTimePayloadAction } from '../types/TimeSleepTypes'
 
 
 const initialState: Partial<TimeSleepSettings> = {
@@ -21,36 +21,67 @@ const timeSleepSettings = createSlice({
 		toggleDayByDayTimeSleepEnabled: (state) => {
 			state.isDayByDayOptionEnabled = !state.isDayByDayOptionEnabled
 		},
-		setMinutes: (state, action: PayloadAction<SetTimePayloadAction>) => {
-			const { dayType, operation, sleepMode } = action.payload
+		setStartTimeMinutes: (state, action: PayloadAction<SetTimePayloadAction>) => {
+			const { dayType, operation } = action.payload
 			if (dayType === 'general') {
-				const currentMinute = state.generalTimeSleepData![sleepMode].minutes
+				const currentMinute = state.generalSleepPeriod!.startTime.minutes
 				const operationValue = operation === 'minus' ? -5 : 5
 				if (currentMinute === 0 && operationValue === -5) return
 				if (currentMinute === 55 && operationValue === 5) return
-				state.generalTimeSleepData![sleepMode].minutes = currentMinute + operationValue
+				state.generalSleepPeriod!.startTime.minutes = currentMinute + operationValue
 			} else {
-				const currentMinute = state.dayByDayTimeSleepData![dayType][sleepMode].minutes
-				const operationValue = operation === 'minus' ? -5 : 5
-				if (currentMinute === 0 && operationValue === -5) return
-				if (currentMinute === 55 && operationValue === 5) return
-				state.dayByDayTimeSleepData![dayType][sleepMode].minutes = currentMinute + operationValue
+				const periodIndex = action.payload.indexPeriod
+				const currentMinute = state.dayByDaySleepPeriods?.[dayType][periodIndex].startTime.minutes
+				if (currentMinute) {
+					const operationValue = operation === 'minus' ? -5 : 5
+					if (currentMinute === 0 && operationValue === -5) return
+					if (currentMinute === 55 && operationValue === 5) return
+					state.dayByDaySleepPeriods![dayType][periodIndex].startTime.minutes = currentMinute + operationValue
+				}
 			}
 		},
-		setHours: (state, action: PayloadAction<SetTimePayloadAction>) => {
-			const { dayType, operation, sleepMode } = action.payload
+		setStartTimeHours: (state, action: PayloadAction<SetTimePayloadAction>) => {
+			const { dayType, operation } = action.payload
 			if (dayType === 'general') {
-				const currentHours = state.generalTimeSleepData![sleepMode].hours
+				const currentHours = state.generalSleepPeriod!.startTime.hours
 				const operationValue = operation === 'minus' ? -1 : 1
 				if (currentHours === 0 && operationValue === -1) return
 				if (currentHours === 23 && operationValue === 1) return
-				state.generalTimeSleepData![sleepMode].hours = currentHours + operationValue
+				state.generalSleepPeriod!.startTime.hours = currentHours + operationValue
 			} else {
-				const currentHours = state.dayByDayTimeSleepData![dayType][sleepMode].hours
-				const operationValue = operation === 'minus' ? -1 : 1
-				if (currentHours === 0 && operationValue === -1) return
-				if (currentHours === 23 && operationValue === 1) return
-				state.dayByDayTimeSleepData![dayType][sleepMode].hours = currentHours + operationValue
+				const periodIndex = action.payload.indexPeriod
+				const currentHours = state.dayByDaySleepPeriods?.[dayType][periodIndex].startTime.hours
+				if (currentHours) {
+					const operationValue = operation === 'minus' ? -1 : 1
+					if (currentHours === 0 && operationValue === -1) return
+					if (currentHours === 23 && operationValue === 1) return
+					state.dayByDaySleepPeriods![dayType][periodIndex].startTime.hours = currentHours + operationValue
+				}
+			}
+		},
+		setPeriodDuration: (state, action: PayloadAction<SetDurationMinutesPayloadAction>) => {
+			const { dayType, durationMinutes } = action.payload
+			if (dayType === 'general') {
+				state.generalSleepPeriod!.durationMinutes = durationMinutes
+			} else {
+				const periodIndex = action.payload.indexPeriod
+				const currentDurations = state.dayByDaySleepPeriods?.[dayType][periodIndex].durationMinutes
+				if (currentDurations) {
+					state.dayByDaySleepPeriods![dayType][periodIndex].durationMinutes = durationMinutes
+				}
+			}
+		},
+		createNewPeriod: (state, action: PayloadAction<DaysOfWeek>) => {
+			const dayOfWeek = action.payload
+			if (state.dayByDaySleepPeriods) {
+				const amountOfPeriods = state.dayByDaySleepPeriods?.[dayOfWeek].length
+				if (amountOfPeriods === 0) {
+					state.dayByDaySleepPeriods[dayOfWeek] = [{ startTime: { hours: 23, minutes: 0 }, durationMinutes: 480 }]
+				} else if (amountOfPeriods === 1) {
+					state.dayByDaySleepPeriods[dayOfWeek].push({ startTime: { hours: 23, minutes: 0 }, durationMinutes: 480 })
+				} else {
+					return
+				}
 			}
 		}
 	}
