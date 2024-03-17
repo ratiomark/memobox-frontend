@@ -57,7 +57,7 @@ export const MyText = memo(
 		} = props;
 
 		if (drop) {
-			return <TagName className={className}>{text ?? '?'}</TagName>
+			return <TagName data-testid={dataTestId} className={className}>{text ?? '?'}</TagName>
 		}
 
 		const sizeClass = mapSizeToClass[size];
@@ -75,7 +75,7 @@ export const MyText = memo(
 						// [cls.bold]: bold,
 					},
 				)}
-				data-testid={`${dataTestId}.Paragraph`}
+				data-testid={dataTestId ? dataTestId : `${dataTestId}.Paragraph`}
 				{...otherProps}
 			>
 				{text ?? '?'}
