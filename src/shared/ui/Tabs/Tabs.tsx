@@ -7,6 +7,7 @@ export interface TabItem {
 	value: string | number
 	additional?: string | number
 	content: ReactNode
+	'data-testid'?: string
 }
 
 interface TabsProps {
@@ -149,6 +150,7 @@ export const Tabs = memo((props: TabsProps) => {
 							classNameForTab,
 						)}
 						onClick={clickHandle(item)}
+						data-testid={item['data-testid']}
 					>
 						{item.content}
 					</li>
