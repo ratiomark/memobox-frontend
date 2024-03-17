@@ -1,11 +1,21 @@
 .DayByDayHoursMinutesComponent {
-  display: grid;
-  grid-template-columns: 30px 100px 100px;
-  column-gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   justify-items: center;
   align-items: center;
-  min-height: 110px;
+
+  // min-height: 110px;
 }
+
+// .DayByDayHoursMinutesComponent {
+//   display: grid;
+//   grid-template-columns: 30px 100px 100px;
+//   column-gap: 30px;
+//   justify-items: center;
+//   align-items: center;
+//   min-height: 110px;
+// }
 
 // .titles {
 //   padding-left: 50px;
@@ -18,6 +28,12 @@
   font-size: 15px;
   align-self: baseline;
   padding-bottom: 10px;
+}
+
+.dayLabel {
+  // font-size: 15px;
+  // align-self: baseline;
+  width: 40px;
 }
 
 // .dayWrapper {

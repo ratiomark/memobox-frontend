@@ -6,29 +6,29 @@ import { HoursMinutesWrapper } from '../HoursMinutesWrapper/HoursMinutesWrapper'
 import { MyText } from '@/shared/ui/Typography';
 import { useTranslation } from 'react-i18next';
 import { daysOfWeek } from '@/entities/User';
+import { HStack } from '@/shared/ui/Stack';
+import { DayByDayItem } from './DayByDayItem';
+import { MutableRefObject } from 'react';
 
 
-export const DayByDayHoursMinutesComponent = () => {
-	const dayByDayTimeSleepData = useSelector(getDayByDayTimeSleepData)
+export const DayByDayHoursMinutesComponent = ({ dialogRef }: { dialogRef: MutableRefObject<HTMLDivElement | null> }) => {
+	// const dayByDayTimeSleepData = useSelector(getDayByDayTimeSleepData)
+	// const dispatch = useAppDispatch()
 	const { t } = useTranslation('settings')
 
 	return (
 
-		<div className={cls.DayByDayHoursMinutesComponent}>
-			<div />
-			<MyText align='center' text={t('start sleep')} className={cls.title} />
-			<MyText align='center' text={t('end sleep')} className={cls.title} />
-			{daysOfWeek.map(day => {
-				return (
-					<>
-						<MyText text={t(`days.${day}`)} size='s' />
-						<HoursMinutesWrapper
-							dayType={day}
-							timeSleepData={dayByDayTimeSleepData?.[day][0]}
-						/>
-					</>
-				)
-			})}
+		<div
+			className={cls.DayByDayHoursMinutesComponent}
+		>
+			{daysOfWeek.map(day => (
+				<HStack max gap='gap_14' key={day} align='center'>
+					<MyText text={t(`days.${day}`)} size='s' className={cls.dayLabel} />
+					<HStack>
+						<DayByDayItem dialogRef={dialogRef} day={day} />
+					</HStack>
+				</HStack>)
+			)}
 		</div>
 	)
 }
