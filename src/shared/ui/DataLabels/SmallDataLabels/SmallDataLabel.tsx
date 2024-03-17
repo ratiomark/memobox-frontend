@@ -3,12 +3,14 @@ import { MyText } from '../../Typography'
 import cls from './SmallDataLabel.module.scss'
 import Spinner from '@/shared/assets/icons/spinner.svg'
 import { DataLabelType } from '../types/DataLabelType';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 interface SmallDataLabelProps {
 	className?: string;
 	type: DataLabelType
 	cardsCount?: number | string
 	isLoading: boolean
+	'data-testid'?: string
 }
 
 export const SmallDataLabel = (props: SmallDataLabelProps) => {
@@ -17,6 +19,7 @@ export const SmallDataLabel = (props: SmallDataLabelProps) => {
 		type,
 		cardsCount,
 		isLoading,
+		'data-testid': dataTestId = TEST_ENTITY_NAMES.labels.allLabel,
 		...otherProps
 	} = props
 
@@ -37,7 +40,7 @@ export const SmallDataLabel = (props: SmallDataLabelProps) => {
 			className={clsx(cls.SmallDataLabel, [className], cls[type])}
 			{...otherProps}
 		>
-			<MyText drop text={cardsCount} className={cls.smallDataLabelText} />
+			<MyText data-testid={dataTestId}   drop text={cardsCount} className={cls.smallDataLabelText} />
 		</div>
 	)
 }

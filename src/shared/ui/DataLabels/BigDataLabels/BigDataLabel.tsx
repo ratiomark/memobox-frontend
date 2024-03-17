@@ -6,6 +6,7 @@ import { MyText } from '../../Typography'
 import { motion } from 'framer-motion'
 import { SmallDataLabel } from '@/shared/ui/DataLabels'
 import { DataLabelType } from '../types/DataLabelType'
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts'
 
 interface BigDataLabelProps<T extends boolean, K extends boolean | undefined> {
 	type: DataLabelType
@@ -31,15 +32,19 @@ export const BigDataLabel = <
 	} = props
 
 	let DataLabelName;
+	let dataTestId;
 	switch (type) {
 		case 'all':
 			DataLabelName = t('all big data label name')
+			dataTestId = TEST_ENTITY_NAMES.labels.allLabel
 			break;
 		case 'train':
 			DataLabelName = t('train big data label name')
+			dataTestId = TEST_ENTITY_NAMES.labels.trainLabel
 			break;
 		case 'wait':
 			DataLabelName = t('wait big data label name')
+			dataTestId = TEST_ENTITY_NAMES.labels.waitLabel
 			break;
 	}
 
@@ -56,11 +61,13 @@ export const BigDataLabel = <
 			&& (<div className={cls.percentValueWrapper} >
 				<SmallDataLabel type={type} isLoading={isLoading} cardsCount={`${percentValue}%`} />
 			</div>)
-		content = <MyText
-			drop
-			// noSelect
-			className={cls.cardsCounter}
-			text={cardsCount} />
+		content = (
+			<MyText
+				drop
+				className={cls.cardsCounter}
+				data-testid={TEST_ENTITY_NAMES.labels.labelInfo}
+				text={cardsCount} />
+		)
 	}
 
 	return (
@@ -70,6 +77,7 @@ export const BigDataLabel = <
 			// viewport={{ once: true }}
 			transition={{ type: 'just', duration: 0.5 }}
 			className={clsx(cls.BigDataLabel, [className])}
+			data-testid={dataTestId}
 		>
 			{percentValueComponent}
 			<div className={clsx(cls.coloredLeftSide, cls[type])}>

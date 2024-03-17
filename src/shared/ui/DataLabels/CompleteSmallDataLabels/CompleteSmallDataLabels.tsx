@@ -1,9 +1,10 @@
-import clsx from 'clsx';
-import { memo } from 'react';
-import { SmallDataLabel } from '../SmallDataLabels/SmallDataLabel';
-import cls from './CompleteSmallDataLabels.module.scss';
-import { StateSchema } from '@/app/providers/StoreProvider';
-import { useSelector } from 'react-redux';
+import clsx from 'clsx'
+import { memo } from 'react'
+import { SmallDataLabel } from '../SmallDataLabels/SmallDataLabel'
+import cls from './CompleteSmallDataLabels.module.scss'
+import { StateSchema } from '@/app/providers/StoreProvider'
+import { useSelector } from 'react-redux'
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts'
 
 interface CompleteSmallDataLabelsProps {
 	className?: string
@@ -17,12 +18,7 @@ interface CompleteSmallDataLabelsProps {
 }
 
 export const CompleteSmallDataLabels = memo((props: CompleteSmallDataLabelsProps) => {
-	const {
-		className,
-		data,
-		isLoading = true,
-		isRefetchingSelectorFn
-	} = props
+	const { className, data, isLoading = true, isRefetchingSelectorFn } = props
 
 	if (isRefetchingSelectorFn) {
 		return (
@@ -30,17 +26,30 @@ export const CompleteSmallDataLabels = memo((props: CompleteSmallDataLabelsProps
 				data={data}
 				className={className}
 				isRefetchingSelectorFn={isRefetchingSelectorFn}
-			/>)
+			/>
+		)
 	}
 
 	return (
-		<div className={clsx(
-			cls.CompleteSmallDataLabels,
-			[className])}
-		>
-			<SmallDataLabel isLoading={isLoading} cardsCount={data?.all} type='all' />
-			<SmallDataLabel isLoading={isLoading} cardsCount={data?.train} type='train' />
-			<SmallDataLabel isLoading={isLoading} cardsCount={data?.wait} type='wait' />
+		<div className={clsx(cls.CompleteSmallDataLabels, [className])}>
+			<SmallDataLabel
+				data-testid={TEST_ENTITY_NAMES.labels.allLabel}
+				isLoading={isLoading}
+				cardsCount={data?.all}
+				type='all'
+			/>
+			<SmallDataLabel
+				data-testid={TEST_ENTITY_NAMES.labels.trainLabel}
+				isLoading={isLoading}
+				cardsCount={data?.train}
+				type='train'
+			/>
+			<SmallDataLabel
+				data-testid={TEST_ENTITY_NAMES.labels.waitLabel}
+				isLoading={isLoading}
+				cardsCount={data?.wait}
+				type='wait'
+			/>
 		</div>
 	)
 })
@@ -55,20 +64,28 @@ interface CompleteSmallDataLabelsWithSelectorProps {
 	isRefetchingSelectorFn: (state: StateSchema) => boolean
 }
 const CompleteSmallDataLabelsWithSelector = (props: CompleteSmallDataLabelsWithSelectorProps) => {
-	const {
-		className,
-		data,
-		isRefetchingSelectorFn,
-	} = props
+	const { className, data, isRefetchingSelectorFn } = props
 	const isLoading = useSelector(isRefetchingSelectorFn)
 	return (
-		<div className={clsx(
-			cls.CompleteSmallDataLabels,
-			[className])}
-		>
-			<SmallDataLabel isLoading={isLoading} cardsCount={data?.all} type='all' />
-			<SmallDataLabel isLoading={isLoading} cardsCount={data?.train} type='train' />
-			<SmallDataLabel isLoading={isLoading} cardsCount={data?.wait} type='wait' />
+		<div className={clsx(cls.CompleteSmallDataLabels, [className])}>
+			<SmallDataLabel
+				data-testid={TEST_ENTITY_NAMES.labels.allLabel}
+				isLoading={isLoading}
+				cardsCount={data?.all}
+				type='all'
+			/>
+			<SmallDataLabel
+				data-testid={TEST_ENTITY_NAMES.labels.trainLabel}
+				isLoading={isLoading}
+				cardsCount={data?.train}
+				type='train'
+			/>
+			<SmallDataLabel
+				data-testid={TEST_ENTITY_NAMES.labels.waitLabel}
+				isLoading={isLoading}
+				cardsCount={data?.wait}
+				type='wait'
+			/>
 		</div>
 	)
 }
