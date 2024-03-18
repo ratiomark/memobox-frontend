@@ -2,7 +2,7 @@
 import { TEST_NAVIGATION_IDS } from '@/shared/const/testConsts'; // Импортируем константы
 
 export class NavigateClass {
-	navigateTo(id: string) {
+	navigateTo(id: keyof typeof TEST_NAVIGATION_IDS) {
 		cy.getByTestId(TEST_NAVIGATION_IDS[id]).click();
 	}
 

@@ -3,7 +3,7 @@ import { TEST_BUTTONS_IDS, TEST_INPUTS_IDS, TEST_USER_DATA } from '../../../src/
 
 export class AuthPage {
 	visit() {
-		cy.visit('/');
+		cy.visit('/login');
 		return this;
 	}
 
