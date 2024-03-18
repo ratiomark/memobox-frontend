@@ -20,13 +20,14 @@ export const loginUserByEmailThunk = createAsyncThunk<UserWithToken, LoginByEmai
 				return thunkAPI.rejectWithValue(i18n.t('error on login'))
 			}
 
-			console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL', response.user)
+			console.log('Login response', response)
 			localDataService.setToken(response.token)
 			localDataService.setRefreshToken(response.refreshToken)
-			localDataService.setUserId(response.user.id!)
+			localDataService.setUserId(response.user.id)
 			thunkAPI.dispatch(userActions.setAuthData(response))
-			thunkAPI.dispatch(userActions.setJsonSavedData(response.user.jsonSavedData!))
-			thunkAPI.dispatch(userActions.setJsonSettings(response.user.jsonSettings!))
+			thunkAPI.dispatch(userActions.setProfileData(response.user))
+			thunkAPI.dispatch(userActions.setJsonSavedData(response.user.jsonSavedData))
+			thunkAPI.dispatch(userActions.setJsonSettings(response.user.jsonSettings))
 
 			return response
 

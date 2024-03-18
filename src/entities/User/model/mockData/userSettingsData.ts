@@ -1,92 +1,92 @@
 import { TimingBlock } from '@/shared/types/DataBlock'
 import { NotificationSettings, TimeSleepSettings } from '../types/userSettings'
 
-export const timeSleepMock: TimeSleepSettings = {
-	isTimeSleepEnabled: true,
-	isDayByDayOptionEnabled: false,
-	generalTimeSleepData: {
-		up: {
-			hours: 8,
-			minutes: 0
-		},
-		down: {
-			hours: 22,
-			minutes: 0
-		}
-	},
-	dayByDayTimeSleepData: {
-		monday: {
-			up: {
-				hours: 8,
-				minutes: 0
-			},
-			down: {
-				hours: 22,
-				minutes: 0
-			}
-		},
-		tuesday: {
-			up: {
-				hours: 8,
-				minutes: 0
-			},
-			down: {
-				hours: 22,
-				minutes: 0
-			}
-		},
-		wednesday: {
-			up: {
-				hours: 8,
-				minutes: 0
-			},
-			down: {
-				hours: 22,
-				minutes: 0
-			}
-		},
-		thursday: {
-			up: {
-				hours: 8,
-				minutes: 0
-			},
-			down: {
-				hours: 22,
-				minutes: 0
-			}
-		},
-		friday: {
-			up: {
-				hours: 8,
-				minutes: 0
-			},
-			down: {
-				hours: 22,
-				minutes: 0
-			}
-		},
-		saturday: {
-			up: {
-				hours: 8,
-				minutes: 0
-			},
-			down: {
-				hours: 22,
-				minutes: 0
-			}
-		},
-		sunday: {
-			up: {
-				hours: 8,
-				minutes: 0
-			},
-			down: {
-				hours: 22,
-				minutes: 0
-			}
-		}
-	}
-}
+// export const timeSleepMock: TimeSleepSettings = {
+// 	isTimeSleepEnabled: true,
+// 	isDayByDayOptionEnabled: false,
+// 	generalTimeSleepData: {
+// 		up: {
+// 			hours: 8,
+// 			minutes: 0
+// 		},
+// 		down: {
+// 			hours: 22,
+// 			minutes: 0
+// 		}
+// 	},
+// 	dayByDayTimeSleepData: {
+// 		monday: {
+// 			up: {
+// 				hours: 8,
+// 				minutes: 0
+// 			},
+// 			down: {
+// 				hours: 22,
+// 				minutes: 0
+// 			}
+// 		},
+// 		tuesday: {
+// 			up: {
+// 				hours: 8,
+// 				minutes: 0
+// 			},
+// 			down: {
+// 				hours: 22,
+// 				minutes: 0
+// 			}
+// 		},
+// 		wednesday: {
+// 			up: {
+// 				hours: 8,
+// 				minutes: 0
+// 			},
+// 			down: {
+// 				hours: 22,
+// 				minutes: 0
+// 			}
+// 		},
+// 		thursday: {
+// 			up: {
+// 				hours: 8,
+// 				minutes: 0
+// 			},
+// 			down: {
+// 				hours: 22,
+// 				minutes: 0
+// 			}
+// 		},
+// 		friday: {
+// 			up: {
+// 				hours: 8,
+// 				minutes: 0
+// 			},
+// 			down: {
+// 				hours: 22,
+// 				minutes: 0
+// 			}
+// 		},
+// 		saturday: {
+// 			up: {
+// 				hours: 8,
+// 				minutes: 0
+// 			},
+// 			down: {
+// 				hours: 22,
+// 				minutes: 0
+// 			}
+// 		},
+// 		sunday: {
+// 			up: {
+// 				hours: 8,
+// 				minutes: 0
+// 			},
+// 			down: {
+// 				hours: 22,
+// 				minutes: 0
+// 			}
+// 		}
+// 	}
+// }
 
 export const notificationsMock: NotificationSettings = {
 	mobilePushEnabled: true,

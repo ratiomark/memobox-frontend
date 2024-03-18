@@ -1,5 +1,5 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
-import { notificationsMock, shelfTemplateMock, timeSleepMock } from '../mockData/userSettingsData';
+// import { notificationsMock, shelfTemplateMock, timeSleepMock } from '../mockData/userSettingsData';
 
 export const getUserSettings = (state: StateSchema) => state.user.userSettings
 

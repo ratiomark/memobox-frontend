@@ -15,7 +15,8 @@ export const logoutThunk = createAsyncThunk<void, void, { rejectValue: string, e
 		try {
 			const { dispatch } = thunkAPI
 			// .unwrap()
-			dispatch(rtkApiLogout())
+			localDataService.logout()
+			await dispatch(rtkApiLogout())
 			thunkAPI.dispatch(userActions.logout())
 
 		} catch (err) {

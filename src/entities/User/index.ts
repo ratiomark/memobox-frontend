@@ -1,6 +1,6 @@
 export { getUserSettingsAwaitingResponse } from './model/selectors/getUserSettings';
 
-export type { NotificationSettings } from './model/types/userSettings';
+export type { NotificationSettings, TimeSleepAtomicDataObject } from './model/types/userSettings';
 
 export { updateNotificationSettingsThunk } from './model/services/userSettings/updateNotificationThunk';
 export { updateJsonSavedDataThunk } from './model/services/updateJsonSavedData';
@@ -12,7 +12,7 @@ export { logoutThunk } from './model/services/logoutThunk';
 export { daysOfWeek } from './model/const/daysOfWeek';
 
 export { loginUserByEmailThunk } from './model/services/loginByEmailAndPassThunk';
-export { registerByEmailThunk  } from './model/services/registerByEmailThunk';
+export { registerByEmailThunk } from './model/services/registerByEmailThunk';
 
 export {
 	rtkApiLoginUser,
@@ -31,7 +31,6 @@ export type {
 	MissedTrainingValue,
 	TimeSleepSettings,
 	DaysOfWeek,
-	TimeSleepDataObject,
 } from './model/types/userSettings';
 
 

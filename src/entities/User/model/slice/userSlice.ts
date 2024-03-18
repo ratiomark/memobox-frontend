@@ -5,7 +5,7 @@ import { JsonSettings } from '../types/JsonSettings'
 import { initAuthData } from '../services/initAuthDataThunk'
 import { JsonSavedData, SortColumnObject } from '../types/JsonSavedData'
 import { UserSchema } from '../types/user'
-import { DayByDayTimeSleepData, MissedTrainingValue, NotificationSettings, TimeSleepDataObject, UserSettings } from '../types/userSettings'
+import { MissedTrainingValue, NotificationSettings, SleepPeriod, TimeSleepSettings, UserSettings } from '../types/userSettings'
 import { jsonSavedDataColumnsMock } from '../mockData/jsonSavedDataMock'
 import { UserWithToken } from '../api/userApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
@@ -120,13 +120,13 @@ const userSlice = createSlice({
 		setSettings: (state, action: PayloadAction<UserSettings>) => {
 			state.userSettings = action.payload
 		},
-		setDayByDayTimeSleepDataInitial: (state, action: PayloadAction<TimeSleepDataObject>) => {
-			if (state.userSettings?.timeSleep && !state.userSettings?.timeSleep.dayByDayTimeSleepData) {
-				const dayByDayTimeSleepData = {} as DayByDayTimeSleepData
+		setDayByDayTimeSleepDataInitial: (state, action: PayloadAction<SleepPeriod>) => {
+			if (state.userSettings?.timeSleep && !state.userSettings?.timeSleep.dayByDaySleepPeriods) {
+				const dayByDaySleepPeriods = {} as TimeSleepSettings['dayByDaySleepPeriods']
 				daysOfWeek.forEach(day => {
-					dayByDayTimeSleepData[day] = action.payload
+					dayByDaySleepPeriods[day] = [action.payload]
 				})
-				state.userSettings.timeSleep.dayByDayTimeSleepData = dayByDayTimeSleepData
+				state.userSettings.timeSleep.dayByDaySleepPeriods = dayByDaySleepPeriods
 			}
 		},
 		setSettingsMissedTraining: (state, action: PayloadAction<MissedTrainingValue>) => {
