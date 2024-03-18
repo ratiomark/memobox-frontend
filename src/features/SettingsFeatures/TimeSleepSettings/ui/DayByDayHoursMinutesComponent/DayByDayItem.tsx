@@ -1,18 +1,18 @@
 import clsx from 'clsx'
 import cls from './DayByDayHoursMinutesComponent.module.scss'
 import { useSelector } from 'react-redux';
-import { getDayByDayTimeSleepData, getGeneralTimeSleepData } from '../../model/selectors/settingsTimeSleep';
-import { HoursMinutesWrapper } from '../HoursMinutesWrapper/HoursMinutesWrapper';
+import { getDayByDayTimeSleepData } from '../../model/selectors/settingsTimeSleep';
 import { MyText } from '@/shared/ui/Typography';
 import { useTranslation } from 'react-i18next';
-import { DaysOfWeek, daysOfWeek } from '@/entities/User';
+import { DaysOfWeek } from '@/entities/User';
 import { Input } from '@/shared/ui/Input/Input';
 import { HStack } from '@/shared/ui/Stack';
 import { settingsTimeSleepActions } from '../../model/slice/timeSleepSlice';
 import { MinutesToHoursAndMinutesPresenter } from '../GeneralHoursMinutesComponent/MinutesToHoursAndMinutesPresenter';
-import { HoursMinutesWrapperV2 } from '../HoursMinutesWrapper copy/HoursMinutesWrapper';
+
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { MouseEvent, MutableRefObject } from 'react';
+import { HoursMinutesWrapper } from '../HoursMinutesWrapper/HoursMinutesWrapper';
 
 interface DayByDayItemProps {
 	day: DaysOfWeek
@@ -73,7 +73,7 @@ export const DayByDayItem = ({ day, dialogRef }: DayByDayItemProps) => {
 						text={t('start sleep')}
 					// className={cls.title}
 					/>
-					<HoursMinutesWrapperV2
+					<HoursMinutesWrapper
 						dayType={day}
 						startTimeSleepTimeObject={period.startTime}
 						indexPeriod={index}

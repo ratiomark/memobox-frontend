@@ -1,5 +1,5 @@
 .TimeSleepSettings {
-  width: 700px;
+  width: 900px;
 
   // max-height: 80%;
 }
@@ -36,6 +36,9 @@
 }
 
 .dayByDayActivator {
+  padding: 8px;
+
+  // 
   display: flex;
   gap: 20px;
   align-items: start;

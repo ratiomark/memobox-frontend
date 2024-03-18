@@ -6,11 +6,11 @@ import { Heading, MyText } from '@/shared/ui/Typography';
 import { Card } from '@/shared/ui/Card';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { settingsTimeSleepActions, settingsTimeSleepReducer } from '../model/slice/timeSleepSlice';
-import { WheelEvent, useEffect } from 'react';
+import { WheelEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserSettingsIsLoading, getUserTimeSleepSettings } from '@/entities/User';
 import { getTimeSleepEnabled, getDayByDayOptionEnabled, getGeneralTimeSleepData, getDayByDayTimeSleepData } from '../model/selectors/settingsTimeSleep';
-import { GeneralHoursMinutesComponent } from './GeneralHoursMinutesComponent/GeneralHoursMinutesComponent copy';
+import { GeneralHoursMinutesComponent } from './GeneralHoursMinutesComponent/GeneralHoursMinutesComponent';
 import { DayByDayHoursMinutesComponent } from './DayByDayHoursMinutesComponent/DayByDayHoursMinutesComponent';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
@@ -19,24 +19,12 @@ import { updateTimeSleepThunk } from '../model/services/updateTimeSleepThunk';
 import { getIsTimeSleepModalOpen } from '../../model/selectors/getModals';
 import { settingsFeaturesActions } from '../../model/slice/settingsFeaturesSlice';
 
-
-
-interface TimeSleepSettingsProps {
-	className?: string
-	isOpen: boolean
-	onClose: () => void
-}
-
 const reducers: ReducersList = {
 	settingsTimeSleep: settingsTimeSleepReducer,
 }
 
+
 export const TimeSleepSettingsModal = () => {
-	// const {
-	// 	className,
-	// 	isOpen,
-	// 	onClose
-	// } = props
 	const isOpen = useSelector(getIsTimeSleepModalOpen)
 	const isLoading = useSelector(getUserSettingsIsLoading)
 	const timeSleepSettingsFromUser = useSelector(getUserTimeSleepSettings)
@@ -44,6 +32,8 @@ export const TimeSleepSettingsModal = () => {
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const isTimeSleepEnabled = useSelector(getTimeSleepEnabled)
 	const isDayByDayTimeSleepEnabled = useSelector(getDayByDayOptionEnabled)
+	const dialogRef = useRef<HTMLDivElement>(null);
+
 
 	useEffect(() => {
 		if (timeSleepSettingsFromUser) {
@@ -63,6 +53,7 @@ export const TimeSleepSettingsModal = () => {
 	}
 	const onToggleTimeSleepEnabled = () => dispatch(settingsTimeSleepActions.toggleTimeSleepEnabled())
 	const onToggleDayByDayEnabled = () => dispatch(settingsTimeSleepActions.toggleDayByDayTimeSleepEnabled())
+
 
 	if (!timeSleepSettingsFromUser || isLoading) return null
 
@@ -85,9 +76,12 @@ export const TimeSleepSettingsModal = () => {
 			isOpen={!!isOpen}
 			onClose={onCloseHandle}
 			onSubmit={onSubmitHandle}
+
 		>
 			<div className={cls.TimeSleepSettings}
 			>
+
+
 				<motion.div
 					// layout
 					className={cls.timeSleepBlock}
@@ -99,7 +93,10 @@ export const TimeSleepSettingsModal = () => {
 							onClickSwitcher={onToggleTimeSleepEnabled}
 						/>
 					</Card>
-					<div className={cls.content} >
+					{dayActivator}
+					<div
+					// className={cls.content}
+					>
 						<motion.div
 							layout
 
@@ -113,8 +110,8 @@ export const TimeSleepSettingsModal = () => {
 											animate={{ height: 'auto', opacity: 1 }}
 											exit={{ height: 0, opacity: 0 }}
 										>
-											<div className={cls.inner}>
-												<DayByDayHoursMinutesComponent />
+											<div className={cls.inner} ref={dialogRef} >
+												<DayByDayHoursMinutesComponent dialogRef={dialogRef} />
 											</div>
 										</motion.div>)
 
@@ -130,7 +127,6 @@ export const TimeSleepSettingsModal = () => {
 										exit={{ opacity: 0, height: 0 }}
 									// transition={{ duration: 6 }}
 									>
-
 										<GeneralHoursMinutesComponent />
 									</motion.div>}
 							</AnimatePresence>
@@ -148,7 +144,7 @@ export const TimeSleepSettingsModal = () => {
 									</motion.div>}
 							</AnimatePresence>
 						</motion.div>
-						{dayActivator}
+						{/* {dayActivator} */}
 
 					</div>
 				</motion.div>
@@ -165,3 +161,15 @@ export const TimeSleepSettingsModal = () => {
 
 	)
 }
+
+
+
+{/* {errors.length > 0 && (
+					<div className={cls.errorMessages}>
+						{errors.map((error, index) => (
+							<div key={index} className={cls.errorMessage}>
+								{error}
+							</div>
+						))}
+					</div>
+				)} */}

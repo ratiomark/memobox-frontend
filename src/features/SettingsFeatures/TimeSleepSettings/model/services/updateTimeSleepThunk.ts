@@ -2,7 +2,16 @@ import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getCurrentTimeSleepSettings } from '../selectors/settingsTimeSleep'
 import { TimeSleepSettings, rtkApiUpdateTimeSleep } from '@/entities/User'
-
+// import { mapHoursMinutesObjectToStartTimeString } from '@/shared/lib/helpers/mappers/mapHoursMinutesObjectToStartTimeString'
+const dayByDaySleepPeriods = {
+	monday: [],
+	tuesday: [],
+	wednesday: [],
+	thursday: [],
+	friday: [],
+	saturday: [],
+	sunday: [],
+}
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
 export const updateTimeSleepThunk = createAsyncThunk<void, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'user/updateTimeSleepThunk',
@@ -10,13 +19,18 @@ export const updateTimeSleepThunk = createAsyncThunk<void, void, { rejectValue: 
 
 		const { dispatch, getState, } = thunkAPI
 		const currentTimeSleepSettings = getCurrentTimeSleepSettings(getState())
-		// console.log(currentTimeSleepSettings)
+		const timeSleepSettingsBackendRequest = { ...currentTimeSleepSettings }
+		timeSleepSettingsBackendRequest.dayByDaySleepPeriods = {
+			...dayByDaySleepPeriods,
+			...timeSleepSettingsBackendRequest.dayByDaySleepPeriods
+		}
+		console.log(timeSleepSettingsBackendRequest)
 		// const currentUserSettings = getJsonSettings(getState())
 
 		// if (!userData) return thunkAPI.rejectWithValue('Нет userData')
 
 		try {
-			const response = await dispatch(rtkApiUpdateTimeSleep(currentTimeSleepSettings as TimeSleepSettings)).unwrap() //разворачиваю в реальный результат
+			const response = await dispatch(rtkApiUpdateTimeSleep(timeSleepSettingsBackendRequest as TimeSleepSettings)).unwrap() //разворачиваю в реальный результат
 			console.log(response)
 			// const jsonSettingsFromResponse = response.jsonSettings
 

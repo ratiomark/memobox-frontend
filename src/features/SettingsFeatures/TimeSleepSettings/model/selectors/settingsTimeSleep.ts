@@ -4,8 +4,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 export const getTimeSleepEnabled = (state: StateSchema) => state.settingsTimeSleep?.isTimeSleepEnabled ?? true
 export const getDayByDayOptionEnabled = (state: StateSchema) => state.settingsTimeSleep?.isDayByDayOptionEnabled ?? false
-export const getGeneralTimeSleepData = (state: StateSchema) => state.settingsTimeSleep?.generalTimeSleepData
-export const getDayByDayTimeSleepData = (state: StateSchema) => state.settingsTimeSleep?.dayByDayTimeSleepData
+export const getGeneralTimeSleepData = (state: StateSchema) => state.settingsTimeSleep?.generalSleepPeriod
+export const getDayByDayTimeSleepData = (state: StateSchema) => state.settingsTimeSleep?.dayByDaySleepPeriods
 
 export const getCurrentTimeSleepSettings = createSelector(
 	[
@@ -14,18 +14,18 @@ export const getCurrentTimeSleepSettings = createSelector(
 		getGeneralTimeSleepData,
 		getDayByDayTimeSleepData
 	],
-	(isTimeSleepEnabled, isDayByDayOptionEnabled, generalTimeSleepData, dayByDayTimeSleepData) => {
+	(isTimeSleepEnabled, isDayByDayOptionEnabled, generalSleepPeriod, dayByDaySleepPeriods) => {
 		if (!isDayByDayOptionEnabled) {
 			return ({
 				isTimeSleepEnabled,
 				isDayByDayOptionEnabled,
-				generalTimeSleepData
+				generalSleepPeriod
 			})
 		}
 		return ({
 			isTimeSleepEnabled,
 			isDayByDayOptionEnabled,
-			generalTimeSleepData,
-			dayByDayTimeSleepData
+			generalSleepPeriod,
+			dayByDaySleepPeriods
 		})
 	})

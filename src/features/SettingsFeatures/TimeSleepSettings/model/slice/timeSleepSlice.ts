@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, } from '@reduxjs/toolkit'
 import { DaysOfWeek, TimeSleepSettings } from '@/entities/User'
 import { DayType, SetDurationMinutesPayloadAction, SetTimePayloadAction } from '../types/TimeSleepTypes'
-
+import { daysOfWeekListValues } from '@/shared/const/daysOfWeek'
 
 const initialState: Partial<TimeSleepSettings> = {
 
@@ -19,6 +19,26 @@ const timeSleepSettings = createSlice({
 			state.isTimeSleepEnabled = !state.isTimeSleepEnabled
 		},
 		toggleDayByDayTimeSleepEnabled: (state) => {
+			const generalStartTime = state.generalSleepPeriod?.startTime
+			const generalDuration = state.generalSleepPeriod?.durationMinutes
+			const createNewDayByDay = () => {
+				const dayByDaySleepPeriods = {} as TimeSleepSettings['dayByDaySleepPeriods']
+				daysOfWeekListValues.forEach((day) => {
+					dayByDaySleepPeriods[day] = [{ startTime: generalStartTime!, durationMinutes: generalDuration! }]
+				})
+				state.dayByDaySleepPeriods = dayByDaySleepPeriods
+			}
+			if (state.dayByDaySleepPeriods === undefined) {
+				createNewDayByDay()
+			} else {
+				let periodsCount = 0
+				daysOfWeekListValues.forEach((day) => {
+					periodsCount += state.dayByDaySleepPeriods?.[day]?.length ?? 0
+				})
+				if (periodsCount === 0) {
+					createNewDayByDay()
+				}
+			}
 			state.isDayByDayOptionEnabled = !state.isDayByDayOptionEnabled
 		},
 		setStartTimeMinutes: (state, action: PayloadAction<SetTimePayloadAction>) => {
@@ -32,7 +52,7 @@ const timeSleepSettings = createSlice({
 			} else {
 				const periodIndex = action.payload.indexPeriod
 				const currentMinute = state.dayByDaySleepPeriods?.[dayType][periodIndex].startTime.minutes
-				if (currentMinute) {
+				if (currentMinute !== undefined) {
 					const operationValue = operation === 'minus' ? -5 : 5
 					if (currentMinute === 0 && operationValue === -5) return
 					if (currentMinute === 55 && operationValue === 5) return
@@ -51,7 +71,7 @@ const timeSleepSettings = createSlice({
 			} else {
 				const periodIndex = action.payload.indexPeriod
 				const currentHours = state.dayByDaySleepPeriods?.[dayType][periodIndex].startTime.hours
-				if (currentHours) {
+				if (currentHours !== undefined) {
 					const operationValue = operation === 'minus' ? -1 : 1
 					if (currentHours === 0 && operationValue === -1) return
 					if (currentHours === 23 && operationValue === 1) return

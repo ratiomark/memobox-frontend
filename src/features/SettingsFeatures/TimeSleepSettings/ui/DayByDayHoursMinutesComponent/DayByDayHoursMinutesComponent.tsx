@@ -1,8 +1,4 @@
-import clsx from 'clsx'
 import cls from './DayByDayHoursMinutesComponent.module.scss'
-import { useSelector } from 'react-redux';
-import { getDayByDayTimeSleepData, getGeneralTimeSleepData } from '../../model/selectors/settingsTimeSleep';
-import { HoursMinutesWrapper } from '../HoursMinutesWrapper/HoursMinutesWrapper';
 import { MyText } from '@/shared/ui/Typography';
 import { useTranslation } from 'react-i18next';
 import { daysOfWeek } from '@/entities/User';
