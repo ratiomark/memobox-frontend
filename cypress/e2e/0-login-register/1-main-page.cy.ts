@@ -1,22 +1,9 @@
-import { TEST_BUTTONS_IDS, TEST_ENTITY_NAMES, TEST_INPUTS_IDS, TEST_PAGES_IDS } from '@/shared/const/testConsts'; // Импортируем константы
 import { MainPageTest } from '#/helpers/pageObjects/MainPage'
 import { AuthPageTest } from '#/helpers/pageObjects/AuthPage'
-import { generateDataTestIdSelector, generateRandomString } from '#/helpers';
-import { NavigateObject } from '#/helpers/pageObjects/Navigation';
+import { restoreLocalStorageData, saveLocalStorageData } from '#/helpers/localStorage';
+import { TEST_PAGES_IDS } from '@/shared/const/testConsts';
 
 describe('Проверка главной страницы', () => {
-	const localStorageData: { [key: string]: any } = {};
-	
-	const saveLocalStorageData = () => {
-		Object.keys(window.localStorage).forEach(key => {
-			localStorageData[key] = window.localStorage.getItem(key);
-		});
-	}
-	const restoreLocalStorageData = () => {
-		Object.keys(localStorageData).forEach(key => {
-			window.localStorage.setItem(key, localStorageData[key]);
-		});
-	}
 
 	beforeEach(() => {
 		restoreLocalStorageData()

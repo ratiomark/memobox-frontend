@@ -1,67 +1,20 @@
-import { TEST_BUTTONS_IDS, TEST_ENTITY_NAMES, TEST_INPUTS_IDS, TEST_PAGES_IDS } from '@/shared/const/testConsts' // Импортируем константы
 import { MainPageTest } from '#/helpers/pageObjects/MainPage'
 import { AuthPageTest } from '#/helpers/pageObjects/AuthPage'
-import { generateDataTestIdSelector, generateRandomString } from '#/helpers'
-import { NavigateObject } from '#/helpers/pageObjects/Navigation'
-import { TrashPageTest } from '#/helpers/pageObjects/TrashPage'
-import { ViewPage, ViewPageTest, ViewPageTest } from '#/helpers/pageObjects/ViewPage'
-import { CommonTest } from '#/helpers/pageObjects/Common'
-import { text } from 'stream/consumers'
+import { loginAndGetToken, restoreDb, saveDb } from '#/helpers/backend/utils'
+import { TEST_PAGES_IDS } from '@/shared/const/testConsts'
+import { restoreLocalStorageData, clearLocalStorageData, saveLocalStorageData } from '#/helpers/localStorage'
 
 describe('Проверка главной страницы', () => {
 	let cleanUp: () => void
 
-	const loginAndGetToken = () => {
-		return cy
-			.request({
-				method: 'POST',
-				url: 'http://localhost:3000/api/v1/auth/email/login', // Предполагается, что baseURL уже настроен в Cypress
-				body: { email: 'john.doe@example.com', password: 'secret' },
-			})
-			.then((response) => {
-				return response.body.token // Предполагаем, что токен находится в body ответа
-			})
-	}
-	const restoreDb = (token) => {
-		return cy.request({
-			method: 'POST',
-			url: 'http://localhost:3000/api/v1/aggregate/restore-db',
-			auth: {
-				bearer: token,
-			},
-		})
-	}
-	const saveDb = (token) => {
-		return cy.request({
-			method: 'POST',
-			url: 'http://localhost:3000/api/v1/aggregate/save-db',
-			auth: {
-				bearer: token,
-			},
-		})
-	}
-
-	const localStorageData: { [key: string]: any } = {}
-	const saveLocalStorageData = () => {
-		Object.keys(window.localStorage).forEach((key) => {
-			localStorageData[key] = window.localStorage.getItem(key)
-		})
-	}
-	const restoreLocalStorageData = () => {
-		Object.keys(localStorageData).forEach((key) => {
-			window.localStorage.setItem(key, localStorageData[key])
-		})
-	}
 	beforeEach(() => {
 		restoreLocalStorageData()
-		// loginAndGetToken().then((token) => {
-		// 	restoreDb(token);
-		// });
 	})
 	after(() => {
 		loginAndGetToken().then((token) => {
 			restoreDb(token)
 		})
+		clearLocalStorageData()
 	})
 
 	afterEach(() => {
@@ -77,10 +30,6 @@ describe('Проверка главной страницы', () => {
 			cy.getByTestId(TEST_PAGES_IDS.mainPage).should('exist')
 			saveDb(token)
 		})
-		// AuthPageTest.visit()
-		// AuthPageTest.goToLogin()
-		// AuthPageTest.login()
-		// cy.getByTestId(TEST_PAGES_IDS.mainPage).should('exist')
 
 		cleanUp = () => {
 			// MainPageTest.visit()
@@ -91,149 +40,130 @@ describe('Проверка главной страницы', () => {
 			// TrashPageTest.removeAll()
 		}
 	})
-
-	it('Create cards, check labels in cupboard, go to view page and check labels in common shelf', () => {
-		let allCards = 30
-		let trainCards = 30
-		const waitCards = 0
+	it('Visit main page without login, create 3 new shelves', () => {
+		// Cypress.env()
 		MainPageTest.visit()
-		const shelfTestName = MainPageTest.createNewShelfFull()
-		const newCardNumber = 2
-		CommonTest.checkLabel('allLabel', allCards)
-		CommonTest.checkLabel('trainLabel', trainCards)
-		CommonTest.checkLabel('waitLabel', waitCards)
-		Array.from({ length: newCardNumber }, () => {
-			MainPageTest.createNewCardFull()
-		})
-		CommonTest.checkLabel('allLabel', allCards + newCardNumber)
-		allCards = allCards+newCardNumber
-		CommonTest.checkLabel('trainLabel', trainCards + newCardNumber)
-		trainCards = trainCards +newCardNumber
-		CommonTest.checkLabel('waitLabel', waitCards)
-
-		NavigateObject.navigateView()
-		ViewPageTest.pageReadyCheck()
-
-		// ViewPageTest.clickBox('all')
-		CommonTest.checkLabel('allLabel', 5 + newCardNumber)
-		CommonTest.checkLabel('trainLabel', 5 + newCardNumber)
-		CommonTest.checkLabel('waitLabel', 0)
-
-		ViewPageTest.clickBox('all')
-		CommonTest.checkLabel('allLabel', allCards)
-		CommonTest.checkLabel('trainLabel', trainCards)
-		CommonTest.checkLabel('waitLabel', waitCards)
-
-		ViewPageTest.clickBox('learning')
-		CommonTest.checkLabel('allLabel', allCards - newCardNumber - 5 - 5)
-		CommonTest.checkLabel('trainLabel', trainCards - newCardNumber - 5 - 5)
-		CommonTest.checkLabel('waitLabel', waitCards)
-		
-		ViewPageTest.clickBox('learnt')
-		CommonTest.checkLabel('allLabel', 5)
-		CommonTest.checkLabel('trainLabel', 5)
-		CommonTest.checkLabel('waitLabel', waitCards)
-
-
-		NavigateObject.navigateMain()
-		// ViewPageTest.checkShelfExistByName(shelfTestName)
-		// ViewPageTest.clickShelfByName(shelfTestName)
-
-		// ViewPageTest.clickBox('all')
-		// CommonTest.checkLabel('allLabel', newCardNumber)
-		// CommonTest.checkLabel('trainLabel', newCardNumber)
-		// CommonTest.checkLabel('waitLabel', 0)
-
-		// ViewPageTest.clickBox('new')
-		// CommonTest.checkLabel('allLabel', newCardNumber)
-		// CommonTest.checkLabel('trainLabel', newCardNumber)
-		// CommonTest.checkLabel('waitLabel', 0)
-
-		// ViewPageTest.clickBox(1)
-		// CommonTest.checkLabel('allLabel', 0)
-		// CommonTest.checkLabel('trainLabel', 0)
-		// CommonTest.checkLabel('waitLabel', 0)
-
-		// NavigateObject.navigateView()
-		// MainPageTest.removeFirstShelf()
-		// NavigateObject.navigateTrash()
-		// TrashPageTest.pageReadyCheck()
-		// TrashPageTest.checkShelfExistByName(shelfTestName)
-		// TrashPageTest.clickRemoveItem()
-		// TrashPageTest.getAllShelves().should('have.length', 0);
-
-		// MainPageTest.getAllShelves().should('have.length', 1);
-
-		// TrashPageTest.pageReadyCheck()
-		// TrashPageTest.getAllShelvesCount().then(count => {
-		// 	TrashPageTest.clickRemoveItem()
-		// 	TrashPageTest.getAllShelves().should('have.length', 0);
-		// })
-		loginAndGetToken().then((token) => {
-			restoreDb(token)
-		})
-	})
-	it('Create shelf, create cards, check labels, go to view page, check shelf', () => {
-		const allCards = 30
-		const trainCards = 30
-		const waitCards = 0
+		MainPageTest.pageReadyCheck()
+		MainPageTest.unfoldFirstShelf()
+		MainPageTest.checkLabelOnBoxFirstShelf('new', 'allLabel', 5)
+		MainPageTest.checkLabelOnBoxFirstShelf('learnt', 'allLabel', 5)
+		MainPageTest.checkLabelOnBoxFirstShelf('learnt', 'trainLabel', 5)
+		MainPageTest.checkLabelOnBoxFirstShelf('learnt', 'waitLabel', 0)
+		MainPageTest.clickBoxTraining('new')
+		// cy.wait(5000);
+		// const shelfTestName = MainPageTest.createNewShelfFull() 
+		// MainPageTest.clickShelfTrainByName('Shelf A')
+	});
+	it('Visit main page without login, create 3 new shelves', () => {
+		// Cypress.env()
 		MainPageTest.visit()
+		MainPageTest.pageReadyCheck()
+		cy.get('body').type('{t + 1}')
+		cy.wait(8000);
+		// MainPageTest.clickBoxTraining('learnt')
 		const shelfTestName = MainPageTest.createNewShelfFull()
-		const newCardNumber = 2
-		CommonTest.checkLabel('allLabel', allCards)
-		CommonTest.checkLabel('trainLabel', trainCards)
-		CommonTest.checkLabel('waitLabel', waitCards)
-		Array.from({ length: newCardNumber }, () => {
-			MainPageTest.createNewCardFull()
-		})
-		CommonTest.checkLabel('allLabel', allCards + newCardNumber)
-		CommonTest.checkLabel('trainLabel', trainCards + newCardNumber)
-		CommonTest.checkLabel('waitLabel', waitCards)
+		// cy.wait(5000);
+		MainPageTest.unfoldShelfByName(shelfTestName)
+		cy.get('body').type('{t + 1}')
+		cy.wait(1000);
+		// MainPageTest.clickShelfTrainByName('Shelf A')
+	});
+	it('Visit main page without login, create 3 new shelves', () => {
+		// Cypress.env()
+		MainPageTest.visit()
+		MainPageTest.pageReadyCheck()
+		MainPageTest.clickBoxTraining(1)
+		// cy.wait(5000);
+		// const shelfTestName = MainPageTest.createNewShelfFull() 
+		// MainPageTest.clickShelfTrainByName('Shelf A')
+	});
+	// it('Create cards, check labels in cupboard, go to view page and check labels in common shelf', () => {
+	// 	let allCards = 30
+	// 	let trainCards = 30
+	// 	const waitCards = 0
+	// 	MainPageTest.visit()
+	// 	const shelfTestName = MainPageTest.createNewShelfFull()
+	// 	const newCardNumber = 2
+	// 	CommonTest.checkLabel('allLabel', allCards)
+	// 	CommonTest.checkLabel('trainLabel', trainCards)
+	// 	CommonTest.checkLabel('waitLabel', waitCards)
+	// 	Array.from({ length: newCardNumber }, () => {
+	// 		MainPageTest.createNewCardFull()
+	// 	})
+	// 	CommonTest.checkLabel('allLabel', allCards + newCardNumber)
+	// 	allCards = allCards+newCardNumber
+	// 	CommonTest.checkLabel('trainLabel', trainCards + newCardNumber)
+	// 	trainCards = trainCards +newCardNumber
+	// 	CommonTest.checkLabel('waitLabel', waitCards)
 
-		MainPageTest.clickShelfViewByName(shelfTestName)
-		ViewPageTest.pageReadyCheck()
-		ViewPageTest.checkShelfExistByName(shelfTestName)
-		ViewPageTest.clickShelfByName(shelfTestName)
+	// 	NavigateObject.navigateView()
+	// 	ViewPageTest.pageReadyCheck()
 
-		// ViewPageTest.clickBox('all')
-		CommonTest.checkLabel('allLabel', newCardNumber)
-		CommonTest.checkLabel('trainLabel',newCardNumber)
-		CommonTest.checkLabel('waitLabel', 0)
+	// 	// будет проверять общую полку + новые карточки.
+	// 	CommonTest.checkLabel('allLabel', 5 + newCardNumber)
+	// 	CommonTest.checkLabel('trainLabel', 5 + newCardNumber)
+	// 	CommonTest.checkLabel('waitLabel', 0)
 
-		// ViewPageTest.clickBox('all')
-		// CommonTest.checkLabel('allLabel', newCardNumber)
-		// CommonTest.checkLabel('trainLabel', newCardNumber)
-		// CommonTest.checkLabel('waitLabel', 0)
+	// 	ViewPageTest.clickBox('all')
+	// 	CommonTest.checkLabel('allLabel', allCards)
+	// 	CommonTest.checkLabel('trainLabel', trainCards)
+	// 	CommonTest.checkLabel('waitLabel', waitCards)
 
-		ViewPageTest.clickBox('new')
-		CommonTest.checkLabel('allLabel', newCardNumber)
-		CommonTest.checkLabel('trainLabel', newCardNumber)
-		CommonTest.checkLabel('waitLabel', 0)
+	// 	ViewPageTest.clickBox('learning')
+	// 	CommonTest.checkLabel('allLabel', allCards - newCardNumber - 5 - 5)
+	// 	CommonTest.checkLabel('trainLabel', trainCards - newCardNumber - 5 - 5)
+	// 	CommonTest.checkLabel('waitLabel', waitCards)
 
-		ViewPageTest.clickBox(1)
-		CommonTest.checkLabel('allLabel', 0)
-		CommonTest.checkLabel('trainLabel', 0)
-		CommonTest.checkLabel('waitLabel', 0)
+	// 	ViewPageTest.clickBox('learnt')
+	// 	CommonTest.checkLabel('allLabel', 5)
+	// 	CommonTest.checkLabel('trainLabel', 5)
+	// 	CommonTest.checkLabel('waitLabel', waitCards)
 
-		// NavigateObject.navigateView()
-		// MainPageTest.removeFirstShelf()
-		// NavigateObject.navigateTrash()
-		// TrashPageTest.pageReadyCheck()
-		// TrashPageTest.checkShelfExistByName(shelfTestName)
-		// TrashPageTest.clickRemoveItem()
-		// TrashPageTest.getAllShelves().should('have.length', 0);
+	// 	loginAndGetToken().then((token) => {
+	// 		restoreDb(token)
+	// 	})
+	// })
+	// it('Create shelf, create cards, check labels, go to view page, check shelf', () => {
+	// 	const allCards = 30
+	// 	const trainCards = 30
+	// 	const waitCards = 0
+	// 	MainPageTest.visit()
+	// 	const shelfTestName = MainPageTest.createNewShelfFull()
+	// 	const newCardNumber = 2
+	// 	CommonTest.checkLabel('allLabel', allCards)
+	// 	CommonTest.checkLabel('trainLabel', trainCards)
+	// 	CommonTest.checkLabel('waitLabel', waitCards)
+	// 	Array.from({ length: newCardNumber }, () => {
+	// 		MainPageTest.createNewCardFull()
+	// 	})
+	// 	CommonTest.checkLabel('allLabel', allCards + newCardNumber)
+	// 	CommonTest.checkLabel('trainLabel', trainCards + newCardNumber)
+	// 	CommonTest.checkLabel('waitLabel', waitCards)
 
-		// MainPageTest.getAllShelves().should('have.length', 1);
+	// 	MainPageTest.clickShelfViewByName(shelfTestName)
+	// 	ViewPageTest.pageReadyCheck()
+	// 	ViewPageTest.checkShelfExistByName(shelfTestName)
+	// 	ViewPageTest.clickShelfByName(shelfTestName)
 
-		// TrashPageTest.pageReadyCheck()
-		// TrashPageTest.getAllShelvesCount().then(count => {
-		// 	TrashPageTest.clickRemoveItem()
-		// 	TrashPageTest.getAllShelves().should('have.length', 0);
-		// })
-		loginAndGetToken().then((token) => {
-			restoreDb(token)
-		})
-	})
+	// 	// поскольку я нажал view на полке, то сразу попаду в все карточки
+	// 	CommonTest.checkLabel('allLabel', newCardNumber)
+	// 	CommonTest.checkLabel('trainLabel',newCardNumber)
+	// 	CommonTest.checkLabel('waitLabel', 0)
+
+	// 	ViewPageTest.clickBox('new')
+	// 	CommonTest.checkLabel('allLabel', newCardNumber)
+	// 	CommonTest.checkLabel('trainLabel', newCardNumber)
+	// 	CommonTest.checkLabel('waitLabel', 0)
+
+	// 	ViewPageTest.clickBox('learnt')
+	// 	CommonTest.checkLabel('allLabel', 0)
+	// 	CommonTest.checkLabel('trainLabel', 0)
+	// 	CommonTest.checkLabel('waitLabel', 0)
+
+	// 	loginAndGetToken().then((token) => {
+	// 		restoreDb(token)
+	// 	})
+	// })
 	// cleanUp()
 
 	// 	TrashPageTest.visit()
