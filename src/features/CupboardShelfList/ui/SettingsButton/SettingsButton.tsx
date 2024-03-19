@@ -9,6 +9,7 @@ import { MyText } from '@/shared/ui/Typography';
 import cls from './SettingsButton.module.scss';
 import { useSelector } from 'react-redux';
 import { getIsOnlyOneShelfLeftInCupboard } from '../../model/selectors/getCupboardShelfList';
+import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
 
 export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 	const { t } = useTranslation()
@@ -42,7 +43,6 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 
 
 	const settingItems: DropdownItem[] = useMemo(() => {
-		// const settingItemsWithoutDeletion: DropdownItem[] = useMemo(() => {
 		return [
 			{
 				content: t('settingsItems.rename'),
@@ -63,6 +63,7 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 			{
 				content: <MyText fontWeight='300'
 					className={cls.removeShelfButton}
+					data-testid={TEST_BUTTONS_IDS.shelf.removeShelfButton}
 					text={t('settingsItems.remove')}
 					variant={
 						isOnlyOneShelfLeftInCupboard
@@ -85,6 +86,7 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 				trigger={
 					<Button
 						fontWeight='300'
+						data-testid={TEST_BUTTONS_IDS.shelf.shelfSettingsButton}
 					// className={cls.button}
 					>
 						{t('settingsItems.settings')}
