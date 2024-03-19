@@ -13,7 +13,7 @@ import {
 	getBoxIdCheckedCardModal,
 } from '../../../model/selectors/getCreateNewCardModal';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { cupboardShelfListActions, getCupboardState } from '../../../model/slice/cupboardShelfListSlice';
+import { getCupboardState } from '../../../model/selectors/getCupboardCommon';
 import { Skeleton, TextEditorSkeleton } from '@/shared/ui/Skeleton';
 import { getIsCupboardLoading, getShelfItems } from '../../../model/selectors/getCupboardShelfList';
 import { HDialog } from '@/shared/ui/HDialog';
@@ -25,6 +25,8 @@ import { EditorUniversal } from '@/shared/ui/LexicalEditor';
 import { createNewCardThunk } from '../../../model/services/createNewCardThunk';
 import { genRandomId } from '@/shared/lib/helpers/common/genRandomId';
 import cls from '@/shared/styles/CardEditAndCreateModal.module.scss';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
+import { cupboardShelfListActions } from '../../../model/slice/cupboardShelfListSlice';
 
 interface CreateNewCardModalProps {
 	cardModalSkeleton: JSX.Element
@@ -105,6 +107,7 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 						onChange={onChangeShelf}
 						max
 						sameWidth
+						triggerTestId={TEST_ENTITY_NAMES.listBoxTriggerShelf}
 					/>
 				</div>
 				<div className={cls.listBoxWrapper}>
@@ -116,6 +119,7 @@ const CreateNewCardModal = memo((props: CreateNewCardModalProps) => {
 						onChange={onChangeBox}
 						max
 						sameWidth
+						triggerTestId={TEST_ENTITY_NAMES.listBoxTriggerBox}
 					/>
 				</div>
 			</div>)
