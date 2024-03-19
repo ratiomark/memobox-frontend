@@ -4,10 +4,11 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { MyToast } from '@/shared/ui/Toast'
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
-import { cupboardShelfListActions, getAllShelvesIds } from '../../model/slice/cupboardShelfListSlice'
+import { getAllShelvesIds, getCupboardState } from '../../model/selectors/getCupboardCommon';
 import { getShelfDeletionRequestStatus } from '../../model/selectors/getDeletionProcess'
 import { EntityId } from '@reduxjs/toolkit'
 import { getShelfTitleByShelfId } from '../../model/selectors/getCupboardShelfList'
+import { cupboardShelfListActions } from '../..'
 
 
 export const ShelvesDeletionToasts = () => {
