@@ -16,6 +16,8 @@ import { useDeleteWithCountdown } from '@/shared/lib/helpers/hooks/useDeleteWith
 import { toastsActions } from '@/shared/ui/Toast';
 import { unstable_batchedUpdates } from 'react-dom';
 import { idPrefixShelfDeletion } from '@/shared/const/idsAndDataAttributes';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
+import { t } from 'i18next';
 
 interface ShelfDeletingProps {
 	shelfId: string
@@ -50,9 +52,8 @@ export const ShelfDeleting = (props: ShelfDeletingProps) => {
 
 
 	return (
-		<div className={clsx(
-			cls.ShelfDeleting,
-		)}
+		<div className={cls.ShelfDeleting}
+			data-testid={TEST_ENTITY_NAMES.shelfItemDeleting}
 		>
 			<VStack align='start' gap='gap_8'>
 				<Heading as='h3' size='s' title={title} className={cls.title} />
