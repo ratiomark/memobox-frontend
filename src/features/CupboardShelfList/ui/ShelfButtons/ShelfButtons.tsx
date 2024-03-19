@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router-dom';
-import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { obtainRouteMain, obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { SettingButton } from '../SettingsButton/SettingsButton';
 import { ShelfSchema, useUpdateShelfMutation } from '@/entities/Shelf';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
@@ -15,11 +15,15 @@ import { dataAttrButtonTypeAddCard, dataAttrButtonTypeTrain } from '@/shared/con
 import cls from './ShelfButtons.module.scss';
 import { useSelector } from 'react-redux';
 import { getIsCupboardRefetching } from '../..';
+import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
+import { MyToast } from '@/shared/ui/Toast';
+import { MySimpleToast, useToastCustom } from '@/shared/ui/Toast/ui/MyToastRTK';
 
 interface ShelfButtonsProps {
 	className?: string
 	onAddNewCardClick: (shelfId: string) => void
 	onCollapseClick: (shelfId: string, collapsed: boolean) => void
+	onNoCardTrainingHotKeyPress: () => void
 	shelf: ShelfSchema
 }
 
@@ -36,10 +40,12 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		},
 		onAddNewCardClick,
 		onCollapseClick,
+		onNoCardTrainingHotKeyPress,
 	} = props
+	const createToastFn = useToastCustom()
 	const [updateShelfMutation] = useUpdateShelfMutation()
 	const isRefetching = useSelector(getIsCupboardRefetching)
-
+	const noTrainingCards = trainCardsCount === 0
 	const shelfIndexEdited = shelfIndex + 1
 	let positionTextCard = '';
 	let positionTextTrain = '';
@@ -50,6 +56,12 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 	const navigate = useNavigate()
 
 	const startTraining = () => {
+		// console.log('startTraining clicked  ', positionTextTrain)
+		if (noTrainingCards) {
+			createToastFn({ status: 'error', messageError: 'No training cards' })
+			onNoCardTrainingHotKeyPress()
+			return
+		}
 		navigate(obtainRouteTraining(shelfId, 'all'))
 	}
 
@@ -58,7 +70,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 	}, [onAddNewCardClick, shelfId])
 
 	useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true, preventDefault: true, })
-	useHotkeys(positionTextTrain, startTraining, { enabled: !isRefetching })
+	useHotkeys(positionTextTrain, startTraining, { keydown: true, enabled: !isRefetching })
 
 
 	const onViewClick = () => {
@@ -85,50 +97,57 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 	const { t } = useTranslation()
 
 	return (
-		<div>
-			<div className={clsx(
-				cls.ShelfButtons,
-				[className])}
-			>
-				<Button
-					fontWeight='300'
-					// className={cls.button}
-					onClick={onAddNewCardHandle}
-					data-button-type={dataAttrButtonTypeAddCard}
-				>
-					{t('add card with hot key') + ` (${positionTextCard})`}
-				</Button>
+		<>
 
-				<SettingButton shelfId={shelfId} />
-
-				<Button
-					// className={cls.button}
-					fontWeight='300'
-					onClick={onViewClick}
+			<div>
+				<div className={clsx(
+					cls.ShelfButtons,
+					[className])}
 				>
-					{t('view')}
-				</Button>
-				<Button
-					fontWeight='300'
-					// className={cls.button}
-					onClick={startTraining}
-					variant='filled'
-					disabled={trainCardsCount === 0 || isRefetching}
-					data-button-type={dataAttrButtonTypeTrain}
-				>
-					{t('train') + ` (${positionTextTrain})`}
-				</Button>
-				<Icon
-					className={
-						clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
-					clickable
-					type='hint'
-					Svg={ArrowBottomIcon}
-					onClick={onCollapseClickHandleDebounced}
+					<Button
+						fontWeight='300'
+						// className={cls.button}
+						onClick={onAddNewCardHandle}
+						data-button-type={dataAttrButtonTypeAddCard}
+						data-testid={TEST_BUTTONS_IDS.shelf.addCardButton}
+					>
+						{t('add card with hot key') + ` (${positionTextCard})`}
+					</Button>
 
-				/>
+					<SettingButton shelfId={shelfId} />
+
+					<Button
+						// className={cls.button}
+						fontWeight='300'
+						onClick={onViewClick}
+						data-testid={TEST_BUTTONS_IDS.shelf.viewButton}
+					>
+						{t('view')}
+					</Button>
+					<Button
+						fontWeight='300'
+						// className={cls.button}
+						onClick={startTraining}
+						variant='filled'
+						disabled={noTrainingCards || isRefetching}
+						data-button-type={dataAttrButtonTypeTrain}
+						data-testid={TEST_BUTTONS_IDS.shelf.trainButton}
+					>
+						{t('train') + ` (${positionTextTrain})`}
+					</Button>
+					<Icon
+						className={
+							clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
+						clickable
+						type='hint'
+						Svg={ArrowBottomIcon}
+						onClick={onCollapseClickHandleDebounced}
+						data-testid={TEST_BUTTONS_IDS.shelf.collapseButton}
+					/>
+				</div>
 			</div>
-		</div>
+			{/* <MySimpleToast status='error' messageError='test' /> */}
+		</>
 	)
 })
 ShelfButtons.displayName = 'ShelfButtons'
