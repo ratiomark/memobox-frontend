@@ -1,20 +1,13 @@
-import { useTranslation } from 'react-i18next';
 import cls from './CupboardShelfList.module.scss';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
-	getCupboardData,
 	getIsCupboardLoading,
-	getCupboardError,
-	getCupboardShelves,
-	getCupboardCommonShelfCollapsed,
-	getIsCupboardDataAlreadyInStore,
 	getIsCupboardFirstRender,
 	getIsCupboardRefetching,
-	// getShelvesFromStorOrLocalSaver,
 } from '../model/selectors/getCupboardShelfList';
-import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
+import { getCupboardState } from '../model/selectors/getCupboardCommon';
 import { ShelfItem } from './ShelfItem/ShelfItem';
 import { ShelfButtons } from './ShelfButtons/ShelfButtons';
 import { ShelfSchema } from '@/entities/Shelf';
@@ -39,6 +32,7 @@ import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore
 import { RenameShelfModal } from './Modals/RenameShelfModal/RenameShelfModal';
 import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags';
 import { rtkApi } from '@/shared/api/rtkApi';
+import { cupboardShelfListActions } from '../model/slice/cupboardShelfListSlice';
 
 export const CupboardShelfList = () => {
 	// const dispatch = useAppDispatch()
@@ -103,10 +97,18 @@ export const ShelvesRendered = () => {
 	}, [dispatch])
 
 	useEffect(() => {
-		return () => {
-			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
-		}
+		const timer = setTimeout(() => {
+			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]));
+		}, 200); // Задержка выполнения на 500 мс
+
+		// Возвращаем функцию очистки, которая будет вызвана при размонтировании компонента
+		return () => clearTimeout(timer);
 	}, [dispatch])
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
+	// 	}
+	// }, [dispatch])
 
 	const onAddNewCardClick = useCallback((shelfId: string) => {
 		dispatch(cupboardShelfListActions.setShelfIdCardModal(shelfId))
@@ -121,6 +123,10 @@ export const ShelvesRendered = () => {
 		dispatch(cupboardShelfListActions.reorderShelves(shelves))
 	}, [dispatch])
 
+	const onNoCardTrainingHotKeyPress = useCallback(() => {
+		dispatch(cupboardShelfListActions.setSkipTrainingHotKey(true))
+	}, [dispatch])
+
 
 	const shelvesList = useMemo(() => {
 		return cupboardShelves.map(shelf => {
@@ -132,6 +138,7 @@ export const ShelvesRendered = () => {
 						shelf={shelf}
 						onAddNewCardClick={onAddNewCardClick}
 						onCollapseClick={onCollapseClick}
+						onNoCardTrainingHotKeyPress={onNoCardTrainingHotKeyPress}
 					/>}
 					noDelay={!cupboardIsLoading}
 					isLoading={cupboardIsLoading && isFirstRender}
@@ -155,7 +162,7 @@ export const ShelvesRendered = () => {
 			)
 		})
 
-	}, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick])
+	}, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick, onNoCardTrainingHotKeyPress])
 
 	return (
 		<Reorder.Group
