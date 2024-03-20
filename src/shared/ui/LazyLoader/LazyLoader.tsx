@@ -1,12 +1,15 @@
 import { ReactNode, Suspense } from 'react';
 
-interface LazyLoaderProps {
-	isOpen: boolean
+interface LazyLoaderBase {
 	render: () => ReactNode
+}
+
+interface LazyLoaderProps extends LazyLoaderBase {
+	isOpen: boolean
 	fallback: ReactNode
 }
-interface LazyLoaderQuickProps {
-	render: () => ReactNode
+
+interface LazyLoaderQuickProps extends LazyLoaderBase {
 	fallback?: ReactNode
 }
 

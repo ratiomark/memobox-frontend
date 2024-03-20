@@ -2,9 +2,10 @@
 
 import clsx from 'clsx';
 import cls from './HDialogHeadless.module.scss';
-import { CSSProperties, MutableRefObject, ReactNode, lazy, useCallback, useEffect, useRef } from 'react';
+import { CSSProperties, MutableRefObject, ReactNode, forwardRef, lazy, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import { useTheme } from '@/shared/context/useTheme';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 interface HDialogProps {
 	className?: string
@@ -24,7 +25,7 @@ interface HDialogProps {
 	overlay?: boolean
 }
 
-export const HDialogHeadless = (props: HDialogProps) => {
+export const HDialogHeadless = forwardRef<HTMLDivElement, HDialogProps>((props, ref) => {
 	const {
 		className,
 		classNamePanelAdditional,
@@ -44,6 +45,8 @@ export const HDialogHeadless = (props: HDialogProps) => {
 	} = props
 	const { theme } = useTheme()
 
+	// const dialogRef = useRef<HTMLDivElement>(null);
+	// useImperativeHandle(ref, () => dialogRef.current as HTMLDivElement);
 
 	// const onKeyDown = useCallback((e: KeyboardEvent) => {
 	// 	if (e.key === 'Enter' && e.shiftKey) {
@@ -74,10 +77,11 @@ export const HDialogHeadless = (props: HDialogProps) => {
 				theme,
 				'app_modal',
 			)}
-
+			data-testid={isOpen ? TEST_ENTITY_NAMES.modalOpen : TEST_ENTITY_NAMES.modalClose}
 			unmount={unmount}
 			open={isOpen}
 			onClose={onClose}
+			// ref={dialogRef}
 		>
 			<div className={cls.content}>
 				{overlay && <div className={transparent ? cls.overlayTransparent : cls.overlay} />}
@@ -99,4 +103,4 @@ export const HDialogHeadless = (props: HDialogProps) => {
 
 		</Dialog >
 	)
-}
+})

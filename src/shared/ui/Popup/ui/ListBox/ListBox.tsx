@@ -8,11 +8,13 @@ import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg'
 import { Icon } from '../../../Icon/Icon';
 import cls from './ListBox.module.scss';
 import CheckIcon from '@/shared/assets/icons/checkIcon.svg'
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 export interface ListBoxItem<T extends string | number> {
 	value: string | T | number
 	content: ReactNode
 	disabled?: boolean
+	'data-testid'?: string
 }
 
 interface ListBoxProps<T extends number | string> {
@@ -30,6 +32,7 @@ interface ListBoxProps<T extends number | string> {
 	labelPadding?: FlexGap
 	sameWidth?: boolean
 	max?: boolean,
+	triggerTestId?: string
 
 	// ref?: MutableRefObject<HTMLElement | null>
 }
@@ -106,6 +109,7 @@ export const ListBox = <T extends number | string>(props: ListBoxProps<T>) => {
 										: cls.pointer,
 								)}
 								ref={listBoxRef}
+								data-testid={props.triggerTestId}
 							>
 								{selectedItemLocalized?.content ?? defaultValue}
 								{isOnlyOneItemInList
@@ -153,6 +157,7 @@ export const ListBox = <T extends number | string>(props: ListBoxProps<T>) => {
 															{ [cls.ListBoxOption_disabled]: item.disabled },
 															{ [cls.ListBoxOption_selected]: selected },
 														)}
+														data-testid={TEST_ENTITY_NAMES.listBoxItem}
 													>
 														{/* {selected} */}
 														{item.content}

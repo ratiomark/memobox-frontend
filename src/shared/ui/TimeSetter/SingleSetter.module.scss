@@ -24,12 +24,6 @@
   fill: grey;
 }
 
-.hint {
-  color: red;
-  fill: red;
-  stroke: red;
-}
-
 .smallTime {
   color: #80808096;
   font-size: 11px;
@@ -37,4 +31,10 @@
 
 .empty {
   height: 24px;
+}
+
+.hint {
+  color: red;
+  fill: red;
+  stroke: red;
 }

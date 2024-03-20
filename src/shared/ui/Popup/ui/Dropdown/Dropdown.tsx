@@ -6,6 +6,7 @@ import { AbsoluteListDirection } from '@/shared/types/ui';
 import { AppLink } from '../../../AppLink/AppLink';
 
 import cls from './Dropdown.module.scss';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 
 export interface DropdownItem {
@@ -43,43 +44,51 @@ export const Dropdown = (props: DropdownProps) => {
 				cls.Dropdown,
 				[className])}
 		>
-			<Menu.Button as={Fragment}>
-				{trigger}
-			</Menu.Button>
+			{({ open }) => (
+				<>
+					<Menu.Button as={Fragment}>
+						{trigger}
+					</Menu.Button>
 
-			<Menu.Items as={asListWrapper ?? 'div'} className={clsx(cls.menu, listDirection)}>
+					<Menu.Items
+						data-testid={open ? TEST_ENTITY_NAMES.dropdownItems : undefined}
+						className={clsx(cls.menu, listDirection)}
+						as={asListWrapper ?? 'ul'}
+					>
 
-				{items.map((item, index) => {
-					const content = ({ active }: { active: boolean }) => (
-						<li
-							className={clsx(
-								cls.menuItem,
-								{ [cls.active]: active },
-								{ [cls.disabled]: item.disabled },
-							)}
-							onClick={item.onClick}
-						>
-							{item.content}
-						</li>
-					)
+						{items.map((item, index) => {
+							const content = ({ active }: { active: boolean }) => (
+								<li
+									className={clsx(
+										cls.menuItem,
+										{ [cls.active]: active },
+										{ [cls.disabled]: item.disabled },
+									)}
+									onClick={item.onClick}
+								>
+									{item.content}
+								</li>
+							)
 
-					if (item.href) {
-						return (
-							<Menu.Item as={AppLink} key={index} to={item.href} disabled={item.disabled}>
-								{/* {({active, close})=>{}} */}
-								{content}
-							</Menu.Item>
-						)
-					}
+							if (item.href) {
+								return (
+									<Menu.Item as={AppLink} key={index} to={item.href} disabled={item.disabled}>
+										{/* {({active, close})=>{}} */}
+										{content}
+									</Menu.Item>
+								)
+							}
 
-					return (
-						<Menu.Item key={index} as={Fragment}>
-							{content}
-						</Menu.Item>
-					)
-				})}
+							return (
+								<Menu.Item key={index} as={Fragment}>
+									{content}
+								</Menu.Item>
+							)
+						})}
 
-			</Menu.Items>
+					</Menu.Items>
+				</>
+			)}
 		</Menu >
 	)
 }

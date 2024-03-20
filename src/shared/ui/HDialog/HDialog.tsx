@@ -8,6 +8,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { Overlay } from '../Overlay/Overlay';
 import { useTheme } from '@/shared/context/useTheme';
 import { AnimatePresence, motion } from 'framer-motion';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 interface HDialogProps {
 	className?: string
@@ -127,7 +128,7 @@ export const HDialog = (props: HDialogProps) => {
 						theme,
 						'app_modal',
 					)}
-
+					data-testid={isOpen ? TEST_ENTITY_NAMES.modalOpen : TEST_ENTITY_NAMES.modalClose}
 				>
 					{/* {overlay && <div onClick={onClose} className={cls.overlay} />} */}
 					{overlay && <Dialog.Overlay forceMount className={transparent ? cls.overlayTransparent : cls.overlay} />}

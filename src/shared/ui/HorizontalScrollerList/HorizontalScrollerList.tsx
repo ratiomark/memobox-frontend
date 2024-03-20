@@ -7,6 +7,7 @@ interface HorizontalScrollerListItem {
 	value: string
 	content: string
 	onChange: () => void
+	'data-testid'?: string
 }
 
 interface HorizontalScrollerListProps {
@@ -56,6 +57,7 @@ export const HorizontalScrollerList = (props: HorizontalScrollerListProps) => {
 					itemRefs.current.push(el!)
 				}}
 				onClick={e => handleSelectItem(e, item, index + 1)}
+				data-testid={item['data-testid']}
 			>
 				{item.content}
 			</li>

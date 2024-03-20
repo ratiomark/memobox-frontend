@@ -1,6 +1,7 @@
 import { CSSProperties, memo } from 'react';
 import clsx from 'clsx';
 import cls from './Skeleton.module.scss';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 interface SkeletonProps {
 	className?: string
@@ -27,6 +28,7 @@ export const Skeleton = memo((props: SkeletonProps) => {
 		<div
 			className={clsx(cls.Skeleton, [className])}
 			style={styles}
+			data-testid={TEST_ENTITY_NAMES.skeleton}
 		/>
 	)
 })

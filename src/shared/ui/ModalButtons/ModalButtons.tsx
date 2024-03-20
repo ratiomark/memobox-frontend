@@ -6,6 +6,7 @@ import { HStack } from '../Stack';
 import { FlexGap, FlexJustify } from '../Stack/Flex/Flex';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { memo } from 'react';
+import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
 
 interface ModalButtonsProps {
 	className?: string
@@ -45,6 +46,7 @@ export const ModalButtons = (props: ModalButtonsProps) => {
 			<Button
 				variant='back'
 				onClick={onClose}
+				data-testid={TEST_BUTTONS_IDS.cancelButton}
 			>
 				{t(textCloseButton)}
 			</Button>
@@ -53,6 +55,7 @@ export const ModalButtons = (props: ModalButtonsProps) => {
 				disabled={isSubmitDisabled}
 				onClick={onSubmit}
 				variant='filled'
+				data-testid={TEST_BUTTONS_IDS.submitButton}
 			>
 				{t(textSubmitButton)}
 			</Button>

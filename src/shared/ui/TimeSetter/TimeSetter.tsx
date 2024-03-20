@@ -8,7 +8,7 @@ import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock';
 import { ModalButtons } from '../ModalButtons';
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
-import useSingleSettersWidth from './useSingleSettersWidth.ts'
+import useSingleSettersWidth from './useSingleSettersWidth'
 
 interface TimeSetterProps {
 	className?: string

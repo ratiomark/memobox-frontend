@@ -1,0 +1,1 @@
+export const getTimeRepresentation = (timeValue: number): number | string => (timeValue < 10 ? `0${timeValue}` : timeValue)

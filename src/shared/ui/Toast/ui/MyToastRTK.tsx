@@ -26,7 +26,7 @@ import { Button } from '../../Button';
 import { ButtonColor } from '../../Button/Button';
 import { useDeleteWithCountdown } from '@/shared/lib/helpers/hooks/useDeleteWithCountdown';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
-import { StateSchema } from '@/app/providers/StoreProvider';
+import { genRandomString } from '@/shared/lib/helpers/common/genRandomString';
 
 interface MyComponentToastsProps extends MyToastProps {
 	onTimeEnd?: () => void
@@ -116,6 +116,7 @@ export const MyToast = (props: MyComponentToastsProps) => {
 	)
 }
 
+
 interface MyComponentToastWithButtonProps extends Omit<MyToastProps, 'status'> {
 	onTimeEnd: () => void
 	onButtonClick: () => void
@@ -123,6 +124,40 @@ interface MyComponentToastWithButtonProps extends Omit<MyToastProps, 'status'> {
 	message?: string
 	buttonColor?: ButtonColor
 }
+
+
+export const MySimpleToast = (props: MyToastProps) => {
+	const {
+		duration = 3000,
+		message = 'some text',
+		status = 'idle'
+	} = props
+	const [visible, setVisible] = useState(true);
+
+	useEffect(() => {
+		const timerId = setTimeout(() => {
+			setVisible(false);
+		}, duration);
+
+		return () => clearTimeout(timerId);
+	}, [duration]);
+
+	if (!visible) {
+		return null;
+	}
+
+	const IconComponent = status === 'pending' ? Spinner : status === 'success' ? CheckIcon : ErrorIcon;
+
+	return (
+		<Root open={visible} className={clsx(cls.MyToast, cls[`${status}_toast`])}>
+			<div className={cls.content}>
+				<ToastTitle className={cls.title}>{message}</ToastTitle>
+				<IconComponent className={cls[status]} width={24} height={24} /> {/* Пример размеров, возможно, потребуется настройка */}
+			</div>
+		</Root>
+	);
+};
+
 
 export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 	const {
@@ -152,19 +187,11 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 	}, [timer])
 
 	useEffect(() => {
-		console.log('render')
+		// console.log('render')
 		return () => {
 			onTimeEnd()
 		}
 	}, [onTimeEnd])
-
-
-	// useEffect(() => {
-	// 	const timer = setTimeout(onTimeEnd, duration);
-	// 	() => {
-	// 		clearTimeout(timer)
-	// 	}
-	// }, [onTimeEnd, duration])
 
 
 	const mainContent = (<div className={cls.content} >
@@ -200,6 +227,12 @@ export const MyToastWithButton = (props: MyComponentToastWithButtonProps) => {
 }
 
 
+export const useToastCustom = () => {
+	const dispatch = useAppDispatch()
+	return (props: MyToastProps) => dispatch(toastsActions.addToast({ id: genRandomString(), toast: props }))
+}
+
+
 const MyToastWrapper = ({ id }: { id: string }) => {
 	// const MyToastWrapper = ({ id, toast }: { id: string, toast: MyToastProps }) => {
 	const dispatch = useAppDispatch()
@@ -217,7 +250,6 @@ const MyToastWrapper = ({ id }: { id: string }) => {
 		/>
 	)
 }
-
 
 
 const reducers: ReducersList = {

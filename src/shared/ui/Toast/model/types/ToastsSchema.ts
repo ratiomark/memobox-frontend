@@ -1,5 +1,6 @@
-import { RequestStatusType } from '@/shared/types/GeneralTypes'
 import { ReactNode } from 'react'
+
+import { RequestStatusType } from '@/shared/types/GeneralTypes'
 
 export interface MyToastProps {
 	className?: string
@@ -12,6 +13,7 @@ export interface MyToastProps {
 	contentSuccess?: string
 	contentError?: string
 	contentCommon?: string
+	message?: string
 	// contentLoading?: string | ReactNode
 	// contentSuccess?: string | ReactNode
 	// contentError?: string | ReactNode

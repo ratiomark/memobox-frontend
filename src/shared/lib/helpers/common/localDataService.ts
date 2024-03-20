@@ -158,6 +158,11 @@ class LocalDataService implements ILocalDataService {
 		this.removeData(KEY_USER_TOKEN_LOCAL_STORAGE)
 		this.removeData(KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE)
 		this.removeData(KEY_USER_ID_LOCAL_STORAGE)
+		this.removeData(KEY_SHELVES_LOCAL_STORAGE)
+		this.removeData(KEY_COMMON_SHELF_IS_COLLAPSED)
+		this.removeData(KEY_VIEW_ROWS_LOCAL_STORAGE)
+		this.removeData(KEY_VIEW_SORT_ORDER_LOCAL_STORAGE)
+		this.removeData(KEY_VIEW_SORT_VALUE_LOCAL_STORAGE)
 	}
 	// 
 	setSortOrderViewPage(sortOrder: SortOrderType) {

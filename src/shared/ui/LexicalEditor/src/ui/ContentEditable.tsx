@@ -6,6 +6,7 @@
  *
  */
 
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 import './ContentEditable.css';
 
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
@@ -16,5 +17,5 @@ export default function LexicalContentEditable({
 }: {
 	className?: string;
 }): JSX.Element {
-	return <ContentEditable className={className || 'ContentEditable__root'} />;
+	return <ContentEditable data-testid={TEST_ENTITY_NAMES.lexical} className={className || 'ContentEditable__root'} />;
 }
