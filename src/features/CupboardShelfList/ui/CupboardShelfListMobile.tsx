@@ -15,7 +15,7 @@ import {
 	getIsCupboardRefetching,
 	// getShelvesFromStorOrLocalSaver,
 } from '../model/selectors/getCupboardShelfList';
-import { cupboardShelfListActions, getCupboardState } from '../model/slice/cupboardShelfListSlice';
+import { getCupboardState } from '../model/selectors/getCupboardCommon';
 import { ShelfItem } from './ShelfItem/ShelfItem';
 import { ShelfButtons } from './ShelfButtons/ShelfButtons';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';

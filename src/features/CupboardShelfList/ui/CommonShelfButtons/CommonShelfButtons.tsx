@@ -1,31 +1,45 @@
-import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
-import { Button } from '@/shared/ui/Button';
-import { Icon } from '@/shared/ui/Icon';
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
-import cls from './CommonShelfButtons.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { getCupboardCommonShelfCollapsed, getIsAnyCardsToTrain, getIsCupboardRefetching } from '../../model/selectors/getCupboardShelfList';
-import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { cupboardShelfListActions } from '../..';
-import { useUpdateCommonShelfMutation } from '@/entities/Shelf';
-import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
-import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
-import { dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
+import { useNavigate } from 'react-router-dom';
+
+import cls from './CommonShelfButtons.module.scss';
+
+import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { userActions } from '@/entities/User';
 import { updateJsonSavedDataThunk } from '@/entities/User';
+import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
+import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
+import { dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
+import { Button } from '@/shared/ui/Button';
+import { Icon } from '@/shared/ui/Icon';
+
+import {
+	getCupboardCommonShelfCollapsed,
+	getIsAnyCardsToTrain,
+	getIsCupboardRefetching,
+	getIsSkipTrainingByHotKeyPress
+} from '../../model/selectors/getCupboardShelfList';
+import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice';
+import { MyTooltip } from '@/shared/ui/Tooltip/Tooltip';
 
 
 export const CommonShelfButtons = () => {
 	const isRefetching = useSelector(getIsCupboardRefetching)
 	const isAnyCardsToTrainExist = useSelector(getIsAnyCardsToTrain)
+	const skipTrainingHotKey = useSelector(getIsSkipTrainingByHotKeyPress)
 	const navigate = useNavigate()
 	const startTraining = () => {
+		if (skipTrainingHotKey) {
+			dispatch(cupboardShelfListActions.setSkipTrainingHotKey(false))
+			return
+		}
+		// console.log('startTraining clicked  ', ' t ', ' all ')
 		navigate(obtainRouteTraining('all', 'all'))
 	}
 	const onViewClick = () => {
@@ -49,7 +63,8 @@ export const CommonShelfButtons = () => {
 		{ leading: true, trailing: false }
 	)
 
-	const { t } = useTranslation()
+	const { t: t2 } = useTranslation('tooltip')
+	const { t } = useTranslation('translation')
 
 	return (
 		<div className={cls.ShelfButtons}>
@@ -59,15 +74,18 @@ export const CommonShelfButtons = () => {
 			>
 				{t('view')}
 			</Button>
-			<Button
-				className={cls.button}
-				variant='filled'
-				data-button-type={dataAttrButtonTypeTrain}
-				onClick={startTraining}
-				disabled={isRefetching || !isAnyCardsToTrainExist}
-			>
-				{t('train') + ' (t)'}
-			</Button>
+			<MyTooltip
+				content={t2('training common shelf')}
+				trigger={<Button
+					className={cls.button}
+					variant='filled'
+					data-button-type={dataAttrButtonTypeTrain}
+					onClick={startTraining}
+					disabled={isRefetching || !isAnyCardsToTrainExist}
+				>
+					{t('train')}
+				</Button>}
+			/>
 			<Icon
 				className={
 					clsx(cls.arrow, !commonShelfCollapsed ? cls.rotateArrow : '')}

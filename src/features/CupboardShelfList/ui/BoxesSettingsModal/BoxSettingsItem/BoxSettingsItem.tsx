@@ -1,23 +1,22 @@
 import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './BoxSettingsItem.module.scss';
-import { Heading } from '@/shared/ui/Typography';
 import TimeIcon from '@/shared/assets/icons/timeIcon2.svg'
+import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
+import { useTranslation } from 'react-i18next';
+import { Heading } from '@/shared/ui/Typography';
 import { Icon } from '@/shared/ui/Icon';
-import { ExtendedTimingBlock, TimingBlock } from '@/shared/types/DataBlock';
+import { ExtendedTimingBlock } from '@/shared/types/DataBlock';
 import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { AddBoxIcon } from '../AddBoxIcon/AddBoxIcon';
 import { DURATION_MILLISEC, DURATION_SEC, } from '@/shared/const/animation';
-import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import { HStack } from '@/shared/ui/Stack';
-import { BOX_TIMING_DATA_DEFAULT } from '@/shared/const/timingBlock';
 import { getTiming } from '@/shared/lib/helpers/common/formaters';
 import { getBoxesTemplateModalMode } from '../../../model/selectors/getShelfBoxesTemplateModal';
 import { shelfBoxesTemplateSettingsActions } from '../../../model/slice/shelfBoxesTemplateSlice';
-import { useState, useCallback, MouseEvent, useEffect, useRef } from 'react';
+import { MouseEvent, useRef } from 'react';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 
 interface BoxSettingsItemProps {

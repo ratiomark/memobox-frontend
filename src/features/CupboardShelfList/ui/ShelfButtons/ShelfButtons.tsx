@@ -18,6 +18,7 @@ import { getIsCupboardRefetching } from '../..';
 import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
 import { MyToast } from '@/shared/ui/Toast';
 import { MySimpleToast, useToastCustom } from '@/shared/ui/Toast/ui/MyToastRTK';
+import { MyTooltip } from '@/shared/ui/Tooltip/Tooltip';
 
 interface ShelfButtonsProps {
 	className?: string
@@ -94,7 +95,8 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		{ leading: true, trailing: false }
 	)
 
-	const { t } = useTranslation()
+	const { t: t2 } = useTranslation('tooltip')
+	const { t } = useTranslation('translation')
 
 	return (
 		<>
@@ -104,15 +106,20 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 					cls.ShelfButtons,
 					[className])}
 				>
-					<Button
-						fontWeight='300'
-						// className={cls.button}
-						onClick={onAddNewCardHandle}
-						data-button-type={dataAttrButtonTypeAddCard}
-						data-testid={TEST_BUTTONS_IDS.shelf.addCardButton}
-					>
-						{t('add card with hot key') + ` (${positionTextCard})`}
-					</Button>
+					<MyTooltip
+						content={t2('add card shelf') + ` (${positionTextCard})`}
+						delay={200}
+						trigger={<Button
+							fontWeight='300'
+							// className={cls.button}
+							onClick={onAddNewCardHandle}
+							data-button-type={dataAttrButtonTypeAddCard}
+							data-testid={TEST_BUTTONS_IDS.shelf.addCardButton}
+						>
+							{t('add card with hot key')}
+						</Button>}
+					/>
+
 
 					<SettingButton shelfId={shelfId} />
 
@@ -124,17 +131,27 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 					>
 						{t('view')}
 					</Button>
-					<Button
-						fontWeight='300'
-						// className={cls.button}
-						onClick={startTraining}
-						variant='filled'
-						disabled={noTrainingCards || isRefetching}
-						data-button-type={dataAttrButtonTypeTrain}
-						data-testid={TEST_BUTTONS_IDS.shelf.trainButton}
-					>
-						{t('train') + ` (${positionTextTrain})`}
-					</Button>
+
+					<MyTooltip
+						content={
+							noTrainingCards
+								? t2('shelf no training cards')
+								: t2('training shelf') + ` (${positionTextTrain})`
+						}
+						delay={200}
+						trigger={<Button
+							fontWeight='300'
+							// className={cls.button}
+							onClick={startTraining}
+							variant='filled'
+							disabled={noTrainingCards || isRefetching}
+							data-button-type={dataAttrButtonTypeTrain}
+							data-testid={TEST_BUTTONS_IDS.shelf.trainButton}
+						>
+							{t('train')}
+						</Button>}
+					/>
+
 					<Icon
 						className={
 							clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}

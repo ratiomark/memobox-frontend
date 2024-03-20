@@ -9,7 +9,7 @@ import { getIsMobile } from '@/entities/UI';
 import { CupboardShelfListMobile } from '../CupboardShelfListMobile';
 
 
-export const CupboardShelfListWrapper = () => {
+export const CupboardShelfListWrapper = () => { 
 	useCupboardLogic()
 	const isMobile = useSelector(getIsMobile)
 
@@ -36,4 +36,12 @@ const useCupboardLogic = () => {
 			dispatch(cupboardShelfListActions.setIsCupboardRefetching(true))
 		}
 	}, [isLoading, isFetching, dispatch])
+
+	// FIXME: Это заглушка, чтобы можно было работать с сотоянием когда нет полок, после регистрации.
+	useEffect(() => {
+		if (data && Array.isArray(data['shelves'])) {
+			dispatch(cupboardShelfListActions.setIsCupboardDataLoading(false))
+			dispatch(cupboardShelfListActions.setIsCupboardRefetching(true))
+		}
+	}, [data, dispatch])
 }

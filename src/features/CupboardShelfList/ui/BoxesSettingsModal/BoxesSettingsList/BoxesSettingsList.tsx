@@ -23,7 +23,7 @@ const createBox = (index: number): ExtendedTimingBlock => {
 		keyId: 'unsaved',
 		isSaved: false,
 		isRemoved: false,
-		id: (Math.random() * Math.random()).toString(),
+		id: `newBox - ${(Math.random() * Math.random()).toString()}`,
 		isOpen: true,
 	}
 }
