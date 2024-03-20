@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, } from '@reduxjs/toolkit'
 import { DaysOfWeek, TimeSleepSettings } from '@/entities/User'
-import { DayType, SetDurationMinutesPayloadAction, SetTimePayloadAction } from '../types/TimeSleepTypes'
+import { DayType, DeletePeriodPayloadAction, SetDurationMinutesPayloadAction, SetTimePayloadAction } from '../types/TimeSleepTypes'
 import { daysOfWeekListValues } from '@/shared/const/daysOfWeek'
 
 const initialState: Partial<TimeSleepSettings> = {
@@ -100,6 +100,19 @@ const timeSleepSettings = createSlice({
 				} else if (amountOfPeriods === 1) {
 					state.dayByDaySleepPeriods[dayOfWeek].push({ startTime: { hours: 23, minutes: 0 }, durationMinutes: 480 })
 				} else {
+					return
+				}
+			}
+		},
+		deletePeriod: (state, action: PayloadAction<DeletePeriodPayloadAction>) => {
+			const { dayType, indexPeriod } = action.payload
+			if (state.dayByDaySleepPeriods && state.dayByDaySleepPeriods[dayType]) {
+				if (indexPeriod === 0) {
+					state.dayByDaySleepPeriods[dayType] = state.dayByDaySleepPeriods[dayType].slice(1)
+					return
+				}
+				if (indexPeriod === 1) {
+					state.dayByDaySleepPeriods[dayType] = state.dayByDaySleepPeriods[dayType].slice(0, 1)
 					return
 				}
 			}

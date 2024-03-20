@@ -32,7 +32,7 @@ export const TimeSleepSettingsModal = () => {
 	const { dispatch } = useAsyncReducer({ reducers, removeAfterUnmount: false })
 	const isTimeSleepEnabled = useSelector(getTimeSleepEnabled)
 	const isDayByDayTimeSleepEnabled = useSelector(getDayByDayOptionEnabled)
-	const dialogRef = useRef<HTMLDivElement>(null);
+	const innerRef = useRef<HTMLDivElement>(null);
 
 
 	useEffect(() => {
@@ -94,59 +94,57 @@ export const TimeSleepSettingsModal = () => {
 						/>
 					</Card>
 					{dayActivator}
-					<div
-					// className={cls.content}
+					{/* <div className={cls.content}> */}
+					<motion.div
+						layout
+
 					>
-						<motion.div
-							layout
-
-						>
-							<AnimatePresence mode='wait'>
-								{isTimeSleepEnabled
-									&& isDayByDayTimeSleepEnabled
-									&& (
-										<motion.div
-											initial={{ height: 0, opacity: 0 }}
-											animate={{ height: 'auto', opacity: 1 }}
-											exit={{ height: 0, opacity: 0 }}
-										>
-											<div className={cls.inner} ref={dialogRef} >
-												<DayByDayHoursMinutesComponent dialogRef={dialogRef} />
-											</div>
-										</motion.div>)
-
-								}
-
-							</AnimatePresence>
-							<AnimatePresence mode='wait'>
-								{isTimeSleepEnabled && !isDayByDayTimeSleepEnabled
-									&& <motion.div
-										// layout
+						<AnimatePresence mode='wait'>
+							{isTimeSleepEnabled
+								&& isDayByDayTimeSleepEnabled
+								&& (
+									<motion.div
 										initial={{ height: 0, opacity: 0 }}
 										animate={{ height: 'auto', opacity: 1 }}
-										exit={{ opacity: 0, height: 0 }}
-									// transition={{ duration: 6 }}
+										exit={{ height: 0, opacity: 0 }}
 									>
-										<GeneralHoursMinutesComponent />
-									</motion.div>}
-							</AnimatePresence>
-							<AnimatePresence mode='wait'>
-								{!isTimeSleepEnabled
-									&& <motion.div
-										// layout
-										initial={{ height: 0, opacity: 0 }}
-										animate={{ height: 'auto', opacity: 1 }}
-										exit={{ opacity: 0, height: 0 }}
-									// transition={{ duration: 6 }}
-									>
+										<div className={cls.inner} ref={innerRef} >
+											<DayByDayHoursMinutesComponent dialogRef={innerRef} />
+										</div>
+									</motion.div>)
 
-										<GeneralHoursMinutesComponent />
-									</motion.div>}
-							</AnimatePresence>
-						</motion.div>
-						{/* {dayActivator} */}
+							}
 
-					</div>
+						</AnimatePresence>
+						<AnimatePresence mode='wait'>
+							{isTimeSleepEnabled && !isDayByDayTimeSleepEnabled
+								&& <motion.div
+									// layout
+									initial={{ height: 0, opacity: 0 }}
+									animate={{ height: 'auto', opacity: 1 }}
+									exit={{ opacity: 0, height: 0 }}
+								// transition={{ duration: 6 }}
+								>
+									<GeneralHoursMinutesComponent />
+								</motion.div>}
+						</AnimatePresence>
+						<AnimatePresence mode='wait'>
+							{!isTimeSleepEnabled
+								&& <motion.div
+									// layout
+									initial={{ height: 0, opacity: 0 }}
+									animate={{ height: 'auto', opacity: 1 }}
+									exit={{ opacity: 0, height: 0 }}
+								// transition={{ duration: 6 }}
+								>
+
+									<GeneralHoursMinutesComponent />
+								</motion.div>}
+						</AnimatePresence>
+					</motion.div>
+					{/* {dayActivator} */}
+
+					{/* </div> */}
 				</motion.div>
 				<ModalButtons
 					onClose={onCloseHandle}

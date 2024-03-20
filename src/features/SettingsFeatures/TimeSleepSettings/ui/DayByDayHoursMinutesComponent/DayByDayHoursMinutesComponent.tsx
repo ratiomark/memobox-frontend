@@ -2,7 +2,7 @@ import cls from './DayByDayHoursMinutesComponent.module.scss'
 import { MyText } from '@/shared/ui/Typography';
 import { useTranslation } from 'react-i18next';
 import { daysOfWeek } from '@/entities/User';
-import { HStack } from '@/shared/ui/Stack';
+import { HStack, VStack } from '@/shared/ui/Stack';
 import { DayByDayItem } from './DayByDayItem';
 import { MutableRefObject } from 'react';
 
@@ -18,12 +18,21 @@ export const DayByDayHoursMinutesComponent = ({ dialogRef }: { dialogRef: Mutabl
 			className={cls.DayByDayHoursMinutesComponent}
 		>
 			{daysOfWeek.map(day => (
-				<HStack max gap='gap_14' key={day} align='center'>
+				<div
+
+					className={cls.dayWrapper}
+					// gap='gap_14'
+					key={day}
+				// align='center'
+				>
+					{/* <div className={cls.dayWrapper} >
+
+					</div> */}
 					<MyText text={t(`days.${day}`)} size='s' className={cls.dayLabel} />
-					<HStack>
+					<VStack max gap='gap_16' className={cls.periodsHolder}  >
 						<DayByDayItem dialogRef={dialogRef} day={day} />
-					</HStack>
-				</HStack>)
+					</VStack>
+				</div>)
 			)}
 		</div>
 	)

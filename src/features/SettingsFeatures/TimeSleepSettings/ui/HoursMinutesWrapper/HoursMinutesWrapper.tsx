@@ -1,11 +1,9 @@
-import clsx from 'clsx'
 import cls from './HoursMinutesWrapper.module.scss'
 import { SingleSetter } from '@/shared/ui/TimeSetter/SingleSetter';
 import { settingsTimeSleepActions } from '../../model/slice/timeSleepSlice';
-import { TimeSleepDataObject } from '@/entities/User';
 import { WheelEvent, memo } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { DayType, TimeControllerFunction } from '../../model/types/TimeSleepTypes';
+import { DayType } from '../../model/types/TimeSleepTypes';
 import { TimeSleepAtomicDataObject } from '@/entities/User';
 import { getTimeRepresentation } from '@/shared/lib/helpers/common/getTimeRepresentation';
 
@@ -19,12 +17,10 @@ interface HoursMinutesWrapperProps {
 	indexPeriod?: number
 }
 
-
 const timeSleepDataObject = {
 	hours: 0,
 	minutes: 0,
 }
-
 
 export const HoursMinutesWrapper = memo((props: HoursMinutesWrapperProps) => {
 	const {

@@ -28,3 +28,8 @@ export interface SetSpecificDayDurationPayloadAction {
 }
 
 export type SetDurationMinutesPayloadAction = SetGeneralDurationPayloadAction | SetSpecificDayDurationPayloadAction
+
+export interface DeletePeriodPayloadAction {
+	dayType: DaysOfWeek
+	indexPeriod: number
+}

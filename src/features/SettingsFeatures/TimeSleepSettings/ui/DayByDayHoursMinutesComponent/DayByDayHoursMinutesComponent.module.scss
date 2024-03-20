@@ -2,10 +2,28 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  justify-items: center;
-  align-items: center;
+  justify-items: flex-start;
+  align-items: left;
+  min-width: 100%;
+  padding: 20px;
 
   // min-height: 110px;
+}
+
+.icon {
+  transition: all 0.25s;
+  width: var(--view-page-icon-button-size);
+  height: var(--view-page-icon-button-size);
+
+  // flex-shrink: 0;
+}
+
+.removeIcon {
+  background-color: var(--cancel-rgb-2);
+}
+
+.eyeIcon {
+  background-color: var(--accent-rgb-2);
 }
 
 // .DayByDayHoursMinutesComponent {
@@ -30,10 +48,33 @@
   padding-bottom: 10px;
 }
 
+.dayWrapper {
+  display: grid;
+  grid-template-columns: 4% 1fr;
+  align-items: center;
+
+  // min-height: 100%;
+  // max-width: 100%;
+  // width: 100%;
+}
+
+// .dayWrapper {
+//   justify-content: space-between;
+
+//   // min-height: 100%;
+//   max-width: 100%;
+//   width: 100%;
+// }
+
+.periodsHolder {
+  padding-left: 14px;
+  border-left: 3px solid var(--accent-rgb-2);
+}
+
 .dayLabel {
   // font-size: 15px;
   // align-self: baseline;
-  width: 40px;
+  min-width: 5%;
 }
 
 // .dayWrapper {
