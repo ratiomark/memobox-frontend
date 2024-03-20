@@ -10,6 +10,8 @@ import { useGetTrashQuery } from '@/entities/Trash';
 import { MyText } from '@/shared/ui/Typography';
 import { getTiming } from '@/entities/Box';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { mapBoxesToListItems } from '@/shared/lib/helpers/mappers/mapBoxesToListItems';
+import { mapShelvesToListItems } from '@/shared/lib/helpers/mappers/mapShelves';
 
 export const RestoreNewOrLearntCardsModal = memo(() => {
 	const { isLoading, data, isError } = useGetTrashQuery()
@@ -29,21 +31,22 @@ export const RestoreNewOrLearntCardsModal = memo(() => {
 	const boxType = useSelector(getTrashPageRestoreNewOrLearntModalBoxType)
 	const boxes = shelvesAndBoxesData?.find(shelf => shelf.id === activeShelfId)?.box
 	const [activeBoxId, setActiveBoxId] = useState(boxes?.[0].id)
-	const boxItems = boxes?.map(box => {
-		let content;
-		switch (box.specialType) {
-			case 'none':
-				content = `${t('box text')} ${box.index} - ${getTiming(box.timing)}`
-				break
-			case 'new':
-				content = t('new cards')
-				break
-			case 'learnt':
-				content = `${t('learnt cards')} - ${getTiming(box.timing)}`
-				break
-		}
-		return { value: box.id, content }
-	})
+	const boxItems = mapBoxesToListItems(boxes)
+	// const boxItems = boxes?.map(box => {
+	// 	let content;
+	// 	switch (box.specialType) {
+	// 		case 'none':
+	// 			content = `${t('box text')} ${box.index} - ${getTiming(box.timing)}`
+	// 			break
+	// 		case 'new':
+	// 			content = t('new cards')
+	// 			break
+	// 		case 'learnt':
+	// 			content = `${t('learnt cards')} - ${getTiming(box.timing)}`
+	// 			break
+	// 	}
+	// 	return { value: box.id, content }
+	// })
 
 
 	useEffect(() => {
@@ -71,7 +74,7 @@ export const RestoreNewOrLearntCardsModal = memo(() => {
 	}
 
 	if (!shelvesAndBoxesData || shelvesAndBoxesData.length === 0) return null
-	const shelvesItems = shelvesAndBoxesData.map(shelf => ({ value: shelf.id, content: shelf.title }))
+	const shelvesItems = mapShelvesToListItems(shelvesAndBoxesData)
 	// const shelvesItems = useSelector(getViewPageShelfItemsModal) as ListBoxItem<string>[]
 
 

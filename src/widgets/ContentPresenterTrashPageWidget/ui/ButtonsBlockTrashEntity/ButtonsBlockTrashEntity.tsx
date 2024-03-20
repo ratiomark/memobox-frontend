@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import { useTranslation } from 'react-i18next';
+import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
 
 export interface ButtonsBlockTrashEntityProps {
 	isCollapsed: boolean;
@@ -38,6 +39,7 @@ export const ButtonsBlockTrashEntity: React.FC<ButtonsBlockTrashEntityProps> = (
 				<Button
 					onClick={onRestore}
 					style={{ visibility: showRestoreButton ? 'visible' : 'hidden' }}
+					data-testid={TEST_BUTTONS_IDS.trash.restoreButton}
 				>
 					{t('restore')}
 				</Button>
@@ -54,6 +56,7 @@ export const ButtonsBlockTrashEntity: React.FC<ButtonsBlockTrashEntityProps> = (
 					buttonSameSize={false}
 					className={clsx(cls.icon, showRemoveButton ? cls.removeIcon : '')}
 					style={{ visibility: showRemoveButton ? 'visible' : 'hidden' }}
+					data-testid={TEST_BUTTONS_IDS.trash.removeButton}
 				/>
 			)}
 			{showCollapseArrow && (
@@ -63,6 +66,7 @@ export const ButtonsBlockTrashEntity: React.FC<ButtonsBlockTrashEntityProps> = (
 					type='hint'
 					Svg={ArrowBottomIcon}
 					onClick={onToggleCollapse}
+					data-testid={TEST_BUTTONS_IDS.trash.collapseButton}
 				/>
 			)}
 			{(!showCollapseArrow && !removeRestoreButton && !removeRemoveButton) && (

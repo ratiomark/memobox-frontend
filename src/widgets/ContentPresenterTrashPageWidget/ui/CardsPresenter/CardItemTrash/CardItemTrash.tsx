@@ -11,6 +11,8 @@ import { CheckBox } from '@/shared/ui/CheckBox';
 import TrashIcon from '@/shared/assets/icons/trashIcon2.svg'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
 import RestoreIcon from '@/shared/assets/icons/restoreIcon.svg'
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { deleteCardFromTrashByIdThunk, trashPageActions } from '@/features/TrashPageInitializer';
 interface CardItemTrashProps {
 	className?: string;
 	card: CardSchemaDeleted
@@ -21,8 +23,17 @@ export const CardItemTrash = (props: CardItemTrashProps) => {
 		card,
 	} = props
 	const isMultiSelectActive = false
+	const dispatch = useAppDispatch()
 	const { t } = useTranslation()
-	const onDeleteCard = () => { }
+
+	const onDeleteCard = () => {
+		dispatch(deleteCardFromTrashByIdThunk(card.id))
+	}
+
+	const onRestoreCard = () => {
+		dispatch(trashPageActions.setRestoreCardModalCardId(card.id))
+		dispatch(trashPageActions.setIsRestoreCardModalOpen(true))
+	}
 
 	const question = useMemo(() => {
 		return <EditorCardPresenter
@@ -88,7 +99,7 @@ export const CardItemTrash = (props: CardItemTrashProps) => {
 								withFill={false}
 								width={22}
 								height={22}
-								onClick={() => { }}
+								onClick={onRestoreCard}
 								buttonSameSize={false}
 								className={clsx(cls.icon, cls.restoreIcon)} />
 							<Icon
@@ -112,39 +123,39 @@ export const CardItemTrash = (props: CardItemTrashProps) => {
 		// 	>
 		// 		{/* <CheckBox className={cls.checkBox} isChecked={isCardSelected} onClick={onSelectCardHandle} /> */}
 
-		// 		<div
-		// 		// className={cls.CardListItem}
-		// 		// onClick={isMultiSelectActive ? onSelectCardHandle : onOpenEditCardModalHandle}
-		// 		>
-		// 			<div className={cls.content} >
+	// 		<div
+	// 		// className={cls.CardListItem}
+	// 		// onClick={isMultiSelectActive ? onSelectCardHandle : onOpenEditCardModalHandle}
+	// 		>
+	// 			<div className={cls.content} >
 
-		// 				<div className={cls.mainContentWrapper} >
-		// 					{question}
-		// 					{answer}
-		// 					{/* <MyText text={card.question ?? 'ТУТ null'} className={cls.mainContent} /> */}
-		// 					{/* <MyText text={card.answer ?? 'ТУТ null'} className={cls.mainContent} /> */}
-		// 				</div>
-		// 			</div>
-		// 			{isMultiSelectActive
-		// 				? <div className={cls.icon} />
-		// 				: (
-		// 					<Icon
-		// 						Svg={TrashIcon}
-		// 						type='cancel'
-		// 						clickable
-		// 						withFill={false}
-		// 						width={22}
-		// 						height={22}
-		// 						onClick={onDeleteCard}
-		// 						buttonSameSize={false}
-		// 						className={clsx(cls.icon, cls.removeIcon)} />
-		// 				)}
-		// 			{/* <Button disabled={isMultiSelectActive} onClick={onDeleteCard}>del</Button> */}
-		// 		</div>
+	// 				<div className={cls.mainContentWrapper} >
+	// 					{question}
+	// 					{answer}
+	// 					{/* <MyText text={card.question ?? 'ТУТ null'} className={cls.mainContent} /> */}
+	// 					{/* <MyText text={card.answer ?? 'ТУТ null'} className={cls.mainContent} /> */}
+	// 				</div>
+	// 			</div>
+	// 			{isMultiSelectActive
+	// 				? <div className={cls.icon} />
+	// 				: (
+	// 					<Icon
+	// 						Svg={TrashIcon}
+	// 						type='cancel'
+	// 						clickable
+	// 						withFill={false}
+	// 						width={22}
+	// 						height={22}
+	// 						onClick={onDeleteCard}
+	// 						buttonSameSize={false}
+	// 						className={clsx(cls.icon, cls.removeIcon)} />
+	// 				)}
+	// 			{/* <Button disabled={isMultiSelectActive} onClick={onDeleteCard}>del</Button> */}
+	// 		</div>
 
-		// 		{/* </div> */}
-		// 	</motion.li>
-		// </div>
+	// 		{/* </div> */}
+	// 	</motion.li>
+	// </div>
 	)
 }
 

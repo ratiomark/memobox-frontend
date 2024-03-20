@@ -1,17 +1,21 @@
 import clsx from 'clsx'
-import cls from './ShelfItemTrash.module.scss'
-import { BoxSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash';
-import { Heading, MyText } from '@/shared/ui/Typography';
-import { formatDate } from '@/shared/lib/helpers/common/formaters';
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
-import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
+import { useTranslation } from 'react-i18next';
+
+import cls from './ShelfItemTrash.module.scss'
+
+import { BoxSchemaDeleted, ShelfSchemaDeleted } from '@/entities/Trash';
 import { restoreShelfByIdThunk, trashPageActions } from '@/features/TrashPageInitializer';
 import { deleteFinalShelfByIdThunk } from '@/features/TrashPageInitializer';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
+import { formatDate } from '@/shared/lib/helpers/common/formaters';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { Heading, MyText } from '@/shared/ui/Typography';
+
+import { BoxItemTrash } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrash';
 import { BoxItemTrashLearnt } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrashLearnt';
 import { BoxItemTrashNew } from '../../BoxesPresenter/BoxItemTrash/BoxItemTrashNew';
+import { ButtonsBlockTrashEntity } from '../../ButtonsBlockTrashEntity/ButtonsBlockTrashEntity';
 
 interface ShelfItemProps {
 	shelf: ShelfSchemaDeleted
@@ -100,6 +104,7 @@ export const ShelfItemTrash = (props: ShelfItemProps) => {
 		<li>
 			<div
 				className={cls.ShelfItem}
+				data-testid={TEST_ENTITY_NAMES.shelfItemTrash}
 			>
 				<Heading className={cls.title}
 					as={'h3'}
