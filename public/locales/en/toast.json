@@ -53,5 +53,11 @@
   "restore_box": {
     "messageSuccess": "Box was restored",
     "additional": "Restoring box"
+  },
+  "delete_card_from_trash": {
+    "messageSuccess": "Card was deleted"
+  },
+  "delete_cards_from_trash": {
+    "messageSuccess": "Card were deleted"
   }
 }

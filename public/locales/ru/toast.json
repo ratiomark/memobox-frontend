@@ -57,5 +57,11 @@
   "restore_box": {
     "messageSuccess": "Коробка восстановлена",
     "additional": "Восстанавливаем коробку"
+  },
+  "delete_card_from_trash": {
+    "messageSuccess": "Карточка удалена"
+  },
+  "delete_cards_from_trash": {
+    "messageSuccess": "Карточки удаленны"
   }
 }
