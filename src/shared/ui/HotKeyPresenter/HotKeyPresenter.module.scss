@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.keyCombination {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.key {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.separator {
+  margin-right: 4px;
+}
+
+.description {
+  font-size: 14px;
+}
