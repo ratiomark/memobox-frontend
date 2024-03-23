@@ -4,6 +4,7 @@ import { Heading } from '@/shared/ui/Typography';
 import { VStack } from '@/shared/ui/Stack';
 import { ShelfSchema } from '../model/types/ShelfSchema';
 import DragDotsIcon from '@/shared/assets/icons/dragDotsIcon2.svg'
+import DragDotsIcon2 from '@/shared/assets/new/dragIcon.svg'
 import { Icon } from '@/shared/ui/Icon';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { Collapsible } from '@/shared/ui/Animations';
@@ -11,6 +12,7 @@ import { useDragControls, Reorder } from 'framer-motion';
 import { ReactNode, memo, useState } from 'react';
 import { CompleteSmallDataLabels } from '@/shared/ui/DataLabels/CompleteSmallDataLabels/CompleteSmallDataLabels';
 import { StateSchema } from '@/app/providers/StoreProvider';
+import { TEST_BUTTONS_IDS, TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 export interface ShelfProps {
 	shelf: ShelfSchema
@@ -58,24 +60,23 @@ export const Shelf = memo((props: ShelfProps) => {
 			dragControls={controls}
 			onDragStart={handleDragStart}
 			onDragEnd={handleDragEnd}
-			// drag
-			// transition={{ type: 'spring', stiffness: isDragging ? 40 : 2000 }}
-			// transition={{ type: 'spring', stiffness: isDragging ? 100 : 0, velocity: 0, restSpeed: 0 }}
-			// dragConstraints={{ left: 30, right: 30 }}
-			// transition={{ duration: isCollapsingNow ? 0 : 0.5 }}
-			// transition={{ duration: isCollapsing ? 0 : 0.5 }}
-			// transition={isDragging ? { type: 'spring', duration: 1 } : { ease: 'linear', duration: 0.1 }}
-			// transition={{ type: 'spring', stiffness: 900 }}
+			data-testid={TEST_ENTITY_NAMES.shelfItem}
+			data-shelf-is-collapsed-testid={isCollapsed}
+			data-shelf-index-testid={props.shelf.index}
 			className={cls.shelfWrapper}
 		>
-			<div className={cls.handle} >
+			<div
+				className={cls.handle}
+			>
 				<Icon
-					Svg={DragDotsIcon}
+					Svg={DragDotsIcon2}
 					type={isDragging ? 'main' : 'hint'}
 					onPointerDown={(e) => controls.start(e)}
 					style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-					width={25}
-					height={25}
+					width={10}
+					height={16}
+					data-testid={TEST_BUTTONS_IDS.shelf.dragButton}
+					data-drop-testid={props.shelf.index === 2 ? 'target-dropzone-test-id' : undefined}
 				/>
 			</div>
 			<div
