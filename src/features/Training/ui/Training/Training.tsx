@@ -6,11 +6,17 @@ import { TrainingContentSkeleton } from '../TrainingContent/TrainingContentSkele
 import { TrainingContent } from '../TrainingContent/TrainingContent';
 import { obtainRouteMain } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
+import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
+import { trainingReducer } from '../../model/slice/trainingSlice';
 
 interface TrainingProps {
 	className?: string
 	shelfId: string
 	boxId?: string
+}
+
+const reducers: ReducersList = {
+	trainingPage: trainingReducer
 }
 
 export const Training = (props: TrainingProps) => {
@@ -19,6 +25,7 @@ export const Training = (props: TrainingProps) => {
 		shelfId = 'all',
 		boxId = 'all'
 	} = props
+	useAsyncReducer({reducers, removeAfterUnmount: false})
 	// const { isLoading, data, isError } = useGetCardsByShelfIdQuery(shelfId)
 	const { isLoading, data, isError } = useGetTrainingCardsQuery({ shelfId, boxId })
 	console.log(data)
@@ -30,6 +37,7 @@ export const Training = (props: TrainingProps) => {
 		alert('No cards you redirected to main page')
 		navigate(obtainRouteMain())
 	}
+	
 	if (data) return <TrainingContent data={data} />
 
 	return (

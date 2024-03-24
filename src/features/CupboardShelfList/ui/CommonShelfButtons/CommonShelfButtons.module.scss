@@ -21,7 +21,13 @@
 }
 
 .arrow {
+  // padding-left: 10px;
+  padding-left: var(--padding-additional-from-collapse);
   transition: all 0.2s;
+}
+
+.trainButton {
+  margin-left: var(--padding-additional-from-train-button);
 }
 
 .rotateArrow {

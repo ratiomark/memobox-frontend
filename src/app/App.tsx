@@ -4,18 +4,20 @@ import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { useSelector } from 'react-redux'
 import { getUserMounted, initAuthData } from '@/entities/User'
-import { Header, HeaderSkeleton } from '@/widgets/Header'
+import { NavBar, NavBarSkeleton } from '@/widgets/NavBarNew'
+import { Header, HeaderSkeleton } from '@/widgets/Header copy'
 import { useTheme } from '@/shared/context/useTheme'
 import { ToastViewport } from '@radix-ui/react-toast'
 import { useInitialCssValuesFromLocalService } from '@/shared/lib/helpers/hooks/useInitialCssValuesFromLocalService'
 import { useIsMobileObserver } from '@/shared/lib/helpers/hooks/useIsMobileObserver'
 import './styles/regularStyles.css'
+import { AppLayout } from './ui/AppLayout'
 
 
 export const App = () => {
 	const userMounted = useSelector(getUserMounted)
 	const dispatch = useAppDispatch()
-	const { theme } = useTheme()
+	// const { theme } = useTheme()
 	useIsMobileObserver()
 	useInitialCssValuesFromLocalService()
 
@@ -24,26 +26,41 @@ export const App = () => {
 	}, [dispatch])
 
 
+	// if (true) {
 	if (!userMounted) {
 		return (
-			<div className={`app ${theme}`}>
-				<HeaderSkeleton />
-				<LoaderWidget />
-			</div>
+			<AppLayout
+				header={<NavBarSkeleton />}
+				navBar={<HeaderSkeleton />}
+				router={<LoaderWidget />}
+			/>
+			// <div className={`app ${theme}`}>
+			// 	<NavBarSkeleton />
+			// 	<HeaderSkeleton />
+			// 	<LoaderWidget />
+			//  </div>
 		)
 	}
 
 
 	return (
+		<AppLayout
+			header={<Header />}
+			navBar={<NavBar />}
+			router={<AppRouter />}
+		/>
 		// <div className='app'>
-		<div className={`app ${theme}`}>
-			<Suspense fallback={<HeaderSkeleton />}>
-				<Header />
-			</Suspense>
-			<AppRouter />
-			<ToastViewport className='toastViewport' />
-			{/* <img src="https://i.pinimg.com/originals/e5/e8/30/e5e830f89f89f0259e1d705e14a5de93.gif" alt="Your GIF" id="my-gif" /> */}
-			{/* <Toast.Viewport className='viewport' /> */}
-		</div>
+		// <div className={`app ${theme}`}>
+		// 	<Suspense fallback={<HeaderSkeleton />}>
+		// 		<Header />
+		// 	</Suspense>
+		// 	<Suspense fallback={<NavBarSkeleton />}>
+		// 		<NavBar />
+		// 	</Suspense>
+		// 	<AppRouter />
+		// 	<ToastViewport className='toastViewport' />
+		// 	{/* <img src="https://i.pinimg.com/originals/e5/e8/30/e5e830f89f89f0259e1d705e14a5de93.gif" alt="Your GIF" id="my-gif" /> */}
+		// 	{/* <Toast.Viewport className='viewport' /> */}
+		// </div>
 	)
 }

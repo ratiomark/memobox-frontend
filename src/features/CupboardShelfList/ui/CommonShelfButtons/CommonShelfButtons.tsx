@@ -27,8 +27,11 @@ import {
 } from '../../model/selectors/getCupboardShelfList';
 import { cupboardShelfListActions } from '../../model/slice/cupboardShelfListSlice';
 import { MyTooltip } from '@/shared/ui/Tooltip/Tooltip';
-
-
+import { HotKeyPresenter } from '@/shared/ui/HotKeyPresenter/HotKeyPresenter';
+import { VStack } from '@/shared/ui/Stack';
+import { MyText } from '@/shared/ui/Typography';
+import ViewButtonIcon from '@/shared/assets/new/viewIcon.svg';
+import ArrowDownIcon from '@/shared/assets/new/arrowDownIcon.svg'
 export const CommonShelfButtons = () => {
 	const isRefetching = useSelector(getIsCupboardRefetching)
 	const isAnyCardsToTrainExist = useSelector(getIsAnyCardsToTrain)
@@ -45,7 +48,8 @@ export const CommonShelfButtons = () => {
 	const onViewClick = () => {
 		navigate(obtainRouteView('all', 'all'))
 	}
-	useHotkeys('t', startTraining, { keyup: true, enabled: !isRefetching })
+	// useHotkeys(positionTextTrain, startTraining, { keydown: true, enabled: !isRefetching })
+	useHotkeys('t + a', startTraining, { keydown: true, enabled: !isRefetching })
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
 	const dispatch = useAppDispatch()
 
@@ -68,24 +72,54 @@ export const CommonShelfButtons = () => {
 
 	return (
 		<div className={cls.ShelfButtons}>
-			<Button
+			{/* <Button
 				className={cls.button}
 				onClick={onViewClick}
 			>
 				{t('view')}
-			</Button>
-			<MyTooltip
-				content={t2('training common shelf')}
-				trigger={<Button
-					className={cls.button}
-					variant='filled'
-					data-button-type={dataAttrButtonTypeTrain}
-					onClick={startTraining}
-					disabled={isRefetching || !isAnyCardsToTrainExist}
-				>
-					{t('train')}
-				</Button>}
+			</Button> */}
+
+			<Icon
+				clickable
+				withFill={false}
+				// type='hint'
+				Svg={ViewButtonIcon}
+				onClick={onViewClick}
 			/>
+			<MyTooltip
+				content={
+					<VStack align='left'>
+						{/* <MyText text={t2('training common shelf')} /> */}
+						<HotKeyPresenter
+							keysCombination={['t', 'a']}
+							description={t2('training common shelf tooltip')}
+						/>
+					</VStack>
+				}
+				trigger={
+					<Button
+						className={cls.trainButton}
+						fontWeight='300'
+						variant='filled'
+						// borderRadius='borderRadius_max'
+						data-button-type={dataAttrButtonTypeTrain}
+						onClick={startTraining}
+						disabled={isRefetching || !isAnyCardsToTrainExist}
+					>
+						{t('train')}
+					</Button>}
+			/>
+			{/* <Icon
+				className={
+					clsx(cls.arrow, !commonShelfCollapsed ? cls.rotateArrow : '')}
+				clickable
+				type='hint'
+				width={24}
+				height={24}
+				Svg={ArrowDownIcon}
+				onClick={onCollapseClickHandle}
+			// data-testid={TEST_BUTTONS_IDS.shelf.collapseButton}
+			/> */}
 			<Icon
 				className={
 					clsx(cls.arrow, !commonShelfCollapsed ? cls.rotateArrow : '')}

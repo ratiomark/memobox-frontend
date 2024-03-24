@@ -7,6 +7,7 @@ import cls from './AnswerButtons.module.scss';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { AnswerType } from '../TrainingContent/TrainingContent';
 import { AnswerButtonsVariants } from './AnswerButtonsVariants';
+import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
 
 interface AnswerButtonsProps {
 	className?: string
@@ -41,6 +42,7 @@ export const AnswerButtons = (props: AnswerButtonsProps) => {
 		<Button
 			variant='filled'
 			onClick={onShowAnswerClick}
+			data-testid={TEST_BUTTONS_IDS.training.shownAnswerButton}
 		>
 			{t('show answer')}
 		</Button>

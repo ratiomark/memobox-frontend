@@ -22,10 +22,12 @@ module.exports = {
 		// "plugin:prettier/recommended",
 		// 'prettier',
 	],
-	ignorePatterns: ['.fttemplates/**/*'],
+	ignorePatterns: ['.fttemplates/**/*', '.eslintrc.js', 'dist', 'node_modules'],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
+		// project: 'tsconfig.json',
+		// tsconfigRootDir: __dirname,
 		sourceType: 'module',
 		ecmaFeatures: {
 			jsx: true,
@@ -33,10 +35,12 @@ module.exports = {
 	},
 	plugins: [
 		'react',
+		'@typescript-eslint/eslint-plugin',
 		'@typescript-eslint',
 		'react-hooks',
 		'i18next',
 		'custom-fsd-checker-plugin',
+		// 'simple-import-sort',
 	],
 	rules: {
 		// добавляю alias в настройки плагина, чтобы он работал корректно с моим элиасом
@@ -109,6 +113,43 @@ module.exports = {
 				ignoreStrings: true,
 			},
 		],
+		//
+		// 'simple-import-sort/exports': 'warn',
+		// 'simple-import-sort/imports': [
+		// 	'warn',
+		// 	{
+		// 		groups: [
+		// 			// ext library & side effect imports
+		// 			['^@?\\w', '^\\u0000'],
+		// 			// {s}css files
+		// 			['^.+\\.s?css$'],
+		// 			// Lib and hooks
+		// 			['^@/lib', '^@/hooks'],
+		// 			// static data
+		// 			['^@/data'],
+		// 			// components
+		// 			['^@/components', '^@/container'],
+		// 			// zustand store
+		// 			['^@/store'],
+		// 			// Other imports
+		// 			['^@/'],
+		// 			// relative paths up until 3 level
+		// 			[
+		// 				'^\\./?$',
+		// 				'^\\.(?!/?$)',
+		// 				'^\\.\\./?$',
+		// 				'^\\.\\.(?!/?$)',
+		// 				'^\\.\\./\\.\\./?$',
+		// 				'^\\.\\./\\.\\.(?!/?$)',
+		// 				'^\\.\\./\\.\\./\\.\\./?$',
+		// 				'^\\.\\./\\.\\./\\.\\.(?!/?$)',
+		// 			],
+		// 			['^@/types'],
+		// 			// other that didnt fit in
+		// 			['^'],
+		// 		],
+		// 	},
+		// ],
 	},
 	globals: {
 		__IS_DEV__: true,

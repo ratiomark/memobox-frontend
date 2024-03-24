@@ -1,11 +1,13 @@
 .shelf {
-  border-radius: 5px;
+  border-radius: var(--border-radius-shelf, 12px);
   box-shadow: var(--entities-box-shadow-main);
-  margin-bottom: 30px;
+
+  // margin-bottom: 30px;
+  margin-bottom: calc(var(--shelves-list-vertical-gap, 30px) + 2px);
   background-color: var(--bg);
 
   // background-color: var(--bg);
-  padding: 10px 20px 10px 15px;
+  padding: 10px var(--padding-shelf-right, 20px) 10px 15px;
 }
 
 .topShelfPart {

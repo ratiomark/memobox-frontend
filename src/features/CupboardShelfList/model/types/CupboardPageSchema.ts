@@ -51,6 +51,7 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	cupboardData: DataBlock
 	isCupboardInfoModalOpen: boolean
 	abortedThunkIds: string[]
+	skipTrainingHotKey: boolean
 }
 
 

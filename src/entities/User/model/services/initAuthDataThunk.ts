@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { UserWithToken, getTokensOnInitWithUserSettings } from '../api/userApi'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { isRefreshResponse } from '@/shared/api/helpers/checkResponse'
-import { userActions } from '../..'
+import { userActions } from '../slice/userSlice'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
 export const initAuthData = createAsyncThunk<UserWithToken, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
@@ -29,7 +29,7 @@ export const initAuthData = createAsyncThunk<UserWithToken, void, { rejectValue:
 			localDataService.setRefreshToken(response.refreshToken)
 			// localDataService.setUserId(response.user.id)
 			// thunkAPI.dispatch(userActions.setAuthData(response))
-			// thunkAPI.dispatch(userActions.setProfileData(response.user))
+			thunkAPI.dispatch(userActions.setProfileData(response.user))
 			// thunkAPI.dispatch(userActions.setJsonSavedData(response.user.jsonSavedData))
 			// thunkAPI.dispatch(userActions.setJsonSettings(response.user.jsonSettings))
 			return response

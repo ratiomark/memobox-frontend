@@ -35,6 +35,7 @@ type ButtonBorderRadius =
 	| 'borderRadius_16'
 	| 'borderRadius_34'
 	| 'borderRadius_max'
+	| 'borderRadius_main'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children?: ReactNode
@@ -72,7 +73,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, forward
 		variant = 'empty',
 		size = 'size_m',
 		color = 'main',
-		borderRadius = 'borderRadius_4',
+		borderRadius = 'borderRadius_main',
 		disabled,
 		addonLeft,
 		addonRight,

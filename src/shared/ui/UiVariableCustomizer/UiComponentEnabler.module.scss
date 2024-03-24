@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 100%;
+}
+
+.nameSliderWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  // gap: 10px;
+
+  align-items: center;
+}
+
+.nameDefaultWrapper {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+
+  // min-width: max-content;
+  // min-width: 350px;
+}
+
+.slider {
+  width: 100%;
+
+  // margin: 10px 0;
+  accent-color: var(--accent);
+  border: none;
+
+  // outline: oldlace 1px solid;
+}
+
+.buttons {
+  // max-width: 400px;
+  // overflow: scroll;
+
+  // display: flex;
+  // min-width: 100%;
+  // gap: 10px;
+}
+
+.button {
+  // padding: 5px 10px;
+  border: none;
+  padding: 0 4px;
+
+  // border-radius: 4px; /* Используйте переменную CSS, если нужно */
+  border-bottom: 2px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button:first-of-type {
+  // padding: 5px 10px;
+  padding: 0 4px 0 0;
+}
+
+.button_active {
+  // background-color: #b8e3ce;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+.button:hover {
+  border-bottom: 1px solid var(--accent);
+}
+
+.icon {
+  transition: all 0.25s;
+  width: var(--view-page-icon-button-size);
+  height: var(--view-page-icon-button-size);
+  flex-shrink: 0;
+}
+
+.restoreIcon {
+  // background-color: var(--accent-rgb-2);
+}

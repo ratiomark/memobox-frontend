@@ -24,6 +24,9 @@ export interface JsonSavedData {
 	// viewPageBoxId?: string
 	viewPageCardRowsCount: number | string | undefined
 	commonShelfCollapsed: boolean
+	cupboard?: {
+		isDelimiterEnabled?: boolean
+	}
 	shelfNamesList: ShelfNameItem[]
 	viewPageColumns: SortColumnObject[]
 }

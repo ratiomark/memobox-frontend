@@ -1,9 +1,24 @@
-.ShelfButtons {
+.ShelfButtons,
+.ShelfButtonsIcons {
   display: flex;
   align-items: center;
   gap: 14px;
 
   // width: max-content;
+}
+
+.addCardButton {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ShelfButtonsIcons {
+  gap: 14px;
+
+  // padding-right: 30px;
 }
 
 .button {
@@ -18,7 +33,20 @@
 }
 
 .arrow {
+  // padding-left: 10px;
+  padding-left: var(--padding-additional-from-collapse);
   transition: all 0.2s;
+}
+
+.trainButton {
+  margin-left: var(--padding-additional-from-train-button);
+}
+
+.iconButtons {
+  transition: all 0.2s;
+
+  // color: red;
+  // fill: red;
 }
 
 .rotateArrow {

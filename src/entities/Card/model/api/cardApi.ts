@@ -1,8 +1,16 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import { CardSchema, CardSchemaExtended, FetchCardsThunkResponse, NewCardSchema } from '../types/CardSchema';
+import {
+	AnswerType,
+	CardSchema,
+	CardSchemaBase,
+	CardSchemaExtended,
+	FetchCardsThunkResponse,
+	NewCardSchema
+} from '../types/CardSchema';
 
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags';
+import { PrismaBatchPayload, ShelfBoxCardIdObject, ShelfBoxIdObject } from '@/shared/types/ApiTypesCommon';
 
 
 interface UpdateCardsRequestBase {
@@ -19,7 +27,12 @@ interface RemoveCardsRequest extends UpdateCardsRequestBase {
 	requestAction: 'removeCards'
 }
 
+export interface CardSchemaAfterTraining extends CardSchemaBase {
+	answer: AnswerType
+}
+
 type UpdateCardsRequest = MoveCardsRequest | RemoveCardsRequest
+type RestoreSeveralCardsArg = Omit<ShelfBoxCardIdObject, 'cardId'> & { cardsIds: string[] }
 
 export const cardApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
@@ -60,7 +73,7 @@ export const cardApi = rtkApi.injectEndpoints({
 				}
 			}),
 		}),
-		getCardsByShelfAndBoxId: build.query<CardSchema[], { shelfId: string, boxId: string }>({
+		getCardsByShelfAndBoxId: build.query<CardSchema[], ShelfBoxIdObject>({
 			query: ({ shelfId, boxId }) => ({
 				url: '/cards',
 				method: 'GET',
@@ -88,7 +101,7 @@ export const cardApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: [TAG_CUPBOARD_PAGE]
 		}),
-		removeSoftCards: build.mutation<{ count: number }, UpdateCardsRequestBase>({
+		deleteCardsSoft: build.mutation<PrismaBatchPayload, UpdateCardsRequestBase>({
 			query: (arg) => ({
 				url: '/cards/remove-cards',
 				method: 'DELETE',
@@ -96,13 +109,56 @@ export const cardApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: [TAG_CUPBOARD_PAGE]
 		}),
-		removeSoftCard: build.mutation<CardSchema, string>({
+		deleteCardSoft: build.mutation<CardSchema, string>({
 			query: (cardId) => ({
 				url: `/cards/${cardId}`,
 				method: 'DELETE',
 			}),
 			invalidatesTags: [TAG_CUPBOARD_PAGE]
 		}),
+
+		deleteCardFinal: build.mutation<CardSchema, string>({
+			query: (cardId) => ({
+				url: `/cards/final/${cardId}`,
+				method: 'DELETE',
+			}),
+		}),
+
+		restoreCardById: build.mutation<CardSchema, ShelfBoxCardIdObject>({
+			query: ({ cardId, shelfId, boxId }) => ({
+				url: `/cards/restore/${cardId}`,
+				method: 'PATCH',
+				body: {
+					shelfId,
+					boxId
+				}
+			}),
+		}),
+		restoreSeveralCards: build.mutation<PrismaBatchPayload, RestoreSeveralCardsArg>({
+			query: ({ cardsIds, shelfId, boxId }) => ({
+				url: '/cards/restore-several-cards',
+				method: 'PATCH',
+				body: {
+					shelfId,
+					boxId,
+					cardsIds,
+				}
+			}),
+		}),
+		// 		  @Patch('restore/:cardId')
+		//   restoreByCardId(
+		// 		@GetCurrentUser('id') userId: UserId,
+		// 		@Param('cardId') cardId: CardId,
+		// 		@Body() body: { boxId: BoxId; shelfId: ShelfId },
+		// 	) {
+		// 	return this.cardsService.restoreByCardId(
+		// 		userId,
+		// 		body.shelfId,
+		// 		body.boxId,
+		// 		cardId,
+		// 	);
+		// }
+
 		updateCard: build.mutation<CardSchema, Partial<CardSchema>>({
 			query: (card) => ({
 				url: `/cards/${card.id}`,
@@ -113,24 +169,20 @@ export const cardApi = rtkApi.injectEndpoints({
 			}),
 		}),
 
-		getTrainingCards: build.query<CardSchema[], { shelfId: string, boxId: string }>({
+		getTrainingCards: build.query<CardSchema[], ShelfBoxIdObject>({
 			query: (arg) => ({
 				url: `/cards/training/${arg.shelfId}/${arg.boxId}`,
 				method: 'GET',
 			}),
 		}),
 
-		sendTrainingAnswers: build.mutation<CardSchema[], { [key: string]: { answer: string, card: Partial<CardSchema> } }>({
-			query: (body) => ({
+		sendTrainingAnswers: build.mutation<CardSchema[], CardSchemaAfterTraining[]>({
+			query: (userResponses) => ({
 				url: '/cards/training/answers',
 				method: 'POST',
 				body: {
-					responses: [
-						...Object.entries(body).map(([cardId, value]) => ({
-							...body[cardId].card,
-							answer: body[cardId].answer,
-						}))
-					]
+					responses: userResponses,
+					timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
 				}
 			}),
 		}),
@@ -162,10 +214,13 @@ export const getAllCards = cardApi.endpoints.getAllCards.initiate
 export const createNewCard = cardApi.endpoints.createNewCard.initiate
 export const rtkApiUpdateCard = cardApi.endpoints.updateCard.initiate
 export const rtkApiMoveCards = cardApi.endpoints.moveCards.initiate
-export const rtkApiDeleteCards = cardApi.endpoints.removeSoftCards.initiate
-export const rtkApiDeleteCard = cardApi.endpoints.removeSoftCard.initiate
+export const rtkApiDeleteCardsSoft = cardApi.endpoints.deleteCardsSoft.initiate
+export const rtkApiDeleteCardSoft = cardApi.endpoints.deleteCardSoft.initiate
 export const rtkApiSendTrainingAnswers = cardApi.endpoints.sendTrainingAnswers.initiate
 export const rtkApiDropCards = cardApi.endpoints.dropCards.initiate
+export const rtkApiDeleteCardFinal = cardApi.endpoints.deleteCardFinal.initiate
+export const rtkApiRestoreCardById = cardApi.endpoints.restoreCardById.initiate
+export const rtkApiRestoreSeveralCards = cardApi.endpoints.restoreSeveralCards.initiate
 
 
 

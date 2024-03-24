@@ -5,7 +5,7 @@ import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLab
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import cls from './StatsAndActionsCupboardWidget.module.scss';
 import {
@@ -25,12 +25,14 @@ import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { CupboardMainButtonsSkeleton } from './StatsAndActionsCupboardWidgetSkeleton/CupboardMainButtonsSkeleton';
 import { iconSizeInfo } from '@/shared/const/iconSizes';
 import { CreateNewShelfModal } from './CreateNewShelfModal/CreateNewShelfModal';
-import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 import { dataAttrButtonTypeAddCardButtonGeneral } from '@/shared/const/idsAndDataAttributes';
 import { rtkApiDropCards } from '@/entities/Card';
 import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { getIsCupboardFirstRender } from '@/features/CupboardShelfList';
+import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
+import { HotKeyPresenter } from '@/shared/ui/HotKeyPresenter/HotKeyPresenter';
+import { MyTooltip } from '@/shared/ui/Tooltip';
 
 export const StatsAndActionsCupboardWidget = () => {
 	const cupboardIsLoading = useSelector(getIsCupboardLoading)
@@ -40,7 +42,8 @@ export const StatsAndActionsCupboardWidget = () => {
 	const isFirstRender = useSelector(getIsCupboardFirstRender)
 	const createNewShelfRequestStatus = useSelector(getCreateNewShelfModalRequestStatus)
 	// const createNewCardRequestStatus = useSelector(getCreateNewCardRequestStatus)
-	const { t } = useTranslation()
+	const { t: t2 } = useTranslation('tooltip')
+	const { t } = useTranslation('translation')
 	const dispatch = useAppDispatch()
 
 	// const onTimeEnd = useCallback(() => {
@@ -51,10 +54,10 @@ export const StatsAndActionsCupboardWidget = () => {
 	// 	dispatch(cupboardShelfListActions.setCreateNewCardModalRequestStatus('idle'))
 	// }, [dispatch])
 
-	const onDropCards = async () => {
-		dispatch(rtkApiDropCards())
-		dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
-	}
+	// const onDropCards = async () => {
+	// 	dispatch(rtkApiDropCards())
+	// 	dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
+	// }
 
 	const onAddNewShelfClick = () => {
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(true))
@@ -74,7 +77,9 @@ export const StatsAndActionsCupboardWidget = () => {
 			skeletonComponent={<CupboardMainButtonsSkeleton />}
 			// animateComponentAfterLoadingFadeInTime={DURA}
 			componentAfterLoading={
-				<HStack gap='gap_14' className={cls.actions}>
+				<HStack
+					className={cls.actions}
+				>
 					{/* <Button onClick={() => { dispatch(restoreAllShelves()) }}>Restore</Button> */}
 					{/* <Button
 						onClick={() => { dispatch(cupboardShelfListActions.setIsCupboardRefetching(!cupboardIsRefetching)) }}
@@ -97,28 +102,63 @@ export const StatsAndActionsCupboardWidget = () => {
 						{t('drop')}
 					</Button> */}
 					<Button
+						// borderRadius='borderRadius_max'
 						disabled={createNewShelfRequestStatus === 'pending'}
 						onClick={onAddNewShelfClick}
+						data-testid={TEST_BUTTONS_IDS.createNewShelfOpen}
+
 						name='new shelf'
 					>
 						{t('new shelf')}
 					</Button>
-					<Button
-						onClick={onAddNewCardClick}
-						data-button-type={dataAttrButtonTypeAddCardButtonGeneral}
-						name='new card'
-					>
-						{t('add card with hot key') + ' (n)'}
-					</Button>
-					<Icon
+					<MyTooltip
+						content={
+							// t2('add card shelf') + ` (${positionTextCard})`
+							<HotKeyPresenter
+								keysCombination={['n']}
+							// description={t2('training common shelf tooltip')}
+							/>
+							// t2('add card common')
+						}
+						delay={200}
+						trigger={
+							<Button
+								// borderRadius='borderRadius_max'
+								className={cls.trainButton}
+								onClick={onAddNewCardClick}
+								data-button-type={dataAttrButtonTypeAddCardButtonGeneral}
+								data-testid={TEST_BUTTONS_IDS.createNewCardOpen}
+								name='new card'
+							>
+								{t('add card with hot key')}
+							</Button>}
+					/>
+					<div className={cls.iconWrapper} >
+
+
+						<Icon
+							Svg={InfoIcon}
+							// width={iconSizeInfo}
+							// height={iconSizeInfo}
+							className={cls.info}
+							width={24}
+							height={24}
+							clickable
+							name='info'
+							onClick={onOpenInfoModal}
+						/>
+					</div>
+					{/* <Icon
 						Svg={InfoIcon}
-						width={iconSizeInfo}
-						height={iconSizeInfo}
+						// width={iconSizeInfo}
+						// height={iconSizeInfo}
 						className={cls.info}
+						width={24}
+						height={24}
 						clickable
 						name='info'
 						onClick={onOpenInfoModal}
-					/>
+					/> */}
 				</HStack >
 			}
 			noDelay={!cupboardIsLoading && !isFirstRender}
@@ -126,7 +166,9 @@ export const StatsAndActionsCupboardWidget = () => {
 		/>
 	)
 
+
 	useHotkeys('n', onAddNewCardClick, { keyup: true })
+	// useHotkeys('n', onAddNewCardClick, { keyup: true })
 
 	return (
 		<motion.div
@@ -146,6 +188,9 @@ export const StatsAndActionsCupboardWidget = () => {
 		</motion.div>
 	)
 }
+
+
+
 // import clsx from 'clsx';
 // import { useTranslation } from 'react-i18next';
 // import { HStack } from '@/shared/ui/Stack';

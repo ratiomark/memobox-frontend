@@ -5,7 +5,7 @@ import { userReducer } from '@/entities/User';
 // import { $api } from '@/shared/api/api';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { cupboardShelfListReducer } from '@/features/CupboardShelfList';
-import { headerReducer } from '@/widgets/Header';
+import { navBarReducer } from '@/widgets/NavBarNew';
 import { toastsReducer } from '@/shared/ui/Toast';
 import { uiReducer } from '@/entities/UI';
 
@@ -16,7 +16,7 @@ export function createReduxStore(
 	const rootReducers: ReducersMapObject<StateSchema> = {
 		...asyncReducers,
 		user: userReducer,
-		header: headerReducer,
+		navBar: navBarReducer,
 		// toasts: toastsReducer,
 		cupboard: cupboardShelfListReducer,
 		ui: uiReducer,

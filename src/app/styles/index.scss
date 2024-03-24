@@ -66,19 +66,37 @@ body.dragging * {
 
 .app,
 .app_modal,
-.app_drawer {
+.app_drawer,
+.app_training {
   font: var(--font-m);
   color: var(--text);
 }
 
 .app {
   // background: var(--bg);
-  min-height: 100vh;
+  // min-height: 100vh;
   margin-inline: auto;
+  display: grid;
+  grid-template-columns: auto 1fr; /* ширина боковой панели и оставшееся пространство */
+  // grid-template-columns: auto 1fr 1fr; /* ширина боковой панели и оставшееся пространство */
+  grid-template-rows: var(--header-height) 1fr; /* высота шапки и оставшееся пространство для контента */
+  // grid-template-rows: auto 1fr 1fr; /* высота шапки и оставшееся пространство для контента */
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  grid-template-areas:
+    "header header"
+    "navbar page";
+  min-height: 100vh; /* Полная высота видимой части экрана */
+  // display: grid;
+  // grid-template-columns: auto 1fr;
 
   // scrollbar-gutter: stable;
 
   // max-width: 1200px;
+}
+
+.app_training {
+  min-height: 100vh;
+  margin-inline: auto;
 }
 
 .content-page {

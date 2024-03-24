@@ -1,28 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { ThunkExtraArg } from '@/app/providers/StoreProvider'
+import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { rtkApiSendTrainingAnswers } from '@/entities/Card'
 import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
+import { getAnswersObject } from '../selectors/getTraining'
+import { mapCardsObjectToCardAfterTraining } from '@/shared/lib/helpers/mappers/mapCardsObjectToCardAfterTraining'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const sendTrainingAnswersThunk = createAsyncThunk<void, any, { rejectValue: string, extra: ThunkExtraArg }>(
+export const sendTrainingAnswersThunk = createAsyncThunk<void, any, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
 	'slice/sendTrainingAnswersThunk',
 	async (arg, thunkAPI) => {
-
 		const { dispatch, extra, getState } = thunkAPI
-
+		const answersObject = getAnswersObject(getState())
 		try {
-			// const newArg = [...Object.entries(arg).map(([cardId, value]) => ({
-			// 	...arg[cardId].card,
-			// 	answer: arg[cardId].answer,
-			// }))]
-			// console.log(newArg)
-			const response = dispatch(rtkApiSendTrainingAnswers(arg)).unwrap()
+			
+			if (!answersObject) return
+			const userResponses = mapCardsObjectToCardAfterTraining(answersObject)
+			const response = dispatch(rtkApiSendTrainingAnswers(userResponses)).unwrap()
+			
 			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
 			console.log(response)
-
-
-
 		} catch (err) {
 			return thunkAPI.rejectWithValue('Some Error in sendTrainingAnswersThunk')
 		}

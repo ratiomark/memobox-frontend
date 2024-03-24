@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import cls from './HotKeyPresenter.module.scss'
-import clsx from 'clsx';
 
 interface HotKeyPresenterProps {
 	keysCombination: string[]
@@ -16,7 +15,13 @@ export const HotKeyPresenter = (props: HotKeyPresenterProps) => {
 		} else {
 			return keysCombination.map((key, index) => (
 				<span key={index}>
-					<span className={cls.key}>{key}</span>
+					<span className={(
+						isNaN(Number(key))
+							? cls.key
+							: cls.key_number)}
+					>
+						{key}
+					</span>
 					{index < keysCombination.length - 1 && <span className={cls.separator}>+</span>}
 				</span>
 			));
@@ -31,46 +36,3 @@ export const HotKeyPresenter = (props: HotKeyPresenterProps) => {
 	);
 };
 
-// export default TooltipDemo;
-// export const Modal = (props: ModalProps) => {
-// 	const {
-// 		children,
-// 		className,
-// 		isOpen,
-// 		onClose,
-// 		lazy,
-// 		animationDelay = 300,
-// 		style,
-// 		panelAbsolute = false,
-// 	} = props
-// 	const { theme } = useTheme()
-// 	const {
-// 		isMounted,
-// 		isClosing,
-// 		onCloseHandler
-// 	} = useModal({ isOpen, onClose, animationDelay })
-
-// 	const mods: Record<string, boolean | undefined> = {
-// 		[cls.opened]: isOpen,
-// 		[cls.isClosing]: isClosing,
-// 	}
-// 	if (lazy && !isOpen) return null
-// 	// if (lazy && !isMounted) return null
-
-// 	return (
-// 		<Portal>
-// 			<div className={clsx(cls.Modal, mods, className, theme, 'app_modal')} >
-// 				<Overlay onClick={onCloseHandler} />
-// 				<div
-// 					style={style}
-// 					className={clsx(
-// 						// cls.content
-// 						{ [cls.panelAbsolute]: panelAbsolute }
-// 					)}
-// 				>
-// 					{children}
-// 				</div>
-// 			</div>
-// 		</Portal>
-// 	)
-// }

@@ -8,9 +8,10 @@ export type TextVariant = 'primary' | 'error' | 'accent';
 
 export type TextAlign = 'right' | 'left' | 'center';
 
-export type TextSize = 's' | 'm' | 'l' | 'xl';
+export type TextSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 
 const mapSizeToClass: Record<TextSize, string> = {
+	xs: 'size_xs',
 	s: 'size_s',
 	m: 'size_m',
 	l: 'size_l',

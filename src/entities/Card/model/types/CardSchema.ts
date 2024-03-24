@@ -7,18 +7,20 @@ export interface NewCardSchema {
 	boxId: string
 }
 
-export interface CardSchema {
+export interface CardSchemaBase {
 	id: string
-	index: number
 	question: string | null
 	answer: string | null
 	shelfId: string
-	boxIndex: number
 	boxId: string
+}
+
+export interface CardSchema extends CardSchemaBase {
+	index: number
+	boxIndex: number
 	isDeleted: boolean
 	state: 'train' | 'wait'
 	specialType: 'new' | 'none' | 'learnt'
-	time: number
 	createdAt: string
 	lastTraining: string
 	nextTraining: string
@@ -38,3 +40,5 @@ export interface FetchCardsThunkResponse {
 	cards: CardSchemaExtended[]
 	shelvesAndBoxesData: ShelvesDataViewPage
 }
+
+export type AnswerType = 'good' | 'bad' | 'middle'

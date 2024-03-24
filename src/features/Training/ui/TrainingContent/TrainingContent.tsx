@@ -11,15 +11,19 @@ import { obtainRouteMain } from '@/app/providers/router/config/routeConfig/route
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { sendTrainingAnswersThunk } from '../../model/services/sendTrainingAnswersThunk';
 import { EditorCardPresenter } from '@/shared/ui/LexicalEditor';
+import { trainingActions } from '../..';
 
 export type AnswerType = 'good' | 'bad' | 'middle'
+
 type CardAnswersObject = {
-	[key: string]: {
+	[cardId: string]: {
 		answer: AnswerType,
 		card: Partial<CardSchema>
 	}
 }
+
 type CardAnswersList = (Partial<CardSchema> & { answer: AnswerType })[]
+
 interface TrainingContentProps {
 	className?: string
 	data: CardSchema[]
@@ -55,34 +59,35 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		if (currIndex === cardsLength - 1) onEndTraining()
 	}
 
-	useEffect(() => {
-		if (currIndex === cardsLength) onEndTraining()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currIndex])
+	// useEffect(() => {
+	// 	if (currIndex === cardsLength) onEndTraining()
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [currIndex, answerObj])
 
 	const onAnswerClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const answer = e && e.currentTarget.getAttribute('data-answer-type') as AnswerType
 		const card = dataObj[String(currIndex)]
 		const cardId = card.id
-		const cardExtended = { ...card, answer: answer! }
+		// const cardExtended = { ...card, answer: answer! }
 		// setAnswerObj(prev => ([...prev, cardExtended]))
-		setAnswerObj(prev => ({ ...prev, [cardId]: { answer: answer!, card: card } }))
+		dispatch(trainingActions.addCardToAnswerObj({[cardId]: { answer: answer!, card: card } }))
+		// setAnswerObj(prev => ({ ...prev, [cardId]: { answer: answer!, card: card } }))
 		setShowAnswer(false)
-		checkEndOfTraining()
 		setCurrIndex(prev => prev + 1)
+		checkEndOfTraining()
 	}
 
 	const onAnswerHotKeyHandle = (answerValue: AnswerType) => {
 		const card = dataObj[String(currIndex)]
 		// const { id: cardId, question, answer, ...rest } = card
 		const cardId = card.id
-		const cardExtended = { ...card, answer: answerValue }
+		// const cardExtended = { ...card, answer: answerValue }
 		// setAnswerObj(prev => ([...prev, cardExtended]))
-		setAnswerObj(prev => ({ ...prev, [cardId]: { answer: answerValue, card: card } }))
+		dispatch(trainingActions.addCardToAnswerObj({[cardId]: { answer:answerValue, card: card } }))
+		// setAnswerObj(prev => ({ ...prev, [cardId]: { answer: answerValue, card: card } }))
 		setShowAnswer(false)
-		checkEndOfTraining()
 		setCurrIndex(prev => prev + 1)
-		// if (currIndex === cardsLength) onEndTraining()
+		checkEndOfTraining()
 	}
 
 

@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TrainingSchema } from '../types/TrainingSchema'
+import { CardAnswersObject, TrainingSchema } from '../types/TrainingSchema'
 
 const initialState: TrainingSchema = {
-
+	answerObject: {},
 }
 
 const trainingSlice = createSlice({
 	name: 'training',
 	initialState,
 	reducers: {
-		method: (state, action: PayloadAction<null>) => {
-
+		addCardToAnswerObj: (state, action: PayloadAction<CardAnswersObject>) => {
+			state.answerObject = {...state.answerObject, ...action.payload}
 		},
 	},
 })

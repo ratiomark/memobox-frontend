@@ -1,0 +1,25 @@
+.HeaderAdditionalBlock {
+  width: min(100%, 1200px);
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 30px;
+}
+
+.subscribeButton {
+  max-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropDownTrigger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  // padding-right: 23px;
+  padding: 6px 23px 6px 0;
+
+  // min-height: 100%;
+}

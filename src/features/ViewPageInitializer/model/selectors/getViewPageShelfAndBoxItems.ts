@@ -7,6 +7,7 @@ import { TabItem } from '@/shared/ui/Tabs/Tabs';
 import { t } from 'i18next';
 import { getViewPageCardDataEdited } from './getViewPageEditModal';
 import { getViewPageMoveCardsModalShelfId } from './getViewPageMoveCardsModal';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 const getViewPageShelvesData = (state: StateSchema) => state.viewPage?.shelvesData
 
@@ -64,35 +65,40 @@ export const getViewPageBoxItemsForWidget = createSelector(
 		if (isLoading || !shelvesDataObject) return []
 		if (shelfId === 'all') {
 			return [
-				{ value: 'all', additional: 'all', content: t('all cards') as string },
-				{ value: 'new', additional: 'new', content: t('new cards') as string },
-				{ value: 'learning', additional: 'learning', content: t('learning cards') as string },
-				{ value: 'learnt', additional: 'learnt', content: t('learnt cards') as string }] as TabItem[]
+				{ value: 'all', additional: 'all', content: t('all cards') as string, 'data-testid': TEST_ENTITY_NAMES.boxes.all},
+				{ value: 'new', additional: 'new', content: t('new cards') as string , 'data-testid':TEST_ENTITY_NAMES.boxes.new },
+				{ value: 'learning', additional: 'learning', content: t('learning cards') as string , 'data-testid': TEST_ENTITY_NAMES.boxes.learning},
+				{ value: 'learnt', additional: 'learnt', content: t('learnt cards') as string, 'data-testid':TEST_ENTITY_NAMES.boxes.learnt }
+			] as TabItem[]
 		}
 		const tabs: TabItem[] = [
 			{
 				value: 'all',
 				additional: 'all',
-				content: t('all cards') as string
+				content: t('all cards') as string,
+				'data-testid': TEST_ENTITY_NAMES.boxes.all
 			},
 		]
 		const boxesData = shelvesDataObject[shelfId].boxesItems
 		tabs.push({
 			value: boxesData[0].id,
 			additional: 'new',
-			content: t('new cards') as string
+			content: t('new cards') as string,
+			'data-testid': TEST_ENTITY_NAMES.boxes.new
 		})
 		boxesData.slice(1, boxesData.length - 1).forEach(box => {
 			tabs.push({
 				value: box.id,
 				additional: box.index.toString(),
-				content: `${t('box text')} ${box.index}`
+				content: `${t('box text')} ${box.index}`,
+				'data-testid': TEST_ENTITY_NAMES.boxItem
 			})
 		})
 		tabs.push({
 			value: boxesData.at(boxesData.length - 1)!.id,
 			additional: 'learnt',
-			content: t('learnt cards') as string
+			content: t('learnt cards') as string,
+			'data-testid': TEST_ENTITY_NAMES.boxes.learnt
 		})
 		return tabs
 	}

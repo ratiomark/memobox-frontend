@@ -1,5 +1,6 @@
 {
   "training common shelf": "Train all cards. Hot key - t",
+  "training common shelf tooltip": "Train all cards",
   "training shelf": "Train shelf cards. Hot key -",
   "add card common": "Add new card. Hot key - n",
   "add card shelf": "Add new card to shelf. Hot key -",

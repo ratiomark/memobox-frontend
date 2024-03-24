@@ -1,22 +1,34 @@
 .container {
   display: flex;
   align-items: center;
+  gap: 6px;
 }
 
 .keyCombination {
   display: flex;
   align-items: center;
-  margin-right: 8px;
+
+  // margin-right: 8px;
 }
 
-.key {
+.key,
+.key_number {
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 2px 6px;
+  padding: 2px 7px;
   font-size: 14px;
   font-weight: bold;
   margin-right: 4px;
+}
+
+.key_number {
+  font-size: 13px;
+}
+
+.key:last-of-type,
+.key_number:last-of-type {
+  margin-right: 0;
 }
 
 .separator {

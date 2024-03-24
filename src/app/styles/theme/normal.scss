@@ -70,7 +70,7 @@ $colors: (
   --checkbox-bg-color: white;
 
   // data-labels
-  --data-label-all: #33d69f;
+  --data-label-all: var(--accent, #33d69f);
   --data-label-train: #eb4b4b;
   --data-label-wait: #ff8b57;
   --data-label-text-color: #676872;
@@ -78,7 +78,7 @@ $colors: (
   --small-data-label-background-all: #e6faf3;
   --small-data-label-background-train: #fce9e9;
   --small-data-label-background-wait: #fff1ea;
-  --small-data-label-color-all: #33d69f;
+  --small-data-label-color-all: var(--accent, #33d69f);
   --small-data-label-color-train: #eb4b4b;
   --small-data-label-color-wait: #ff8b57;
 

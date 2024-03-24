@@ -1,8 +1,12 @@
+export { deleteCardFromTrashByIdThunk } from './model/services/deleteCardFromTrashByIdThunk'
 export { restoreShelfByIdThunk } from './model/services/restoreShelfByIdThunk'
 export { restoreNewOrLearntBoxThunk } from './model/services/restoreNewOrLearntBoxThunk'
 export { restoreBoxThunk } from './model/services/restoreBoxThunk'
+export { restoreCardThunk } from './model/services/restoreCardThunk'
 
 export { deleteShelfFromTrashByIdThunk as deleteFinalShelfByIdThunk } from './model/services/deleteShelfFromTrashByIdThunk'
+
+
 export { deleteBoxFromTrashByIdThunk } from './model/services/deleteBoxFromTrashByIdThunk'
 
 export {
@@ -18,6 +22,10 @@ export {
 	getTrashPageIsRestoreNewOrLearntModalOpen,
 	getTrashPageRestoreNewOrLearntModalShelfId,
 	getTrashPageRestoreNewOrLearntModalBoxId,
+	getTrashPageIsRestoreCardModalOpen,
+	getTrashPageRestoreCardModalBoxId,
+	getTrashPageRestoreCardModalCardId,
+	getTrashPageRestoreCardModalShelfId
 } from './model/selectors/getTrashPageModals'
 
 export { getTrashPageIsMultiSelectActive, getTrashPageSelectedCardIds } from './model/selectors/getTrashPageMultiSelect'

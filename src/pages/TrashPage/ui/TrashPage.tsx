@@ -1,8 +1,9 @@
+import { memo } from 'react';
+
 import { TrashPageInitializer } from '@/features/TrashPageInitializer';
-import { ContentPresenterTrashPageWidget } from '@/widgets/ContentPresenterTrashPageWidget';
+import { ContentPresenterTrashPageWidget, RestoreCardModal } from '@/widgets/ContentPresenterTrashPageWidget';
 import { EntitySwitcherTrashPageWidget } from '@/widgets/EntitySwitcherTrashPageWidget';
 import { Page } from '@/widgets/Page';
-import { memo } from 'react';
 
 const TrashPage = memo(() => {
 
@@ -11,7 +12,9 @@ const TrashPage = memo(() => {
 			<TrashPageInitializer
 				entitySwitcherWidget={<EntitySwitcherTrashPageWidget />}
 				contentPresenterWidget={<ContentPresenterTrashPageWidget />}
+				// restoreCardModal={<RestoreCardModal />}
 			/>
+			{/* <RestoreCardModal /> */}
 			{/* <motion.div
 				animate={{ x: ['20%', '0%', '40%', '0%'] }}
 				transition={{ duration: 2 }}

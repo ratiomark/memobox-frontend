@@ -1,14 +1,20 @@
 import clsx from 'clsx'
-import cls from './TrashPageInitializer.module.scss'
 import { ReactNode, useEffect } from 'react';
-import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
-import { trashPageReducer } from '../model/slice/trashPageSlice';
+
+import cls from './TrashPageInitializer.module.scss'
+
 import { useGetTrashQuery } from '@/entities/Trash';
+import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
+
+import { trashPageReducer } from '../model/slice/trashPageSlice';
+// import { RestoreCardModal } from '@/widgets/ContentPresenterTrashPageWidget';
 
 interface TrashPageInitializerProps {
 	className?: string;
 	entitySwitcherWidget: ReactNode
 	contentPresenterWidget?: ReactNode
+	restoreCardModal?: ReactNode
+	// modals?: ReactNode[]
 }
 
 const reducers: ReducersList = {
@@ -20,6 +26,8 @@ export const TrashPageInitializer = (props: TrashPageInitializerProps) => {
 		className,
 		entitySwitcherWidget,
 		contentPresenterWidget,
+		// restoreCardModal
+		// modals,
 	} = props
 	// const { isLoading, data, isError } = useGetTrashQuery()
 
@@ -37,6 +45,8 @@ export const TrashPageInitializer = (props: TrashPageInitializerProps) => {
 		<div className={clsx(cls.TrashPageInitializer, [className])} >
 			{entitySwitcherWidget}
 			{contentPresenterWidget}
+			{/* {restoreCardModal} */}
+			{/* {modals?.map(item => item)} */}
 		</div>
 	)
 }

@@ -10,3 +10,4 @@ export const KEY_VIEW_ROWS_LOCAL_STORAGE = 'viewRows';
 export const KEY_VIEW_SORT_ORDER_LOCAL_STORAGE = 'sortOrder';
 export const KEY_VIEW_SORT_VALUE_LOCAL_STORAGE = 'sortValue';
 export const KEY_APP_LANG_LOCAL_STORAGE = 'i18nextLng';
+export const KEY_TOOLTIP_ENABLED_LOCAL_STORAGE = 'tooltipEnabled';

@@ -64,7 +64,7 @@
 }
 
 .paddingDefault {
-  padding: var(--padding-main);
+  padding: var(--padding-button-main);
 }
 
 .paddingWithBothAddon,
@@ -308,7 +308,11 @@
   }
 
   &_max {
-    border-radius: 999999px;
+    border-radius: 999px;
+  }
+
+  &_main {
+    border-radius: var(--border-radius-button-main, 4px);
   }
 }
 

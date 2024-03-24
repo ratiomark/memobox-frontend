@@ -1,11 +1,7 @@
-import clsx from 'clsx';
-import { useTranslation } from 'react-i18next';
 import cls from './BoxesSettingsList.module.scss';
-import { BoxSchema } from '@/entities/Box';
 import { MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion'
-import { Icon } from '@/shared/ui/Icon';
-import PlusIcon from '@/shared/assets/icons/plusIcon2.svg'
+// import PlusIcon from '@/shared/assets/icons/plusIcon2.svg'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { settingsShelfTemplateActions } from '../../model/slice/shelfTemplateSlice';
 import { getSettingsCurrentShelfTemplate, getSettingsShelfTemplateMode } from '../../model/selectors/settingsShelfTemplate';
@@ -27,7 +23,7 @@ const createBox = (index: number): ExtendedTimingBlock => {
 		minutes: 0,
 		keyId: 'unsaved',
 		isSaved: false,
-		id: (Math.random() * Math.random()).toString(),
+		id: `newBox - ${(Math.random() * Math.random()).toString()}`,
 		isOpen: true,
 	}
 }
@@ -76,18 +72,14 @@ export const BoxesSettingsList = () => {
 		const updatedBoxesList: ExtendedTimingBlock[] = [];
 		const boxListRelevant = currentShelfTemplate.slice(0, currentShelfTemplate.length)
 
-		// console.log(' INDEX   INDEX   ', index)
 		if (index === 0) {
 			// updatedBoxesList.push({ ...newBox, index })
 			updatedBoxesList.push(newBox)
-			// console.log(updatedBoxesList)
 			boxListRelevant.forEach(boxItem => {
 				updatedBoxesList.push({ ...boxItem, index: boxItem.index! + 1 })
 			})
 			console.log(updatedBoxesList)
-			// console.log('КОНЕЦЦЦЦЦЦЦ')
 		} else if (index === boxListRelevant.length) {
-			// console.log('LAST LAST LAST LAST LAST LAST LAST LAST')
 			boxListRelevant.forEach(boxItem => updatedBoxesList.push(boxItem))
 			updatedBoxesList.push(newBox)
 		} else {
