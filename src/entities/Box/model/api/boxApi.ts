@@ -87,7 +87,7 @@ export const boxApi = rtkApi.injectEndpoints({
 				url: 'boxes/move-all-cards-and-restore',
 				method: 'PATCH',
 				body: {
-					fromBoxId,
+					fromBoxId,	
 					toBoxId,
 					toShelfId,
 				}

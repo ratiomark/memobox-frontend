@@ -1,5 +1,5 @@
 import { BoxSchema, ShelfRepresentedByBoxes } from '@/entities/Box';
-import { DataBlock } from '@/shared/types/DataBlock';
+import { DataBlock, TimingBlock } from '@/shared/types/DataBlock';
 import { MissedTrainingValue } from '@/entities/User';
 import { RequestStatusType } from '@/shared/types/GeneralTypes';
 import { CardSchemaExtended } from '@/entities/Card';
@@ -44,3 +44,8 @@ export interface ShelvesDataViewPage {
 	[shelfId: string]: ShelfData
 }
 
+// export interface ShelfUpdateBoxListItem{
+// 	timing: TimingBlock
+// 	id: string
+// 	index: number
+// }

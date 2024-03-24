@@ -4,6 +4,7 @@ import cls from './ActionButtons.module.scss';
 import { Button } from '@/shared/ui/Button';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useLayoutEffect } from 'react';
+import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
 
 interface ActionButtonsProps {
 	className?: string
@@ -43,6 +44,7 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 					color='trainingAction'
 					onClick={onCloseTraining}
 					data-button-type="training-bottom-actions"
+					data-testid={TEST_BUTTONS_IDS.training.endTrainingButton}
 				>
 					{t('end training')}
 				</Button>
@@ -51,6 +53,7 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 					color='trainingAction'
 					onClick={onPreviousCardClick}
 					data-button-type="training-bottom-actions"
+					data-testid={TEST_BUTTONS_IDS.training.previousCardButton}
 				>
 					{t('previous card')}
 				</Button>
@@ -59,6 +62,7 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 					color='trainingAction'
 					onClick={onNextCardClick}
 					data-button-type="training-bottom-actions"
+					data-testid={TEST_BUTTONS_IDS.training.skipCardButton}
 				>
 					{t('next card')}
 
@@ -66,6 +70,7 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 				<Button
 					color='trainingAction'
 					data-button-type="training-bottom-actions"
+					data-testid={TEST_BUTTONS_IDS.training.editCardButton}
 				>
 					{t('edit card')}
 				</Button>

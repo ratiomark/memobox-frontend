@@ -33,6 +33,22 @@ import { RenameShelfModal } from './Modals/RenameShelfModal/RenameShelfModal';
 import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { cupboardShelfListActions } from '../model/slice/cupboardShelfListSlice';
+import { UiColorCustomizer, UiComponentEnabler, UiVariableCustomizer } from '@/shared/ui/UiVariableCustomizer';
+import { MyShelvesDelimiter } from './MyShelvesDelimiter/MyShelvesDelimiter';
+import { getUserSavedDataIsDelimiterEnabled, userActions } from '@/entities/User';
+import { getUserSavedDataCupboard } from '@/entities/User/model/selectors/getJsonSavedData';
+
+
+const DelimiterController = () => {
+	const dispatch = useAppDispatch()
+	const cupboard = useSelector(getUserSavedDataCupboard)
+	const isDelimiterEnabled = useSelector(getUserSavedDataIsDelimiterEnabled)
+	const onToggle = () => {
+		dispatch(userActions.updateJsonSavedData({ cupboard: { ...cupboard, isDelimiterEnabled: !isDelimiterEnabled } }))
+	}
+	return <UiComponentEnabler entityName='delimiter' isEnabled={isDelimiterEnabled} onToggleClick={onToggle} />
+}
+
 
 export const CupboardShelfList = () => {
 	// const dispatch = useAppDispatch()
@@ -52,8 +68,55 @@ export const CupboardShelfList = () => {
 				className={cls.cupboardShelfList}
 				id={idCupboardShelfList}
 			>
+
 				<CommonShelf />
+				<MyShelvesDelimiter />
 				<ShelvesRendered />
+				<div
+					style={{
+						width: '40%',
+						background: 'transparent',
+						display: 'flex',
+						flexDirection: 'column',
+						// alignItems: 'center',
+						// justifyContent: 'center',
+						gap: 16
+					}}
+				>
+					<DelimiterController />
+					{/* <UiVariableCustomizer
+						entityName='Button border radius'
+						cssProperty='--border-radius-button-main'
+						useMaxValue
+					/>
+					<UiVariableCustomizer
+						entityName='Shelf border radius'
+						cssProperty='--border-radius-shelf'
+						useMaxValue
+					/> */}
+					{/* <UiColorCustomizer
+						entityName='Button color'
+						cssProperty='--accent'
+					/> */}
+					<UiVariableCustomizer
+						entityName='Shelf padding left'
+						cssProperty='--padding-shelf-right'
+						valueListLength={12}
+						sliderMaxValue={64}
+					/>
+					<UiVariableCustomizer
+						entityName='Collapse left padding'
+						cssProperty='--padding-additional-from-collapse'
+						valueListLength={12}
+						sliderMaxValue={64}
+					/>
+					<UiVariableCustomizer
+						entityName='Train button left padding'
+						cssProperty='--padding-additional-from-train-button'
+						valueListLength={12}
+						sliderMaxValue={64}
+					/>
+				</div>
 				<div style={{ width: '100%', height: 20, background: 'transparent' }}></div>
 				{/* <CommonShelf data={cupboardData} isLoading={cupboardIsLoading && isFirstRender} /> */}
 				{/* <Reorder.Group

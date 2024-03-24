@@ -22,6 +22,11 @@
   text-align: center;
 }
 
+.size_xs {
+  line-height: var(--font-line-s);
+  font-size: 14px;
+}
+
 .size_s {
   font: var(--font-m);
 }
@@ -38,6 +43,7 @@
 
 .size_xl {
   font: var(--font-xxl-header);
+
   // font: var(--font-xx);
 }
 

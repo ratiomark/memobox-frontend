@@ -15,7 +15,7 @@ export type { ShelfBoxesTemplateSchema } from './model/types/shelfBoxesTemplateS
 // export { shelfBoxesTemplateSettingsReducer } from './model/slice/shelfBoxesTemplateSlice';
 export { CupboardShelfListWrapper } from './ui/CupboardShelfListWrapper/CupboardShelfListWrapper';
 
-export { getCupboardState } from './model/slice/cupboardShelfListSlice';
+export { getCupboardState } from './model/selectors/getCupboardCommon';
 export {
 	getCupboard,
 	getCupboardData,

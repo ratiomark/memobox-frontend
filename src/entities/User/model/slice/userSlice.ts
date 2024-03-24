@@ -26,6 +26,9 @@ const initialState: UserSchema = {
 	jsonSavedData: {
 		viewPageCardRowsCount: 2,
 		commonShelfCollapsed: true,
+		cupboard: {
+			isDelimiterEnabled: true
+		},
 		shelfNamesList: [],
 		viewPageColumns: jsonSavedDataColumnsMock,
 	},

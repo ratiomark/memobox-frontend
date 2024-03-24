@@ -1,10 +1,10 @@
 import { DefaultButtonSkeleton, Skeleton } from '@/shared/ui/Skeleton';
-import cls from './CommonShelfButtons.module.scss';
+import clsShelfButtons from '../ShelfButtons/ShelfButtons.module.scss'
 import { ICON_SIZE_DEFAULT } from '@/shared/const/iconSizes';
 
 export const CommonShelfButtonsSkeleton = () => {
 	return (
-		<div className={cls.ShelfButtons}>
+		<div className={clsShelfButtons.ShelfButtons}>
 			<DefaultButtonSkeleton width={65} />
 			<DefaultButtonSkeleton width={110} />
 			{/* <DefaultButtonSkeleton width={200} /> */}

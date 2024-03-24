@@ -1,14 +1,17 @@
 import clsx from 'clsx'
-import cls from './ViewPageToastsWithButtons.module.scss'
-import { useSelector } from 'react-redux';
-import { MyToastWithButton } from '@/shared/ui/Toast/ui/MyToastRTK';
-import { getMultiSelectDeleteCardIds, getMultiSelectMoveCardIds } from '../model/selectors/getViewPageMultiSelect';
-import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
-import { moveMultipleCardsThunk, viewPageActions } from '..';
-import { deleteMultipleCardsThunk } from '../model/services/deleteMultipleCardsThunk';
 import { memo, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
+import cls from './ViewPageToastsWithButtons.module.scss'
+
 import { DURATION_MULTIPLE_CARDS_DELETION_MILLISEC } from '@/shared/const/animation';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { toastsActions } from '@/shared/ui/Toast';
+import { MyToastWithButton } from '@/shared/ui/Toast/ui/MyToastRTK';
+
+import { moveMultipleCardsThunk, viewPageActions } from '..';
+import { getMultiSelectDeleteCardIds, getMultiSelectMoveCardIds } from '../model/selectors/getViewPageMultiSelect';
+import { deleteMultipleCardsThunk } from '../model/services/deleteMultipleCardsThunk';
 
 
 const MoveCardsToasts = () => {
@@ -32,7 +35,6 @@ const MoveCardsToasts = () => {
 				}}
 				// onTimeEnd={() => alert('Закрывашка')}
 				duration={DURATION_MULTIPLE_CARDS_DELETION_MILLISEC}
-			// duration={DURATION_MULTIPLE_CARDS_DELETION_MILLISEC}
 			/>
 		))}
 	</>
@@ -60,7 +62,6 @@ const DeleteCardsToasts = () => {
 				}}
 				// onTimeEnd={() => alert('Закрывашка')}
 				duration={DURATION_MULTIPLE_CARDS_DELETION_MILLISEC}
-			// duration={DURATION_MULTIPLE_CARDS_DELETION_MILLISEC}
 			/>
 		))}
 	</>

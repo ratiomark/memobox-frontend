@@ -12,31 +12,13 @@ import { CommonShelfBoxes } from '../CommonShelfBoxes/CommonShelfBoxes';
 import { CommonShelfButtonsSkeleton } from '../CommonShelfButtons/CommonShelfButtonsSkeleton';
 import { motion } from 'framer-motion'
 import cls from './CommonShelf.module.scss';
+// eslint-disable-next-line custom-fsd-checker-plugin/public-api-imports
+import shelfCls from '@/entities/Shelf/ui/Shelf.module.scss';
 import { AnimateSkeletonLoader, Collapsible } from '@/shared/ui/Animations';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
-import { CommonShelfBackendResponse } from '@/entities/Cupboard';
 
-
-
-// interface CommonShelfProps extends CommonShelfBackendResponse {
-interface CommonShelfProps {
-	data?: {
-		all: number
-		train: number
-		wait: number
-	}
-	isLoading: boolean
-	className?: string
-}
-
-// export const CommonShelf = memo((props: CommonShelfProps) => {
 export const CommonShelf = memo(() => {
-	// const {
-	// 	className,
-	// 	data,
-	// 	isLoading,
-	// } = props
 	const data = useSelector(getCupboardData)
 	const isCupboardLoading = useSelector(getIsCupboardLoading)
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
@@ -71,16 +53,20 @@ export const CommonShelf = memo(() => {
 		<motion.div
 			layout
 			// transition={{ type: 'spring', stiffness: 80, duration: 0.3 }}
-			className={cls.shelf}
+			className={shelfCls.shelf}
 		>
-			<div className={cls.topShelfPart}>
-				<VStack align='start' gap='gap_8'>
-					<Heading as='h3' size='s' title={t('common shelf name')} noSelect />
+			<div className={shelfCls.shelfTitleContainer} >
+
+				<Heading as='h3' noSelect size='xs' title={t('common shelf name')} />
+			</div>
+			<div className={shelfCls.topShelfPart}>
+				<div className={shelfCls.smallDataLabelsWrapper} >
 					<CompleteSmallDataLabels data={data} isLoading={isRefetching} />
-				</VStack>
+				</div>
 				<div>
 					{buttons}
 				</div>
+
 			</div>
 			<Collapsible
 				// mode='sync'

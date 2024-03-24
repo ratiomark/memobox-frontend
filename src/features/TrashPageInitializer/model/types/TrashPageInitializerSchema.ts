@@ -35,6 +35,7 @@ export interface TrashPageInitializerSchema {
 	cards: CardSchemaDeleted[]
 	restoreBoxModal: RestoreBoxModal
 	restoreNewOrLearntModal: RestoreNewOrLearnModal
+	restoreCardModal: RestoreCardModal
 }
 
 export interface RestoreBoxModal {
@@ -53,4 +54,9 @@ export interface RestoreNewOrLearnModal {
 	// boxIndex: number
 	isOpen: boolean
 	shelfTitle: string
+}
+
+interface RestoreCardModal extends Omit<RestoreNewOrLearnModal, 'boxType'> {
+	cardIds?: string[]
+	cardId?: string
 }

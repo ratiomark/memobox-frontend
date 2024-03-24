@@ -1,6 +1,7 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { CommonShelfBackendResponse, CupboardSchema } from '@/entities/Cupboard'
 import { ShelfDndRepresentation, ShelfSchema } from '../types/ShelfSchema'
+import { ShelfUpdateBoxListItem } from '@/entities/Box/model/types/BoxSchema';
 
 export const shelvesApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
@@ -107,6 +108,16 @@ export const shelvesApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Shelves'],
 		}),
+		shelfUpdateBoxesList: build.mutation<string, { shelfId: string, boxesList: ShelfUpdateBoxListItem[] }>({
+			query: (arg) => ({
+				url: 'shelves/update-boxes-list',
+				method: 'PATCH',
+				body: {
+					...arg
+				},
+			}),
+			invalidatesTags: ['Shelves'],
+		}),
 	}),
 })
 export const rtkRemoveShelfById = shelvesApi.endpoints.removeShelf.initiate
@@ -115,6 +126,7 @@ export const rtkCreateNewShelf = shelvesApi.endpoints.createNewShelf.initiate
 export const rtkUpdateShelfListOrder = shelvesApi.endpoints.updateShelfListOrder.initiate
 export const rtkRestoreShelfById = shelvesApi.endpoints.restoreShelfById.initiate
 export const rtkRemoveShelfFinal = shelvesApi.endpoints.removeShelfFinal.initiate
+export const rtkShelfUpdateBoxesList = shelvesApi.endpoints.shelfUpdateBoxesList.initiate
 export const { useGetShelvesQuery } = shelvesApi
 export const { useUpdateShelfMutation } = shelvesApi
 export const { useUpdateShelfWithTagMutation } = shelvesApi

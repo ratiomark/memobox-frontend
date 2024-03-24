@@ -13,8 +13,8 @@
 
   // m
   --font-size-m: 16px;
-  --font-size-m-button: 14px;
-  --font-line-m-button: 18px;
+  --font-size-m-button: 16px;
+  --font-line-m-button: 24px;
   --font-line-m: 24px;
   --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
   --font-m-text: var(--font-size-m) / var(--font-line-m) var(--font-family-text);
@@ -95,11 +95,18 @@
   --border-radius-48: 48px;
   --tabs-border-radius: 8px;
   --tabs-border-top-and-bottom-size: 1px;
+  --border-radius-shelf: 12px;
+  --border-radius-button-main: 999px;
 
   // padding
   --padding-main: 8px 16px;
+  --padding-button-main: 10px 16px;
   --padding-main-top-and-bottom: 8px;
   --padding-0-top-16-side: 0 16px;
+  --padding-additional-from-collapse: 10px;
+  --padding-additional-from-train-button: 10px;
+  --padding-shelf-right: 20px;
+  --padding-shelf-top-and-bottom: 22px;
   --padding-0-top-16-right-8-left-side: 0 16px 0 8px;
   --padding-0-top-16-right-16-left-side: 0 16px;
   --padding-2-top-8-left-16-right: 2px 16px 2px 8px;
@@ -121,6 +128,9 @@
   --tab-item-padding-top-and-bottom: 6px;
   --tab-item-padding-left-and-right: 16px;
   --trash-page-entity-left-padding: 20px;
+
+  // gaps and margins
+  --shelves-list-vertical-gap: 46px;
 
   /* stylelint-disable-next-line length-zero-no-unit */
   --big-data-labels-data-holder-padding-right: 0px;

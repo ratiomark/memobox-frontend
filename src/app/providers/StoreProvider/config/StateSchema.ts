@@ -10,18 +10,19 @@ import { CupboardPageSchema } from '@/features/CupboardShelfList';
 import { SettingsShelfTemplate } from '@/features/SettingsFeatures'
 import { TrashPageInitializerSchema } from '@/features/TrashPageInitializer';
 import { ProfilePageWidgetSchema } from '@/widgets/ProfilePageWidget';
-import { HeaderSchema } from '@/widgets/Header';
 import { ShelfBoxesTemplateSchema } from '@/features/CupboardShelfList';
 import { ToastsSchema } from '@/shared/ui/Toast';
 import { UISchema } from '@/entities/UI';
 import { SettingsFeaturesSchema } from '@/features/SettingsFeatures';
+import { TrainingSchema } from '@/features/Training';
+import { NavBarSchema } from '@/widgets/NavBarNew';
 
 // loginForm делаю не обязательным, таким образом я могу подружать его позже с помощью асинхронна и ТС не будет ругаться на то что я не объявил его в rootReducers
 export interface StateSchema {
 	[rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 	user: UserSchema
 	ui: UISchema
-	header: HeaderSchema
+	navBar: NavBarSchema
 	cupboard: CupboardPageSchema
 	// async reducers
 	toasts?: ToastsSchema
@@ -33,6 +34,7 @@ export interface StateSchema {
 	shelfBoxesTemplateSettings?: ShelfBoxesTemplateSchema
 	settingsTimeSleep?: Partial<TimeSleepSettings>
 	profilePage?: ProfilePageWidgetSchema
+	trainingPage?: TrainingSchema
 	// sortColumns
 }
 

@@ -84,16 +84,18 @@ export const Shelf = memo((props: ShelfProps) => {
 					cls.shelf,
 					[className])}
 			>
+				<div className={cls.shelfTitleContainer} >
+
+					<Heading as='h3' noSelect size='xs' title={title} />
+				</div>
 				<div className={cls.topShelfPart}>
-					<VStack align='start' gap='gap_8'>
-						<Heading as='h3' noSelect size='s' title={title} />
+					<div className={cls.smallDataLabelsWrapper} >
+
 						<CompleteSmallDataLabels
 							data={data}
 							isRefetchingSelectorFn={isRefetchingSelectorFn}
 						/>
-						{/* {completeSmallDataLabels} */}
-						{/* {completeSmallDataLabelsBlock} */}
-					</VStack>
+					</div>
 					{shelfButtonsBlock}
 				</div>
 				<Collapsible

@@ -21,6 +21,7 @@
 .container {
   width: min(100%, 1200px);
   margin: 0 auto;
+
   /* test border */
   border: 1px solid red;
 }

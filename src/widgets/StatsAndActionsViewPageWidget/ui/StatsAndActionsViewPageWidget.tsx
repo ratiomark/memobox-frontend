@@ -2,11 +2,9 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
 import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLabels/CompleteBigDataLabels';
-import { useEffect, useRef, } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { CardSchema } from '@/entities/Card';
 import {
-	getViewPageCardsFiltered,
 	getViewPageIsLoading,
 	getViewPageIsMounted,
 	viewPageActions
@@ -17,8 +15,7 @@ import cls from './StatsAndActionsViewPageWidget.module.scss';
 import { Button } from '@/shared/ui/Button';
 import { motion } from 'framer-motion'
 import { TableSettingModal } from './TableSettingModal/TableSettingModal';
-import { BigDataLabelsSkeleton, Skeleton } from '@/shared/ui/Skeleton';
-import { getViewPageCardsFactor, getViewPageCardsSortedFactor } from '@/features/ViewPageInitializer';
+import { getViewPageCardsFactor } from '@/features/ViewPageInitializer';
 interface StatsData {
 	all: number
 	train: number
@@ -30,6 +27,7 @@ const replaceCardsWithStatsData = (cards?: CardSchema[]) => {
 	cards?.forEach(card => statsData[card.state] += 1)
 	return statsData
 }
+
 const replaceShelfWithStatsData = (shelfDataObject: ShelfRepresentedByBoxes) => {
 	const statsData = { all: 0, train: 0, wait: 0 }
 	for (const key in shelfDataObject) {

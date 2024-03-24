@@ -15,13 +15,13 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding-right: 23px;
+  padding-right: 20px;
 
   // width: max-content;
 }
 
 .info {
-  margin-left: 3px;
+  // padding-left: 3px;
 }
 
 .commonWrapper {
@@ -35,5 +35,60 @@
   // align-items: center;
 
   gap: 14px;
-  padding-right: var(--padding-right-correction-info-icon);
+  padding-right: var(--padding-shelf-right);
+
+  // padding-right: var(--padding-right-correction-info-icon);
 }
+
+.iconWrapper {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--padding-additional-from-collapse);
+}
+
+.trainButton {
+  margin-left: var(--padding-additional-from-train-button);
+}
+
+// .statsAndActionsCupboardWidget {
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: var(--additional-padding-top-data-labels) 0 40px;
+//   position: relative;
+// }
+
+// .wrapper {
+//   display: flex;
+//   width: 520px;
+//   justify-content: space-between;
+// }
+
+// .ShelfButtons {
+//   display: flex;
+//   align-items: center;
+//   gap: 14px;
+//   padding-right: 23px;
+
+//   // width: max-content;
+// }
+
+// .info {
+//   margin-left: 3px;
+// }
+
+// .commonWrapper {
+//   display: flex;
+//   align-items: center;
+//   height: 100%;
+// }
+
+// .actions {
+//   // display: flex;
+//   // align-items: center;
+
+//   gap: 14px;
+//   padding-right: var(--padding-right-correction-info-icon);
+// }

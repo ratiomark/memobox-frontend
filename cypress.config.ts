@@ -1,7 +1,13 @@
 import { defineConfig } from 'cypress';
-import { resolve } from 'path'
+// import { resolve } from 'path'
 import vitePreprocessor from 'cypress-vite'
-import fs from 'fs';
+import * as fs from 'fs';
+const environment = process.env.NODE_ENV || 'dev';
+
+// Загрузка переменных окружения из разных файлов в зависимости от NODE_ENV
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const envConfig = require(`./cypress/config/${environment}.env.json`);
+console.log(envConfig)
 
 export default defineConfig({
 	e2e: {
@@ -39,20 +45,25 @@ export default defineConfig({
 				}
 			});
 		},
-		env: {
-			NODE_ENV: JSON.stringify('development'),
-			__IS_DEV__: JSON.stringify(true),
-			__API__: JSON.stringify('http://localhost:3000/api/v1'),
-			__API__BACK: JSON.stringify('https://memobox.tech/api/v1'),
-			__PROJECT__: JSON.stringify('frontend')
-		},
+		// env: {
+		// API_URL_DEV: 'http://localhost:3000/api/v1',
+		// NODE_ENV: JSON.stringify('development'),
+		// __IS_DEV__: JSON.stringify(true),
+		// API_URL_DEV: 'http://localhost:3000/api/v1',
+		// __API__BACK: JSON.stringify('https://memobox.tech/api/v1'),
+		// __PROJECT__: JSON.stringify('frontend')
+		// },
 		baseUrl: 'http://localhost:5173',
 		viewportWidth: 1920,
 		viewportHeight: 1080,
 		specPattern: ['**/*.e2e.ts', '**/*.cy.ts', '**/*.cy.js'],
 	},
 	env: {
-		NODE_ENV: JSON.stringify('development'),
+		...envConfig
+		// 	API_URL_DEV: 'http://localhost:3000/api/v1',
+		// 	API_URL: 'http://backend-test:3000/api/v1',
+		// 	// API_URL_DEV: 'http://localhost:3000/api/v1',
+		// 	// NODE_ENV: JSON.stringify('development'),
 	},
 	screenshotsFolder: './cypress/screenshots-test',
 	// typescript: {

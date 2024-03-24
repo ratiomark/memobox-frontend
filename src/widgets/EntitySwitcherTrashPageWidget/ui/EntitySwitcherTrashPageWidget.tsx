@@ -23,7 +23,7 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 	const { t } = useTranslation('trash-page')
 	const { isLoading, data, isError } = useGetTrashQuery()
 	const { entitiesCount } = data || {};
-	
+
 	const onTabClick = (tab: TabItem) => {
 		dispatch(trashPageActions.setActiveEntity(tab.value as TrashPageEntityType))
 	}
@@ -46,9 +46,9 @@ export const EntitySwitcherTrashPageWidget = (props: EntitySwitcherTrashPageWidg
 		]
 	}, [t, entitiesCount])
 
-	useEffect(() => {
-		console.log(isLoading)
-	}, [isLoading])
+	// useEffect(() => {
+	// 	console.log(isLoading)
+	// }, [isLoading])
 
 	return (
 		<div className={clsx(

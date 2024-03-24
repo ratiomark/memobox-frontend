@@ -1,6 +1,9 @@
 # Logs
 logs
 *.log
+*_ignore
+*_ignore.tsx
+*_ignore.ts
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -34,3 +37,7 @@ ignore
 src/widgets/ContentPresenterTrashPageWidget/ui/ContentPresenterWrapper_copy
 src/shared/ui/LexicalEditor/src/utils/createLexicalEditorStateFromMultilineText.ts
 src/features/AuthByUsername copy
+# 
+cypress/screenshots
+cypress/screenshots-test
+cypress/video-test

@@ -10,6 +10,8 @@ import cls from './SettingsButton.module.scss';
 import { useSelector } from 'react-redux';
 import { getIsOnlyOneShelfLeftInCupboard } from '../../model/selectors/getCupboardShelfList';
 import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
+import SettingsButtonIcon from '@/shared/assets/new/settingsIcon.svg';
+import { Icon } from '@/shared/ui/Icon';
 
 export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 	const { t } = useTranslation()
@@ -83,14 +85,17 @@ export const SettingButton = memo(({ shelfId }: { shelfId: string }) => {
 		<>
 			<Dropdown
 				items={settingItems}
+				className={cls.dropdown}
 				trigger={
-					<Button
-						fontWeight='300'
+					<Icon
+						className={cls.icon}
+						clickable
+						onClick={() => { }}
+						withFill={false}
+						Svg={SettingsButtonIcon}
 						data-testid={TEST_BUTTONS_IDS.shelf.shelfSettingsButton}
-					// className={cls.button}
-					>
-						{t('settingsItems.settings')}
-					</Button>
+					/>
+
 				}
 			/>
 		</>

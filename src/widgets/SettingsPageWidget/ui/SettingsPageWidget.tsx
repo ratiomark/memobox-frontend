@@ -38,8 +38,8 @@ export const SettingsPageWidget = (props: SettingsPageWidgetProps) => {
 		if (data) {
 			console.log('data', data)
 			dispatch(userActions.setSettings(data))
-			if (!data.timeSleep.dayByDayTimeSleepData) {
-				const d = data.timeSleep.generalTimeSleepData
+			if (!data.timeSleep.dayByDaySleepPeriods) {
+				const d = data.timeSleep.generalSleepPeriod
 				dispatch(userActions.setDayByDayTimeSleepDataInitial(d))
 			}
 		}

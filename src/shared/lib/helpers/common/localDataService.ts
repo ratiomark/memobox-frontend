@@ -7,6 +7,7 @@ import {
 	KEY_COMMON_SHELF_IS_COLLAPSED,
 	KEY_SHELVES_LOCAL_STORAGE,
 	KEY_THEME_LOCAL_STORAGE,
+	KEY_TOOLTIP_ENABLED_LOCAL_STORAGE,
 	KEY_USER_ID_LOCAL_STORAGE,
 	KEY_USER_REFRESH_TOKEN_LOCAL_STORAGE,
 	KEY_USER_TOKEN_LOCAL_STORAGE,
@@ -78,6 +79,8 @@ interface ILocalDataService {
 	getUserId(): string
 	setLanguage(language: string): void
 	getLanguage(): string
+	setTooltipIsEnabled(state: boolean): void
+	getTooltipIsEnabled(): boolean
 	logout(): void
 	// 
 	setSortOrderViewPage(sortOrder: SortOrderType): void
@@ -153,6 +156,12 @@ class LocalDataService implements ILocalDataService {
 	}
 	getLanguage(): string {
 		return this.getData(KEY_APP_LANG_LOCAL_STORAGE) ?? 'en'
+	}
+	setTooltipIsEnabled(state: boolean) {
+		this.saveData(KEY_TOOLTIP_ENABLED_LOCAL_STORAGE, state)
+	}
+	getTooltipIsEnabled() {
+		return this.getData(KEY_TOOLTIP_ENABLED_LOCAL_STORAGE) ?? true
 	}
 	logout() {
 		this.removeData(KEY_USER_TOKEN_LOCAL_STORAGE)

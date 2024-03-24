@@ -14,6 +14,7 @@ import MultiSelectIcon from '@/shared/assets/icons/multiSelect.svg'
 import cls from './ShelvesListViewWidget.module.scss';
 import { AnimateSkeletonLoader } from '@/shared/ui/Animations';
 import { ShelvesListViewWidgetSkeleton } from '@/shared/ui/Skeleton';
+import { TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 export const ShelvesListViewWidget = memo(() => {
 	const { t } = useTranslation()
@@ -34,12 +35,13 @@ export const ShelvesListViewWidget = memo(() => {
 
 	const items = useMemo(() => {
 		if (isLoading) return
-		const items = [{ value: 'all', content: t('common shelf name'), onChange: () => onChangeShelf('all') }]
+		const items = [{ value: 'all', content: t('common shelf name'), onChange: () => onChangeShelf('all') , 'data-testid': TEST_ENTITY_NAMES.commonShelf}]
 		shelfItemsFromSelector.forEach(({ value, content }) => {
 			items.push({
 				value,
 				content,
 				onChange: () => onChangeShelf(value),
+				'data-testid': TEST_ENTITY_NAMES.shelfItemViewPage
 			})
 		})
 		return items

@@ -5,6 +5,8 @@ import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 export const getJsonSavedData = (state: StateSchema) => state.user.jsonSavedData
 export const getUserShelfNamesList = (state: StateSchema) => state.user.jsonSavedData?.shelfNamesList
 export const getUserSavedDataCommonShelfCollapsed = (state: StateSchema) => state.user.jsonSavedData?.commonShelfCollapsed ?? localDataService.getCommonShelfCollapsed()
+export const getUserSavedDataCupboard = (state: StateSchema) => state.user.jsonSavedData?.cupboard ?? {}
+export const getUserSavedDataIsDelimiterEnabled = (state: StateSchema) => state.user.jsonSavedData?.cupboard?.isDelimiterEnabled ?? true
 // export const getJsonSavedData = (state: StateSchema) => state.user.authData?.jsonSavedData
 // export const getUserShelfNamesList = (state: StateSchema) => state.user.authData?.jsonSavedData?.shelfNamesList
 // export const getUserSavedDataCommonShelfCollapsed = (state: StateSchema) => state.user.authData?.jsonSavedData?.commonShelfCollapsed

@@ -29,3 +29,9 @@ export interface BoxCoordinates {
 export type BoxSchema =
 	| NewCardsBox
 	| RegularAndLearntCardsBox
+
+export interface ShelfUpdateBoxListItem {
+	timing: TimingBlock
+	id: string
+	index: number
+}

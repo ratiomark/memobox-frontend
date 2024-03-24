@@ -1,3 +1,4 @@
+
 export { getUserSettingsAwaitingResponse } from './model/selectors/getUserSettings';
 
 export type { NotificationSettings, TimeSleepAtomicDataObject } from './model/types/userSettings';
@@ -6,7 +7,6 @@ export { updateNotificationSettingsThunk } from './model/services/userSettings/u
 export { updateJsonSavedDataThunk } from './model/services/updateJsonSavedData';
 
 export { updateMissedTrainingThunk } from './model/services/userSettings/updateMissedTrainingThunk';
-
 export { logoutThunk } from './model/services/logoutThunk';
 
 export { daysOfWeek } from './model/const/daysOfWeek';
@@ -66,7 +66,9 @@ export {
 	getUserSavedDataCommonShelfCollapsed,
 	getUserSavedDataViewPageColumns,
 	getUserSavedDataViewPageRowsCount,
+	getUserSavedDataIsDelimiterEnabled,
 } from './model/selectors/getJsonSavedData';
+
 export { initAuthData } from './model/services/initAuthDataThunk';
 
 export { saveJsonSettings } from './model/services/saveJsonSettings';

@@ -1,0 +1,46 @@
+.header {
+  background: #141e30;  /* fallback for old browsers */
+  background: linear-gradient(to right, #243b55, #141e30);  /* Chrome 10-25, Safari 5.1-6 */
+  position: sticky;
+  top: 0;
+  z-index: var(--header-index);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  grid-area: header;
+}
+
+.navigation {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.items {
+  display: flex;
+
+  // width: min(100%, 1200px);
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0 16px;
+  height: 100%;
+}
+
+.additional {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 6px 28px 6px 0;
+  height: 100%;
+}
+
+.additionalMini {
+  display: flex;
+  gap: 5px;
+}

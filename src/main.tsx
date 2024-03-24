@@ -9,6 +9,7 @@ import { ToastProvider } from '@radix-ui/react-toast'
 import '@/shared/config/i18n/i18n'
 import './app/styles/index.scss'
 import { MyToastsRTK } from './shared/ui/Toast/ui/MyToastRTKLazy'
+import { CustomTooltipProvider } from './shared/ui/Tooltip/TooltipProvider'
 
 // import posthog from 'posthog-js'
 // posthog.init('phc_n1lURzDBW3hd64MQIjv1eFphRgcpOK5rsNwpJ6Kg3ou', { api_host: 'https://us.posthog.com' })
@@ -37,8 +38,10 @@ root.render(
 				<ToastProvider duration={5000} >
 					<ThemeProvider>
 						<LazyMotion features={domAnimation}>
-							<App />
-							<MyToastsRTK />
+							<CustomTooltipProvider>
+								<App />
+								<MyToastsRTK />
+							</CustomTooltipProvider>
 						</LazyMotion>
 					</ThemeProvider>
 				</ToastProvider>

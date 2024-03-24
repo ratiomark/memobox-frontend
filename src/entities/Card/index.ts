@@ -1,5 +1,5 @@
-export { getCardMainData } from './model/helpers/getCardMainData';
-export { useGetAllCardsQuery } from './model/api/cardApi';
+export { getCardMainData } from './model/helpers/getCardMainData'
+export { useGetAllCardsQuery } from './model/api/cardApi'
 
 export {
 	getAllCards,
@@ -8,12 +8,21 @@ export {
 	useUpdateCardsMutation,
 	rtkApiUpdateCard,
 	rtkApiMoveCards,
-	rtkApiDeleteCard,
-	rtkApiDeleteCards,
+	rtkApiDeleteCardSoft,
+	rtkApiDeleteCardsSoft,
+	rtkApiDeleteCardFinal,
 	useGetTrainingCardsQuery,
 	rtkApiSendTrainingAnswers,
-	rtkApiDropCards
-} from './model/api/cardApi';
+	rtkApiDropCards,
+	rtkApiRestoreCardById,
+	rtkApiRestoreSeveralCards,
+} from './model/api/cardApi'
 
-export type { CardSchema, CardSchemaExtended, FetchCardsThunkResponse } from './model/types/CardSchema';
-export type { CardMainData } from './model/types/CardMainData';
+export type {
+	CardSchema,
+	CardSchemaExtended,
+	FetchCardsThunkResponse,
+	AnswerType,
+	CardSchemaBase
+} from './model/types/CardSchema'
+export type { CardMainData } from './model/types/CardMainData'

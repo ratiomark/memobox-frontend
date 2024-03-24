@@ -28,6 +28,14 @@ const initialState: TrashPageInitializerSchema = {
 		boxType: 'new',
 		isOpen: false
 	},
+	restoreCardModal: {
+		shelfId: '',
+		shelfTitle: '',
+		boxId: '',
+		isOpen: false,
+		cardId: '',
+		cardIds: [],
+	},
 
 }
 
@@ -97,6 +105,35 @@ const trashPageSlice = createSlice({
 		setIsRestoreNewOrLearnModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.restoreNewOrLearntModal.isOpen = action.payload
 		},
+		// restoreCardModal
+		setIsRestoreCardModalOpen: (state, action: PayloadAction<boolean>) => {
+			state.restoreCardModal.isOpen = action.payload
+		},
+		setRestoreCardModalShelfId: (state, action: PayloadAction<string>) => {
+			state.restoreCardModal.shelfId = action.payload
+		},
+		setRestoreCardModalBoxId: (state, action: PayloadAction<string>) => {
+			state.restoreCardModal.boxId = action.payload
+		},
+		setRestoreCardModalCardId: (state, action: PayloadAction<string>) => {
+			state.restoreCardModal.cardId = action.payload
+		},
+		setRestoreCardModalShelfTitle: (state, action: PayloadAction<string>) => {
+			state.restoreCardModal.shelfTitle = action.payload
+		},
+		// setrestoreCardModalShelfTitle: (state, action: PayloadAction<string>) => {
+		// 	state.restoreCardModal.shelfTitle = action.payload
+		// },
+		// setRestoreNewOrLearnModalData: (state, action: PayloadAction<Omit<RestoreNewOrLearnModal, 'isOpen'>>) => {
+		// 	const { boxId, boxType, shelfId, shelfTitle } = action.payload
+		// 	state.restoreNewOrLearntModal.boxId = boxId
+		// 	state.restoreNewOrLearntModal.shelfId = shelfId
+		// 	state.restoreNewOrLearntModal.shelfTitle = shelfTitle
+		// 	state.restoreNewOrLearntModal.boxType = boxType
+		// },
+		// setIsRestoreNewOrLearnModalOpen: (state, action: PayloadAction<boolean>) => {
+		// 	state.restoreNewOrLearntModal.isOpen = action.payload
+		// },
 		// setActiveShelfId: (state, action: PayloadAction<string>) => {
 		// 	const shelfId = action.payload
 		// 	state.shelfId = shelfId

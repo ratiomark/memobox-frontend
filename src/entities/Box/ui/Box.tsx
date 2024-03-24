@@ -23,6 +23,7 @@ import getBoxTimingStringRepresentation from '../utils/getTiming';
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { useSelector } from 'react-redux';
+import { TEST_BUTTONS_IDS, TEST_ENTITY_NAMES } from '@/shared/const/testConsts';
 
 export interface BoxPropsBase {
 	className?: string
@@ -73,7 +74,6 @@ export const Box = (props: BoxPropsBase) => {
 	const navigate = useNavigate()
 
 	const onBoxViewClickHandle = useCallback(() => {
-
 		let boxSpecialId: string | number;
 		if (specialType === 'none') {
 			boxSpecialId = boxItem.index
@@ -84,6 +84,15 @@ export const Box = (props: BoxPropsBase) => {
 		}
 		onBoxViewClick(shelfId, boxSpecialId)
 	}, [onBoxViewClick, shelfId, boxItem.index, specialType])
+
+	let boxDataTestId: string;
+	if (specialType === 'none') {
+		boxDataTestId = TEST_ENTITY_NAMES.boxItem
+	} else if (specialType === 'learnt') {
+		boxDataTestId = TEST_ENTITY_NAMES.boxes.learnt
+	} else {
+		boxDataTestId = TEST_ENTITY_NAMES.boxes.new
+	}
 
 	// const onAddNewCardHandle = useCallback(() => {
 	// 	onAddNewCard(shelfId, boxItem.id)
@@ -169,7 +178,10 @@ export const Box = (props: BoxPropsBase) => {
 		)
 
 		return (
-			<li className={clsx(cls.Box, [className])} >
+			<li
+				className={clsx(cls.Box, [className])}
+				data-testid={boxDataTestId}
+			>
 				<div className={cls.boxInnerWrapper} >
 					{title}
 					{completeSmallDataLabels}
@@ -184,6 +196,7 @@ export const Box = (props: BoxPropsBase) => {
 					onClick={startTraining}
 					variant='filledBox'
 					disabled={isButtonDisabled}
+					data-testid={TEST_BUTTONS_IDS.shelf.trainButton}
 				>
 					{t('train')}
 				</Button>
@@ -194,7 +207,10 @@ export const Box = (props: BoxPropsBase) => {
 	const isButtonDisabled = data.all < 1 || isRefetching
 	const title = <Heading as='h5' className={cls.title} title={t('new cards')} />
 	return (
-		<li className={clsx(cls.Box, [className])} >
+		<li
+			className={clsx(cls.Box, [className])}
+			data-testid={boxDataTestId}
+		>
 			<div className={cls.boxInnerWrapper} >
 				{title}
 				<SmallDataLabel
@@ -230,6 +246,7 @@ export const Box = (props: BoxPropsBase) => {
 				variant='filledBox'
 				disabled={isButtonDisabled}
 				className={cls.trainButton}
+				data-testid={TEST_BUTTONS_IDS.shelf.trainButton}
 			>
 				{t('train')}
 			</Button>
