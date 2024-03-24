@@ -17,28 +17,8 @@ import shelfCls from '@/entities/Shelf/ui/Shelf.module.scss';
 import { AnimateSkeletonLoader, Collapsible } from '@/shared/ui/Animations';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
-import { CommonShelfBackendResponse } from '@/entities/Cupboard';
 
-
-
-// interface CommonShelfProps extends CommonShelfBackendResponse {
-interface CommonShelfProps {
-	data?: {
-		all: number
-		train: number
-		wait: number
-	}
-	isLoading: boolean
-	className?: string
-}
-
-// export const CommonShelf = memo((props: CommonShelfProps) => {
 export const CommonShelf = memo(() => {
-	// const {
-	// 	className,
-	// 	data,
-	// 	isLoading,
-	// } = props
 	const data = useSelector(getCupboardData)
 	const isCupboardLoading = useSelector(getIsCupboardLoading)
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)

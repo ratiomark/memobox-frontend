@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import cls from './CommonShelfButtons.module.scss';
+import clsShelfButtons from '../ShelfButtons/ShelfButtons.module.scss'
 
 import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { userActions } from '@/entities/User';
@@ -71,7 +71,7 @@ export const CommonShelfButtons = () => {
 	const { t } = useTranslation('translation')
 
 	return (
-		<div className={cls.ShelfButtons}>
+		<div className={clsShelfButtons.ShelfButtons}>
 			{/* <Button
 				className={cls.button}
 				onClick={onViewClick}
@@ -98,7 +98,7 @@ export const CommonShelfButtons = () => {
 				}
 				trigger={
 					<Button
-						className={cls.trainButton}
+						className={clsShelfButtons.trainButton}
 						fontWeight='300'
 						variant='filled'
 						// borderRadius='borderRadius_max'
@@ -122,7 +122,7 @@ export const CommonShelfButtons = () => {
 			/> */}
 			<Icon
 				className={
-					clsx(cls.arrow, !commonShelfCollapsed ? cls.rotateArrow : '')}
+					clsx(clsShelfButtons.arrow, !commonShelfCollapsed ? clsShelfButtons.rotateArrow : '')}
 				clickable
 				type='hint'
 				Svg={ArrowBottomIcon}
