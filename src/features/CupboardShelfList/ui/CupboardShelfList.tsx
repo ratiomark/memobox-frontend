@@ -99,6 +99,14 @@ export const CupboardShelfList = () => {
 						cssProperty='--accent'
 					/> */}
 					<UiVariableCustomizer
+						entityName='padding button cupboard action top'
+						cssProperty='--padding-button-cupboard-action-top'
+					/>
+					<UiVariableCustomizer
+						entityName='padding button cupboard action side'
+						cssProperty='--padding-button-cupboard-action-side'
+					/>
+					<UiVariableCustomizer
 						entityName='Shelf padding left'
 						cssProperty='--padding-shelf-right'
 						valueListLength={12}

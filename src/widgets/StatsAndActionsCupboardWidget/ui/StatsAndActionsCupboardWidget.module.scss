@@ -49,6 +49,12 @@
   margin-left: var(--padding-additional-from-collapse);
 }
 
+.actionButton {
+  font-size: 14px;
+  line-height: 20px;
+  padding: var(--padding-button-cupboard-action-top) var(--padding-button-cupboard-action-side) var(--padding-button-cupboard-action-top) var(--padding-button-cupboard-action-side);
+}
+
 .trainButton {
   margin-left: var(--padding-additional-from-train-button);
 }

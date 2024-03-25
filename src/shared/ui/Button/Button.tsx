@@ -22,6 +22,7 @@ export type ButtonColor =
 
 export type ButtonSize =
 	| 'size_s'
+	| 'size_14'
 	| 'size_m'
 	| 'size_l'
 	| 'size_xl'

@@ -67,6 +67,10 @@
   padding: var(--padding-button-main);
 }
 
+// .paddingCupboardActions {
+//   padding: 12px 16px;
+// }
+
 .paddingWithBothAddon,
 .paddingWithRightAddon {
   padding: var(--padding-3-top-16-side);
@@ -328,6 +332,11 @@
 
 .size_s {
   font: var(--font-s);
+}
+
+.size_14 {
+  font-size: var(--font-size-pre-m-button);
+  line-height: var(--font-line-s);
 }
 
 .size_m {

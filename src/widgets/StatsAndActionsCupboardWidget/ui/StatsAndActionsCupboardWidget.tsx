@@ -103,10 +103,11 @@ export const StatsAndActionsCupboardWidget = () => {
 					</Button> */}
 					<Button
 						// borderRadius='borderRadius_max'
+						className={clsx(cls.actionButton)}
 						disabled={createNewShelfRequestStatus === 'pending'}
 						onClick={onAddNewShelfClick}
 						data-testid={TEST_BUTTONS_IDS.createNewShelfOpen}
-
+						// size='size_14'
 						name='new shelf'
 					>
 						{t('new shelf')}
@@ -124,11 +125,12 @@ export const StatsAndActionsCupboardWidget = () => {
 						trigger={
 							<Button
 								// borderRadius='borderRadius_max'
-								className={cls.trainButton}
+								className={clsx(cls.actionButton, cls.trainButton)}
 								onClick={onAddNewCardClick}
 								data-button-type={dataAttrButtonTypeAddCardButtonGeneral}
 								data-testid={TEST_BUTTONS_IDS.createNewCardOpen}
 								name='new card'
+							// size='size_14'
 							>
 								{t('add card with hot key')}
 							</Button>}

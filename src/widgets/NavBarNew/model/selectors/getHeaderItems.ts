@@ -68,6 +68,11 @@ export const getNavBarItems = createSelector(
 				Icon: AboutIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateLogin
 			},
+			{
+				path: obtainRouteLogin(),
+				text: 'Тёмная тема',
+				Icon: AboutIcon,
+			},
 		]
 		// ссылки только для авторизованных пользователей
 		// if (userData) {
