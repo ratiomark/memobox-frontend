@@ -12,11 +12,13 @@
   color: var(--text-header);
 
   // margin-left: 10px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .active {
-  background-color: var(--accent);
+  // border: 1px solid var(--accent);
+
+  background-color: var(--accent-rgb-2);
 
   // border-bottom: 2px solid var(--accent);
 }
