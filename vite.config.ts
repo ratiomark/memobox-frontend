@@ -7,6 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 // https://vitejs.dev/config/
 // https://stackoverflow.com/questions/73273017/when-i-run-vite-preview-i-get-the-bundle-size-of-300kb-and-when-i-run-vite-build
 
+const versionId = new Date().toISOString();
 
 export default defineConfig({
 	// base: 'https://memobox.tech/',
@@ -18,6 +19,7 @@ export default defineConfig({
 			workbox: {
 				maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
 				sourcemap: true,
+				cacheId: versionId,
 			},
 			// devOptions: {
 			// 	enabled: false
