@@ -32,6 +32,7 @@ import { VStack } from '@/shared/ui/Stack';
 import { MyText } from '@/shared/ui/Typography';
 import ViewButtonIcon from '@/shared/assets/new/viewIcon.svg';
 import ArrowDownIcon from '@/shared/assets/new/arrowDownIcon.svg'
+import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
 export const CommonShelfButtons = () => {
 	const isRefetching = useSelector(getIsCupboardRefetching)
 	const isAnyCardsToTrainExist = useSelector(getIsAnyCardsToTrain)
@@ -109,18 +110,18 @@ export const CommonShelfButtons = () => {
 						{t('train')}
 					</Button>}
 			/>
-			{/* <Icon
+			<Icon
 				className={
-					clsx(cls.arrow, !commonShelfCollapsed ? cls.rotateArrow : '')}
+					clsx(clsShelfButtons.arrow, !commonShelfCollapsed ? clsShelfButtons.rotateArrow : '')}
 				clickable
 				type='hint'
 				width={24}
 				height={24}
 				Svg={ArrowDownIcon}
 				onClick={onCollapseClickHandle}
-			// data-testid={TEST_BUTTONS_IDS.shelf.collapseButton}
-			/> */}
-			<Icon
+				name='show/hide'
+			/>
+			{/* <Icon
 				className={
 					clsx(clsShelfButtons.arrow, !commonShelfCollapsed ? clsShelfButtons.rotateArrow : '')}
 				clickable
@@ -128,7 +129,7 @@ export const CommonShelfButtons = () => {
 				Svg={ArrowBottomIcon}
 				onClick={onCollapseClickHandle}
 				name='show/hide'
-			/>
+			/> */}
 		</div>
 	)
 }

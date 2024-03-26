@@ -126,7 +126,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 							delay={200}
 							trigger={
 								<button
-									className={cls.addCardButton} 
+									className={cls.addCardButton}
 									onClick={onAddNewCardHandle}
 									data-button-type={dataAttrButtonTypeAddCard}
 									data-testid={TEST_BUTTONS_IDS.shelf.addCardButton}
@@ -138,9 +138,9 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 										// clickable
 										withFill={false}
 										Svg={AddCardButtonIcon}
-										// onClick={onAddNewCardHandle}
-										// data-button-type={dataAttrButtonTypeAddCard}
-										// data-testid={TEST_BUTTONS_IDS.shelf.addCardButton}
+									// onClick={onAddNewCardHandle}
+									// data-button-type={dataAttrButtonTypeAddCard}
+									// data-testid={TEST_BUTTONS_IDS.shelf.addCardButton}
 									/>
 								</button>
 							}
@@ -193,7 +193,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 						</Button>}
 					/>
 
-					{/* <Icon
+					<Icon
 						className={
 							clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
 						clickable
@@ -203,8 +203,10 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 						Svg={ArrowDownIcon}
 						onClick={onCollapseClickHandleDebounced}
 						data-testid={TEST_BUTTONS_IDS.shelf.collapseButton}
-					/> */}
-					<Icon
+					/>
+					{/* <Icon
+						width={24}
+						height={24}
 						className={
 							clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
 						clickable
@@ -212,7 +214,21 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 						Svg={ArrowBottomIcon}
 						onClick={onCollapseClickHandleDebounced}
 						data-testid={TEST_BUTTONS_IDS.shelf.collapseButton}
-					/>
+					/> */}
+					{/* <div style={{ width: 32, height: 32, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
+						<Icon
+							width={24}
+							height={24}
+							className={
+								clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
+							clickable
+							type='hint'
+							Svg={ArrowBottomIcon}
+							onClick={onCollapseClickHandleDebounced}
+							data-testid={TEST_BUTTONS_IDS.shelf.collapseButton}
+						/>
+					</div> */}
 				</div>
 			</div>
 			{/* <MySimpleToast status='error' messageError='test' /> */}
