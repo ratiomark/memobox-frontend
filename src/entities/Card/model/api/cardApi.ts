@@ -11,6 +11,7 @@ import {
 // eslint-disable-next-line custom-fsd-checker-plugin/layer-import-sequence
 import { TAG_CUPBOARD_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags';
 import { PrismaBatchPayload, ShelfBoxCardIdObject, ShelfBoxIdObject } from '@/shared/types/ApiTypesCommon';
+import { getCurrentTimeZone } from '@/shared/lib/helpers/common/getCurrentTimeZone';
 
 
 interface UpdateCardsRequestBase {
@@ -182,7 +183,7 @@ export const cardApi = rtkApi.injectEndpoints({
 				method: 'POST',
 				body: {
 					responses: userResponses,
-					timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+					timezone: getCurrentTimeZone(),
 				}
 			}),
 		}),

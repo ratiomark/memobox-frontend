@@ -5,6 +5,7 @@ import { NotificationSettings, TimeSleepSettings, UserSettings } from '../types/
 import { JsonSavedData } from '../types/JsonSavedData'
 import { MissedTrainingValue } from '../types/userSettings'
 import { TimingBlock } from '@/shared/types/DataBlock'
+import { getCurrentTimeZone } from '@/shared/lib/helpers/common/getCurrentTimeZone'
 
 
 interface SetJsonSettings {
@@ -58,6 +59,7 @@ const userApi = rtkApi.injectEndpoints({
 				body: {
 					...arg,
 					firstName: arg.name,
+					timezone: getCurrentTimeZone(),
 				}
 			})
 		}),
