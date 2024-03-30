@@ -39,7 +39,7 @@ export const NavBar = memo(() => {
 				<ul className={cls.items}>
 					{NavBarItemsListRendered}
 				</ul>
-				<HeaderAdditionalBlock />
+				{/* <HeaderAdditionalBlock /> */}
 			</nav>
 			<WriteToUsModal />
 		</>
