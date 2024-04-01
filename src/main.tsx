@@ -10,7 +10,72 @@ import '@/shared/config/i18n/i18n'
 import './app/styles/index.scss'
 import { MyToastsRTK } from './shared/ui/Toast/ui/MyToastRTKLazy'
 import { CustomTooltipProvider } from './shared/ui/Tooltip/TooltipProvider'
+import { registerSW } from 'virtual:pwa-register';
 
+const updateSW = registerSW({
+	onNeedRefresh() {
+		// Показать сообщение о доступном обновлении
+		updateSW(true);
+		// if (confirm('Доступна новая версия. Обновить страницу?')) {
+		// }
+	},
+	onOfflineReady() {
+		// Показать сообщение о готовности работать офлайн
+	},
+	onRegisteredSW(swScriptUrl, r) {
+		console.log('Service Worker зарегистрирован:', swScriptUrl);
+		if (r) {
+			setInterval(() => {
+				r.update();
+			}, 20000 /* интервал проверки обновлений, например, 20 секунд */);
+
+			navigator.serviceWorker.addEventListener('message', (event) => {
+				if (event.data && event.data.type === 'SW_UPDATED') {
+					// if (confirm('Доступно обновление. Перезагрузить страницу?')) {
+					window.location.reload();
+					// }
+				}
+			});
+		}
+	},
+	onRegisterError(error) {
+		console.error('Ошибка регистрации Service Worker:', error);
+	},
+});
+// const updateSW = registerSW({
+// 	onNeedRefresh() {
+// 		updateSW(true);
+// 		// Показать сообщение о доступном обновлении
+// 		// и предложить пользователю обновить страницу
+// 	},
+// 	onOfflineReady() {
+// 		// Показать сообщение о готовности работать офлайн
+// 	},
+// 	onRegisteredSW(swScriptUrl, registration) {
+// 		console.log('Service Worker зарегистрирован:', swScriptUrl);
+// 		registration && setInterval(() => {
+// 			registration.update();
+// 		}, 20000 /* интервал проверки обновлений, например, 20 секунд */);
+// 	},
+// 	// onRegistered(swScriptUrl, r) {
+// 	// 	console.log('Service Worker зарегистрирован:', swScriptUrl);
+// 	// 	r && setInterval(() => {
+// 	// 		r.update();
+// 	// 	}, 20000 /* интервал проверки обновлений, например, 20 секунд */);
+// 	// },
+// 	onRegisterError(error) {
+// 		console.error('Ошибка регистрации Service Worker:', error);
+// 	},
+// });
+
+// let refreshing = false;
+
+// navigator.serviceWorker.addEventListener('controllerchange', () => {
+// 	if (!refreshing) {
+// 		window.location.reload();
+// 		refreshing = true;
+// 	}
+// });
 // import posthog from 'posthog-js'
 // posthog.init('phc_n1lURzDBW3hd64MQIjv1eFphRgcpOK5rsNwpJ6Kg3ou', { api_host: 'https://us.posthog.com' })
 
