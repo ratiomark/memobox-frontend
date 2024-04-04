@@ -1,7 +1,7 @@
 import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
 // import { clientsClaim } from 'workbox-core';
 // import { NavigationRoute, registerRoute } from 'workbox-routing';
-
+import image from '@/shared/assets/images/emailConfirmed.png';
 declare let self: ServiceWorkerGlobalScope;
 
 // self.__WB_MANIFEST
@@ -41,15 +41,56 @@ self.addEventListener('fetch', function (event) {
 
 
 self.addEventListener('push', event => {
-	const data = event?.data?.json();
-	const { title, body, icon } = data;
 
-	const options = {
-		body,
-		icon, // Укажите путь к иконке
-	};
+	try {
 
-	event.waitUntil(self.registration.showNotification(title, options));
+		console.log('Service Worker: Push...', event);
+		console.log('Service Worker: Push...', event.data);
+		const data = event?.data?.json();
+		console.log('Service Worker: Push...', data);
+		const { title = 'Training time 📖', body = 'Let\'s ', icon } = data;
+
+		const options = {
+			body,
+			icon: image,
+			data: {
+				notificationId: '123',
+				url: '/training/all/all'
+			}
+			// icon: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Types_of_Artificial_Intelligence.jpg'
+		};
+
+		// event.waitUntil(self.registration.showNotification(title, options));
+		// const options = {
+		// 	body,
+		// 	icon: `path/to/${icon}`, // Укажите правильный путь к иконке
+		// };
+
+		event.waitUntil(self.registration.showNotification(title, options));
+	} catch (error) {
+		console.error('Service Worker: Error in push event handler', error);
+	}
+});
+
+self.addEventListener('notificationclick', event => {
+	event.notification.close();
+	console.log('Service Worker: Notification click...', event);
+	console.log('Service Worker: Notification click...', event.notification);
+	console.log('Service Worker: Notification click...', event.notification.data);
+	const url = event.notification.data.url;
+	event.waitUntil(
+		self.clients.matchAll({ type: 'window' }).then(windowClients => {
+			for (let i = 0; i < windowClients.length; i++) {
+				const client = windowClients[i];
+				if (client.url === url && 'focus' in client) {
+					return client.focus();
+				}
+			}
+			if (self.clients.openWindow) {
+				return self.clients.openWindow(url);
+			}
+		})
+	);
 });
 // // Прекэширование ресурсов
 // precacheAndRoute(self.__WB_MANIFEST);
