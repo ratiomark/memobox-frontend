@@ -6,7 +6,7 @@ import {
 	getLoginUserName,
 } from '../../Model/selectors/getLoginState/getLoginState'
 import { loginActions } from '../../Model/slice/loginSlice'
-import { memo, useCallback, useState } from 'react'
+import { FormEvent, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import cls from './LoginForm.module.scss'
@@ -55,9 +55,13 @@ const RegisterForm = memo(() => {
 		dispatch(loginActions.setIsLoginProcess(true))
 	}, [dispatch])
 
-	const onClickRegisterButton = useCallback(async () => {
+	const onClickRegisterButton = (e: void | FormEvent<HTMLFormElement>) => {
+		if (e) e.preventDefault()
 		dispatch(registerByEmailThunk({ email, password, name: firstName }))
-	}, [dispatch, email, password, firstName])
+	}
+	// const onClickRegisterButton = useCallback(() => {
+	// 	// dispatch(registerByEmailThunk({ email, password, name: firstName }))
+	// }, [dispatch, email, password, firstName])
 
 	// const onMeClick = useCallback(async () => {
 	// 	dispatch(registerByEmailThunk({ email, password }))
@@ -71,7 +75,7 @@ const RegisterForm = memo(() => {
 	return (
 		<div className={cls.wrapper} >
 
-			<form className={clsx(cls.LoginForm)}>
+			<form className={clsx(cls.LoginForm)} onSubmit={e => onClickRegisterButton(e)}>
 				{/* <MyText align='center' text={t('Регистрация')} /> */}
 				{/* <MyText text={t('regiset form in modal')} /> */}
 
@@ -121,7 +125,7 @@ const RegisterForm = memo(() => {
 						variant='filled'
 						size='size_m'
 						className={cls.loginBtn}
-						onClick={onClickRegisterButton}
+						onClick={() => onClickRegisterButton()}
 						disabled={isLoading}
 						data-testid={TEST_BUTTONS_IDS.registerButton}
 					>

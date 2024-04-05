@@ -90,8 +90,11 @@
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vite-bundle-visualizer": "^0.10.0",
-    "vite-plugin-pwa": "^0.17.4",
-    "vite-plugin-svgr": "^3.2.0"
+    "vite-plugin-pwa": "^0.19.7",
+    "vite-plugin-svgr": "^3.2.0",
+    "workbox-core": "^7.0.0",
+    "workbox-precaching": "^7.0.0",
+    "workbox-window": "^7.0.0"
   },
   "engines": {
     "node": ">=16.0.0",

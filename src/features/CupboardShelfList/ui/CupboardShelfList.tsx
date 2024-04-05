@@ -37,6 +37,7 @@ import { UiColorCustomizer, UiComponentEnabler, UiVariableCustomizer } from '@/s
 import { MyShelvesDelimiter } from './MyShelvesDelimiter/MyShelvesDelimiter';
 import { getUserSavedDataIsDelimiterEnabled, userActions } from '@/entities/User';
 import { getUserSavedDataCupboard } from '@/entities/User/model/selectors/getJsonSavedData';
+import { Button } from '@/shared/ui/Button';
 
 
 const DelimiterController = () => {
@@ -55,11 +56,7 @@ export const CupboardShelfList = () => {
 	// const cupboardError = useSelector(getCupboardError)
 	useCupboardButtonsSizes()
 
-	// useEffect(() => {
-	// 	return () => {
-	// 		dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
-	// 	}
-	// }, [dispatch])
+
 
 
 	return (
@@ -70,6 +67,7 @@ export const CupboardShelfList = () => {
 			>
 
 				<CommonShelf />
+
 				<MyShelvesDelimiter />
 				<ShelvesRendered />
 				<div

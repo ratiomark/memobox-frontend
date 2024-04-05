@@ -2,12 +2,12 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 import visualizer from 'rollup-plugin-visualizer'
-import { VitePWA } from 'vite-plugin-pwa';
+import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa';
 // import path from 'path'
 // https://vitejs.dev/config/
 // https://stackoverflow.com/questions/73273017/when-i-run-vite-preview-i-get-the-bundle-size-of-300kb-and-when-i-run-vite-build
-
-const versionId = new Date().toISOString();
+const versionId = '1234'
+// const versionId = new Date().toISOString();
 
 export default defineConfig({
 	// base: 'https://memobox.tech/',
@@ -15,15 +15,27 @@ export default defineConfig({
 		// visualizer(),
 		react(),
 		VitePWA({
+			minify: false,
 			registerType: 'autoUpdate',
+			strategies: 'injectManifest',
+			srcDir: 'src',
+			filename: 'sw-custom.ts',
+
+			injectManifest: {
+				minify: false,
+				sourcemap: true,
+				enableWorkboxModulesLogs: true,
+			},
 			workbox: {
 				maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
 				sourcemap: true,
 				cacheId: versionId,
+				swDest: 'dist/sw-custom.js',
 			},
-			// devOptions: {
-			// 	enabled: false
-			// },
+			devOptions: {
+				enabled: true,
+				type: 'module',
+			},
 			manifest: {
 				name: 'Memobox',
 				short_name: 'Memobox',
@@ -80,11 +92,12 @@ export default defineConfig({
 		]
 	},
 	build: {
-		sourcemap: 'inline',
+		// sourcemap: 'inline',
 		// sourcemap: 'hidden',
-		// sourcemap: true,
+		sourcemap: true,
 
 		rollupOptions: {
+
 			output: {
 				manualChunks(id) {
 					if (id.includes('/LexicalEditor/')) {
@@ -118,12 +131,14 @@ export default defineConfig({
 	define: {
 		__IS_DEV__: JSON.stringify(true),
 		// __API__: JSON.stringify('https://memobox-backend.onrender.com/api/v1'),
-		__API__: JSON.stringify('http://localhost:3000/api/v1'),
+		__API__: JSON.stringify('https://qlwh4kww-3000.uks1.devtunnels.ms/api/v1'),
+		// __API__: JSON.stringify('http://localhost:3000/api/v1'),
 		// __API__: JSON.stringify('http://localhost:8000'),
 		// NSA: укажи тут адрес сервера
 		// __API__BACK: JSON.stringify('http://localhost:3000'),
 		// __API__BACK: JSON.stringify('https://memobox-backend.onrender.com/api/v1'),
 		__API__BACK: JSON.stringify('https://memobox.tech/api/v1'),
-		__PROJECT__: JSON.stringify('frontend')
+		__PROJECT__: JSON.stringify('frontend'),
+		__VAPID_PUBLIC_KEY__: JSON.stringify('BN1AMPF6naRQmxIfr367bePCH_EM7o3q7bf61-CrYKWJJfqfpbUi5n30mFZCiGwggqI65Z4U96dDC7o61Zubric')
 	}
 })

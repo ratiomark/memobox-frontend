@@ -66,10 +66,8 @@ export const LoginScreen = () => {
 				}
 			</Button> */}
 			<Suspense fallback={<div>{t('zagruzka')} </div>}>
-				{isLoginProcess
-					? <LoginForm />
-					: <RegisterForm />
-				}
+				{isLoginProcess && <LoginForm />}
+				{!isLoginProcess && <RegisterForm />}
 			</Suspense>
 		</div>
 	)

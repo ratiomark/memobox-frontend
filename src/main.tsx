@@ -16,17 +16,16 @@ const updateSW = registerSW({
 	onNeedRefresh() {
 		// Показать сообщение о доступном обновлении
 		updateSW(true);
-		// if (confirm('Доступна новая версия. Обновить страницу?')) {
-		// }
+		// alert('нужен рефреш')
 	},
 	onOfflineReady() {
 		// Показать сообщение о готовности работать офлайн
 	},
-	onRegisteredSW(swScriptUrl, r) {
+	onRegisteredSW(swScriptUrl, ServiceWorkerRegistration) {
 		console.log('Service Worker зарегистрирован:', swScriptUrl);
-		if (r) {
+		if (ServiceWorkerRegistration) {
 			setInterval(() => {
-				r.update();
+				ServiceWorkerRegistration.update();
 			}, 20000 /* интервал проверки обновлений, например, 20 секунд */);
 
 			navigator.serviceWorker.addEventListener('message', (event) => {
@@ -57,10 +56,10 @@ const updateSW = registerSW({
 // 			registration.update();
 // 		}, 20000 /* интервал проверки обновлений, например, 20 секунд */);
 // 	},
-// 	// onRegistered(swScriptUrl, r) {
+// 	// onRegistered(swScriptUrl, ServiceWorkerRegistration ) {
 // 	// 	console.log('Service Worker зарегистрирован:', swScriptUrl);
-// 	// 	r && setInterval(() => {
-// 	// 		r.update();
+// 	// 	ServiceWorkerRegistration  && setInterval(() => {
+// 	// 		ServiceWorkerRegistration .update();
 // 	// 	}, 20000 /* интервал проверки обновлений, например, 20 секунд */);
 // 	// },
 // 	onRegisterError(error) {

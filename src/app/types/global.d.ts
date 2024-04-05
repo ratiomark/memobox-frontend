@@ -42,6 +42,7 @@ declare module '*.png' {
 declare const __IS_DEV__: boolean;
 declare const __API__: string;
 declare const __API__BACK: string;
+declare const __VAPID_PUBLIC_KEY__: string;
 declare const __PROJECT__: 'storybook' | 'jest' | 'frontend'
 
 type DeepPartial<T> = T extends object ? {

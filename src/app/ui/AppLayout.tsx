@@ -1,4 +1,5 @@
 import { useTheme } from '@/shared/context/useTheme';
+import { Loader } from '@/shared/ui/Loader/Loader';
 import { HeaderSkeleton } from '@/widgets/Header copy';
 import { NavBarSkeleton } from '@/widgets/NavBarNew';
 import { ToastViewport } from '@radix-ui/react-toast';
@@ -38,7 +39,9 @@ export const AppLayout = (props: AppLayoutProps) => {
 			<Suspense fallback={<NavBarSkeleton />}>
 				{navBar}
 			</Suspense>
-			{router}
+			<Suspense fallback={<Loader />}>
+				{router}
+			</Suspense>
 			<ToastViewport className='toastViewport' />
 		</div>
 	)

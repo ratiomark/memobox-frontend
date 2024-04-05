@@ -16,6 +16,7 @@ import { NotificationSettings as NotificationSettingsType } from '@/entities/Use
 import { getIsNotificationModalOpen } from '../../../model/selectors/getModals';
 import { settingsFeaturesActions } from '../../../model/slice/settingsFeaturesSlice';
 import { ManageEmailsModal } from '../ManageEmailsModal/ManageEmailsModal';
+import { subscribeToPushThunk } from '../../model/services/subscribeToPushThunk';
 
 interface NotificationSettingsProps {
 	className?: string
@@ -70,7 +71,94 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 	const [pushEnabled, setPushEnabled] = useState(mobilePushEnabled)
 
 	const onToggleEmailEnabled = () => setEmailEnabled(prev => !prev)
-	const onTogglePushEnabled = () => setPushEnabled(prev => !prev)
+
+	// const sub = () => {
+	// 	Notification.requestPermission().then((permission) => {
+	// 		if (permission === 'granted') {
+	// 			subscribeUserToPush();
+	// 		} else {
+	// 			console.log('Permission denied.');
+	// 		}
+	// 	});
+	// }
+
+	// async function unsubscribeFromPush() {
+	// 	const registration = await navigator.serviceWorker.ready;
+	// 	const subscription = await registration.pushManager.getSubscription();
+	// 	const api = import.meta.env.DEV
+	// 		? __API__
+	// 		: __API__BACK
+	// 	// Теперь отправьте объект подписки на ваш сервер
+	// 	if (!subscription) return
+	// 	await fetch(api + '/notifications/push/unsubscribe', {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify({ subscription }),
+	// 	});
+	// }
+
+
+	// async function subscribeUserToPush() {
+	// 	const swRegistration = await navigator.serviceWorker.ready; // Убедитесь, что SW зарегистрирован
+	// 	const VAPID_PUBLIC_KEY = 'BN1AMPF6naRQmxIfr367bePCH_EM7o3q7bf61-CrYKWJJfqfpbUi5n30mFZCiGwggqI65Z4U96dDC7o61Zubric'
+	// 	const subscription = await swRegistration.pushManager.subscribe({
+	// 		userVisibleOnly: true,
+	// 		applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+	// 	});
+	// 	const api = import.meta.env.DEV
+	// 		? __API__
+	// 		: __API__BACK
+	// 	// Теперь отправьте объект подписки на ваш сервер
+	// 	const userAgent = navigator.userAgent;
+	// 	let browserName = 'unknown';
+	// 	let osName = 'unknown';
+
+	// 	if (userAgent.match(/chrome|chromium|crios/i)) {
+	// 		browserName = 'chrome';
+	// 	} else if (userAgent.match(/firefox|fxios/i)) {
+	// 		browserName = 'firefox';
+	// 	} // Добавьте другие браузеры по необходимости
+	// 	console.log(userAgent)
+	// 	if (userAgent.match(/android/i)) {
+	// 		osName = 'android';
+	// 	} else if (userAgent.match(/iphone|ipad|ipod/i)) {
+	// 		osName = 'ios';
+	// 	} // Добавьте другие ОС по необходимости
+
+	// 	await fetch(api + '/notifications/push/subscribe', {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify({ subscription, browserName, osName }),
+	// 	});
+	// }
+
+	// // Вспомогательная функция для преобразования VAPID ключа из URL-safe base64 в Uint8Array
+	// function urlBase64ToUint8Array(base64String: string) {
+	// 	const padding = '='.repeat((4 - base64String.length % 4) % 4);
+	// 	const base64 = (base64String + padding)
+	// 		.replace(/\-/g, '+')
+	// 		.replace(/_/g, '/');
+
+	// 	const rawData = window.atob(base64);
+	// 	const outputArray = new Uint8Array(rawData.length);
+
+	// 	for (let i = 0; i < rawData.length; ++i) {
+	// 		outputArray[i] = rawData.charCodeAt(i);
+	// 	}
+	// 	return outputArray;
+	// }
+
+	const onTogglePushEnabled = () => {
+		dispatch(subscribeToPushThunk())
+		setPushEnabled(prev => !prev)
+	}
+
+
+
 
 	const onManageEmailsClick = () => {
 		onClose()

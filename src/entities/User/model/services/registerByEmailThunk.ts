@@ -14,7 +14,7 @@ export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps,
 
 			// в случае успеха ничего не возращает, status 201 - Created
 			await dispatch(rtkApiRegisterUser({ email, password, name })).unwrap();
-			
+
 			// Нет необходимости проверять response.status здесь, так как ошибки будут перехвачены в блоке catch
 
 			await dispatch(loginUserByEmailThunk({ email, password }));
