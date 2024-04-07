@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './Switcher.module.scss';
 import * as Switch from '@radix-ui/react-switch';
-import { KeyboardEvent } from 'react';
+import { KeyboardEvent, forwardRef } from 'react';
 
 interface SwitcherProps {
 	className?: string
@@ -11,31 +11,26 @@ interface SwitcherProps {
 	disabled?: boolean
 	title?: string
 }
-
-export const Switcher = (props: SwitcherProps) => {
+// forwardRef принимает функцию рендеринга в качестве аргумента, которая принимает props и ref и возвращает React - элемент.Вот пример использования:
+export const Switcher = forwardRef<HTMLDivElement, SwitcherProps>((props, ref) => {
 	const {
 		className,
 		isChecked,
 		onClickSwitcher,
 		disabled,
-		title
-	} = props
-
-	// const onEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {
-	// 	if (e.key === 'Enter') onClickSwitcher()
-	// }
+		title,
+	} = props;
 
 	return (
 		<div
+			ref={ref} // Примените ref к корневому элементу
 			className={clsx(
 				className ? '' : cls.switcherWrapper,
 				className
 			)}
 			onClick={disabled ? undefined : onClickSwitcher}
-		// onKeyDown={onEnterDown}
-		// tabIndex={0}
 		>
-			{title && <label className={cls.label}>{title}</label >}
+			{title && <label className={cls.label}>{title}</label>}
 			<Switch.Root
 				checked={isChecked}
 				disabled={disabled}
@@ -45,32 +40,16 @@ export const Switcher = (props: SwitcherProps) => {
 					disabled ? '' : cls.pointer
 				)}
 			>
-
 				<Switch.Thumb
 					className={clsx(
 						cls.switcherCircle,
 						{ [cls.switcherCircle_active]: isChecked }
 					)}
 				/>
-
 			</Switch.Root>
-			{/* <div
-				className={clsx(
-					cls.switcher,
-					{ [cls.switcher_active]: isChecked },
-					disabled ? '' : cls.pointer
-				)}
-			>
-				<div
-					className={clsx(
-						cls.switcherCircle,
-						{ [cls.switcherCircle_active]: isChecked }
-					)}
-				/>
-			</div> */}
-		</div >
-	)
-}
+		</div>
+	);
+});
 // import clsx from 'clsx';
 // import { useTranslation } from 'react-i18next';
 // import cls from './Switcher.module.scss';
