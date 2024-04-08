@@ -2,7 +2,6 @@ export {
 	useUpdateBoxWithTagMutation,
 	updateBoxWithTag
 } from './model/api/boxApi';
-
 export type { BoxPropsBase } from './ui/Box';
 
 export { BoxesBlockSkeleton } from './ui/BoxesBlockSkeleton';
@@ -20,6 +19,7 @@ export type {
 	RegularAndLearntCardsBox,
 	BoxSchema,
 	BoxCoordinates,
+	ShelfUpdateBoxListItem,
 } from './model/types/BoxSchema'
 export { Box } from './ui/Box';
 
