@@ -1,7 +1,7 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { CommonShelfBackendResponse, CupboardSchema } from '@/entities/Cupboard'
 import { ShelfDndRepresentation, ShelfSchema } from '../types/ShelfSchema'
-import { ShelfUpdateBoxListItem } from '@/entities/Box/model/types/BoxSchema';
+import { ShelfUpdateBoxListItem } from '@/entities/Box';
 
 export const shelvesApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
