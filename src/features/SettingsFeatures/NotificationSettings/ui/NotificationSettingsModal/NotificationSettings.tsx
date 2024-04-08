@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './NotificationSettings.module.scss';
 import { useSelector } from 'react-redux';
-import { getUserNotificationSettings, getUserSettingsAwaitingResponse, getUserSettingsIsLoading, updateNotificationSettingsThunk } from '@/entities/User';
+import { getIsUserDeviceSubscribedToPush, getUserNotificationSettings, getUserPushNotificationPermission, getUserSettingsAwaitingResponse, getUserSettingsIsLoading, updateNotificationSettingsThunk, userActions } from '@/entities/User';
 import { Card } from '@/shared/ui/Card';
-import { Heading } from '@/shared/ui/Typography';
+import { Heading, MyText } from '@/shared/ui/Typography';
 import { Switcher } from '@/shared/ui/Switcher';
 import { SingleSetter } from '@/shared/ui/TimeSetter/SingleSetter';
-import { WheelEvent, useState } from 'react';
+import { WheelEvent, useEffect, useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
@@ -17,6 +17,10 @@ import { getIsNotificationModalOpen } from '../../../model/selectors/getModals';
 import { settingsFeaturesActions } from '../../../model/slice/settingsFeaturesSlice';
 import { ManageEmailsModal } from '../ManageEmailsModal/ManageEmailsModal';
 import { subscribeToPushThunk } from '../../model/services/subscribeToPushThunk';
+import { switchPushNotificationThunk } from '../../model/services/switchPushNotificationThunk';
+import { unsubscribeFromPushThunk } from '../../model/services/unsubscribeFromPushThunk';
+import { VStack } from '@/shared/ui/Stack';
+import { MyTooltip } from '@/shared/ui/Tooltip';
 
 interface NotificationSettingsProps {
 	className?: string
@@ -53,9 +57,13 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 		onClose,
 		notificationsSettings,
 	} = props
+	const dialogCustomId = 'notificationSettingsModalId'
 	const { t } = useTranslation()
+	const { t: t2 } = useTranslation('tooltip')
 	const dispatch = useAppDispatch()
 	const settingsAwaitingResponseObj = useSelector(getUserSettingsAwaitingResponse)
+	const isDevicePushEnable = useSelector(getIsUserDeviceSubscribedToPush)
+	const notificationPermission = useSelector(getUserPushNotificationPermission)
 	const {
 		emailNotificationsEnabled,
 		minimumCardsForEmailNotification,
@@ -69,96 +77,82 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 
 	const [emailEnabled, setEmailEnabled] = useState(emailNotificationsEnabled)
 	const [pushEnabled, setPushEnabled] = useState(mobilePushEnabled)
+	// const [deviceIsSubscribed, setDeviceIsSubscribed] = useState(isDevicePushEnable)
+	// const [permission, setPermission] = useState(notificationPermission)
+	// const [pushEndpoint, setPushEndpoint] = useState<null | string>(null)
+
+
+	useEffect(() => {
+		const initialCheck = async () => {
+			dispatch(userActions.setPushNotificationPermission(Notification.permission))
+			dispatch(userActions.setPushNotificationIsSubscribed(Notification.permission === 'granted'))
+		}
+		initialCheck()
+	}, [dispatch])
 
 	const onToggleEmailEnabled = () => setEmailEnabled(prev => !prev)
-
-	// const sub = () => {
-	// 	Notification.requestPermission().then((permission) => {
-	// 		if (permission === 'granted') {
-	// 			subscribeUserToPush();
-	// 		} else {
-	// 			console.log('Permission denied.');
-	// 		}
-	// 	});
-	// }
-
-	// async function unsubscribeFromPush() {
-	// 	const registration = await navigator.serviceWorker.ready;
-	// 	const subscription = await registration.pushManager.getSubscription();
-	// 	const api = import.meta.env.DEV
-	// 		? __API__
-	// 		: __API__BACK
-	// 	// Теперь отправьте объект подписки на ваш сервер
-	// 	if (!subscription) return
-	// 	await fetch(api + '/notifications/push/unsubscribe', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify({ subscription }),
-	// 	});
-	// }
-
-
-	// async function subscribeUserToPush() {
-	// 	const swRegistration = await navigator.serviceWorker.ready; // Убедитесь, что SW зарегистрирован
-	// 	const VAPID_PUBLIC_KEY = 'BN1AMPF6naRQmxIfr367bePCH_EM7o3q7bf61-CrYKWJJfqfpbUi5n30mFZCiGwggqI65Z4U96dDC7o61Zubric'
-	// 	const subscription = await swRegistration.pushManager.subscribe({
-	// 		userVisibleOnly: true,
-	// 		applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
-	// 	});
-	// 	const api = import.meta.env.DEV
-	// 		? __API__
-	// 		: __API__BACK
-	// 	// Теперь отправьте объект подписки на ваш сервер
-	// 	const userAgent = navigator.userAgent;
-	// 	let browserName = 'unknown';
-	// 	let osName = 'unknown';
-
-	// 	if (userAgent.match(/chrome|chromium|crios/i)) {
-	// 		browserName = 'chrome';
-	// 	} else if (userAgent.match(/firefox|fxios/i)) {
-	// 		browserName = 'firefox';
-	// 	} // Добавьте другие браузеры по необходимости
-	// 	console.log(userAgent)
-	// 	if (userAgent.match(/android/i)) {
-	// 		osName = 'android';
-	// 	} else if (userAgent.match(/iphone|ipad|ipod/i)) {
-	// 		osName = 'ios';
-	// 	} // Добавьте другие ОС по необходимости
-
-	// 	await fetch(api + '/notifications/push/subscribe', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify({ subscription, browserName, osName }),
-	// 	});
-	// }
-
-	// // Вспомогательная функция для преобразования VAPID ключа из URL-safe base64 в Uint8Array
-	// function urlBase64ToUint8Array(base64String: string) {
-	// 	const padding = '='.repeat((4 - base64String.length % 4) % 4);
-	// 	const base64 = (base64String + padding)
-	// 		.replace(/\-/g, '+')
-	// 		.replace(/_/g, '/');
-
-	// 	const rawData = window.atob(base64);
-	// 	const outputArray = new Uint8Array(rawData.length);
-
-	// 	for (let i = 0; i < rawData.length; ++i) {
-	// 		outputArray[i] = rawData.charCodeAt(i);
-	// 	}
-	// 	return outputArray;
-	// }
-
-	const onTogglePushEnabled = () => {
-		dispatch(subscribeToPushThunk())
-		setPushEnabled(prev => !prev)
+	const checkPermission = async () => {
+		// const permission = await Notification.permission
+		const permissionDenied = Notification.permission === 'denied'
+		// console.log(permission)
+		// if (permission === 'granted') {
+		// 	// await subscribeUserToPush();
+		// } else if (permission === 'denied') {
+		// 	//
+		// }
 	}
 
 
+	const onTogglePushEnabled = () => {
+		dispatch(switchPushNotificationThunk(!pushEnabled))
+		// checkPermission()
+		// setPushEnabled(prev => !prev)
+	}
 
+	const onToggleDeviceSubscription = async () => {
+		// let res: boolean;
+		if (isDevicePushEnable) {
+			await dispatch(unsubscribeFromPushThunk())
+		} else {
+			await dispatch(subscribeToPushThunk())
+		}
+		// setDeviceIsSubscribed(prev => !prev)
+	}
+
+	const deviceSwitcher = (
+		<MyTooltip
+			isModalOpen={isOpen}
+			delay={200}
+			portalId={dialogCustomId}
+			content={
+				<VStack align='left'>
+					{Notification.permission === 'denied' && t2('push_denied')}
+					{Notification.permission === 'default' && <div style={{ maxWidth: 200 }}>
+						{t2('push_default')}
+					</div>
+					}
+				</VStack>
+			}
+			trigger={
+				<div>
+					<Switcher
+						isChecked={isDevicePushEnable ?? false}
+						disabled={!pushEnabled}
+						onClickSwitcher={onToggleDeviceSubscription}
+					/>
+				</div>
+			}
+		/>)
+
+	const deviceSubscriptionBlock = (<div className={cls.deviceSubscription} >
+		<MyText text={t('Пуши для этого устройства')} variant={pushEnabled ? 'primary' : 'hint'} />
+		{deviceSwitcher}
+		{/* <Switcher
+			isChecked={deviceIsSubscribed ?? false}
+			disabled={!pushEnabled}
+			onClickSwitcher={onToggleDeviceSubscription}
+		/> */}
+	</div>)
 
 	const onManageEmailsClick = () => {
 		onClose()
@@ -186,7 +180,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 		else onEmailUpClick()
 	}
 	const onPushUpClick = () => {
-		if (pushMinNotifications === 15) return
+		if (pushMinNotifications === 30) return
 		setPushMinNotifications(prev => prev + 1)
 	}
 	const onPushDownClick = () => {
@@ -223,11 +217,13 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 				isOpen={isOpen}
 				onClose={onCloseHandle}
 				onSubmit={onSubmit}
+				customId={dialogCustomId}
 			>
 				<div className={clsx(
 					cls.NotificationSettings,
 					className)}
 				>
+
 					<div className={cls.notificationBlock} >
 						<Card className={cls.notificationCard} >
 							<Heading size='s' title={'Email'} />
@@ -265,10 +261,13 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 								onClickSwitcher={onTogglePushEnabled}
 							/>
 						</Card>
-						<div className={clsx(cls.detailsBlock, cls.detailsBlock_last)} >
+						<div className={clsx(cls.detailsBlock,
+							// cls.detailsBlock_last
+						)}
+						>
 							<SingleSetter
 								title='Минимум карточек для пуша'
-								maxTime={15}
+								maxTime={30}
 								minTime={minEmailNotificationConst}
 								time={pushMinNotifications}
 								onUpClick={onPushUpClick}
@@ -276,6 +275,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 								onWheelScroll={onScrollPushMinNotification}
 								disabled={!pushEnabled}
 							/>
+							{deviceSubscriptionBlock}
 						</div>
 					</div>
 					<ModalButtons

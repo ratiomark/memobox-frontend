@@ -8,6 +8,14 @@
 
 }
 
+.deviceSubscription {
+  padding: 8px;
+  display: flex;
+  gap: 20px;
+  align-items: start;
+  justify-content: end;
+}
+
 .detailsBlock {
   display: flex;
   justify-content: space-between;
@@ -15,9 +23,10 @@
   padding: 20px 0;
 }
 
-.detailsBlock_last {
-  justify-content: start;
-}
+// .detailsBlock_last {
+//   justify-content: start;
+//   padding-top: 0;
+// }
 
 .notificationCard {
   display: flex;
