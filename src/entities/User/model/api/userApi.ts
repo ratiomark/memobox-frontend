@@ -38,9 +38,16 @@ export interface LoginByEmailProps {
 	password: string
 }
 
-
+interface SubscribeDevicePushNotification {
+	subscription: PushSubscription
+	browserName: string
+	osName: string
+}
+interface UnsubscribeDevicePushNotification {
+	subscription: PushSubscription
+}
 // test comment API
-const userApi = rtkApi.injectEndpoints({
+export const userApi = rtkApi.injectEndpoints({
 	endpoints: (build) => ({
 		loginUser: build.mutation<UserWithToken, LoginByEmailProps>({
 			query: (arg) => ({
@@ -174,6 +181,29 @@ const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
+		switchPushNotification: build.mutation<NotificationSettings, boolean>({
+			query: (newState) => ({
+				url: '/settings/switchPushNotification',
+				method: 'PATCH',
+				body: {
+					pushEnabled: newState
+				}
+			})
+		}),
+		subscribeDevicePushNotification: build.mutation<{ message: 'Subscribed' }, SubscribeDevicePushNotification>({
+			query: (arg) => ({
+				url: '/notifications/push/subscribe',
+				method: 'POST',
+				body: arg
+			})
+		}),
+		unsubscribeDevicePushNotification: build.mutation<void, UnsubscribeDevicePushNotification>({
+			query: (arg) => ({
+				url: '/notifications/push/unsubscribe',
+				method: 'POST',
+				body: arg
+			})
+		}),
 		confirmEmail: build.mutation<{ email_confirmed: boolean }, { hash: string }>({
 			query: ({ hash }) => ({
 				url: '/auth/email/confirm',
@@ -201,6 +231,9 @@ export const rtkApiUpdateTimeSleep = userApi.endpoints.updateTimeSleep.initiate
 export const rtkApiUpdateNotifications = userApi.endpoints.updateNotificationSettings.initiate
 export const rtkApiAddNotificationEmail = userApi.endpoints.addNotificationEmail.initiate
 export const rtkApiSetDefaultShelfTemplate = userApi.endpoints.setDefaultShelfTemplate.initiate
+export const rtkApiSwitchPushNotification = userApi.endpoints.switchPushNotification.initiate
+export const rtkApiSubscribeDevicePushNotification = userApi.endpoints.subscribeDevicePushNotification.initiate
+export const rtkApiUnsubscribeDevicePushNotification = userApi.endpoints.unsubscribeDevicePushNotification.initiate
 export const rtkApiLogout = userApi.endpoints.logout.initiate
 export const { useGetUserSettingsQuery } = userApi
 export const { useUpdateMissedTrainingMutation } = userApi

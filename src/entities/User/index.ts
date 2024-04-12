@@ -1,3 +1,4 @@
+export { getIsUserDeviceSubscribedToPush, getUserPushNotificationPermission } from './model/selectors/getUserPushNotificaion';
 
 export { getUserSettingsAwaitingResponse } from './model/selectors/getUserSettings';
 
@@ -23,6 +24,9 @@ export {
 	rtkApiUpdateTimeSleep,
 	rtkApiSetDefaultShelfTemplate,
 	rtkApiUpdateNotifications,
+	rtkApiSwitchPushNotification,
+	rtkApiSubscribeDevicePushNotification,
+	rtkApiUnsubscribeDevicePushNotification,
 	useConfirmEmailMutation,
 } from './model/api/userApi';
 
@@ -67,6 +71,8 @@ export {
 	getUserSavedDataViewPageColumns,
 	getUserSavedDataViewPageRowsCount,
 	getUserSavedDataIsDelimiterEnabled,
+	getUserSavedDataCupboard,
+	getUserSavedDataIsStartTrainingHotKeyVisible,
 } from './model/selectors/getJsonSavedData';
 
 export { initAuthData } from './model/services/initAuthDataThunk';

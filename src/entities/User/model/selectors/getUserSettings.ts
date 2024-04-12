@@ -12,7 +12,32 @@ export const getUserShelfTemplateSettings = (state: StateSchema) => state.user?.
 
 export const getUserTimeSleepSettings = (state: StateSchema) => state.user.userSettings?.timeSleep
 export const getUserSettingsIsLoading = (state: StateSchema) => state.user.userSettingsIsLoading
+
 export const getUserSettingsAwaitingResponse = (state: StateSchema) => state.user.userSettingsAwaitingResponseObject
+
+
+// export const getIsDevicePushEnable = async () => {
+// 	const registration = await navigator.serviceWorker.ready;
+// 	const subscription = await registration.pushManager.getSubscription();
+// 	const api = import.meta.env.DEV
+// 		? __API__
+// 		: __API__BACK
+// 	// Теперь отправьте объект подписки на ваш сервер
+
+// 	await fetch(api + '/notifications/push/unsubscribe', {
+// 		method: 'POST',
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 		},
+// 		body: JSON.stringify({ subscription }),
+// 	});
+// }
+
+// export const getDeviceSubscriptionEndpoint = async (): Promise<string | null > => {
+// 	const registration = await navigator.serviceWorker.ready;
+// 	const subscription = await registration.pushManager.getSubscription();
+// 	return subscription?.endpoint ?? null
+// }
 
 
 

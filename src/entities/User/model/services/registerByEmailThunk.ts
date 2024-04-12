@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkExtraArg } from '@/app/providers/StoreProvider'
 import i18n from '@/shared/config/i18n/i18n'
-import { RegisterByEmailProps, UserWithToken, rtkApiRegisterUser, } from '../api/userApi'
+import { RegisterByEmailProps, UserWithToken, rtkApiRegisterUser, userApi, } from '../api/userApi'
 import { userActions } from '../slice/userSlice'
 import { loginUserByEmailThunk } from './loginByEmailAndPassThunk'
 
@@ -12,13 +12,24 @@ export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps,
 		try {
 			const { dispatch } = thunkAPI;
 
-			// в случае успеха ничего не возращает, status 201 - Created
-			await dispatch(rtkApiRegisterUser({ email, password, name })).unwrap();
+			const response = await dispatch(
+				rtkApiRegisterUser({ email, password, name })
+			).unwrap()
 
-			// Нет необходимости проверять response.status здесь, так как ошибки будут перехвачены в блоке catch
+			// Если получен null, то все прошло успешно
+			const responseSuccess = response === null
 
-			await dispatch(loginUserByEmailThunk({ email, password }));
-			return null;
+			if (responseSuccess) {
+				await dispatch(loginUserByEmailThunk({ email, password }));
+				return null;
+			} else {
+				// Если ответ не соответствует ожидаемому, выбрасываем ошибку
+				throw new Error('Unexpected response from server');
+			}
+			// // Нет необходимости проверять response.status здесь, так как ошибки будут перехвачены в блоке catch
+
+			// await dispatch(loginUserByEmailThunk({ email, password }));
+			// return null;
 		} catch (error) {
 			// Обработка ошибок
 			// Если ошибка содержит структуру, определённую RTK Query (например, error.status), можно использовать её

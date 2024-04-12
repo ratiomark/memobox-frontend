@@ -43,6 +43,12 @@ export interface UserSchema {
 	jsonSavedDataOriginal?: JsonSavedData
 	jsonCommonSettings?: JsonSettings
 	jsonCommonSettingsOriginal?: JsonSettings
+	pushNotification: PushNotification
+}
+
+export interface PushNotification {
+	permission: NotificationPermission
+	isDeviceSubscribed: boolean
 }
 // export type ExtendedTimingBlockForRealShelf = ExtendedTimingBlock & {
 // 	missedTrainingValue?: MissedTrainingValue

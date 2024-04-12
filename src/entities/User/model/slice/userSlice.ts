@@ -40,6 +40,10 @@ const initialState: UserSchema = {
 		subscriptionExpiresAt: 0,
 		subscriptionType: 'none',
 	},
+	pushNotification: {
+		permission: 'default',
+		isDeviceSubscribed: false
+	},
 	help: `jsonCommonSettings - общие данные, например была ли посещена страница Х, видел ли окно Y
 userSettings - настройки системы, время сна, уведомления и т.д. В общем, все что живет на странице "настройки"
 jsonSavedData - данные по UI:
@@ -135,6 +139,21 @@ const userSlice = createSlice({
 		setSettingsMissedTraining: (state, action: PayloadAction<MissedTrainingValue>) => {
 			if (state.userSettings) {
 				state.userSettings.missedTraining = action.payload
+			}
+		},
+		setPushNotificationIsSubscribed: (state, action: PayloadAction<boolean>) => {
+			if (state.pushNotification) {
+				state.pushNotification.isDeviceSubscribed = action.payload
+			}
+		},
+		setPushNotificationPermission: (state, action: PayloadAction<NotificationPermission>) => {
+			if (state.pushNotification) {
+				state.pushNotification.permission = action.payload
+			}
+		},
+		setNotificationSettings: (state, action: PayloadAction<NotificationSettings>) => {
+			if (state.userSettings) {
+				state.userSettings.notifications = action.payload
 			}
 		},
 		setSettingsShelfTemplate: (state, action: PayloadAction<TimingBlock[]>) => {

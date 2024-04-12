@@ -26,6 +26,7 @@ export interface JsonSavedData {
 	commonShelfCollapsed: boolean
 	cupboard?: {
 		isDelimiterEnabled?: boolean
+		isStartTrainingHotKeyVisible?: boolean
 	}
 	shelfNamesList: ShelfNameItem[]
 	viewPageColumns: SortColumnObject[]
