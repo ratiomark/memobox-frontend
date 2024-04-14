@@ -23,6 +23,7 @@ interface HDialogProps {
 	panelWithBackground?: boolean
 	panelAbsolute?: boolean
 	overlay?: boolean
+	customId?: string
 }
 
 export const HDialogHeadless = forwardRef<HTMLDivElement, HDialogProps>((props, ref) => {
@@ -42,6 +43,7 @@ export const HDialogHeadless = forwardRef<HTMLDivElement, HDialogProps>((props, 
 		panelWithMainPadding = true,
 		panelAbsolute,
 		overlay = true,
+		customId,
 	} = props
 	const { theme } = useTheme()
 
@@ -81,9 +83,12 @@ export const HDialogHeadless = forwardRef<HTMLDivElement, HDialogProps>((props, 
 			unmount={unmount}
 			open={isOpen}
 			onClose={onClose}
-			// ref={dialogRef}
+			custom-id={customId ? customId : undefined}
+		// ref={dialogRef}
 		>
-			<div className={cls.content}>
+			<div className={cls.content}
+			// custom-id={customId ? customId : undefined}
+			>
 				{overlay && <div className={transparent ? cls.overlayTransparent : cls.overlay} />}
 				<Dialog.Panel
 					className={clsx(

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import cls from './Switcher.module.scss';
 import * as Switch from '@radix-ui/react-switch';
-import { KeyboardEvent, forwardRef } from 'react';
+import { KeyboardEvent, forwardRef, useEffect } from 'react';
 
 interface SwitcherProps {
 	className?: string
@@ -12,7 +12,7 @@ interface SwitcherProps {
 	title?: string
 }
 // forwardRef принимает функцию рендеринга в качестве аргумента, которая принимает props и ref и возвращает React - элемент.Вот пример использования:
-export const Switcher = forwardRef<HTMLDivElement, SwitcherProps>((props, ref) => {
+export const Switcher = forwardRef<HTMLDivElement, SwitcherProps>((props, forwardedRef) => {
 	const {
 		className,
 		isChecked,
@@ -20,13 +20,19 @@ export const Switcher = forwardRef<HTMLDivElement, SwitcherProps>((props, ref) =
 		disabled,
 		title,
 	} = props;
-
+	// useEffect(() => {
+	// 	if (forwardedRef) {
+	// 		console.log('999999999999999999999999999')
+	// 		document.body.focus()
+	// 	}
+	// }, [forwardedRef])
 	return (
+
 		<div
-			ref={ref} // Примените ref к корневому элементу
+			ref={forwardedRef} // Примените ref к корневому элементу
 			className={clsx(
+				className,
 				className ? '' : cls.switcherWrapper,
-				className
 			)}
 			onClick={disabled ? undefined : onClickSwitcher}
 		>
