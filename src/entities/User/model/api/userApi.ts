@@ -6,6 +6,7 @@ import { JsonSavedData } from '../types/JsonSavedData'
 import { MissedTrainingValue } from '../types/userSettings'
 import { TimingBlock } from '@/shared/types/DataBlock'
 import { getCurrentTimeZone } from '@/shared/lib/helpers/common/getCurrentTimeZone'
+import { getBrowserLanguage } from '@/shared/lib/helpers/common/getBrowserLanguage'
 
 
 interface SetJsonSettings {
@@ -55,7 +56,6 @@ export const userApi = rtkApi.injectEndpoints({
 				method: 'POST',
 				body: {
 					...arg,
-					// userName: arg.name,
 				}
 			})
 		}),
@@ -67,6 +67,7 @@ export const userApi = rtkApi.injectEndpoints({
 					...arg,
 					firstName: arg.name,
 					timezone: getCurrentTimeZone(),
+					language: getBrowserLanguage()
 				}
 			})
 		}),
@@ -83,6 +84,16 @@ export const userApi = rtkApi.injectEndpoints({
 				method: 'PATCH',
 				body: {
 					jsonSettings
+				}
+			})
+		}),
+		setUserLang: build.mutation<User, { userId: string, language: string }>({
+			query: ({ userId, language }) => ({
+				url: `/users/${userId}`,
+				method: 'PATCH',
+				body: {
+					language,
+					// const timeZones = Intl.supportedValuesOf('timeZone');
 				}
 			})
 		}),
@@ -238,3 +249,4 @@ export const rtkApiLogout = userApi.endpoints.logout.initiate
 export const { useGetUserSettingsQuery } = userApi
 export const { useUpdateMissedTrainingMutation } = userApi
 export const { useConfirmEmailMutation } = userApi
+export const { useSetUserLangMutation } = userApi
