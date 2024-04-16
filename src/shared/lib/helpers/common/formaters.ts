@@ -38,6 +38,26 @@ export function timeLeft(utcTime: string) {
 		return '< минуты';
 	}
 }
+
+
+export const formatUtcOffset = (offset: number) => {
+	// Определяем знак смещения
+	const sign = offset >= 0 ? '+' : '-';
+
+	// Преобразуем смещение в абсолютное значение для упрощения вычислений
+	const absoluteOffset = Math.abs(offset);
+
+	// Вычисляем количество полных часов и минут
+	const hours = Math.floor(absoluteOffset / 60);
+	const minutes = absoluteOffset % 60;
+
+	// Формируем строку с ведущими нулями, если необходимо
+	const formattedHours = hours.toString().padStart(2, '0');
+	const formattedMinutes = minutes.toString().padStart(2, '0');
+
+	return `${sign}${formattedHours}:${formattedMinutes}`;
+}
+
 // export const formatDate = (ISODate: string | null | Date) => {
 // 	// return ISODate ?? '---'
 
