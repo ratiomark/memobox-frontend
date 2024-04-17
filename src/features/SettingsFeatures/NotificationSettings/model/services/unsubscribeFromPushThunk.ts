@@ -16,6 +16,11 @@ export const unsubscribeFromPushThunk = createAsyncThunk<void, void, { rejectVal
 
 		try {
 			const subscription = await getDevicePushSubscription()
+			// const registration = await navigator.serviceWorker.ready;
+			// const subscription2 = await registration.pushManager.getSubscription();
+			// console.log(subscription)
+			// console.log(subscription2)
+			// console.log(swRegistration)
 			if (!subscription) {
 				return
 			}

@@ -27,6 +27,7 @@ export const switchPushNotificationThunk = createAsyncThunk<void, boolean, { rej
 		try {
 
 			const notificationSettings = await dispatch(rtkApiSwitchPushNotification(pushSettingState)).unwrap()
+			console.log(notificationSettings)
 			dispatch(userActions.setNotificationSettings(notificationSettings))
 
 			// console.log(notificationSettings)

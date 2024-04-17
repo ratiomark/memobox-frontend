@@ -4,9 +4,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getSettingsCurrentShelfTemplate } from '../selectors/settingsShelfTemplate'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
+import { settingsShelfTemplateActions } from '../slice/shelfTemplateSlice'
 
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
+const id = 'update-shelf-template-settings'
 export const updateShelfTemplateThunk = createAsyncThunk<void, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'settingsShelfTemplate/updateShelfTemplateThunk',
 	async (_, thunkAPI) => {
@@ -14,7 +16,7 @@ export const updateShelfTemplateThunk = createAsyncThunk<void, void, { rejectVal
 		const { dispatch, getState, } = thunkAPI
 		dispatch(userActions.setSettingsAwaitingResponse({ settings: 'shelfTemplate', isLoading: true }))
 		dispatch(toastsActions.addToast({
-			id: 'update-shelfTemplate',
+			id,
 			toast: {
 				status: 'pending',
 				messageLoading: t('toast:messageLoading'),
@@ -22,7 +24,7 @@ export const updateShelfTemplateThunk = createAsyncThunk<void, void, { rejectVal
 				messageSuccess: t('toast:update_settings.messageSuccess'),
 			}
 		}))
-		
+
 		const currentShelfTemplate = getSettingsCurrentShelfTemplate(getState())
 		if (!currentShelfTemplate) return thunkAPI.rejectWithValue('Нет userData')
 
@@ -31,20 +33,21 @@ export const updateShelfTemplateThunk = createAsyncThunk<void, void, { rejectVal
 			const shelfTemplateFromResponse = response.shelfTemplate
 
 			if (!shelfTemplateFromResponse) return thunkAPI.rejectWithValue('Нет userData')
-			
+
 			dispatch(toastsActions.updateToastById({
-				id: 'update-shelfTemplate',
+				id,
 				toast: { status: 'success' }
 			}))
 			dispatch(userActions.setSettingsAwaitingResponse({ settings: 'shelfTemplate', isLoading: false }))
 			dispatch(userActions.setSettingsShelfTemplate(shelfTemplateFromResponse))
-
+			dispatch(settingsShelfTemplateActions.setInitialTemplate(shelfTemplateFromResponse))
+			dispatch(settingsShelfTemplateActions.reset())
 			// dispatch(shelfBoxesTemplateSettingsActions.setInitialTemplate(shelfTemplateFromResponse))
 			// return shelfTemplateFromResponse
 
 		} catch (err) {
 			thunkAPI.dispatch(toastsActions.updateToastById({
-				id: 'update-shelfTemplate',
+				id,
 				toast: { status: 'error' }
 			}))
 			dispatch(userActions.setSettingsAwaitingResponse({ settings: 'shelfTemplate', isLoading: false }))

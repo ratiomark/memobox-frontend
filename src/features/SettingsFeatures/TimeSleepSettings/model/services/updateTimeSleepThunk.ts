@@ -2,6 +2,8 @@ import { StateSchema, ThunkExtraArg } from '@/app/providers/StoreProvider'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getCurrentTimeSleepSettings } from '../selectors/settingsTimeSleep'
 import { TimeSleepSettings, rtkApiUpdateTimeSleep } from '@/entities/User'
+import { toastsActions } from '@/shared/ui/Toast'
+import { t } from 'i18next'
 // import { mapHoursMinutesObjectToStartTimeString } from '@/shared/lib/helpers/mappers/mapHoursMinutesObjectToStartTimeString'
 const dayByDaySleepPeriods = {
 	monday: [],
@@ -13,6 +15,7 @@ const dayByDaySleepPeriods = {
 	sunday: [],
 }
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
+const id = 'update-time-sleep-settings'
 export const updateTimeSleepThunk = createAsyncThunk<void, void, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'user/updateTimeSleepThunk',
 	async (_, thunkAPI) => {
@@ -24,6 +27,15 @@ export const updateTimeSleepThunk = createAsyncThunk<void, void, { rejectValue: 
 			...dayByDaySleepPeriods,
 			...timeSleepSettingsBackendRequest.dayByDaySleepPeriods
 		}
+		dispatch(toastsActions.addToast({
+			id,
+			toast: {
+				status: 'pending',
+				messageLoading: t('toast:messageLoading'),
+				messageError: t('toast:messageError'),
+				messageSuccess: t('toast:update_settings.messageSuccess'),
+			}
+		}))
 		console.log(timeSleepSettingsBackendRequest)
 		// const currentUserSettings = getJsonSettings(getState())
 
@@ -31,15 +43,19 @@ export const updateTimeSleepThunk = createAsyncThunk<void, void, { rejectValue: 
 
 		try {
 			const response = await dispatch(rtkApiUpdateTimeSleep(timeSleepSettingsBackendRequest as TimeSleepSettings)).unwrap() //разворачиваю в реальный результат
-			console.log(response)
-			// const jsonSettingsFromResponse = response.jsonSettings
+			// console.log(response)
+			dispatch(toastsActions.updateToastById({
+				id,
+				toast: { status: 'success' }
+			}))
 
-			// if (!jsonSettingsFromResponse) return thunkAPI.rejectWithValue('Нет userData')
-
-			// return jsonSettingsFromResponse
 			return
 
 		} catch (err) {
+			dispatch(toastsActions.updateToastById({
+				id,
+				toast: { status: 'success' }
+			}))
 			return thunkAPI.rejectWithValue('Some Error in saveJsonSettings')
 		}
 	}

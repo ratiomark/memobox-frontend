@@ -28,7 +28,9 @@ export const subscribeToPushThunk = createAsyncThunk<void, void, { rejectValue: 
 		try {
 			const subscribeUserToPush = async () => {
 				const browserOsData = getBrowserAndOs()
+				console.log(browserOsData)
 				const swRegistration = await navigator.serviceWorker.ready; // Убедитесь, что SW зарегистрирован
+				console.log(swRegistration)
 				// const permissionState = await swRegistration.pushManager.permissionState({ userVisibleOnly: true })
 				const currentSubscription = await swRegistration.pushManager.getSubscription();
 				// console.log('currentSubscription  ', currentSubscription)

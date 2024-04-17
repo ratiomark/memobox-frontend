@@ -76,10 +76,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 	const [pushMinNotifications, setPushMinNotifications] = useState(minimumCardsForPush)
 
 	const [emailEnabled, setEmailEnabled] = useState(emailNotificationsEnabled)
-	const [pushEnabled, setPushEnabled] = useState(mobilePushEnabled)
-	// const [deviceIsSubscribed, setDeviceIsSubscribed] = useState(isDevicePushEnable)
-	// const [permission, setPermission] = useState(notificationPermission)
-	// const [pushEndpoint, setPushEndpoint] = useState<null | string>(null)
+	
 
 
 	useEffect(() => {
@@ -91,20 +88,20 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 	}, [dispatch])
 
 	const onToggleEmailEnabled = () => setEmailEnabled(prev => !prev)
-	const checkPermission = async () => {
-		// const permission = await Notification.permission
-		const permissionDenied = Notification.permission === 'denied'
-		// console.log(permission)
-		// if (permission === 'granted') {
-		// 	// await subscribeUserToPush();
-		// } else if (permission === 'denied') {
-		// 	//
-		// }
-	}
+	// const checkPermission = async () => {
+	// 	// const permission = await Notification.permission
+	// 	const permissionDenied = Notification.permission === 'denied'
+	// 	// console.log(permission)
+	// 	// if (permission === 'granted') {
+	// 	// 	// await subscribeUserToPush();
+	// 	// } else if (permission === 'denied') {
+	// 	// 	//
+	// 	// }
+	// }
 
 
 	const onTogglePushEnabled = () => {
-		dispatch(switchPushNotificationThunk(!pushEnabled))
+		dispatch(switchPushNotificationThunk(!mobilePushEnabled))
 		// checkPermission()
 		// setPushEnabled(prev => !prev)
 	}
@@ -137,7 +134,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 				<div>
 					<Switcher
 						isChecked={isDevicePushEnable ?? false}
-						disabled={!pushEnabled}
+						disabled={!mobilePushEnabled}
 						onClickSwitcher={onToggleDeviceSubscription}
 					/>
 				</div>
@@ -145,11 +142,11 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 		/>)
 
 	const deviceSubscriptionBlock = (<div className={cls.deviceSubscription} >
-		<MyText text={t('Пуши для этого устройства')} variant={pushEnabled ? 'primary' : 'hint'} />
+		<MyText text={t('Пуши для этого устройства')} variant={mobilePushEnabled ? 'primary' : 'hint'} />
 		{deviceSwitcher}
 		{/* <Switcher
 			isChecked={deviceIsSubscribed ?? false}
-			disabled={!pushEnabled}
+			disabled={!mobilePushEnabled}
 			onClickSwitcher={onToggleDeviceSubscription}
 		/> */}
 	</div>)
@@ -163,7 +160,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 		setEmailMinNotifications(minimumCardsForEmailNotification)
 		setPushMinNotifications(minimumCardsForPush)
 		setEmailEnabled(emailNotificationsEnabled)
-		setPushEnabled(mobilePushEnabled)
+		// setPushEnabled(mobilePushEnabled)
 		onClose()
 	}
 
@@ -202,7 +199,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 
 		dispatch(updateNotificationSettingsThunk({
 			emailNotificationsEnabled: emailEnabled,
-			mobilePushEnabled: pushEnabled,
+			mobilePushEnabled: mobilePushEnabled,
 			minimumCardsForEmailNotification: emailMinNotificationsChecked,
 			minimumCardsForPush: pushMinNotificationsChecked,
 			notificationEmails,
@@ -257,7 +254,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 						<Card className={cls.notificationCard} >
 							<Heading size='s' title={'Push notification'} />
 							<Switcher
-								isChecked={pushEnabled ?? false}
+								isChecked={mobilePushEnabled ?? false}
 								onClickSwitcher={onTogglePushEnabled}
 							/>
 						</Card>
@@ -273,7 +270,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 								onUpClick={onPushUpClick}
 								onDownClick={onPushDownClick}
 								onWheelScroll={onScrollPushMinNotification}
-								disabled={!pushEnabled}
+								disabled={!mobilePushEnabled}
 							/>
 							{deviceSubscriptionBlock}
 						</div>
