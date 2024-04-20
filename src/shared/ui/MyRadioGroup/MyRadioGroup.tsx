@@ -4,19 +4,31 @@ import { Fragment, ReactNode, forwardRef, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import cls from './MyRadioGroup.module.scss';
 
-export interface RadioItem {
-	value: string
-	content: ReactNode | string
-}
-interface MyRadioGroupProps {
-	className?: string
-	value: RadioItem
-	onChange: (value: any) => void
-	items: RadioItem[]
-	label?: string
+// export interface RadioItem {
+// 	value: string
+// 	content: ReactNode | string
+// }
+// interface MyRadioGroupProps {
+// 	className?: string
+// 	value: RadioItem
+// 	onChange: (value: any) => void
+// 	items: RadioItem[]
+// 	label?: string
+// }
+export interface RadioItem<T> {
+	value: T;
+	content: ReactNode | string;
 }
 
-export const MyRadioGroup = forwardRef<any, MyRadioGroupProps>((props, forwardedRef) => {
+interface MyRadioGroupProps<T> {
+	className?: string;
+	value: RadioItem<T>;
+	onChange: (value: RadioItem<T>) => void;
+	items: RadioItem<T>[];
+	label?: string;
+}
+
+export const MyRadioGroup = forwardRef<HTMLDivElement, MyRadioGroupProps<any>>((props, forwardedRef) => {
 	const {
 		className,
 		value,
