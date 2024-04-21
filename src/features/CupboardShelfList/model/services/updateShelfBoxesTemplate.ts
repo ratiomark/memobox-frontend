@@ -10,6 +10,8 @@ import { updateBoxWithTag } from '@/entities/Box'
 import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
 import { idPrefixShelfBoxesTemplateUpdating } from '@/shared/const/idsAndDataAttributes'
 import { getBoxesTemplateModalCurrentShelfTemplate } from '../selectors/getShelfBoxesTemplateModal'
+import { TAG_VIEW_PAGE, TAG_TRASH_PAGE, TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags'
+import { rtkApi } from '@/shared/api/rtkApi'
 
 export interface UpdateShelfBoxesTemplate {
 	missedTrainingValue: MissedTrainingValue
@@ -49,23 +51,26 @@ export const updateShelfBoxesTemplate = createAsyncThunk<string, string, { rejec
 			}
 		}))
 		try {
+			// FIXME: в случае ошибки нужно оставить текущий текущий шаблон, чтобы пользователь не потерял его
 			// await sleep(4)
-			console.log('-------------------------  ', currentShelfTemplate)
-			console.log('+++++++++++++++++++++++  ', boxesList)
+			// console.log('-------------------------  ', currentShelfTemplate)
+			// console.log('+++++++++++++++++++++++  ', boxesList)
+			// const response = await dispatch(rtkShelfUpdateBoxesList({ shelfId, boxesList })).unwrap()
 			const response = await dispatch(rtkShelfUpdateBoxesList({ shelfId, boxesList })).unwrap()
-			console.log('response===================  ', response)
+			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE]))
+			// console.log('response===================  ', response)
 			// const response = boxId
 			// 	? dispatch(updateBoxWithTag({ shelfId, box: { missedTrainingValue, id: boxId } })).unwrap()
 			// 	: dispatch(updateShelfWithTag({ id: shelfId, missedTrainingValue })).unwrap()
 
-			// if (!response) {
-			// 	dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
-			// 	throw new Error()
-			// }
+			if (!response) {
+				throw new Error()
+			}
 
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 			return shelfId
 		} catch (err) {
+			dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 			return thunkAPI.rejectWithValue('some error in fetchCupboardData')
 		}
 	}

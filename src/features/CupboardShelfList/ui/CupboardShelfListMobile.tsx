@@ -40,8 +40,10 @@ import useShelvesLocalSaver from '../model/hooks/useShelvesLocalSaver';
 import useCupboardButtonsSizes from '../model/hooks/useCupboardButtonsSizes';
 import { setLocalShelvesToStore } from '../model/services/setLocalShelvesToStore';
 import { RenameShelfModal } from './Modals/RenameShelfModal/RenameShelfModal';
+import { Button } from '@/shared/ui/Button';
 
 export const CupboardShelfListMobile = () => {
+
 	// const dispatch = useAppDispatch()
 	// const cupboardData = useSelector(getCupboardData)
 	// const cupboardIsLoading = useSelector(getCupboardIsLoading)

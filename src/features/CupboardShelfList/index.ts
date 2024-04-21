@@ -24,6 +24,7 @@ export {
 	getCupboardShelves,
 	getIsCupboardRefetching,
 	getIsCupboardFirstRender,
+	getIsCupboardAppearanceModalOpen,
 } from './model/selectors/getCupboardShelfList';
 
 export { cupboardShelfListReducer, cupboardShelfListActions } from './model/slice/cupboardShelfListSlice';

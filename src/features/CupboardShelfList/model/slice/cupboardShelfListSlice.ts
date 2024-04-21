@@ -109,6 +109,7 @@ export const cupboardInitialState: CupboardPageSchema = {
 		wait: 0
 	},
 	isCupboardInfoModalOpen: false,
+	isCupboardAppearanceModalOpen: false,
 	abortedThunkIds: [],
 	skipTrainingHotKey: false
 }
@@ -185,9 +186,10 @@ const cupboardShelfList = createSlice({
 		setCreateNewShelfModalRequestStatus: (state, action: PayloadAction<RequestStatusType>) => {
 			state.createNewShelfModal.requestStatus = action.payload
 		},
-		// setCreateShelfCounter: (state) => {
-		// 	state.createNewShelfModal.shelvesCreated++
-		// },
+		// запускает перерисовку кнопок и их размера
+		addShelvesCount: (state) => {
+			state.createNewShelfModal.shelvesCreated++
+		},
 		// create new card
 		setIsCreateNewCardModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.createNewCardModal.isOpen = action.payload
@@ -304,6 +306,9 @@ const cupboardShelfList = createSlice({
 		// cupboard info modal
 		setIsCupboardInfoModalOpen: (state, action: PayloadAction<boolean>) => {
 			state.isCupboardInfoModalOpen = action.payload
+		},
+		setIsCupboardAppearanceModalOpen: (state, action: PayloadAction<boolean>) => {
+			state.isCupboardAppearanceModalOpen = action.payload
 		},
 		// 
 		setIsCupboardDataLoading: (state, action: PayloadAction<boolean>) => {

@@ -50,6 +50,7 @@ export interface CupboardPageSchema extends EntityState<ShelfSchema> {
 	renameShelfModal: RenameShelfModal
 	cupboardData: DataBlock
 	isCupboardInfoModalOpen: boolean
+	isCupboardAppearanceModalOpen: boolean
 	abortedThunkIds: string[]
 	skipTrainingHotKey: boolean
 }

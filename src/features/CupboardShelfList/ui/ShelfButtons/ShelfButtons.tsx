@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router-dom';
-import { obtainRouteMain, obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
+import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { SettingButton } from '../SettingsButton/SettingsButton';
 import { ShelfSchema, useUpdateShelfMutation } from '@/entities/Shelf';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
@@ -16,14 +16,14 @@ import cls from './ShelfButtons.module.scss';
 import { useSelector } from 'react-redux';
 import { getIsCupboardRefetching } from '../..';
 import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
-import { MyToast } from '@/shared/ui/Toast';
-import { MySimpleToast, useToastCustom } from '@/shared/ui/Toast/ui/MyToastRTK';
+import { useToastCustom } from '@/shared/ui/Toast/ui/MyToastRTK';
 import { MyTooltip } from '@/shared/ui/Tooltip/Tooltip';
 import { HotKeyPresenter } from '@/shared/ui/HotKeyPresenter/HotKeyPresenter';
 
 import ViewButtonIcon from '@/shared/assets/new/viewIcon.svg';
 import AddCardButtonIcon from '@/shared/assets/new/addIcon.svg'
 import ArrowDownIcon from '@/shared/assets/new/arrowDownIcon.svg'
+import { getUserSavedDataIsStartTrainingHotKeyVisible } from '@/entities/User';
 
 interface ShelfButtonsProps {
 	className?: string
@@ -51,13 +51,16 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 	const createToastFn = useToastCustom()
 	const [updateShelfMutation] = useUpdateShelfMutation()
 	const isRefetching = useSelector(getIsCupboardRefetching)
+	const isStartTrainingHotKeyVisible = useSelector(getUserSavedDataIsStartTrainingHotKeyVisible)
 	const noTrainingCards = trainCardsCount === 0
 	const shelfIndexEdited = shelfIndex + 1
 	let positionTextCard = '';
 	let positionTextTrain = '';
+	let positionTextView = '';
 	if (shelfIndexEdited < 10) {
 		positionTextCard = `n + ${shelfIndexEdited}`
 		positionTextTrain = `t + ${shelfIndexEdited}`
+		positionTextView = `v + ${shelfIndexEdited}`
 	}
 	const navigate = useNavigate()
 
@@ -71,17 +74,18 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		navigate(obtainRouteTraining(shelfId, 'all'))
 	}
 
+	const onViewClick = () => {
+		navigate(obtainRouteView(shelfId))
+	}
+
+
 	const onAddNewCardHandle = useCallback(() => {
 		onAddNewCardClick(shelfId)
 	}, [onAddNewCardClick, shelfId])
 
 	useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true, preventDefault: true, })
+	useHotkeys(positionTextView, onViewClick, { keydown: true, preventDefault: true, })
 	useHotkeys(positionTextTrain, startTraining, { keydown: true, enabled: !isRefetching })
-
-
-	const onViewClick = () => {
-		navigate(obtainRouteView(shelfId))
-	}
 
 
 	const onCollapseClickHandle = useCallback(() => {
@@ -102,6 +106,53 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 
 	const { t: t2 } = useTranslation('tooltip')
 	const { t } = useTranslation('translation')
+
+	let trainingButton;
+	if (isStartTrainingHotKeyVisible) {
+		trainingButton = (
+			<Button
+				fontWeight='300'
+				// className={cls.button}
+				// borderRadius='borderRadius_max'
+				onClick={startTraining}
+				variant='filled'
+				disabled={noTrainingCards || isRefetching}
+				data-button-type={dataAttrButtonTypeTrain}
+				data-testid={TEST_BUTTONS_IDS.shelf.trainButton}
+				className={cls.trainButton}
+			>
+				{t('train') + ` (${positionTextTrain})`}
+			</Button>
+		)
+	} else {
+		trainingButton = (
+			<MyTooltip
+				content={
+					<HotKeyPresenter
+						keysCombination={['t', `${shelfIndexEdited}`]}
+					// description={t2('training common shelf tooltip')}
+					/>
+					// noTrainingCards
+					// 	? t2('shelf no training cards')
+					// 	: t2('training shelf') + ` (${positionTextTrain})`
+				}
+				delay={200}
+				trigger={<Button
+					fontWeight='300'
+					// className={cls.button}
+					// borderRadius='borderRadius_max'
+					onClick={startTraining}
+					variant='filled'
+					disabled={noTrainingCards || isRefetching}
+					data-button-type={dataAttrButtonTypeTrain}
+					data-testid={TEST_BUTTONS_IDS.shelf.trainButton}
+					className={cls.trainButton}
+				>
+					{t('train')}
+				</Button>}
+			/>
+		)
+	}
 
 	return (
 		<>
@@ -148,7 +199,37 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 
 
 						<SettingButton shelfId={shelfId} />
-						<Icon
+
+						<MyTooltip
+							content={
+								// t2('add card shelf') + ` (${positionTextCard})`
+								<HotKeyPresenter
+									keysCombination={['v', `${shelfIndexEdited}`]}
+								// description={t2('training common shelf tooltip')}
+								/>
+							}
+							delay={200}
+							trigger={
+								<button
+									className={cls.addCardButton}
+									onClick={onViewClick}
+									// data-button-type={dataAttrButtonTypeAddCard}
+									data-testid={TEST_BUTTONS_IDS.shelf.viewButton}
+								>
+									<Icon
+										// className={
+										// 	clsx(cls.iconButtons)}
+										// clickable
+										withFill={false}
+										Svg={ViewButtonIcon}
+										// onClick={onViewClick}
+										data-testid={TEST_BUTTONS_IDS.shelf.viewButton}
+									/>
+
+								</button>
+							}
+						/>
+						{/* <Icon
 							// className={
 							// 	clsx(cls.iconButtons)}
 							clickable
@@ -156,7 +237,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 							Svg={ViewButtonIcon}
 							onClick={onViewClick}
 							data-testid={TEST_BUTTONS_IDS.shelf.viewButton}
-						/>
+						/> */}
 						{/* <Button
 						// className={cls.button}
 						fontWeight='300'
@@ -166,33 +247,8 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 						{t('view')}
 					</Button> */}
 					</div>
-					<MyTooltip
-						content={
-							<HotKeyPresenter
-								keysCombination={['t', `${shelfIndexEdited}`]}
-							// description={t2('training common shelf tooltip')}
-							/>
-							// noTrainingCards
-							// 	? t2('shelf no training cards')
-							// 	: t2('training shelf') + ` (${positionTextTrain})`
-						}
-						delay={200}
-						trigger={<Button
-							fontWeight='300'
-							// className={cls.button}
-							// borderRadius='borderRadius_max'
-							onClick={startTraining}
-							variant='filled'
-							disabled={noTrainingCards || isRefetching}
-							data-button-type={dataAttrButtonTypeTrain}
-							data-testid={TEST_BUTTONS_IDS.shelf.trainButton}
-							className={cls.trainButton}
-						>
-							{t('train')}
-							{/* {t('train') + ` (${positionTextTrain})`} */}
-						</Button>}
-					/>
 
+					{trainingButton}
 					<Icon
 						className={
 							clsx(cls.arrow, !isCollapsed ? cls.rotateArrow : '')}
@@ -201,6 +257,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 						width={24}
 						height={24}
 						Svg={ArrowDownIcon}
+						// Svg={ArrowBottomIcon}
 						onClick={onCollapseClickHandleDebounced}
 						data-testid={TEST_BUTTONS_IDS.shelf.collapseButton}
 					/>

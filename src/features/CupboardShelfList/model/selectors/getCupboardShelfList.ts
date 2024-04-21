@@ -97,3 +97,4 @@ export const getShelfIdAndIndexesList = (state: StateSchema) => state.cupboard.s
 export const getShelfIdAndIndexesListInitial = (state: StateSchema) => state.cupboard.shelvesIdsAndIndexesInitial ?? []
 
 export const getIsCupboardInfoOpen = (state: StateSchema) => state.cupboard.isCupboardInfoModalOpen
+export const getIsCupboardAppearanceModalOpen = (state: StateSchema) => state.cupboard.isCupboardAppearanceModalOpen

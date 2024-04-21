@@ -33,9 +33,12 @@ const useCupboardButtonsSizes = () => {
 			// addCardButtons.forEach(button => addCardsButtonsWidthList.push(button.clientWidth))
 			const maxButtonWidth = Math.ceil(Math.max(...buttonsWidthList))
 			const addCardMaxButtonWidth = Math.ceil(Math.max(...addCardsButtonsWidthList))
-			trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
+			trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth}px`)
 			// addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
-			addCardButtonGeneral.style.minWidth = `${maxButtonWidth + 2}px`
+			addCardButtonGeneral.style.minWidth = `${maxButtonWidth}px`
+			// trainButtons.forEach(button => button.style.minWidth = `${maxButtonWidth + 2}px`)
+			// // addCardButtons.forEach(button => button.style.minWidth = `${addCardMaxButtonWidth + 2}px`)
+			// addCardButtonGeneral.style.minWidth = `${maxButtonWidth + 2}px`
 		}
 		if (document.readyState === 'complete') {
 			updateSizes();

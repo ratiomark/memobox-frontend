@@ -6,11 +6,15 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import clsShelfButtons from '../ShelfButtons/ShelfButtons.module.scss'
+import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
 
 import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
-import { userActions } from '@/entities/User';
-import { updateJsonSavedDataThunk } from '@/entities/User';
-import ArrowBottomIcon from '@/shared/assets/icons/arrow-bottom.svg';
+import {
+	getUserSavedDataIsStartTrainingHotKeyVisible,
+	updateJsonSavedDataThunk,
+	userActions,
+} from '@/entities/User';
+
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
 import { localDataService } from '@/shared/lib/helpers/common/localDataService';
@@ -33,10 +37,12 @@ import { MyText } from '@/shared/ui/Typography';
 import ViewButtonIcon from '@/shared/assets/new/viewIcon.svg';
 import ArrowDownIcon from '@/shared/assets/new/arrowDownIcon.svg'
 import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
+
 export const CommonShelfButtons = () => {
 	const isRefetching = useSelector(getIsCupboardRefetching)
 	const isAnyCardsToTrainExist = useSelector(getIsAnyCardsToTrain)
 	const skipTrainingHotKey = useSelector(getIsSkipTrainingByHotKeyPress)
+	const isStartTrainingHotKeyVisible = useSelector(getUserSavedDataIsStartTrainingHotKeyVisible)
 	const navigate = useNavigate()
 	const startTraining = () => {
 		if (skipTrainingHotKey) {
@@ -71,22 +77,23 @@ export const CommonShelfButtons = () => {
 	const { t: t2 } = useTranslation('tooltip')
 	const { t } = useTranslation('translation')
 
-	return (
-		<div className={clsShelfButtons.ShelfButtons}>
-			{/* <Button
-				className={cls.button}
-				onClick={onViewClick}
+	let trainingButton;
+	if (isStartTrainingHotKeyVisible) {
+		trainingButton = (
+			<Button
+				className={clsShelfButtons.trainButton}
+				fontWeight='300'
+				variant='filled'
+				// borderRadius='borderRadius_max'
+				data-button-type={dataAttrButtonTypeTrain}
+				onClick={startTraining}
+				disabled={isRefetching || !isAnyCardsToTrainExist}
 			>
-				{t('view')}
-			</Button> */}
-
-			<Icon
-				clickable
-				withFill={false}
-				// type='hint'
-				Svg={ViewButtonIcon}
-				onClick={onViewClick}
-			/>
+				{t('train') + ' ( t )'}
+			</Button>
+		)
+	} else {
+		trainingButton = (
 			<MyTooltip
 				content={
 					<VStack align='left'>
@@ -110,6 +117,26 @@ export const CommonShelfButtons = () => {
 						{t('train')}
 					</Button>}
 			/>
+		)
+	}
+
+	return (
+		<div className={clsShelfButtons.ShelfButtons}>
+			{/* <Button
+				className={cls.button}
+				onClick={onViewClick}
+			>
+				{t('view')}
+			</Button> */}
+
+			<Icon
+				clickable
+				withFill={false}
+				// type='hint'
+				Svg={ViewButtonIcon}
+				onClick={onViewClick}
+			/>
+			{trainingButton}
 			<Icon
 				className={
 					clsx(clsShelfButtons.arrow, !commonShelfCollapsed ? clsShelfButtons.rotateArrow : '')}

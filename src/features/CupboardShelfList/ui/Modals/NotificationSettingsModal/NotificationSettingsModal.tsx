@@ -12,7 +12,7 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 import { Card } from '@/shared/ui/Card';
 import { MyText } from '@/shared/ui/Typography';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
-import { useState } from 'react';
+import { updateShelfNotificationThunk } from '../../../model/services/updateShelfNotificationThunk';
 
 
 
@@ -20,13 +20,18 @@ export const NotificationSettingsModal = () => {
 
 	const dispatch = useAppDispatch()
 	const isOpen = useSelector(getNotificationModalIsOpen)
-	const shelfId = useSelector(getNotificationModalShelfId)
-	const shelfNotificationsEnabledStore = useSelector(getShelfNotificationSetting)
-	const [notificationEnabled, setNotificationEnabled] = useState(shelfNotificationsEnabledStore)
+	// const shelfId = useSelector(getNotificationModalShelfId)
+	// const shelfNotificationsEnabledStore = useSelector(getShelfNotificationSetting)
+	// const [notificationEnabled, setNotificationEnabled] = useState(shelfNotificationsEnabledStore)
+	const notificationEnabled = useSelector(getShelfNotificationSetting)
+	
+	const onSaveNotification = () => {
+		dispatch(updateShelfNotificationThunk())
+	}
 
 	const onClose = () => {
 		dispatch(cupboardShelfListActions.setNotificationModalIsOpen(false))
-		setNotificationEnabled(shelfNotificationsEnabledStore)
+		// setNotificationEnabled(shelfNotificationsEnabledStore)
 	}
 
 	const { t } = useTranslation()
@@ -43,7 +48,7 @@ export const NotificationSettingsModal = () => {
 					className={cls.switcher}
 					title={t('Уведомления для полки')}
 					isChecked={notificationEnabled}
-					onClickSwitcher={() => setNotificationEnabled(prev => !prev)}
+					onClickSwitcher={onSaveNotification}
 				/>
 			</Card>
 			<MyText text={t('Уведомления для полки')} />

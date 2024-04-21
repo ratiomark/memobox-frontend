@@ -35,20 +35,35 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { cupboardShelfListActions } from '../model/slice/cupboardShelfListSlice';
 import { UiColorCustomizer, UiComponentEnabler, UiVariableCustomizer } from '@/shared/ui/UiVariableCustomizer';
 import { MyShelvesDelimiter } from './MyShelvesDelimiter/MyShelvesDelimiter';
-import { getUserSavedDataIsDelimiterEnabled, userActions } from '@/entities/User';
-import { getUserSavedDataCupboard } from '@/entities/User/model/selectors/getJsonSavedData';
+import {
+	getUserSavedDataIsDelimiterEnabled,
+	getUserSavedDataCupboard,
+	getUserSavedDataIsStartTrainingHotKeyVisible,
+	userActions
+} from '@/entities/User';
 import { Button } from '@/shared/ui/Button';
 
 
-const DelimiterController = () => {
-	const dispatch = useAppDispatch()
-	const cupboard = useSelector(getUserSavedDataCupboard)
-	const isDelimiterEnabled = useSelector(getUserSavedDataIsDelimiterEnabled)
-	const onToggle = () => {
-		dispatch(userActions.updateJsonSavedData({ cupboard: { ...cupboard, isDelimiterEnabled: !isDelimiterEnabled } }))
-	}
-	return <UiComponentEnabler entityName='delimiter' isEnabled={isDelimiterEnabled} onToggleClick={onToggle} />
-}
+// const DelimiterController = () => {
+// 	const dispatch = useAppDispatch()
+// 	const cupboard = useSelector(getUserSavedDataCupboard)
+// 	const isDelimiterEnabled = useSelector(getUserSavedDataIsDelimiterEnabled)
+// 	const onToggle = () => {
+// 		dispatch(userActions.updateJsonSavedData({ cupboard: { ...cupboard, isDelimiterEnabled: !isDelimiterEnabled } }))
+// 	}
+// 	return <UiComponentEnabler entityName='delimiter' isEnabled={isDelimiterEnabled} onToggleClick={onToggle} />
+// }
+// const TrainingHotKeyVisibilitySwitcher = () => {
+// 	const dispatch = useAppDispatch()
+// 	const cupboard = useSelector(getUserSavedDataCupboard)
+// 	const isStartTrainingHotKeyVisible = useSelector(getUserSavedDataIsStartTrainingHotKeyVisible)
+// 	const onToggle = () => {
+// 		dispatch(userActions.updateJsonSavedData({ cupboard: { ...cupboard, isStartTrainingHotKeyVisible: !isStartTrainingHotKeyVisible } }))
+// 		dispatch(cupboardShelfListActions.addShelvesCount())
+// 		// state.createNewShelfModal.shelvesCreated++
+// 	}
+// 	return <UiComponentEnabler entityName='Training hot key visibility' isEnabled={isStartTrainingHotKeyVisible} onToggleClick={onToggle} />
+// }
 
 
 export const CupboardShelfList = () => {
@@ -65,7 +80,8 @@ export const CupboardShelfList = () => {
 				className={cls.cupboardShelfList}
 				id={idCupboardShelfList}
 			>
-
+				{/* <AfterRegistrationSetup /> */}
+				{/* <div style={{ width: '100%', height: 20, background: 'transparent' }}></div> */}
 				<CommonShelf />
 
 				<MyShelvesDelimiter />
@@ -81,7 +97,8 @@ export const CupboardShelfList = () => {
 						gap: 16
 					}}
 				>
-					<DelimiterController />
+					{/* <TrainingHotKeyVisibilitySwitcher />
+					<DelimiterController /> */}
 					{/* <UiVariableCustomizer
 						entityName='Button border radius'
 						cssProperty='--border-radius-button-main'
@@ -92,10 +109,10 @@ export const CupboardShelfList = () => {
 						cssProperty='--border-radius-shelf'
 						useMaxValue
 					/> */}
-					{/* <UiColorCustomizer
+					<UiColorCustomizer
 						entityName='Button color'
 						cssProperty='--accent'
-					/> */}
+					/>
 					<UiVariableCustomizer
 						entityName='padding button cupboard action top'
 						cssProperty='--padding-button-cupboard-action-top'
