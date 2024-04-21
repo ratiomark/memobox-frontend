@@ -12,7 +12,8 @@ const useHideNavBar = () => {
 	const pathname = useLocation().pathname
 	const currentLocation = pathname.split('/')[1]
 	const isMobile = useSelector(getIsMobile)
-	return isMobile || currentLocation === 'training'
+	return isMobile || currentLocation === 'training' 
+	// return isMobile || currentLocation === 'training' || currentLocation === 'login' || currentLocation === 'forgot-password'
 }
 
 export const NavBar = memo(() => {
