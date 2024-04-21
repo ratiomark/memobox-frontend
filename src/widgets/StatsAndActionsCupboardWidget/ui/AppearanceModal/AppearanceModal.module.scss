@@ -1,0 +1,70 @@
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
+.cardModalPanel {
+  // max-height: 90%;
+  // min-height: 420px;
+  // width: min(600px, 80%);
+  min-width: 400px;
+  overflow: hidden;
+}
+
+.cardModal {
+  --padding-right: 20px;
+  --padding-for-scroll: 5px;
+}
+
+.mainContentWrapper {
+  padding-right: var(--padding-for-scroll);
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  // min-height: 400px;
+  min-width: 100%;
+  padding: 20px;
+
+  // padding-right: calc(var(--padding-right) - var(--padding-for-scroll));
+  // padding-left: calc(var(--padding-right) + var(--padding-for-scroll));
+  // padding-top: 4px;
+  // padding-bottom: 4px;
+  // overflow: auto;
+  // scroll-padding-bottom: 20px;
+  // scrollbar-gutter: stable;
+}
+
+// .mainContent {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+//   min-height: 400px;
+//   min-width: 100%;
+//   padding-right: calc(var(--padding-right) - var(--padding-for-scroll));
+//   padding-left: calc(var(--padding-right) + var(--padding-for-scroll));
+//   padding-top: 4px;
+//   padding-bottom: 4px;
+//   overflow: auto;
+//   scroll-padding-bottom: 20px;
+//   scrollbar-gutter: stable;
+// }
+
+// .shelfAndBoxesWrapper {
+//   display: flex;
+//   min-width: 100%;
+// }
+
+.emptySpace_top {
+  height: 20px;
+}
+
+.emptySpace_bottom {
+  height: 10px;
+}
+
+.closeButtonWrapper {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}

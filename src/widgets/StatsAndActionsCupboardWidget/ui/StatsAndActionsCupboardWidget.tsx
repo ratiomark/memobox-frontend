@@ -5,7 +5,7 @@ import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLab
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import cls from './StatsAndActionsCupboardWidget.module.scss';
 import {
@@ -33,6 +33,109 @@ import { getIsCupboardFirstRender } from '@/features/CupboardShelfList';
 import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
 import { HotKeyPresenter } from '@/shared/ui/HotKeyPresenter/HotKeyPresenter';
 import { MyTooltip } from '@/shared/ui/Tooltip';
+
+
+
+import { Dropdown } from '@/shared/ui/Popup';
+import { DropdownItem } from '@/shared/ui/Popup/ui/Dropdown/Dropdown';
+import SettingsButtonIcon from '@/shared/assets/new/settingsIcon.svg';
+import AppearanceIcon from '@/shared/assets/icons/appearance-icon.svg';
+import DotsIcon from '@/shared/assets/icons/dots-vertical-icon.svg';
+import { MyText } from '@/shared/ui/Typography';
+import { t } from 'i18next';
+import { AppearanceModal } from './AppearanceModal/AppearanceModal';
+
+export const AdditionalMenu = memo(() => {
+	const { t } = useTranslation()
+	const dispatch = useAppDispatch()
+
+	const onOpenInfoModal = () => {
+		dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
+	}
+	const onOpenInfoModal2 = () => {
+		dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
+	}
+
+
+	const appearanceIcon = <Icon
+		Svg={AppearanceIcon}
+		// width={iconSizeInfo}
+		// height={iconSizeInfo}
+		className={cls.info}
+		width={18}
+		height={18}
+		clickable
+		name='info'
+		onClick={onOpenInfoModal}
+	/>
+
+	const infoIcon = <Icon
+		Svg={InfoIcon}
+		// width={iconSizeInfo}
+		// height={iconSizeInfo}
+		className={cls.info}
+		width={18}
+		height={18}
+		clickable
+		name='info'
+		onClick={onOpenInfoModal}
+	/>
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const info = <HStack max gap='gap_12' >
+		{infoIcon}
+		{/* <MyText  text={t('cupboard')} /> */}
+		<span>
+			{t('cupboard')}
+		</span>
+	</HStack>
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const appearance = <HStack max gap='gap_12' justify='between'>
+		{appearanceIcon}
+		{/* <MyText  text={t('appearance')} /> */}
+		<span>
+			{t('appearance')}
+		</span>
+	</HStack>
+
+
+	const settingItems: DropdownItem[] = useMemo(() => {
+		return [
+			{
+				content: info,
+				onClick: () => dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
+			},
+			{
+				content: appearance,
+				onClick: () => dispatch(cupboardShelfListActions.setIsCupboardAppearanceModalOpen(true))
+			},
+
+		]
+	}, [appearance, dispatch, info])
+
+	return (
+		<Dropdown
+			items={settingItems}
+			className={cls.dropdown}
+			listDirection='bottom_left'
+			lastItemPadding
+			trigger={
+				<Icon
+					className={cls.icon}
+					// clickable
+					type='hint'
+					// onClick={() => { }}
+					withFill={false}
+					width={24}
+					height={24}
+					Svg={DotsIcon}
+				/>
+			}
+		/>
+	)
+})
+
 
 export const StatsAndActionsCupboardWidget = () => {
 	const cupboardIsLoading = useSelector(getIsCupboardLoading)
@@ -63,9 +166,9 @@ export const StatsAndActionsCupboardWidget = () => {
 		dispatch(cupboardShelfListActions.setIsCreateNewShelfModalOpen(true))
 	}
 
-	const onOpenInfoModal = () => {
-		dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
-	}
+	// const onOpenInfoModal = () => {
+	// 	dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
+	// }
 
 	const onAddNewCardClick = useCallback(() => {
 		dispatch(cupboardShelfListActions.setIsCreateNewCardModalOpen(true))
@@ -136,9 +239,9 @@ export const StatsAndActionsCupboardWidget = () => {
 							</Button>}
 					/>
 					<div className={cls.iconWrapper} >
+						<AdditionalMenu />
 
-
-						<Icon
+						{/* <Icon
 							Svg={InfoIcon}
 							// width={iconSizeInfo}
 							// height={iconSizeInfo}
@@ -148,7 +251,7 @@ export const StatsAndActionsCupboardWidget = () => {
 							clickable
 							name='info'
 							onClick={onOpenInfoModal}
-						/>
+						/> */}
 					</div>
 					{/* <Icon
 						Svg={InfoIcon}
@@ -186,61 +289,10 @@ export const StatsAndActionsCupboardWidget = () => {
 				</div>
 				{buttons}
 				<CreateNewShelfModal />
+				<AppearanceModal />
 			</HStack>
 		</motion.div>
 	)
 }
 
 
-
-// import clsx from 'clsx';
-// import { useTranslation } from 'react-i18next';
-// import { HStack } from '@/shared/ui/Stack';
-// import { CompleteBigDataLabels } from '@/shared/ui/DataLabels/CompleteBigDataLabels/CompleteBigDataLabels';
-// import { Button } from '@/shared/ui/Button';
-// import { Icon } from '@/shared/ui/Icon';
-// import InfoIcon from '@/shared/assets/icons/infoIcon.svg'
-
-// import cls from './StatsAndActionsCupboardWidget.module.scss';
-// import { useGetCupboardDataQuery } from '@/features/GetCupboardData';
-
-
-
-// interface StatsAndActionsCupboardWidgetProps {
-// 	className?: string
-// }
-
-
-// const data = { wait: 40, all: 40, train: 33 }
-// export const StatsAndActionsCupboardWidget = (props: StatsAndActionsCupboardWidgetProps) => {
-// 	const {
-// 		className
-// 	} = props
-// 	const { isSuccess, data, isLoading } = useGetCupboardDataQuery()
-// 	const { t } = useTranslation()
-
-// 	// if (isLoading) return <p>Загрузка</p>
-// 	// if(!isSuccess) return <p>Неудача</p>
-
-// 	return (
-// 		<HStack
-// 			max
-// 			className={clsx(
-// 				cls.statsAndActionsCupboardWidget,
-// 				className)}
-// 		>
-// 			<CompleteBigDataLabels data={data ?? } />
-// 			<HStack gap='gap_14' className={cls.actions} >
-// 				<Button borderRadius='borderRadius_4'>{t('New shelf')}</Button>
-// 				<Button borderRadius='borderRadius_4'>{t('add card with hot key')}</Button>
-// 				<Icon
-// 					Svg={InfoIcon}
-// 					width={26}
-// 					height={26}
-// 					className={cls.info}
-// 				/>
-
-// 			</HStack>
-// 		</HStack>
-// 	)
-// }

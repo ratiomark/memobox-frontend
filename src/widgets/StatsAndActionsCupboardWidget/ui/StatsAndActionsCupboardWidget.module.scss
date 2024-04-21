@@ -59,6 +59,25 @@
   margin-left: var(--padding-additional-from-train-button);
 }
 
+// -------------
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeShelfButton {
+  font-size: 14px;
+}
+
+.icon {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
 // .statsAndActionsCupboardWidget {
 //   justify-content: space-between;
 //   align-items: center;
