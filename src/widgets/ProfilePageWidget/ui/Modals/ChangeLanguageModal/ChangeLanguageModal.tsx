@@ -6,30 +6,29 @@ import { profilePageWidgetActions } from '../../../model/slice/profilePageWidget
 import { Input } from '@/shared/ui/Input/Input';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
 import { Heading, MyText } from '@/shared/ui/Typography';
-import { MutableRefObject, useEffect, useMemo,  useState } from 'react';
-import { Langs, useCustomTranslate } from '@/features/LanguageSwitcher';
+import { MutableRefObject, useEffect, useMemo, useState } from 'react';
+import { useCustomTranslate } from '@/features/LanguageSwitcher';
 import { getIsChangeLanguageModalOpen } from '../../../model/selectors/getProfilePageModals';
 import { useSelector } from 'react-redux';
 import { MyRadioGroup } from '@/shared/ui/MyRadioGroup';
 import { capitalizeFirstLetter } from '@/shared/lib/helpers/common/capitalizeFirstLetter';
 import { RadioItem } from '@/shared/ui/MyRadioGroup/MyRadioGroup';
+import { Langs } from '@/shared/types/languages';
 
-interface ChangeLanguageModalProps {
-	className?: string;
-}
-
+// interface ChangeLanguageModalProps {
+// 	className?: string;
+// }
+type RadioItemLangs = RadioItem<Langs>
 const LanguageNameEngInstance = new Intl.DisplayNames(['en'], { type: 'language' });
 
-export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
-	const {
-		className,
-	} = props
+// export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
+export const ChangeLanguageModal = () => {
 	const isOpen = useSelector(getIsChangeLanguageModalOpen)
 	const dispatch = useAppDispatch()
 
 	const { currentLang, setLang, t, allLangs } = useCustomTranslate('profile')
 	// const initialLang = useRef(null) as MutableRefObject<string | null>
-	const [initLang, setInitLang] = useState<string | null>(null)
+	const [initLang, setInitLang] = useState<Langs | null>(null)
 
 	useEffect(() => {
 		if (initLang === null && isOpen) {
@@ -40,13 +39,15 @@ export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
 	}, [currentLang, isOpen, initLang])
 
 	const onCloseHandle = () => {
-		setLang(initLang as Langs)
+		if (initLang) {
+			setLang(initLang)
+		}
 		setValue(langItems.find(item => item.value === initLang)!)
 		dispatch(profilePageWidgetActions.setIsChangeLanguageModalOpen(false))
 	}
 
 	const langItems = useMemo(() => {
-		const items: RadioItem[] = []
+		const items: RadioItemLangs[] = []
 		allLangs.forEach(lang => {
 			if (lang === 'en') {
 				items.push({ value: lang, content: 'English' })
@@ -62,11 +63,11 @@ export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
 	}, [allLangs])
 
 
-	const [value, setValue] = useState(langItems.find(item => item.value === currentLang)!)
+	const [value, setValue] = useState<RadioItemLangs>(langItems.find(item => item.value === currentLang)!)
 
-	const onLangChange = (radioItem: RadioItem) => {
+	const onLangChange = (radioItem: RadioItemLangs) => {
 		setValue(radioItem)
-		setLang(radioItem.value as Langs)
+		setLang(radioItem.value)
 	}
 
 	const onSubmit = () => {
@@ -88,7 +89,8 @@ export const ChangeLanguageModal = (props: ChangeLanguageModalProps) => {
 		>
 			<div className={clsx(
 				cls.changeNameModal,
-				className)}
+				// className
+			)}
 			>
 				<Heading as='h2' className={cls.title} title='Select language' />
 
