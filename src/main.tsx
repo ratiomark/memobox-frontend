@@ -26,7 +26,7 @@ const updateSW = registerSW({
 		if (ServiceWorkerRegistration) {
 			setInterval(() => {
 				ServiceWorkerRegistration.update();
-			}, 20000 /* интервал проверки обновлений, например, 20 секунд */);
+			}, 2000000 /* интервал проверки обновлений, например, 200 секунд */);
 
 			navigator.serviceWorker.addEventListener('message', (event) => {
 				if (event.data && event.data.type === 'SW_UPDATED') {

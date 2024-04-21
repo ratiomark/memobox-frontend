@@ -6,8 +6,9 @@ import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa';
 // import path from 'path'
 // https://vitejs.dev/config/
 // https://stackoverflow.com/questions/73273017/when-i-run-vite-preview-i-get-the-bundle-size-of-300kb-and-when-i-run-vite-build
-const versionId = '1234'
-// const versionId = new Date().toISOString();
+// eslint-disable-next-line prefer-const
+let versionId = '1234'
+versionId = new Date().toISOString();
 
 export default defineConfig({
 	// base: 'https://memobox.tech/',
@@ -15,25 +16,25 @@ export default defineConfig({
 		// visualizer(),
 		react(),
 		VitePWA({
-			minify: false,
+			minify: true,
 			registerType: 'autoUpdate',
 			strategies: 'injectManifest',
 			srcDir: 'src',
 			filename: 'sw-custom.ts',
 
 			injectManifest: {
-				minify: false,
-				sourcemap: true,
+				minify: true,
+				sourcemap: false,
 				enableWorkboxModulesLogs: true,
 			},
 			workbox: {
 				maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
-				sourcemap: true,
+				sourcemap: false,
 				cacheId: versionId,
 				swDest: 'dist/sw-custom.js',
 			},
 			devOptions: {
-				enabled: true,
+				enabled: false,
 				type: 'module',
 			},
 			manifest: {
@@ -92,9 +93,9 @@ export default defineConfig({
 		]
 	},
 	build: {
-		// sourcemap: 'inline',
-		// sourcemap: 'hidden',
-		sourcemap: true,
+		// sourcemap: 'inlinefalse,
+		// sourcemap: 'hiddenfalse,
+		sourcemap: false,
 
 		rollupOptions: {
 
@@ -131,8 +132,8 @@ export default defineConfig({
 	define: {
 		__IS_DEV__: JSON.stringify(true),
 		// __API__: JSON.stringify('https://memobox-backend.onrender.com/api/v1'),
-		__API__: JSON.stringify('https://qlwh4kww-3000.uks1.devtunnels.ms/api/v1'),
-		// __API__: JSON.stringify('http://localhost:3000/api/v1'),
+		// __API__: JSON.stringify('https://qlwh4kww-3000.uks1.devtunnels.ms/api/v1'),
+		__API__: JSON.stringify('http://localhost:3000/api/v1'),
 		// __API__: JSON.stringify('http://localhost:8000'),
 		// NSA: укажи тут адрес сервера
 		// __API__BACK: JSON.stringify('http://localhost:3000'),

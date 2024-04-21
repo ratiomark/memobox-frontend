@@ -60,6 +60,7 @@ module.exports = {
 		// 'code': [1, 80],
 		indent: [1, 'tab', { SwitchCase: 1 }],
 		'react/jsx-indent': [1, 'tab'],
+		"react/prop-types": "off",
 		'react/jsx-indent-props': [1, 'tab'],
 		'no-mixed-spaces-and-tabs': [1, 'smart-tabs'],
 		'react/jsx-filename-extension': [
