@@ -24,6 +24,7 @@ interface DropdownProps {
 	listDirection?: AbsoluteListDirection
 	asMainWrapper?: 'ul' | 'div' | 'ul'
 	asListWrapper?: 'ul' | 'div' | 'ul'
+	lastItemPadding?: boolean
 }
 
 
@@ -35,6 +36,7 @@ export const Dropdown = (props: DropdownProps) => {
 		asMainWrapper,
 		asListWrapper,
 		listDirection = 'bottom_right',
+		lastItemPadding = false,
 	} = props
 
 	return (
@@ -63,6 +65,7 @@ export const Dropdown = (props: DropdownProps) => {
 										cls.menuItem,
 										{ [cls.active]: active },
 										{ [cls.disabled]: item.disabled },
+										{ [cls.lastItemPadding]: index === items.length - 1 && lastItemPadding },
 									)}
 									onClick={item.onClick}
 								>
