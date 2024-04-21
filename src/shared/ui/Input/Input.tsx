@@ -136,7 +136,7 @@ export const Input = memo((props: InputProps) => {
 	// если нет аддонов, то возвращаю просто инпут
 	return (
 		<>
-			{label && <MyText text={label} />}
+			{label && <MyText as={'label'} text={label} />}
 			<input
 				// ref={myRef}
 				// autoFocus
