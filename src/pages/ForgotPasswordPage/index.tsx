@@ -1,0 +1,1 @@
+export { ForgotPasswordPageLaze as ForgotPasswordPage } from './ui/ForgotPasswordPage.lazy';
