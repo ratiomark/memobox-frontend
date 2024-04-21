@@ -13,6 +13,7 @@ export {
 	rtkRemoveShelfFinal,
 	useGetShelvesQuery,
 	rtkShelfUpdateBoxesList,
+	rtkToggleShelfNotification,
 } from './model/api/shelvesApi'
 
 export { ShelfButtons } from '../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons'

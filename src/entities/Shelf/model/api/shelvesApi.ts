@@ -108,7 +108,17 @@ export const shelvesApi = rtkApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Shelves'],
 		}),
-		shelfUpdateBoxesList: build.mutation<string, { shelfId: string, boxesList: ShelfUpdateBoxListItem[] }>({
+		toggleShelfNotification: build.mutation<string, { shelfId: string , notificationEnabled: boolean}>({
+			query: ({ shelfId, notificationEnabled}) => ({
+				url: `shelves/toggleNotification/${shelfId}`,
+				method: 'PATCH',
+				body: {
+					notificationEnabled
+				},
+			}),
+			invalidatesTags: ['Shelves'],
+		}),
+		shelfUpdateBoxesList: build.mutation<any, { shelfId: string, boxesList: ShelfUpdateBoxListItem[] }>({
 			query: (arg) => ({
 				url: 'shelves/update-boxes-list',
 				method: 'PATCH',
@@ -127,6 +137,7 @@ export const rtkUpdateShelfListOrder = shelvesApi.endpoints.updateShelfListOrder
 export const rtkRestoreShelfById = shelvesApi.endpoints.restoreShelfById.initiate
 export const rtkRemoveShelfFinal = shelvesApi.endpoints.removeShelfFinal.initiate
 export const rtkShelfUpdateBoxesList = shelvesApi.endpoints.shelfUpdateBoxesList.initiate
+export const rtkToggleShelfNotification = shelvesApi.endpoints.toggleShelfNotification.initiate
 export const { useGetShelvesQuery } = shelvesApi
 export const { useUpdateShelfMutation } = shelvesApi
 export const { useUpdateShelfWithTagMutation } = shelvesApi
