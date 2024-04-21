@@ -10,6 +10,10 @@
   "end sleep": "End of sleep",
   "add notification email": "Add email",
   "write new notification email": "Specify a new email to send notifications",
+  "device_push": {
+    "enable": "Pushes are enabled for the current device",
+    "disable": "Pushes are disabled for the current device"
+  },
   "days": {
     "monday": "Mon",
     "tuesday": "Tue",

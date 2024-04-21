@@ -11,6 +11,7 @@
   "sign up": "Зарегистрироваться",
   "sign in": "Войти",
   "log out": "Выйти",
+  "log out full text": "Выйти из системы",
   "go to sign up": "Перейти к регистрации\t",
   "go to sign in": "Перейти к входу",
   "have account": "Уже есть аккаунт?",
@@ -89,5 +90,6 @@
   "return to default": "Вернуть по умолчанию",
   "add box": "Добавить коробку",
   "compare data": "Сравнить (alt + c)",
-  "remove box": "Удалить коробку"
+  "remove box": "Удалить коробку",
+  "appearance": "Внешний вид"
 }

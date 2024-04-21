@@ -17,6 +17,7 @@
   "do not have account": "Don't have an account?",
   "to main page": "To main page",
   "log out": "Log out",
+  "log out full text": "Log out from account",
   "Форма регистрации": "SignUp Form",
   "About us": "About us",
   "main page": "Main page",
@@ -87,5 +88,6 @@
   "return to default": "Return to default",
   "add box": "Add box",
   "compare data": "Compare (alt + c)",
-  "remove box": "Remove box"
+  "remove box": "Remove box",
+  "appearance": "Appearance"
 }

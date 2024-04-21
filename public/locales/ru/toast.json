@@ -4,7 +4,22 @@
   "messageSuccess": "Успешно",
   "update_settings": {
     "messageSuccess": "Настройки обновлены",
-    "additional": "Обновление настроек"
+    "additional": "Обновление настроек",
+    "returnShelfTemplateDefault": "Восстановленны настройки по умолчанию"
+  },
+  "register": {
+    "messageSuccess": "Вы успешно зарегистрированы",
+    "messageLoading": "Регистрация пользователя"
+  },
+  "login": {
+    "messageSuccess": "Вы успешно вошли",
+    "messageLoading": "Вход в систему"
+  },
+  "logout": {
+    "messageSuccess": "Вы вышли из системы",
+    "messageLoading": "Выход из системы",
+    "messageError": "Ой, что-то пошло не так",
+    "contentError": "Пожалуйста, обновите страницу и попробуйте снова"
   },
   "create_new_card": {
     "messageSuccess": "Карточка создана",

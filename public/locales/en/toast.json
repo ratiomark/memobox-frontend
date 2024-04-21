@@ -4,7 +4,22 @@
   "messageSuccess": "Success",
   "update_settings": {
     "messageSuccess": "Settings were updated",
-    "additional": "Updating settings"
+    "additional": "Updating settings",
+    "returnShelfTemplateDefault": "Shelf template was restored to default"
+  },
+  "register": {
+    "messageSuccess": "You are registered",
+    "messageLoading": "Registration"
+  },
+  "login": {
+    "messageSuccess": "You are logged in",
+    "messageLoading": "Logging in"
+  },
+  "logout": {
+    "messageSuccess": "You are logged out",
+    "messageLoading": "Logging out",
+    "messageError": "Oops, something went wrong",
+    "contentError": "Please update the page and try again"
   },
   "create_new_card": {
     "messageSuccess": "Card created",

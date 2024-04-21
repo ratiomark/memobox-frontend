@@ -10,6 +10,10 @@
   "end sleep": "Конец сна",
   "add notification email": "Добавить email",
   "write new notification email": "Укажите новый email для отправки уведомлений",
+  "device_push": {
+    "enable": "Пуши включены для текущего устройства",
+    "disable": "Пуши отключены для текущего устройства"
+  },
   "days": {
     "monday": "Пн",
     "tuesday": "Вт",
