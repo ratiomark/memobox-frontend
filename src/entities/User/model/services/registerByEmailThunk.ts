@@ -4,14 +4,40 @@ import i18n from '@/shared/config/i18n/i18n'
 import { RegisterByEmailProps, UserWithToken, rtkApiRegisterUser, userApi, } from '../api/userApi'
 import { userActions } from '../slice/userSlice'
 import { loginUserByEmailThunk } from './loginByEmailAndPassThunk'
-
+import { toastsActions } from '@/shared/ui/Toast'
+import { t } from 'i18next'
+import { sleep } from '@/shared/lib/helpers/common/sleep'
+// dispatch(
+// 	toastsActions.addToast({
+// 		id,
+// 		toast: {
+// 			status: 'pending',
+// 			messageLoading: t('toast:messageLoading'),
+// 			messageError: t('toast:messageError'),
+// 			messageSuccess: t('toast:delete_shelf.messageSuccess'),
+// 			contentCommon: `${t('toast:delete_shelf.additional')} "${shelf.title}"`,
+// 		},
+// 	})
+// )
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
+export const id = 'registerByEmailThunk'
 export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps, { rejectValue: string, extra: ThunkExtraArg }>(
 	'user/registerByEmailThunk',
 	async ({ email, password, name }, thunkAPI) => {
 		try {
 			const { dispatch } = thunkAPI;
-
+			dispatch(
+				toastsActions.addToast({
+					id,
+					toast: {
+						status: 'pending',
+						messageLoading: t('toast:register.messageLoading'),
+						messageError: t('toast:messageError'),
+						messageSuccess: t('toast:register.messageSuccess'),
+						contentError: t('toast:logout.contentError'),
+					},
+				})
+			)
 			const response = await dispatch(
 				rtkApiRegisterUser({ email, password, name })
 			).unwrap()
@@ -19,19 +45,27 @@ export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps,
 			// Если получен null, то все прошло успешно
 			const responseSuccess = response === null
 
-			if (responseSuccess) {
-				await dispatch(loginUserByEmailThunk({ email, password }));
-				return null;
-			} else {
+			if (!responseSuccess) {
 				// Если ответ не соответствует ожидаемому, выбрасываем ошибку
 				throw new Error('Unexpected response from server');
 			}
-			// // Нет необходимости проверять response.status здесь, так как ошибки будут перехвачены в блоке catch
 
-			// await dispatch(loginUserByEmailThunk({ email, password }));
-			// return null;
+			dispatch(
+				toastsActions.updateToastById({
+					id,
+					toast: { status: 'success' }
+				}))
+			await dispatch(loginUserByEmailThunk({ email, password }));
+			return null;
+
 		} catch (error) {
-			// Обработка ошибок
+
+			thunkAPI.dispatch(
+				toastsActions.updateToastById({
+					id,
+					toast: { status: 'error' }
+				}))
+
 			// Если ошибка содержит структуру, определённую RTK Query (например, error.status), можно использовать её
 			if (isErrorWithStatus(error)) {
 				console.log('Ошибка при регистрации:', error.status, error.data);

@@ -71,7 +71,7 @@ export const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
-		logout: build.mutation<void, void>({
+		logout: build.mutation<{ count: number }, void>({
 			query: () => ({
 				url: '/auth/logout',
 				method: 'POST',
@@ -84,6 +84,16 @@ export const userApi = rtkApi.injectEndpoints({
 				method: 'PATCH',
 				body: {
 					jsonSettings
+				}
+			})
+		}),
+		confirmCountryTimeZone: build.mutation<User, { userId: string, country: string, timezone: string }>({
+			query: ({ userId, country, timezone }) => ({
+				url: `/users/${userId}`,
+				method: 'PATCH',
+				body: {
+					country,
+					timezone
 				}
 			})
 		}),
@@ -108,6 +118,13 @@ export const userApi = rtkApi.injectEndpoints({
 				url: `/users/${userId}/json-saved-data`,
 				method: 'PATCH',
 				body: jsonSavedData
+			})
+		}),
+		updateJsonSettings: build.mutation<JsonSettings, SetJsonSettings>({
+			query: ({ userId, jsonSettings }) => ({
+				url: `/users/${userId}/json-settings`,
+				method: 'PATCH',
+				body: jsonSettings
 			})
 		}),
 		getUserDataById: build.query<User, string>({
@@ -224,6 +241,25 @@ export const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
+		resetPassword: build.mutation<void, { hash: string, password: string }>({
+			query: ({ hash, password }) => ({
+				url: '/auth/reset/password',
+				method: 'POST',
+				body: {
+					hash,
+					password,
+				}
+			})
+		}),
+		forgotPassword: build.mutation<void, { email: string }>({
+			query: ({ email }) => ({
+				url: '/auth/forgot/password',
+				method: 'POST',
+				body: {
+					email
+				}
+			})
+		}),
 	}),
 })
 
@@ -232,8 +268,10 @@ export const userApi = rtkApi.injectEndpoints({
 export const setJsonSettingsMutation = userApi.endpoints.setJsonSettings.initiate
 export const getUserDataByIdQuery = userApi.endpoints.getUserDataById.initiate
 export const rtkApiUpdateJsonSavedData = userApi.endpoints.updateJsonSavedData.initiate
+export const rtkApiUpdateJsonSettings = userApi.endpoints.updateJsonSettings.initiate
 export const rtkApiLoginUser = userApi.endpoints.loginUser.initiate
 export const rtkApiRegisterUser = userApi.endpoints.registerUser.initiate
+export const rtkApiConfirmCountryTimeZone = userApi.endpoints.confirmCountryTimeZone.initiate
 export const rtkApiGetMe = userApi.endpoints.getMe.initiate
 export const getTokensOnInitWithUserSettings = userApi.endpoints.getTokensOnInitWithUserSettings.initiate
 export const rtkApiUpdateShelfTemplate = userApi.endpoints.updateShelfTemplate.initiate
@@ -250,3 +288,5 @@ export const { useGetUserSettingsQuery } = userApi
 export const { useUpdateMissedTrainingMutation } = userApi
 export const { useConfirmEmailMutation } = userApi
 export const { useSetUserLangMutation } = userApi
+export const { useForgotPasswordMutation } = userApi
+export const { useResetPasswordMutation } = userApi

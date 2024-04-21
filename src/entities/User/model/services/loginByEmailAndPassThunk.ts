@@ -5,20 +5,41 @@ import { LoginByEmailProps, UserWithToken, rtkApiLoginUser, } from '../api/userA
 import { userActions } from '../slice/userSlice'
 import { isRefreshResponse } from '@/shared/api/helpers/checkResponse'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
+import { toastsActions } from '@/shared/ui/Toast'
+import { t } from 'i18next'
 
 
-// createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
+export const id = 'loginByEmailThunk'
 export const loginUserByEmailThunk = createAsyncThunk<UserWithToken, LoginByEmailProps, { rejectValue: string, extra: ThunkExtraArg }>(
 	'user/loginByEmailAndPassThunk',
 	async ({ email, password }, thunkAPI) => {
 
 		try {
 			const { dispatch } = thunkAPI
+
+			dispatch(
+				toastsActions.addToast({
+					id,
+					toast: {
+						status: 'pending',
+						messageLoading: t('toast:login.messageLoading'),
+						messageError: t('toast:messageError'),
+						messageSuccess: t('toast:login.messageSuccess'),
+						contentError: t('toast:logout.contentError'),
+					},
+				})
+			)
 			const response = await dispatch(rtkApiLoginUser({ email, password })).unwrap()
 
 			if (!isRefreshResponse(response)) {
 				return thunkAPI.rejectWithValue(i18n.t('error on login'))
 			}
+
+			dispatch(
+				toastsActions.updateToastById({
+					id,
+					toast: { status: 'success' }
+				}))
 
 			console.log('Login response', response)
 			localDataService.setToken(response.token)
@@ -32,6 +53,11 @@ export const loginUserByEmailThunk = createAsyncThunk<UserWithToken, LoginByEmai
 			return response
 
 		} catch (err) {
+			thunkAPI.dispatch(
+				toastsActions.updateToastById({
+					id,
+					toast: { status: 'error' }
+				}))
 			return thunkAPI.rejectWithValue(i18n.t('error on login'))
 		}
 	}

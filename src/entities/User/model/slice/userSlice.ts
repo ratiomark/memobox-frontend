@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { setFeatureFlag } from '@/shared/lib/features'
 import { saveJsonSettings } from '../services/saveJsonSettings'
-import { JsonSettings } from '../types/JsonSettings'
+import { JsonSettings, PostRegistrationStep } from '../types/JsonSettings'
 import { initAuthData } from '../services/initAuthDataThunk'
 import { JsonSavedData, SortColumnObject } from '../types/JsonSavedData'
 import { UserSchema } from '../types/user'
@@ -14,6 +14,7 @@ import { daysOfWeek } from '../const/daysOfWeek'
 import { updateJsonSavedDataThunk } from '../services/updateJsonSavedData'
 import { updateNotificationSettingsThunk } from '../services/userSettings/updateNotificationThunk'
 import { updateMissedTrainingThunk } from '../services/userSettings/updateMissedTrainingThunk'
+import { updateJsonSettingsThunk } from '../services/updateJsonSettingsThunk'
 
 const initialState: UserSchema = {
 	_mounted: false,
@@ -69,11 +70,22 @@ const userSlice = createSlice({
 			state.userProfileData = action.payload
 		},
 		// 
+		setPostRegistrationStep: (state, action: PayloadAction<PostRegistrationStep>) => {
+			if (state.jsonCommonSettings) {
+				state.jsonCommonSettings.postRegistrationStep = action.payload
+			}
+		},
+		// 
 		setJsonSavedData: (state, action: PayloadAction<JsonSavedData>) => {
 			state.jsonSavedData = action.payload
 		},
 		updateJsonSavedData: (state, action: PayloadAction<Partial<JsonSavedData>>) => {
 			state.jsonSavedData = { ...state.jsonSavedData, ...action.payload }
+		},
+		updateJsonSettings: (state, action: PayloadAction<Partial<JsonSettings>>) => {
+			if (state.jsonCommonSettings) {
+				state.jsonCommonSettings = { ...state.jsonCommonSettings, ...action.payload }
+			}
 		},
 		createCopyOfJsonSavedData: (state) => {
 			state.jsonSavedDataOriginal = state.jsonSavedData
@@ -164,7 +176,7 @@ const userSlice = createSlice({
 		// 
 		logout: (state) => {
 			state.authData = undefined
-			localDataService.logout()
+			// localDataService.logout()
 			// localStorage.removeItem(KEY_USER_ID_LOCAL_STORAGE)
 		}
 	},
@@ -180,6 +192,12 @@ const userSlice = createSlice({
 				(state, action: PayloadAction<JsonSavedData>) => {
 					state.jsonSavedData = action.payload
 					state.jsonSavedDataOriginal = action.payload
+				})
+			.addCase(
+				updateJsonSettingsThunk.fulfilled,
+				(state, action: PayloadAction<JsonSettings>) => {
+					state.jsonCommonSettings = action.payload
+					state.jsonCommonSettingsOriginal = action.payload
 				})
 			.addCase(
 				updateNotificationSettingsThunk.fulfilled,

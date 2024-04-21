@@ -1,7 +1,12 @@
-export { getIsUserDeviceSubscribedToPush, getUserPushNotificationPermission } from './model/selectors/getUserPushNotificaion';
+export { updateJsonSettingsThunk } from './model/services/updateJsonSettingsThunk';
+
+export { useJsonSettings, getJsonSettings } from './model/selectors/getJsonSettings';
+
+export { getIsUserDeviceSubscribedToPush, getUserPushNotificationPermission } from './model/selectors/getUserPushNotification';
 
 export { getUserSettingsAwaitingResponse } from './model/selectors/getUserSettings';
 
+export type { PostRegistrationStep, } from './model/types/JsonSettings';
 export type { NotificationSettings, TimeSleepAtomicDataObject } from './model/types/userSettings';
 
 export { updateNotificationSettingsThunk } from './model/services/userSettings/updateNotificationThunk';
@@ -14,7 +19,7 @@ export { daysOfWeek } from './model/const/daysOfWeek';
 
 export { loginUserByEmailThunk } from './model/services/loginByEmailAndPassThunk';
 export { registerByEmailThunk } from './model/services/registerByEmailThunk';
-
+export { confirmCountryTimeZoneThunk } from './model/services/confirmCountryTimeZoneThunk';
 export {
 	rtkApiLoginUser,
 	rtkApiRegisterUser,
@@ -28,6 +33,9 @@ export {
 	rtkApiSubscribeDevicePushNotification,
 	rtkApiUnsubscribeDevicePushNotification,
 	useConfirmEmailMutation,
+	useSetUserLangMutation,
+	useForgotPasswordMutation,
+	useResetPasswordMutation,
 } from './model/api/userApi';
 
 export type {
@@ -78,7 +86,7 @@ export {
 export { initAuthData } from './model/services/initAuthDataThunk';
 
 export { saveJsonSettings } from './model/services/saveJsonSettings';
-export { useJsonSettings } from './model/selectors/getJsonSettings';
+
 export { getUserMounted } from './model/selectors/getUserMounted';
 export { getUserAuthData } from './model/selectors/getUserAuthData';
 export { userReducer, userActions } from './model/slice/userSlice';
