@@ -1,8 +1,11 @@
 import { useCurrentTime } from '@/shared/lib/helpers/hooks/useCurrentTime';
 import { Button } from '@/shared/ui/Button';
-import { HStack } from '@/shared/ui/Stack';
-import { MyText } from '@/shared/ui/Typography';
+import { HStack, VStack } from '@/shared/ui/Stack';
+import { Heading, MyText } from '@/shared/ui/Typography';
 import { FC } from 'react';
+import { LogoutComponent } from '../LogoutComponent/LogoutComponent';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { Card } from '@/shared/ui/Card';
 
 interface TimeZoneConfirmationProps {
 	country: string | null;
@@ -17,38 +20,43 @@ export const TimeZoneConfirmation: FC<TimeZoneConfirmationProps> = ({ country, t
 		return <div>Loading...</div>;
 	}
 	return (
-		<div>
-			<h2>Confirm Your Time Zone</h2>
-			<div>
-				<MyText
-					text={'Your country: '}
-					as={'span'}
-				/>
-				<MyText
-					fontWeight='600'
-					text={country}
-					as={'span'}
-				/>
-			</div>
-			<HStack gap='gap_4' style={{ flex: 1, textAlign: 'right', }}>
-				<MyText as={'span'} text={'Your current time: '} />
+		<VStack gap='gap_10' style={{ minWidth: 400 }}>
+			<Heading title={'Правильно ли указаны данные?'} as='h1' size='s' />
+			<Card max>
+				<HStack max justify='between'>
+					<MyText
+						text={'Ваша страна:'}
+					// as={'span'}
+					/>
+					<MyText
+						fontWeight='600'
+						text={country}
+					// as={'span'}
+					/>
+				</HStack>
+			</Card>
+			<Card max>
+				<HStack max justify='between' gap='gap_4' style={{ flex: 1, textAlign: 'right', }}>
+					{/* <HStack gap='gap_4' style={{ flex: 1, textAlign: 'right', }}> */}
+					<MyText as={'span'} text={'Ваше текущее время: '} />
+					<HStack gap='gap_4' align='center'>
+						{/* <MyText as={'span'} text={mainCurrentTime} /> */}
+						<MyText fontWeight='600' as={'span'} text={mainCurrentTime} />
+						<MyText as={'span'} size='s' text={`(${secondCurrentTime})`} />
+					</HStack>
+				</HStack>
+			</Card>
+			<div style={{ padding: 10 }} />
+			<ModalButtons
+				// justify='center'
+				onClose={() => onConfirm(false)}
+				onSubmit={() => onConfirm(true)}
+				textCloseButton='No, adjust'
+				textSubmitButton='Yes, all correct'
+			/>
 
-				<MyText fontWeight='600' as={'span'} text={mainCurrentTime} />
-				<MyText as={'span'} size='s' text={`(${secondCurrentTime})`} />
-			</HStack>
-			{/* <p>Your current time: {mainCurrentTime} ({secondCurrentTime})</p> */}
-			<Button
-				variant='back'
-				onClick={() => onConfirm(false)}
-			>
-				No, adjust
-			</Button>
-			<Button
-				onClick={() => onConfirm(true)}
-			>
-				Yes, all correct
-			</Button>
+			<LogoutComponent />
 			{/* <p>Your current time: {currentTime}</p> */}
-		</div>
+		</VStack>
 	);
 };

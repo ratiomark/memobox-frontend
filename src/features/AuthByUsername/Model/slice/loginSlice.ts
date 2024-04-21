@@ -10,6 +10,7 @@ const initialState: LoginSchema = {
 	name: TEST_USER_DATA.name,
 	isLoginProcess: false,
 	isForgotModalOpen: false,
+	_mounted: true,
 }
 
 

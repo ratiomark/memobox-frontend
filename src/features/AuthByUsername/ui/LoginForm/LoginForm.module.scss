@@ -3,12 +3,21 @@
   place-content: center;
 }
 
-.LoginForm {
+.skeletonWrapper {
+  min-width: 100%;
+}
+
+.LoginForm,
+.LoginFormSkeleton {
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 10px 15px;
   max-width: 300px;
+}
+
+.LoginFormSkeleton {
+  margin: 0 auto;
 }
 
 .inputWrapper {
@@ -40,6 +49,10 @@
   // margin-top: 15px;
   // margin-left: auto;
   margin: 15px auto;
+}
+
+.loginBtnSkeleton {
+  margin: 15px;
 }
 
 .textBeforeLinkButton,

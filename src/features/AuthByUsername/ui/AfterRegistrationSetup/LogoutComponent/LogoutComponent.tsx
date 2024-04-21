@@ -7,24 +7,16 @@ import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
 import { Button } from '@/shared/ui/Button';
 
-interface LogoutComponentProps {
-	className?: string;
-}
 
-export const LogoutComponent = (props: LogoutComponentProps) => {
+export const LogoutComponent = () => {
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
-	const onLogoutClick = useCallback(() => {
-		dispatch(logoutThunk())
-	}, [dispatch])
-	// content: t('log out'),
-	// onClick: onLogoutClick
-	const {
-		className,
-	} = props
+	const onLogoutClick = async () => {
+		await dispatch(logoutThunk())
+	}
 
 	return (
-		<HStack max align='center' justify='center' style={{ padding: 20 }}>
+		<HStack max align='center' justify='center' style={{ paddingTop: 20 }}>
 			<Button
 				variant='link'
 				// className={clsx(cls.logoutButton, className)}

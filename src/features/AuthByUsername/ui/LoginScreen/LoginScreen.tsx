@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginForm } from '../LoginForm/LoginForm.lazy';
 import cls from './LoginScreen.module.scss'
@@ -7,95 +7,92 @@ import { Modal } from '@/shared/ui/Modal/Modal';
 import { Button } from '@/shared/ui/Button';
 import { RegisterForm } from '../LoginForm/RegisterForm.lazy';
 import { useSelector } from 'react-redux';
-import { getLoginIsLoginProcess } from '../../Model/selectors/getLoginState/getLoginState';
+import { getLoginIsLoginProcess, getLoginMounted } from '../../Model/selectors/getLoginState/getLoginState';
 import { ReducersList, useAsyncReducer } from '@/shared/lib/helpers/hooks/useAsyncReducer';
 import { loginReducer } from '../..';
 import { LoginModalContent } from './LoginScreenContent';
+import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { loginActions } from '../../Model/slice/loginSlice';
+import { RegisterFormSkeleton } from '../LoginForm/RegisterFormSkeleton';
+import { LoginFormSkeleton } from '../LoginForm/LoginFormSkeleton';
 
-interface LoginModalProps {
-	className?: string;
-	// isOpen: boolean;
-	// onClose: () => void;
-}
-// Отдельно выносим редьюсеры от комопнента, чтобы лишний раз не создавать объект с редьюсерами, если так не сделать, то каждый раз при монтировании компонента LoginForm будет создаваться новый объект с редьюсерами и передаваться в хук, лучше сделать такой объект один раз
-// const initialReducers: ReducersList = {
-// 	loginForm: loginReducer,
-// }
-// export const LoginScreen = () => {
-// 	// const { dispatch, store } = useAsyncReducer({
-// 	// 	reducers: initialReducers,
-// 	// 	removeAfterUnmount: false,
-// 	// })
-// 	// if (store.getState().loginForm) {
-// 	return <LoginModalContent />
-// 	// }
-// 	// export const LoginModal = (props: LoginModalProps) => {
-// 	// const {
-// 	// className,
-// 	// isOpen,
-// 	// onClose
-// 	// } = props
-// 	// const isLoginProcess = useSelector(getLoginIsLoginProcess)
-// 	// const [isLogin, setIsLogin] = useState(true)
-// 	// const { t } = useTranslation()
-// 	return (
-// 		null
-// 	)
-// }
 export const LoginScreen = () => {
-	// const { dispatch, store } = useAsyncReducer({
-	// 	reducers: initialReducers,
-	// 	removeAfterUnmount: false,
-	// })
-	// export const LoginModal = (props: LoginModalProps) => {
-	// const {
-	// className,
-	// isOpen,
-	// onClose
-	// } = props
 	const isLoginProcess = useSelector(getLoginIsLoginProcess)
-	// const [isLogin, setIsLogin] = useState(true)
-	const { t } = useTranslation()
+	const loginMounted = useSelector(getLoginMounted)
+	const dispatch = useAppDispatch()
+	const location = useLocation();
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		if (location.search && loginMounted) {
+			const queryParams = new URLSearchParams(location.search);
+			const isLogin = queryParams.get('isLoginProcess');
+			const isForgotPasswordOpen = queryParams.get('isForgotPasswordOpen');
+			if (isLogin) {
+				dispatch(loginActions.setIsLoginProcess(true))
+			}
+			if (isForgotPasswordOpen) {
+				dispatch(loginActions.setIsForgotPasswordModal(true))
+			}
+			navigate('/login', { replace: true })
+		}
+	}, [location.search, loginMounted, dispatch, navigate])
+	// console.log(location.state)
+	// const fullPath = location.pathname + location.search + location.hash;
+
+	// console.log('Полный путь после /login:', fullPath);
+	// const queryParams = new URLSearchParams(location.search);
+	// console.log(JSON.stringify(queryParams.values()))
+	// console.log(JSON.stringify(queryParams.entries))
+	// console.log(JSON.stringify(queryParams.entries()))
+	// console.log(JSON.stringify(queryParams.keys))
+	// console.log(JSON.stringify(queryParams.keys()))
+	// const status = queryParams.get('status');
+	// const hash = queryParams.get('hash');
+	// <Button onClick={() => navigate('/login?isLoginProcess=true&isForgotPasswordOpen=true')}>
+	// const { postRegistrationStep } = useJsonSettings()
+	// useEffect(() => {
+	// 	// if (!auth) {
+	// 	if (!auth || postRegistrationStep !== 'COMPLETED') {
+	// 		navigate('/login')
+	// 	}
+	// }, [auth, navigate, postRegistrationStep])
 	return (
 		<div className={cls.wrapper} >
-			{/* <Button onClick={() => setIsLogin(prev => !prev)}>
-				{
-					isLogin
-						? 'ПЕРЕЙТИ К РЕГИСТРАЦИИ'
-						: 'ПЕРЕЙТИ КО ВХОДУ'
-				}
-			</Button> */}
-			<Suspense fallback={<div>{t('zagruzka')} </div>}>
-				{isLoginProcess && <LoginForm />}
+			<Suspense fallback={<RegisterFormSkeleton />}>
 				{!isLoginProcess && <RegisterForm />}
+			</Suspense>
+			<Suspense fallback={<LoginFormSkeleton />}>
+				{isLoginProcess && <LoginForm />}
 			</Suspense>
 		</div>
 	)
 }
 
-// export const LoginModal = () => {
-// 	// export const LoginModal = (props: LoginModalProps) => {
-// 	// const {
-// 	// className,
-// 	// isOpen,
-// 	// onClose
-// 	// } = props
 
+// export const LoginScreen = () => {
+// 	const isLoginProcess = useSelector(getLoginIsLoginProcess)
+// 	// const { postRegistrationStep } = useJsonSettings()
+// 	// useEffect(() => {
+// 	// 	// if (!auth) {
+// 	// 	if (!auth || postRegistrationStep !== 'COMPLETED') {
+// 	// 		navigate('/login')
+// 	// 	}
+// 	// }, [auth, navigate, postRegistrationStep])
 // 	const { t } = useTranslation()
 // 	return (
-// 		<Suspense fallback={<div>{t('zagruzka')} </div>}>
-// 			<LoginForm />
-// 		</Suspense>
+// 		<div className={cls.wrapper} >
+// 			<Suspense fallback={<div>{t('zagruzka')} </div>}>
+// 				{isLoginProcess && <LoginForm />}
+// 				{!isLoginProcess && <RegisterForm />}
+// 			</Suspense>
+// 		</div>
 // 	)
-// 	// return (
-// 	// 	<HDialogHeadless className={clsx(cls.LoginModal, [className])}
-// 	// 		isOpen={isOpen}
-// 	// 		lazy
-// 	// 		onClose={onClose}
-// 	// 	>
-// 	// 		<Suspense fallback={<div>{t('zagruzka')} </div>}>
-// 	// 			<LoginForm onSuccess={onClose} isOpen={isOpen} />
-// 	// 		</Suspense>
-// 	// 	</HDialogHeadless>
-// 	// )
 // }
+
+
+
+
+
+

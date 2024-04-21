@@ -1,113 +1,50 @@
-import {
-	getLoginError,
-	getLoginIsLoading,
-	getLoginPassword,
-	getLoginEmail,
-	getLoginUserName,
-} from '../../Model/selectors/getLoginState/getLoginState'
-import { loginActions } from '../../Model/slice/loginSlice'
-import { FormEvent, memo, useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 import cls from './LoginForm.module.scss'
-import { Button } from '@/shared/ui/Button/Button'
-import { Input } from '@/shared/ui/Input/Input'
-import clsx from 'clsx'
-import { MyText } from '@/shared/ui/Typography'
-import { getUserAuthData, registerByEmailThunk, userActions } from '@/entities/User'
-import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
-import { Icon } from '@/shared/ui/Icon'
-import EyeIcon from '@/shared/assets/icons/eye2.svg'
-import { TEST_BUTTONS_IDS, TEST_INPUTS_IDS } from '@/shared/const/testConsts'
-import { EmailAndPassword } from './EmailAndPassword'
-// import { AlreadyAuthScreen } from './AlreadyAuthScreen'
+import { DefaultButtonSkeleton, Skeleton } from '@/shared/ui/Skeleton'
 
-export interface LoginFormProps {
-	className?: string
-	isOpen?: boolean
-	onSuccess: () => void;
-}
+export const LoginFormSkeleton = () => {
 
-const RegisterForm = memo(() => {
-	const { t } = useTranslation()
-	const dispatch = useAppDispatch()
-	const email = useSelector(getLoginEmail)
-	const firstName = useSelector(getLoginUserName)
-	const password = useSelector(getLoginPassword)
-	const isLoading = useSelector(getLoginIsLoading)
-	const error = useSelector(getLoginError)
-
-	const onChangeUserName = useCallback((value: string) => {
-		dispatch(loginActions.setUserName(value))
-	}, [dispatch])
-
-	const onSwitchToLogin = useCallback(() => {
-		dispatch(loginActions.setIsLoginProcess(true))
-	}, [dispatch])
-
-	const onSubmitRegister = (e: void | FormEvent<HTMLFormElement>) => {
-		if (e) e.preventDefault()
-		onClickRegisterButton()
-	}
-
-	const onClickRegisterButton = async () => {
-		const res = await dispatch(registerByEmailThunk({ email, password, name: firstName }))
-		if (res.payload === null) {
-			dispatch(loginActions.setIsLoginProcess(true))
-		}
-	}
 
 	return (
-		<div className={cls.wrapper} >
+		<div className={cls.skeletonWrapper} >
 
-			<form className={clsx(cls.LoginForm)} onSubmit={onSubmitRegister}>
+			<div className={cls.LoginFormSkeleton}>
 				<div className={cls.inputWrapper}>
-					{error && <MyText text={error} variant='error' />}
-
-					<label className={cls.label} htmlFor='firstName'>
-						{t('name')}
-					</label>
-					<Input
-						autoFocus
-						type='text'
-						id='firstName'
-						data-testid={TEST_INPUTS_IDS.registerInputFirstName}
-						value={firstName}
-						onChangeString={onChangeUserName}
-					/>
-					<EmailAndPassword />
-					<Button
+					<Skeleton height={24} width={'20%'} className={cls.label} />
+					<Skeleton height={40} />
+					<Skeleton height={24} width={'25%'} className={cls.label} />
+					<Skeleton height={40} />
+					<DefaultButtonSkeleton className={cls.loginBtnSkeleton} />
+					{/* <Button
 						type='submit'
 						variant='filled'
 						size='size_m'
 						className={cls.loginBtn}
 						// onClick={onClickRegisterButton}
-						disabled={isLoading}
+						disabled={false}
 						data-testid={TEST_BUTTONS_IDS.registerButton}
 					>
-						{t('sign up')}
+						Зарегистрироваться
 					</Button>
 					<div>
 						<MyText
 							className={cls.textBeforeLinkButton}
 							as={'span'}
-							text={t('have account')}
+							text='Зарегистрироваться'
 						/>
 						<MyText
 							className={cls.linkButton}
 							as={'span'}
-							onClick={onSwitchToLogin}
+							onClick={() => { }}
 							data-testid={TEST_BUTTONS_IDS.goToLogin}
-							text={t('go to sign in')}
+							text='Зарегистрироваться'
 						/>
-					</div>
+					</div> */}
 				</div>
-			</form>
+			</div>
 		</div>
 	)
-})
+}
 
-export default RegisterForm
 // import {
 // 	getLoginError,
 // 	getLoginIsLoading,

@@ -9,6 +9,9 @@ import { MyText } from '@/shared/ui/Typography';
 import { confirmCountryTimeZoneThunk, userActions, updateJsonSettingsThunk } from '@/entities/User';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { Button } from '@/shared/ui/Button';
+import { LogoutComponent } from '../LogoutComponent/LogoutComponent';
+import { Card } from '@/shared/ui/Card';
+import { ModalButtons } from '@/shared/ui/ModalButtons';
 
 interface TimeZoneOptionProps {
 	timeZone: string
@@ -211,18 +214,33 @@ export const TimeZoneSetup = ({ timeZoneData, countyList }: TimeZoneSetupProps) 
 			<div className={cls.listBoxWrapper} >
 			</div>
 			{showTimeZones && timeZoneListBox}
-
-			<HStack gap='gap_4' style={{ flex: 1, textAlign: 'right', }}>
+			{/* <div style={{ paddingBottom: 10 }} /> */}
+			<Card max>
+				<HStack max justify='between' gap='gap_4' style={{ flex: 1, textAlign: 'right', }}>
+					{/* <HStack gap='gap_4' style={{ flex: 1, textAlign: 'right', }}> */}
+					<MyText as={'span'} text={'Ваше текущее время: '} />
+					<HStack gap='gap_4' align='center'>
+						{/* <MyText as={'span'} text={mainCurrentTime} /> */}
+						<MyText fontWeight='600' as={'span'} text={mainCurrentTime} />
+						<MyText as={'span'} size='s' text={`(${secondCurrentTime})`} />
+					</HStack>
+				</HStack>
+			</Card>
+			{/* <HStack gap='gap_4' style={{ flex: 1, textAlign: 'right', }}>
 				<MyText as={'span'} text={'Your current time: '} />
 				<MyText fontWeight='600' as={'span'} text={mainCurrentTime} />
 				<MyText as={'span'} size='s' text={`(${secondCurrentTime})`} />
+			</HStack> */}
+			<HStack max justify='center'>
+
+				<Button
+					onClick={handleConfirmation}
+					variant='filled'
+				>
+					Далее
+				</Button>
 			</HStack>
-			<Button
-				onClick={handleConfirmation}
-				variant='filled'
-			>
-				Далее
-			</Button>
+			<LogoutComponent />
 		</VStack>
 	);
 };
