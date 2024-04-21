@@ -16,6 +16,7 @@ import { ViewPageSkeleton } from '@/pages/ViewPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { ProfilePageWidgetSkeleton } from '@/widgets/ProfilePageWidget';
 import { ConfirmEmailPage } from '@/pages/ConfirmEmailPage';
+import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 
 export type AppRouteProps = RouteProps & {
 	authOnly?: boolean
@@ -37,6 +38,7 @@ export const AppRoutes = {
 	profile: 'profile',
 	ABOUT: 'about',
 	confirmEmail: 'confirmEmail',
+	'forgot-password': 'forgot-password',
 	forbidden_page: 'forbidden_page',
 	PAGE_NOT_FOUND: 'PAGE_NOT_FOUND',
 } as const;
@@ -81,7 +83,8 @@ export const obtainRouteArticles = () => '/articles'
 export const obtainRouteArticlesDetails = (id: string | number) => `/articles/${id}`
 export const obtainRouteAdminPanel = () => '/admin'
 export const obtainForbiddenPage = () => '/forbidden'
-export const obtainConfirmEmailPage = () => '/confirm-email'
+const obtainConfirmEmailPage = () => '/confirm-email'
+const obtainForgotPasswordPage = () => '/forgot-password'
 
 
 export const routeConfig: Record<AppRoutes, AppRouteProps> = {
@@ -155,7 +158,12 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	confirmEmail: {
 		path: obtainConfirmEmailPage(),
 		element: <ConfirmEmailPage />,
-		// suspense: <LoadingSkeleton />, // Подставьте компонент загрузки, соответствующий вашему приложению
+		// suspense: <LoadingSkeleton />, // Подставьть компонент загрузки?
+	},
+	'forgot-password': {
+		path: obtainForgotPasswordPage(),
+		element: <ForgotPasswordPage />,
+		// suspense: <LoadingSkeleton />, // Подставьть компонент загрузки?
 	},
 	forbidden_page: {
 		path: obtainForbiddenPage(),
