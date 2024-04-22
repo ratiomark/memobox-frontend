@@ -1,24 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkExtraArg } from '@/app/providers/StoreProvider'
-import i18n from '@/shared/config/i18n/i18n'
-import { RegisterByEmailProps, UserWithToken, rtkApiRegisterUser, userApi, } from '../api/userApi'
-import { userActions } from '../slice/userSlice'
+import { RegisterByEmailProps, rtkApiRegisterUser } from '../api/userApi'
 import { loginUserByEmailThunk } from './loginByEmailAndPassThunk'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
-import { sleep } from '@/shared/lib/helpers/common/sleep'
-// dispatch(
-// 	toastsActions.addToast({
-// 		id,
-// 		toast: {
-// 			status: 'pending',
-// 			messageLoading: t('toast:messageLoading'),
-// 			messageError: t('toast:messageError'),
-// 			messageSuccess: t('toast:delete_shelf.messageSuccess'),
-// 			contentCommon: `${t('toast:delete_shelf.additional')} "${shelf.title}"`,
-// 		},
-// 	})
-// )
+
+
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
 export const id = 'registerByEmailThunk'
 export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps, { rejectValue: string, extra: ThunkExtraArg }>(
@@ -88,30 +75,6 @@ interface CustomError {
 function isErrorWithStatus(error: any): error is CustomError {
 	return 'status' in error;
 }
-
-// export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps, { rejectValue: string, extra: ThunkExtraArg }>(
-// 	'user/registerByEmailThunk',
-// 	async ({ email, password, name }, thunkAPI) => {
-
-// 		try {
-// 			const { dispatch } = thunkAPI
-// 			const response = await dispatch(rtkApiRegisterUser({ email, password, name })).unwrap()
-
-// 			console.log('Регистрация. Ответ сервера:   ', response)
-// 			if (!response.status!==201) {
-// 				console.log('ОШИБКА ПРИ РЕГИСТРАЦИИ  ', response)
-// 				throw new Error()
-// 			}
-// 			// сейчас сетает null, так как после регистрации сервер не возвращает ничего
-// 			await dispatch(loginUserByEmailThunk({ email, password }))
-// 			// thunkAPI.dispatch(userActions.setAuthData(response))
-// 			return null
-
-// 		} catch (err) {
-// 			return thunkAPI.rejectWithValue(i18n.t('error on login'))
-// 		}
-// 	}
-// )
 
 // Вообще внутри thunkAPI находятся разные приколюхи, например dispatch, чтобы вызвать какой нибудь экш или getState чтобы получить акутально состояние стейта. По умолчанию, если я что-то возвращаю из createAsyncThunk, то это оборачивается в fulfillWithValue, именно таким образом thunk автоматически пробрасывает значения в slice
 

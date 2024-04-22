@@ -225,8 +225,8 @@ const userSlice = createSlice({
 					} = action.payload
 					state.authData = { id: user.id }
 					// setFeatureFlag(action.payload.features)
-					state.jsonSavedData = user.jsonSavedData!
-					state.jsonCommonSettings = user.jsonSettings!
+					state.jsonSavedData = user.jsonSavedData
+					state.jsonCommonSettings = user.jsonSettings
 					state._mounted = true
 				})
 			// .addCase(

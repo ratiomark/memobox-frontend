@@ -7,6 +7,7 @@ import { isRefreshResponse } from '@/shared/api/helpers/checkResponse'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
+import { indexedConfigService } from '@/shared/lib/helpers/common/indexedDBService'
 
 
 export const id = 'loginByEmailThunk'
@@ -45,6 +46,8 @@ export const loginUserByEmailThunk = createAsyncThunk<UserWithToken, LoginByEmai
 			localDataService.setToken(response.token)
 			localDataService.setRefreshToken(response.refreshToken)
 			localDataService.setUserId(response.user.id)
+			void indexedConfigService.setConfig('token', response.token)
+			void indexedConfigService.setConfig('refreshToken', response.refreshToken)
 			thunkAPI.dispatch(userActions.setAuthData(response))
 			thunkAPI.dispatch(userActions.setProfileData(response.user))
 			thunkAPI.dispatch(userActions.setJsonSavedData(response.user.jsonSavedData))
