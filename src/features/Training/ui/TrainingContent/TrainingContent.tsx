@@ -12,6 +12,10 @@ import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { sendTrainingAnswersThunk } from '../../model/services/sendTrainingAnswersThunk';
 import { EditorCardPresenter } from '@/shared/ui/LexicalEditor';
 import { trainingActions } from '../..';
+import { mapCardsObjectToCardAfterTraining } from '@/shared/lib/helpers/mappers/mapCardsObjectToCardAfterTraining';
+import { useSelector } from 'react-redux';
+import { getAnswersObject } from '../../model/selectors/getTraining';
+import { useSendAnswersWhenWindowClose } from '../../model/hooks/useSendAnswersWhenWindowClose';
 
 export type AnswerType = 'good' | 'bad' | 'middle'
 
@@ -42,27 +46,27 @@ export const TrainingContent = (props: TrainingContentProps) => {
 
 	const [currIndex, setCurrIndex] = useState(0)
 	// const [answerObj, setAnswerObj] = useState<CardAnswersList>([])
-	const [answerObj, setAnswerObj] = useState<CardAnswersObject>({})
+	// const [answerObj, setAnswerObj] = useState<CardAnswersObject>({})
+	// const answersObject = useSelector(getAnswersObject)
 	// const [answerObj, setAnswerObj] = useState<{ [key: string]: AnswerType }>({})
 	const [showAnswer, setShowAnswer] = useState(false)
-	// const { t } = useTranslation()
+	const [isTrainingComplete, setIsTrainingComplete] = useState(false);
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
+	useSendAnswersWhenWindowClose({ isTrainingComplete })
+
 	const onShowAnswerClick = () => setShowAnswer(true)
 
 	const onEndTraining = () => {
-		dispatch(sendTrainingAnswersThunk(answerObj))
+		setIsTrainingComplete(true)
+		dispatch(sendTrainingAnswersThunk())
 		navigate(obtainRouteMain())
 	}
 
 	const checkEndOfTraining = () => {
 		if (currIndex === cardsLength - 1) onEndTraining()
 	}
-
-	// useEffect(() => {
-	// 	if (currIndex === cardsLength) onEndTraining()
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [currIndex, answerObj])
+	
 
 	const onAnswerClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const answer = e && e.currentTarget.getAttribute('data-answer-type') as AnswerType
@@ -70,7 +74,7 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		const cardId = card.id
 		// const cardExtended = { ...card, answer: answer! }
 		// setAnswerObj(prev => ([...prev, cardExtended]))
-		dispatch(trainingActions.addCardToAnswerObj({[cardId]: { answer: answer!, card: card } }))
+		dispatch(trainingActions.addCardToAnswerObj({ [cardId]: { answer: answer!, card: card } }))
 		// setAnswerObj(prev => ({ ...prev, [cardId]: { answer: answer!, card: card } }))
 		setShowAnswer(false)
 		setCurrIndex(prev => prev + 1)
@@ -83,7 +87,7 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		const cardId = card.id
 		// const cardExtended = { ...card, answer: answerValue }
 		// setAnswerObj(prev => ([...prev, cardExtended]))
-		dispatch(trainingActions.addCardToAnswerObj({[cardId]: { answer:answerValue, card: card } }))
+		dispatch(trainingActions.addCardToAnswerObj({ [cardId]: { answer: answerValue, card: card } }))
 		// setAnswerObj(prev => ({ ...prev, [cardId]: { answer: answerValue, card: card } }))
 		setShowAnswer(false)
 		setCurrIndex(prev => prev + 1)
@@ -105,7 +109,7 @@ export const TrainingContent = (props: TrainingContentProps) => {
 	}
 
 
-	console.log(answerObj)
+	// console.log(answerObj)
 
 	return (
 		<div className={clsx(
@@ -164,29 +168,3 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		</div >
 	)
 }
-
-
-// <HStack max justify='center' gap='gap_8' className={cls.actions} >
-// 	<Button
-// 		color='trainingAction'
-// 	>
-// 		End
-// 	</Button>
-// 	<Button
-// 		variant='filled'
-// 		color='trainingAction'
-// 		onClick={onPreviousCardClick}
-// 	>
-// 		Back</Button>
-// 	<Button
-// 		variant='filled'
-// 		color='trainingAction'
-// 		onClick={onNextCardClick}
-// 	>
-// 		Next
-// 	</Button>
-// 	<Button
-// 		color='trainingAction'
-// 	>
-// 		Edit</Button>
-// </HStack>
