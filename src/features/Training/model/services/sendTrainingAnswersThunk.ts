@@ -7,9 +7,9 @@ import { getAnswersObject } from '../selectors/getTraining'
 import { mapCardsObjectToCardAfterTraining } from '@/shared/lib/helpers/mappers/mapCardsObjectToCardAfterTraining'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const sendTrainingAnswersThunk = createAsyncThunk<void, any, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
+export const sendTrainingAnswersThunk = createAsyncThunk<void, void, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
 	'slice/sendTrainingAnswersThunk',
-	async (arg, thunkAPI) => {
+	async (_, thunkAPI) => {
 		const { dispatch, extra, getState } = thunkAPI
 		const answersObject = getAnswersObject(getState())
 		try {
