@@ -2,10 +2,17 @@ import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery 
 import { localDataService } from '../lib/helpers/common/localDataService'
 import { isRefreshResponse } from './helpers/checkResponse';
 import { TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE, TAG_VIEW_PAGE } from './const/tags';
+import { indexedConfigService } from '../lib/helpers/common/indexedDBService';
 
 const getAuthToken = () => localDataService.getToken();
 const getUserLang = () => localDataService.getLanguage()
+// async function saveTokenToIndexedDB(token: string): Promise<void> {
+// 	await indexedConfigService.setConfig('token', token)
+// }
 
+// async function saveRefreshTokenToIndexedDB(refreshToken: string): Promise<void> {
+// 	await indexedConfigService.setConfig('refreshToken', refreshToken)
+// }
 const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = fetchBaseQuery({
 	baseUrl:
 		import.meta.env.DEV
@@ -38,6 +45,8 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 		if (isRefreshResponse(refreshResult.data)) {
 			localDataService.setToken(refreshResult.data.token);
 			localDataService.setRefreshToken(refreshResult.data.refreshToken);
+			void indexedConfigService.setConfig('token', refreshResult.data.token)
+			void indexedConfigService.setConfig('refreshToken', refreshResult.data.refreshToken)
 			// Повторный запрос с обновленным токеном
 			result = await baseQuery(args, api, extraOptions);
 		}
