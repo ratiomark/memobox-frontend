@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import {
 	getLoginError,
-	getLoginIsLoading,
+	getLoginIsLoadingLogin,
 	getLoginPassword,
 	getLoginEmail,
 } from '../../Model/selectors/getLoginState/getLoginState'
@@ -45,25 +45,27 @@ const LoginForm = memo(() => {
 
 	const email = useSelector(getLoginEmail)
 	const password = useSelector(getLoginPassword)
-	const isLoading = useSelector(getLoginIsLoading)
+	const isLoading = useSelector(getLoginIsLoadingLogin)
 	const error = useSelector(getLoginError)
 
 
-	useEffect(() => {
-		if (postRegistrationStep === 'COMPLETED') {
-			navigate('/');
-		}
-	}, [postRegistrationStep, navigate]);
+	// useEffect(() => {
+	// 	if (postRegistrationStep === 'COMPLETED') {
+	// 		navigate('/');
+	// 	}
+	// }, [postRegistrationStep, navigate]);
 
 	const onSwitchToRegister = useCallback(() => {
 		dispatch(loginActions.setIsLoginProcess(false))
 	}, [dispatch])
 
 	const onClickLoginButton = useCallback(async () => {
+		dispatch(loginActions.setIsLoadingLogin(true))
 		const res = await dispatch(loginUserByEmailThunk({ email, password }))
 		if (res && res.payload && isRefreshResponse(res.payload) && res.meta.requestStatus === 'fulfilled' && postRegistrationStep === 'COMPLETED') {
 			navigate('/')
 		}
+		dispatch(loginActions.setIsLoadingLogin(false))
 	}, [dispatch, email, password, navigate, postRegistrationStep])
 
 	const onForgotPasswordClick = useCallback(() => {
