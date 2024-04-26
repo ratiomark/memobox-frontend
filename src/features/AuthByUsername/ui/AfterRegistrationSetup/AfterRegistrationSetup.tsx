@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { updateJsonSettingsThunk } from '@/entities/User';
 import { HDialog } from '@/shared/ui/HDialog';
 import { HDialogHeadless } from '@/shared/ui/HDialog/HDialogHeadless';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 
 export const AfterRegistrationSetup = () => {
@@ -35,6 +36,14 @@ export const AfterRegistrationSetup = () => {
 			navigate('/');
 		}
 	}, [postRegistrationStep, navigate]);
+
+
+	useEffect(() => {
+		if (postRegistrationStep === 'LANGUAGE_CONFIRMATION') {
+			analyticsTrackEvent('setup_start')
+		}
+	}, [postRegistrationStep]);
+
 
 
 	useEffect(() => {
@@ -58,7 +67,12 @@ export const AfterRegistrationSetup = () => {
 	};
 
 	const handleConfirmationLanguage = async () => {
+		analyticsTrackEvent('setup_language_confirmed')
+		
 		dispatch(userActions.setPostRegistrationStep('TIMEZONE_CONFIRMATION'))
+		// analyticsTrackEvent('user_', {
+		// 	email,
+		// });
 		dispatch(updateJsonSettingsThunk())
 	};
 
@@ -66,6 +80,7 @@ export const AfterRegistrationSetup = () => {
 		if (confirm) {
 			// If the user confirms the timezone, finalize the settings or move to the next step
 			console.log('Timezone confirmed');
+			analyticsTrackEvent('setup_timezone_confirmed')
 			dispatch(confirmCountryTimeZoneThunk({ country: country!, timezone: initialTimeZone }))
 			dispatch(userActions.setPostRegistrationStep('COMPLETED'))
 			dispatch(updateJsonSettingsThunk())
@@ -73,6 +88,7 @@ export const AfterRegistrationSetup = () => {
 			// Here, you can route to another part of your application or show a success message
 		} else {
 			// If the user wants to adjust the timezone manually
+			analyticsTrackEvent('setup_timezone_manual_start')
 			dispatch(userActions.setPostRegistrationStep('TIMEZONE_SETUP'))
 		}
 	};

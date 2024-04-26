@@ -1,6 +1,6 @@
 import {
 	getLoginError,
-	getLoginIsLoading,
+	getLoginIsLoadingRegister,
 	getLoginPassword,
 	getLoginEmail,
 	getLoginUserName,
@@ -20,6 +20,7 @@ import { Icon } from '@/shared/ui/Icon'
 import EyeIcon from '@/shared/assets/icons/eye2.svg'
 import { TEST_BUTTONS_IDS, TEST_INPUTS_IDS } from '@/shared/const/testConsts'
 import { EmailAndPassword } from './EmailAndPassword'
+// import posthog from 'posthog-js'
 // import { AlreadyAuthScreen } from './AlreadyAuthScreen'
 
 export interface LoginFormProps {
@@ -34,7 +35,7 @@ const RegisterForm = memo(() => {
 	const email = useSelector(getLoginEmail)
 	const firstName = useSelector(getLoginUserName)
 	const password = useSelector(getLoginPassword)
-	const isLoading = useSelector(getLoginIsLoading)
+	const isLoading = useSelector(getLoginIsLoadingRegister)
 	const error = useSelector(getLoginError)
 
 	const onChangeUserName = useCallback((value: string) => {
@@ -51,7 +52,9 @@ const RegisterForm = memo(() => {
 	}
 
 	const onClickRegisterButton = async () => {
+		dispatch(loginActions.setIsLoadingRegister(true))
 		const res = await dispatch(registerByEmailThunk({ email, password, name: firstName }))
+		dispatch(loginActions.setIsLoadingRegister(false))
 		if (res.payload === null) {
 			dispatch(loginActions.setIsLoginProcess(true))
 		}

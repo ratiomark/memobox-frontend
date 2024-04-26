@@ -4,7 +4,8 @@ export interface LoginSchema {
 	email: string
 	password: string
 	name: string
-	isLoading?: boolean
+	isLoadingLogin: boolean
+	isLoadingRegister: boolean
 	error?: string
 	isLoginProcess: boolean
 	isForgotModalOpen: boolean

@@ -4,7 +4,8 @@ import { LoginSchema } from '../types/loginSchema';
 import { TEST_USER_DATA } from '@/shared/const/testConsts';
 
 const initialState: LoginSchema = {
-	isLoading: false,
+	isLoadingLogin: false,
+	isLoadingRegister: false,
 	email: TEST_USER_DATA.email,
 	password: TEST_USER_DATA.password,
 	name: TEST_USER_DATA.name,
@@ -32,6 +33,12 @@ export const loginSlice = createSlice({
 		},
 		setIsForgotPasswordModal: (state, action: PayloadAction<boolean>) => {
 			state.isForgotModalOpen = action.payload
+		},
+		setIsLoadingLogin: (state, action: PayloadAction<boolean>) => {
+			state.isLoadingLogin = action.payload
+		},
+		setIsLoadingRegister: (state, action: PayloadAction<boolean>) => {
+			state.isLoadingRegister = action.payload
 		}
 	},
 	// extraReducers: (builder) => {

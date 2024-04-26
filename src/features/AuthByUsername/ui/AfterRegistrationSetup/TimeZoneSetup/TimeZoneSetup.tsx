@@ -12,6 +12,7 @@ import { Button } from '@/shared/ui/Button';
 import { LogoutComponent } from '../LogoutComponent/LogoutComponent';
 import { Card } from '@/shared/ui/Card';
 import { ModalButtons } from '@/shared/ui/ModalButtons';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 interface TimeZoneOptionProps {
 	timeZone: string
@@ -202,6 +203,7 @@ export const TimeZoneSetup = ({ timeZoneData, countyList }: TimeZoneSetupProps) 
 		dispatch(confirmCountryTimeZoneThunk({ country: selectedCountry, timezone: selectedTimeZone }))
 		dispatch(userActions.setPostRegistrationStep('COMPLETED'))
 		dispatch(updateJsonSettingsThunk())
+		analyticsTrackEvent('setup_timezone_confirmed')
 	};
 
 	return (

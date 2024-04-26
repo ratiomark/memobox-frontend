@@ -23,6 +23,8 @@ import { TEST_BUTTONS_IDS, TEST_INPUTS_IDS } from '@/shared/const/testConsts'
 import { getUserAuthData, loginUserByEmailThunk, useJsonSettings } from '@/entities/User'
 import { EmailAndPassword } from './EmailAndPassword'
 import { AfterRegistrationSetup } from '../AfterRegistrationSetup/AfterRegistrationSetup'
+import posthog from 'posthog-js'
+import { analyticsTrackEvent } from '@/shared/lib/analytics'
 
 export interface LoginFormProps {
 	className?: string
@@ -59,14 +61,23 @@ const LoginForm = memo(() => {
 		dispatch(loginActions.setIsLoginProcess(false))
 	}, [dispatch])
 
-	const onClickLoginButton = useCallback(async () => {
+	const onClickLoginButton = async () => {
+		analyticsTrackEvent('login_button_clicked', {
+			email,
+		});
 		dispatch(loginActions.setIsLoadingLogin(true))
 		const res = await dispatch(loginUserByEmailThunk({ email, password }))
-		if (res && res.payload && isRefreshResponse(res.payload) && res.meta.requestStatus === 'fulfilled' && postRegistrationStep === 'COMPLETED') {
+		dispatch(loginActions.setIsLoadingLogin(false))
+		if (
+			res
+			&& res.payload
+			&& isRefreshResponse(res.payload)
+			&& res.meta.requestStatus === 'fulfilled'
+			&& postRegistrationStep === 'COMPLETED'
+		) {
 			navigate('/')
 		}
-		dispatch(loginActions.setIsLoadingLogin(false))
-	}, [dispatch, email, password, navigate, postRegistrationStep])
+	}
 
 	const onForgotPasswordClick = useCallback(() => {
 		dispatch(loginActions.setIsForgotPasswordModal(true))
