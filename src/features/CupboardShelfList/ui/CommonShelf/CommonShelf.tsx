@@ -33,6 +33,7 @@ export const CommonShelf = memo(() => {
 			skeletonComponent={<BoxesBlockSkeleton />}
 			componentAfterLoading={<CommonShelfBoxes />}
 			noDelay={!isLoading}
+			// noDelay={!isCupboardLoading && !isFirstRender}
 			classNameForCommonWrapper={cls.substitute}
 			classNameAbsoluteParts={cls.setBoxesLeft}
 			isLoading={isLoading}
@@ -43,6 +44,7 @@ export const CommonShelf = memo(() => {
 			skeletonComponent={<CommonShelfButtonsSkeleton />}
 			componentAfterLoading={<CommonShelfButtons />}
 			noDelay={!isLoading}
+			// noDelay={!isCupboardLoading && !isFirstRender}
 			classNameForCommonWrapper={cls.commonWrapper}
 			isLoading={isLoading}
 		/>)
