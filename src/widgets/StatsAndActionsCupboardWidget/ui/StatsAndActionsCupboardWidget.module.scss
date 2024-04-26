@@ -78,6 +78,12 @@
   }
 }
 
+.arrow {
+  // padding-left: 10px;
+  margin-left: var(--padding-additional-from-collapse);
+  transition: all 0.2s;
+}
+
 // .statsAndActionsCupboardWidget {
 //   justify-content: space-between;
 //   align-items: center;
