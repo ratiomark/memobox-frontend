@@ -183,7 +183,6 @@ export const cardApi = rtkApi.injectEndpoints({
 				method: 'POST',
 				body: {
 					responses: userResponses,
-					timezone: getCurrentTimeZone(),
 				}
 			}),
 		}),
