@@ -44,6 +44,7 @@ import DotsIcon from '@/shared/assets/icons/dots-vertical-icon.svg';
 import { MyText } from '@/shared/ui/Typography';
 import { t } from 'i18next';
 import { AppearanceModal } from './AppearanceModal/AppearanceModal';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 export const AdditionalMenu = memo(() => {
 	const { t } = useTranslation()
@@ -104,11 +105,17 @@ export const AdditionalMenu = memo(() => {
 		return [
 			{
 				content: info,
-				onClick: () => dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
+				onClick: () => {
+					dispatch(cupboardShelfListActions.setIsCupboardInfoModalOpen(true))
+					analyticsTrackEvent('cupboard_info_click')
+				}
 			},
 			{
 				content: appearance,
-				onClick: () => dispatch(cupboardShelfListActions.setIsCupboardAppearanceModalOpen(true))
+				onClick: () => {
+					dispatch(cupboardShelfListActions.setIsCupboardAppearanceModalOpen(true))
+					analyticsTrackEvent('cupboard_appearance_click')
+				}
 			},
 
 		]
@@ -123,9 +130,11 @@ export const AdditionalMenu = memo(() => {
 			trigger={
 				<Icon
 					className={cls.icon}
-					// clickable
+					clickable
 					type='hint'
-					// onClick={() => { }}
+					onClick={() => {
+						analyticsTrackEvent('cupboard_additional_click')
+					}}
 					withFill={false}
 					width={24}
 					height={24}
