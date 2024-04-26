@@ -12,7 +12,7 @@ import CheckIcon from '@/shared/assets/icons/checkIcon.svg'
 import CheckIcon2 from '@/shared/assets/icons/done-20-20.svg'
 import ErrorIcon from '@/shared/assets/icons/errorIcon.svg'
 import { MyToastProps } from '../model/types/ToastsSchema';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getToastByToastId, getToastsListIds, getToastsObject } from '../model/selectors/getToasts';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
 import { toastsActions, toastsReducer } from '../model/slice/toastSlice';
@@ -95,7 +95,7 @@ export const MyToast = (props: MyComponentToastsProps) => {
 	}
 
 	const additionalContent = additionalMessage
-		? <ToastDescription className={cls.description} >{t(additionalMessage)}</ToastDescription>
+		? <ToastDescription className={cls.description}>{t(additionalMessage)}</ToastDescription>
 		// ? <ToastDescription className={cls.description} >{t(additionalMessage)}</ToastDescription>
 		: null
 
