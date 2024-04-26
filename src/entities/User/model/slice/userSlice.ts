@@ -38,6 +38,7 @@ const initialState: UserSchema = {
 		firstName: '',
 		emailVerified: false,
 		id: '',
+		timezone: '',
 		subscriptionExpiresAt: 0,
 		subscriptionType: 'none',
 	},

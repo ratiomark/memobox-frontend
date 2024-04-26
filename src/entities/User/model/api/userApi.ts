@@ -59,7 +59,7 @@ export const userApi = rtkApi.injectEndpoints({
 				}
 			})
 		}),
-		registerUser: build.mutation<null, RegisterByEmailProps>({
+		registerUser: build.mutation<{ id: string }, RegisterByEmailProps>({
 			query: (arg) => ({
 				url: '/auth/email/register',
 				method: 'POST',

@@ -21,6 +21,7 @@ export type User = {
 	emailVerified: boolean
 	subscriptionType: 'none' | 'trial' | 'paid' | 'canceled'
 	subscriptionExpiresAt: string | number
+	timezone: string
 	// role?: UserRole[]
 	features?: Partial<FeatureFlags>
 	jsonSettings: JsonSettings
