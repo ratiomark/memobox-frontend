@@ -19,6 +19,7 @@ import { rtkCreateNewShelf } from '@/entities/Shelf';
 import { toastsActions } from '@/shared/ui/Toast';
 import { sleep } from '@/shared/lib/helpers/common/sleep';
 import { updateJsonSettingsThunk, userActions } from '@/entities/User';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 interface CreateNewShelfModalProps {
 	isOpen: boolean
@@ -60,6 +61,7 @@ const CreateNewShelfModal = ({ isOpen, setIsOpen, setIsShelfCreated, isLoading, 
 				throw new Error()
 			}
 			setIsShelfCreated(true)
+			analyticsTrackEvent('setup_completed')
 			// dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			dispatch(userActions.updateJsonSettings({ hasCreatedFirstShelf: true }))
 			await dispatch(updateJsonSettingsThunk())
