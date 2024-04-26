@@ -1,7 +1,8 @@
 import { ReactNode } from 'react'
 import { ToggleFeatures } from '@/shared/lib/features'
-import { useCustomTranslate, Langs } from '@/features/LanguageSwitcher'
+import { useCustomTranslate } from '@/features/LanguageSwitcher'
 import { Button } from '@/shared/ui/Button/Button'
+import { Langs } from '@/shared/types/languages'
 
 interface LangSwitcherProps {
 	className?: string
