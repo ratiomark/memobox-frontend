@@ -7,6 +7,7 @@ import { isRefreshResponse } from '@/shared/api/helpers/checkResponse'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
+import { analyticsLogout } from '@/shared/lib/analytics'
 
 
 const id = 'logoutThunk'
@@ -42,6 +43,8 @@ export const logoutThunk = createAsyncThunk<void, void, { rejectValue: string, e
 					id,
 					toast: { status: 'success' }
 				}))
+			
+			analyticsLogout()
 
 		} catch (err) {
 			thunkAPI.dispatch(

@@ -4,6 +4,7 @@ import { RegisterByEmailProps, rtkApiRegisterUser } from '../api/userApi'
 import { loginUserByEmailThunk } from './loginByEmailAndPassThunk'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
+import { analyticsIdentifyUser, analyticsTrackEvent } from '@/shared/lib/analytics'
 
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
@@ -13,6 +14,7 @@ export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps,
 	async ({ email, password, name }, thunkAPI) => {
 		try {
 			const { dispatch } = thunkAPI;
+			analyticsTrackEvent('user_sign_up_started');
 			dispatch(
 				toastsActions.addToast({
 					id,
@@ -29,14 +31,16 @@ export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps,
 				rtkApiRegisterUser({ email, password, name })
 			).unwrap()
 
-			// Если получен null, то все прошло успешно
-			const responseSuccess = response === null
-
-			if (!responseSuccess) {
+			if (!response.id) {
 				// Если ответ не соответствует ожидаемому, выбрасываем ошибку
 				throw new Error('Unexpected response from server');
 			}
-
+			analyticsIdentifyUser(response.id, {
+				email,
+				firstName: name,
+				id: response.id
+			})
+			analyticsTrackEvent('user_signed_up')
 			dispatch(
 				toastsActions.updateToastById({
 					id,
@@ -46,19 +50,35 @@ export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps,
 			return null;
 
 		} catch (error) {
-
 			thunkAPI.dispatch(
 				toastsActions.updateToastById({
 					id,
 					toast: { status: 'error' }
 				}))
-
-			// Если ошибка содержит структуру, определённую RTK Query (например, error.status), можно использовать её
-			if (isErrorWithStatus(error)) {
-				console.log('Ошибка при регистрации:', error.status, error.data);
+			if (isErrorWithStatusAndData(error)) {
+				analyticsTrackEvent('user_sign_up_failed', {
+					error: {
+						status: error.status,
+						message: error.data.message,
+					},
+					email,
+				});
 				// можно использовать error.data для получения тела ответа сервера, если сервер отправляет полезные данные об ошибке
-			}
-			else {
+				console.log('Ошибка при регистрации:', error.status, error.data);
+			} else if (isErrorWithStatusAndError(error)) {
+				analyticsTrackEvent('user_sign_up_failed', {
+					error: {
+						status: error.status,
+						message: error.error,
+					},
+					email,
+				});
+				console.log('Ошибка при регистрации:', error);
+			} else {
+				analyticsTrackEvent('user_sign_up_failed', {
+					error,
+					email,
+				});
 				console.log('Неизвестная ошибка при регистрации', error);
 			}
 			return thunkAPI.rejectWithValue('error on login');
@@ -68,12 +88,21 @@ export const registerByEmailThunk = createAsyncThunk<null, RegisterByEmailProps,
 
 interface CustomError {
 	status?: number;
-	data?: any;
+	error?: string;
+}
+interface CustomErrorFromServer {
+	status?: number;
+	data: {
+		message: string;
+	}
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function isErrorWithStatus(error: any): error is CustomError {
-	return 'status' in error;
+function isErrorWithStatusAndError(error: any): error is CustomError {
+	return 'status' in error && 'error' in error;
+}
+function isErrorWithStatusAndData(error: any): error is CustomErrorFromServer {
+	return 'status' in error && 'data' in error;
 }
 
 // Вообще внутри thunkAPI находятся разные приколюхи, например dispatch, чтобы вызвать какой нибудь экш или getState чтобы получить акутально состояние стейта. По умолчанию, если я что-то возвращаю из createAsyncThunk, то это оборачивается в fulfillWithValue, именно таким образом thunk автоматически пробрасывает значения в slice
