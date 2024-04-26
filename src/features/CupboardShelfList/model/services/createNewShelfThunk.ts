@@ -9,6 +9,7 @@ import { t } from 'i18next'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { TAG_TRASH_PAGE, TAG_VIEW_PAGE } from '@/shared/api/const/tags'
 import { getCupboardState } from '../selectors/getCupboardCommon';
+import { analyticsTrackEvent } from '@/shared/lib/analytics'
 
 export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
 	'cupboardPage/createNewShelfThunk',
@@ -36,6 +37,7 @@ export const createNewShelfThunk = createAsyncThunk<ShelfSchema[], string, { rej
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 				throw new Error()
 			}
+			analyticsTrackEvent('shelf_created', { shelfName })
 			dispatch(rtkApi.util.invalidateTags([TAG_VIEW_PAGE, TAG_TRASH_PAGE]))
 			const shelves = getCupboardState.selectAll(getState()).map((shelf) => ({
 				...shelf,

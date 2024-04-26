@@ -7,6 +7,8 @@ import { cupboardShelfListActions } from '../slice/cupboardShelfListSlice'
 import { t } from 'i18next'
 import { createNewCard } from '@/entities/Card'
 import { rtkApi } from '@/shared/api/rtkApi'
+import { getShelfTitleByShelfId } from '../selectors/getCupboardShelfList'
+import { analyticsTrackEvent } from '@/shared/lib/analytics'
 
 export const createNewCardThunk = createAsyncThunk<{ shelfId: string, boxId: string }, string, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
 	'cupboardPage/createNewCardThunk',
@@ -31,6 +33,7 @@ export const createNewCardThunk = createAsyncThunk<{ shelfId: string, boxId: str
 		const answer = getAnswerCardModal(getState())
 		const shelfId = getShelfIdCardModal(getState())
 		const boxId = getBoxIdCheckedCardModal(getState())!
+		const shelfName = getShelfTitleByShelfId(shelfId!)(getState())
 		try {
 			// await sleep()
 			// const response = Math.random() > 0.5
@@ -41,7 +44,7 @@ export const createNewCardThunk = createAsyncThunk<{ shelfId: string, boxId: str
 				dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
 				throw new Error()
 			}
-
+			analyticsTrackEvent('card_created', { shelfName })
 			// либо можно вручную, проверить, что viewPageInitializer существует и вручную добавить карточку
 			dispatch(rtkApi.util.invalidateTags(['ViewPage']))
 			dispatch(toastsActions.updateToastById({ id: randomId, toast: { status: 'success' } }))
