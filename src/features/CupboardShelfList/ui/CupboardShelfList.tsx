@@ -86,7 +86,7 @@ export const CupboardShelfList = () => {
 
 				<MyShelvesDelimiter />
 				<ShelvesRendered />
-				<div
+				{/* <div
 					style={{
 						width: '40%',
 						background: 'transparent',
@@ -97,9 +97,9 @@ export const CupboardShelfList = () => {
 						gap: 16
 					}}
 				>
-					{/* <TrainingHotKeyVisibilitySwitcher />
-					<DelimiterController /> */}
-					{/* <UiVariableCustomizer
+					<TrainingHotKeyVisibilitySwitcher />
+					<DelimiterController />
+					<UiVariableCustomizer
 						entityName='Button border radius'
 						cssProperty='--border-radius-button-main'
 						useMaxValue
@@ -108,7 +108,7 @@ export const CupboardShelfList = () => {
 						entityName='Shelf border radius'
 						cssProperty='--border-radius-shelf'
 						useMaxValue
-					/> */}
+					/>
 					<UiColorCustomizer
 						entityName='Button color'
 						cssProperty='--accent'
@@ -139,7 +139,7 @@ export const CupboardShelfList = () => {
 						valueListLength={12}
 						sliderMaxValue={64}
 					/>
-				</div>
+				</div> */}
 				<div style={{ width: '100%', height: 20, background: 'transparent' }}></div>
 				{/* <CommonShelf data={cupboardData} isLoading={cupboardIsLoading && isFirstRender} /> */}
 				{/* <Reorder.Group
@@ -172,7 +172,7 @@ export const CupboardShelfList = () => {
 
 export const ShelvesRendered = () => {
 	const dispatch = useAppDispatch()
-	const cupboardIsLoading = useSelector(getIsCupboardLoading)
+	const isCupboardLoading = useSelector(getIsCupboardLoading)
 	const cupboardShelves = useSelector(getCupboardState.selectAll)
 	const isFirstRender = useSelector(getIsCupboardFirstRender)
 	useShelvesDndHandler()
@@ -226,13 +226,14 @@ export const ShelvesRendered = () => {
 						onCollapseClick={onCollapseClick}
 						onNoCardTrainingHotKeyPress={onNoCardTrainingHotKeyPress}
 					/>}
-					noDelay={!cupboardIsLoading}
-					isLoading={cupboardIsLoading && isFirstRender}
+					noDelay={!isCupboardLoading}
+					// noDelay={!isCupboardLoading && !isFirstRender}
+					isLoading={isCupboardLoading && isFirstRender}
 				/>
 			)
 
 			const boxesBlock = <BoxesBlockWrapper
-				isLoading={cupboardIsLoading && isFirstRender}
+				isLoading={isCupboardLoading && isFirstRender}
 				shelf={shelf}
 			/>
 
@@ -248,7 +249,7 @@ export const ShelvesRendered = () => {
 			)
 		})
 
-	}, [cupboardIsLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick, onNoCardTrainingHotKeyPress])
+	}, [isCupboardLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick, onNoCardTrainingHotKeyPress])
 
 	return (
 		<Reorder.Group
