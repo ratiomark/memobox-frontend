@@ -89,7 +89,7 @@ export const CommonShelfButtons = () => {
 				onClick={startTraining}
 				disabled={isRefetching || !isAnyCardsToTrainExist}
 			>
-				{t('train') + ' ( t )'}
+				{t('train') + ' (t + a)'}
 			</Button>
 		)
 	} else {
