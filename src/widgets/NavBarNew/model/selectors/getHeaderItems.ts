@@ -17,6 +17,7 @@ import {
 import MainIcon from '@/shared/assets/icons/home.svg';
 import AboutIcon from '@/shared/assets/icons/InfoBook.svg';
 import { TEST_NAVIGATION_IDS } from '@/shared/const/testConsts';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 // createSelector принимает массив(или просто набор селекторов через запятую) селекторов и функцию преобразования. Если передаю массив, то каждое вычисленное значение селектора будет доступно в аргументах функции по порядку в котором были указаны в массиве
 export const getNavBarItems = createSelector(
@@ -33,31 +34,46 @@ export const getNavBarItems = createSelector(
 		// }
 		const sidebarItemsList: HeaderItemType[] = [
 			{
-				path: obtainRouteMain(),
+				path: (() => {
+					analyticsTrackEvent('navigation_main')
+					return obtainRouteMain()
+				})(),
 				text: 'cupboard',
 				Icon: MainIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateMain
 			},
 			{
-				path: obtainRouteViewEmpty(),
+				path: (() => {
+					analyticsTrackEvent('navigation_view')
+					return obtainRouteViewEmpty()
+				})(),
 				text: 'view',
 				Icon: AboutIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateView
 			},
 			{
-				path: obtainRouteStats(),
+				path: (() => {
+					analyticsTrackEvent('navigation_stats')
+					return obtainRouteStats()
+				})(),
 				text: 'stats',
 				Icon: MainIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateStats
 			},
 			{
-				path: obtainRouteSettings(),
+				path: (() => {
+					analyticsTrackEvent('navigation_settings')
+					return obtainRouteSettings()
+				})(),
 				text: 'settings',
 				Icon: AboutIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateSettings
 			},
 			{
-				path: obtainRouteTrash(),
+				path: (() => {
+					analyticsTrackEvent('navigation_trash')
+					return obtainRouteTrash()
+				})(),
 				text: 'trash',
 				Icon: AboutIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateTrash
