@@ -2,17 +2,85 @@ import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from
 // import { clientsClaim } from 'workbox-core';
 // import { NavigationRoute, registerRoute } from 'workbox-routing';
 import image from '@/shared/assets/images/emailConfirmed.png';
+import { SWMessage } from './shared/types/SW-types';
+import { sendTrainingAnswersToServer } from './shared/lib/helpers/SW/send-training-answer-to-server';
 declare let self: ServiceWorkerGlobalScope;
 
 // self.__WB_MANIFEST
 precacheAndRoute(self.__WB_MANIFEST);
 
-self.addEventListener('message', (event) => {
+self.addEventListener('message', (event: ExtendableMessageEvent) => {
 	console.log('Service Worker: Message...', event);
-	if (event.data && event.data.type === 'SKIP_WAITING') {
-		self.skipWaiting();
+	if (event.data) {
+		const message = event.data as SWMessage;
+		switch (message.type) {
+			case 'SKIP_WAITING':
+				self.skipWaiting();
+				break;
+			case 'SEND_TRAINING_DATA':
+				// Обработайте отправку данных тренировки
+				sendTrainingAnswersToServer(message.payload);
+				break;
+			case 'SW_UPDATED':
+				// Обработайте обновление сервис-воркера
+				self.clients.claim();
+				break;
+			default:
+				// Выведите ошибку, если тип сообщения не известен
+				console.error('Received unknown message type from main thread:', message);
+		}
 	}
 });
+
+
+// self.addEventListener('message', (event: ExtendableMessageEvent) => {
+// 	console.log('Service Worker: Message...', event);
+// 	if (event.data) {
+// 		const messageType = event.data.type as SWMessageType
+// 		switch (messageType) {
+// 			case 'SKIP_WAITING':
+// 				self.skipWaiting();
+// 				break;
+// 			case 'SEND_TRAINING_DATA':
+// 				sendDataToServer(event.data.payload);
+// 				break;
+// 			case 'SW_UPDATED':
+// 				self.clients.claim();
+// 				break;
+// 			default:
+// 				console.log('Неизвестный тип сообщения');
+// 		}
+// 	}
+// });
+// if (event.data && event.data.type === 'SKIP_WAITING') {
+// 	self.skipWaiting();
+// }
+// if (event.data && event.data.type === 'SEND_TRAINING_DATA') {
+// 	// Принимаем данные и отправляем их на сервер
+// 	sendDataToServer(event.data.payload);
+// }
+
+// async function sendDataToServer(data: any) {
+// 	console.log(data)
+// }
+// async function sendDataToServer(data: any) {
+// 	console.log(data)
+// 	// try {
+// 		// const response = await fetch('YOUR_BACKEND_ENDPOINT', {
+// 			// method: 'POST',
+// 			// body: JSON.stringify(data),
+// 			// headers: {
+// 				// 'Content-Type': 'application/json'
+// 			// }
+// 		// });
+// 		// if (!response.ok) {
+// 			// throw new Error('Ошибка при отправке данных на сервер');
+// 		// }
+// 		// console.log('Данные успешно отправлены');
+// 	// } catch (error) {
+// 		// console.error('Ошибка при отправке данных на сервер:', error);
+// 	// }
+// }
 
 self.addEventListener('install', (event) => {
 	console.log('Service Worker: Installing...', event);
@@ -63,7 +131,6 @@ export interface PushTrainingNotificationPayload
 }
 
 
-// использовать image, icon, badge по умолчанию
 self.addEventListener('push', event => {
 
 	try {
@@ -78,35 +145,15 @@ self.addEventListener('push', event => {
 			data,
 			tag,
 		} = payload;
-		// console.log(data)
-		// console.log(icon)
+
 		const options: NotificationOptions = {
 			body,
 			tag,
 			icon,
 			data,
 			renotify: true,
-			// image: icon,
-			// badge,
-			// icon: image,
-			// actions: [
-			// 	{ action: 'view', title: 'Просмотреть' },
-			// 	{ action: 'dismiss', title: 'Отложить на 4 часа' }
-			// ],
-			// data: {
-			// 	// notificationId: '123',
-
-			// 	url: '/training/all/all'
-			// }
 			// icon: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Types_of_Artificial_Intelligence.jpg'
 		};
-
-		// event.waitUntil(self.registration.showNotification(title, options));
-		// const options = {
-		// 	body,
-		// 	icon: `path/to/${icon}`, // Укажите правильный путь к иконке
-		// };
-
 		event.waitUntil(self.registration.showNotification(title, options));
 	} catch (error) {
 		console.error('Service Worker: Error in push event handler', error);
@@ -119,23 +166,6 @@ function handleTrainingNotification(notification: PushTrainingNotificationPayloa
 		return self.clients.openWindow(relativeUrl);
 	});
 }
-// function handleTrainingNotification(notification: PushTrainingNotificationPayload) {
-// 	return self.clients.matchAll({ type: 'window' }).then(windowClients => {
-// 		const relativeUrl = notification.data.url;
-// 		for (const client of windowClients) {
-// 			const clientUrl = new URL(client.url);
-// 			const expectedUrl = new URL(relativeUrl, clientUrl.origin); // Используем origin от текущего клиента
-// 			// console.log(clientUrl)
-// 			// console.log(expectedUrl)
-// 			// console.log(clientUrl.pathname)
-// 			// console.log(expectedUrl.pathname)
-// 			if (clientUrl.pathname === expectedUrl.pathname && 'focus' in client) {
-// 				return client.focus(); // Фокусировка, если пути совпадают и есть метод focus
-// 			}
-// 		}
-// 		return self.clients.openWindow(relativeUrl);
-// 	});
-// }
 
 self.addEventListener('notificationclick', event => {
 	const notification = event.notification as PushNotificationBasePayload;

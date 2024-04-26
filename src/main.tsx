@@ -11,6 +11,43 @@ import './app/styles/index.scss'
 import { MyToastsRTK } from './shared/ui/Toast/ui/MyToastRTKLazy'
 import { CustomTooltipProvider } from './shared/ui/Tooltip/TooltipProvider'
 import { registerSW } from 'virtual:pwa-register';
+import { indexedConfigService } from './shared/lib/helpers/common/indexedDBService'
+import { loadAnalytics } from './shared/lib/analytics'
+// import posthog from 'posthog-js'
+
+
+loadAnalytics()
+// posthog.init('phc_n1lURzDBW3hd64MQIjv1eFphRgcpOK5rsNwpJ6Kg3ou', { api_host: 'https://us.i.posthog.com' })
+
+indexedConfigService.setup({
+	apiBaseUrl: import.meta.env.DEV
+		? __API__
+		: __API__BACK
+})
+
+// window.addEventListener('load', syncLocalStorage);
+// document.addEventListener('visibilitychange', () => {
+// 	if (document.visibilityState === 'visible') {
+// 		syncLocalStorage();
+// 	}
+// });
+
+// async function syncLocalStorage() {
+// 	// Проверка и обновление токенов, если страница имеет доступ к IndexedDB
+// 	await sleep(2)
+// 	if (window.indexedDB) {
+// 		const accessToken = await indexedConfigService.getConfig('token')
+// 		const refreshToken = await indexedConfigService.getConfig('refreshToken')
+// 		if (accessToken && localDataService.getToken() !== accessToken) {
+// 			console.log('Запись токена в localStorage: ', accessToken, ' из IndexedDB')
+// 			localDataService.setToken(accessToken);
+// 		}
+// 		if (refreshToken && localDataService.getRefreshToken() !== refreshToken) {
+// 			console.log('Запись refresh токена в localStorage: ', refreshToken, ' из IndexedDB')
+// 			localDataService.setRefreshToken(refreshToken);
+// 		}
+// 	}
+// }
 
 const updateSW = registerSW({
 	onNeedRefresh() {
