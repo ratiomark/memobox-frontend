@@ -147,7 +147,7 @@ export const AdditionalMenu = memo(() => {
 
 
 export const StatsAndActionsCupboardWidget = () => {
-	const cupboardIsLoading = useSelector(getIsCupboardLoading)
+	const isCupboardLoading = useSelector(getIsCupboardLoading)
 	const cupboardIsRefetching = useSelector(getIsCupboardRefetching)
 	const cupboardError = useSelector(getCupboardError)
 	const cupboardData = useSelector(getCupboardData)
@@ -275,8 +275,9 @@ export const StatsAndActionsCupboardWidget = () => {
 					/> */}
 				</HStack >
 			}
-			noDelay={!cupboardIsLoading && !isFirstRender}
-			isLoading={cupboardIsLoading && isFirstRender}
+			noDelay={!isCupboardLoading}
+			// noDelay={!isCupboardLoading && !isFirstRender}
+			isLoading={isCupboardLoading && isFirstRender}
 		/>
 	)
 
