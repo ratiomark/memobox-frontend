@@ -5,6 +5,8 @@ import { Button } from '@/shared/ui/Button';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useLayoutEffect } from 'react';
 import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
+import { ActionMethod } from '@/entities/Shelf';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 interface ActionButtonsProps {
 	className?: string
@@ -20,7 +22,7 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 		onNextCardClick,
 		onCloseTraining,
 	} = props
-	
+
 	useLayoutEffect(() => {
 		const buttons = document.querySelectorAll('[data-button-type="training-bottom-actions"]') as NodeListOf<HTMLButtonElement>
 		const buttonsWidthList: number[] = [150]
@@ -29,9 +31,28 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 		buttons.forEach(button => button.style.minWidth = `${maxButtonWidth + 10}px`)
 	}, [])
 
-	useHotkeys('esc', onCloseTraining)
-	useHotkeys('b', onPreviousCardClick)
-	useHotkeys('m', onNextCardClick)
+	const onCloseTrainingHandle = (method: ActionMethod) => {
+		analyticsTrackEvent('training_closed', {
+			method,
+		});
+		onCloseTraining()
+	}
+	const onPreviousCardClickHandle = (method: ActionMethod) => {
+		analyticsTrackEvent('training_previous_card_navigated', {
+			method,
+		});
+		onPreviousCardClick()
+	}
+	const onNextCardClickHandle = (method: ActionMethod) => {
+		analyticsTrackEvent('training_next_card_navigated', {
+			method,
+		});
+		onNextCardClick()
+	}
+
+	useHotkeys('esc', () => onCloseTrainingHandle('hotkey'))
+	useHotkeys('b', () => onPreviousCardClickHandle('hotkey'))
+	useHotkeys('m', () => onNextCardClickHandle('hotkey'))
 	const { t } = useTranslation('training')
 
 	return (
@@ -42,7 +63,7 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 			<div className={clsx(cls.buttons, 'container')} >
 				<Button
 					color='trainingAction'
-					onClick={onCloseTraining}
+					onClick={() => onCloseTrainingHandle('click')}
 					data-button-type="training-bottom-actions"
 					data-testid={TEST_BUTTONS_IDS.training.endTrainingButton}
 				>
@@ -51,7 +72,7 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 				<Button
 					variant='filled'
 					color='trainingAction'
-					onClick={onPreviousCardClick}
+					onClick={() => onPreviousCardClickHandle('click')}
 					data-button-type="training-bottom-actions"
 					data-testid={TEST_BUTTONS_IDS.training.previousCardButton}
 				>
@@ -60,7 +81,7 @@ export const ActionButtons = (props: ActionButtonsProps) => {
 				<Button
 					variant='filled'
 					color='trainingAction'
-					onClick={onNextCardClick}
+					onClick={() => onNextCardClickHandle('click')}
 					data-button-type="training-bottom-actions"
 					data-testid={TEST_BUTTONS_IDS.training.skipCardButton}
 				>
