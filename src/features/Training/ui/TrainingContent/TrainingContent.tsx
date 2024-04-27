@@ -16,6 +16,7 @@ import { mapCardsObjectToCardAfterTraining } from '@/shared/lib/helpers/mappers/
 import { useSelector } from 'react-redux';
 import { getAnswersObject } from '../../model/selectors/getTraining';
 import { useSendAnswersWhenWindowClose } from '../../model/hooks/useSendAnswersWhenWindowClose';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 export type AnswerType = 'good' | 'bad' | 'middle'
 
@@ -66,10 +67,14 @@ export const TrainingContent = (props: TrainingContentProps) => {
 	const checkEndOfTraining = () => {
 		if (currIndex === cardsLength - 1) onEndTraining()
 	}
-	
+
 
 	const onAnswerClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const answer = e && e.currentTarget.getAttribute('data-answer-type') as AnswerType
+		analyticsTrackEvent('training_answer_selected', {
+			method: 'click',
+			answer,
+		});
 		const card = dataObj[String(currIndex)]
 		const cardId = card.id
 		// const cardExtended = { ...card, answer: answer! }
@@ -82,6 +87,10 @@ export const TrainingContent = (props: TrainingContentProps) => {
 	}
 
 	const onAnswerHotKeyHandle = (answerValue: AnswerType) => {
+		analyticsTrackEvent('training_answer_selected', {
+			method: 'hotkey',
+			answer: answerValue,
+		});
 		const card = dataObj[String(currIndex)]
 		// const { id: cardId, question, answer, ...rest } = card
 		const cardId = card.id
