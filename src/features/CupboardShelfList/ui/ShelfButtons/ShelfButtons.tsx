@@ -8,7 +8,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router-dom';
 import { obtainRouteTraining, obtainRouteView } from '@/app/providers/router/config/routeConfig/routeConfig';
 import { SettingButton } from '../SettingsButton/SettingsButton';
-import { ShelfSchema, useUpdateShelfMutation } from '@/entities/Shelf';
+import { ActionMethod, ShelfSchema, useUpdateShelfMutation } from '@/entities/Shelf';
 import { DURATION_SHELF_COLLAPSING_SEC } from '@/shared/const/animation';
 import { useThrottle } from '@/shared/lib/helpers/hooks/useThrottle';
 import { dataAttrButtonTypeAddCard, dataAttrButtonTypeTrain } from '@/shared/const/idsAndDataAttributes';
@@ -24,12 +24,13 @@ import ViewButtonIcon from '@/shared/assets/new/viewIcon.svg';
 import AddCardButtonIcon from '@/shared/assets/new/addIcon.svg'
 import ArrowDownIcon from '@/shared/assets/new/arrowDownIcon.svg'
 import { getUserSavedDataIsStartTrainingHotKeyVisible } from '@/entities/User';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 interface ShelfButtonsProps {
 	className?: string
 	onAddNewCardClick: (shelfId: string) => void
 	onCollapseClick: (shelfId: string, collapsed: boolean) => void
-	onNoCardTrainingHotKeyPress: () => void
+	// onNoCardTrainingHotKeyPress: () => void
 	shelf: ShelfSchema
 }
 
@@ -46,7 +47,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 		},
 		onAddNewCardClick,
 		onCollapseClick,
-		onNoCardTrainingHotKeyPress,
+		// onNoCardTrainingHotKeyPress,
 	} = props
 	const createToastFn = useToastCustom()
 	const [updateShelfMutation] = useUpdateShelfMutation()
@@ -64,28 +65,44 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 	}
 	const navigate = useNavigate()
 
-	const startTraining = () => {
-		// console.log('startTraining clicked  ', positionTextTrain)
+	const startTraining = (method: ActionMethod) => {
 		if (noTrainingCards) {
 			createToastFn({ status: 'error', messageError: 'No training cards' })
-			onNoCardTrainingHotKeyPress()
 			return
 		}
+		analyticsTrackEvent('training_started', {
+			method,
+			shelfType: 'regular',
+			boxType: 'all',
+			shelfIndex,
+		});
 		navigate(obtainRouteTraining(shelfId, 'all'))
 	}
 
-	const onViewClick = () => {
+	const onViewClick = (method: ActionMethod) => {
+		analyticsTrackEvent('view_navigated', {
+			method,
+			shelfType: 'regular',
+			shelfIndex,
+		});
 		navigate(obtainRouteView(shelfId))
 	}
 
-
-	const onAddNewCardHandle = useCallback(() => {
+	const onAddNewCardHandle = (method: ActionMethod) => {
+		analyticsTrackEvent('add_new_card_opened', {
+			method,
+			shelfType: 'regular',
+			shelfIndex,
+		});
 		onAddNewCardClick(shelfId)
-	}, [onAddNewCardClick, shelfId])
+	}
+	// const onAddNewCardHandle = useCallback(() => {
+	// 	onAddNewCardClick(shelfId)
+	// }, [onAddNewCardClick, shelfId])
 
-	useHotkeys(positionTextCard, onAddNewCardHandle, { keydown: true, preventDefault: true, })
-	useHotkeys(positionTextView, onViewClick, { keydown: true, preventDefault: true, })
-	useHotkeys(positionTextTrain, startTraining, { keydown: true, enabled: !isRefetching })
+	useHotkeys(positionTextCard, () => onAddNewCardHandle('hotkey'), { keydown: true, preventDefault: true, })
+	useHotkeys(positionTextView, () => onViewClick('hotkey'), { keydown: true, preventDefault: true, })
+	useHotkeys(positionTextTrain, () => startTraining('hotkey'), { keydown: true, enabled: !isRefetching })
 
 
 	const onCollapseClickHandle = useCallback(() => {
@@ -114,7 +131,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 				fontWeight='300'
 				// className={cls.button}
 				// borderRadius='borderRadius_max'
-				onClick={startTraining}
+				onClick={() => startTraining('click')}
 				variant='filled'
 				disabled={noTrainingCards || isRefetching}
 				data-button-type={dataAttrButtonTypeTrain}
@@ -141,7 +158,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 					fontWeight='300'
 					// className={cls.button}
 					// borderRadius='borderRadius_max'
-					onClick={startTraining}
+					onClick={() => startTraining('click')}
 					variant='filled'
 					disabled={noTrainingCards || isRefetching}
 					data-button-type={dataAttrButtonTypeTrain}
@@ -178,7 +195,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 							trigger={
 								<button
 									className={cls.addCardButton}
-									onClick={onAddNewCardHandle}
+									onClick={() => onAddNewCardHandle('click')}
 									data-button-type={dataAttrButtonTypeAddCard}
 									data-testid={TEST_BUTTONS_IDS.shelf.addCardButton}
 								>
@@ -212,7 +229,7 @@ export const ShelfButtons = memo((props: ShelfButtonsProps) => {
 							trigger={
 								<button
 									className={cls.addCardButton}
-									onClick={onViewClick}
+									onClick={() => onViewClick('click')}
 									// data-button-type={dataAttrButtonTypeAddCard}
 									data-testid={TEST_BUTTONS_IDS.shelf.viewButton}
 								>
