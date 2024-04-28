@@ -1,0 +1,1 @@
+export type ActionMethod = 'hotkey' | 'click'

@@ -19,6 +19,7 @@ export {
 export { ShelfButtons } from '../../features/CupboardShelfList/ui/ShelfButtons/ShelfButtons'
 
 // export { shelfSchema } from './model/types/shelf';
+export type { ActionMethod } from './model/types/additional'
 export type { ShelfSchema } from './model/types/ShelfSchema'
 export type { ShelfProps } from './ui/Shelf'
 export { Shelf } from './ui/Shelf'
