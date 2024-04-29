@@ -9,6 +9,7 @@ interface CustomErrorFromServer {
 	}
 }
 
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isErrorWithStatusAndError(error: any): error is CustomError {
 	return 'status' in error && 'error' in error;
