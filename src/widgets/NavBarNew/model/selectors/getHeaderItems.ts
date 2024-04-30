@@ -34,46 +34,36 @@ export const getNavBarItems = createSelector(
 		// }
 		const sidebarItemsList: HeaderItemType[] = [
 			{
-				path: (() => {
-					analyticsTrackEvent('navigation_main')
-					return obtainRouteMain()
-				})(),
+				path: obtainRouteMain(),
+				onClickItem: () => analyticsTrackEvent('navigation_main'),
 				text: 'cupboard',
 				Icon: MainIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateMain
 			},
 			{
-				path: (() => {
-					analyticsTrackEvent('navigation_view')
-					return obtainRouteViewEmpty()
-				})(),
+				path: obtainRouteViewEmpty(),
+				onClickItem: () => analyticsTrackEvent('navigation_view'),
 				text: 'view',
 				Icon: AboutIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateView
 			},
 			{
-				path: (() => {
-					analyticsTrackEvent('navigation_stats')
-					return obtainRouteStats()
-				})(),
+				path: obtainRouteStats(),
+				onClickItem: () => analyticsTrackEvent('navigation_stats'),
 				text: 'stats',
 				Icon: MainIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateStats
 			},
 			{
-				path: (() => {
-					analyticsTrackEvent('navigation_settings')
-					return obtainRouteSettings()
-				})(),
+				path: obtainRouteSettings(),
+				onClickItem: () => analyticsTrackEvent('navigation_settings'),
 				text: 'settings',
 				Icon: AboutIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateSettings
 			},
 			{
-				path: (() => {
-					analyticsTrackEvent('navigation_trash')
-					return obtainRouteTrash()
-				})(),
+				path: obtainRouteTrash(),
+				onClickItem: () => analyticsTrackEvent('navigation_trash'),
 				text: 'trash',
 				Icon: AboutIcon,
 				'data-testid': TEST_NAVIGATION_IDS.navigateTrash

@@ -18,7 +18,9 @@ export const NavBarItem = memo((props: HeaderItemProps) => {
 	} = props
 	const { t } = useTranslation()
 	return (
-		<li>
+		<li
+			onClick={item.onClickItem}
+		>
 			<AppLink
 				className={clsx(
 					cls.item,
