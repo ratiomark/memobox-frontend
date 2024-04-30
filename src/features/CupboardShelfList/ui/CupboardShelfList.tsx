@@ -209,9 +209,9 @@ export const ShelvesRendered = () => {
 		dispatch(cupboardShelfListActions.reorderShelves(shelves))
 	}, [dispatch])
 
-	const onNoCardTrainingHotKeyPress = useCallback(() => {
-		dispatch(cupboardShelfListActions.setSkipTrainingHotKey(true))
-	}, [dispatch])
+	// const onNoCardTrainingHotKeyPress = useCallback(() => {
+	// 	dispatch(cupboardShelfListActions.setSkipTrainingHotKey(true))
+	// }, [dispatch])
 
 
 	const shelvesList = useMemo(() => {
@@ -224,7 +224,7 @@ export const ShelvesRendered = () => {
 						shelf={shelf}
 						onAddNewCardClick={onAddNewCardClick}
 						onCollapseClick={onCollapseClick}
-						onNoCardTrainingHotKeyPress={onNoCardTrainingHotKeyPress}
+					// onNoCardTrainingHotKeyPress={onNoCardTrainingHotKeyPress}
 					/>}
 					noDelay={!isCupboardLoading}
 					// noDelay={!isCupboardLoading && !isFirstRender}
@@ -249,7 +249,7 @@ export const ShelvesRendered = () => {
 			)
 		})
 
-	}, [isCupboardLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick, onNoCardTrainingHotKeyPress])
+	}, [isCupboardLoading, isFirstRender, cupboardShelves, onAddNewCardClick, onCollapseClick,])
 
 	return (
 		<Reorder.Group
