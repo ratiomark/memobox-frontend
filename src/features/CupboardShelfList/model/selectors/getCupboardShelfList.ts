@@ -11,7 +11,7 @@ export const getIsCupboardDataAlreadyInStore = (state: StateSchema) => state.cup
 export const getIsCupboardNeedRefetch = (state: StateSchema) => state.cupboard.isNeedRefetch
 export const getCupboardIsNeedStop = (state: StateSchema) => state.cupboard.isNeedStop
 export const getIsCupboardFirstRender = (state: StateSchema) => state.cupboard.isFirstRender
-export const getCupboardCommonShelfCollapsed = (state: StateSchema) => state.cupboard.commonShelf?.isCollapsed
+export const getCupboardCommonShelfCollapsed = (state: StateSchema) => state.cupboard.commonShelf?.isCollapsed ?? true
 export const getCupboardCommonShelf = (state: StateSchema) => state.cupboard.commonShelf
 export const getCupboardData = (state: StateSchema) => state.cupboard.cupboardData
 export const getIsCupboardLoading = (state: StateSchema) => state.cupboard.isLoading
