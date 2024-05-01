@@ -5,6 +5,7 @@ import { TAG_CUPBOARD_PAGE } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { getAnswersObject } from '../selectors/getTraining'
 import { mapCardsObjectToCardAfterTraining } from '@/shared/lib/helpers/mappers/mapCardsObjectToCardAfterTraining'
+import { analyticsTrackEvent } from '@/shared/lib/analytics'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
 export const sendTrainingAnswersThunk = createAsyncThunk<void, void, { rejectValue: string; extra: ThunkExtraArg; state: StateSchema }>(
@@ -14,13 +15,24 @@ export const sendTrainingAnswersThunk = createAsyncThunk<void, void, { rejectVal
 		const answersObject = getAnswersObject(getState())
 		try {
 			
-			if (!answersObject) return
+			if (!answersObject) {
+				analyticsTrackEvent('training_completed_without_answers')
+				return
+			}
 			const userResponses = mapCardsObjectToCardAfterTraining(answersObject)
 			const response = dispatch(rtkApiSendTrainingAnswers(userResponses)).unwrap()
+			analyticsTrackEvent('training_completed_with_answers', {
+				all_cards: userResponses.length,
+				good_answers: userResponses.filter(card => card.answer === 'good').length,
+				bad_answers: userResponses.filter(card => card.answer === 'bad').length,
+				middle_answers: userResponses.filter(card => card.answer === 'middle').length,
+			})
 			
 			dispatch(rtkApi.util.invalidateTags([TAG_CUPBOARD_PAGE]))
 			console.log(response)
 		} catch (err) {
+			// if(isRespo)
+			analyticsTrackEvent('training_completed_with_error', { error: err })
 			return thunkAPI.rejectWithValue('Some Error in sendTrainingAnswersThunk')
 		}
 	}
