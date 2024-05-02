@@ -121,6 +121,7 @@ export function InsertImageUploadedDialogBody({
 		// 	})
 	};
 
+	// Изначальная функция загрузки изображения
 	const loadImage = (files: FileList | null) => {
 		// const url = URL.createObjectURL(files[0])
 		// setSrc(url)
@@ -142,12 +143,35 @@ export function InsertImageUploadedDialogBody({
 			reader.readAsDataURL(files[0]);
 		}
 	};
+	const loadImage3 = (files: FileList | null) => {
+		if (files === null) return;
+
+		const file = files[0];
+		const formData = new FormData();
+		formData.append('file', file);
+		formData.append('upload_preset', 'test_upload_present'); // Замените 'your_preset_here' на имя вашей предустановки
+
+		fetch('https://api.cloudinary.com/v1_1/dntzjcvfh/image/upload', {
+			method: 'POST',
+			body: formData,
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.secure_url) {
+					console.log('Image uploaded successfully: ', data.secure_url);
+					setSrc(data.secure_url); // Обновляем состояние компонента с URL загруженного изображения
+				}
+			})
+			.catch(error => {
+				console.error('Error uploading image: ', error);
+			});
+	};
 
 	return (
 		<>
 			<FileInput
 				label="Image Upload"
-				onChange={loadImage}
+				onChange={loadImage3}
 				accept="image/*"
 				data-test-id="image-modal-file-upload"
 			/>
