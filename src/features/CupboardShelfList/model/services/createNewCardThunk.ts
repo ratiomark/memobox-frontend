@@ -40,7 +40,6 @@ export const createNewCardThunk = createAsyncThunk<{ shelfId: string, boxId: str
 			const response = await dispatch(createNewCard({ question, answer, shelfId, boxId, })).unwrap()
 			console.log('новая карточка   ', response)
 			if (!response) {
-				dispatch(toastsActions.updateToastById({ id: randomId, toast: { status: 'error' } }))
 				dispatch(cupboardShelfListActions.setCreateNewShelfModalRequestStatus('error'))
 				throw new Error()
 			}
@@ -55,6 +54,7 @@ export const createNewCardThunk = createAsyncThunk<{ shelfId: string, boxId: str
 			// return true
 
 		} catch (err) {
+			dispatch(toastsActions.updateToastById({ id: randomId, toast: { status: 'error' } }))
 			return thunkAPI.rejectWithValue('some error in fetchCupboardData')
 		}
 	}
