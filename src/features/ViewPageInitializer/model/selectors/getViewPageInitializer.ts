@@ -207,28 +207,29 @@ export const getViewPageCardsSorted = createSelector(
 	(cards, sort, sortOrder) => {
 		if (cards?.length) {
 			return [...cards].sort((a, b) => {
-				if (sortOrder === 'asc') {
-					if (a[sort] > b[sort]) {
-						return -1
-					} else if (a[sort] < b[sort]) {
-						return 1
-					} else {
-						return 0
-					}
-				} else {
-					if (a[sort] < b[sort]) {
-						return -1
-					} else if (a[sort] > b[sort]) {
-						return 1
-					} else {
-						return 0
-					}
+				const aValue = a[sort];
+				const bValue = b[sort];
+
+				// Проверка на null
+				if (aValue === null && bValue === null) {
+					return 0;
+				} else if (aValue === null) {
+					return sortOrder === 'asc' ? 1 : -1;
+				} else if (bValue === null) {
+					return sortOrder === 'asc' ? -1 : 1;
 				}
-			})
+
+				// Обычное сравнение значений
+				if (sortOrder === 'asc') {
+					return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+				} else {
+					return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+				}
+			});
 		}
-		return []
+		return [];
 	}
-)
+);
 
 // Это вариант для случая, если я решу карточки сохранять в объекте
 export const getViewPageCardsSortedFactor = createSelector(
