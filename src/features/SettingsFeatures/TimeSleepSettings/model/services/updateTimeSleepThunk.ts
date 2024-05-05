@@ -4,6 +4,7 @@ import { getCurrentTimeSleepSettings } from '../selectors/settingsTimeSleep'
 import { TimeSleepSettings, rtkApiUpdateTimeSleep } from '@/entities/User'
 import { toastsActions } from '@/shared/ui/Toast'
 import { t } from 'i18next'
+import { analyticsTrackEvent } from '@/shared/lib/analytics'
 // import { mapHoursMinutesObjectToStartTimeString } from '@/shared/lib/helpers/mappers/mapHoursMinutesObjectToStartTimeString'
 const dayByDaySleepPeriods = {
 	monday: [],
@@ -36,14 +37,17 @@ export const updateTimeSleepThunk = createAsyncThunk<void, void, { rejectValue: 
 				messageSuccess: t('toast:update_settings.messageSuccess'),
 			}
 		}))
-		console.log(timeSleepSettingsBackendRequest)
+		// console.log(timeSleepSettingsBackendRequest)
 		// const currentUserSettings = getJsonSettings(getState())
 
 		// if (!userData) return thunkAPI.rejectWithValue('Нет userData')
 
 		try {
-			const response = await dispatch(rtkApiUpdateTimeSleep(timeSleepSettingsBackendRequest as TimeSleepSettings)).unwrap() //разворачиваю в реальный результат
+			const response = await dispatch(
+				rtkApiUpdateTimeSleep(timeSleepSettingsBackendRequest as TimeSleepSettings)
+			).unwrap()
 			// console.log(response)
+			analyticsTrackEvent('settings_time_sleep_updated')
 			dispatch(toastsActions.updateToastById({
 				id,
 				toast: { status: 'success' }
@@ -56,6 +60,7 @@ export const updateTimeSleepThunk = createAsyncThunk<void, void, { rejectValue: 
 				id,
 				toast: { status: 'success' }
 			}))
+			analyticsTrackEvent('settings_time_sleep_updated_error', { error: err })
 			return thunkAPI.rejectWithValue('Some Error in saveJsonSettings')
 		}
 	}

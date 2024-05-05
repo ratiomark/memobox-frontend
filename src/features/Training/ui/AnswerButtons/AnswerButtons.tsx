@@ -8,6 +8,8 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { AnswerType } from '../TrainingContent/TrainingContent';
 import { AnswerButtonsVariants } from './AnswerButtonsVariants';
 import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
+import { ActionMethod } from '@/entities/Shelf';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
 
 interface AnswerButtonsProps {
 	className?: string
@@ -26,7 +28,14 @@ export const AnswerButtons = (props: AnswerButtonsProps) => {
 		onAnswerClick,
 	} = props
 
-	useHotkeys('space', onShowAnswerClick, { keyup: true, enabled: !showAnswer })
+
+	const onShowAnswerClickHandle = (method: ActionMethod) => {
+		analyticsTrackEvent('training_answer_showed', {
+			method,
+		});
+		onShowAnswerClick()
+	}
+	useHotkeys('space', () => onShowAnswerClickHandle('hotkey'), { keyup: true, enabled: !showAnswer })
 
 	const { t } = useTranslation('training')
 
@@ -41,7 +50,7 @@ export const AnswerButtons = (props: AnswerButtonsProps) => {
 	return (
 		<Button
 			variant='filled'
-			onClick={onShowAnswerClick}
+			onClick={() => onShowAnswerClickHandle('click')}
 			data-testid={TEST_BUTTONS_IDS.training.shownAnswerButton}
 		>
 			{t('show answer')}
