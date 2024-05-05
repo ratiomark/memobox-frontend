@@ -206,30 +206,55 @@ export const getViewPageCardsSorted = createSelector(
 	],
 	(cards, sort, sortOrder) => {
 		if (cards?.length) {
-			return [...cards].sort((a, b) => {
-				const aValue = a[sort];
-				const bValue = b[sort];
-
-				// Проверка на null
-				if (aValue === null && bValue === null) {
-					return 0;
-				} else if (aValue === null) {
-					return sortOrder === 'asc' ? 1 : -1;
-				} else if (bValue === null) {
-					return sortOrder === 'asc' ? -1 : 1;
-				}
-
-				// Обычное сравнение значений
-				if (sortOrder === 'asc') {
-					return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
-				} else {
-					return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
-				}
-			});
+			const sortedCards = cards
+				.filter(card => card[sort] !== null)
+				.sort((a, b) => {
+					const aValue = a[sort];
+					const bValue = b[sort];
+					// Обычное сравнение значений
+					if (sortOrder === 'asc') {
+						return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+					} else {
+						return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+					}
+				});
+			return [...sortedCards, ...cards.filter(card => card[sort] === null)]
 		}
 		return [];
 	}
 );
+// export const getViewPageCardsSorted = createSelector(
+// 	[
+// 		getViewPageCardsFiltered,
+// 		getViewPageSortChecked,
+// 		getViewPageSortOrder,
+// 	],
+// 	(cards, sort, sortOrder) => {
+// 		if (cards?.length) {
+// 			return [...cards].sort((a, b) => {
+// 				const aValue = a[sort];
+// 				const bValue = b[sort];
+
+// 				// Проверка на null
+// 				if (aValue === null && bValue === null) {
+// 					return 0;
+// 				} else if (aValue === null) {
+// 					return sortOrder === 'asc' ? 1 : -1;
+// 				} else if (bValue === null) {
+// 					return sortOrder === 'asc' ? -1 : 1;
+// 				}
+
+// 				// Обычное сравнение значений
+// 				if (sortOrder === 'asc') {
+// 					return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+// 				} else {
+// 					return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+// 				}
+// 			});
+// 		}
+// 		return [];
+// 	}
+// );
 
 // Это вариант для случая, если я решу карточки сохранять в объекте
 export const getViewPageCardsSortedFactor = createSelector(
