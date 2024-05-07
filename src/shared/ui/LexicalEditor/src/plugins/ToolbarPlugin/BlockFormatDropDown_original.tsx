@@ -5,8 +5,9 @@ import orderedListIcon from '../../images/icons/text-number-list-ltr-svgrepo-com
 // import orderedListIcon from '../../images/icons/orderedListIcon3.svg'
 import codeIcon from '../../images/icons/codeIcon.svg'
 // import codeIcon from '../../images/icons/codeIcon.svg'
+import imageIcon from '../../images/icons/image-1-svgrepo-com.svg'
+// import imageIcon from '../../images/icons/imageUrl.svg'
 // import imageIcon from '../../images/icons/image-1-svgrepo-com.svg'
-import imageIcon from '../../images/icons/imageUrl.svg'
 // import imageIcon from '../../images/icons/imageIcon.svg'
 import mathIcon from '../../images/icons/mathIcon2.svg'
 import collapseIcon from '../../images/icons/triangle-right-svgrepo-com.svg'
@@ -21,10 +22,9 @@ import { buttonTitles } from '../../const/buttonTitles';
 import { blockTypeToBlockName, rootTypeToRootName } from './const';
 import { INSERT_COLLAPSIBLE_COMMAND } from '../CollapsiblePlugin';
 import { InsertEquationDialog } from '../EquationsPlugin';
-import { InsertImageDialog, InsertImageUploadDialog, InsertImageUrlDialog } from '../ImagesPlugin';
+import { InsertImageDialog } from '../ImagesPlugin';
 import { InsertInlineImageDialog } from '../InlineImagePlugin'
 import { memo } from 'react'
-import { ImageUploadButton } from '../../ui/FileInputNew'
 
 interface BlockFormatDropDownProps {
 	blockType: keyof typeof blockTypeToBlockName;
@@ -139,31 +139,7 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 			onClick: formatCode,
 			blockType: 'code',
 			icon: codeIcon
-		},
-		// {
-		// 	title: 'image url',
-		// 	onClick: () => {
-		// 		showModal('Insert Image by URL', (onClose) => (
-		// 			<InsertImageUrlDialog
-		// 				activeEditor={activeEditor}
-		// 				onClose={onClose}
-		// 			/>
-		// 		));
-		// 	},
-		// 	icon: imageIcon
-		// },
-		// {
-		// 	title: 'image upload',
-		// 	onClick: () => {
-		// 		showModal('Upload Image', (onClose) => (
-		// 			<InsertImageUploadDialog
-		// 				activeEditor={activeEditor}
-		// 				onClose={onClose}
-		// 			/>
-		// 		));
-		// 	},
-		// 	icon: imageIcon
-		// }
+		}
 	]
 
 	return (
@@ -186,63 +162,17 @@ export const BlockFormatDropDown = memo(({ editor, activeEditor, blockType, root
 					Svg={button.icon}
 				/>
 			))}
-
-			{/* <Icon
-				clickable
-				buttonProps={{
-					disabled: disabled,
-					// title: t(buttonTitles.image),
-					title: t('image upload'),
-					tabIndex: -1,
-					id: 'toolbar_image_button'
-				}}
-				onClick={() => {
-					showModal('Upload Image', (onClose) => (
-						<InsertImageUploadDialog
-							activeEditor={activeEditor}
-							onClose={onClose}
-						/>
-					));
-				}}
-				withFill={false}
-				type={'hint'}
-				width={iconSizeEditor}
-				height={iconSizeEditor}
-				Svg={imageIcon}
-			/> */}
-			<ImageUploadButton
-				onImageUpload={(file) => {
-					showModal('Upload Image', (onClose) => (
-						<InsertImageUploadDialog
-							activeEditor={activeEditor}
-							onClose={onClose}
-							imageFile={file}
-						/>
-					));
-				}}
-				disabled={disabled}
-			>
-				{/* <Icon
-					withFill={false}
-					type={'hint'}
-					width={iconSizeEditor}
-					height={iconSizeEditor}
-					Svg={imageIcon}
-				/> */}
-			</ImageUploadButton>
-
 			<Icon
 				clickable
 				buttonProps={{
 					disabled: disabled,
-					title: t('image url'),
-					// title: t(buttonTitles.image),
+					title: t(buttonTitles.image),
 					tabIndex: -1,
 					id: 'toolbar_image_button'
 				}}
 				onClick={() => {
-					showModal('Insert Image by URL', (onClose) => (
-						<InsertImageUrlDialog
+					showModal('Insert Image', (onClose) => (
+						<InsertImageDialog
 							activeEditor={activeEditor}
 							onClose={onClose}
 						/>

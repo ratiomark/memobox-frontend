@@ -19,8 +19,10 @@ function Editor({ isTraining }: { isTraining: boolean }) {
 		<>
 			<PlainTextPlugin
 				contentEditable={
-					<div className={isTraining ? '' : 'editor-scroller-card-presenter'}>
-						<ContentEditable className='ContentEditable__card-presenter' />
+					<div className='editor-shell'>
+						<div className={isTraining ? '' : 'editor-scroller-card-presenter'}>
+							<ContentEditable className='ContentEditable__card-presenter' />
+						</div>
 					</div>
 				}
 				placeholder={null}
@@ -32,7 +34,8 @@ function Editor({ isTraining }: { isTraining: boolean }) {
 
 export const EditorCardPresenter = (props: EditorProps) => {
 	const initialConfig = {
-		editable: true,
+		editable: false,
+		// editable: true,
 		editorState: props.editorState ?? lexicalEmptyEditorState,
 		namespace: props.namespace ? props.namespace : 'Playground',
 		nodes: [...PlaygroundNodes],

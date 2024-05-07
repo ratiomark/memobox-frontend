@@ -181,12 +181,12 @@ function Editor(props: EditorProps) {
 					{isListNode && <TabIndentationPlugin />}
 					<ListMaxIndentLevelPlugin maxDepth={7} />
 					<ImagesPlugin captionsEnabled={false} />
-					{/* <EquationsPlugin /> */}
+					<EquationsPlugin />
 					<CollapsiblePlugin />
 					{floatingAnchorElem && !isSmallWidthViewport && (
 						<>
 							<DraggableBlockPlugin anchorElem={floatingAnchorElem} />
-							{/* <CodeActionMenuPlugin anchorElem={floatingAnchorElem} /> */}
+							<CodeActionMenuPlugin anchorElem={floatingAnchorElem} />
 							{/* <FloatingLinkEditorPlugin anchorElem={floatingAnchorElem} /> */}
 							{/* <TableCellActionMenuPlugin
 									anchorElem={floatingAnchorElem}
@@ -204,7 +204,11 @@ function Editor(props: EditorProps) {
 							hasCellBackgroundColor={tableCellBackgroundColor}
 						/>*/}
 					{/* 	<TableCellResizer /> */}
-					<InlineImagePlugin />
+				
+					{/* !!!!!!!!!!!!!! */}
+					{/* <InlineImagePlugin /> */}
+					{/* !!!!!!!!!!!!!! */}
+
 					{/* <ClearEditorPlugin /> */}
 					{/* <HorizontalRulePlugin /> */}
 					{/* <TabFocusPlugin /> */}

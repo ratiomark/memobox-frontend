@@ -38,6 +38,7 @@ import FileInput from '../../ui/FileInput';
 import TextInput from '../../ui/TextInput';
 import { CAN_USE_DOM } from '../../../shared/canUseDOM';
 import yellowFlowerImage from '@/shared/assets/yellow-flower.jpg';
+import { Loader } from '@/shared/ui/Loader/Loader';
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 
@@ -46,154 +47,6 @@ const getDOMSelection = (targetWindow: Window | null): Selection | null =>
 
 export const INSERT_IMAGE_COMMAND: LexicalCommand<InsertImagePayload> =
 	createCommand('INSERT_IMAGE_COMMAND');
-
-export function InsertImageUriDialogBody({
-	onClick,
-}: {
-	onClick: (payload: InsertImagePayload) => void;
-}) {
-	const [src, setSrc] = useState('');
-	const [altText, setAltText] = useState('[IMAGE]');
-
-	const isDisabled = src === '';
-
-	return (
-		<>
-			<TextInput
-				label="Image URL"
-				placeholder="i.e. https://source.unsplash.com/random"
-				onChange={setSrc}
-				value={src}
-				data-test-id="image-modal-url-input"
-			/>
-			<TextInput
-				label="Alt Text"
-				placeholder="Random unsplash image"
-				onChange={setAltText}
-				value={altText}
-				data-test-id="image-modal-alt-text-input"
-			/>
-			<DialogActions>
-				<Button
-					data-test-id="image-modal-confirm-btn"
-					disabled={isDisabled}
-					onClick={() => onClick({ altText, src })}>
-					Confirm
-				</Button>
-			</DialogActions>
-		</>
-	);
-}
-
-export function InsertImageUploadedDialogBody({
-	onClick,
-}: {
-	onClick: (payload: InsertImagePayload) => void;
-}) {
-	const [src, setSrc] = useState('');
-	const [altText, setAltText] = useState('[IMAGE]');
-
-	const isDisabled = src === '';
-
-	// VAR: Тут нужно переделать загрузку изображения, потому что вкладывать 25кв в стейт это плохо
-	const loadImage2 = (files: FileList | null) => {
-		const url = URL.createObjectURL(files[0])
-		setSrc(url)
-		fetch(url)
-			.then(response => response.blob())
-			.then(blob => {
-				const size = blob.size
-				console.log(size)
-				return blob.arrayBuffer()
-			})
-			// .then(blob => blob.arrayBuffer())
-			.then(arrayBuffer => {
-				const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-				console.log(base64)
-				// localStorage.setItem('image', base64);
-			});
-		// fetch(url)
-		// 	.then(response => response.blob())
-		// 	.then(blob => {
-		// 		// Создайте новый объект File из blob
-		// 		const file = new File([blob], 'filename.ext', { type: blob.type });
-		// 		console.log(file)
-		// 	})
-	};
-
-	// Изначальная функция загрузки изображения
-	const loadImage = (files: FileList | null) => {
-		// const url = URL.createObjectURL(files[0])
-		// setSrc(url)
-		const reader = new FileReader();
-		reader.onload = function () {
-			if (typeof reader.result === 'string') {
-				const stringLength = reader.result.length;
-				const byteSize = 4 * Math.ceil((stringLength / 3)) * 0.75; // 0.75 - это коэффициент коррекции для символов '=' в конце строки base64
-
-				// Переводим размер в килобайты
-				const sizeInKilobytes = byteSize / 1024;
-
-				console.log(`Размер строки: ${sizeInKilobytes.toFixed(2)} KB`);
-				setSrc(reader.result);
-			}
-			return '';
-		};
-		if (files !== null) {
-			reader.readAsDataURL(files[0]);
-		}
-	};
-	const loadImage3 = (files: FileList | null) => {
-		if (files === null) return;
-
-		const file = files[0];
-		const formData = new FormData();
-		formData.append('file', file);
-		formData.append('upload_preset', 'test_upload_present'); // Замените 'your_preset_here' на имя вашей предустановки
-
-		fetch('https://api.cloudinary.com/v1_1/dntzjcvfh/image/upload', {
-			method: 'POST',
-			body: formData,
-		})
-			.then(response => response.json())
-			.then(data => {
-				if (data.secure_url) {
-					console.log('Image uploaded successfully: ', data.secure_url);
-					setSrc(data.secure_url); // Обновляем состояние компонента с URL загруженного изображения
-				}
-			})
-			.catch(error => {
-				console.error('Error uploading image: ', error);
-			});
-	};
-
-	return (
-		<>
-			<FileInput
-				label="Image Upload"
-				onChange={loadImage3}
-				accept="image/*"
-				data-test-id="image-modal-file-upload"
-			/>
-			<TextInput
-				label="Alt Text"
-				placeholder="Descriptive alternative text"
-				onChange={setAltText}
-				value='[IMAGE]'
-				// value={altText}
-				data-test-id="image-modal-alt-text-input"
-			/>
-			<DialogActions>
-				<Button
-					data-test-id="image-modal-file-upload-btn"
-					disabled={isDisabled}
-					onClick={() => onClick({ altText, src })}>
-					Confirm
-				</Button>
-			</DialogActions>
-		</>
-	);
-}
 
 export function InsertImageDialog({
 	activeEditor,
@@ -226,38 +79,529 @@ export function InsertImageDialog({
 			{!mode && (
 				<DialogButtonsList>
 					<Button
-						data-test-id="image-modal-option-sample"
-						onClick={() =>
-							onClick(
-								hasModifier.current
-									? {
-										altText:
-											'Daylight fir trees forest glacier green high ice landscape',
-										src: yellowFlowerImage,
-									}
-									: {
-										altText: 'Yellow flower in tilt shift lens',
-										src: yellowFlowerImage,
-									},
-							)
-						}>
-						Sample
-					</Button>
-					<Button
 						data-test-id="image-modal-option-url"
-						onClick={() => setMode('url')}>
-						URL
+						onClick={() => setMode('url')}
+					>
+						Вставить ссылку на изображение
 					</Button>
 					<Button
 						data-test-id="image-modal-option-file"
-						onClick={() => setMode('file')}>
-						File
+						onClick={() => setMode('file')}
+					>
+						Добавить изображение с компьютера
 					</Button>
 				</DialogButtonsList>
 			)}
-			{mode === 'url' && <InsertImageUriDialogBody onClick={onClick} />}
-			{mode === 'file' && <InsertImageUploadedDialogBody onClick={onClick} />}
+			{mode === 'url' && (
+				<InsertImageUriDialogBody
+					onClick={onClick}
+					onClose={onClose}
+				/>
+			)}
+			{mode === 'file' && (
+				<InsertImageUploadedDialogBody
+					onClick={onClick}
+					onClose={onClose}
+				/>
+			)}
 		</>
+	);
+}
+
+export function InsertImageUriDialogBody({
+	onClick,
+	onClose,
+}: {
+	onClick: (payload: InsertImagePayload) => void;
+	onClose: () => void;
+}) {
+	const [src, setSrc] = useState('');
+	const [altText, setAltText] = useState('[IMAGE]');
+
+	const isDisabled = src === '';
+
+	return (
+		<>
+			<TextInput
+				label="Image URL"
+				placeholder="i.e. https://source.unsplash.com/random"
+				onChange={setSrc}
+				value={src}
+				data-test-id="image-modal-url-input"
+			/>
+			<TextInput
+				label="Alt Text"
+				placeholder="Random unsplash image"
+				onChange={setAltText}
+				value={altText}
+				data-test-id="image-modal-alt-text-input"
+			/>
+			<DialogActions>
+				<Button
+					data-test-id="image-modal-confirm-btn"
+					disabled={isDisabled}
+					onClick={() => {
+						onClick({ altText, src });
+						onClose();
+					}}
+				>
+					Confirm
+				</Button>
+			</DialogActions>
+		</>
+	);
+}
+
+export function InsertImageUploadedDialogBody({
+	onClick,
+	onClose,
+}: {
+	onClick: (payload: InsertImagePayload) => void;
+	onClose: () => void;
+}) {
+	const [src, setSrc] = useState('');
+	const [altText, setAltText] = useState('[IMAGE]');
+
+	const isDisabled = src === '';
+
+	const loadImage = (files: FileList | null) => {
+		if (files === null) return;
+
+		const file = files[0];
+		const formData = new FormData();
+		formData.append('file', file);
+		formData.append('upload_preset', 'test_upload_present'); // имя предустановки
+		formData.append('fetch_format', 'auto'); // Добавление автоматического определения формата
+		formData.append('quality', 'auto'); // Добавление автоматической оптимизации качества
+
+		fetch('https://api.cloudinary.com/v1_1/dntzjcvfh/image/upload', {
+			method: 'POST',
+			body: formData,
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.secure_url) {
+					// Формирование URL с параметрами автоматической оптимизации
+					const splitUrl = data.secure_url.split('/upload/')
+					const optimizedUrl = `${splitUrl[0]}/upload/f_auto,q_auto/${splitUrl[1]}`;
+					console.log('Image uploaded successfully: ', optimizedUrl);
+					setSrc(optimizedUrl); // Обновляем состояние компонента с оптимизированным URL
+				}
+			})
+			.catch(error => {
+				console.error('Error uploading image: ', error);
+			});
+	};
+
+	return (
+		<>
+			<FileInput
+				label="Image Upload"
+				onChange={loadImage}
+				accept="image/*"
+				data-test-id="image-modal-file-upload"
+			/>
+			<TextInput
+				label="Alt Text"
+				placeholder="Descriptive alternative text"
+				onChange={setAltText}
+				value='[IMAGE]'
+				data-test-id="image-modal-alt-text-input"
+			/>
+			<DialogActions>
+				<Button
+					data-test-id="image-modal-file-upload-btn"
+					disabled={isDisabled}
+					onClick={() => {
+						onClick({ altText, src });
+						onClose();
+					}}
+				>
+					Confirm
+				</Button>
+			</DialogActions>
+		</>
+	);
+}
+
+export function InsertImageUrlDialog({
+	activeEditor,
+	onClose,
+}: {
+	activeEditor: LexicalEditor;
+	onClose: () => void;
+}): JSX.Element {
+	const [url, setUrl] = useState('');
+
+	const onClick = () => {
+		activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, {
+			altText: url,
+			src: url,
+		});
+		onClose();
+	};
+
+	return (
+		<>
+			<TextInput
+				label="Image URL"
+				placeholder="Enter the image URL"
+				onChange={setUrl}
+				value={url}
+			/>
+			<DialogActions>
+				<Button onClick={onClick} disabled={!url}>
+					Insert
+				</Button>
+			</DialogActions>
+		</>
+	);
+}
+
+// работает!!!
+// export function InsertImageUploadDialog({
+// 	activeEditor,
+// 	onClose,
+// }: {
+// 	activeEditor: LexicalEditor;
+// 	onClose: () => void;
+// }): JSX.Element {
+// 	const [src, setSrc] = useState('');
+// 	// const [altText, setAltText] = useState('');
+
+// 	const loadImage = (files: FileList | null) => {
+// 		if (files === null) return;
+
+// 		const file = files[0];
+// 		const formData = new FormData();
+// 		formData.append('file', file);
+// 		formData.append('upload_preset', 'test_upload_present'); // имя предустановки
+// 		formData.append('fetch_format', 'auto'); // Добавление автоматического определения формата
+// 		formData.append('quality', 'auto'); // Добавление автоматической оптимизации качества
+
+// 		fetch('https://api.cloudinary.com/v1_1/dntzjcvfh/image/upload', {
+// 			method: 'POST',
+// 			body: formData,
+// 		})
+// 			.then(response => response.json())
+// 			.then(data => {
+// 				if (data.secure_url) {
+// 					// Формирование URL с параметрами автоматической оптимизации
+// 					const splitUrl = data.secure_url.split('/upload/')
+// 					const optimizedUrl = `${splitUrl[0]}/upload/f_auto,q_auto/${splitUrl[1]}`;
+// 					console.log('Image uploaded successfully: ', optimizedUrl);
+// 					setSrc(optimizedUrl); // Обновляем состояние компонента с оптимизированным URL
+// 				}
+// 			})
+// 			.catch(error => {
+// 				console.error('Error uploading image: ', error);
+// 			});
+// 	};
+
+// 	const onClick = () => {
+// 		activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, {
+// 			altText: 'Image',
+// 			src,
+// 		});
+// 		onClose();
+// 	};
+
+// 	return (
+// 		<>
+// 			<FileInput
+// 				label="Image Upload"
+// 				onChange={loadImage}
+// 				accept="image/*"
+// 			/>
+// 			{/* <TextInput
+// 				label="Alt Text"
+// 				placeholder="Description of the image"
+// 				onChange={setAltText}
+// 				value={altText}
+// 			/> */}
+// 			<DialogActions>
+// 				<Button onClick={onClick} disabled={!src}>
+// 					Insert
+// 				</Button>
+// 			</DialogActions>
+// 		</>
+// 	);
+// }
+
+// export function InsertImageUploadDialog({
+// 	activeEditor,
+// 	onClose,
+// }: {
+// 	activeEditor: LexicalEditor;
+// 	onClose: () => void;
+// }): JSX.Element {
+// 	const [file, setFile] = useState<File | null>(null);
+
+// 	const onChange = (files: FileList | null) => {
+// 		setFile(files?.[0] || null);
+// 	};
+
+// 	const onClick = () => {
+// 		if (file) {
+// 			const reader = new FileReader();
+// 			reader.onload = (event) => {
+// 				const data = event.target?.result;
+// 				if (typeof data === 'string') {
+// 					activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, {
+// 						altText: file.name,
+// 						src: data,
+// 					});
+// 				}
+// 			};
+// 			reader.readAsDataURL(file);
+// 			onClose();
+// 		}
+// 	};
+
+// 	return (
+// 		<>
+// 			<FileInput
+// 				label="Image Upload"
+// 				onChange={onChange}
+// 				accept="image/*"
+// 			/>
+// 			<DialogActions>
+// 				<Button onClick={onClick} disabled={!file}>
+// 					Upload
+// 				</Button>
+// 			</DialogActions>
+// 		</>
+// 	);
+// }
+// export function InsertImageUriDialogBody({
+// 	onClick,
+// }: {
+// 	onClick: (payload: InsertImagePayload) => void;
+// }) {
+// 	const [src, setSrc] = useState('');
+// 	const [altText, setAltText] = useState('[IMAGE]');
+
+// 	const isDisabled = src === '';
+
+// 	return (
+// 		<>
+// 			<TextInput
+// 				label="Image URL"
+// 				placeholder="i.e. https://source.unsplash.com/random"
+// 				onChange={setSrc}
+// 				value={src}
+// 				data-test-id="image-modal-url-input"
+// 			/>
+// 			<TextInput
+// 				label="Alt Text"
+// 				placeholder="Random unsplash image"
+// 				onChange={setAltText}
+// 				value={altText}
+// 				data-test-id="image-modal-alt-text-input"
+// 			/>
+// 			<DialogActions>
+// 				<Button
+// 					data-test-id="image-modal-confirm-btn"
+// 					disabled={isDisabled}
+// 					onClick={() => onClick({ altText, src })}>
+// 					Confirm
+// 				</Button>
+// 			</DialogActions>
+// 		</>
+// 	);
+// }
+
+// export function InsertImageUploadedDialogBody({
+// 	onClick,
+// }: {
+// 	onClick: (payload: InsertImagePayload) => void;
+// }) {
+// 	const [src, setSrc] = useState('');
+// 	const [altText, setAltText] = useState('[IMAGE]');
+
+// 	const isDisabled = src === '';
+
+// 	const loadImage = (files: FileList | null) => {
+// 		if (files === null) return;
+
+// 		const file = files[0];
+// 		const formData = new FormData();
+// 		formData.append('file', file);
+// 		formData.append('upload_preset', 'test_upload_present'); // имя  предустановки
+// 		formData.append('fetch_format', 'auto'); // Добавление автоматического определения формата
+// 		formData.append('quality', 'auto'); // Добавление автоматической оптимизации качества
+
+// 		fetch('https://api.cloudinary.com/v1_1/dntzjcvfh/image/upload', {
+// 			method: 'POST',
+// 			body: formData,
+// 		})
+// 			.then(response => response.json())
+// 			.then(data => {
+// 				if (data.secure_url) {
+// 					// Формирование URL с параметрами автоматической оптимизации
+// 					const splitUrl = data.secure_url.split('/upload/')
+// 					const optimizedUrl = `${splitUrl[0]}/upload/f_auto,q_auto/${splitUrl[1]}`;
+// 					console.log('Image uploaded successfully: ', optimizedUrl);
+// 					setSrc(optimizedUrl); // Обновляем состояние компонента с оптимизированным URL
+// 				}
+// 			})
+// 			.catch(error => {
+// 				console.error('Error uploading image: ', error);
+// 			});
+// 	};
+
+// 	return (
+// 		<>
+// 			<FileInput
+// 				label="Image Upload"
+// 				onChange={loadImage}
+// 				accept="image/*"
+// 				data-test-id="image-modal-file-upload"
+// 			/>
+// 			<TextInput
+// 				label="Alt Text"
+// 				placeholder="Descriptive alternative text"
+// 				onChange={setAltText}
+// 				value='[IMAGE]'
+// 				// value={altText}
+// 				data-test-id="image-modal-alt-text-input"
+// 			/>
+// 			<DialogActions>
+// 				<Button
+// 					data-test-id="image-modal-file-upload-btn"
+// 					disabled={isDisabled}
+// 					onClick={() => onClick({ altText, src })}>
+// 					Confirm
+// 				</Button>
+// 			</DialogActions>
+// 		</>
+// 	);
+// }
+
+// export function InsertImageDialog({
+// 	activeEditor,
+// 	onClose,
+// }: {
+// 	activeEditor: LexicalEditor;
+// 	onClose: () => void;
+// }): JSX.Element {
+// 	const [mode, setMode] = useState<null | 'url' | 'file'>(null);
+// 	const hasModifier = useRef(false);
+
+// 	useEffect(() => {
+// 		hasModifier.current = false;
+// 		const handler = (e: KeyboardEvent) => {
+// 			hasModifier.current = e.altKey;
+// 		};
+// 		document.addEventListener('keydown', handler);
+// 		return () => {
+// 			document.removeEventListener('keydown', handler);
+// 		};
+// 	}, [activeEditor]);
+
+// 	const onClick = (payload: InsertImagePayload) => {
+// 		activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
+// 		onClose();
+// 	};
+
+// 	return (
+// 		<>
+// 			{!mode && (
+// 				<DialogButtonsList>
+// 					<Button
+// 						data-test-id="image-modal-option-sample"
+// 						onClick={() =>
+// 							onClick(
+// 								hasModifier.current
+// 									? {
+// 										altText:
+// 											'Daylight fir trees forest glacier green high ice landscape',
+// 										src: yellowFlowerImage,
+// 									}
+// 									: {
+// 										altText: 'Yellow flower in tilt shift lens',
+// 										src: yellowFlowerImage,
+// 									},
+// 							)
+// 						}>
+// 						Sample
+// 					</Button>
+// 					<Button
+// 						data-test-id="image-modal-option-url"
+// 						onClick={() => setMode('url')}>
+// 						URL
+// 					</Button>
+// 					<Button
+// 						data-test-id="image-modal-option-file"
+// 						onClick={() => setMode('file')}>
+// 						File
+// 					</Button>
+// 				</DialogButtonsList>
+// 			)}
+// 			{mode === 'url' && <InsertImageUriDialogBody onClick={onClick} />}
+// 			{mode === 'file' && <InsertImageUploadedDialogBody onClick={onClick} />}
+// 		</>
+// 	);
+// }
+
+export function InsertImageUploadDialog({
+	activeEditor,
+	onClose,
+	imageFile,
+}: {
+	activeEditor: LexicalEditor;
+	onClose: () => void;
+	imageFile: File;
+}): JSX.Element {
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		const uploadImage = async () => {
+			setIsLoading(true);
+			try {
+				const formData = new FormData();
+				formData.append('file', imageFile);
+				formData.append('upload_preset', 'test_upload_present');
+				formData.append('fetch_format', 'auto');
+				formData.append('quality', 'auto');
+
+				const response = await fetch(
+					'https://api.cloudinary.com/v1_1/dntzjcvfh/image/upload',
+					{
+						method: 'POST',
+						body: formData,
+					}
+				);
+				const data = await response.json();
+
+				if (data.secure_url) {
+					const splitUrl = data.secure_url.split('/upload/');
+					const optimizedUrl = `${splitUrl[0]}/upload/f_auto,q_auto/${splitUrl[1]}`;
+					activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, {
+						altText: imageFile.name,
+						src: optimizedUrl,
+					});
+				}
+			} catch (error) {
+				console.error('Error uploading image: ', error);
+			} finally {
+				setIsLoading(false);
+				onClose();
+			}
+		};
+
+		uploadImage();
+	}, [activeEditor, imageFile, onClose]);
+
+	return (
+		<div style={{display: 'flex', 'justifyContent': 'center', alignItems: 'center'}}>
+			{isLoading ? (
+				// <div>Uploading image...</div>
+				<Loader />
+			) : (
+				<div>Image uploaded successfully!</div>
+			)}
+		</div>
 	);
 }
 

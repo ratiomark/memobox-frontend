@@ -6,6 +6,16 @@
  *
  */
 
+/* .ContentEditable__card-presenter {
+  border: 0;
+  font-size: 15px;
+  display: block;
+  position: relative;
+  outline: 0;
+  padding: var(--padding-textarea-top-and-bottom) var(--padding-textarea-left-and-right) var(--padding-textarea-top-and-bottom) 30px;
+  min-height: 100%;
+} */
+
 @import "https://fonts.googleapis.com/css?family=Reenie+Beanie";
 
 .editor-scroller-card-presenter {

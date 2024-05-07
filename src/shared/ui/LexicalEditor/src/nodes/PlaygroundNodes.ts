@@ -63,7 +63,7 @@ export const PlaygroundNodes: Array<Klass<LexicalNode>> = [
 	HorizontalRuleNode,
 	// TweetNode,
 	// YouTubeNode,
-	FigmaNode,
+	// FigmaNode,
 	// MarkNode,
 	CollapsibleContainerNode,
 	CollapsibleContentNode,
