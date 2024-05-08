@@ -1,5 +1,6 @@
 import { useRef } from 'react';
-import imageIcon from '../images/icons/imageUploadIcon.svg'
+// import imageIcon from '../images/icons/imageUploadIcon.svg'
+import imageIcon from '../images/icons/imageUpload2.svg'
 // import imageIcon from '../images/icons/image-1-svgrepo-com.svg'
 import { iconSizeEditor } from '@/shared/const/iconSizes';
 import { Icon } from '@/shared/ui/Icon';
