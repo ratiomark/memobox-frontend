@@ -1,7 +1,7 @@
 import { ExtendedTimingBlock } from '@/shared/types/DataBlock'
 
 export const formatDate = (utcDateString: string | null) => {
-	if (!utcDateString || utcDateString === '---') return '---'
+	if (!utcDateString || utcDateString === '---') return '—'
 	const date = new Date(utcDateString);
 
 	const pad = (num: number) => (num < 10 ? '0' + num : num);
@@ -14,6 +14,18 @@ export const formatDate = (utcDateString: string | null) => {
 	const minutes = pad(date.getMinutes());
 
 	return `${day}.${month}.${year}\n${hours}:${minutes}`;
+}
+export const formatDateLastTraining = (utcDateString: string | null) => {
+	if (!utcDateString || utcDateString === '---') return '---'
+	const date = new Date(utcDateString);
+
+	return date.toLocaleDateString('ru-RU', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: '2-digit',
+		minute: '2-digit'
+	});
 }
 export function timeLeft(utcTime: string) {
 	console.log(utcTime, '---------------')
