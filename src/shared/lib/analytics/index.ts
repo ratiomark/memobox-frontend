@@ -1,14 +1,18 @@
 import { PostData, PostHog } from 'posthog-js';
 
 let posthog: PostHog;
+let key = 'phc_TAy2XeA2qDuEh9Zoh8idzH5n75vPtYNN13ZAjEPx7O9'
+key = 'phc_DtdPhH2rhVbCX7T5sLQVBhOq2OnhKtXov62ETNjanEB'
+const api_host = 'https://us.i.posthog.com'
 
 export const loadAnalytics = () => {
 	if (!posthog) {
 		import('posthog-js').then((module) => {
 			posthog = module.default;
-			// posthog.init('phc_TAy2XeA2qDuEh9Zoh8idzH5n75vPtYNN13ZAjEPx7O9', { api_host: 'https://us.i.posthog.com', autocapture: false });
-			posthog.init('phc_TAy2XeA2qDuEh9Zoh8idzH5n75vPtYNN13ZAjEPx7O9', { api_host: 'https://us.i.posthog.com', autocapture: true , capture_pageview: false});
-			// posthog.init('phc_TAy2XeA2qDuEh9Zoh8idzH5n75vPtYNN13ZAjEPx7O9', { api_host: 'https://us.i.posthog.com', autocapture: true , capture_pageview: false});
+			// posthog.init(key, { api_host,  autocapture: false });
+			posthog.init(key, { api_host, autocapture: true, capture_pageview: true });
+			// posthog.init(key, { api_host,  autocapture: true , capture_pageview: false});
+			// posthog.init(key, { api_host,  autocapture: true , capture_pageview: false});
 		}).catch(error => {
 			console.error('Failed to load PostHog:', error);
 		});
