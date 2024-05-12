@@ -22,7 +22,6 @@ import { formatDate, timeLeft } from '@/shared/lib/helpers/common/formaters';
 import { EditorCardPresenter } from '@/shared/ui/LexicalEditor';
 import { CardDeleting } from '../CardDeleting/CardDeleting';
 import { getViewPageIsCardEdited, getViewPageIsCardSelected } from '@/features/ViewPageInitializer';
-import { EditorState } from 'lexical';
 
 interface CardListItemProps {
 	className?: string
@@ -100,11 +99,14 @@ export const CardListItem = (props: CardListItemProps) => {
 						saveOriginal
 
 						text={
-							columnValue === 'nextTraining'
-								? card[columnValue]
-								// ? timeLeft(card[columnValue])
-								: formatDate(card[columnValue])
+								 formatDate(card[columnValue])
 						}
+						// text={
+						// 	columnValue === 'nextTraining'
+						// 		? card[columnValue]
+						// 		// ? timeLeft(card[columnValue])
+						// 		: formatDate(card[columnValue])
+						// }
 						size='s'
 					/>
 				} else if (columnValue === 'shelfId') {
