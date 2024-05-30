@@ -1,0 +1,72 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--header-index);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: header;
+}
+
+// .header {
+//   background: #141e30;  /* fallback for old browsers */
+//   background: linear-gradient(to right, #243b55, #141e30);  /* Chrome 10-25, Safari 5.1-6 */
+//   position: sticky;
+//   top: 0;
+//   z-index: var(--header-index);
+//   height: var(--header-height);
+//   display: flex;
+//   align-items: center;
+//   grid-area: header;
+// }
+
+.navigation {
+  width: min(100%, calc(1200px + var(--nav-padding) + var(--nav-bar-item-min-width)));
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 30px;
+}
+
+// .navigation {
+//   width: min(100%, calc(1200px + var(--nav-padding) + var(--nav-bar-item-min-width)));
+//   margin: 0 auto;
+//   display: flex;
+//   justify-content: space-between;
+//   height: 100%;
+// }
+
+.items {
+  display: flex;
+
+  // width: min(100%, 1200px);
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0 16px;
+  height: 100%;
+}
+
+.additional {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 6px 20px 6px 0;
+  height: 100%;
+}
+
+.additionalMini {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  // padding-right: 23px;
+  padding: 6px 15px 6px 0;
+
+  // display: flex;
+  // gap: 5px;
+}

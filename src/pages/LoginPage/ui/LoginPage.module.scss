@@ -1,0 +1,48 @@
+.loginPageBase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - var(--header-height) - 200px);
+}
+
+.loginPage {
+  background-image: linear-gradient(125deg, #1e8fff43, #00808054, #3cb37244, #48d1cd6e, #9470db6c, #dda0dd64, #ba55d351, #b2222277);
+  background-size: 400% 400%;
+  animation: bganimation 30s infinite;
+  min-height: 100vh;
+}
+
+@keyframes bganimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// .loginPage {
+//   background-image: linear-gradient(125deg, #1e90ff, #008080, #3cb371, #48d1cc, #9370db, #dda0dd, #ba55d3, #b22222);
+//   background-size: 400% 400%;
+//   animation: bganimation 14s infinite;
+//   min-height: 100vh;
+// }
+
+// @keyframes bganimation {
+//   0% {
+//     background-position: 0% 50%;
+//   }
+
+//   50% {
+//     background-position: 100% 50%;
+//   }
+
+//   100% {
+//     background-position: 0% 50%;
+//   }
+// }

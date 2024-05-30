@@ -37,26 +37,53 @@ import { MyText } from '@/shared/ui/Typography';
 import ViewButtonIcon from '@/shared/assets/new/viewIcon.svg';
 import ArrowDownIcon from '@/shared/assets/new/arrowDownIcon.svg'
 import { TEST_BUTTONS_IDS } from '@/shared/const/testConsts';
-
+import { useToastCustom } from '@/shared/ui/Toast/ui/MyToastRTK';
+import { analyticsTrackEvent } from '@/shared/lib/analytics';
+import { ActionMethod } from '@/entities/Shelf';
+// const isRefetching = useSelector(getIsCupboardRefetching)
+// const isAnyCardsToTrainExist = useSelector(getIsAnyCardsToTrain)
+// const skipTrainingHotKey = useSelector(getIsSkipTrainingByHotKeyPress)
+// const isStartTrainingHotKeyVisible = useSelector(getUserSavedDataIsStartTrainingHotKeyVisible)
+// const navigate = useNavigate()
+// const createToastFn = useToastCustom()
+// const startTraining = () => {
+// 	if (!isAnyCardsToTrainExist) {
+// 		createToastFn({ status: 'error', messageError: 'No training cards' })
+// 		return
+// 	}
+// 	navigate(obtainRouteTraining('all', 'all'))
+// }
+// const onViewClick = () => {
+// 	navigate(obtainRouteView('all', 'all'))
+// }
+// // useHotkeys(positionTextTrain, startTraining, { keydown: true, enabled: !isRefetching })
+// useHotkeys('t + a', () => {
+// 	startTraining()
+// }, { keydown: true, enabled: !isRefetching })
 export const CommonShelfButtons = () => {
 	const isRefetching = useSelector(getIsCupboardRefetching)
 	const isAnyCardsToTrainExist = useSelector(getIsAnyCardsToTrain)
 	const skipTrainingHotKey = useSelector(getIsSkipTrainingByHotKeyPress)
 	const isStartTrainingHotKeyVisible = useSelector(getUserSavedDataIsStartTrainingHotKeyVisible)
 	const navigate = useNavigate()
-	const startTraining = () => {
-		if (skipTrainingHotKey) {
-			dispatch(cupboardShelfListActions.setSkipTrainingHotKey(false))
+	const createToastFn = useToastCustom()
+	const startTraining = (method: ActionMethod) => {
+		if (!isAnyCardsToTrainExist) {
+			createToastFn({ status: 'error', messageError: 'No training cards' })
 			return
 		}
-		// console.log('startTraining clicked  ', ' t ', ' all ')
+		analyticsTrackEvent('training_started', {
+			method,
+			shelfType: 'common',
+			boxType: 'all',
+		});
 		navigate(obtainRouteTraining('all', 'all'))
 	}
 	const onViewClick = () => {
 		navigate(obtainRouteView('all', 'all'))
 	}
 	// useHotkeys(positionTextTrain, startTraining, { keydown: true, enabled: !isRefetching })
-	useHotkeys('t + a', startTraining, { keydown: true, enabled: !isRefetching })
+	useHotkeys('t + a', () => { startTraining('hotkey') }, { keydown: true, enabled: !isRefetching })
 	const commonShelfCollapsed = useSelector(getCupboardCommonShelfCollapsed)
 	const dispatch = useAppDispatch()
 
@@ -86,7 +113,7 @@ export const CommonShelfButtons = () => {
 				variant='filled'
 				// borderRadius='borderRadius_max'
 				data-button-type={dataAttrButtonTypeTrain}
-				onClick={startTraining}
+				onClick={() => startTraining('click')}
 				disabled={isRefetching || !isAnyCardsToTrainExist}
 			>
 				{t('train') + ' (t + a)'}
@@ -111,7 +138,7 @@ export const CommonShelfButtons = () => {
 						variant='filled'
 						// borderRadius='borderRadius_max'
 						data-button-type={dataAttrButtonTypeTrain}
-						onClick={startTraining}
+						onClick={() => startTraining('click')}
 						disabled={isRefetching || !isAnyCardsToTrainExist}
 					>
 						{t('train')}

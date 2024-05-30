@@ -20,7 +20,7 @@
 }
 
 .navigation {
-  width: min(100%, 1200px);
+  width: min(100%, calc(1200px + var(--nav-padding) + var(--nav-bar-item-min-width)));
   margin: 0 auto;
   display: flex;
   justify-content: center;

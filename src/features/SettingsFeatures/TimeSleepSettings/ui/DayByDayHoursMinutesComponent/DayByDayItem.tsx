@@ -100,7 +100,7 @@ export const DayByDayItem = ({ day, dialogRef }: DayByDayItemProps) => {
 			<HStack max justify='between' gap='gap_32'>
 				<MyText
 					align='center'
-					text={t('На этот день нет периодов сна')}
+					text={t('no sleep period')}
 				// className={cls.title}
 				/>
 				{addPeriodButton}
@@ -126,7 +126,7 @@ export const DayByDayItem = ({ day, dialogRef }: DayByDayItemProps) => {
 						<MyText
 							// variant={isTimeSleepEnabled ? 'primary' : 'hint'}
 							align='center'
-							text={'длительность сна'}
+							text={t('sleep duration')}
 						// text={t('end sleep')}
 						// className={cls.title}
 						/>
@@ -151,9 +151,9 @@ export const DayByDayItem = ({ day, dialogRef }: DayByDayItemProps) => {
 								// }}
 								type='number'
 								style={{ maxWidth: 90 }} />
-							<p>минут
-								<span><MinutesToHoursAndMinutesPresenter minutes={period.durationMinutes} /></span>
+							<p>{t('minutes')}
 							</p>
+							<span><MinutesToHoursAndMinutesPresenter minutes={period.durationMinutes} /></span>
 						</HStack>
 					</HStack>
 					<HStack gap='gap_14'>

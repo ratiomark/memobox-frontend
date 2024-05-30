@@ -61,7 +61,9 @@ const RegisterForm = memo(() => {
 	}
 
 	return (
-		<div className={cls.wrapper} >
+		<div
+			className={cls.wrapper}
+		>
 
 			<form className={clsx(cls.LoginForm)} onSubmit={onSubmitRegister}>
 				<div className={cls.inputWrapper}>

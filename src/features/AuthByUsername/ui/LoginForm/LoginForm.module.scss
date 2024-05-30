@@ -3,6 +3,16 @@
   place-content: center;
 }
 
+// .wrapper {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   flex-grow: 1;
+// height: 100%;
+//   // height: calc(100vh - var(--header-height));
+// }
+
 .skeletonWrapper {
   min-width: 100%;
 }

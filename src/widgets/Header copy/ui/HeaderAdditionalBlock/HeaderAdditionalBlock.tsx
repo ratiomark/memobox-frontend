@@ -12,7 +12,8 @@ import { useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { headerActions } from '../../model/slice/headerSlice';
 import { useTranslation } from 'react-i18next';
-import { logoutThunk } from '@/entities/User';
+import { getUserName, logoutThunk } from '@/entities/User';
+import { useSelector } from 'react-redux';
 
 interface HeaderAdditionalBlockProps {
 	className?: string;
@@ -26,6 +27,7 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const { t } = useTranslation('header')
+	const userName = useSelector(getUserName)
 
 	const toggleIsAdditionalOpen = () => setIsAdditionalOpen(prev => !prev)
 
@@ -73,12 +75,12 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 
 	return (
 		<div className={clsx(cls.HeaderAdditionalBlock, [className])} >
-			<Button
+			{/* <Button
 				className={cls.subscribeButton}
 				onClick={onSubscriptionClick}
 			>
 				{t('subscription button')}
-			</Button>
+			</Button> */}
 			<Dropdown
 				listDirection='bottom_left'
 				items={additionalItems}
@@ -89,12 +91,15 @@ export const HeaderAdditionalBlock = (props: HeaderAdditionalBlockProps) => {
 						className={cls.dropDownTrigger}
 					// onClick={toggleIsAdditionalOpen}
 					>
-						<MyText variant='header' text={t('additional')} />
+						<MyText variant='header' text={userName} />
+						{/* <MyText variant='header' text={t('additional')} /> */}
 						<Icon
 							className={
 								clsx(cls.arrow, !isAdditionalOpen ? cls.rotateArrow : '')}
 							type='hint'
 							Svg={ArrowBottomIcon}
+							width={24}
+							height={24}
 						/>
 
 					</menu>

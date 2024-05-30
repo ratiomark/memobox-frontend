@@ -14,25 +14,27 @@ import MainPageNewUser from './MainPageNewUser/MainPageNewUser'
 const MainPage = () => {
 	const auth = useSelector(getUserAuthData)
 	const navigate = useNavigate();
+
 	const { postRegistrationStep, hasCreatedFirstShelf } = useJsonSettings()
-	// useEffect(() => {
-	// 	// if (!auth) {
-	// 	if (!auth || postRegistrationStep !== 'COMPLETED') {
-	// 		navigate('/login')
-	// 	}
-	// }, [auth, navigate, postRegistrationStep])
+	useEffect(() => {
+		// if (!auth) {
+		if (!auth || postRegistrationStep !== 'COMPLETED') {
+			navigate('/login')
+		}
+	}, [auth, navigate, postRegistrationStep])
 	// if (!auth) {
 	// 	navigate('/login'); // Перенаправление на страницу логина
 	// }
-	if (!auth || postRegistrationStep !== 'COMPLETED') {
-		// 	navigate('/login'); // Перенаправление на страницу логина
-		return (
-			<LoginPage />
-			// 		<Page data-testid='MainPage'>
-			// 			<LoginScreen />
-			// 		</Page>
-		)
-	}
+	// if (!auth || postRegistrationStep !== 'COMPLETED') {
+	// 	console.log('!!!!!!!!!!!!!!!!!!!!!')
+	// 	navigate('/login'); // Перенаправление на страницу логина
+	// 	// return (
+	// 	// 	<LoginPage />
+	// 	// 	// 		<Page data-testid='MainPage'>
+	// 	// 	// 			<LoginScreen />
+	// 	// 	// 		</Page>
+	// 	// )
+	// }
 
 	if (hasCreatedFirstShelf) {
 		// // без StatsAndActionsCupboardWidget не будет работать CupboardShelfListWrapper из-за перерасчета ширины кнопок
@@ -49,7 +51,7 @@ const MainPage = () => {
 			</Page>
 		)
 	}
-	
+
 	return <MainPageNewUser />
 
 }

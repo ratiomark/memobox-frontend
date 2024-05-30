@@ -63,6 +63,7 @@ export const RenameShelfModal = () => {
 			isOpen={isOpen}
 			onClose={onClose}
 			onSubmit={onRenameShelf}
+			isSubmitDisabled={shelfTitleRedux.length === 0 || inputErrors.length > 0 || shelfTitleRedux === currentShelfTitle}
 		>
 			<div className={cls.CreateNewShelfModal}>
 				<Heading as='h2' className={cls.title} title={t('write shelf name')} />

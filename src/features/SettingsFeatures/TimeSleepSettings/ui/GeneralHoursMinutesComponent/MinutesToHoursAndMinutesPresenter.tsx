@@ -10,7 +10,7 @@ interface MinutesToHoursAndMinutesPresenterProps {
 
 
 export const MinutesToHoursAndMinutesPresenter = ({ minutes, isTimeSleepEnabled = true }: MinutesToHoursAndMinutesPresenterProps) => {
-	// const { t } = useTranslation('settings')
+	const { t } = useTranslation('settings')
 	if (!minutes) return null
 	const hours = Math.floor(minutes / 60);
 	const remainingMinutes = minutes % 60;
@@ -18,7 +18,7 @@ export const MinutesToHoursAndMinutesPresenter = ({ minutes, isTimeSleepEnabled 
 		return <MyText
 			variant={isTimeSleepEnabled ? 'primary' : 'hint'}
 			align='center'
-			text={`(${hours} ч.)`}
+			text={`(${hours} ${t('hours short')})`}
 			// text={t('end sleep')}
 			as={'span'}
 			className={cls.title}
@@ -28,7 +28,7 @@ export const MinutesToHoursAndMinutesPresenter = ({ minutes, isTimeSleepEnabled 
 		<MyText
 			variant={isTimeSleepEnabled ? 'primary' : 'hint'}
 			align='center'
-			text={`(${hours} ч. ${remainingMinutes} мин.)`}
+			text={`(${hours} ${t('hours short')} ${remainingMinutes} ${t('minutes short')})`}
 			// text={t('end sleep')}
 			as={'span'}
 			className={cls.title}

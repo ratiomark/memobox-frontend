@@ -11,8 +11,10 @@ import { getUserSavedDataCupboard, getUserSavedDataIsDelimiterEnabled, userActio
 import { UiComponentEnabler } from '@/shared/ui/UiVariableCustomizer';
 import { cupboardShelfListActions, getIsCupboardAppearanceModalOpen } from '@/features/CupboardShelfList';
 
-
-const DelimiterController = () => {
+interface AppearanceSwitcherProps {
+	entityName: string;
+}
+const DelimiterController = ({ entityName }: AppearanceSwitcherProps) => {
 	const dispatch = useAppDispatch()
 	const cupboard = useSelector(getUserSavedDataCupboard)
 	const isDelimiterEnabled = useSelector(getUserSavedDataIsDelimiterEnabled)
@@ -20,11 +22,11 @@ const DelimiterController = () => {
 		dispatch(userActions.updateJsonSavedData({ cupboard: { ...cupboard, isDelimiterEnabled: !isDelimiterEnabled } }))
 		dispatch(updateJsonSavedDataThunk())
 	}
-	return <UiComponentEnabler entityName='Разделитель "Мои полки"' isEnabled={isDelimiterEnabled} onToggleClick={onToggle} />
+	return <UiComponentEnabler entityName={entityName} isEnabled={isDelimiterEnabled} onToggleClick={onToggle} />
 }
 
 
-const TrainingHotKeyVisibilitySwitcher = () => {
+const TrainingHotKeyVisibilitySwitcher = ({ entityName }: AppearanceSwitcherProps) => {
 	const dispatch = useAppDispatch()
 	const cupboard = useSelector(getUserSavedDataCupboard)
 	const isStartTrainingHotKeyVisible = useSelector(getUserSavedDataIsStartTrainingHotKeyVisible)
@@ -34,12 +36,12 @@ const TrainingHotKeyVisibilitySwitcher = () => {
 		dispatch(updateJsonSavedDataThunk())
 		// state.createNewShelfModal.shelvesCreated++
 	}
-	return <UiComponentEnabler entityName='Текст горячих клавиш (t+n)' isEnabled={isStartTrainingHotKeyVisible} onToggleClick={onToggle} />
+	return <UiComponentEnabler entityName={entityName} isEnabled={isStartTrainingHotKeyVisible} onToggleClick={onToggle} />
 }
 
 export const AppearanceModal = () => {
 
-	const { t } = useTranslation()
+	const { t } = useTranslation('appearance-modal')
 	// const { t: t2 } = useTranslation()
 	const dispatch = useAppDispatch()
 	// const isOpen = true
@@ -84,11 +86,14 @@ export const AppearanceModal = () => {
 			<div
 				className={cls.mainContent}
 			>
-				<MyText align='center' saveOriginal text={t('Настройки внешнего вида шкафа')} />
-				<DelimiterController />
-				<TrainingHotKeyVisibilitySwitcher />
+				<MyText align='center' saveOriginal text={t('modal title')} />
+				<DelimiterController entityName={t('delimiter controller')} />
+				<TrainingHotKeyVisibilitySwitcher entityName={t('hot key text')} />
 			</div>
 
 		</HDialogHeadless>
 	)
 }
+// "modal title": "Modal title",
+// 	"delimiter controller": "Delimiter controller",
+// 		"hot key text": "Hot key text"

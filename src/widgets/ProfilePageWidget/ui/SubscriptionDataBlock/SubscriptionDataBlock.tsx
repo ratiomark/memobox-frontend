@@ -51,7 +51,7 @@ export const SubscriptionDataBlock = (props: SubscriptionDataBlockProps) => {
 				<MyText text={t('trial subscription')} />
 				<MyText size='s' variant='accent' text={`(${t('subscription expires at')} ${subscriptionExpiresAt})`}/>
 			</HStack>)
-			buttons = <Button className={cls.button} variant='filled' onClick={() => { }}>{t('subscribe')}</Button>
+			// buttons = <Button className={cls.button} variant='filled' onClick={() => { }}>{t('subscribe')}</Button>
 			break
 		case 'canceled':
 			content = <MyText text={t('canceled subscription')} />

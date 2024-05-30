@@ -67,7 +67,7 @@ export const UserDataBlock = (props: UserDataBlockProps) => {
 			</HStack>)
 
 	const emailButtonsBlock = isEmailVerified
-		? <Button>{t('edit')}</Button>
+		? <Button className={cls.button} disabled>{t('edit')}</Button>
 		: (
 			<HStack gap='gap_20'>
 				<Button className={cls.button} variant='filled'>{t('confirm email')}</Button>

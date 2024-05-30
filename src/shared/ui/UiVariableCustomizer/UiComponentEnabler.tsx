@@ -18,7 +18,7 @@ export const UiComponentEnabler = (props: UiComponentEnablerProps) => {
 		isEnabled,
 		onToggleClick,
 	} = props
-
+	
 	return (
 		<Card>
 			<div className={clsx(cls.container, [className])} >

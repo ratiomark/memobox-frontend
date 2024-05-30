@@ -110,7 +110,7 @@ export const TableSettingModal = (props: TableSettingModalProps) => {
 					{/* {columns?.map(column => <ColumnItem key={column.value} column={column} />)} */}
 					<Reorder.Group
 						axis='y'
-						style={{ border: '1px solid red' }}
+						// style={{ border: '1px solid red' }}
 						values={columns.slice(1,)}
 						onReorder={onSetColumns}
 					// dragConstraints={{ bottom: 10, top: 10 }}

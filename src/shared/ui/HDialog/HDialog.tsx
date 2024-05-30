@@ -118,7 +118,7 @@ export const HDialog = (props: HDialogProps) => {
 	return (
 		<Dialog.Root open={isOpen}
 			// modal={false}
-			// forceMount={true}
+		// forceMount={true}
 			onOpenChange={onOpenChange}
 		>
 			<Dialog.Portal >
@@ -131,7 +131,7 @@ export const HDialog = (props: HDialogProps) => {
 					data-testid={isOpen ? TEST_ENTITY_NAMES.modalOpen : TEST_ENTITY_NAMES.modalClose}
 				>
 					{/* {overlay && <div onClick={onClose} className={cls.overlay} />} */}
-					{overlay && <Dialog.Overlay forceMount className={transparent ? cls.overlayTransparent : cls.overlay} />}
+					{overlay && <Dialog.Overlay onClick={onClose} forceMount className={transparent ? cls.overlayTransparent : cls.overlay} />}
 					{/* {overlay && <Dialog.Overlay className={cls.overlay} />} */}
 					{/* <Dialog.Close /> */}
 					<Dialog.Content

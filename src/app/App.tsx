@@ -4,8 +4,8 @@ import { LoaderWidget } from '@/widgets/LoaderWidget'
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch'
 import { useSelector } from 'react-redux'
 import { getUserMounted, initAuthData } from '@/entities/User'
-import { NavBar, NavBarSkeleton } from '@/widgets/NavBarNew'
-import { Header, HeaderSkeleton } from '@/widgets/Header copy'
+import { NavBar, NavBarSkeleton, NavBarSkeletonNew } from '@/widgets/NavBarNew'
+import { Header, HeaderSkeleton, HeaderSkeletonNew } from '@/widgets/Header copy'
 import { useTheme } from '@/shared/context/useTheme'
 import { ToastViewport } from '@radix-ui/react-toast'
 import { useInitialCssValuesFromLocalService } from '@/shared/lib/helpers/hooks/useInitialCssValuesFromLocalService'
@@ -30,9 +30,12 @@ export const App = () => {
 	if (!userMounted) {
 		return (
 			<AppLayout
-				header={<NavBarSkeleton />}
-				navBar={<HeaderSkeleton />}
-				router={<LoaderWidget />}
+				header={<NavBarSkeletonNew />}
+				navBar={<HeaderSkeletonNew />}
+				
+				// navBar={<NavBar />}	
+				// router={<LoaderWidget />}
+				router={<AppRouter />}
 			/>
 			// <div className={`app ${theme}`}>
 			// 	<NavBarSkeleton />

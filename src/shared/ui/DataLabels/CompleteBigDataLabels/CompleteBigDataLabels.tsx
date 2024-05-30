@@ -6,7 +6,7 @@ import { DataBlock } from '@/shared/types/DataBlock';
 import { useCustomTranslate } from '@/features/LanguageSwitcher';
 import langIcon from '../../../assets/icons/langIcon.svg'
 import { Icon } from '../../Icon';
-import { ThemeSwitcher } from '@/features/ThemeSwitcher';
+// import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 
 interface CompleteBigDataLabelsProps {
 	className?: string
@@ -22,7 +22,7 @@ export const CompleteBigDataLabels = (props: CompleteBigDataLabelsProps) => {
 		isLoading
 	} = props
 
-	const { currentLang, setLang } = useCustomTranslate()
+	// const { currentLang, setLang } = useCustomTranslate()
 
 	return (
 		<div className={clsx(
@@ -32,12 +32,12 @@ export const CompleteBigDataLabels = (props: CompleteBigDataLabelsProps) => {
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.all} type='all' />
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.train} type='train' />
 			<BigDataLabel isLoading={isLoading} cardsCount={data?.wait} type='wait' />
-			<Icon
+			{/* <Icon
 				clickable
 				onClick={() => setLang(currentLang === 'ru' ? 'en' : 'ru')}
 				Svg={langIcon}
-			/>
-			<ThemeSwitcher />
+			/> */}
+			{/* <ThemeSwitcher /> */}
 		</div>
 	)
 }

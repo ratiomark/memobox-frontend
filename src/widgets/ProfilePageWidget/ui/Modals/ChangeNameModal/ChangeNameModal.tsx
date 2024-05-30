@@ -35,16 +35,16 @@ export const ChangeNameModal = (props: ChangeNameModalProps) => {
 	// const onClose = () => dispatch(profilePageWidgetActions.setIsChangeNameModalOpen(false))
 
 	const onCloseHandle = () => {
+		dispatch(profilePageWidgetActions.setIsChangeNameModalOpen(false))
 		setInputErrors([])
 		setUserNameLocal(userName)
-		dispatch(profilePageWidgetActions.setIsChangeNameModalOpen(false))
 	}
 
 	return (
 		<HDialog
 			isOpen={isOpen}
 			onClose={onCloseHandle}
-			onSubmit={() => alert('Сохраняю имя пользователя')}
+			onSubmit={() => alert('Save user name')}
 		>
 			<div className={clsx(
 				cls.changeNameModal,
@@ -61,7 +61,7 @@ export const ChangeNameModal = (props: ChangeNameModalProps) => {
 
 				<ModalButtons
 					onClose={onCloseHandle}
-					onSubmit={() => alert('Сохраняю нвоое имя')}
+					onSubmit={() => alert('Save user name')}
 					isSubmitDisabled={userNameLocal === '' || inputErrors.length > 0}
 					justify='end'
 					gap='gap_14'

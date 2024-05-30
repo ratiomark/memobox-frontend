@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { loginActions } from '../../Model/slice/loginSlice';
 import { RegisterFormSkeleton } from '../LoginForm/RegisterFormSkeleton';
 import { LoginFormSkeleton } from '../LoginForm/LoginFormSkeleton';
+import { LangSwitcherIcon } from '@/shared/ui/SwitchLanguageIcon/SwitchLanguageIcon';
 
 export const LoginScreen = () => {
 	const isLoginProcess = useSelector(getLoginIsLoginProcess)
@@ -59,14 +60,18 @@ export const LoginScreen = () => {
 	// 	}
 	// }, [auth, navigate, postRegistrationStep])
 	return (
-		<div className={cls.wrapper} >
-			<Suspense fallback={<RegisterFormSkeleton />}>
-				{!isLoginProcess && <RegisterForm />}
-			</Suspense>
-			<Suspense fallback={<LoginFormSkeleton />}>
-				{isLoginProcess && <LoginForm />}
-			</Suspense>
-		</div>
+		<>
+			<div className={cls.wrapper} >
+
+				<Suspense fallback={<RegisterFormSkeleton />}>
+					{!isLoginProcess && <RegisterForm />}
+				</Suspense>
+				<Suspense fallback={<LoginFormSkeleton />}>
+					{isLoginProcess && <LoginForm />}
+				</Suspense>
+				<LangSwitcherIcon style={{ marginTop: 20 }} />
+			</div>
+		</>
 	)
 }
 

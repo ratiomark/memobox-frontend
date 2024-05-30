@@ -109,7 +109,7 @@ const LoginForm = memo(() => {
 								className={cls.forgetLink}
 								as={'span'}
 								onClick={onForgotPasswordClick}
-								text={t('Забыли пароль?')}
+								text={t('forget password')}
 								data-testid={TEST_BUTTONS_IDS.forgotPasswordLink}
 							/>
 						</div>

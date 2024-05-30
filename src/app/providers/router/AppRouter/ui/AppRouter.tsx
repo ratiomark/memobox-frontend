@@ -19,7 +19,7 @@ export const AppRouter = () => {
 		} = route
 
 		const finalElement = (
-			<Suspense fallback={suspenseSkeleton ? suspenseSkeleton : <LoaderWidget />}>
+			<Suspense fallback={suspenseSkeleton ? suspenseSkeleton : null}>
 				{
 					Wrapper
 						? <Wrapper>{element}</Wrapper>
@@ -41,7 +41,8 @@ export const AppRouter = () => {
 	const routes = Object.values(routeConfig).map(renderWithWrapper)
 	// console.log('РОУТЕР')
 	return (
-		<Suspense fallback={<LoaderWidget />}>
+		<Suspense fallback={null}>
+		 {/* <Suspense fallback={<LoaderWidget />}>  */}
 			<Routes >
 				{routes}
 			</Routes>

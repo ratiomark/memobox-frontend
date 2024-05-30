@@ -58,7 +58,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 		notificationsSettings,
 	} = props
 	const dialogCustomId = 'notificationSettingsModalId'
-	const { t } = useTranslation()
+	const { t } = useTranslation('settings')
 	const { t: t2 } = useTranslation('tooltip')
 	const dispatch = useAppDispatch()
 	const settingsAwaitingResponseObj = useSelector(getUserSettingsAwaitingResponse)
@@ -76,7 +76,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 	const [pushMinNotifications, setPushMinNotifications] = useState(minimumCardsForPush)
 
 	const [emailEnabled, setEmailEnabled] = useState(emailNotificationsEnabled)
-	
+
 
 
 	useEffect(() => {
@@ -142,7 +142,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 		/>)
 
 	const deviceSubscriptionBlock = (<div className={cls.deviceSubscription} >
-		<MyText text={t('Пуши для этого устройства')} variant={mobilePushEnabled ? 'primary' : 'hint'} />
+		<MyText text={t('pushes_for_this_device')} variant={mobilePushEnabled ? 'primary' : 'hint'} />
 		{deviceSwitcher}
 		{/* <Switcher
 			isChecked={deviceIsSubscribed ?? false}
@@ -232,7 +232,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 						<div className={cls.detailsBlock} >
 
 							<SingleSetter
-								title='Минимум карточек для почты'
+								title={t('minimum_cards_for_email')}
 								maxTime={30}
 								minTime={minEmailNotificationConst}
 								time={emailMinNotifications}
@@ -241,18 +241,18 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 								onWheelScroll={onScrollEmailMinNotification}
 								disabled={!emailEnabled}
 							/>
-							<Button
+							{/* <Button
 								variant='filled'
 								disabled={!emailEnabled}
 								onClick={onManageEmailsClick}
 							>
 								Управление почтовыми адресами
-							</Button>
+							</Button> */}
 						</div>
 					</div>
 					<div className={cls.notificationBlock} >
 						<Card className={cls.notificationCard} >
-							<Heading size='s' title={'Push notification'} />
+							<Heading size='s' title={t('push_notification')} />
 							<Switcher
 								isChecked={mobilePushEnabled ?? false}
 								onClickSwitcher={onTogglePushEnabled}
@@ -263,7 +263,7 @@ export const NotificationSettingsLoaded = (props: NotificationSettingsProps & { 
 						)}
 						>
 							<SingleSetter
-								title='Минимум карточек для пуша'
+								title={t('minimum_cards_for_push')}
 								maxTime={30}
 								minTime={minEmailNotificationConst}
 								time={pushMinNotifications}

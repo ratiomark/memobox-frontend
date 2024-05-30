@@ -24,6 +24,7 @@ interface HDialogProps {
 	panelAbsolute?: boolean
 	overlay?: boolean
 	customId?: string
+	isSubmitDisabled?: boolean
 }
 
 export const HDialogHeadless = forwardRef<HTMLDivElement, HDialogProps>((props, ref) => {
@@ -44,9 +45,11 @@ export const HDialogHeadless = forwardRef<HTMLDivElement, HDialogProps>((props, 
 		panelAbsolute,
 		overlay = true,
 		customId,
+		isSubmitDisabled = false,
 	} = props
 	const { theme } = useTheme()
 
+	// const dialogRef = useRef<HTMLDivElement>(null);
 	// const dialogRef = useRef<HTMLDivElement>(null);
 	// useImperativeHandle(ref, () => dialogRef.current as HTMLDivElement);
 
@@ -56,19 +59,29 @@ export const HDialogHeadless = forwardRef<HTMLDivElement, HDialogProps>((props, 
 	// 	}
 	// }, [onSubmit])
 
-	// useEffect(() => {
-	// 	if (!isOpen) return
+	useEffect(() => {
+		if (!isOpen) return
 
-	// 	const onKeyDown = (e: KeyboardEvent) => {
-	// 		if (e.key === 'Enter' && e.shiftKey) {
-	// 			onSubmit ? onSubmit() : null
-	// 		}
-	// 	}
-	// 	window.addEventListener('keydown', onKeyDown)
-	// 	return () => {
-	// 		window.removeEventListener('keydown', onKeyDown)
-	// 	}
-	// }, [isOpen, onSubmit])
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Enter' && e.shiftKey) {
+				e.preventDefault()
+				// e.stopPropagation()
+				// e.stopImmediatePropagation()
+				if (onSubmit && !isSubmitDisabled) {
+					onSubmit()
+					// const activeElement = document.activeElement as HTMLElement;
+					// if (activeElement && typeof activeElement.blur === 'function') {
+					// 	activeElement.blur();
+					// }
+					// onSubmit()
+				}
+			}
+		}
+		window.addEventListener('keydown', onKeyDown)
+		return () => {
+			window.removeEventListener('keydown', onKeyDown)
+		}
+	}, [isOpen, onSubmit, isSubmitDisabled])
 
 	if (lazy && !isOpen) return null
 

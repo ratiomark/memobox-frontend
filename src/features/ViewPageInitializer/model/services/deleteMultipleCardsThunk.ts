@@ -8,6 +8,7 @@ import { getCardIdsSelectedForDeletionByRandomId } from '../selectors/getViewPag
 import { rtkApiDeleteCardsSoft } from '@/entities/Card'
 import { TAG_CUPBOARD_PAGE, TAG_TRASH_PAGE, TAG_VIEW_PAGE, } from '@/shared/api/const/tags'
 import { rtkApi } from '@/shared/api/rtkApi'
+import { sleep } from '@/shared/lib/helpers/common/sleep'
 
 export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rejectValue: string[], extra: ThunkExtraArg, state: StateSchema, rejectedMeta: { aborted: boolean } }>(
 	'viewPage/deleteMultipleCardsThunk',
@@ -23,12 +24,15 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 		// console.log(cardIdsSelectedForDeletion)
 		const abortedThunkIds = getViewPageAbortedThunkIds(getState())
 		const id = randomId
+		await sleep(2000)
+		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!')
 		try {
 			if (abortedThunkIds.includes(id) || !cardIdsSelectedForDeletion.length) {
 				dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
 				throw new Error('Aborted')
 			}
+			await sleep(2000)
 			dispatch(viewPageActions.setAbortedThunkId(id))
 			dispatch(toastsActions.addToast({
 				id,
@@ -40,11 +44,11 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 					contentCommon: t('toast:delete_multiple_card.additional'),
 				}
 			}))
-
+			await sleep(2000)
 			const response = await dispatch(rtkApiDeleteCardsSoft({ cardIds: cardIdsSelectedForDeletion })).unwrap()
 
 			if (!response) {
-				dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
+
 				throw new Error('Request failed')
 			}
 			dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
@@ -53,8 +57,9 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 			return cardIdsSelectedForDeletion
 
 		} catch (err) {
+			console.log(err)
 			const error = err as Error;
-			
+			dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 			// dispatch(viewPageActions.removeAbortedThunkId(id))
 			dispatch(viewPageActions.removeAbortedThunkId(id))
 			dispatch(viewPageActions.setCardsIsNotDeletedByIdList(cardIdsSelectedForDeletion))

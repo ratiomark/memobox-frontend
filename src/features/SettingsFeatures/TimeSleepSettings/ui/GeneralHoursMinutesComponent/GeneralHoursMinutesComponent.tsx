@@ -35,7 +35,7 @@ export const GeneralHoursMinutesComponent = () => {
 			<MyText
 				variant={isTimeSleepEnabled ? 'primary' : 'hint'}
 				align='center'
-				text={'длительность сна'}
+				text={t('sleep duration')}
 				// text={t('end sleep')}
 				className={cls.title}
 			/>
@@ -57,9 +57,9 @@ export const GeneralHoursMinutesComponent = () => {
 							}}
 							type='number'
 							style={{ maxWidth: 90 }} />
-						<p>минут
-							<span>{hoursMinutesBlock}</span>
+						<p>{t('minutes')}
 						</p>
+						<span >{hoursMinutesBlock}</span>
 
 					</HStack>
 				)
