@@ -1,7 +1,7 @@
 import { Page } from '@/widgets/Page'
 import { StatsAndActionsCupboardWidget } from '@/widgets/StatsAndActionsCupboardWidget'
 import { CupboardShelfListWrapper } from '@/features/CupboardShelfList'
-import { getUserAuthData, useJsonSettings } from '@/entities/User'
+import { getUserAuthData, getUserMounted, useJsonSettings } from '@/entities/User'
 import { useSelector } from 'react-redux'
 import { LoginScreen } from '@/features/AuthByUsername'
 import { useNavigate } from 'react-router-dom'
@@ -13,15 +13,15 @@ import cls from './MainPage.module.scss'
 import MainPageNewUser from './MainPageNewUser/MainPageNewUser'
 const MainPage = () => {
 	const auth = useSelector(getUserAuthData)
+	const userMounted = useSelector(getUserMounted)
 	const navigate = useNavigate();
 
 	const { postRegistrationStep, hasCreatedFirstShelf } = useJsonSettings()
 	useEffect(() => {
-		// if (!auth) {
-		if (!auth || postRegistrationStep !== 'COMPLETED') {
+		if (userMounted && !auth || postRegistrationStep !== 'COMPLETED') {
 			navigate('/login')
 		}
-	}, [auth, navigate, postRegistrationStep])
+	}, [auth, navigate, postRegistrationStep, userMounted])
 	// if (!auth) {
 	// 	navigate('/login'); // Перенаправление на страницу логина
 	// }
