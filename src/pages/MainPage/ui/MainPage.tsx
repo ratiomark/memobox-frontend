@@ -36,23 +36,23 @@ const MainPage = () => {
 	// 	// )
 	// }
 
-	if (hasCreatedFirstShelf) {
+	if (!hasCreatedFirstShelf) {
 		// // без StatsAndActionsCupboardWidget не будет работать CupboardShelfListWrapper из-за перерасчета ширины кнопок
-		return (
-			<Page
-				// className={cls.wrapper}
-				data-testid={TEST_PAGES_IDS.mainPage}
-			>
-				<div className={cls.wrapper} >
-
-					<StatsAndActionsCupboardWidget />
-					<CupboardShelfListWrapper />
-				</div>
-			</Page>
-		)
+		return <MainPageNewUser />
 	}
+	return (
+		<Page
+			// className={cls.wrapper}
+			data-testid={TEST_PAGES_IDS.mainPage}
+		>
+			<div className={cls.wrapper} >
 
-	return <MainPageNewUser />
-
+				<StatsAndActionsCupboardWidget />
+				<CupboardShelfListWrapper />
+			</div>
+		</Page>
+	)
 }
+
+
 export default MainPage
