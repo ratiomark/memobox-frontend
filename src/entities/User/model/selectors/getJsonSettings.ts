@@ -3,7 +3,7 @@ import { JsonSettings } from '../types/JsonSettings';
 import { StateSchema } from '@/app/providers/StoreProvider';
 
 // специально создаю объект отдельной коснтантой, чтобы передать в селектор как запаску, потому что если передам там объект, то он будет создаваться каждый раз по новой, а const статична
-const defaultJsonSettings: JsonSettings = { postRegistrationStep: 'COMPLETED', hasCreatedFirstShelf: false }
+const defaultJsonSettings: JsonSettings = { postRegistrationStep: 'COMPLETED', hasCreatedFirstShelf: true }
 // const defaultJsonSettings: JsonSettings = { postRegistrationStep: 'LANGUAGE_CONFIRMATION'}
 
 export const [useJsonSettings, getJsonSettings] = buildSelector<JsonSettings, []>(state => state.user?.jsonCommonSettings ?? defaultJsonSettings)
