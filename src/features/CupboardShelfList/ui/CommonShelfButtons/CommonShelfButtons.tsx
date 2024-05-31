@@ -159,6 +159,7 @@ export const CommonShelfButtons = () => {
 			<Icon
 				clickable
 				withFill={false}
+				className={clsShelfButtons.viewButton}
 				// type='hint'
 				Svg={ViewButtonIcon}
 				onClick={onViewClick}
