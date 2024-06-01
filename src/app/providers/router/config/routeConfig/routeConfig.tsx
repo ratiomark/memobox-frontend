@@ -129,12 +129,14 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 		path: obtainRouteTrash(),
 		element: <TrashPage />,
 		authOnly: true,
+		// VAR: create skeleton
 	},
 	training: {
 		path: obtainRouteTraining(':shelfId', ':boxId'),
 		element: <TrainingPage />,
 		authOnly: true,
 		// suspense: <Susp/>
+		// VAR: create skeleton
 	},
 	subscription: {
 		path: obtainRouteSubscription(),
