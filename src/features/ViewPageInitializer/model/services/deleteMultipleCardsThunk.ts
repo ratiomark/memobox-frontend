@@ -57,8 +57,12 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 			return cardIdsSelectedForDeletion
 
 		} catch (err) {
-			console.log(err)
+			// console.log(err)
 			const error = err as Error;
+			if (error.message === 'Aborted') {
+				dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
+				return thunkAPI.rejectWithValue([id], { aborted: true });
+			}
 			dispatch(toastsActions.updateToastById({ id, toast: { status: 'error' } }))
 			// dispatch(viewPageActions.removeAbortedThunkId(id))
 			dispatch(viewPageActions.removeAbortedThunkId(id))
