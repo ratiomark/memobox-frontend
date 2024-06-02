@@ -24,15 +24,15 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 		// console.log(cardIdsSelectedForDeletion)
 		const abortedThunkIds = getViewPageAbortedThunkIds(getState())
 		const id = randomId
-		await sleep(2000)
-		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!')
+		// await sleep(2000)
+		// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!')
 		try {
 			if (abortedThunkIds.includes(id) || !cardIdsSelectedForDeletion.length) {
 				dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
 				dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
 				throw new Error('Aborted')
 			}
-			await sleep(2000)
+			// await sleep(2000)
 			dispatch(viewPageActions.setAbortedThunkId(id))
 			dispatch(toastsActions.addToast({
 				id,
@@ -44,7 +44,7 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 					contentCommon: t('toast:delete_multiple_card.additional'),
 				}
 			}))
-			await sleep(2000)
+			// await sleep(2000)
 			const response = await dispatch(rtkApiDeleteCardsSoft({ cardIds: cardIdsSelectedForDeletion })).unwrap()
 
 			if (!response) {

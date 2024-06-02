@@ -25,7 +25,7 @@ export const Training = (props: TrainingProps) => {
 		shelfId = 'all',
 		boxId = 'all'
 	} = props
-	useAsyncReducer({reducers, removeAfterUnmount: false})
+	useAsyncReducer({ reducers, removeAfterUnmount: false })
 	// const { isLoading, data, isError } = useGetCardsByShelfIdQuery(shelfId)
 	const { isLoading, data, isError } = useGetTrainingCardsQuery({ shelfId, boxId })
 	console.log(data)
@@ -37,7 +37,7 @@ export const Training = (props: TrainingProps) => {
 		alert('No cards you redirected to main page')
 		navigate(obtainRouteMain())
 	}
-	
+
 	if (data) return <TrainingContent data={data} />
 
 	return (

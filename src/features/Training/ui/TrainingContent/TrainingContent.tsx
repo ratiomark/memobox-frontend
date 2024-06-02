@@ -127,8 +127,8 @@ export const TrainingContent = (props: TrainingContentProps) => {
 		>
 			<div className={cls.top} >
 				<div className='container' >
-					<Heading align='center' title='training' />
-					<MyText align='center' text='progress bar here' />
+					<Heading align='center' title='Training' />
+					{/* <MyText align='center' text='progress bar here' /> */}
 				</div>
 			</div>
 			<div className={cls.contentWrapper} >
