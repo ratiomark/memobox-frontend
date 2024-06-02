@@ -30,11 +30,9 @@ export const App = () => {
 	if (!userMounted) {
 		return (
 			<AppLayout
-				navBar={<NavBarSkeletonNew />}
-				// header={<NavBarSkeletonNew />}
-				header={<HeaderSkeletonNew />}
-				// navBar={<HeaderSkeletonNew />}
-				
+				header={<NavBarSkeletonNew />}
+				navBar={<HeaderSkeletonNew />}
+
 				// navBar={<NavBar />}	
 				// router={<LoaderWidget />}
 				router={<AppRouter />}
