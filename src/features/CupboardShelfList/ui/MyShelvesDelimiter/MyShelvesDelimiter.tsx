@@ -25,7 +25,7 @@ export const MyShelvesDelimiter = () => {
 			<MyText
 				className={cls.text}
 				// size='s'
-				text={'Мои полки'}
+				text={t('delimiter text')}
 			/>
 		</HStack>
 	)

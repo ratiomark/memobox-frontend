@@ -2,7 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100% - var(--header-height) - 200px);
+
+  // height: calc(100% - var(--header-height));
+
+  // height: calc(100% - var(--header-height) - 200px);
 }
 
 .loginPage {

@@ -14,13 +14,13 @@ export const LoginPage = () => {
 		removeAfterUnmount: false,
 
 	})
-	
+
 	return (
 		<Page
 			className={cls.loginPageBase}
 			data-testid={TEST_PAGES_IDS.loginPage}>
 			<LoginScreen />
-			
+
 		</Page>
 	)
 }

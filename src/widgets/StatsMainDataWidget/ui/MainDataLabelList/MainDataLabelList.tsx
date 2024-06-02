@@ -56,11 +56,11 @@ export const MainDataLabelList = (props: MainDataLabelListProps) => {
 				percentValue={data?.wait.percentValue}
 				type='wait'
 			/>
-			<Icon
+			{/* <Icon
 				clickable
 				onClick={() => setLang(currentLang === 'ru' ? 'en' : 'ru')}
 				Svg={langIcon}
-			/>
+			/> */}
 		</div>
 	)
 }

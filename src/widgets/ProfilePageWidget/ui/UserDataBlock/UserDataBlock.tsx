@@ -83,7 +83,7 @@ export const UserDataBlock = (props: UserDataBlockProps) => {
 	const passwordRow = (<ProfileRowData
 		title={t('password')}
 		content={<MyText text={'*******'} />}
-		buttons={<Button className={cls.button} onClick={onPasswordChangeClick}>{t('edit')}</Button>}
+		buttons={<Button className={cls.button} disabled onClick={onPasswordChangeClick}>{t('edit')}</Button>}
 	/>)
 
 	return (

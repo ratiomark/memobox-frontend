@@ -15,7 +15,7 @@ interface AppLayoutProps {
 const useAppClass = () => {
 	const pathname = useLocation().pathname
 	const currentLocation = pathname.split('/')[1]
-	if (currentLocation === 'training') {
+	if (currentLocation === 'training' || currentLocation === 'login') {
 		return 'app_training'
 	} else {
 		return 'app'

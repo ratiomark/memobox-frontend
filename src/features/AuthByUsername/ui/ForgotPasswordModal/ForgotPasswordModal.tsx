@@ -17,7 +17,7 @@ import { VStack } from '@/shared/ui/Stack';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 
 export const ForgotPasswordModal = () => {
-	const { t } = useTranslation()
+	const { t } = useTranslation('forget-password')
 	const dispatch = useAppDispatch()
 	const isOpen = useSelector(getIsForgotModalOpen)
 	const [email, setEmail] = useState('')
@@ -56,9 +56,12 @@ export const ForgotPasswordModal = () => {
 				// transition={{ delay: 0.5 }}
 				layout
 			>
-				<MyText text={t('Instructions have been sent to your email to reset your password')} />
-				<MyText text={t('Please check your inbox and spam')} />
-				<Button onClick={onCloseModal}>{t('Close window')}</Button>
+				{/* <MyText text={t('Instructions have been sent to your email to reset your password')} /> */}
+				{/* <MyText text={t('Please check your inbox and spam')} /> */}
+				{/* <Button onClick={onCloseModal}>{t('Close window')}</Button> */}
+				<MyText text={t('successMessage')} />
+				<MyText text={t('successMessage2')} />
+				<Button onClick={onCloseModal}>{t('closeButton')}</Button>
 			</motion.div>
 		)
 	} else {
@@ -73,10 +76,9 @@ export const ForgotPasswordModal = () => {
 			>
 
 				<VStack className={cls.content} align='left' gap='gap_4'>
-
-					<Heading size='s' title={'Укажите вашу почту и мы пришлем вам пароль'} as={'h1'} />
+					<Heading className={cls.heading} size='s' title={t('emailPrompt')} as={'h1'} />
 					<label className={cls.label} htmlFor='email'>
-						{t('Email')}:
+						{t('emailLabel')}
 					</label>
 					<Input
 						autoFocus
@@ -89,8 +91,8 @@ export const ForgotPasswordModal = () => {
 				<ModalButtons
 					onClose={onCloseModal}
 					onSubmit={onSendPasswordClick}
-					textCloseButton='Назад'
-					textSubmitButton='Восстановить пароль'
+					textCloseButton={t('backButton')}
+					textSubmitButton={t('submitButton')}
 				/>
 
 			</motion.div>
