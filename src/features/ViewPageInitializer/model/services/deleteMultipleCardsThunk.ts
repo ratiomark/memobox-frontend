@@ -29,7 +29,7 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 		try {
 			if (abortedThunkIds.includes(id) || !cardIdsSelectedForDeletion.length) {
 				dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
-				dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
+				// dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
 				throw new Error('Aborted')
 			}
 			// await sleep(2000)
@@ -60,6 +60,8 @@ export const deleteMultipleCardsThunk = createAsyncThunk<string[], string, { rej
 			// console.log(err)
 			const error = err as Error;
 			if (error.message === 'Aborted') {
+				// dispatch(viewPageActions.removeMultiSelectDeleteIds(randomId))
+				dispatch(toastsActions.updateToastById({ id, toast: { status: 'idle' } }))
 				// dispatch(toastsActions.updateToastById({ id, toast: { status: 'success' } }))
 				dispatch(viewPageActions.removeAbortedThunkId(id))
 				dispatch(viewPageActions.setCardsIsNotDeletedByIdList(cardIdsSelectedForDeletion))
