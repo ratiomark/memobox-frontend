@@ -106,9 +106,9 @@ const WriteToUsModal = memo(() => {
 						sameWidth
 					/>
 					<div className={cls.warning} >
-						<MyText className={cls.warningText} saveOriginal text={'Перед тем как задать вопрос, пожалуйста, внимательно ознакомьтесь с разделом '} />
-						<AppLink className={cls.warningText} variant='accent' to='/'>помощь</AppLink>
-						<MyText className={cls.warningText} saveOriginal text=' в нем собраны самые частые вопросы и ответы' />
+						<MyText className={cls.warningText} saveOriginal text={t('warningTextIntro')} />
+						<AppLink className={cls.warningText} variant='accent' to='/'>{t('helpLinkText')}</AppLink>
+						<MyText className={cls.warningText} saveOriginal text={t('warningTextOutro')} />
 					</div>
 				</div>
 

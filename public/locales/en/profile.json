@@ -21,6 +21,9 @@
   "input label city": "City",
   "input label user": "User name",
   "input label avatar": "Avatar",
+  "warningTextIntro": "Before asking a question, please carefully review the section",
+  "helpLinkText": "help",
+  "warningTextOutro": "it contains the most frequently asked questions and answers",
   "inputs": {
     "MANDATORY_INPUT": "This field is required",
     "INPUT_CANNOT_BE_EMPTY": "This field can't be empty",
