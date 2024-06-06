@@ -7,7 +7,7 @@ import { JsonSettings } from '../types/JsonSettings'
 import { localDataService } from '@/shared/lib/helpers/common/localDataService'
 
 // createAsyncThunk третьим аргументом принимает конфиг и там я могу описать поле extra и теперь обращаясь в thunkAPI.extra ТС подхватит то, что я описал в ThunkExtraArg
-export const saveJsonSettings = createAsyncThunk<JsonSettings, JsonSettings, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema }>(
+export const saveJsonSettings = createAsyncThunk<JsonSettings, Partial<JsonSettings>, { rejectValue: string, extra: ThunkExtraArg, state: StateSchema, }>(
 	'user/saveJsonSettings',
 	async (newJsonSettings, thunkAPI) => {
 
