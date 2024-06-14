@@ -15,12 +15,6 @@ const TrashPage = memo(() => {
 				// restoreCardModal={<RestoreCardModal />}
 			/>
 			{/* <RestoreCardModal /> */}
-			{/* <motion.div
-				animate={{ x: ['20%', '0%', '40%', '0%'] }}
-				transition={{ duration: 2 }}
-			>
-				{t('about')}
-			</motion.div> */}
 		</Page>
 
 	)
