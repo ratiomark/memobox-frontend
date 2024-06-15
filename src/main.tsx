@@ -104,16 +104,6 @@ const updateSW = registerSW({
 // 	},
 // });
 
-// let refreshing = false;
-
-// navigator.serviceWorker.addEventListener('controllerchange', () => {
-// 	if (!refreshing) {
-// 		window.location.reload();
-// 		refreshing = true;
-// 	}
-// });
-// import posthog from 'posthog-js'
-// posthog.init('phc_n1lURzDBW3hd64MQIjv1eFphRgcpOK5rsNwpJ6Kg3ou', { api_host: 'https://us.posthog.com' })
 
 const container = document.getElementById('root')
 if (!container) throw new Error('Root container is not Found! Check main.tsx file')
