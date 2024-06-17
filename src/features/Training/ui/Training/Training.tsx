@@ -26,7 +26,6 @@ export const Training = (props: TrainingProps) => {
 		boxId = 'all'
 	} = props
 	useAsyncReducer({ reducers, removeAfterUnmount: false })
-	// const { isLoading, data, isError } = useGetCardsByShelfIdQuery(shelfId)
 	const { isLoading, data, isError } = useGetTrainingCardsQuery({ shelfId, boxId })
 	console.log(data)
 	const { t } = useTranslation()
