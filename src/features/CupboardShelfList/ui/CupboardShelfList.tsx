@@ -44,27 +44,6 @@ import {
 import { Button } from '@/shared/ui/Button';
 
 
-// const DelimiterController = () => {
-// 	const dispatch = useAppDispatch()
-// 	const cupboard = useSelector(getUserSavedDataCupboard)
-// 	const isDelimiterEnabled = useSelector(getUserSavedDataIsDelimiterEnabled)
-// 	const onToggle = () => {
-// 		dispatch(userActions.updateJsonSavedData({ cupboard: { ...cupboard, isDelimiterEnabled: !isDelimiterEnabled } }))
-// 	}
-// 	return <UiComponentEnabler entityName='delimiter' isEnabled={isDelimiterEnabled} onToggleClick={onToggle} />
-// }
-// const TrainingHotKeyVisibilitySwitcher = () => {
-// 	const dispatch = useAppDispatch()
-// 	const cupboard = useSelector(getUserSavedDataCupboard)
-// 	const isStartTrainingHotKeyVisible = useSelector(getUserSavedDataIsStartTrainingHotKeyVisible)
-// 	const onToggle = () => {
-// 		dispatch(userActions.updateJsonSavedData({ cupboard: { ...cupboard, isStartTrainingHotKeyVisible: !isStartTrainingHotKeyVisible } }))
-// 		dispatch(cupboardShelfListActions.addShelvesCount())
-// 		// state.createNewShelfModal.shelvesCreated++
-// 	}
-// 	return <UiComponentEnabler entityName='Training hot key visibility' isEnabled={isStartTrainingHotKeyVisible} onToggleClick={onToggle} />
-// }
-
 
 export const CupboardShelfList = () => {
 	// const dispatch = useAppDispatch()
