@@ -1,8 +1,5 @@
-import clsx from 'clsx'
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
-
-import cls from './ViewPageToastsWithButtons.module.scss'
 
 import { DURATION_MULTIPLE_CARDS_DELETION_MILLISEC } from '@/shared/const/animation';
 import { useAppDispatch } from '@/shared/lib/helpers/hooks/useAppDispatch';
