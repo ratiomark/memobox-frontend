@@ -1,4 +1,3 @@
-// import cls from './BoxDeleting.module.scss';
 // eslint-disable-next-line custom-fsd-checker-plugin/public-api-imports
 import cls from '@/entities/Box/ui/Box.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -57,21 +56,3 @@ export const BoxDeleting = (props: BoxDeletingProps) => {
 			</div>
 		</li>)
 }
-
-
-// useEffect(() => {
-// 	if (!condition) {
-// 		dispatch(cupboardShelfListActions.updateShelf({ id: shelfId, changes: { isDeleting: false, deletingRequestStatus: 'idle' } }));
-// 		dispatch(toastsActions.removeToastById('shelfDeletion' + shelfId));
-// 	}
-// }, [condition, dispatch, shelfId]);
-
-// useEffect(() => {
-// 	return () => {
-// 		if (condition) {
-// 			console.log('SSSSSSSSSSSSSSSSSSS')
-// 			dispatch(deleteShelfThunk(shelfId))
-// 		}
-
-// 	}
-// }, [dispatch, shelfId, condition])
